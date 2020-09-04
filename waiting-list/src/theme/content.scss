@@ -44,28 +44,11 @@
     h1, h2 {
         text-transform: uppercase;
     }
-
-    .section-vertical-blur {
-        width: 20%;
-        height: 100%;
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
-        background: linear-gradient(90deg, #140514 4.23%, rgba(20, 5, 20, 0) 83.85%);
-    }
-
-    .section-horizontal-blur {
-        width: 100%;
-        height: 10%;
-        position: absolute;
-        bottom: 0px;
-        background: linear-gradient(180deg, #140514 3.23%, rgba(20, 5, 20, 0) 83.85%);
-        transform: rotate(-180deg);
-    }
 }
 
-.content-section-one{
-    background-image: url('../assets/img/sectionOne.png');
+#content-section-img{
+    background: #140514;
+    background-image: url('../assets/img/sectionImg.png');
     background-size: cover;
     background-position: center;
 }

@@ -13,6 +13,10 @@
     }
 }
 
+.separator-min {
+    @include img-step(url('../assets/img/rectangle.svg'), 62px, 2px)
+}
+
 .register{
     @include img-step(url('../assets/img/register.svg'), 121px, 73px)
 }

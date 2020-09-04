@@ -1,0 +1,70 @@
+@font-face {
+    font-family: 'Eurostile';
+    src:  url('../assets/font/Eurostile.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Eurostile BQ';
+    src:  url('../assets/font/EurostileBQ-BoldExtended.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Helvetica LT Std';
+    src:  url('../assets/font/HelveticaNeueLTStd-BdCn_3.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src:  url('../assets/font/HelveticaNeue.woff') format('woff');
+}
+
+@mixin title ($font-family, $color, $margin, $font-size) {
+    font-family: $font-family;
+    color: $color;
+    margin: $margin;
+    font-size: $font-size;
+    text-align: center;
+    letter-spacing: 0px;
+}
+
+.title-primary {
+    @include title('Eurostile BQ', #FFFFFF, 0px, 60px)
+}
+
+.title-secondary {
+    @include title('Helvetica Neue', #FFFFFF, 0px, 28px);
+    line-height: 32px;
+    font-style: normal;
+    font-weight: bold;
+    max-width: 50%;
+}
+
+.title-tertiary {
+    @include title('Eurostile', #FFFFFF, 0px, 24px);
+    font-style: normal;
+    font-weight: normal;
+    line-height: 26px;
+}
+
+.primary {
+    text-align: center;
+    font-size: 60px;
+    letter-spacing: 0px;
+    @media (min-width: 0px) and (max-width: 720px) {
+        font-size: 30px;
+    }
+}
+
+.secondary {
+    text-align: center;
+    font-size: 36px;
+    letter-spacing: 0px;
+    @media (min-width: 0px) and (max-width: 720px) {
+        font-size: 24px;
+    }
+}
+
+p{
+    color: #FFFFFF;
+    margin: 8.5px;
+}

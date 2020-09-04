@@ -1,0 +1,9 @@
+ion-item {
+    margin-top: 29px;
+    margin-bottom: 29px;
+    --padding-start: 0px;
+    @media (min-width: 0px) and (max-width: 720px) {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+}

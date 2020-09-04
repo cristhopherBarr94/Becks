@@ -1,0 +1,45 @@
+@mixin img-step ($background-image, $width, $height) {
+    background-image: $background-image;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: $width;
+    height: $height;
+    margin-top: 85px;
+    margin-bottom: 73px;
+    @media (min-width: 0px) and (max-width: 720px) {
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+}
+
+.register{
+    @include img-step(url('../assets/img/register.svg'), 121px, 73px)
+}
+
+.surface{
+    @include img-step(url('../assets/img/surface.svg'), 121px, 73px)  
+}
+
+.customer{
+    @include img-step(url('../assets/img/customer.svg'), 121px, 73px)
+}
+
+.branch{
+    background-image: url('../assets/img/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 127.01px;
+    height: 60.5px;
+}
+
+.social {
+    background-image: url('../assets/img/Social.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 165px;
+    height: 33px;
+}
+

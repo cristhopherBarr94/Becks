@@ -1,0 +1,37 @@
+@mixin btn ($color, $background, $border, $font-family, $font-size, $min-width, $border-hover) {
+  height: 42px;
+  font-family: $font-family;
+  font-size: $font-size;
+  color: $color;
+  border: $border;
+  cursor: pointer;
+  background-color: $background;
+  border-radius: 1.5em;
+  padding: 10px 25px;
+}
+
+.becks-button {
+  margin-top: 100px;
+  min-width: 267px;
+  height: 56px;
+  background: #377F5E;
+  border-radius: 4px;
+}
+
+.becks-button:hover {
+  border: 3px solid #FFFFFF;
+}
+
+.becks-button:active {
+  background: #FFFFFF;
+  span {
+    text-transform: none;
+    color: #377F5E;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+.becks-btn-primary {
+  @include btn(#FFFFFF, #30333A, 3px solid #FFFFFF, 'Eurostile BQ', 16px, 200px, 3px solid #FFFFFF)
+}

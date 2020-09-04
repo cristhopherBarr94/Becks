@@ -1,0 +1,46 @@
+.content-flex-all-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .form-section {
+        max-width: 752px;
+    }
+}
+
+.full-height{
+    height: 100%
+}
+
+.flex-direction-column {
+    flex-direction: column;
+}
+
+.col-flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+
+.full-height{
+    height: 100%;
+}
+
+.max-width-title{
+    max-width: 1212px;
+}
+
+
+@media (min-width: 0px) and (max-width: 720px) {
+    .padding-form {
+        padding-left: 40.5px;
+        padding-right: 40.5px;
+    }
+
+    .max-width-title{
+        max-width: 828px;
+        padding-left: 55px;
+        padding-right: 55px;
+    }
+}
+

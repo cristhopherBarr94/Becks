@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { PrincipalHeaderComponent } from './principal-header/principal-header.component';
 import { FooterComponent } from './footer/footer.component';
+import { SectionPrincipalFormComponent } from './section-principal-form/section-principal-form.component';
+import { SectionPrincipalImgComponent } from './section-principal-img/section-principal-img.component';
+import { SectionPrincipalStepComponent } from './section-principal-step/section-principal-step.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -11,14 +16,22 @@ import { FooterComponent } from './footer/footer.component';
   ],
   declarations: [
     PrincipalHeaderComponent,
-    FooterComponent],
+    FooterComponent,
+    SectionPrincipalFormComponent,
+    SectionPrincipalImgComponent,
+    SectionPrincipalStepComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   exports: [
     PrincipalHeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SectionPrincipalFormComponent,
+    SectionPrincipalImgComponent,
+    SectionPrincipalStepComponent
   ]
 })
 export class ComponentsModule { }

@@ -1,0 +1,142 @@
+<section
+    id="formSection"
+    class="fullSection from-section"
+  >
+    <div class="content-flex-all-center full-height flex-direction-column padding-form">
+      <p class="title-primary secondary">DÉJANOS TUS DATOS</p>
+
+      <P class="white tertiary">
+        Si quieres ser parte de Becks society llena algunos datos
+      </P>
+
+      <form
+        [formGroup]="userRegisterForm"
+        class="form-section"
+      >
+        <ion-grid fixed="fixed">
+          <ion-row>
+            <ion-col
+              sizeXs="12"
+              sizeSm="12"
+              sizeLg="6"
+              sizeXl="6"
+            >
+              <ion-item>
+                <ion-label position="floating">Nombre*</ion-label>
+
+                <ion-input
+                  formControlName="name"
+                  [(ngModel)]="userRegister.first_name"
+                  type="text"
+                  pattern="[a-zA-Z ]*"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col
+              sizeXs="12"
+              sizeSm="12"
+              sizeLg="6"
+              sizeXl="6"
+            >
+              <ion-item>
+                <ion-label position="floating">Apellido*</ion-label>
+
+                <ion-input
+                  formControlName="surname"
+                  [(ngModel)]="userRegister.last_name"
+                  type="text"
+                  pattern="[a-zA-Z ]*"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col
+              sizeXs="12"
+              sizeSm="12"
+              sizeLg="6"
+              sizeXl="6"
+            >
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" 
+                     placeholder="Ex. pat@example.com">
+              <mat-hint>Errors appear instantly!</mat-hint>
+              <mat-error *ngIf="userRegisterForm.controls.email.hasError('email') && !userRegisterForm.controls.email.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="userRegisterForm.controls.email.hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            
+              <ion-item>
+                <ion-label position="floating">Correo electronico*</ion-label>
+
+                <ion-input
+                  formControlName="email"
+                  [(ngModel)]="userRegister.email"
+                  type="email"
+                  pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col
+              sizeXs="12"
+              sizeSm="12"
+              sizeLg="6"
+              sizeXl="6"
+            >
+              <ion-item>
+                <ion-label position="floating">Número de telefono*</ion-label>
+
+                <ion-input
+                  formControlName="telephone"
+                  [(ngModel)]="userRegister.mobile_phone"
+                  type="number"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col
+              sizeXs="12"
+              sizeSm="12"
+              sizeLg="6"
+              sizeXl="6"
+            >
+              <ion-item>
+                <ion-label position="floating">Género</ion-label>
+
+                <ion-select
+                  formControlName="gender"
+                  [(ngModel)]="userRegister.gender"
+                  interface="popover"
+                >
+                  <ion-select-option value="F">Femenino</ion-select-option>
+
+                  <ion-select-option value="M">Masculino</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="ion-justify-content-center">
+            <ion-button
+              block="block"
+              color="becks"
+              (click)="saveUser()"
+              class="becks-button"
+              [disabled]="userRegisterForm.invalid">
+              <span>CONTINUAR</span>
+            </ion-button>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </div>
+  </section>

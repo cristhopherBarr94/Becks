@@ -8,6 +8,7 @@ import { PrincipalPagePageRoutingModule } from './principal-page-routing.module'
 
 import { PrincipalPagePage } from './principal-page.page';
 import { ComponentsModule } from '../../components/components.module';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { ComponentsModule } from '../../components/components.module';
     IonicModule,
     PrincipalPagePageRoutingModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule
   ],
   declarations: [PrincipalPagePage]
 })

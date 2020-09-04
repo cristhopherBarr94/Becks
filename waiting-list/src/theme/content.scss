@@ -30,6 +30,56 @@
     max-width: 1212px;
 }
 
+.fullSection {
+    width: 100%;
+    height: 100%;
+
+    .branch{
+        position: absolute;
+        top: 17px;
+        left: 139px;
+        z-index: 99;
+    }
+
+    h1, h2 {
+        text-transform: uppercase;
+    }
+
+    .section-vertical-blur {
+        width: 20%;
+        height: 100%;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        background: linear-gradient(90deg, #140514 4.23%, rgba(20, 5, 20, 0) 83.85%);
+    }
+
+    .section-horizontal-blur {
+        width: 100%;
+        height: 10%;
+        position: absolute;
+        bottom: 0px;
+        background: linear-gradient(180deg, #140514 3.23%, rgba(20, 5, 20, 0) 83.85%);
+        transform: rotate(-180deg);
+    }
+}
+
+.content-section-one{
+    background-image: url('../assets/img/sectionOne.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.content-section-two{
+    background-color: #140514;
+}
+
+.from-section {
+    background-image: linear-gradient(0deg, rgba(0,0,0,0.7) 100%, rgba(0,0,0,0.7) 100%), url('../assets/img/sectionTwo.png');
+    background-size: cover;
+    background-position: center;
+}
+
 
 @media (min-width: 0px) and (max-width: 720px) {
     .padding-form {

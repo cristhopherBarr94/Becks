@@ -33,14 +33,34 @@
 .title-primary {
     @include title('Eurostile BQ', #FFFFFF, 0px, 44px, normal, normal, 60px);
     text-transform: uppercase;
-    @media (min-width: 0px) and (max-width: 720px) {
+    // @media (min-width: 0px) and (max-width: 360px) {
+    // }
+    @media (min-width: 0px) and (max-width: 768px) {
+        font-size: 22px !important;
+        line-height: 23px !important;
+        display: flex !important;
+        align-items: center;
+        text-align: center !important;
+    }
+    @media (min-width: 768px) and (max-width: 1024px) {
         line-height: 44px;
     }
 }
 
 .title-secondary {
     @include title('Helvetica Neue', #FFFFFF, 0px, 28px, normal, bold, 32px);
-    max-width: 50%;
+    // @media (min-width: 0px) and (max-width: 360px) {
+    // }
+    @media (min-width: 0px) and (max-width: 768px) {
+        font-size: 28px !important;
+        line-height: 32px !important;
+        display: flex !important;
+        align-items: center;
+        text-align: center !important;
+    }
+    @media (min-width: 768px) and (max-width: 1024px) {
+        max-width: 50%;
+    }
 }
 
 .title-tertiary {

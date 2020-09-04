@@ -1,11 +1,19 @@
 .content-flex-all-center{
     display: flex;
+    height: auto;
     justify-content: center;
     align-items: center;
 
     .form-section {
         max-width: 752px;
     }
+    
+    // @media (min-width: 0px) and (max-width: 360px) {
+    // }
+    // @media (min-width: 360px) and (max-width: 768px) {
+    // }
+    // @media (min-width: 0px) and (max-width: 1024px) {
+    // }
 }
 
 .full-height{
@@ -34,13 +42,6 @@
     width: 100%;
     height: 100%;
 
-    .branch{
-        position: absolute;
-        top: 17px;
-        left: 139px;
-        z-index: 99;
-    }
-
     h1, h2 {
         text-transform: uppercase;
     }
@@ -51,10 +52,38 @@
     background-image: url('../assets/img/sectionImg.png');
     background-size: cover;
     background-position: center;
+    
+    // @media (min-width: 0px) and (max-width: 360px) {
+    // }
+    @media (min-width: 0px) and (max-width: 768px) {
+        background-position-x: 90%;
+    }
+    // @media (min-width: 0px) and (max-width: 1024px) {
+    // }
 }
 
-.content-section-two{
+.content-section-step{
     background-color: #140514;
+    height: auto;
+    h1 {
+        max-width: 50%;
+    }
+    .title-tertiary {
+        max-width: 70%;
+    }
+    ion-grid {
+        padding: 100px 0;
+    }
+    
+    // @media (min-width: 0px) and (max-width: 360px) {
+    // }
+    @media (min-width: 0px) and (max-width: 768px) {
+        h1 {
+            max-width: 90%;
+        }
+    }
+    // @media (min-width: 0px) and (max-width: 1024px) {
+    // }
 }
 
 .from-section {

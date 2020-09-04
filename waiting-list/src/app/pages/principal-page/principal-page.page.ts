@@ -44,10 +44,4 @@ export class PrincipalPagePage implements OnInit {
         err => {}
       );
     }
-
-    public scrollToElement(){
-      const y = document.getElementById('formSection').offsetTop;
-      console.log(y);
-      this.principalContent.scrollToPoint(0, y);
-    }
 }

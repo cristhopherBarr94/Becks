@@ -29,9 +29,22 @@
     @include img-step(url('../assets/img/customer.svg'), 121px, 73px)
 }
 
-.branch{
+.logo{
     @include img-step(url('../assets/img/logo.png'), 140px, 65.5px);
+    background-size: auto;
+    position: absolute;
+    top: 17px;
+    left: 139px;
+    z-index: 99;
     margin-top: 0px;
+    // @media (min-width: 0px) and (max-width: 360px) {
+    // }
+    @media (min-width: 0px) and (max-width: 768px) {
+        top: 0px;
+        left: auto;
+    }
+    @media (min-width: 768px) and (max-width: 1024px) {
+    }
 }
 
 .social {

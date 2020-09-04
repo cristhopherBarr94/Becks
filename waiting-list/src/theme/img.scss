@@ -26,12 +26,8 @@
 }
 
 .branch{
-    background-image: url('../assets/img/logo.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 127.01px;
-    height: 60.5px;
+    @include img-step(url('../assets/img/logo.png'), 140px, 65.5px);
+    margin-top: 0px;
 }
 
 .social {

@@ -18,32 +18,33 @@
     src:  url('../assets/font/HelveticaNeue.woff') format('woff');
 }
 
-@mixin title ($font-family, $color, $margin, $font-size) {
-    font-family: $font-family;
-    color: $color;
-    margin: $margin;
-    font-size: $font-size;
-    text-align: center;
-    letter-spacing: 0px;
+@mixin title ($font-family, $color, $margin, $font-size, $font-style, $font-weight, $line-height) {
+    font-family: $font-family !important;
+    color: $color !important;
+    margin: $margin !important;
+    font-size: $font-size !important;
+    font-style: $font-style !important;
+    font-weight: $font-weight !important;
+    line-height: $line-height !important;
+    text-align: center !important;
+    letter-spacing: 0px !important;
 }
 
 .title-primary {
-    @include title('Eurostile BQ', #FFFFFF, 0px, 60px)
+    @include title('Eurostile BQ', #FFFFFF, 0px, 44px, normal, normal, 60px);
+    text-transform: uppercase;
+    @media (min-width: 0px) and (max-width: 720px) {
+        line-height: 44px;
+    }
 }
 
 .title-secondary {
-    @include title('Helvetica Neue', #FFFFFF, 0px, 28px);
-    line-height: 32px;
-    font-style: normal;
-    font-weight: bold;
+    @include title('Helvetica Neue', #FFFFFF, 0px, 28px, normal, bold, 32px);
     max-width: 50%;
 }
 
 .title-tertiary {
-    @include title('Eurostile', #FFFFFF, 0px, 24px);
-    font-style: normal;
-    font-weight: normal;
-    line-height: 26px;
+    @include title('Eurostile', #FFFFFF, 0px, 24px, normal, normal, 26px);
 }
 
 .primary {

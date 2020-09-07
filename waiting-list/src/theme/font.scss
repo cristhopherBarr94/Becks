@@ -18,71 +18,41 @@
     src:  url('../assets/font/HelveticaNeue.woff') format('woff');
 }
 
-@mixin title ($font-family, $color, $margin, $font-size, $font-style, $font-weight, $line-height) {
+@mixin title ($font-family, $color, $margin, $font-style, $font-weight, $cut-point-1-fs, $cut-point-1-lh, $cut-point-2-fs, $cut-point-2-lh, $cut-point-3-fs, $cut-point-3-lh) {
     font-family: $font-family !important;
     color: $color !important;
     margin: $margin !important;
-    font-size: $font-size !important;
     font-style: $font-style !important;
     font-weight: $font-weight !important;
-    line-height: $line-height !important;
     text-align: center !important;
     letter-spacing: 0px !important;
+    text-transform: uppercase;
+
+    @media (min-width: 0px) and (max-width: 360px) {
+        font-size: $cut-point-1-fs !important;
+        line-height: $cut-point-1-lh !important;
+    }
+    @media (min-width: 361px) and (max-width: 768px) {
+        font-size: $cut-point-2-fs !important;
+        line-height: $cut-point-2-lh !important;
+    }
+
+    @media (min-width: 769px) {
+        font-size: $cut-point-3-fs !important;
+        line-height: $cut-point-3-lh !important;
+    }
 }
 
 .title-primary {
-    @include title('Eurostile BQ', #FFFFFF, 0px, 44px, normal, normal, 60px);
-    text-transform: uppercase;
-    // @media (min-width: 0px) and (max-width: 360px) {
-    // }
-    @media (min-width: 0px) and (max-width: 768px) {
-        font-size: 22px !important;
-        line-height: 23px !important;
-        display: flex !important;
-        align-items: center;
-        text-align: center !important;
-    }
-    @media (min-width: 768px) and (max-width: 1024px) {
-        line-height: 44px;
-    }
+    @include title('Eurostile BQ', #FFFFFF, 0px, normal, bold, 22px, 23px, 44px, 49px, 44px, 49px);
 }
 
 .title-secondary {
-    @include title('Helvetica Neue', #FFFFFF, 0px, 28px, normal, bold, 32px);
-    // @media (min-width: 0px) and (max-width: 360px) {
-    // }
-    @media (min-width: 0px) and (max-width: 768px) {
-        font-size: 28px !important;
-        line-height: 32px !important;
-        display: flex !important;
-        align-items: center;
-        text-align: center !important;
-    }
-    @media (min-width: 768px) and (max-width: 1024px) {
-        max-width: 50%;
-    }
+    @include title('Eurostile BQ', #FFFFFF, 0px, normal, bold, 30px, 30px, 27px, 49px, 27px, 49px);
 }
 
 .title-tertiary {
-    @include title('Eurostile', #FFFFFF, 0px, 24px, normal, normal, 26px);
-}
-
-.primary {
-    text-align: center;
-    font-size: 60px;
-    letter-spacing: 0px;
-    @media (min-width: 0px) and (max-width: 720px) {
-        font-size: 30px;
-    }
-}
-
-.secondary {
-    text-align: center;
-    font-size: 36px;
-    letter-spacing: 0px;
-    @media (min-width: 0px) and (max-width: 720px) {
-        font-size: 24px;
-    }
+    @include title('Helvetica Neue', #FFFFFF, 0px, normal, bold, 22px, 110%, 28px, 32px, 28px, 32px);
 }
 
 p{

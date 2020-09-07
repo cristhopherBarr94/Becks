@@ -1,142 +1,119 @@
 <section
-    id="formSection"
-    class="fullSection from-section"
-  >
-    <div class="content-flex-all-center full-height flex-direction-column padding-form">
-      <p class="title-primary secondary">DÉJANOS TUS DATOS</p>
+  id="formSection"
+  class="fullSection from-section content-flex-all-center"
+>
+  <div class="content-flex-all-center full-height flex-direction-column padding-form">
+    <h2 class="title-secondary">DÉJANOS TUS DATOS</h2>
 
-      <P class="white tertiary">
-        Si quieres ser parte de Becks society llena algunos datos
-      </P>
+    <h3 class="title-tertiary max-width-title-secondary">
+      REGÍSTRATE PARA CONOCER LAS NOVEDADES DE BECKS Y PREPÁRATE PARA DISFRUTAR MUCHAS MÁS EXPERIENCIAS
+    </h3>
 
-      <form
-        [formGroup]="userRegisterForm"
-        class="form-section"
-      >
-        <ion-grid fixed="fixed">
+    <form
+      [formGroup]="userRegisterForm"
+      class="form-section"
+      autocomplete="off"
+    >
+      <mat-form-field [ngClass]="getClassInput(userRegisterForm.controls.name)">
+        <mat-label>Nombre</mat-label>
+        <input
+          matInput
+          formControlName="name"
+          placeholder="Nombre"
+          type="text"
+          required
+        >
+        <mat-error *ngIf="userRegisterForm.controls.name.hasError('required')">Ingrese un nombre</mat-error>
+      </mat-form-field>
+
+      <mat-form-field [ngClass]="getClassInput(userRegisterForm.controls.surname)">
+        <mat-label>Alpellido</mat-label>
+        <input
+          matInput
+          formControlName="surname"
+          placeholder="Apellido"
+          type="text"
+          required
+        >
+        <mat-error *ngIf="userRegisterForm.controls.surname.hasError('required')">Ingrese un apellido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" [ngClass]="getClassInputSelect(userRegisterForm.controls.gender)">
+        <mat-label>Sexo</mat-label>
+        <mat-select formControlName="gender" required>
+          <mat-option value="F"> FEMENINO</mat-option>
+          <mat-option value="M"> MASCULINO</mat-option>
+        </mat-select>
+        <mat-error *ngIf="userRegisterForm.controls.gender.hasError('required')">Seleccione un género</mat-error>
+      </mat-form-field>
+
+      <div>
+
+        <ion-grid class="no-padding">
           <ion-row>
-            <ion-col
-              sizeXs="12"
-              sizeSm="12"
-              sizeLg="6"
-              sizeXl="6"
-            >
-              <ion-item>
-                <ion-label position="floating">Nombre*</ion-label>
-
-                <ion-input
-                  formControlName="name"
-                  [(ngModel)]="userRegister.first_name"
-                  type="text"
-                  pattern="[a-zA-Z ]*"
-                ></ion-input>
-              </ion-item>
-            </ion-col>
-
-            <ion-col
-              sizeXs="12"
-              sizeSm="12"
-              sizeLg="6"
-              sizeXl="6"
-            >
-              <ion-item>
-                <ion-label position="floating">Apellido*</ion-label>
-
-                <ion-input
-                  formControlName="surname"
-                  [(ngModel)]="userRegister.last_name"
-                  type="text"
-                  pattern="[a-zA-Z ]*"
-                ></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col
-              sizeXs="12"
-              sizeSm="12"
-              sizeLg="6"
-              sizeXl="6"
-            >
-
-            <mat-form-field class="example-full-width">
-              <mat-label>Email</mat-label>
-              <input matInput formControlName="email" 
-                     placeholder="Ex. pat@example.com">
-              <mat-hint>Errors appear instantly!</mat-hint>
-              <mat-error *ngIf="userRegisterForm.controls.email.hasError('email') && !userRegisterForm.controls.email.hasError('required')">
-                Please enter a valid email address
-              </mat-error>
-              <mat-error *ngIf="userRegisterForm.controls.email.hasError('required')">
-                Email is <strong>required</strong>
-              </mat-error>
-            </mat-form-field>
-            
-              <ion-item>
-                <ion-label position="floating">Correo electronico*</ion-label>
-
-                <ion-input
-                  formControlName="email"
-                  [(ngModel)]="userRegister.email"
-                  type="email"
-                  pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-                ></ion-input>
-              </ion-item>
-            </ion-col>
-
-            <ion-col
-              sizeXs="12"
-              sizeSm="12"
-              sizeLg="6"
-              sizeXl="6"
-            >
-              <ion-item>
-                <ion-label position="floating">Número de telefono*</ion-label>
-
-                <ion-input
-                  formControlName="telephone"
-                  [(ngModel)]="userRegister.mobile_phone"
+            <ion-col size="2">
+              <mat-form-field [ngClass]="getClassInput(userRegisterForm.controls.prefix)">
+                <mat-label>Pref.</mat-label>
+                <input
+                  matInput
+                  formControlName="prefix"
+                  placeholder="+57"
                   type="number"
-                ></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col
-              sizeXs="12"
-              sizeSm="12"
-              sizeLg="6"
-              sizeXl="6"
-            >
-              <ion-item>
-                <ion-label position="floating">Género</ion-label>
-
-                <ion-select
-                  formControlName="gender"
-                  [(ngModel)]="userRegister.gender"
-                  interface="popover"
+                  required
+                  minlength="1"
+                  maxlength="3"
                 >
-                  <ion-select-option value="F">Femenino</ion-select-option>
-
-                  <ion-select-option value="M">Masculino</ion-select-option>
-                </ion-select>
-              </ion-item>
+                <mat-error *ngIf="userRegisterForm.controls.prefix.hasError('required')">Prefijo</mat-error>
+              </mat-form-field>
             </ion-col>
-          </ion-row>
-
-          <ion-row class="ion-justify-content-center">
-            <ion-button
-              block="block"
-              color="becks"
-              (click)="saveUser()"
-              class="becks-button"
-              [disabled]="userRegisterForm.invalid">
-              <span>CONTINUAR</span>
-            </ion-button>
+            <ion-col size="1">
+              
+            </ion-col>
+            <ion-col size="9">
+              <mat-form-field [ngClass]="getClassInput(userRegisterForm.controls.telephone)">
+                <mat-label>Número Celular</mat-label>
+                <input
+                  matInput
+                  formControlName="telephone"
+                  placeholder="Número Celular"
+                  type="number"
+                  required
+                  minlength="7"
+                  maxlength="10"
+                >
+                <mat-error *ngIf="userRegisterForm.controls.telephone.hasError('required')">Ingrese un número celular</mat-error>
+              </mat-form-field>
+            </ion-col>
           </ion-row>
         </ion-grid>
-      </form>
-    </div>
-  </section>
+        
+
+        
+      </div>
+
+      <mat-form-field [ngClass]="getClassInput(userRegisterForm.controls.email)">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          placeholder="example@example.com"
+          [(ngModel)]="userRegister.email"
+          type="email"
+          required
+        >
+        <mat-error *ngIf="userRegisterForm.controls.email.hasError('email') && !userRegisterForm.controls.email.hasError('required')">Ingrese un email válido</mat-error>
+        <mat-error *ngIf="userRegisterForm.controls.email.hasError('required')">Ingrese un email</mat-error>
+      </mat-form-field>
+      
+      <ion-button
+        block="block"
+        color="becks"
+        (click)="saveUser()"
+        class="becks-button margin-top-button"
+        [disabled]="userRegisterForm.invalid"
+      >
+        <span>ENVIAR</span>
+      </ion-button>
+    </form>
+  </div>
+</section>

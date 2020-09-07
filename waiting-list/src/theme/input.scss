@@ -1,9 +1,85 @@
-ion-item {
-    margin-top: 29px;
-    margin-bottom: 29px;
-    --padding-start: 0px;
-    @media (min-width: 0px) and (max-width: 720px) {
-        margin-top: 0px;
-        margin-bottom: 0px;
+@mixin input ($font-size, $color, $label-color, $width, $border, $padding) {
+    width: $width;
+
+    span, input, :active {
+        color: $color;
+        font-size: $font-size;
+    }
+
+    .mat-form-field-label {
+        color: $label-color;
+        font-size: $font-size;
+    }
+
+    .mat-form-field-flex {
+        border: $border;
+        border-radius: 4px;
+        padding: $padding !important;
+    }
+    .mat-form-field-ripple, .mat-form-field-underline{
+        display: none;
+    }
+    .mat-form-field-wrapper {
+        padding-bottom: 24px;
+    }
+    .mat-form-field-subscript-wrapper {
+        margin: 0px;
+    } 
+}
+
+@mixin select ($backgraund-color,$font-size, $color, $label-color, $width, $border, $padding) {
+    @include input($font-size, $color, $label-color, $width, $border, $padding);
+
+    .example-panel-red.mat-select-panel {
+        background: $backgraund-color;
+    }
+
+    .mat-select-arrow{
+        color: $color;
+        font-size: $font-size;
+    }
+
+    .mat-select-arrow-wrapper{
+        transform: translateY(0) !important;
     }
 }
+
+.mat-form-field-subscript-wrapper{
+    padding: 0px !important;
+}
+
+.mat-error{
+    padding-left: 16px;
+}
+
+.input-becks{
+    @include input(14px ,#FFFFFF, #FFFFFF,100%, 2px solid #FFFFFF, 5px 16px)
+}
+
+.input-becks-error{
+    @include input(14px ,#FFFFFF, #FF0C3E ,100%, 1px solid #FF0C3E, 5px 16px)
+}
+
+.input-becks-ok{
+    @include input(14px ,#FFFFFF, #219653 ,100%, 1px solid #FFFFFF, 5px 16px)
+}
+
+.select-becks{
+    @include select(#377F5E, 14px ,#FFFFFF, #FFFFFF, 100%, 1px solid #FFFFFF, 5px 16px)
+}
+
+.select-becks-ok{
+    @include select(#377F5E, 14px ,#FFFFFF, #219653, 100%, 1px solid #FFFFFF, 5px 16px)
+}
+
+.select-becks-error{
+    @include select(#377F5E, 14px ,#FFFFFF, #FF0C3E, 100%, 1px solid #FF0C3E, 5px 16px)
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }

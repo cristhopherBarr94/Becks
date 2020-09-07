@@ -25,10 +25,11 @@ export class SectionPrincipalFormComponent implements OnInit {
 
     initforms(){
       this.userRegisterForm = this.formBuilder.group({
-            name: new FormControl('', Validators.required),
-            surname: new FormControl('', Validators.required),
-            email: new FormControl('', [Validators.required, Validators.email]),
-            telephone: new FormControl('', Validators.required),
+            name: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+            surname: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+            email: new FormControl('', [Validators.required, Validators.email,  Validators.maxLength(30)]),
+            prefix: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+            telephone: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(10)]),
             gender: new FormControl(null, Validators.required)
           });
     }
@@ -41,5 +42,28 @@ export class SectionPrincipalFormComponent implements OnInit {
         },
         err => {}
       );
+    }
+
+
+    public getClassInput(item: FormControl): string {
+      let classreturn = 'input-becks';
+      if (item.valid) {
+        classreturn = 'input-becks-ok';
+      }
+      else if (item.touched){
+        classreturn = 'input-becks-error';
+      }
+      return classreturn;
+    }
+
+    public getClassInputSelect(item: FormControl): string {
+      let classreturn = 'select-becks';
+      if (item.valid) {
+        classreturn = 'select-becks-ok';
+      }
+      else if (item.touched){
+        classreturn = 'select-becks-error';
+      }
+      return classreturn;
     }
 }

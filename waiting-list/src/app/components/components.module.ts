@@ -8,6 +8,7 @@ import { SectionPrincipalImgComponent } from './section-principal-img/section-pr
 import { SectionPrincipalStepComponent } from './section-principal-step/section-principal-step.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -24,7 +25,8 @@ import { MatInputModule } from '@angular/material/input';
     CommonModule,
     IonicModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   exports: [
     PrincipalHeaderComponent,

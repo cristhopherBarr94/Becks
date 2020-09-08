@@ -1,0 +1,40 @@
+<section class="fullSection content-flex-all-center flex-direction-column content-section-img">
+  <div class="logo"></div>
+
+  <h1 class="title-primary primary max-width-title-primary">
+    Bienvenido a beck’s society
+  </h1>
+  <h2 class="title-secondary secondary"> para continuar con la experiencia debes ser mayor de edad </h2>
+  
+  <form
+      autocomplete="off"
+    > 
+
+    <mat-form-field appearance="fill" floatLabel="auto" class="input-becks input-age">
+      <mat-label>Dia</mat-label>
+      <input matInput type="number" maxlength="2">
+      <mat-placeholder>DD</mat-placeholder>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="auto" class="input-becks input-age">
+      <mat-label>Mes</mat-label>
+      <input matInput placeholder="MM" type="number" maxlength="2">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="auto" class="input-becks input-age">
+      <mat-label>Año</mat-label>
+      <input matInput placeholder="AAAA" type="number" maxlength="4">
+    </mat-form-field>
+  </form>
+
+
+  <ion-button
+    block="block"
+    color="becks"
+    class="becks-button">
+    <span>Entrar</span>
+  </ion-button>
+  
+  
+</section>
+<app-footer></app-footer>

@@ -25,8 +25,8 @@ export class SectionPrincipalFormComponent implements OnInit {
 
     initforms(){
       this.userRegisterForm = this.formBuilder.group({
-            name: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-            surname: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+            name: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern('[A-Za-z ]*')]),
+            surname: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern('[A-Za-z ]*')]),
             email: new FormControl('', [Validators.required, Validators.email,  Validators.maxLength(30)]),
             prefix: new FormControl('', [Validators.required, Validators.maxLength(3)]),
             telephone: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(10)]),
@@ -65,5 +65,20 @@ export class SectionPrincipalFormComponent implements OnInit {
         classreturn = 'select-becks-error';
       }
       return classreturn;
+    }
+
+    public getMessageform (item: FormControl, name: string, min?: number, max?: number): string{
+      console.log(item);
+      if (item.hasError('required')) {
+        return 'Ingrese un ' + name;
+      } else if (item.hasError('maxlength')){
+        return 'Maximo ' + max;
+      } else if (item.hasError('minlength')){
+        return 'Minimo ' + min;
+      } else if (item.hasError('pattern')) {
+        return 'Ingrese solo letras';
+      } else if (item.hasError('email')) {
+        return 'Ingrese un email válido';
+      }
     }
 }

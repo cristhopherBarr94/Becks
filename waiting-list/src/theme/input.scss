@@ -1,48 +1,36 @@
-@mixin input ($font-size, $color, $label-color, $width, $border, $padding) {
-    width: $width;
-
+@mixin input ($color, $label-color, $border, $padding) {
     span, input, :active {
         color: $color;
-        font-size: $font-size;
-    }
 
+    }
     .mat-form-field-label {
         color: $label-color;
-        font-size: $font-size;
     }
-
     .mat-form-field-flex {
         border: $border;
         border-radius: 4px;
-        padding: $padding !important;
     }
     .mat-form-field-ripple, .mat-form-field-underline{
         display: none;
     }
-    .mat-form-field-wrapper {
-        padding-bottom: 24px;
-    }
-    .mat-form-field-subscript-wrapper {
-        margin: 0px;
-    } 
+
+    margin-bottom: 5px;
 }
 
-@mixin select ($backgraund-color,$font-size, $color, $label-color, $width, $border, $padding) {
-    @include input($font-size, $color, $label-color, $width, $border, $padding);
 
+@mixin select ($backgraund-color, $color, $label-color, $border, $padding) {
+    @include input($color, $label-color, $border, $padding);
     .example-panel-red.mat-select-panel {
         background: $backgraund-color;
     }
-
     .mat-select-arrow{
         color: $color;
-        font-size: $font-size;
-    }
-
-    .mat-select-arrow-wrapper{
-        transform: translateY(0) !important;
     }
 }
+
+mat-form-field.mat-form-field {
+    font-size: 16px;
+  }
 
 .mat-form-field-subscript-wrapper{
     padding: 0px !important;
@@ -52,28 +40,32 @@
     padding-left: 16px;
 }
 
+.fullInput {
+    width: 100%;
+}
+
 .input-becks{
-    @include input(14px ,#FFFFFF, #FFFFFF,100%, 2px solid #FFFFFF, 5px 16px)
+    @include input(#FFFFFF, #FFFFFF, 1px solid #FFFFFF, 5px 16px)
 }
 
 .input-becks-error{
-    @include input(14px ,#FFFFFF, #FF0C3E ,100%, 1px solid #FF0C3E, 5px 16px)
+    @include input(#FFFFFF, #FF0C3E, 1px solid #FF0C3E, 5px 16px)
 }
 
 .input-becks-ok{
-    @include input(14px ,#FFFFFF, #219653 ,100%, 1px solid #FFFFFF, 5px 16px)
+    @include input(#FFFFFF, #219653, 1px solid #FFFFFF, 5px 16px)
 }
 
 .select-becks{
-    @include select(#377F5E, 14px ,#FFFFFF, #FFFFFF, 100%, 1px solid #FFFFFF, 5px 16px)
+    @include select(#377F5E,#FFFFFF, #FFFFFF, 1px solid #FFFFFF, 5px 16px)
 }
 
 .select-becks-ok{
-    @include select(#377F5E, 14px ,#FFFFFF, #219653, 100%, 1px solid #FFFFFF, 5px 16px)
+    @include select(#377F5E,#FFFFFF, #219653, 1px solid #FFFFFF, 5px 16px)
 }
 
 .select-becks-error{
-    @include select(#377F5E, 14px ,#FFFFFF, #FF0C3E, 100%, 1px solid #FF0C3E, 5px 16px)
+    @include select(#377F5E,#FFFFFF, #FF0C3E, 1px solid #FF0C3E, 5px 16px)
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -83,3 +75,16 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input[type=number] { -moz-appearance:textfield; }
+
+.input-age {
+    max-width: 100px;
+    margin: 0px 13.5px;
+
+    .mat-form-field-label {
+        display: flex !important;
+        justify-content: center !important;
+    }
+    input {
+        text-align: center !important;
+    }
+}

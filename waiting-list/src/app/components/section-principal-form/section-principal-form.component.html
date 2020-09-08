@@ -14,33 +14,37 @@
       class="form-section"
       autocomplete="off"
     >
-      <mat-form-field [ngClass]="getClassInput(userRegisterForm.controls.name)">
+      <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.name)" >
         <mat-label>Nombre</mat-label>
         <input
           matInput
           formControlName="name"
           placeholder="Nombre"
+          maxlength="20"
           type="text"
+          [(ngModel)]="userRegister.first_name"
           required
         >
-        <mat-error *ngIf="userRegisterForm.controls.name.hasError('required')">Ingrese un nombre</mat-error>
+        <mat-error *ngIf="userRegisterForm.controls.name.errors">{{ getMessageform(userRegisterForm.controls.name, 'nombre', 0, 20) }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field [ngClass]="getClassInput(userRegisterForm.controls.surname)">
+      <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.surname)">
         <mat-label>Alpellido</mat-label>
         <input
           matInput
           formControlName="surname"
           placeholder="Apellido"
           type="text"
+          maxlength="20"
+          [(ngModel)]="userRegister.last_name"
           required
         >
-        <mat-error *ngIf="userRegisterForm.controls.surname.hasError('required')">Ingrese un apellido</mat-error>
+        <mat-error *ngIf="userRegisterForm.controls.surname.errors">{{ getMessageform(userRegisterForm.controls.surname, 'apellido', 0, 20) }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" [ngClass]="getClassInputSelect(userRegisterForm.controls.gender)">
+      <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInputSelect(userRegisterForm.controls.gender)">
         <mat-label>Sexo</mat-label>
-        <mat-select formControlName="gender" required>
+        <mat-select formControlName="gender" required [(ngModel)]="userRegister.gender">
           <mat-option value="F"> FEMENINO</mat-option>
           <mat-option value="M"> MASCULINO</mat-option>
         </mat-select>
@@ -52,7 +56,7 @@
         <ion-grid class="no-padding">
           <ion-row>
             <ion-col size="2">
-              <mat-form-field [ngClass]="getClassInput(userRegisterForm.controls.prefix)">
+              <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.prefix)">
                 <mat-label>Pref.</mat-label>
                 <input
                   matInput
@@ -63,14 +67,15 @@
                   minlength="1"
                   maxlength="3"
                 >
-                <mat-error *ngIf="userRegisterForm.controls.prefix.hasError('required')">Prefijo</mat-error>
+                <!--<mat-error *ngIf="userRegisterForm.controls.prefix.errors">{{ getMessageform(userRegisterForm.controls.prefix, 'prefijo', 1, 3)}}</mat-error>-->
+                <mat-error *ngIf="userRegisterForm.controls.prefix.hasError('required')">prefijo</mat-error>
               </mat-form-field>
             </ion-col>
             <ion-col size="1">
               
             </ion-col>
             <ion-col size="9">
-              <mat-form-field [ngClass]="getClassInput(userRegisterForm.controls.telephone)">
+              <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.telephone)">
                 <mat-label>Número Celular</mat-label>
                 <input
                   matInput
@@ -80,8 +85,9 @@
                   required
                   minlength="7"
                   maxlength="10"
+                  [(ngModel)]="userRegister.mobile_phone"
                 >
-                <mat-error *ngIf="userRegisterForm.controls.telephone.hasError('required')">Ingrese un número celular</mat-error>
+                <mat-error *ngIf="userRegisterForm.controls.telephone.errors">{{ getMessageform(userRegisterForm.controls.telephone, 'número celular', 7, 10)}}</mat-error>
               </mat-form-field>
             </ion-col>
           </ion-row>
@@ -91,7 +97,7 @@
         
       </div>
 
-      <mat-form-field [ngClass]="getClassInput(userRegisterForm.controls.email)">
+      <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.email)">
         <mat-label>Email</mat-label>
         <input
           matInput
@@ -100,9 +106,9 @@
           [(ngModel)]="userRegister.email"
           type="email"
           required
+          maxlength="30"
         >
-        <mat-error *ngIf="userRegisterForm.controls.email.hasError('email') && !userRegisterForm.controls.email.hasError('required')">Ingrese un email válido</mat-error>
-        <mat-error *ngIf="userRegisterForm.controls.email.hasError('required')">Ingrese un email</mat-error>
+        <mat-error *ngIf="userRegisterForm.controls.email.errors">{{ getMessageform(userRegisterForm.controls.email, 'email valido', 0, 30)}}</mat-error>
       </mat-form-field>
       
       <ion-button

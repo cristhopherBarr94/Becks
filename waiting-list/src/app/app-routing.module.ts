@@ -14,7 +14,12 @@ const routes: Routes = [
   {
     path: 'principal-page',
     loadChildren: () => import('./pages/principal-page/principal-page.module').then( m => m.PrincipalPagePageModule)
+  },
+  {
+    path: 'age-gate',
+    loadChildren: () => import('./pages/age-gate/age-gate.module').then( m => m.AgeGatePageModule)
   }
+
 ];
 
 const routerOptions: ExtraOptions = {

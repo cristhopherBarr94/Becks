@@ -44,15 +44,33 @@
 }
 
 .title-primary {
-    @include title('Eurostile BQ', #FFFFFF, 0px, normal, bold, 22px, 23px, 44px, 49px, 44px, 49px);
+    @include title('Eurostile BQ', #FFFFFF, 0px, normal, bold, 22px, 23px, 22px, 23px, 44px, 49px);
 }
 
 .title-secondary {
-    @include title('Eurostile BQ', #FFFFFF, 0px, normal, bold, 30px, 30px, 27px, 49px, 27px, 49px);
+    @include title('Eurostile BQ', #FFFFFF, 0px, normal, bold, 30px, 30px, 30px, 30px, 27px, 49px);
 }
 
 .title-tertiary {
-    @include title('Helvetica Neue', #FFFFFF, 0px, normal, bold, 22px, 110%, 28px, 32px, 28px, 32px);
+    @include title('Helvetica LT Std', #FFFFFF, 0px, normal, bold, 22px, 110%, 22px, 110%, 28px, 32px);
+}
+
+.font-link {
+    font-family: 'Helvetica LT Std';
+    color: #FFFFFF;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 18px
+} 
+
+.font-link-social {
+    font-family: 'Helvetica LT Std';
+    color: #FFFFFF;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 18px;
 }
 
 p{

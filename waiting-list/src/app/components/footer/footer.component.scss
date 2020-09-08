@@ -2,3 +2,13 @@
     background-color: #004C33;
     min-height: 169px;
 }
+
+.padding-footer {
+    @media (min-width: 0px) and (max-width: 360px) {
+        padding: 86px 0px;
+    }
+}
+
+.flex-column{
+    flex-direction: column;
+}

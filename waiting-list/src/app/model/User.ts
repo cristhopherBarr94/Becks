@@ -11,4 +11,7 @@ export class User {
 
     prefix?: string;
     phone?: string;
+    
+    captcha?: string;
+    captcha_key?: number;
 }

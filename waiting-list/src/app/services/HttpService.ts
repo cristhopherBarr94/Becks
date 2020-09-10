@@ -37,6 +37,10 @@ export class HttpService {
         return this.http.put(url, body, { headers: headersIn, observe: 'response' }).pipe(catchError(error => this.handleError(error)));
     }
 
+    public patch(url: string, body?: any, headersIn?: any): Observable<object> {
+        return this.http.patch(url, body, { headers: headersIn, observe: 'response' }).pipe(catchError(error => this.handleError(error)));
+    }
+
     public delete(url: string, headersIn?: any): Observable<object> {
         return this.http.delete(url, { headers: headersIn, observe: 'response' }).pipe(catchError(error => this.handleError(error)));
     }

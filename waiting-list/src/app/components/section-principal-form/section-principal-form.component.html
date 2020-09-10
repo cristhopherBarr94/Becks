@@ -113,12 +113,31 @@
         <mat-error *ngIf="userRegisterForm.controls.email.errors">{{ getMessageform(userRegisterForm.controls.email, 'email valido', 0, 30)}}</mat-error>
       </mat-form-field>
       
+      <fieldset class="becks-captcha" *ngIf="userCaptcha.question">
+        <legend>{{ userCaptcha.question  }}</legend>
+        <mat-radio-group formControlName="captcha">
+          <mat-radio-button 
+            *ngFor="let answer of userCaptcha.answers; let i = index"
+            class="answer" 
+            disableRipple="true"
+            [value]="answer.value"
+            (change)="checkCaptcha(answer)">
+              <mat-icon 
+                [ngClass]="{'active': userAnswer.value === answer.value}"
+                aria-hidden="false"
+                aria-label="{{ answer.title }}"
+                >{{ answer.icon }}</mat-icon>
+          </mat-radio-button>
+        </mat-radio-group>
+        <mat-error [hidden]="captchaAnswer.value == userAnswer.value">Captcha no valido</mat-error>
+      </fieldset>
+
       <ion-button
         block="block"
         color="becks"
         (click)="saveUser()"
         class="becks-button margin-top-button"
-        [disabled]="userRegisterForm.invalid"
+        [disabled]="userRegisterForm.invalid || captchaAnswer.value != userAnswer.value"
       >
         <span>ENVIAR</span>
       </ion-button>

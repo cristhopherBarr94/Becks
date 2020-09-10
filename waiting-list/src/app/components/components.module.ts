@@ -13,8 +13,8 @@ import { IsAlphabeticalDirective } from '../directives/is-alphabetical.directive
 import { IsNumericDirective } from '../directives/is-numeric.directive';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AgeGateComponent } from './age-gate/age-gate.component';
-
-
+import {MatRadioModule} from '@angular/material/radio';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   entryComponents:[
@@ -34,7 +34,9 @@ import { AgeGateComponent } from './age-gate/age-gate.component';
     ReactiveFormsModule,
     MatInputModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatRadioModule,
+    MatIconModule
   ],
   exports: [
     PrincipalHeaderComponent,

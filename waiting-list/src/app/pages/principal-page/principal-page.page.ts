@@ -28,26 +28,27 @@ export class PrincipalPagePage implements OnInit {
           this.router.navigate(['age-gate']);
         }
       }
-      this.initforms();
+      // this.initforms();
     }
 
-    initforms(){
-      this.userRegisterForm = this.formBuilder.group({
-            name: new FormControl('', Validators.required),
-            surname: new FormControl('', Validators.required),
-            email: new FormControl('', [Validators.required, Validators.email]),
-            telephone: new FormControl('', Validators.required),
-            gender: new FormControl(null, Validators.required)
-          });
-    }
+    // initforms(){
+    //   this.userRegisterForm = this.formBuilder.group({
+    //         name: new FormControl('', Validators.required),
+    //         surname: new FormControl('', Validators.required),
+    //         email: new FormControl('', [Validators.required, Validators.email]),
+    //         telephone: new FormControl('', Validators.required),
+    //         gender: new FormControl(null, Validators.required),
+    //         captcha: new FormControl(null, Validators.required)
+    //       });
+    // }
 
-    saveUser(): void {
-      this.userService.setCreationUser(this.userRegister).subscribe(
-        (data: any) => {
-          this.userRegisterForm.reset();
-          this.router.navigate(['confirm-register']);
-        },
-        err => {}
-      );
-    }
+    // saveUser(): void {
+    //   this.userService.setCreationUser(this.userRegister).subscribe(
+    //     (data: any) => {
+    //       this.userRegisterForm.reset();
+    //       this.router.navigate(['confirm-register']);
+    //     },
+    //     err => {}
+    //   );
+    // }
 }

@@ -34,3 +34,7 @@
 .text-decoration-underline{
     text-decoration: underline;
 }
+
+::ng-deep .mat-checkbox-frame { 
+    border-color: white 
+}

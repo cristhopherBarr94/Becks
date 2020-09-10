@@ -70,6 +70,7 @@ export class SectionPrincipalFormComponent implements OnInit {
       this.userService.setCreationUser(this.userRegister).subscribe(
         (data: any) => {
           this.userRegisterForm.reset();
+          this.initCaptcha();
           this.router.navigate(['confirm-register']);
         },
         err => {}
@@ -132,14 +133,14 @@ export class SectionPrincipalFormComponent implements OnInit {
       this.userCaptcha.answers = [];
       this.captchaAnswer = null;
 
-      var questions = this.captchaQuestions;
-      var iq = Math.floor(Math.random()*questions.length);
+      let questions = this.captchaQuestions;
+      let iq = Math.floor(Math.random() * questions.length);
       this.captchaAnswer = questions[iq];
       this.userCaptcha.answers.push( this.captchaAnswer );
 
       questions.splice( iq, 1 );
-      for( var i = 0; i < 3; i++) {
-        iq = Math.floor(Math.random()*questions.length);
+      for( let i = 0; i < 3; i++) {
+        iq = Math.floor( Math.random() * questions.length );
         this.userCaptcha.answers.push( questions[iq] );
         questions.splice( iq, 1 );
       }

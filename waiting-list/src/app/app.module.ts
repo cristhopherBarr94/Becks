@@ -15,6 +15,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IsNumericDirective } from './directives/is-numeric.directive';
+import { IsAlphabeticalDirective } from './directives/is-alphabetical.directive';
 
 @NgModule({
   declarations: [AppComponent],

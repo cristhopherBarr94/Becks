@@ -14,7 +14,6 @@ export class SectionPrincipalImgComponent implements OnInit {
 
   public scrollToElement(){
     const y = document.getElementById('formSection').offsetTop;
-    console.log(y);
     this.principalContent.scrollToPoint(0, y);
   }
 

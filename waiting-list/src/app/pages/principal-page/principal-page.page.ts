@@ -22,6 +22,12 @@ export class PrincipalPagePage implements OnInit {
               private router: Router) { }
 
     ngOnInit() {
+
+      if (!localStorage.getItem('age-gate-local')) {
+        if(!sessionStorage.getItem('age-gate-session')) {
+          this.router.navigate(['age-gate']);
+        }
+      }
       this.initforms();
     }
 

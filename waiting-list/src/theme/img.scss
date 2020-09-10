@@ -30,8 +30,13 @@
 }
 
 .logo{
-    @include img-step(url('../assets/img/logo.png'), 140px, 65.5px);
+    background-image: url('../assets/img/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: auto;
+    width: 140px;
+    height: 65.5px;
     position: absolute;
     top: 17px;
     left: 139px;
@@ -40,7 +45,7 @@
     // @media (min-width: 0px) and (max-width: 360px) {
     // }
     @media (min-width: 0px) and (max-width: 768px) {
-        top: 0px;
+        top: 17px;
         left: auto;
     }
     @media (min-width: 768px) and (max-width: 1024px) {

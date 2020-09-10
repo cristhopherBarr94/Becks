@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-age-gate',
+  selector: 'app-age-gate-page',
   templateUrl: './age-gate.page.html',
   styleUrls: ['./age-gate.page.scss'],
 })

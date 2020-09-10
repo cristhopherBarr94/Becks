@@ -18,10 +18,10 @@
         <mat-label>Nombre</mat-label>
         <input
           matInput
+          (input)="inputValidatorAlphabetical($event)"
           formControlName="name"
           placeholder="Nombre"
           maxlength="20"
-          type="text"
           [(ngModel)]="userRegister.first_name"
           required
         >
@@ -29,12 +29,12 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.surname)">
-        <mat-label>Alpellido</mat-label>
+        <mat-label>Apellido</mat-label>
         <input
           matInput
+          (input)="inputValidatorAlphabetical($event)"
           formControlName="surname"
           placeholder="Apellido"
-          type="text"
           maxlength="20"
           [(ngModel)]="userRegister.last_name"
           required
@@ -44,7 +44,7 @@
 
       <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInputSelect(userRegisterForm.controls.gender)">
         <mat-label>Sexo</mat-label>
-        <mat-select formControlName="gender" required [(ngModel)]="userRegister.gender">
+        <mat-select panelClass="backgroud-panel" formControlName="gender" required [(ngModel)]="userRegister.gender">
           <mat-option value="F"> FEMENINO</mat-option>
           <mat-option value="M"> MASCULINO</mat-option>
         </mat-select>
@@ -60,9 +60,9 @@
                 <mat-label>Pref.</mat-label>
                 <input
                   matInput
+                  (input)="inputValidatorNumeric($event)"
                   formControlName="prefix"
                   placeholder="+57"
-                  type="number"
                   required
                   minlength="1"
                   maxlength="3"
@@ -79,9 +79,9 @@
                 <mat-label>Número Celular</mat-label>
                 <input
                   matInput
+                  (input)="inputValidatorNumeric($event)"
                   formControlName="telephone"
                   placeholder="Número Celular"
-                  type="number"
                   required
                   minlength="7"
                   maxlength="10"
@@ -106,6 +106,7 @@
           [(ngModel)]="userRegister.email"
           type="email"
           required
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           maxlength="30"
         >
         <mat-error *ngIf="userRegisterForm.controls.email.errors">{{ getMessageform(userRegisterForm.controls.email, 'email valido', 0, 30)}}</mat-error>

@@ -25,8 +25,8 @@ export class SectionPrincipalFormComponent implements OnInit {
 
     initforms(){
       this.userRegisterForm = this.formBuilder.group({
-            name: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern('[A-Za-z ]*')]),
-            surname: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern('[A-Za-z ]*')]),
+            name: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+            surname: new FormControl('', [Validators.required, Validators.maxLength(20)]),
             email: new FormControl('', [Validators.required, Validators.email,  Validators.maxLength(30)]),
             prefix: new FormControl('', [Validators.required, Validators.maxLength(3)]),
             telephone: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(10)]),
@@ -42,6 +42,20 @@ export class SectionPrincipalFormComponent implements OnInit {
         },
         err => {}
       );
+    }
+
+    public inputValidatorNumeric(event: any) {
+      const pattern = /^[0-9]*$/;
+      if (!pattern.test(event.target.value)) {
+        event.target.value = event.target.value.replace(/[^0-9]/g, '');
+      }
+    }
+
+    public inputValidatorAlphabetical(event: any) {
+      const pattern = /^[a-zA-ZnÑ ]*$/;
+      if (!pattern.test(event.target.value)) {
+        event.target.value = event.target.value.replace(/[^a-zA-ZnÑ ]/g, '');
+      }
     }
 
 
@@ -68,7 +82,6 @@ export class SectionPrincipalFormComponent implements OnInit {
     }
 
     public getMessageform (item: FormControl, name: string, min?: number, max?: number): string{
-      console.log(item);
       if (item.hasError('required')) {
         return 'Ingrese un ' + name;
       } else if (item.hasError('maxlength')){

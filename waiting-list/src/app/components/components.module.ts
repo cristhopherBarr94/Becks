@@ -9,6 +9,10 @@ import { SectionPrincipalStepComponent } from './section-principal-step/section-
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { IsAlphabeticalDirective } from '../directives/is-alphabetical.directive';
+import { IsNumericDirective } from '../directives/is-numeric.directive';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AgeGateComponent } from './age-gate/age-gate.component';
 
 
 
@@ -20,20 +24,25 @@ import { MatSelectModule } from '@angular/material/select';
     FooterComponent,
     SectionPrincipalFormComponent,
     SectionPrincipalImgComponent,
-    SectionPrincipalStepComponent],
+    SectionPrincipalStepComponent,
+    AgeGateComponent,
+    IsNumericDirective,
+    IsAlphabeticalDirective],
   imports: [
     CommonModule,
     IonicModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
   ],
   exports: [
     PrincipalHeaderComponent,
     FooterComponent,
     SectionPrincipalFormComponent,
     SectionPrincipalImgComponent,
-    SectionPrincipalStepComponent
+    SectionPrincipalStepComponent,
+    AgeGateComponent
   ]
 })
 export class ComponentsModule { }

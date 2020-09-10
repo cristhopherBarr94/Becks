@@ -5,9 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { AgeGatePageRoutingModule } from './age-gate-routing.module';
-
 import { AgeGatePage } from './age-gate.page';
-import { MatInputModule } from '@angular/material/input';
 import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
@@ -16,8 +14,7 @@ import { ComponentsModule } from '../../components/components.module';
     FormsModule,
     IonicModule,
     AgeGatePageRoutingModule,
-    MatInputModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   declarations: [AgeGatePage]
 })

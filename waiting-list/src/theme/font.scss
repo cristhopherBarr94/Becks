@@ -26,7 +26,6 @@
     font-weight: $font-weight !important;
     text-align: center !important;
     letter-spacing: 0px !important;
-    text-transform: uppercase;
 
     @media (min-width: 0px) and (max-width: 360px) {
         font-size: $cut-point-1-fs !important;
@@ -45,14 +44,21 @@
 
 .title-primary {
     @include title('Eurostile BQ', #FFFFFF, 0px, normal, bold, 22px, 23px, 22px, 23px, 44px, 49px);
+    text-transform: uppercase;
 }
 
 .title-secondary {
     @include title('Eurostile BQ', #FFFFFF, 0px, normal, bold, 30px, 30px, 30px, 30px, 27px, 49px);
+    text-transform: uppercase;
 }
 
 .title-tertiary {
     @include title('Helvetica LT Std', #FFFFFF, 0px, normal, bold, 22px, 110%, 22px, 110%, 28px, 32px);
+    text-transform: uppercase;
+}
+
+.title-fourthy {
+    @include title('Helvetica LT Std', #FFFFFF, 0px, normal, bold, 16px, 18px, 16px, 18px, 16px, 18px);
 }
 
 .font-link {
@@ -61,7 +67,8 @@
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
-    line-height: 18px
+    line-height: 18px;
+    margin-bottom: 10px !important;
 } 
 
 .font-link-social {
@@ -71,9 +78,9 @@
     font-weight: bold;
     font-size: 22px;
     line-height: 18px;
+    margin-bottom: 24px !important;
 }
 
 p{
     color: #FFFFFF;
-    margin: 8.5px;
 }

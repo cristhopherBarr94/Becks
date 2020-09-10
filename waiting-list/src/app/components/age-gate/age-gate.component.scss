@@ -1,3 +1,6 @@
+.background-black{
+    background-color: black;
+}
 .margin-top {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -22,4 +25,12 @@
 
 .mat-error {
     padding-left: 0px !important;
+}
+
+.no-margin {
+    margin: 0px;
+}
+
+.text-decoration-underline{
+    text-decoration: underline;
 }

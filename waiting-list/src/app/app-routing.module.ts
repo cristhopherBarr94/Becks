@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes, ExtraOptions } from '@angular/
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'principal-page',
+    redirectTo: 'principal',
     pathMatch: 'full'
   },
   {
@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/confirm-register/confirm-register.module').then( m => m.ConfirmRegisterPageModule)
   },
   {
-    path: 'principal-page',
+    path: 'principal',
     loadChildren: () => import('./pages/principal-page/principal-page.module').then( m => m.PrincipalPagePageModule)
   },
   {

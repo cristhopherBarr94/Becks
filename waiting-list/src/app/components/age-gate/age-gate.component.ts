@@ -32,7 +32,7 @@ export class AgeGateComponent implements OnInit{
     });
   }
 
-  validateAgeGate(){  
+  validateAgeGate() {
     if (moment().diff(moment().day(this.ageGateForm.controls.day.value)
         .month(this.ageGateForm.controls.month.value)
         .year(this.ageGateForm.controls.year.value) , 'years') >= 18) {
@@ -41,7 +41,7 @@ export class AgeGateComponent implements OnInit{
       } else {
         sessionStorage.setItem('age-gate-session', moment().toISOString());
       }
-      this.router.navigate(['principal-page']);
+      this.router.navigate(['principal']);
     } else {
       window.location.href = 'https://www.tapintoyourbeer.com/age_check.cfm';
     }

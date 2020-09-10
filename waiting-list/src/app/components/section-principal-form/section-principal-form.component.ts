@@ -35,6 +35,7 @@ export class SectionPrincipalFormComponent implements OnInit {
     }
 
     saveUser(): void {
+      this.userRegister.mobile_phone = '+' + this.userRegister.prefix + this.userRegister.phone;
       this.userService.setCreationUser(this.userRegister).subscribe(
         (data: any) => {
           this.userRegisterForm.reset();

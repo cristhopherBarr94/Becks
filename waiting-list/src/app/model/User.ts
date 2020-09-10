@@ -8,4 +8,7 @@ export class User {
     password?: string;
     waitingState?: number;
     delete?: boolean;
+
+    prefix?: string;
+    phone?: string;
 }

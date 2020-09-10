@@ -66,6 +66,7 @@
                   required
                   minlength="1"
                   maxlength="3"
+                  [(ngModel)]="userRegister.prefix"
                 >
                 <!--<mat-error *ngIf="userRegisterForm.controls.prefix.errors">{{ getMessageform(userRegisterForm.controls.prefix, 'prefijo', 1, 3)}}</mat-error>-->
                 <mat-error *ngIf="userRegisterForm.controls.prefix.hasError('required')">prefijo</mat-error>
@@ -85,7 +86,7 @@
                   required
                   minlength="7"
                   maxlength="10"
-                  [(ngModel)]="userRegister.mobile_phone"
+                  [(ngModel)]="userRegister.phone"
                 >
                 <mat-error *ngIf="userRegisterForm.controls.telephone.errors">{{ getMessageform(userRegisterForm.controls.telephone, 'número celular', 7, 10)}}</mat-error>
               </mat-form-field>

@@ -70,3 +70,29 @@
     height: 33px;
 }
 
+.img-404{
+    background-image: url('../assets/img/_404.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 928px;
+    height: 391px;
+
+    
+
+    @media (min-width: 0px) and (max-width: 768px) {
+        width: 349px;
+        height: 147px;
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        width: 500px;
+        height: 211px;
+    }
+
+    @media (min-width: 1024px) {
+        width: 928px;
+        height: 391px;
+    }
+}
+

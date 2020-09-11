@@ -18,7 +18,12 @@ const routes: Routes = [
   {
     path: 'age-gate',
     loadChildren: () => import('./pages/age-gate/age-gate.module').then( m => m.AgeGatePageModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   }
+
 
 ];
 

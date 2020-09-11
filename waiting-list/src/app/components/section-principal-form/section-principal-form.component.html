@@ -69,7 +69,7 @@
                   [(ngModel)]="userRegister.prefix"
                 >
                 <!--<mat-error *ngIf="userRegisterForm.controls.prefix.errors">{{ getMessageform(userRegisterForm.controls.prefix, 'prefijo', 1, 3)}}</mat-error>-->
-                <mat-error *ngIf="userRegisterForm.controls.prefix.hasError('required')">prefijo</mat-error>
+                <mat-error *ngIf="userRegisterForm.controls.prefix.hasError('required')">Prefijo</mat-error>
               </mat-form-field>
             </ion-col>
             <ion-col size="1">
@@ -136,7 +136,7 @@
         block="block"
         color="becks"
         (click)="saveUser()"
-        class="becks-button margin-top-button"
+        class="becks-btn-primary margin-top-button"
         [disabled]="userRegisterForm.invalid || captchaAnswer.value != userAnswer.value"
       >
         <span>ENVIAR</span>

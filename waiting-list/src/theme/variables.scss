@@ -298,5 +298,5 @@ $waiting-list-theme: mat-light-theme((
     --ion-card-background: #1e1e1e;
   }
 }
-html, body { height: 100%; }
+html, body { height: 100%; word-wrap: normal !important}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

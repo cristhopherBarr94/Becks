@@ -20,10 +20,6 @@
     // }
 }
 
-.full-height{
-    height: 100%
-}
-
 .flex-direction-column {
     flex-direction: column;
 }
@@ -34,13 +30,15 @@
     align-items: center;
 }
 
-
 .full-height{
     min-height: 100%;
 }
 
 .max-width-title-primary{
-    max-width: 68%;
+    max-width: 894px;
+    @media (min-width: 0px) and (max-width: 768px) {
+        max-width: 80%;
+    }
 }
 
 .max-width-title-secondary{
@@ -121,8 +119,10 @@
         max-width: 828px;
         padding-left: 55px;
         padding-right: 55px;
+        }
     }
 }
+.background-black{
+    background: #140514;
 }
-
 

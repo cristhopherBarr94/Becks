@@ -1,37 +1,39 @@
-@mixin btn ($color, $background, $border, $font-family, $font-size, $min-width, $border-hover) {
-  height: 42px;
+@mixin btn ($color, $background, $border, $font-family, $font-size, $width, $height, $border-hover) {
+  width: $width;
+  height: $height;
   font-family: $font-family;
   font-size: $font-size;
   color: $color;
-  border: $border;
   cursor: pointer;
   background-color: $background;
-  border-radius: 1.5em;
-  padding: 10px 25px;
-}
-
-.becks-button {
-  width: 267px;
-  height: 56px;
-  background: #377F5E;
   border-radius: 4px;
-}
 
-.becks-button:hover {
-  border: 3px solid #FFFFFF;
-  background: #377F5E;
-}
-
-.becks-button:active {
-  background: #FFFFFF;
   span {
-    text-transform: none;
-    color: #377F5E;
-    font-size: 14px;
+    font-size: $font-size;
     font-weight: bold;
+  }
+
+  &:hover {
+    border: $border-hover;
+    background: $background;
+  }
+
+  &:active {
+    background: $color;
+    span {
+      color: $background;
+    }
   }
 }
 
 .becks-btn-primary {
-  @include btn(#FFFFFF, #30333A, 3px solid #FFFFFF, 'Eurostile BQ', 16px, 200px, 3px solid #FFFFFF)
+  @include btn(#FFFFFF, #377F5E, 2px solid #FFFFFF, 'Helvetica LT Std', 14px, 267px, 56px,3px solid #FFFFFF)
+}
+
+.button-disabled {
+  background: #BDBDBD;
+  opacity: 1;
+  span {
+    color: #FFFFFF;
+  }
 }

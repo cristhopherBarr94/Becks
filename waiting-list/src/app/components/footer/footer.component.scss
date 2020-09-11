@@ -1,12 +1,10 @@
 .color-footer{
-    background-color: #004C33;
+    background-color: #377F5E;
     min-height: 169px;
 }
 
 .padding-footer {
-    @media (min-width: 0px) and (max-width: 360px) {
-        padding: 86px 0px;
-    }
+    padding: 50px;
 }
 
 .flex-column{

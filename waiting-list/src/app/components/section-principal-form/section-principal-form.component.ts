@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from '../../model/User';
 import { SHA512 } from "crypto-js";
+import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-section-principal-form',
@@ -20,7 +21,8 @@ export class SectionPrincipalFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               public userService: UserService,
-              private router: Router) {}
+              private router: Router,
+              private ui: UiService) {}
 
     ngOnInit() {
       this.initforms();
@@ -38,17 +40,22 @@ export class SectionPrincipalFormComponent implements OnInit {
     }
 
     saveUser(): void {
+      this.ui.showLoading();
+      this.restartCaptcha = true;
       this.userRegister.captcha_key = Math.floor( Math.random() * ( 999999999999 - 121212) + 121212 );
       this.userRegister.captcha = SHA512( 'setupCaptchaValidator("' + this.userRegister.email + '-' + this.userRegister.captcha_key + '")' ).toString();
       this.userRegister.mobile_phone = '+' + this.userRegister.prefix + this.userRegister.phone;
       this.userService.setCreationUser(this.userRegister).subscribe(
         (data: any) => {
-          this.restartCaptcha = true;
+          this.ui.dismissLoading();
           this.restartCaptcha = false;
           this.userRegisterForm.reset();
           this.router.navigate(['confirm-register']);
         },
-        err => {}
+        err => {
+          // console.error('Save User' , err);
+          this.ui.dismissLoading();
+        }
       );
     }
 

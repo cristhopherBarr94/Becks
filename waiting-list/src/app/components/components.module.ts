@@ -14,6 +14,7 @@ import { IsNumericDirective } from '../directives/is-numeric.directive';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AgeGateComponent } from './age-gate/age-gate.component';
 import { CaptchaComponent } from './captcha/captcha.component';
+import { LoadingComponent } from './loading/loading.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
 
@@ -28,6 +29,7 @@ import {MatIconModule} from '@angular/material/icon';
     SectionPrincipalStepComponent,
     AgeGateComponent,
     CaptchaComponent,
+    LoadingComponent,
     IsNumericDirective,
     IsAlphabeticalDirective],
   imports: [

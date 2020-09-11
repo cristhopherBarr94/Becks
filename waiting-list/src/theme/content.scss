@@ -111,7 +111,6 @@
     background-position: center;
 }
 
-
 .padding-form {
     padding: 139px 40.5px 143px 40.5px;
     @media (min-width: 0px) and (max-width: 720px) {
@@ -122,11 +121,22 @@
         }
     }
 }
+
 .background-black{
     background: #140514;
 }
 
-
 .padding-logo {
     padding: 90px 0;
+}
+
+.loading-modal {
+    width: 100%;
+    height: 100%;
+    opacity: 0.5 !important;
+
+    .modal-wrapper {
+        width: 100%;
+        height: 100%;
+    }
 }

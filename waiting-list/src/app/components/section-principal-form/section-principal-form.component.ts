@@ -17,6 +17,7 @@ export class SectionPrincipalFormComponent implements OnInit {
   public userRegister: User = new User();
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
+  public httpError: string;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -37,6 +38,7 @@ export class SectionPrincipalFormComponent implements OnInit {
             telephone: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(10)]),
             gender: new FormControl(null, Validators.required)
           });
+      this.userRegister.prefix = "57";
     }
 
     saveUser(): void {
@@ -44,7 +46,7 @@ export class SectionPrincipalFormComponent implements OnInit {
       this.restartCaptcha = true;
       this.userRegister.captcha_key = Math.floor( Math.random() * ( 999999999999 - 121212) + 121212 );
       this.userRegister.captcha = SHA512( 'setupCaptchaValidator("' + this.userRegister.email + '-' + this.userRegister.captcha_key + '")' ).toString();
-      this.userRegister.mobile_phone = '+' + this.userRegister.prefix + this.userRegister.phone;
+      this.userRegister.mobile_phone = '+' + this.userRegister.prefix + ' ' + this.userRegister.phone;
       this.userService.setCreationUser(this.userRegister).subscribe(
         (data: any) => {
           this.ui.dismissLoading();
@@ -52,8 +54,10 @@ export class SectionPrincipalFormComponent implements OnInit {
           this.userRegisterForm.reset();
           this.router.navigate(['confirm-register']);
         },
-        err => {
-          // console.error('Save User' , err);
+        (err) => {
+          if ( err.error ) {
+            this.httpError = err.error.message;
+          }
           this.ui.dismissLoading();
         }
       );

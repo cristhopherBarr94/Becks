@@ -62,7 +62,7 @@
                   matInput
                   (input)="inputValidatorNumeric($event)"
                   formControlName="prefix"
-                  placeholder="+57"
+                  placeholder="57"
                   required
                   minlength="1"
                   maxlength="3"
@@ -116,6 +116,8 @@
       <app-captcha [restart]="restartCaptcha"
                   (status)="setCaptchaStatus($event)">
       </app-captcha>
+
+      <br/><mat-error *ngIf="httpError">{{ httpError }}</mat-error>
 
       <ion-button
         block="block"

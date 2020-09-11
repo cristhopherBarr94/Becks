@@ -49,12 +49,13 @@ export class SectionPrincipalFormComponent implements OnInit {
       this.userRegister.mobile_phone = '+' + this.userRegister.prefix + ' ' + this.userRegister.phone;
       this.userService.setCreationUser(this.userRegister).subscribe(
         (data: any) => {
-          this.ui.dismissLoading();
           this.restartCaptcha = false;
+          this.ui.dismissLoading();
           this.userRegisterForm.reset();
           this.router.navigate(['confirm-register']);
         },
         (err) => {
+          this.restartCaptcha = false;
           if ( err.error ) {
             this.httpError = err.error.message;
           }

@@ -3,8 +3,12 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from '../../model/User';
-import { SHA512 } from "crypto-js";
+import { SHA256, SHA512 } from "crypto-js";
 import { UiService } from 'src/app/services/ui.service';
+
+declare global {
+  interface Window { dataLayer: any[]; }
+}
 
 @Component({
   selector: 'app-section-principal-form',
@@ -47,11 +51,17 @@ export class SectionPrincipalFormComponent implements OnInit {
       this.userRegister.captcha_key = Math.floor( Math.random() * ( 999999999999 - 121212) + 121212 );
       this.userRegister.captcha = SHA512( 'setupCaptchaValidator("' + this.userRegister.email + '-' + this.userRegister.captcha_key + '")' ).toString();
       this.userRegister.mobile_phone = '+' + this.userRegister.prefix + ' ' + this.userRegister.phone;
+      const email256 = SHA256(this.userRegister.email).toString();
       this.userService.setCreationUser(this.userRegister).subscribe(
         (data: any) => {
           this.restartCaptcha = false;
           this.ui.dismissLoading();
           this.userRegisterForm.reset();
+          window.dataLayer.push({ 'event': 'trackEvent',
+                                  'eventCategory': 'becks society', 
+                                  'eventAction': 'finalizar', 
+                                  'eventLabel': email256 
+                                });
           this.router.navigate(['confirm-register']);
         },
         (err) => {

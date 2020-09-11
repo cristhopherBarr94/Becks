@@ -147,17 +147,13 @@ export class SectionPrincipalFormComponent implements OnInit {
 
       this.userCaptcha.answers = this.userCaptcha.answers.sort( () => Math.random() - 0.5);
       this.userCaptcha.question = "Seleccione " + this.captchaAnswer.title;
-      console.log(this.userCaptcha);
     }
 
     public checkCaptcha( answer ) {
       this.userAnswer = answer;
-      console.log( this.captchaAnswer , this.userAnswer );
-      console.log( this.captchaAnswer.value != this.userAnswer.value );
       if ( this.captchaAnswer.value != this.userAnswer.value ) {
         this.userRegisterForm.controls.captcha.setValue(null);
       }
-      console.log(this.userRegisterForm.controls.captcha.errors);
       console.error( this.userRegisterForm.status , this.userRegisterForm.invalid );
     }
 }

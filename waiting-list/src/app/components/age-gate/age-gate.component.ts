@@ -43,6 +43,8 @@ export class AgeGateComponent implements OnInit{
       }
       this.router.navigate(['principal']);
     } else {
+      localStorage.removeItem('age-gate-local');
+      sessionStorage.removeItem('age-gate-session');
       window.location.href = 'https://www.tapintoyourbeer.com/age_check.cfm';
     }
   }
@@ -69,9 +71,9 @@ export class AgeGateComponent implements OnInit{
     if (item.hasError('required')) {
       return 'Ingrese un ' + name;
     } else if (item.hasError('maxlength')){
-      return 'Maximo ' + maxlength;
+      return 'Máximo ' + maxlength;
     } else if (item.hasError('minlength')){
-      return 'Minimo ' + minlength;
+      return 'Mínimo ' + minlength;
     } else if (item.hasError('pattern')) {
       return 'Ingrese solo letras';
     } else if (item.hasError('email')) {

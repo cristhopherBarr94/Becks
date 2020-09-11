@@ -8,31 +8,3 @@
 .margin-top-button{
     margin-top: 23px;
 }
-
-.becks-captcha {
-
-    legend {
-        color: white;
-    }
-
-    legend , mat-error {
-        text-align: center;
-    }
-
-    .mat-radio-button {
-        padding: 10px;
-    }
-    
-    .active {
-        color: #377F5E;
-    }
-}
-
-::ng-deep .mat-radio-button .mat-radio-container {
-  width: 0;
-}
-::ng-deep .mat-radio-container .mat-radio-outer-circle,
-::ng-deep .mat-radio-container .mat-radio-inner-circle {
-  border: none;
-  width: 0;
-}

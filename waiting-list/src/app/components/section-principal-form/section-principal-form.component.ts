@@ -104,9 +104,9 @@ export class SectionPrincipalFormComponent implements OnInit {
       if (item.hasError('required')) {
         return 'Ingrese un ' + name;
       } else if (item.hasError('maxlength')){
-        return 'Maximo ' + max;
+        return 'Máximo ' + max;
       } else if (item.hasError('minlength')){
-        return 'Minimo ' + min;
+        return 'Mínimo ' + min;
       } else if (item.hasError('pattern')) {
         return 'Ingrese solo letras';
       } else if (item.hasError('email')) {

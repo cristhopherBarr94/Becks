@@ -13,6 +13,7 @@ import { IsAlphabeticalDirective } from '../directives/is-alphabetical.directive
 import { IsNumericDirective } from '../directives/is-numeric.directive';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AgeGateComponent } from './age-gate/age-gate.component';
+import { CaptchaComponent } from './captcha/captcha.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
 
@@ -26,6 +27,7 @@ import {MatIconModule} from '@angular/material/icon';
     SectionPrincipalImgComponent,
     SectionPrincipalStepComponent,
     AgeGateComponent,
+    CaptchaComponent,
     IsNumericDirective,
     IsAlphabeticalDirective],
   imports: [
@@ -44,7 +46,8 @@ import {MatIconModule} from '@angular/material/icon';
     SectionPrincipalFormComponent,
     SectionPrincipalImgComponent,
     SectionPrincipalStepComponent,
-    AgeGateComponent
+    AgeGateComponent,
+    CaptchaComponent
   ]
 })
 export class ComponentsModule { }

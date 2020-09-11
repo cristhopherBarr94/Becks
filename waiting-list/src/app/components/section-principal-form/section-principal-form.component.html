@@ -69,7 +69,7 @@
                   [(ngModel)]="userRegister.prefix"
                 >
                 <!--<mat-error *ngIf="userRegisterForm.controls.prefix.errors">{{ getMessageform(userRegisterForm.controls.prefix, 'prefijo', 1, 3)}}</mat-error>-->
-                <mat-error *ngIf="userRegisterForm.controls.prefix.hasError('required')">Prefijo</mat-error>
+                <mat-error *ngIf="userRegisterForm.controls.prefix.hasError('required')">prefijo</mat-error>
               </mat-form-field>
             </ion-col>
             <ion-col size="1">
@@ -113,31 +113,16 @@
         <mat-error *ngIf="userRegisterForm.controls.email.errors">{{ getMessageform(userRegisterForm.controls.email, 'email valido', 0, 30)}}</mat-error>
       </mat-form-field>
       
-      <fieldset class="becks-captcha" *ngIf="userCaptcha.question">
-        <legend>{{ userCaptcha.question  }}</legend>
-        <mat-radio-group formControlName="captcha">
-          <mat-radio-button 
-            *ngFor="let answer of userCaptcha.answers; let i = index"
-            class="answer" 
-            disableRipple="true"
-            [value]="answer.value"
-            (change)="checkCaptcha(answer)">
-              <mat-icon 
-                [ngClass]="{'active': userAnswer.value === answer.value}"
-                aria-hidden="false"
-                aria-label="{{ answer.title }}"
-                >{{ answer.icon }}</mat-icon>
-          </mat-radio-button>
-        </mat-radio-group>
-        <mat-error [hidden]="captchaAnswer.value == userAnswer.value">Captcha no valido</mat-error>
-      </fieldset>
+      <app-captcha [restart]="restartCaptcha"
+                  (status)="setCaptchaStatus($event)">
+      </app-captcha>
 
       <ion-button
         block="block"
         color="becks"
         (click)="saveUser()"
-        class="becks-btn-primary margin-top-button"
-        [disabled]="userRegisterForm.invalid || captchaAnswer.value != userAnswer.value"
+        class="becks-button margin-top-button"
+        [disabled]="userRegisterForm.invalid || !captchaStatus"
       >
         <span>ENVIAR</span>
       </ion-button>

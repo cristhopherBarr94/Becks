@@ -87,3 +87,32 @@ p{
 .color-green {
     color: #377F5E;
 }
+
+.content-expend {
+    .title-exp{
+        font-family: 'Helvetica LT Std';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 19px;
+        line-height: 23px;
+        color: #FFFFFF;
+        margin: 0px;
+        text-align: center;
+        @media (min-width: 769px) {
+            text-align: start;
+        }
+    }
+}
+
+.link-age-gate{
+    font-family: 'Helvetica LT Std';
+    text-decoration: none;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 18px;
+    color: #FFFFFF;
+    @media (min-width: 769px) {
+        font-size: 12px;
+    }
+}

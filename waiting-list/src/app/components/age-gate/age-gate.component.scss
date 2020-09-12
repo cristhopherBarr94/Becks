@@ -52,3 +52,42 @@
 .padding-form-age {
     padding: 15px 0;
 }
+
+.content-expend {
+    background-color: #252525;
+    padding: 16px;
+    min-height: 74px;
+
+    .content-general-img {
+        width: 315px;
+        height: 40px;
+        display: flex;
+        
+        .content-img{
+            width: 125px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1.5px solid #DB4843;
+            img {
+                margin: 2px;
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        .content-link{
+            width: 232px;
+            background: #DB4843;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (min-width: 769px) {
+            width: 357px;
+        }
+    }
+
+    
+}

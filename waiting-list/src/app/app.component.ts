@@ -4,8 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
-declare var gtag;
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +30,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.validateCookies();
+  }
 
+  validateCookies(){
+    if (localStorage.getItem('ok-cookies')){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  okCookies(){
+    localStorage.setItem('ok-cookies', moment().toISOString());
   }
 }

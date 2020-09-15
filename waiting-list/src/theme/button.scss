@@ -30,6 +30,10 @@
   @include btn(#FFFFFF, #377F5E, 2px solid #FFFFFF, 'Helvetica LT Std', 14px, 267px, 56px,3px solid #FFFFFF)
 }
 
+.becks-btn-cookies {
+  @include btn(#FFFFFF, #377F5E, 2px solid #FFFFFF, 'Helvetica LT Std', 14px, 200px, 35px,3px solid #FFFFFF)
+}
+
 .button-disabled {
   background: #BDBDBD;
   opacity: 1;

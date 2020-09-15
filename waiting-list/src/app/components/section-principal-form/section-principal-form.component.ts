@@ -38,11 +38,9 @@ export class SectionPrincipalFormComponent implements OnInit {
             name: new FormControl('', [Validators.required, Validators.maxLength(20)]),
             surname: new FormControl('', [Validators.required, Validators.maxLength(20)]),
             email: new FormControl('', [Validators.required, Validators.email,  Validators.maxLength(30)]),
-            prefix: new FormControl('', [Validators.required, Validators.maxLength(3)]),
             telephone: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(10)]),
             gender: new FormControl(null, Validators.required)
           });
-      this.userRegister.prefix = "57";
     }
 
     saveUser(): void {
@@ -50,7 +48,6 @@ export class SectionPrincipalFormComponent implements OnInit {
       this.restartCaptcha = true;
       this.userRegister.captcha_key = Math.floor( Math.random() * ( 999999999999 - 121212) + 121212 );
       this.userRegister.captcha = SHA512( 'setupCaptchaValidator("' + this.userRegister.email + '-' + this.userRegister.captcha_key + '")' ).toString();
-      this.userRegister.mobile_phone = '+' + this.userRegister.prefix + ' ' + this.userRegister.phone;
       const email256 = SHA256(this.userRegister.email).toString();
       this.userService.setCreationUser(this.userRegister).subscribe(
         (data: any) => {

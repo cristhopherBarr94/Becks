@@ -1,3 +1,24 @@
 <ion-app>
     <ion-router-outlet id="main-content"></ion-router-outlet>
+    <div [hidden]="validateCookies()" class="content-cookies">
+        <ion-grid fixed>
+            <ion-row>
+                <ion-col sizeXs="12" sizeSm="12" sizeLg="9" sizeXl="9">
+                    <span class="text-cookies">Cookies para personalizar contenido y anuncios, proporcionar funciones de redes sociales y analizar nuestro tráfico. También compartimos información sobre cómo usted utiliza nuestro sitio con nuestros socios de redes sociales, de publicidad y de analítica. </span> 
+                    <a target="_blank" href="https://www.ab-inbev.com" class="color-green">Política de Privacidad</a> 
+                </ion-col>
+                <ion-col sizeXs="12" sizeSm="12" sizeLg="3" sizeXl="3" class="col-flex-center">
+                    <ion-button
+                        block="block"
+                        color="becks"
+                        class="becks-btn-cookies margin-top-button"
+                        (click)="okCookies()"
+                        data-qadp="acept-cookies"
+                    >
+                        <span>Aceptar cookies</span>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
 </ion-app>

@@ -143,3 +143,13 @@
         height: 100%;
     }
 }
+
+.content-cookies{
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    border: none;
+    background-color: rgba(0,0,0,0.85);
+    color: white;
+    padding: 15px 30px;
+}

@@ -77,7 +77,7 @@
     font-weight: bold;
     font-size: 22px;
     line-height: 18px;
-    margin-bottom: 24px !important;
+    margin-bottom: 14px !important;
 }
 
 p{
@@ -115,4 +115,9 @@ p{
     @media (min-width: 769px) {
         font-size: 12px;
     }
+}
+
+.text-cookies {
+    font-family: 'Helvetica LT Std';
+    color: #FFFFFF;
 }

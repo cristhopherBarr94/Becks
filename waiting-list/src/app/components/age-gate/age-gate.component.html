@@ -14,26 +14,26 @@
 
       <mat-form-field appearance="fill" floatLabel="auto" [ngClass]="getClassInput(ageGateForm.controls.day)" class="input-age margin-top">
         <mat-label>Día</mat-label>
-        <input matInput formControlName="day" placeholder="DD" minlength="1" maxlength="2" (input)="inputValidatorNumeric($event)">
+        <input matInput formControlName="day" placeholder="DD" minlength="1" maxlength="2" (input)="inputValidatorNumeric($event)" data-qadp="age_gate_day"> 
         <mat-error *ngIf="ageGateForm.controls.day.errors">{{ getMessageform(ageGateForm.controls.day, 'dia', 2, 2, 1, 31) }}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill" floatLabel="auto" [ngClass]="getClassInput(ageGateForm.controls.month)" class="input-becks input-age">
         <mat-label>Mes</mat-label>
-        <input matInput formControlName="month" placeholder="MM" minlength="1" maxlength="2" (input)="inputValidatorNumeric($event)">
+        <input matInput formControlName="month" placeholder="MM" minlength="1" maxlength="2" (input)="inputValidatorNumeric($event)" data-qadp="age_gate_month">
         <mat-error *ngIf="ageGateForm.controls.month.errors">{{ getMessageform(ageGateForm.controls.month, 'mes', 2, 2, 1, 12) }}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill" floatLabel="auto" [ngClass]="getClassInput(ageGateForm.controls.year)" class="input-becks input-age">
         <mat-label>Año</mat-label>
-        <input matInput formControlName="year" placeholder="AAAA" minlength="4" maxlength="4" (input)="inputValidatorNumeric($event)">
+        <input matInput formControlName="year" placeholder="AAAA" minlength="4" maxlength="4" (input)="inputValidatorNumeric($event)" data-qadp="age_gate_year">
         <mat-error *ngIf="ageGateForm.controls.year.errors">{{ getMessageform(ageGateForm.controls.year, 'año', 4, 4, 1920, 2020) }}</mat-error>
       </mat-form-field>
     </form>
 
     <div class="content-check">
       <mat-checkbox color="success" class="margin-check"></mat-checkbox>
-      <div><span class="title-fourthy">RECORDARME *</span> <i class="title-fourthy"> No utilizar en caso de ser un ordenador compartido. </i></div>
+      <div><span class="title-fourthy">RECORDARME *</span> <i class="title-fourthy"> No utilizar en caso de ser un ordenador compartido con menores de edad. </i></div>
     </div>
 
     <ion-button
@@ -41,7 +41,8 @@
       color="becks"
       [disabled]="ageGateForm.invalid"
       (click)="validateAgeGate()"
-      class="becks-btn-primary margin-top-button">
+      class="becks-btn-primary margin-top-button"
+      data-qadp="button_enter_agegate">
       <span>ENTRAR</span>
     </ion-button>
     
@@ -84,5 +85,5 @@
 <app-footer></app-footer>
 <div  class="background-black padding-age-gate">
   <p class="title-fourthy">NO COMPARTA ESTE CONTENIDO CON MENORES DE EDAD</p>
-  <p class="title-fourthy">Todos los derechos reservados @2020 <span class="color-green"> Anheuser-Busch InBev</span></p>
+  <p class="title-fourthy">Todos los derechos reservados @2020 <a target="_blank" href="https://www.ab-inbev.com" class="color-green"> Anheuser-Busch InBev</a></p>
 </div>

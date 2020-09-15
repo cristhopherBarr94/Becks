@@ -121,7 +121,7 @@ export class SectionPrincipalFormComponent implements OnInit {
       } else if (item.hasError('pattern')) {
         return 'Ingrese solo letras';
       } else if (item.hasError('email')) {
-        return 'Ingrese un email válido';
+        return 'Ingrese una dirección de correo electrónico válida';
       }
     }
 

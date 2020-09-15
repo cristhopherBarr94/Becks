@@ -24,6 +24,7 @@
           maxlength="20"
           [(ngModel)]="userRegister.first_name"
           required
+          data-qadp="name"
         >
         <mat-error *ngIf="userRegisterForm.controls.name.errors">{{ getMessageform(userRegisterForm.controls.name, 'nombre', 0, 20) }}</mat-error>
       </mat-form-field>
@@ -38,68 +39,38 @@
           maxlength="20"
           [(ngModel)]="userRegister.last_name"
           required
+          data-qadp="lastName"
         >
         <mat-error *ngIf="userRegisterForm.controls.surname.errors">{{ getMessageform(userRegisterForm.controls.surname, 'apellido', 0, 20) }}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInputSelect(userRegisterForm.controls.gender)">
         <mat-label>Sexo</mat-label>
-        <mat-select panelClass="backgroud-panel" formControlName="gender" required [(ngModel)]="userRegister.gender">
+        <mat-select panelClass="backgroud-panel" formControlName="gender" required [(ngModel)]="userRegister.gender" data-qadp="gender">
           <mat-option value="F"> FEMENINO</mat-option>
           <mat-option value="M"> MASCULINO</mat-option>
         </mat-select>
         <mat-error *ngIf="userRegisterForm.controls.gender.hasError('required')">Seleccione un género</mat-error>
       </mat-form-field>
-
-      <div>
-
-        <ion-grid class="no-padding">
-          <ion-row>
-            <ion-col size="2">
-              <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.prefix)">
-                <mat-label>Pref.</mat-label>
-                <input
-                  matInput
-                  (input)="inputValidatorNumeric($event)"
-                  formControlName="prefix"
-                  placeholder="57"
-                  required
-                  minlength="1"
-                  maxlength="3"
-                  [(ngModel)]="userRegister.prefix"
-                >
-                <!--<mat-error *ngIf="userRegisterForm.controls.prefix.errors">{{ getMessageform(userRegisterForm.controls.prefix, 'prefijo', 1, 3)}}</mat-error>-->
-                <mat-error *ngIf="userRegisterForm.controls.prefix.hasError('required')">prefijo</mat-error>
-              </mat-form-field>
-            </ion-col>
-            <ion-col size="1">
-              
-            </ion-col>
-            <ion-col size="9">
-              <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.telephone)">
-                <mat-label>Número Celular</mat-label>
-                <input
-                  matInput
-                  (input)="inputValidatorNumeric($event)"
-                  formControlName="telephone"
-                  placeholder="Número Celular"
-                  required
-                  minlength="7"
-                  maxlength="10"
-                  [(ngModel)]="userRegister.phone"
-                >
-                <mat-error *ngIf="userRegisterForm.controls.telephone.errors">{{ getMessageform(userRegisterForm.controls.telephone, 'número celular', 7, 10)}}</mat-error>
-              </mat-form-field>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
         
-
-        
-      </div>
+      <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.telephone)">
+        <mat-label>Número Celular</mat-label>
+        <input
+          matInput
+          (input)="inputValidatorNumeric($event)"
+          formControlName="telephone"
+          placeholder="Número Celular"
+          required
+          minlength="7"
+          maxlength="10"
+          [(ngModel)]="userRegister.phone"
+          data-qadp="phone"
+        >
+        <mat-error *ngIf="userRegisterForm.controls.telephone.errors">{{ getMessageform(userRegisterForm.controls.telephone, 'número celular', 7, 10)}}</mat-error>
+      </mat-form-field>
 
       <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.email)">
-        <mat-label>Email</mat-label>
+        <mat-label>Correo electrónico</mat-label>
         <input
           matInput
           formControlName="email"
@@ -109,6 +80,7 @@
           required
           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
           maxlength="30"
+          data-qadp="email"
         >
         <mat-error *ngIf="userRegisterForm.controls.email.errors">{{ getMessageform(userRegisterForm.controls.email, 'email valido', 0, 30)}}</mat-error>
       </mat-form-field>
@@ -125,6 +97,7 @@
         (click)="saveUser()"
         class="becks-btn-primary margin-top-button"
         [disabled]="userRegisterForm.invalid || !captchaStatus"
+        data-qadp="send-button-form"
       >
         <span>ENVIAR</span>
       </ion-button>

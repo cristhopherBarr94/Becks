@@ -5,8 +5,8 @@
     background-position: center;
     width: $width;
     height: $height;
-    margin-top: 85px;
-    margin-bottom: 73px;
+    margin-top: 65px;
+    margin-bottom: 53px;
     @media (min-width: 0px) and (max-width: 720px) {
         margin-top: 50px;
         margin-bottom: 20px;
@@ -30,11 +30,6 @@
 }
 
 .logo{
-    background-image: url('../assets/img/logo.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: auto;
     width: 140px;
     height: 65.5px;
     position: absolute;
@@ -53,10 +48,6 @@
 }
 
 .logo-2{
-    background-image: url('../assets/img/logo.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
     width: 150px;
     height: 67px;
 }

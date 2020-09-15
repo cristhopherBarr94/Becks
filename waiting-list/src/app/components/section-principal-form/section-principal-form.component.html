@@ -82,7 +82,7 @@
           maxlength="30"
           data-qadp="email"
         >
-        <mat-error *ngIf="userRegisterForm.controls.email.errors">{{ getMessageform(userRegisterForm.controls.email, 'email valido', 0, 30)}}</mat-error>
+        <mat-error *ngIf="userRegisterForm.controls.email.errors">{{ getMessageform(userRegisterForm.controls.email, 'email', 0, 30)}}</mat-error>
       </mat-form-field>
       
       <app-captcha [restart]="restartCaptcha"

@@ -9,7 +9,6 @@ export class User {
     waitingState?: number;
     delete?: boolean;
 
-    prefix?: string;
     phone?: string;
     
     captcha?: string;

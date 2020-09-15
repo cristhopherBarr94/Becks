@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'https://host/becks-back/api',
+  serverUrl: 'https://becks.flexitco.co/becks-back/api',
   user: {
     list: '/list',
     addWaiting: '/ab-inbev-api-usercustom'

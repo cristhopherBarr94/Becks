@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
@@ -22,7 +22,7 @@ export class SectionPrincipalFormComponent implements OnInit {
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
-
+  @Input() principalContent;
 
   constructor(private formBuilder: FormBuilder,
               public userService: UserService,
@@ -59,6 +59,7 @@ export class SectionPrincipalFormComponent implements OnInit {
                                   'eventAction': 'finalizar', 
                                   'eventLabel': email256 
                                 });
+          this.moveSection();
           this.router.navigate(['confirm-register']);
         },
         (err) => {
@@ -69,6 +70,11 @@ export class SectionPrincipalFormComponent implements OnInit {
           this.ui.dismissLoading();
         }
       );
+    }
+
+    public moveSection(){
+      const y = document.getElementById('section-img').offsetTop;
+      this.principalContent.scrollToPoint(0, y);
     }
 
     public inputValidatorNumeric(event: any) {
@@ -115,10 +121,10 @@ export class SectionPrincipalFormComponent implements OnInit {
         return 'Máximo ' + max;
       } else if (item.hasError('minlength')){
         return 'Mínimo ' + min;
+      } else if (item.hasError('email') || (item.hasError('pattern') && name === 'email')) {
+        return 'Ingrese una dirección de correo electrónico válida';
       } else if (item.hasError('pattern')) {
         return 'Ingrese solo letras';
-      } else if (item.hasError('email')) {
-        return 'Ingrese una dirección de correo electrónico válida';
       }
     }
 

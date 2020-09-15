@@ -1,0 +1,67 @@
+<?php
+
+use Drupal\user\Entity\Role;
+
+/**
+ * @file
+ * Install, update and uninstall functions for the AB-InBev module.
+ */
+
+  
+/**
+ * Implements hook_schema_alter().
+ *
+ * Update the fields after schema alter
+ */
+function ab_inbev_api_schema_alter(&$schema) {
+}
+
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the database tables used by this module.
+ */
+function ab_inbev_api_schema() {
+  $schema = array();
+  return $schema;
+}
+
+
+/**
+ * @install 
+ * 
+ * Implements hook_install().
+ * 
+ * @ingroup AB-InBev
+ */
+function ab_inbev_api_install() {
+  // User Rol, unique Execution
+  $role = Role::create(array('id' => 'web_app', 'label' => 'Web App - REST API'));
+  $role->grantPermission('web_app_api');
+  $role->save();
+}
+
+
+/**
+ * Implements hook_uninstall().
+ * 
+ * Remove roles nad pre-configured data.
+ */
+function ab_inbev_api_uninstall(){
+  // Remove role
+  $role = Role::load('web_app');
+  $role->delete();
+}
+
+
+/**
+ * Implements hook_update_N().
+ *
+ * Update the database tables used by this module.
+ *
+ *
+ * @ingroup AB-InBev
+ */
+function ab_inbev_api_update_8601() {
+}

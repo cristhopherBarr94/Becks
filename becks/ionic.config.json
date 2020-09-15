@@ -1,0 +1,22 @@
+{
+  "projects": {
+    "waiting-list": {
+      "name": "waiting-list",
+      "integrations": {},
+      "type": "angular",
+      "root": "projects\\waiting-list"
+    },
+    "waiting-list-admin": {
+      "name": "waiting-list-admin",
+      "integrations": {},
+      "type": "angular",
+      "root": "projects\\waiting-list-admin"
+    },
+    "user-app": {
+      "name": "user-app",
+      "integrations": {},
+      "type": "angular",
+      "root": "projects\\user-app"
+    }
+  }
+}

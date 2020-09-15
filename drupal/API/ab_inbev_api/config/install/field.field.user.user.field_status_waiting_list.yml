@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_status_waiting_list
+  module:
+    - user
+id: user.user.field_status_waiting_list
+field_name: field_status_waiting_list
+entity_type: user
+bundle: user
+label: 'Status in the ''Waiting list'''
+description: 'Estado del usuario en ''Waiting List'''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

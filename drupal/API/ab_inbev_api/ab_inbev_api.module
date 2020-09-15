@@ -1,0 +1,40 @@
+<?php
+
+
+/**
+ * @module
+ * FULL REST API AB-InBev
+ * 
+ *  Modify Entity Fields
+ *
+ * 
+ * https://www.webomelette.com/creating-pseudo-fields-drupal-8
+ * https://timonweb.com/archive/adding-a-custom-extra-field-to-entity-node-display/
+ * http://api.drupalhelp.net/api/drupal/modules--field--field.api.php/function/hook_field_extra_fields/8
+ * 
+ */
+/**
+ * Implements hook_mail().
+ */
+function ab_inbev_api_mail($key, &$message, $params) {
+    switch ($key) {
+      case 'default':
+        $message['from'] = $params['from'];
+        $message['subject'] = $params['subject'];
+        $message['body'][] = $params['message'];      
+        break;
+    }
+}
+
+/**
+ * Implements hook_mail_alter().
+ *
+ * Don't send any mail during registration.
+ * skip mail for $user->activate()
+ */
+function ab_inbev_api_mail_alter(&$message) {
+    if ($message['id'] == 'user_register_no_approval_required' && $message['key'] == 'register_no_approval_required') {
+        $message['send'] = FALSE;
+        return;
+    }
+}

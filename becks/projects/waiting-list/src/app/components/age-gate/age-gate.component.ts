@@ -41,7 +41,7 @@ export class AgeGateComponent implements OnInit{
       } else {
         sessionStorage.setItem('age-gate-session', moment().toISOString());
       }
-      this.router.navigate(['principal']);
+      this.router.navigate(['principal'], { queryParamsHandling: "preserve" });
     } else {
       localStorage.removeItem('age-gate-local');
       sessionStorage.removeItem('age-gate-session');

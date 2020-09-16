@@ -19,7 +19,7 @@
     // }
     // @media (min-width: 360px) and (max-width: 768px) {
     // }
-    // @media (min-width: 0px) and (max-width: 1024px) {
+    // @media (min-width: 768px) and (max-width: 1024px) {
     // }
 }
 
@@ -70,18 +70,18 @@
 
 .content-section-img{
     background: #140514;
-    background-image: url('../assets/img/sectionImg.png');
     background-size: cover;
     background-position: center;
     
     // @media (min-width: 0px) and (max-width: 360px) {
     // }
     @media (min-width: 0px) and (max-width: 768px) {
-        background-image: linear-gradient(0deg, rgba(0,0,0,0.2) 100%, rgba(0,0,0,0.2) 100%), url('../assets/img/sectionImg.png');
+        background-image: linear-gradient(0deg, rgba(0,0,0,0.2) 100%, rgba(0,0,0,0.2) 100%), url('../assets/img/bg_mobile_360x667_home.jpg');
         background-position-x: 83%;
     }
-    // @media (min-width: 0px) and (max-width: 1024px) {
-    // }
+    @media (min-width: 768px)  {
+        background-image: url('../assets/img/bg_desktop_1366x768_home.jpg');
+    }
 }
 
 .content-section-step{
@@ -109,9 +109,14 @@
 }
 
 .from-section {
-    background-image: linear-gradient(0deg, rgba(0,0,0,0.7) 100%, rgba(0,0,0,0.7) 100%), url('../assets/img/sectionTwo.png');
     background-size: cover;
     background-position: center;
+    @media (min-width: 0px) and (max-width: 768px) {
+        background-image: linear-gradient(0deg, rgba(0,0,0,0.7) 100%, rgba(0,0,0,0.7) 100%), url('../assets/img/bg_mobile_360x667_botellaverde.jpg');
+    }
+    @media (min-width: 768px)  {
+        background-image: linear-gradient(0deg, rgba(0,0,0,0.7) 100%, rgba(0,0,0,0.7) 100%), url('../assets/img/bg_desktop_1366x768_botellaverde.jpg');
+    }
 }
 
 .padding-form {

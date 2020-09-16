@@ -13,7 +13,7 @@ export class CaptchaComponent implements OnInit {
   public userAnswer = { value: -1, icon: '', title: '' };
   private captchaAnswer = { value: -1, icon: '', title: '' };
   public userCaptcha = { question: null , answers: [] };
-  private captchaQuestions = [
+  private static captchaQuestions = [
     { value: 0, icon: 'home', title: 'la Casa' },
     { value: 1, icon: 'airplanemode_on', title: 'el Avión' },
     { value: 2, icon: 'accessibility', title: 'la Persona' },
@@ -48,7 +48,7 @@ export class CaptchaComponent implements OnInit {
     this.userCaptcha.answers = [];
     this.captchaAnswer = null;
 
-    let questions = this.captchaQuestions;
+    let questions = CaptchaComponent.captchaQuestions;
     let iq = Math.floor(Math.random() * questions.length);
     this.captchaAnswer = questions[iq];
     this.userCaptcha.answers.push( this.captchaAnswer );

@@ -18,5 +18,8 @@
       "type": "angular",
       "root": "projects\\user-app"
     }
+  },
+  "cli": {
+    "defaultCollection": "@ionic/angular-toolkit"
   }
 }

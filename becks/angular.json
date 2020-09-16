@@ -2,5 +2,21 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "waiting-list": {
+      "projectType": "application",
+      "root": "projects\\waiting-list"
+    },
+    "waiting-list-admin": {
+      "projectType": "application",
+      "root": "projects\\waiting-list-admin"
+    },
+    "user-app": {
+      "projectType": "application",
+      "root": "projects\\user-app"
+    }
+  },
+  "cli": {
+    "defaultCollection": "@ionic/angular-toolkit"
+  }
 }

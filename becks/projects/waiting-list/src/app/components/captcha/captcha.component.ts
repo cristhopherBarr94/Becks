@@ -11,7 +11,7 @@ export class CaptchaComponent implements OnInit {
   @Output('status') statusEmitter = new EventEmitter();
 
   public userAnswer = { value: -1, icon: '', title: '' };
-  private captchaAnswer = { value: -1, icon: '', title: '' };
+  public captchaAnswer = { value: -1, icon: '', title: '' };
   public userCaptcha = { question: null , answers: [] };
   private static captchaQuestions = [
     { value: 0, icon: 'home', title: 'la Casa' },

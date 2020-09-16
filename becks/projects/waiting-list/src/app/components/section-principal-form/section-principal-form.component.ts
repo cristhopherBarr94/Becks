@@ -95,7 +95,7 @@ export class SectionPrincipalFormComponent implements OnInit {
     }
 
 
-    public getClassInput(item: FormControl): string {
+    public getClassInput(item: any): string {
       let classreturn = 'input-becks';
       if (item.valid) {
         classreturn = 'input-becks-ok';
@@ -106,7 +106,7 @@ export class SectionPrincipalFormComponent implements OnInit {
       return classreturn;
     }
 
-    public getClassInputSelect(item: FormControl): string {
+    public getClassInputSelect(item: any): string {
       let classreturn = 'select-becks';
       if (item.valid) {
         classreturn = 'select-becks-ok';
@@ -117,7 +117,7 @@ export class SectionPrincipalFormComponent implements OnInit {
       return classreturn;
     }
 
-    public getMessageform (item: FormControl, name: string, min?: number, max?: number): string{
+    public getMessageform (item: any, name: string, min?: number, max?: number): string{
       if (item.hasError('required')) {
         return 'Ingrese un ' + name;
       } else if (item.hasError('maxlength')){

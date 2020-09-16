@@ -56,7 +56,7 @@ export class AgeGateComponent implements OnInit{
     }
   }
 
-  public getClassInput(item: FormControl): string {
+  public getClassInput(item: any): string {
     let classreturn = 'input-becks';
     if (item.valid) {
       classreturn = 'input-becks-ok';
@@ -67,7 +67,7 @@ export class AgeGateComponent implements OnInit{
     return classreturn;
   }
 
-  public getMessageform (item: FormControl, name: string, minlength?: number, maxlength?: number, min?: number, max?: number): string{
+  public getMessageform (item: any, name: string, minlength?: number, maxlength?: number, min?: number, max?: number): string{
     if (item.hasError('required')) {
       return 'Ingrese un ' + name;
     } else if (item.hasError('maxlength')){

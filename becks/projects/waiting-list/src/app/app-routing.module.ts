@@ -20,6 +20,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/age-gate/age-gate.module').then( m => m.AgeGatePageModule)
   },
   {
+    path: 'privacy-policy',
+    loadChildren: () => import('./pages/privacy-policy/privacy-policy.module').then( m => m.PrivacyPolicyPageModule)
+  },
+  {
+    path: 'terms-conditions',
+    loadChildren: () => import('./pages/terms-conditions/terms-conditions.module').then( m => m.TermsConditionsPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   }

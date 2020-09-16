@@ -10,7 +10,15 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },  {
+    path: 'active-list',
+    loadChildren: () => import('./pages/active-list/active-list.module').then( m => m.ActiveListPageModule)
   },
+  {
+    path: 'active-list',
+    loadChildren: () => import('./pages/active-list/active-list.module').then( m => m.ActiveListPageModule)
+  },
+
 ];
 
 @NgModule({

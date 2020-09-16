@@ -39,7 +39,9 @@ export class SectionPrincipalFormComponent implements OnInit {
             surname: new FormControl('', [Validators.required, Validators.maxLength(20)]),
             email: new FormControl('', [Validators.required, Validators.email,  Validators.maxLength(30)]),
             telephone: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(10)]),
-            gender: new FormControl(null, Validators.required)
+            gender: new FormControl(null, Validators.required),
+            privacy: new FormControl(null, Validators.required),
+            promo: new FormControl(null),
           });
     }
 

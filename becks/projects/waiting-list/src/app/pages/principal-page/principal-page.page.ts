@@ -1,8 +1,8 @@
-import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from '../../model/User';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-principal-page',
@@ -22,7 +22,7 @@ export class PrincipalPagePage implements OnInit {
     ngOnInit() {
       if (!localStorage.getItem('age-gate-local')) {
         if(!sessionStorage.getItem('age-gate-session')) {
-          this.router.navigate(['age-gate']);
+          this.router.navigate(['age-gate'], { queryParamsHandling: "preserve" });
         }
       }
     }

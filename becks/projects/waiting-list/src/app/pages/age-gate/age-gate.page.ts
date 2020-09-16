@@ -12,7 +12,7 @@ export class AgeGatePage implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('age-gate-local') || sessionStorage.getItem('age-gate-session')) {
-      this.router.navigate(['principal']);
+      this.router.navigate(['principal'], { queryParamsHandling: "preserve" });
     }
   }
 

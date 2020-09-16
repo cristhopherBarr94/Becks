@@ -46,6 +46,7 @@ export class SectionPrincipalFormComponent implements OnInit {
     saveUser(): void {
       this.ui.showLoading();
       this.restartCaptcha = true;
+      this.setCaptchaStatus( !this.restartCaptcha );
       this.userRegister.captcha_key = Math.floor( Math.random() * ( 999999999999 - 121212) + 121212 );
       this.userRegister.captcha = SHA512( 'setupCaptchaValidator("' + this.userRegister.email + '-' + this.userRegister.captcha_key + '")' ).toString();
       const email256 = SHA256(this.userRegister.email).toString();
@@ -60,7 +61,7 @@ export class SectionPrincipalFormComponent implements OnInit {
                                   'eventLabel': email256 
                                 });
           this.moveSection();
-          this.router.navigate(['confirm-register']);
+          this.router.navigate(['confirm-register'], { queryParamsHandling: "preserve" });
         },
         (err) => {
           this.restartCaptcha = false;

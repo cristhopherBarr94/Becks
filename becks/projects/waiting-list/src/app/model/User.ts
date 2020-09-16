@@ -13,4 +13,6 @@ export class User {
     
     captcha?: string;
     captcha_key?: number;
+    promo?: boolean;
+    privacy?: boolean;
 }

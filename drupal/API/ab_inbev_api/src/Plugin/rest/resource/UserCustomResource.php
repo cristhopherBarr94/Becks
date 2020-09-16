@@ -171,9 +171,10 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
           $data['last_name'],
           $data['gender'] == 'M' ? 'masculino' : 'femenino',
           intval($data['mobile_phone']),
-          $data['email']
+          $data['email'],
+          $data['privacy'],
+          $data['promo']
        );
-       dump( $result );
       } else {
         $code = '502';
         $response_array['message'] = "Error Interno";
@@ -287,7 +288,9 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       'gender',
       'email',
       'captcha',
-      'captcha_key'
+      'captcha_key',
+      'privacy',
+      'promo'
     ];
 
     // if (count(array_diff(array_keys($record), $allowed_fields)) > 0) {
@@ -340,6 +343,10 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       throw new BadRequestHttpException('El "Genero" debe ser "M" (Masculino) o "F" (Femenino) ');
     } 
     
+    if ( !isset($record['privacy']) || !is_bool($record['privacy']) || $record['privacy'] != true ) {
+      throw new BadRequestHttpException('El usuario no puede ser registrado porque hacen falta aceptar la Política y Términos del sitio');
+    }
+
     // Validate Captcha
     if ( !isset($record['captcha']) || empty($record['captcha']) ||
           !isset($record['captcha_key']) || empty($record['captcha_key']) || 
@@ -417,18 +424,16 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     // return new ModifiedResourceResponse($updated_record, 200);
   }
 
-  private function __sendTD($name , $lastname , $gender , $phone , $email ) {
+  private function __sendTD($name , $lastname , $gender , $phone , $email , $privacy , $promo ) {
     
     // define variable that will be used to tell the __sendTD method if it should send to the production database
     $is_production = false;
-    $tcpp = true;
-    $marketing = true;
     // define the purpose variable as an empty array
     $purposes = array();
     // check whether the TC-PP checkbox is checked, and if it is, then adds it to the purpose array - informed
-    if($tcpp) $purposes[] = 'TC-PP';
+    if( $privacy ) $purposes[] = 'TC-PP';
     // check whether the MARKETING-ACTIVATION checkbox is checked, and if it is, then adds it to the purpose array
-    if($marketing) $purposes[] = 'MARKETING-ACTIVATION';
+    if( $promo ) $purposes[] = 'MARKETING-ACTIVATION';
     // here it's possible to add additional purposes to the purpose array
     // runs the __sendTD method with parameters got from the request, it should be changed based on your form fields, country, brand, campaign, form, and whether if it's running in the production environment or not
     $data = array(

@@ -12,8 +12,7 @@
     <form
       [formGroup]="userRegisterForm"
       class="form-section"
-      autocomplete="off"
-    >
+      autocomplete="off">
       <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.name)" >
         <mat-label>Nombre</mat-label>
         <input
@@ -84,6 +83,34 @@
         >
         <mat-error *ngIf="userRegisterForm.controls.email.errors">{{ getMessageform(userRegisterForm.controls.email, 'email', 0, 30)}}</mat-error>
       </mat-form-field>
+
+      <div class="checks">
+
+        <div class="content-check">
+          <mat-checkbox 
+              formControlName="promo"
+              [(ngModel)]="userRegister.promo"
+              color="success"
+              class="margin-check">
+          </mat-checkbox>
+          <div><i class="title-fourthy"> Me gustaría recibir comunicaciones promocionales (Recibirás un email de confirmación) </i></div>
+        </div>
+        
+        <div class="content-check">
+          <mat-checkbox 
+              formControlName="privacy"
+              [(ngModel)]="userRegister.privacy"
+              color="success"
+              class="margin-check"
+              required>
+          </mat-checkbox>
+          <div>
+            <i class="title-fourthy"> Declaro que he leído y acepto la <a>nueva Política de Privacidad</a> y los <a>Términos y Condiciones</a> de Becks </i>
+            <mat-error *ngIf="userRegisterForm.controls.privacy.hasError('required')">Por favor lea y acepte las políticas y los términos</mat-error>
+          </div>
+        </div>
+
+      </div>
       
       <app-captcha [restart]="restartCaptcha"
                   (status)="setCaptchaStatus($event)">

@@ -1,0 +1,13 @@
+{
+    "name": "waiting-list",
+    "short_name": "waiting-list",
+    "start_url": "index.html",
+    "display": "standalone",
+    "icons": [{
+        "src": "./assets/icon/ms-icon-310x310.png",
+        "sizes": "310x310",
+        "type": "image/png"
+    }],
+    "background_color": "#488aff",
+    "theme_color": "#488aff"
+}

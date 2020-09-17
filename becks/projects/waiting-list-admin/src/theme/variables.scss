@@ -1,3 +1,38 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$waiting-list-primary: mat-palette($mat-indigo);
+$waiting-list-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$waiting-list-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$waiting-list-theme: mat-light-theme((
+  color: (
+    primary: $waiting-list-primary,
+    accent: $waiting-list-accent,
+    warn: $waiting-list-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($waiting-list-theme);
+
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
@@ -74,7 +109,40 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** becks **/
+  --ion-color-becks: transparent;
+  --ion-color-becks-rgb: 48,51,58;
+  --ion-color-becks-contrast: #ffffff;
+  --ion-color-becks-contrast-rgb: 255,255,255;
+  --ion-color-becks-shade: #2a2d33;
+  --ion-color-becks-tint: #45474e;
+
+  /** becks-inverted **/
+  --ion-color-becks-inverted: transparent;
+  --ion-color-becks-inverted-rgb: 48,51,58;
+  --ion-color-becks-inverted-contrast: #377F5E;
+  --ion-color-becks-inverted-contrast-rgb: 255,255,255;
+  --ion-color-becks-inverted-shade: #2a2d33;
+  --ion-color-becks-inverted-tint: #45474e;
+
+  --ion-toolbar-background: #0d0d0d;
+
+  /**inputs**/
+  --ion-item-background: transparent;
+  --ion-text-color:#BCBCBC;
 }
+
+.ion-color-becks {
+  --ion-color-base: var(--ion-color-becks);
+  --ion-color-base-rgb: var(--ion-color-becks-rgb);
+  --ion-color-contrast: var(--ion-color-becks-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-becks-contrast-rgb);
+  --ion-color-shade: var(--ion-color-becks-shade);
+  --ion-color-tint: var(--ion-color-becks-tint);
+  --ion-text-color: #000;
+}
+
 
 @media (prefers-color-scheme: dark) {
   /*
@@ -230,3 +298,5 @@
     --ion-card-background: #1e1e1e;
   }
 }
+html, body { height: 100%; word-wrap: normal !important}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

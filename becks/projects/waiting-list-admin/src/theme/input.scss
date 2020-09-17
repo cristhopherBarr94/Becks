@@ -1,0 +1,128 @@
+@mixin input ($color, $label-color, $border, $padding) {
+    span, input, :active {
+        color: $color;
+        font-family: 'Helvetica LT Std';
+    }
+    .mat-form-field-label {
+        color: $label-color;
+        font-family: 'Helvetica LT Std';
+    }
+    .mat-form-field-flex {
+        border: $border;
+        border-radius: 4px;
+    }
+    &:focus .mat-form-field-flex {
+        border:  2px solid #377F5E;
+        border-radius: 4px;
+    }
+    .mat-form-field-ripple, .mat-form-field-underline{
+        display: none;
+    }
+    margin-bottom: 5px;
+}
+
+
+@mixin select ($backgraund-color, $color, $label-color, $border, $padding) {
+    @include input($color, $label-color, $border, $padding);
+    .mat-select-arrow{
+        color: $color;
+    }
+}
+
+mat-form-field .mat-form-field {
+    font-size: 16px;
+    color: #FFFFFF;
+}
+
+.mat-focused {
+    label {
+        color: #FFFFFF !important;
+    } 
+    .mat-input-element {
+        caret-color: #FFFFFF !important;
+    }  
+}
+
+.mat-form-field-subscript-wrapper{
+    padding: 0px !important;
+}
+
+.mat-error{
+    padding-left: 16px;
+}
+
+.fullInput {
+    width: 100%;
+}
+
+.input-becks{
+    @include input(#FFFFFF, #FFFFFF, 1px solid #FFFFFF, 5px 16px)
+}
+
+.input-becks-error{
+    @include input(#FFFFFF, #FF0C3E, 1px solid #FF0C3E, 5px 16px)
+}
+
+.input-becks-ok{
+    @include input(#FFFFFF, #219653, 1px solid #FFFFFF, 5px 16px)
+}
+
+.select-becks{
+    @include select(#377F5E,#FFFFFF, #FFFFFF, 1px solid #FFFFFF, 5px 16px)
+}
+
+.select-becks-ok{
+    @include select(#377F5E,#FFFFFF, #219653, 1px solid #FFFFFF, 5px 16px)
+}
+
+.select-becks-error{
+    @include select(#377F5E,#FFFFFF, #FF0C3E, 1px solid #FF0C3E, 5px 16px)
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
+
+.input-age {
+    max-width: 89px;
+    margin: 0px 12px;
+
+    .mat-form-field-label {
+        font-family: 'Helvetica LT Std';
+        display: flex !important;
+        justify-content: center !important;
+    }
+    input {
+        font-family: 'Helvetica LT Std';
+        text-align: center !important;
+    }
+
+    @media (min-width: 768px)  {
+        max-width: 100px;
+        margin: 0px 13.5px;
+    }
+}
+
+.mat-option {
+    color: #FFFFFF;
+    font-family: 'Helvetica LT Std';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 50px;
+
+    &.mat-active, &.mat-selected, &.mat-focus-indicator:hover {
+        color: #377F5E !important;
+        background: #FFFFFF !important;
+    }    
+}
+
+.mat-select-panel {
+    background: #377F5E;
+    border: 1px solid #FFFFFF;
+}
+

@@ -1,21 +1,25 @@
 @font-face {
     font-family: 'Eurostile';
     src:  url('../assets/font/Eurostile.woff') format('woff');
+    
 }
 
 @font-face {
     font-family: 'Eurostile BQ';
     src:  url('../assets/font/EurostileBQ-BoldExtended.woff') format('woff');
+    
 }
 
 @font-face {
     font-family: 'Helvetica LT Std';
     src:  url('../assets/font/HelveticaNeueLTStd-BdCn_3.woff') format('woff');
+    
 }
 
 @font-face {
     font-family: 'Helvetica Neue';
     src:  url('../assets/font/HelveticaNeue.woff') format('woff');
+    
 }
 
 @mixin title ($font-family, $color, $margin, $font-style, $font-weight, $cut-point-1-fs, $cut-point-1-lh, $cut-point-2-fs, $cut-point-2-lh, $cut-point-3-fs, $cut-point-3-lh) {

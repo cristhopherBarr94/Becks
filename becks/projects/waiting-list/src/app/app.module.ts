@@ -13,10 +13,7 @@ import { ComponentsModule } from './components/components.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IsNumericDirective } from './directives/is-numeric.directive';
-import { IsAlphabeticalDirective } from './directives/is-alphabetical.directive';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +26,6 @@ import { IsAlphabeticalDirective } from './directives/is-alphabetical.directive'
     ComponentsModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    FontAwesomeModule,
     BrowserAnimationsModule
   ],
   providers: [

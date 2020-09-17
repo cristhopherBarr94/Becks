@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes, ExtraOptions } from '@angular/
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'principal',
+    redirectTo: 'age-gate',
     pathMatch: 'full'
   },
   {

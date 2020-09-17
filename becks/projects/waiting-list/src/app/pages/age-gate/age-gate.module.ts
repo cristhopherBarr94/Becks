@@ -1,21 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
 import { IonicModule } from '@ionic/angular';
-
 import { AgeGatePageRoutingModule } from './age-gate-routing.module';
 import { AgeGatePage } from './age-gate.page';
-import { ComponentsModule } from '../../components/components.module';
+import { AgeGateComponent } from 'src/app/components/age-gate/age-gate.component';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     AgeGatePageRoutingModule,
-    ComponentsModule,
+    MatCheckboxModule,
+    MatInputModule,
+    ComponentsModule
   ],
-  declarations: [AgeGatePage]
+  declarations: [
+    AgeGatePage,
+    AgeGateComponent
+  ]
 })
 export class AgeGatePageModule {}

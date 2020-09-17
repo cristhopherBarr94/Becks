@@ -1,9 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
@@ -13,21 +8,16 @@ import * as moment from 'moment';
 })
 export class AppComponent implements OnInit {
 
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private router: Router
-  ) {
-    this.initializeApp();
+  constructor() {
+    // this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
+  // initializeApp() {
+    // this.platform.ready().then(() => {
+    //   this.statusBar.styleDefault();
+    //   this.splashScreen.hide();
+    // });
+  // }
 
   ngOnInit() {
     this.validateCookies();

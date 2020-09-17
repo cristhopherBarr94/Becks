@@ -441,7 +441,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       "abi_lastname" => $lastname,
       "abi_gender" => $gender,
       "abi_phone" => $phone,
-      "abi_email " => $email,
+      "abi_email" => $email,
       "purpose_name" => $purposes,
     );
 

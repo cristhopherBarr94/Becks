@@ -39,9 +39,10 @@
     <button
       block="block"
       color="becks"
-      [disabled]="ageGateForm.invalid"
       (click)="validateAgeGate()"
       class="becks-btn-primary margin-top-button"
+      [ngClass]="{'button-disabled': ageGateForm.invalid }"
+      [disabled]="ageGateForm.invalid"
       data-qadp="button_enter_agegate">
       <span>ENTRAR</span>
     </button>

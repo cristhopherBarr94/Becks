@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ declare global {
   templateUrl: './section-principal-form.component.html',
   styleUrls: ['./section-principal-form.component.scss'],
 })
-export class SectionPrincipalFormComponent implements OnInit {
+export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
 
   public userRegisterForm: FormGroup;
   public userRegister: User = new User();
@@ -29,20 +29,28 @@ export class SectionPrincipalFormComponent implements OnInit {
               private router: Router,
               private ui: UiService) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
       this.initforms();
+    }
+
+    ngAfterViewInit(): void {
+      try {
+        document.getElementById("mat-checkbox-promo")
+        .getElementsByTagName('input')[0]
+        .setAttribute('data-qadp',"input-marketing");  
+      } catch (error) {}
     }
 
     initforms(){
       this.userRegisterForm = this.formBuilder.group({
-            name: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-            surname: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-            email: new FormControl('', [Validators.required, Validators.email,  Validators.maxLength(30)]),
-            telephone: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(10)]),
-            gender: new FormControl(null, Validators.required),
-            privacy: new FormControl(null, Validators.required),
-            promo: new FormControl(null),
-          });
+        name: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+        surname: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+        email: new FormControl('', [Validators.required, Validators.email,  Validators.maxLength(30)]),
+        telephone: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(10)]),
+        gender: new FormControl(null, Validators.required),
+        privacy: new FormControl(null, Validators.required),
+        promo: new FormControl(null)
+      });
     }
 
     saveUser(): void {

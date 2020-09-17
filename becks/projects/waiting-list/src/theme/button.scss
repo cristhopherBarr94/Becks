@@ -34,7 +34,7 @@
   @include btn(#FFFFFF, #377F5E, 2px solid #FFFFFF, 'Helvetica LT Std', 14px, 200px, 35px,3px solid #FFFFFF)
 }
 
-.button-disabled {
+.button-disabled , .button-disabled:hover, .button-disabled:active {
   background: #BDBDBD;
   opacity: 1;
   span {

@@ -87,13 +87,18 @@
       <div class="checks">
 
         <div class="content-check">
-          <mat-checkbox 
+          <mat-checkbox
+              id="mat-checkbox-promo"
               formControlName="promo"
               [(ngModel)]="userRegister.promo"
               color="success"
               class="margin-check">
           </mat-checkbox>
-          <div><i class="title-fourthy"> Me gustaría recibir comunicaciones promocionales (Recibirás un email de confirmación) </i></div>
+          <div>
+            <i class="title-fourthy">
+              Deseo recibir información comercial y eventos de Becks.
+            </i>
+        </div>
         </div>
         
         <div class="content-check">
@@ -105,7 +110,9 @@
               required>
           </mat-checkbox>
           <div>
-            <i class="title-fourthy"> Declaro que he leído y acepto la nueva <a target="_blank" href="./privacy-policy">Política de Privacidad</a> y los <a target="_blank" href="./terms-conditions">Términos y Condiciones</a> de Becks </i>
+            <i class="title-fourthy"> 
+              He leído, entendido y aceptado los <a target="_blank" href="./terms-conditions" data-qadp="link-tc">Términos y Condiciones</a> y la <a target="_blank" href="./privacy-policy" data-qadp="link-pp">política de protección de datos personales</a>, en particular el procesamiento de mi información personal por parte de Bavaria & Cía S.C.A. con las finalidades y usos requeridos por ésta descritos en la mencionada política.
+            </i>
             <mat-error *ngIf="userRegisterForm.controls.privacy.hasError('required')">Por favor lea y acepte las políticas y los términos</mat-error>
           </div>
         </div>
@@ -118,16 +125,16 @@
 
       <br/><mat-error *ngIf="httpError">{{ httpError }}</mat-error>
 
-      <ion-button
+      <button
         block="block"
         color="becks"
         (click)="saveUser()"
         class="becks-btn-primary margin-top-button"
+        [ngClass]="{'button-disabled': userRegisterForm.invalid || !captchaStatus }"
         [disabled]="userRegisterForm.invalid || !captchaStatus"
-        data-qadp="send-button-form"
-      >
+        data-qadp="send-button-form">
         <span>ENVIAR</span>
-      </ion-button>
+      </button>
     </form>
   </div>
 </section>

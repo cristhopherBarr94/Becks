@@ -27,6 +27,12 @@
     flex-direction: column;
 }
 
+.col-logo-2 {
+    @media (min-width: 0px) and (max-width: 768px) {
+        padding: 40px;
+    }
+}
+
 .col-flex-center {
     display: flex;
     justify-content: center;
@@ -161,6 +167,7 @@
 
 
 .content-expend {
+    max-width: 100%;
     background-color: #252525;
     padding: 16px;
     min-height: 74px;
@@ -202,6 +209,7 @@
 
 .content-terms-priv {
     width: 958px;
+    max-width: 95%;
     height: auto;
     display: block;
     margin-left: auto;

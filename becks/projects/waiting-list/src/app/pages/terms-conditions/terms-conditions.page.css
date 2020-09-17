@@ -2,3 +2,23 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+.logo {
+    width: 125px;
+    height: 58.33px;
+    top: 32px;
+}
+.title-primary {
+    font-weight: 500;
+    font-size: 84px;
+    line-height: 18px;
+    text-align: center;
+    text-transform: none;
+}
+
+h3 {
+    font-family: 'Helvetica LT Std';
+}
+
+.padding-age-gate{
+    padding: 23px 37px;
+}

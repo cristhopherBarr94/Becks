@@ -60,6 +60,8 @@
     @include title('Helvetica LT Std', #FFFFFF, 0px, normal, bold, 16px, 18px, 16px, 18px, 16px, 18px);
 }
 
+
+
 .font-link {
     font-family: 'Helvetica LT Std';
     color: #FFFFFF;
@@ -120,4 +122,18 @@ p{
 .text-cookies {
     font-family: 'Helvetica LT Std';
     color: #FFFFFF;
+}
+
+.font-terms{
+    font-family: 'Helvetica LT Std';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 110%;
+    text-transform: capitalize;
+    color: #FFFFFF;
+}
+.link-terms {
+    color: #038259;
+    text-decoration: none;
 }

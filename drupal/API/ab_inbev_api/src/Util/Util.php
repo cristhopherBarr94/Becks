@@ -12,7 +12,7 @@ final class Util
     /**
      * Generate a Numeric Key Random 
      */
-    public function getRandomUserPass() {
+    public static function getRandomUserPass() {
         $letters = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"), 0, 2 );
         $numbers = substr(str_shuffle("0123456789"), 0, 4 );
         $pass = str_shuffle( $letters . $numbers );
@@ -22,7 +22,7 @@ final class Util
     /**
      * 
     */
-    public function sendTD($form_data, $country, $brand, $campaign, $form, $unify, $production) {
+    public static function sendTD($form_data, $country, $brand, $campaign, $form, $unify, $production) {
         $td_env = $production ? 'prod' : 'dev';
         $http_protocol = isset($_SERVER['https']) ? 'https://' : 'http://';
         $form_data['abi_brand'] = $brand;
@@ -58,7 +58,7 @@ final class Util
     /*
     * Captcha
     */
-    public function getCaptchaHash( $value ) {
+    public static function getCaptchaHash( $value ) {
         return hash("sha512", 'setupCaptchaValidator("'. $value . '")' );
     }
         

@@ -62,14 +62,16 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
       const email256 = SHA256(this.userRegister.email).toString();
       this.userService.setCreationUser(this.userRegister).subscribe(
         (data: any) => {
-          this.restartCaptcha = false;
-          this.ui.dismissLoading();
-          this.userRegisterForm.reset();
-          window.dataLayer.push({ 'event': 'trackEvent',
-                                  'eventCategory': 'becks society', 
-                                  'eventAction': 'finalizar', 
-                                  'eventLabel': email256 
-                                });
+          try {
+            this.restartCaptcha = false;
+            this.ui.dismissLoading();
+            this.userRegisterForm.reset();
+              window.dataLayer.push({ 'event': 'trackEvent',
+              'eventCategory': 'becks society', 
+              'eventAction': 'finalizar', 
+              'eventLabel': email256 
+            });
+          } catch(e) {}
           this.moveSection();
           this.router.navigate(['confirm-register'], { queryParamsHandling: "preserve" });
         },

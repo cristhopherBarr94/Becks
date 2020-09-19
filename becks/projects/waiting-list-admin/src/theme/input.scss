@@ -126,3 +126,26 @@ input[type=number] { -moz-appearance:textfield; }
     border: 1px solid #FFFFFF;
 }
 
+.input-search{
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    width: 220px;
+    height: 29px;
+    border: 1px solid #FFFFFF;
+    border-radius: 20px;
+    box-sizing: border-box;
+    font-family: 'Helvetica LT Std';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 14px;
+    background: transparent;
+    padding-left: 30px;
+  }
+  .input-search:focus{
+    border: none;
+  }
+    ::-webkit-input-placeholder {
+      color: #FFFFFF;
+    }

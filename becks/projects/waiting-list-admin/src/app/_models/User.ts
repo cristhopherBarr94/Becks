@@ -1,4 +1,4 @@
-export class User {
+export interface User {
     id?: number;
     first_name?: string;
     last_name?: string;
@@ -15,4 +15,6 @@ export class User {
     captcha_key?: number;
     promo?: boolean;
     privacy?: boolean;
+
+    status_waiting_list?: boolean;
 }

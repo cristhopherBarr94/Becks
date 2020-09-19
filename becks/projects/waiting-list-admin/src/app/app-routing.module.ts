@@ -8,13 +8,15 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'activation',
     pathMatch: 'full'
   },
   {
     path: 'activation',
-    loadChildren: () => import('./_modules/activation/activation.module').then( m => m.ActivationModule)
-  }
+    loadChildren: () => import('./_modules/activation/activation.module').then( m => m.ActivationPageModule)
+  },
+
+
 ];
 
 @NgModule({

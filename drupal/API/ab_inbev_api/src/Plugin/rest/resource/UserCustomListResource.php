@@ -2,6 +2,7 @@
 
 namespace Drupal\ab_inbev_api\Plugin\rest\resource;
 
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Component\Plugin\DependentPluginInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Routing\BcRoute;
@@ -65,9 +66,23 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
    */
   protected $currentRequest;
 
+  /**
+   * The current user.
+   *
+   * @var Drupal\Core\Session\AccountInterface;
+   */
+  protected $currentUser;
+
+  /**
+   * Vars for the get list
+   *
+   */
   protected $page = 0;
   protected $pageSize = 10;
   protected $status_waiting_list = null;
+  protected $order_by = null;
+  protected $order_desc = null;
+  protected $search = null;
   
   /**
    * Constructs a Drupal\rest\Plugin\rest\resource\EntityResource object.
@@ -91,11 +106,13 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
                                 LoggerInterface $logger,
                                 Connection $db_connection,
                                 EntityTypeManagerInterface $entity_type_manager,
-                                Request $request) {
+                                Request $request,
+                                AccountInterface $account) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $serializer_formats, $logger);
     $this->dbConnection = $db_connection;
     $this->entityTypeManager = $entity_type_manager;
     $this->currentRequest = $request;
+    $this->currentUser = $account;
   }
 
   /**
@@ -110,7 +127,8 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
       $container->get('logger.factory')->get('rest'),
       $container->get('database'),
       $container->get('entity_type.manager'),
-      $container->get('request_stack')->getCurrentRequest()
+      $container->get('request_stack')->getCurrentRequest(),
+      $container->get('current_user')
     );
   }
 
@@ -129,7 +147,16 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
     $this->page = $this->currentRequest->get('page', $this->page);
     $this->pageSize = $this->currentRequest->get('page_size', $this->pageSize);
     $this->status_waiting_list = $this->currentRequest->get('status_waiting_list');
+    $this->order_by = $this->currentRequest->get('order_by');
+    $this->order_desc = $this->currentRequest->get('order_desc');
+    $this->search = $this->currentRequest->get('search');
 
+    switch ( $this->order_by ) {
+      case "0": $this->order_by = 'field_first_name'; break;
+      case "1": $this->order_by = 'field_last_name'; break;
+      case "2": $this->order_by = 'mail'; break;
+      default: $this->order_by = null;
+    }
     // return new ResourceResponse($this->loadRecord($id));
     $response = new ResourceResponse($this->loadRecords());
     $disable_cache = new CacheableMetadata();
@@ -150,6 +177,15 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
    *   The HTTP response object.
    */
   public function post($data) {
+    // $resp = [ 
+    //   $this->currentUser->getRoles(),
+    //   $this->currentUser->getEmail(),
+    //   $this->currentUser->getAccountName(),
+    //   $this->currentUser->getDisplayName(),
+    //   $this->currentUser->isAuthenticated(),
+    //   $this->currentUser->getLastAccessedTime()
+    // ];
+    // return new ResourceResponse($resp);
   }
 
   /**
@@ -164,8 +200,6 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
    *   The HTTP response object.
    */
   public function patch($id, $data) {
-    $response_array = [];
-
     $uids = json_decode( $data->getContent() , false );
     $patchUids = $this->patchWaitingListUsers( $uids );
     return new ResourceResponse($patchUids);
@@ -182,19 +216,18 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
    *
    * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    */
-  public function delete($id) {
-
-    // Make sure the record still exists.
-    $this->loadRecord($id);
-
-    $this->dbConnection->delete('ab_inbev_api_web_app_user_list_api')
-      ->condition('id', $id)
-      ->execute();
-
-    $this->logger->notice('Web App - User List API record @id has been deleted.', ['@id' => $id]);
+  public function delete($id, $data) {
+    $user_storage = $this->entityTypeManager->getStorage('user');
+    $uids = json_decode( $data->getContent() , false );
+    //$retUsers = array();
+    $users = $user_storage->loadMultiple( $uids , TRUE );
+    foreach ($users as $user) {
+      // array_push( $retUsers , $user->get('uid')->value );
+      $user->delete();
+    }
 
     // Deleted responses have an empty body.
-    return new ModifiedResourceResponse(NULL, 204);
+    return new ModifiedResourceResponse(NULL, 202);
   }
 
   /**
@@ -287,6 +320,18 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
       $query = $query->condition('field_status_waiting_list', TRUE );
     } else if ( $this->status_waiting_list == 'false' ) {
       $query = $query->condition('field_status_waiting_list', FALSE );
+    }
+
+    if ( $this->search != null ) { 
+      $query = $query->condition('field_first_name', $this->search , 'CONTAINS' );
+    }
+    
+    if ( $this->order_by != null ) {
+      if ( $this->order_desc == 'true' ) {
+        $query = $query->sort( $this->order_by, 'DESC' );
+      } else {
+        $query = $query->sort( $this->order_by, 'ASC' );
+      }
     }
 
     $count_query = clone $query;

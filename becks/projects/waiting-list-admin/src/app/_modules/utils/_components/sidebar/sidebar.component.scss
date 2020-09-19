@@ -3,5 +3,12 @@
     height: 782px;
     position: absolute;
     background: linear-gradient(180deg, #100D10 0%, #222222 100%);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding-top: 17px;
+
+    .btn {
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 12px;
+    }
   }

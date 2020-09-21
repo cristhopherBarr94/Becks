@@ -9,19 +9,46 @@
     background-position: center; 
     
 }
-
-.tittleForm{
-    font-family: 'Eurostile BQ';
-    font-size: 34px;
-    color: #FFFFFF;
-    line-height: 40px;
-   
+.no-padding {
+    padding: 0px;
+    ion-row, ion-col {
+        padding: 0px;
+    }
 }
 
-.subTittleForm{
+.margin-top-button{
+    margin-top: 23px;
+}
+
+.checks {
+    cursor: default;
     font-family: 'Helvetica Neue';
-    font-size: 18px;
-    color: #FFFFFF;
-    line-height: 40px;
-   
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: bold;
+
+    .content-check {
+        margin: 22px 0px;
+        display: flex;
+
+        a {
+            cursor: pointer;
+            color: #219653;
+            text-decoration: underline;
+        }
+    }
+    
+    .margin-check {
+        margin-right: 11px;
+    }
+
+    ::ng-deep .mat-checkbox-frame { 
+        border-color: white 
+    }
+
+    mat-error {
+        font-family:Roboto, "Helvetica Neue", sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+    }
 }

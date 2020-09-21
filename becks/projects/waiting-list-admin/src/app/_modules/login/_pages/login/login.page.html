@@ -1,35 +1,31 @@
-<app-toolbar></app-toolbar>
 <ion-content>
-  <section id="formSection" class='container content-flex-all-center'>
-    <div class='content-flex-all-center full-height flex-direction-column full-height'>
-      <h1 class='tittleForm'>
-        BIENVENIDO A <br /> BECK’S SOCIETY
-      </h1>
-      <h2 class="subTittleForm">
-        INGRESA TU USUARIO Y CONTRASEÑA
-      </h2>
-      <form [formGroup]="userLoginForm" class="form-section" autocomplete="off">
-        <mat-form-field appearance="fill" floatLabel="auto" class="fullInput"
-          [ngClass]="getClassInput(userLoginForm.controls.user)">
-          <mat-label>Usuario</mat-label>
-          <input matInput (input)="inputValidatorAlphabetical($event)" formControlName="user" placeholder="Usuario"
-            maxlength="20" [(ngModel)]="userLogin.user" required data-qadp="user">
-          <mat-error *ngIf="userLoginForm.controls.user.errors">
-            {{ getMessageform(userLoginForm.controls.user, 'user', 0, 20) }}</mat-error>
-        </mat-form-field>
 
-        <mat-form-field appearance="fill" floatLabel="auto" class="fullInput"
-          [ngClass]="getClassInput(userLoginForm.controls.user)">
-          <mat-label>Usuario</mat-label>
-          <input matInput (input)="inputValidatorAlphabetical($event)" formControlName="user" placeholder="Usuario"
-            maxlength="20" [(ngModel)]="userLogin.user" required data-qadp="user">
-          <mat-error *ngIf="userLoginForm.controls.user.errors">
-            {{ getMessageform(userLoginForm.controls.user, 'user', 0, 20) }}</mat-error>
-        </mat-form-field>
+  <div class="container content-flex-all-center full-height flex-direction-column padding-form">
+    <img src="../../../../../assets/img/becks-logoverde.svg" alt="logo">
+    <h2 class="title-secondary"> BIENVENIDO A <br /> BECK’S SOCIETY</h2>
 
-      </form>
-    </div>
-  </section>
+    <h3 class="title-tertiary max-width-title-secondary">
+      INGRESA TU USUARIO Y CONTRASEÑA
+    </h3>
+
+
+    <form [formGroup]="userLoginForm" class="form-section" autocomplete="off">
+      <app-captcha [restart]="restartCaptcha" (status)="setCaptchaStatus($event)">
+      </app-captcha>
+
+      <mat-form-field appearance="fill" floatLabel="auto" class="fullInput"
+        [ngClass]="getClassInput(userLoginForm.controls.email)">
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput formControlName="email" placeholder="example@example.com" type="email" required
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$" maxlength="30" data-qadp="email">
+        <mat-error *ngIf="userLoginForm.controls.email.errors">
+          {{ getMessageform(userLoginForm.controls.email, 'email', 0, 30)}}</mat-error>
+      </mat-form-field>
+
+    </form>
+
+
+  </div>
 
 </ion-content>
 <app-footer></app-footer>

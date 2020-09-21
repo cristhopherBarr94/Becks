@@ -24,8 +24,8 @@
             </ion-row>
           </div>
           
-            <input class="input-search" (keyup)="applyFilter($event.target.value)" placeholder="Buscar" >
-            <!-- <ion-searchbar (keyup)="applyFilter($event.target.value)" placeholder="Buscar"></ion-searchbar> -->
+       <input class="input-search" (keyup)="applyFilter($event.target.value)" placeholder="Buscar" >
+            
         </ion-row>
 
         <table mat-table matSort [dataSource]="dataSource" class="font-table">
@@ -75,11 +75,20 @@
         
         </table>
         <ion-row>
-          <!-- <mat-paginator
-          
-          [pageSize]="this.SizeOptions"
-          [hidePageSize]="true"
-          ></mat-paginator> -->
+          <div class="paginator">
+            <ion-row>
+              <div class="label">
+                <p>
+                  {{currentPg+1}} de {{numPage}}
+                </p>
+              </div>
+              <div class="controls">
+                <button class="btn-control" (click)="controlPage('prev')"><img src="../../../../../assets/icon/chevron-left.svg" alt=""></button>
+                <button class="btn-control" (click)="controlPage('next')"><img src="../../../../../assets/icon/chevron-right.svg" alt=""></button>
+              </div>
+            </ion-row>
+          </div>
+   
           <ion-button 
           block="block"
           color="becks"
@@ -111,8 +120,9 @@
       </div>
       </span>
       <span class="modal-footer">
-        <ion-button block="block" color="becks"
-        class="becks-button"
+        <ion-button
+        class="modal-btn"
+        color="becks"
         (click)="activateUser()"
         >CONTINUAR</ion-button>
       </span>

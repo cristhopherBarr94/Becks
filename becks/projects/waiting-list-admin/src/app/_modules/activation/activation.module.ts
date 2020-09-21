@@ -9,13 +9,13 @@ import { ActivationPageRoutingModule } from './activation-routing.module';
 import { ActivationPage } from './activation.page';
 import { UtilsModule } from '../utils/utils.module';
 import { TableComponent } from './components/table/table.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule} from '@angular/material/sidenav';
 import { UserListService } from 'src/app/_services/UserList.service';
 import { MatTableModule } from '@angular/material/table'  
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
+import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule} from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({

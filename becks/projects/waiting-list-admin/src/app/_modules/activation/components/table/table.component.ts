@@ -5,8 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
-import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material/icon';
+import { DomSanitizer} from '@angular/platform-browser';
+import { MatIconRegistry} from '@angular/material/icon';
 import { UserListService } from 'src/app/_services/UserList.service';
 
 
@@ -29,6 +29,9 @@ export class TableComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   // add conexion with pop-up
   allow:boolean = false;
+  currentPg: number;
+  numPage:number;
+  sizeUser:number;
 
   constructor(    
     public userListService: UserListService,
@@ -47,8 +50,9 @@ export class TableComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.onSelectNumber(0, 10);
     this.changePage(10);
+    this.currentPg = 0;
   }
-  onSelectNumber( page:number, size:number): void {
+  onSelectNumber( page?:number, size?:number): void {
     this.userListService.getUser(page, size , true).subscribe((res: any) => {
       this.dataSource.data = res.items as User[];
       console.log(res);
@@ -103,21 +107,30 @@ export class TableComponent implements OnInit {
         console.log(error);
       });
   }
-  changePage(option:any):void{
-   
-    this.onSelectNumber(null, option);
-    //  return this.paginator._changePageSize(option);
-  }
 
-  calculatePages( total:number , size:number ): void {
-   let numPage;
+  calculatePages( total?:number , size?:number ): void {
+
     if( total % size ){
-      numPage = Math.floor((total/size)) +1; 
-      console.log(numPage);
+      this.numPage = Math.floor((total/size)) +1; 
+      console.log(this.numPage);
     }else {
-      numPage = Math.floor((total/size));
-      console.log(numPage);
+      this.numPage = Math.floor((total/size));
+      console.log(this.numPage);
     }
+  }
+  changePage(option:any):void{
+    this.sizeUser = option;
+     this.onSelectNumber(this.currentPg, this.sizeUser);
+   }
+  controlPage(operation:String):void {
+    let finalPg = this.numPage;
+    if((operation == 'prev') && (this.currentPg > 0)){
+      this.currentPg -= 1;
+    }else if((operation == 'next') && (this.currentPg < finalPg-1 )) {
+      this.currentPg += 1;
+    }
+    this.onSelectNumber(this.currentPg, this.sizeUser);
+    console.log(this.currentPg);
   }
 
   delete(){

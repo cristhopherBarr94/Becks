@@ -1,0 +1,25 @@
+<div class="modal">
+    <span class="modal-hader">
+    <button class="btn-cancel"
+    (click)="close()"
+    >X</button>
+    </span>
+    <span class="modal-body">
+      <div>
+        <h1>!</h1>
+      </div>
+    <div>
+      <h3 [hidden]="del==true">VAS A DARLE ACCESO A {{amount}} USUARIOS</h3>
+      <h3 [hidden]="del==false">VAS A ELIMINAR A {{authorizated_users.length}} USUARIOS</h3>
+    </div>
+    <div>
+      <p>¿DESEAS CONITUAR?</p>
+    </div>
+    </span>
+    <span>
+      <button
+      class="modal-btn"
+      (click)="activateUser()"
+      >CONTINUAR</button>
+    </span>
+</div>

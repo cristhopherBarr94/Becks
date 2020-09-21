@@ -19,14 +19,11 @@ export class UserListService {
     });
   }
   setActivateStatus(array_us: any) {
-    // patch api set active status
     console.log(array_us);
     return this.httpClient.patch('http://becks.flexitco.co/becks-back/api/ab-inbev-api-web-app-user-list-api/', array_us);
   }
 
   deleteUser(array_us: any) {
-    // patch api set active status
-    console.log(array_us);
     return this.httpClient.delete('http://becks.flexitco.co/becks-back/api/ab-inbev-api-web-app-user-list-api/', array_us);
   }
 

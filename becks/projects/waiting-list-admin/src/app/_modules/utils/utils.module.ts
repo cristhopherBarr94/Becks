@@ -5,6 +5,7 @@ import { FooterComponent } from './_components/footer/footer.component';
 import { IonicModule } from '@ionic/angular';
 import { SidebarComponent } from './_components/sidebar/sidebar.component';
 import { ToolbarComponent } from './_components/toolbar/toolbar.component';
+import { NotifyModalComponent } from './_components/notify-modal/notify-modal.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { ToolbarComponent } from './_components/toolbar/toolbar.component';
     LoadingComponent,
     FooterComponent,
     SidebarComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    NotifyModalComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { ToolbarComponent } from './_components/toolbar/toolbar.component';
   exports:[
     FooterComponent,
     SidebarComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    NotifyModalComponent
 
   ]
 })

@@ -8,6 +8,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { DomSanitizer} from '@angular/platform-browser';
 import { MatIconRegistry} from '@angular/material/icon';
 import { UserListService } from 'src/app/_services/UserList.service';
+import { ModalController } from '@ionic/angular';
+import { NotifyModalComponent } from '../../../utils/_components/notify-modal/notify-modal.component';
 
 
 @Component({
@@ -27,8 +29,10 @@ export class TableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   //add sorting to the table
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  // add conexion with pop-up
+
   allow:boolean = false;
+  del:boolean = false;
+  delAux:boolean = false;
   currentPg: number;
   numPage:number;
   sizeUser:number;
@@ -36,23 +40,20 @@ export class TableComponent implements OnInit {
   constructor(    
     public userListService: UserListService,
     iconRegistry: MatIconRegistry, 
-    sanitizer: DomSanitizer) {
-      iconRegistry.addSvgIcon(
-        'trash-bin',
-        sanitizer.bypassSecurityTrustResourceUrl('../../../assets/icon/trash-alt.svg'));
-
-     }
+    sanitizer: DomSanitizer,
+    private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<User>(this.ELEMENT_DATA);
     this.selection = new SelectionModel<User>(true, []);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.loadPage(0, 10);
     this.changePage(10);
     this.currentPg = 0;
+    this.sizeUser = 10;
+    this.loadPage(this.currentPg, this.sizeUser);
   }
-  loadPage( page?:number, size?:number): void {
+  loadPage( page:number, size:number): void {
     this.userListService.getUser(page, size , true).subscribe((res: any) => {
       this.dataSource.data = res.items as User[];
       console.log(res);
@@ -109,7 +110,6 @@ export class TableComponent implements OnInit {
   }
 
   calculatePages( total?:number , size?:number ): void {
-
     if( total % size ){
       this.numPage = Math.floor((total/size)) +1; 
       console.log(this.numPage);
@@ -118,6 +118,7 @@ export class TableComponent implements OnInit {
       console.log(this.numPage);
     }
   }
+  
   changePage(option:any):void{
     this.sizeUser = option;
      this.loadPage(this.currentPg, this.sizeUser);
@@ -130,20 +131,21 @@ export class TableComponent implements OnInit {
       this.currentPg += 1;
     }
     this.loadPage(this.currentPg, this.sizeUser);
-    console.log(this.currentPg);
   }
 
-  delete (userId:String){
+  delete ( userId:number ){
+
     this.authorizated_users=[];
     this.authorizated_users.push(userId);
-    this.userListService.deleteUser(this.authorizated_users).subscribe(
-      res => {
-        console.log('received ok response from patch request', res);
-        location.reload();
-      },
-      error => {
-        console.error('There was an error during the request');
-        console.log(error);
-      });
+      this.userListService.deleteUser(this.authorizated_users).subscribe(
+        res => {
+          console.log('received ok response from patch request', res);
+          location.reload();
+        },
+        error => {
+          console.error('There was an error during the request');
+          console.log(error);
+        });
+
   }
 }

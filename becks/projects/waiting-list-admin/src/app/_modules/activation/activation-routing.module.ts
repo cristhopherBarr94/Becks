@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ActivationPage } from './activation.page';
+import { ActivationPage } from './_pages/activation/activation.page';
 
 const routes: Routes = [
   {

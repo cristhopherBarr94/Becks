@@ -15,7 +15,7 @@ import { UtilsModule } from '../utils/utils.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    UtilsModule,
+    UtilsModule
    
   ],
   declarations: [HomePage]

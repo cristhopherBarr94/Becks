@@ -6,9 +6,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { ActivationPageRoutingModule } from './activation-routing.module';
 
-import { ActivationPage } from './activation.page';
+import { ActivationPage } from './_pages/activation/activation.page';
 import { UtilsModule } from '../utils/utils.module';
-import { TableComponent } from './components/table/table.component';
+import { TableComponent } from './_components/table/table.component';
 import { MatSidenavModule} from '@angular/material/sidenav';
 import { UserListService } from 'src/app/_services/UserList.service';
 import { MatTableModule } from '@angular/material/table'  

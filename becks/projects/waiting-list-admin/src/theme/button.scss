@@ -35,6 +35,7 @@
 }
 .modal-btn {
   @include btn(#3A8361, #FFFFFF, 2px solid #FFFFFF , 'Helvetica LT Std', 16px , 167px, 35px, 3px solid #FFFFFF );
+
 }
 .btn-delete {
   @include btn(#3A8361, url('../assets/icon/trash-alt.svg'), none , 'Helvetica LT Std', 16px , 27px, 30px, 1px solid #3A8361 );

@@ -48,11 +48,11 @@ export class TableComponent implements OnInit {
     this.selection = new SelectionModel<User>(true, []);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.onSelectNumber(0, 10);
+    this.loadPage(0, 10);
     this.changePage(10);
     this.currentPg = 0;
   }
-  onSelectNumber( page?:number, size?:number): void {
+  loadPage( page?:number, size?:number): void {
     this.userListService.getUser(page, size , true).subscribe((res: any) => {
       this.dataSource.data = res.items as User[];
       console.log(res);
@@ -120,7 +120,7 @@ export class TableComponent implements OnInit {
   }
   changePage(option:any):void{
     this.sizeUser = option;
-     this.onSelectNumber(this.currentPg, this.sizeUser);
+     this.loadPage(this.currentPg, this.sizeUser);
    }
   controlPage(operation:String):void {
     let finalPg = this.numPage;
@@ -129,29 +129,21 @@ export class TableComponent implements OnInit {
     }else if((operation == 'next') && (this.currentPg < finalPg-1 )) {
       this.currentPg += 1;
     }
-    this.onSelectNumber(this.currentPg, this.sizeUser);
+    this.loadPage(this.currentPg, this.sizeUser);
     console.log(this.currentPg);
   }
 
-  delete(){
-    console.log(this.selection.selected);
-    // if (this.authorizated_users.length > 0) {
-    //   this.authorizated_users = [];
-    // }
-    // this.selection.clicked.forEach(item => {
-    //   this.authorizated_users.push(item.id);
-    //   console.log( this.authorizated_users);
-    // }    
-    // );
-    // console.log(userId);
-    // this.userListService.deleteUser(userId).subscribe(
-    //   res => {
-    //     console.log('received ok response from patch request', res);
-    //     location.reload();
-    //   },
-    //   error => {
-    //     console.error('There was an error during the request');
-    //     console.log(error);
-    //   });
+  delete (userId:String){
+    this.authorizated_users=[];
+    this.authorizated_users.push(userId);
+    this.userListService.deleteUser(this.authorizated_users).subscribe(
+      res => {
+        console.log('received ok response from patch request', res);
+        location.reload();
+      },
+      error => {
+        console.error('There was an error during the request');
+        console.log(error);
+      });
   }
 }

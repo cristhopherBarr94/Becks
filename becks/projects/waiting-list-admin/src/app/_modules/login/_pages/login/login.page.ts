@@ -88,10 +88,9 @@ export class LoginPage implements OnInit {
           },
           (e) => {
             this.ui.dismissLoading();
-            console.log(e);
+            this.redirect();
             this.restartCaptcha = true;
             this.setCaptchaStatus(!this.restartCaptcha);
-            this.redirect();
             this.httpError = "usuario y/o contraseña incorrecta";
           }
         );

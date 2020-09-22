@@ -6,7 +6,11 @@ import {
   FormControl,
   Validators,
 } from "@angular/forms";
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from "src/app/_services/http.service";
+import { UiService } from 'src/app/_services/ui.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: "waiting-login",
@@ -21,11 +25,21 @@ export class LoginPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private authService: AuthService,
+    private ui: UiService,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    this.redirect();
     this.initforms();
+  }
+
+  redirect() {
+    if ( this.authService.isAuthenticated() ) {
+      this.router.navigate(['activation'], { queryParamsHandling: "preserve" });
+    }
   }
 
   initforms() {
@@ -43,29 +57,39 @@ export class LoginPage implements OnInit {
   }
 
   loginUser(): void {
+
+    this.ui.showLoading();
     this.restartCaptcha = true;
     this.setCaptchaStatus(!this.restartCaptcha);
     const formData = new FormData();
     formData.append("username", this.userLoginForm.controls.email.value);
     formData.append("password", this.userLoginForm.controls.password.value);
-    formData.append("grant_type", "password");
-    formData.append("client_id", "c7a551b7-f850-4839-90c5-3d78f03c2031");
-    formData.append("client_secret", "WebAppConsumer");
-    formData.append("scope", "administrator web_app");
+    formData.append("grant_type",  environment.rest.grant_type );
+    formData.append("client_id", environment.rest.client_id );
+    formData.append("client_secret", environment.rest.client_secret );
+    formData.append("scope", environment.rest.scope );
 
+    console.log( environment.serverUrl + environment.login.resource, formData);
+    
     this.httpService
       .postFormData(
-        "http://becks.flexitco.co/becks-back/oauth/token?_format=json",
+        (environment.serverUrl + environment.login.resource) ,
         formData
       )
-      .subscribe((response: any) => {
-        console.log("LoginPage -> loginUser -> response", response);
-
-        if (response.status == 200) {
-          console.log(response.body);
-          localStorage.setItem("token", response.body.access_token);
+      .subscribe(
+        (response: any) => {
+          this.ui.dismissLoading();
+          if (response.status == 200) {
+            this.userLoginForm.reset();
+            this.authService.setAuthenticated( 'Bearer ' + response.body.access_token );
+          }
+          this.redirect();
+        },
+        (e) => {
+          console.log(e);
+          this.ui.dismissLoading();
         }
-      });
+      );
   }
 
   // showPassword = () => {

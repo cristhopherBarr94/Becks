@@ -33,7 +33,7 @@
       <app-captcha [restart]="restartCaptcha" (status)="setCaptchaStatus($event)">
       </app-captcha>
 
-      <button class="becks-btn-primary margin-top-button"> <span>ENTRAR</span></button>
+      <button class="becks-btn-primary margin-top-button" (click)="loginUser()"> <span>ENTRAR</span></button>
 
 
     </form>

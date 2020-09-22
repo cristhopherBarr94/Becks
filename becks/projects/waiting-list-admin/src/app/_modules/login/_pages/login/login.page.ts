@@ -60,14 +60,14 @@ export class LoginPage implements OnInit {
       .subscribe((resonse) => console.log(resonse));
   }
 
-  showPassword = () => {
-    const pass: HTMLElement = document.getElementById("password");
-    if (pass.getAttribute("type") == "password") {
-      pass.setAttribute("type", "text");
-    } else {
-      pass.setAttribute("type", "password");
-    }
-  };
+  // showPassword = () => {
+  //   const pass: HTMLElement = document.getElementById("password");
+  //   if (pass.getAttribute("type") == "password") {
+  //     pass.setAttribute("type", "text");
+  //   } else {
+  //     pass.setAttribute("type", "password");
+  //   }
+  // };
 
   public getClassInput(item: any): string {
     let classreturn = "input-becks";

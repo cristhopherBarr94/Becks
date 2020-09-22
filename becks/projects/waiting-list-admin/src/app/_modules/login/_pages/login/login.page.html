@@ -26,7 +26,6 @@
         <input
           matInput
           formControlName="email"
-          placeholder="example@example.com"
           type="email"
           required
           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
@@ -46,21 +45,20 @@
         [ngClass]="getClassInput(userLoginForm.controls.password)"
       >
         <mat-label>Constraseña</mat-label>
-        <!-- <mat-icon class="icon-password">remove_red_eye</mat-icon> -->
         <input
           matInput
           id="password"
           formControlName="password"
-          placeholder="password"
-          type="password"
+          [type]="hide ? 'password' : 'text'"
           required
           maxlength="30"
           data-qadp="password"
           class="input-password"
           [(ngModel)]="password"
         />
-        <mat-icon matSuffix (click)="showPassword()">remove_red_eye</mat-icon>
-
+        <mat-icon matSuffix (click)="hide = !hide"
+          >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon
+        >
         <mat-error *ngIf="userLoginForm.controls.password.errors">
           {{ getMessageform(userLoginForm.controls.password, 'password', 0,
           3)}}</mat-error

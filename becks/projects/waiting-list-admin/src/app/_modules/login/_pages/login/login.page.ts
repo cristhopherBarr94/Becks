@@ -45,7 +45,7 @@ export class LoginPage implements OnInit {
       componentProps: {},
     });
     await modal.present();
-    modal.onDidDismiss();
+    // modal.onDidDismiss();
     // .then(res=> alert("success request: "+ JSON.stringify(res)))
   }
 

@@ -7,16 +7,16 @@ import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DomSanitizer} from '@angular/platform-browser';
 import { MatIconRegistry} from '@angular/material/icon';
-import { UserListService } from 'src/app/_services/UserList.service';
 import { ModalController } from '@ionic/angular';
 import { NotifyModalComponent } from '../../../utils/_components/notify-modal/notify-modal.component';
+import { HttpService } from 'src/app/_services/http.service';
+import { UiService } from 'src/app/_services/ui.service';
 
 
 @Component({
   selector: 'waiting-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  providers: [UserListService]
 })
 export class TableComponent implements OnInit {
 
@@ -36,10 +36,11 @@ export class TableComponent implements OnInit {
   sizeUser:number;
 
   constructor(    
-    public userListService: UserListService,
+    private httpService: HttpService,
     iconRegistry: MatIconRegistry, 
     sanitizer: DomSanitizer,
-    private modalCtrl: ModalController ) { }
+    private modalCtrl: ModalController,
+    private uiService: UiService ) { }
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<User>(this.ELEMENT_DATA);
@@ -52,9 +53,16 @@ export class TableComponent implements OnInit {
     this.loadPage(this.currentPg, this.sizeUser);
   }
   loadPage( page:number, size:number): void {
-    this.userListService.getUser(page, size , true).subscribe((res: any) => {
-      this.dataSource.data = res.items as User[];
-      this.calculatePages( res.total , size);
+    this.uiService.showLoading();
+    this.httpService.get('http://becks.flexitco.co/becks-back/api/ab-inbev-api-web-app-user-list-api/?'
+        +'page=' + page + ''
+        +'&page_size=' + size + ''
+        +'&status_waiting_list=' + 'true'
+        +'&time_stamp=' + (Math.floor(Date.now()/1000)) + ''
+    ).subscribe((res: any) => {
+      this.uiService.dismissLoading();
+      this.dataSource.data = res.body.items as User[];
+      this.calculatePages( res.body.total , size);
     });
     this.authorizated_users = [];
   }
@@ -94,12 +102,15 @@ export class TableComponent implements OnInit {
   }
 
   activateUser(): void {
-    this.userListService.setActivateStatus(this.authorizated_users).subscribe(
+    this.uiService.showLoading();
+    this.httpService.patch('http://becks.flexitco.co/becks-back/api/ab-inbev-api-web-app-user-list-api/', this.authorizated_users).subscribe(
       res => {
+        this.uiService.dismissLoading();
         console.log('received ok response from patch request', res);
-        location.reload();
+        this.loadPage(this.currentPg, this.sizeUser);
       },
       error => {
+        this.uiService.dismissLoading();
         console.error('There was an error during the request');
         console.log(error);
       });
@@ -117,6 +128,7 @@ export class TableComponent implements OnInit {
     this.sizeUser = option;
      this.loadPage(this.currentPg, this.sizeUser);
    }
+   
   controlPage(operation:String):void {
     let finalPg = this.numPage;
     if((operation == 'prev') && (this.currentPg > 0)){
@@ -151,12 +163,16 @@ export class TableComponent implements OnInit {
       this.deleted_users.push(userId);
       this.showModal();
     }else {
-      this.userListService.deleteUser(this.authorizated_users).subscribe(
+      console.log(this.deleted_users);
+      this.uiService.showLoading();
+      this.httpService.delete('http://becks.flexitco.co/becks-back/api/ab-inbev-api-web-app-user-list-api/?id=' + this.deleted_users).subscribe(
         res => {
+          this.uiService.dismissLoading();
           console.log('received ok response from patch request', res);
-          location.reload();
+          this.loadPage(this.currentPg, this.sizeUser);
         },
         error => {
+          this.uiService.dismissLoading();
           console.error('There was an error during the request');
           console.log(error);
         });

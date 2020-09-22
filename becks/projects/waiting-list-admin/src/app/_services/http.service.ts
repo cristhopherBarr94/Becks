@@ -65,6 +65,7 @@ export class HttpService {
   }
 
   public patch(url: string, body?: any, headersIn?: any): Observable<object> {
+    console.log( "patch", body );
     return this.http
       .patch(url, body, { headers: headersIn, observe: "response" })
       .pipe(catchError((error) => this.handleError(error)));

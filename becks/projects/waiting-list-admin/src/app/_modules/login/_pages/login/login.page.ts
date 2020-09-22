@@ -31,6 +31,11 @@ export class LoginPage implements OnInit {
     });
   }
 
+  loginUser(): void {
+    this.restartCaptcha = true;
+    this.setCaptchaStatus(!this.restartCaptcha);
+  }
+
   public getClassInput(item: any): string {
     let classreturn = 'input-becks';
     if (item.valid) {

@@ -176,7 +176,6 @@ export class TableComponent implements OnInit {
       this.deleted_users.push(userId);
       this.showModal();
     }else {
-      console.log(this.deleted_users);
       this.uiService.showLoading();
       this.httpService.delete( (environment.serverUrl + environment.validation.resource) + '?id=' + this.deleted_users).subscribe(
         res => {

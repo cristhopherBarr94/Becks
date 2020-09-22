@@ -12,9 +12,6 @@
             <ion-row>
               <p>MOSTRAR </p>
                 <select (change)="changePage($event.target.value)">
-                  <!-- <option *ngFor="let op of options" value="{{op.id}}">
-                    {{op.value}}
-                  </option> -->
                   <option [value]="10">10</option>
                   <option [value]="20">20</option>
                   <option [value]="30">30</option>

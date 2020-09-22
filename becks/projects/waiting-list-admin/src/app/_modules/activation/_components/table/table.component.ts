@@ -54,14 +54,12 @@ export class TableComponent implements OnInit {
   }
   loadPage( page:number, size:number): void {
     this.uiService.showLoading();
-    this.httpService.get('http://becks.flexitco.co/becks-back/api/ab-inbev-api-web-app-user-list-api/', {
-      params: {
-        'page': page + '',
-        'page_size': size + '',
-        'status_waiting_list' : 'true',
-        'time_stamp': (Math.floor(Date.now()/1000)) + ''
-      }
-    }).subscribe((res: any) => {
+    this.httpService.get('http://becks.flexitco.co/becks-back/api/ab-inbev-api-web-app-user-list-api/?'
+        +'page=' + page + ''
+        +'&page_size=' + size + ''
+        +'&status_waiting_list=' + 'true'
+        +'&time_stamp=' + (Math.floor(Date.now()/1000)) + ''
+    ).subscribe((res: any) => {
       this.uiService.dismissLoading();
       this.dataSource.data = res.body.items as User[];
       this.calculatePages( res.body.total , size);
@@ -130,6 +128,7 @@ export class TableComponent implements OnInit {
     this.sizeUser = option;
      this.loadPage(this.currentPg, this.sizeUser);
    }
+   
   controlPage(operation:String):void {
     let finalPg = this.numPage;
     if((operation == 'prev') && (this.currentPg > 0)){
@@ -164,8 +163,9 @@ export class TableComponent implements OnInit {
       this.deleted_users.push(userId);
       this.showModal();
     }else {
+      console.log(this.deleted_users);
       this.uiService.showLoading();
-      this.httpService.delete('http://becks.flexitco.co/becks-back/api/ab-inbev-api-web-app-user-list-api/', this.authorizated_users).subscribe(
+      this.httpService.delete('http://becks.flexitco.co/becks-back/api/ab-inbev-api-web-app-user-list-api/?id=' + this.deleted_users).subscribe(
         res => {
           this.uiService.dismissLoading();
           console.log('received ok response from patch request', res);

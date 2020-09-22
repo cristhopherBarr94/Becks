@@ -5,9 +5,15 @@ import {
   FormControl,
   Validators,
 } from "@angular/forms";
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from "src/app/_services/http.service";
+<<<<<<< HEAD
 import { ModalController } from "@ionic/angular";
 import { NotifyModalComponent } from "src/app/_modules/utils/_components/notify-modal/notify-modal.component";
+=======
+import { UiService } from 'src/app/_services/ui.service';
+>>>>>>> TEST
 
 @Component({
   selector: "waiting-login",
@@ -23,13 +29,21 @@ export class LoginPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private httpService: HttpService,
+<<<<<<< HEAD
     private modalCtrl: ModalController
+=======
+    private authService: AuthService,
+    private ui: UiService,
+    private router: Router
+>>>>>>> TEST
   ) {}
 
   ngOnInit() {
+    this.redirect();
     this.initforms();
   }
 
+<<<<<<< HEAD
   async showModal() {
     const modal = await this.modalCtrl.create({
       component: NotifyModalComponent,
@@ -39,6 +53,12 @@ export class LoginPage implements OnInit {
     await modal.present();
     modal.onDidDismiss();
     // .then(res=> alert("success request: "+ JSON.stringify(res)))
+=======
+  redirect() {
+    if ( this.authService.isAuthenticated() ) {
+      this.router.navigate(['activation'], { queryParamsHandling: "preserve" });
+    }
+>>>>>>> TEST
   }
 
   initforms() {
@@ -56,6 +76,8 @@ export class LoginPage implements OnInit {
   }
 
   loginUser(): void {
+
+    this.ui.showLoading();
     this.restartCaptcha = true;
     this.setCaptchaStatus(!this.restartCaptcha);
     const formData = new FormData();
@@ -72,12 +94,20 @@ export class LoginPage implements OnInit {
         formData
       )
       .subscribe((response: any) => {
+<<<<<<< HEAD
         console.log("LoginPage -> loginUser -> response", response);
         if (response.status == 200) {
           localStorage.setItem("token", response.body.access_token);
         } else {
           // this.showModal();
+=======
+        this.ui.dismissLoading();
+        if (response.status == 200) {
+          this.userLoginForm.reset();
+          this.authService.setAuthenticated( 'Bearer ' + response.body.access_token );
+>>>>>>> TEST
         }
+        this.redirect();
       });
   }
 

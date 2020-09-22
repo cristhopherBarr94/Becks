@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from './_services/auth-guard.service';
 
 const routes: Routes = [
@@ -21,9 +21,16 @@ const routes: Routes = [
 
 ];
 
+const routerOptions: ExtraOptions = {
+  scrollPositionRestoration: 'enabled',
+  onSameUrlNavigation: 'reload',
+  anchorScrolling: 'enabled',
+  scrollOffset: [0, 150]
+}
+
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot( routes, routerOptions )
   ],
   exports: [RouterModule]
 })

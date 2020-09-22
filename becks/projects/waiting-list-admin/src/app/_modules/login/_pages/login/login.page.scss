@@ -76,6 +76,10 @@
   }
 }
 
+mat-icon {
+  cursor: pointer;
+}
+
 ::ng-deep mat-icon:active {
   font-family: 'Material Icons' !important;
 }

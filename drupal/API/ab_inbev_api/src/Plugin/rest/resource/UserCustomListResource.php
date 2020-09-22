@@ -177,15 +177,15 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
    *   The HTTP response object.
    */
   public function post($data) {
-    // $resp = [ 
-    //   $this->currentUser->getRoles(),
-    //   $this->currentUser->getEmail(),
-    //   $this->currentUser->getAccountName(),
-    //   $this->currentUser->getDisplayName(),
-    //   $this->currentUser->isAuthenticated(),
-    //   $this->currentUser->getLastAccessedTime()
-    // ];
-    // return new ResourceResponse($resp);
+    $resp = [ 
+      $this->currentUser->getRoles(),
+      $this->currentUser->getEmail(),
+      $this->currentUser->getAccountName(),
+      $this->currentUser->getDisplayName(),
+      $this->currentUser->isAuthenticated(),
+      $this->currentUser->getLastAccessedTime()
+    ];
+    return new ResourceResponse($resp);
   }
 
   /**
@@ -200,7 +200,16 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
    *   The HTTP response object.
    */
   public function patch($id, $data) {
+    $response_array = [];
+
     $uids = json_decode( $data->getContent() , false );
+    $uids = $this->validateUids( $uids );
+
+    if ( empty( $uids ) ) {
+      echo ( "Petición no valida" );
+      return new ModifiedResourceResponse(NULL, 400);
+    }
+
     $patchUids = $this->patchWaitingListUsers( $uids );
     return new ResourceResponse($patchUids);
   }
@@ -217,16 +226,35 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
    * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    */
   public function delete($id, $data) {
+    $uid = $this->currentRequest->get('id');
+
+    // $uids = json_decode( $data->getContent() , false );
+    // $uids = $this->validateUids( $uids );
+    
+    if ( empty( $uid ) ) {
+      echo ( "Petición no valida" );
+      return new ModifiedResourceResponse(NULL, 400);
+    }
+    $retUsers = array();
+    
     $user_storage = $this->entityTypeManager->getStorage('user');
-    $uids = json_decode( $data->getContent() , false );
-    //$retUsers = array();
-    $users = $user_storage->loadMultiple( $uids , TRUE );
-    foreach ($users as $user) {
-      // array_push( $retUsers , $user->get('uid')->value );
+    $user = $user_storage->load( $uid , TRUE );
+    if ( in_array("web_app", $user -> getRoles()) ) {
+      array_push( $retUsers , $user->get('uid')->value );
       $user->delete();
     }
 
+    // $users = $user_storage->loadMultiple( $uids , TRUE );
+    // foreach ($users as $user) {
+    //   if ( in_array("web_app", $user -> getRoles()) ) {
+    //     array_push( $retUsers , $user->get('uid')->value );
+    //     $user->delete();
+    //   }
+    // }
+
     // Deleted responses have an empty body.
+    // echo Response
+    echo( json_encode($retUsers) );
     return new ModifiedResourceResponse(NULL, 202);
   }
 
@@ -301,6 +329,15 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
     // @DCG Add more validation rules here.
   }
 
+  private function validateUids( $uids ) {
+    foreach ($uids as $elementKey => $uid) {
+      if ( $uid == '' || !is_numeric($uid) ) {
+        unset($uids[$elementKey]);
+      }
+    }
+    return $uids;
+  }
+
   /**
    * Loads record from database.
    *
@@ -311,7 +348,7 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
    * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
    */
   protected function loadRecords() {
-    $user_storage = $this->entityTypeManager->getStorage('user');
+    $user_storage = \Drupal::service('entity_type.manager')->getStorage('user');
 
     $query = $user_storage->getQuery()
               ->condition('roles', 'web_app');
@@ -396,7 +433,8 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
     $retUsers = array();
     $users = User::loadMultiple( $uids , TRUE );
     foreach ($users as $user) {
-      if ( $user->get('field_status_waiting_list')->value ) {
+      if ( in_array("web_app", $user -> getRoles()) &&
+            $user->get('field_status_waiting_list')->value ) {
         array_push( $retUsers , $user->get('uid')->value );
         $pass = Util::getRandomUserPass();
         $user->setPassword($pass);

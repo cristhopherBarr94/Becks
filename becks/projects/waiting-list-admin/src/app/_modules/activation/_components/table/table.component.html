@@ -22,8 +22,8 @@
               <p> ENTRADAS</p>
             </ion-row>
           </div>
-          
-       <input class="input-search" (keyup)="applyFilter($event.target.value)" placeholder="Buscar" >
+        
+       <input class="input-search" (keyup.enter)="applyFilter($event.target.value)" placeholder="Buscar" >
             
         </ion-row>
 

@@ -44,7 +44,8 @@ export class LoginPage implements OnInit {
       cssClass: "modalMessage",
       componentProps: {},
     });
-    modal.present();
+    await modal.present();
+    modal.onDidDismiss();
     // .then(res=> alert("success request: "+ JSON.stringify(res)))
   }
 
@@ -69,42 +70,41 @@ export class LoginPage implements OnInit {
   }
 
   loginUser(): void {
-    this.ui.showLoading();
-    this.restartCaptcha = true;
-    this.setCaptchaStatus(!this.restartCaptcha);
-    const formData = new FormData();
-    formData.append("username", this.userLoginForm.controls.email.value);
-    formData.append("password", this.userLoginForm.controls.password.value);
-    formData.append("grant_type", environment.rest.grant_type);
-    formData.append("client_id", environment.rest.client_id);
-    formData.append("client_secret", environment.rest.client_secret);
-    formData.append("scope", environment.rest.scope);
-
-    console.log(environment.serverUrl + environment.login.resource, formData);
-
-    this.httpService
-      .postFormData(
-        environment.serverUrl + environment.login.resource,
-        formData
-      )
-      .subscribe(
-        (response: any) => {
-          this.ui.dismissLoading();
-          if (response.status == 200) {
-            this.userLoginForm.reset();
-            this.authService.setAuthenticated(
-              "Bearer " + response.body.access_token
-            );
+    if (this.userLoginForm.valid && this.captchaStatus) {
+      this.ui.showLoading();
+      this.restartCaptcha = true;
+      this.setCaptchaStatus(!this.restartCaptcha);
+      const formData = new FormData();
+      formData.append("username", this.userLoginForm.controls.email.value);
+      formData.append("password", this.userLoginForm.controls.password.value);
+      formData.append("grant_type", environment.rest.grant_type);
+      formData.append("client_id", environment.rest.client_id);
+      formData.append("client_secret", environment.rest.client_secret);
+      formData.append("scope", environment.rest.scope);
+      this.httpService
+        .postFormData(
+          environment.serverUrl + environment.login.resource,
+          formData
+        )
+        .subscribe(
+          (response: any) => {
+            this.ui.dismissLoading();
+            if (response.status == 200) {
+              this.userLoginForm.reset();
+              this.authService.setAuthenticated(
+                "Bearer " + response.body.access_token
+              );
+            }
+            this.redirect();
+          },
+          (e) => {
+            console.log(e);
+            this.redirect();
+            this.ui.dismissLoading();
+            this.showModal();
           }
-          this.redirect();
-        },
-        (e) => {
-          console.log(e);
-          this.redirect();
-          this.ui.dismissLoading();
-          this.showModal();
-        }
-      );
+        );
+    }
   }
 
   // showPassword = () => {

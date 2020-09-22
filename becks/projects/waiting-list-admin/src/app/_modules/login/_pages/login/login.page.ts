@@ -6,7 +6,10 @@ import {
   FormControl,
   Validators,
 } from "@angular/forms";
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from "src/app/_services/http.service";
+import { UiService } from 'src/app/_services/ui.service';
 
 @Component({
   selector: "waiting-login",
@@ -21,11 +24,21 @@ export class LoginPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private authService: AuthService,
+    private ui: UiService,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    this.redirect();
     this.initforms();
+  }
+
+  redirect() {
+    if ( this.authService.isAuthenticated() ) {
+      this.router.navigate(['activation'], { queryParamsHandling: "preserve" });
+    }
   }
 
   initforms() {
@@ -43,6 +56,8 @@ export class LoginPage implements OnInit {
   }
 
   loginUser(): void {
+
+    this.ui.showLoading();
     this.restartCaptcha = true;
     this.setCaptchaStatus(!this.restartCaptcha);
     const formData = new FormData();
@@ -59,12 +74,12 @@ export class LoginPage implements OnInit {
         formData
       )
       .subscribe((response: any) => {
-        console.log("LoginPage -> loginUser -> response", response);
-
+        this.ui.dismissLoading();
         if (response.status == 200) {
-          console.log(response.body);
-          localStorage.setItem("token", response.body.access_token);
+          this.userLoginForm.reset();
+          this.authService.setAuthenticated( 'Bearer ' + response.body.access_token );
         }
+        this.redirect();
       });
   }
 

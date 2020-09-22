@@ -76,7 +76,6 @@ export class LoginPage implements OnInit {
         if (response.status == 200) {
           localStorage.setItem("token", response.body.access_token);
         } else {
-          console.log(error);
           // this.showModal();
         }
       });

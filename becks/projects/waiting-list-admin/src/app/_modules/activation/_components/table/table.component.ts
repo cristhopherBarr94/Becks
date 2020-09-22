@@ -5,8 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
-import { DomSanitizer} from '@angular/platform-browser';
-import { MatIconRegistry} from '@angular/material/icon';
 import { ModalController } from '@ionic/angular';
 import { NotifyModalComponent } from '../../../utils/_components/notify-modal/notify-modal.component';
 import { HttpService } from 'src/app/_services/http.service';
@@ -39,10 +37,10 @@ export class TableComponent implements OnInit {
   way:boolean;
   search:string;
 
+  reload = false;
+
   constructor(    
     private httpService: HttpService,
-    iconRegistry: MatIconRegistry, 
-    sanitizer: DomSanitizer,
     private modalCtrl: ModalController,
     private uiService: UiService ) { }
 
@@ -70,11 +68,22 @@ export class TableComponent implements OnInit {
         +'&order_by=' + order + ''
         +'&order_desc=' + way +''
         +'&search=' + sh +''
-    ).subscribe((res: any) => {
-      this.uiService.dismissLoading();
-      this.dataSource.data = res.body.items as User[];
-      this.calculatePages( res.body.total , size);
-    });
+    ).subscribe(
+      (res: any) => {
+        this.uiService.dismissLoading();
+        this.dataSource.data = res.body.items as User[];
+        this.calculatePages( res.body.total , size);
+
+        try {
+          if ( this.reload && this.dataSource.data.length == 0 ) {
+            location.reload();
+          }
+        } catch (error) { location.reload(); }
+      },
+      (e) => {
+        // location.reload();
+      }
+    );
     this.authorizated_users = [];
   }
 
@@ -119,13 +128,11 @@ export class TableComponent implements OnInit {
     this.httpService.patch( (environment.serverUrl + environment.validation.resource) , this.authorizated_users).subscribe(
       res => {
         this.uiService.dismissLoading();
-        console.log('received ok response from patch request', res);
+        this.reload = true;
         this.loadPage(this.currentPg, this.sizeUser);
       },
       error => {
         this.uiService.dismissLoading();
-        console.error('There was an error during the request');
-        console.log(error);
       });
   }
 
@@ -176,18 +183,15 @@ export class TableComponent implements OnInit {
       this.deleted_users.push(userId);
       this.showModal();
     }else {
-      console.log(this.deleted_users);
       this.uiService.showLoading();
       this.httpService.delete( (environment.serverUrl + environment.validation.resource) + '?id=' + this.deleted_users).subscribe(
         res => {
           this.uiService.dismissLoading();
-          console.log('received ok response from patch request', res);
+          this.reload = true;
           this.loadPage(this.currentPg, this.sizeUser);
         },
         error => {
           this.uiService.dismissLoading();
-          console.error('There was an error during the request');
-          console.log(error);
         });
     } 
   }

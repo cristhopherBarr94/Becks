@@ -23,10 +23,10 @@
       <mat-form-field appearance="fill" floatLabel="auto" class="fullInput"
         [ngClass]="getClassInput(userLoginForm.controls.password)">
         <mat-label>Constraseña</mat-label>
-        <input matInput formControlName="password" placeholder="example@example.com" type="password" required
-          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$" maxlength="30" data-qadp="password">
+        <input matInput formControlName="password" placeholder="password" type="password" required maxlength="30"
+          data-qadp="password">
         <mat-error *ngIf="userLoginForm.controls.password.errors">
-          {{ getMessageform(userLoginForm.controls.password, 'password', 0, 30)}}</mat-error>
+          {{ getMessageform(userLoginForm.controls.password, 'password', 0, 3)}}</mat-error>
       </mat-form-field>
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { SHA256, SHA512 } from "crypto-js";
 import { Router } from '@angular/router';
 
 @Component({
@@ -27,13 +28,15 @@ export class LoginPage implements OnInit {
   initforms() {
     this.userLoginForm = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(30)]),
-      password: new FormControl('', [Validators.required, Validators.maxLength(40)])
+      password: new FormControl('', [Validators.required, Validators.minLength(3)])
     });
   }
 
   loginUser(): void {
     this.restartCaptcha = true;
     this.setCaptchaStatus(!this.restartCaptcha);
+    const email256 = SHA256(this.userLoginForm.value.user).toString();
+    console.log("LoginPage -> loginUser -> email256", email256)
   }
 
   public getClassInput(item: any): string {
@@ -60,8 +63,11 @@ export class LoginPage implements OnInit {
   }
 
   public getMessageform(item: any, name: string, min?: number, max?: number): string {
-    if (item.hasError('email') || (item.hasError('pattern') && name === 'email')) {
+    if (item.hasError('email') && name === 'email') {
       return 'Ingrese una dirección de correo electrónico válida';
+    }
+    if (item.hasError('password')) {
+      return 'Contraseña invalida'
     }
   }
 

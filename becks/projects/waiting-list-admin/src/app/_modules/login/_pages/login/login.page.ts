@@ -23,6 +23,7 @@ export class LoginPage implements OnInit {
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
+  public hide: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,17 +37,6 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.redirect();
     this.initforms();
-  }
-
-  async showModal() {
-    const modal = await this.modalCtrl.create({
-      component: NotifyModalComponent,
-      cssClass: "modalMessage",
-      componentProps: {},
-    });
-    await modal.present();
-    modal.onDidDismiss();
-    // .then(res=> alert("success request: "+ JSON.stringify(res)))
   }
 
   redirect() {
@@ -98,10 +88,11 @@ export class LoginPage implements OnInit {
             this.redirect();
           },
           (e) => {
-            console.log(e);
-            this.redirect();
             this.ui.dismissLoading();
-            this.showModal();
+            this.redirect();
+            this.restartCaptcha = true;
+            this.setCaptchaStatus(!this.restartCaptcha);
+            this.httpError = "usuario y/o contraseña incorrecta";
           }
         );
     }

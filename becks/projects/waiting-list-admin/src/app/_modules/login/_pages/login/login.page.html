@@ -76,7 +76,7 @@
         (click)="loginUser()"
         block="block"
         color="becks"
-        [ngClass]="{'button-disabled':  !captchaStatus }"
+        [ngClass]="{'button-disabled': userLoginForm.invalid || !captchaStatus }"
       >
         <span>ENTRAR</span>
       </button>

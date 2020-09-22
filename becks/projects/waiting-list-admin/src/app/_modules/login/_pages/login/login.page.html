@@ -1,7 +1,7 @@
 <ion-content>
 
   <div class="container content-flex-all-center full-height flex-direction-column padding-form">
-    <img src="../../../../../assets/img/becks-logoverde.svg" alt="logo" class="margin-top">
+    <img src="../../../../../assets/img/becks-logoverde.svg" alt="logo" class="margin-top-login-form">
     <h2 class="title-secondary margin-top-form-login"> BIENVENIDO A <br /> BECK’S SOCIETY</h2>
 
     <h3 class="font-link">
@@ -9,7 +9,7 @@
     </h3>
 
 
-    <form [formGroup]="userLoginForm" class="form-section " autocomplete="off">
+    <form [formGroup]="userLoginForm" class="form-section margin-top-login-form" autocomplete="off">
 
       <mat-form-field appearance="fill" floatLabel="auto" class="fullInput"
         [ngClass]="getClassInput(userLoginForm.controls.email)">
@@ -33,7 +33,7 @@
       <app-captcha [restart]="restartCaptcha" (status)="setCaptchaStatus($event)">
       </app-captcha>
 
-      <button></button>
+      <button class="becks-btn-primary margin-top-button"> <span>ENTRAR</span></button>
 
 
     </form>

@@ -17,8 +17,14 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./_modules/login/login.module').then(m => m.LoginModule)
   },
-
-
+  {
+    path: 'terms-conditions',
+    loadChildren: () => import('./_modules/utils/_pages/terms-conditions/terms-conditions.module').then(m => m.TermsConditionsPageModule),
+  },
+  {
+    path: 'privacy-policy',
+    loadChildren: () => import('./_modules/utils/_pages/privacy-policy/privacy-policy.module').then(m => m.PrivacyPolicyPageModule),
+  },
 ];
 
 const routerOptions: ExtraOptions = {

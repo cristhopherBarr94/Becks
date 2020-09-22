@@ -1,3 +1,4 @@
+import { HttpResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import {
   FormBuilder,
@@ -57,7 +58,14 @@ export class LoginPage implements OnInit {
         "http://becks.flexitco.co/becks-back/oauth/token?_format=json",
         formData
       )
-      .subscribe((resonse) => console.log(resonse));
+      .subscribe((response: any) => {
+        console.log("LoginPage -> loginUser -> response", response);
+
+        if (response.status == 200) {
+          console.log(response.body);
+          localStorage.setItem("token", response.body.access_token);
+        }
+      });
   }
 
   // showPassword = () => {

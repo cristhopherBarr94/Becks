@@ -38,17 +38,6 @@ export class LoginPage implements OnInit {
     this.initforms();
   }
 
-  async showModal() {
-    const modal = await this.modalCtrl.create({
-      component: NotifyModalComponent,
-      cssClass: "modalMessage",
-      componentProps: {},
-    });
-    await modal.present();
-    // modal.onDidDismiss();
-    // .then(res=> alert("success request: "+ JSON.stringify(res)))
-  }
-
   redirect() {
     if (this.authService.isAuthenticated()) {
       this.router.navigate(["activation"], { queryParamsHandling: "preserve" });
@@ -98,10 +87,12 @@ export class LoginPage implements OnInit {
             this.redirect();
           },
           (e) => {
-            console.log(e);
-            this.redirect();
             this.ui.dismissLoading();
-            this.showModal();
+            console.log(e);
+            this.restartCaptcha = true;
+            this.setCaptchaStatus(!this.restartCaptcha);
+            this.redirect();
+            this.httpError = "usuario y/o contraseña incorrecta";
           }
         );
     }

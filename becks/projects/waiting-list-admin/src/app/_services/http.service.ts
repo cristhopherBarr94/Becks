@@ -14,12 +14,12 @@ export class HttpService {
               private authService: AuthService) {}
 
   getHeaders() {
-
     return {
       "Content-Type": "application/json; charset=UTF-8",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE"
+      "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
+      "Authorization" : this.authService.getToken()
     };
   }
 
@@ -27,7 +27,8 @@ export class HttpService {
     return {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE"
+      "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
+      "Authorization" : this.authService.getToken()
     };
   }
 

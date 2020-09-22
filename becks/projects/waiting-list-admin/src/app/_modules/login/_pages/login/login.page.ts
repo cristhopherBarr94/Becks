@@ -61,8 +61,12 @@ export class LoginPage implements OnInit {
   }
 
   showPassword = () => {
-    var pass = document.getElementById("password");
-    console.log("LoginPage -> showPassword -> pass", pass);
+    const pass: HTMLElement = document.getElementById("password");
+    if (pass.getAttribute("type") == "password") {
+      pass.setAttribute("type", "text");
+    } else {
+      pass.setAttribute("type", "password");
+    }
   };
 
   public getClassInput(item: any): string {

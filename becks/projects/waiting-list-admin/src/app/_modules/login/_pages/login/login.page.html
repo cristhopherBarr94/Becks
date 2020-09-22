@@ -59,7 +59,7 @@
           class="input-password"
           [(ngModel)]="password"
         />
-        <mat-icon matSuffix>remove_red_eye</mat-icon>
+        <mat-icon matSuffix (click)="showPassword()">remove_red_eye</mat-icon>
 
         <mat-error *ngIf="userLoginForm.controls.password.errors">
           {{ getMessageform(userLoginForm.controls.password, 'password', 0,

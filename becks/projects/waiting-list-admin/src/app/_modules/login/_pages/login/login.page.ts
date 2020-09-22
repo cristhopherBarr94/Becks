@@ -1,4 +1,3 @@
-import { HttpResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import {
   FormBuilder,
@@ -7,6 +6,8 @@ import {
   Validators,
 } from "@angular/forms";
 import { HttpService } from "src/app/_services/http.service";
+import { ModalController } from "@ionic/angular";
+import { NotifyModalComponent } from "src/app/_modules/utils/_components/notify-modal/notify-modal.component";
 
 @Component({
   selector: "waiting-login",
@@ -21,11 +22,23 @@ export class LoginPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
     this.initforms();
+  }
+
+  async showModal() {
+    const modal = await this.modalCtrl.create({
+      component: NotifyModalComponent,
+      cssClass: "modalMessage",
+      componentProps: {},
+    });
+    await modal.present();
+    modal.onDidDismiss();
+    // .then(res=> alert("success request: "+ JSON.stringify(res)))
   }
 
   initforms() {
@@ -60,10 +73,11 @@ export class LoginPage implements OnInit {
       )
       .subscribe((response: any) => {
         console.log("LoginPage -> loginUser -> response", response);
-
         if (response.status == 200) {
-          console.log(response.body);
           localStorage.setItem("token", response.body.access_token);
+        } else {
+          console.log(error);
+          // this.showModal();
         }
       });
   }

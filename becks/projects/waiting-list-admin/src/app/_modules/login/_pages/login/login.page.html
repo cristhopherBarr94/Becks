@@ -22,6 +22,7 @@
         [ngClass]="getClassInput(userLoginForm.controls.email)"
       >
         <mat-label>Usuario</mat-label>
+
         <input
           matInput
           formControlName="email"
@@ -45,6 +46,7 @@
         [ngClass]="getClassInput(userLoginForm.controls.password)"
       >
         <mat-label>Constraseña</mat-label>
+        <!-- <mat-icon class="icon-password">remove_red_eye</mat-icon> -->
         <input
           matInput
           id="password"
@@ -54,7 +56,11 @@
           required
           maxlength="30"
           data-qadp="password"
+          class="input-password"
+          [(ngModel)]="password"
         />
+        <mat-icon matSuffix>remove_red_eye</mat-icon>
+
         <mat-error *ngIf="userLoginForm.controls.password.errors">
           {{ getMessageform(userLoginForm.controls.password, 'password', 0,
           3)}}</mat-error

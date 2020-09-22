@@ -4,10 +4,6 @@ import { AuthGuardService } from './_services/auth-guard.service';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./_modules/home/home.module').then(m => m.HomePageModule)
-  },
-  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'

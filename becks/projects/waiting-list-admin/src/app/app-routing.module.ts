@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'activation',
     loadChildren: () => import('./_modules/activation/activation.module').then(m => m.ActivationPageModule),
-    canActivate: [AuthGuardService] 
+    // canActivate: [AuthGuardService] 
   },
   {
     path: 'login',

@@ -34,3 +34,26 @@
   width: 25px;
   height: 20px;
 }
+ 
+.btn-order {
+width: 9px;
+height: 9px;
+margin-left: 9px;
+}
+.btn-up {
+  background: url('../../../../../assets/icon/caret-up-2.svg');
+  background-repeat: no-repeat!important;
+  background-size: contain!important;
+  margin-bottom: 2px;
+}
+
+.btn-down {
+  background: url('../../../../../assets/icon/caret-down.svg');
+  background-repeat: no-repeat!important;
+  background-size: contain!important;
+}
+
+.btn-order:active {
+  width: 7px;
+  height: 7px;
+}

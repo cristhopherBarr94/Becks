@@ -65,7 +65,7 @@
             <td mat-cell *matCellDef="let element">
               <button class="btn-delete"
                [id]="element.id"
-               (click)="delete ($event.target.id)"
+               (click)="delete($event.target.id)"
                >
               </button>
             </td>
@@ -80,7 +80,7 @@
             <ion-row>
               <div class="label">
                 <p>
-                  {{currentPg+1}} de {{numPage}}
+                  {{currentPg+1}} DE {{numPage}}
                 </p>
               </div>
               <div class="controls">
@@ -95,37 +95,9 @@
           color="becks"
           class="becks-btn-primary margin-button-top becks-button"
           [disabled]="this.authorizated_users.length == 0"
-          (click)="allow = true"
+          (click)="showModal()"
           >dar acceso</ion-button>
         </ion-row>
       </div>
     </div>
-  </div>
-  <div class="modal"
-  [hidden]="allow == false"
-  >
-      <span class="modal-hader">
-      <button class="btn-cancel"
-      (click)="allow = false"
-      >X</button>
-      </span>
-      <span class="modal-body">
-        <div>
-          <h1>!</h1>
-        </div>
-      <div>
-        <h3>VAS A DARLE ACCESO A {{authorizated_users.length}} USUARIOS</h3>
-        <!-- <h3 [hidden]="delAux==false">VAS A ELIMINAR A {{authorizated_users.length}} USUARIOS</h3> -->
-      </div>
-      <div>
-        <p>¿DESEAS CONITUAR?</p>
-      </div>
-      </span>
-      <span>
-        <button
-        [hidden]="delAux==true" 
-        class="modal-btn"
-        (click)="activateUser()"
-        >CONTINUAR</button>
-      </span>
   </div>

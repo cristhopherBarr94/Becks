@@ -133,18 +133,26 @@ input[type=number] { -moz-appearance:textfield; }
     width: 220px;
     height: 29px;
     border: 1px solid #FFFFFF;
-    border-radius: 20px;
+    border-radius: 10px;
     box-sizing: border-box;
     font-family: 'Helvetica LT Std';
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 14px;
-    background: transparent;
-    padding-left: 30px;
+    background: url('../assets/icon/search.png');
+    background-repeat: no-repeat;
+    background-position: 10px;
+    background-size: 15px;
+    padding-left: 40px;
+    transition: padding-left 0.5s;
+
   }
+
   .input-search:focus{
     border: none;
+    background: transparent;
+    padding-left: 20px;
   }
     ::-webkit-input-placeholder {
       color: #FFFFFF;

@@ -1,11 +1,13 @@
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
   border-color: #FFFFFF;
+
 }
 ::ng-deep .mat-checkbox-checkmark-path {
   stroke: #2DAF73!important;
 }
-::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-  background-color: #FFFFFF!important;
+::ng-deep .mat-checkbox-checked .mat-checkbox-frame {
+ background-color: #FFFFFF;
+
 }
 
   .title-primary {
@@ -25,3 +27,10 @@
     display: none !important;
 }
 
+.btn-delete {
+  background: url('../../../../../assets/icon/trash-alt.svg');
+  background-repeat: no-repeat!important;
+  background-size: contain!important;
+  width: 25px;
+  height: 29px;
+}

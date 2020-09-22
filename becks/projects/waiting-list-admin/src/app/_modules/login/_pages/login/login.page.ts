@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'waiting-login',
@@ -14,6 +15,7 @@ export class LoginPage implements OnInit {
   public userLoginForm: FormGroup;
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
+  public httpError: string;
 
 
   constructor(private formBuilder: FormBuilder) { }
@@ -53,16 +55,8 @@ export class LoginPage implements OnInit {
   }
 
   public getMessageform(item: any, name: string, min?: number, max?: number): string {
-    if (item.hasError('required')) {
-      return 'Ingrese un ' + name;
-    } else if (item.hasError('maxlength')) {
-      return 'Máximo ' + max;
-    } else if (item.hasError('minlength')) {
-      return 'Mínimo ' + min;
-    } else if (item.hasError('email') || (item.hasError('pattern') && name === 'email')) {
+    if (item.hasError('email') || (item.hasError('pattern') && name === 'email')) {
       return 'Ingrese una dirección de correo electrónico válida';
-    } else if (item.hasError('pattern')) {
-      return 'Ingrese solo letras';
     }
   }
 

@@ -37,6 +37,7 @@ export class TableComponent implements OnInit {
   sizeUser:number;
   orderBy:number;
   way:boolean;
+  search:string;
 
   constructor(    
     private httpService: HttpService,
@@ -53,9 +54,12 @@ export class TableComponent implements OnInit {
     this.allow = false;
     this.currentPg = 0;
     this.sizeUser = 10;
-    this.loadPage(this.currentPg, this.sizeUser);
+    this.orderBy = 0;
+    this.way = false;
+    this.search = '';
+    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way , this.search);
   }
-  loadPage( page:number, size:number, order?:number , way?:boolean): void {
+  loadPage( page:number, size:number, order?:number , way?:boolean , sh?:string): void {
     this.uiService.showLoading();
     
     this.httpService.get( (environment.serverUrl + environment.validation.resource)
@@ -65,6 +69,7 @@ export class TableComponent implements OnInit {
         +'&time_stamp=' + (Math.floor(Date.now()/1000)) + ''
         +'&order_by=' + order + ''
         +'&order_desc=' + way +''
+        +'&search=' + sh +''
     ).subscribe((res: any) => {
       this.uiService.dismissLoading();
       this.dataSource.data = res.body.items as User[];
@@ -74,7 +79,9 @@ export class TableComponent implements OnInit {
   }
 
   applyFilter(filterValue: String) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    // this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.search = filterValue.trim().toLowerCase();
+    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way , this.search);
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -132,7 +139,7 @@ export class TableComponent implements OnInit {
   
   changePage(option:any):void{
     this.sizeUser = option;
-     this.loadPage(this.currentPg, this.sizeUser);
+    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way , this.search);
    }
    
   controlPage(operation:String):void {
@@ -142,8 +149,7 @@ export class TableComponent implements OnInit {
     }else if((operation == 'next') && (this.currentPg < finalPg-1 )) {
       this.currentPg += 1;
     }
-    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way);
-   
+    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way , this.search);   
   }
 
   async showModal() {
@@ -189,6 +195,6 @@ export class TableComponent implements OnInit {
   sortTable(orBy:number, wayIn:boolean){
     this.orderBy = orBy;
     this.way = wayIn;
-    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way);
+    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way , this.search);
   }
 }

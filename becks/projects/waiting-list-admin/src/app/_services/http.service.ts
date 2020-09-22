@@ -19,7 +19,7 @@ export class HttpService {
       "Content-Type": "application/json; charset=UTF-8",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE"
     };
   }
 
@@ -27,7 +27,7 @@ export class HttpService {
     return {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE"
     };
   }
 
@@ -57,6 +57,8 @@ export class HttpService {
     if (headersIn == null) {
       headersIn = this.getHeadersFormData();
     }
+    console.log(url);
+    
     return this.http
       .post(url, body, { headers: headersIn, observe: "response" })
       .pipe(catchError((error) => this.handleError(error)));
@@ -91,7 +93,8 @@ export class HttpService {
 
   handleError(error: HttpErrorResponse) {
     if (error.status === HttpConstants.UNAUTHORIZED) {
-      localStorage.clear();
+      // this.authService.setAuthenticated( null );
+      // location.reload();
     } else if (error.status === HttpConstants.CONFLICT) {
       console.log("mensaje incorrecto");
     } else if (

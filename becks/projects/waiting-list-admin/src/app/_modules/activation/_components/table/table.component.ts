@@ -11,6 +11,7 @@ import { ModalController } from '@ionic/angular';
 import { NotifyModalComponent } from '../../../utils/_components/notify-modal/notify-modal.component';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -54,8 +55,9 @@ export class TableComponent implements OnInit {
   }
   loadPage( page:number, size:number): void {
     this.uiService.showLoading();
-    this.httpService.get('http://becks.flexitco.co/becks-back/api/ab-inbev-api-web-app-user-list-api/?'
-        +'page=' + page + ''
+    
+    this.httpService.get( (environment.serverUrl + environment.validation.resource)
+        +'?page=' + page + ''
         +'&page_size=' + size + ''
         +'&status_waiting_list=' + 'true'
         +'&time_stamp=' + (Math.floor(Date.now()/1000)) + ''
@@ -103,7 +105,7 @@ export class TableComponent implements OnInit {
 
   activateUser(): void {
     this.uiService.showLoading();
-    this.httpService.patch('http://becks.flexitco.co/becks-back/api/ab-inbev-api-web-app-user-list-api/', this.authorizated_users).subscribe(
+    this.httpService.patch( (environment.serverUrl + environment.validation.resource) , this.authorizated_users).subscribe(
       res => {
         this.uiService.dismissLoading();
         console.log('received ok response from patch request', res);
@@ -165,7 +167,7 @@ export class TableComponent implements OnInit {
     }else {
       console.log(this.deleted_users);
       this.uiService.showLoading();
-      this.httpService.delete('http://becks.flexitco.co/becks-back/api/ab-inbev-api-web-app-user-list-api/?id=' + this.deleted_users).subscribe(
+      this.httpService.delete( (environment.serverUrl + environment.validation.resource) + '?id=' + this.deleted_users).subscribe(
         res => {
           this.uiService.dismissLoading();
           console.log('received ok response from patch request', res);

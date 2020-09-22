@@ -9,19 +9,25 @@ import { NotifyModalComponent } from '../utils/_components/notify-modal/notify-m
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
+  deleteUsers: any[] = ['11','12','13'];
   constructor(private modalCtrl: ModalController) {}
 
     async showModal() {
       const modal =  await this.modalCtrl.create({
         component: NotifyModalComponent,
+        cssClass: 'modalMessage',
         componentProps: {
-          data:10
+          data:this.deleteUsers,
+          amount: this.deleteUsers.length,
+          actFunc: this.activateUser.bind(this)
         }
       })
       await modal.present();
       modal.onDidDismiss()
-      .then(res=> alert("success request: "+ JSON.stringify(res)))
+      // .then(res=> alert("success request: "+ JSON.stringify(res)))
     }
 
+    activateUser(){
+      console.log("funcion activar usuarios desde la futura table");
+    }
 }

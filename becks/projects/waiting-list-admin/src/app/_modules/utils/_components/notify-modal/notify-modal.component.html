@@ -9,8 +9,8 @@
         <h1>!</h1>
       </div>
     <div>
-      <h3 [hidden]="del==true">VAS A DARLE ACCESO A {{amount}} USUARIOS</h3>
-      <h3 [hidden]="del==false">VAS A ELIMINAR A {{authorizated_users.length}} USUARIOS</h3>
+      <h3 [hidden]="allow==true">VAS A DARLE ACCESO A {{amount}} USUARIOS</h3>
+      <h3 [hidden]="allow==false">VAS A ELIMINAR A ESTE USUARIO</h3>
     </div>
     <div>
       <p>¿DESEAS CONITUAR?</p>
@@ -18,8 +18,14 @@
     </span>
     <span>
       <button
+      [hidden]="allow==true"
       class="modal-btn"
-      (click)="activateUser()"
+      (click)="activateUserParent()"
       >CONTINUAR</button>
+      <button
+      [hidden]="allow==false"
+      class="modal-btn"
+      (click)="deleteUserParent()"
+      >ELIMINAR</button>
     </span>
 </div>

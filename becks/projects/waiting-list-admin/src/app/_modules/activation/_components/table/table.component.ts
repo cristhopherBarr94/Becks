@@ -21,6 +21,7 @@ import { NotifyModalComponent } from '../../../utils/_components/notify-modal/no
 export class TableComponent implements OnInit {
 
   authorizated_users: any[] = [];
+  deleted_users: any[] = [];
   ELEMENT_DATA: User[];
   public dataSource;
   public selection;
@@ -29,10 +30,7 @@ export class TableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   //add sorting to the table
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-
-  allow:boolean = false;
-  del:boolean = false;
-  delAux:boolean = false;
+  allow:boolean;
   currentPg: number;
   numPage:number;
   sizeUser:number;
@@ -41,14 +39,14 @@ export class TableComponent implements OnInit {
     public userListService: UserListService,
     iconRegistry: MatIconRegistry, 
     sanitizer: DomSanitizer,
-    private modalCtrl: ModalController) { }
+    private modalCtrl: ModalController ) { }
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<User>(this.ELEMENT_DATA);
     this.selection = new SelectionModel<User>(true, []);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.changePage(10);
+    this.allow = false;
     this.currentPg = 0;
     this.sizeUser = 10;
     this.loadPage(this.currentPg, this.sizeUser);
@@ -56,7 +54,6 @@ export class TableComponent implements OnInit {
   loadPage( page:number, size:number): void {
     this.userListService.getUser(page, size , true).subscribe((res: any) => {
       this.dataSource.data = res.items as User[];
-      console.log(res);
       this.calculatePages( res.total , size);
     });
     this.authorizated_users = [];
@@ -92,7 +89,6 @@ export class TableComponent implements OnInit {
     }
     this.selection.selected.forEach(item => {
       this.authorizated_users.push(item.id);
-      console.log( this.authorizated_users);
     }    
     );
   }
@@ -112,10 +108,8 @@ export class TableComponent implements OnInit {
   calculatePages( total?:number , size?:number ): void {
     if( total % size ){
       this.numPage = Math.floor((total/size)) +1; 
-      console.log(this.numPage);
     }else {
       this.numPage = Math.floor((total/size));
-      console.log(this.numPage);
     }
   }
   
@@ -133,10 +127,30 @@ export class TableComponent implements OnInit {
     this.loadPage(this.currentPg, this.sizeUser);
   }
 
-  delete ( userId:number ){
+  async showModal() {
+    const modal =  await this.modalCtrl.create({
+      component: NotifyModalComponent,
+      cssClass: 'modalMessage',
+      componentProps: {
+        data:this.authorizated_users,
+        amount: this.authorizated_users.length,
+        allow:this.allow,
+        actFunc: this.activateUser.bind(this),
+        delFunc: this.delete.bind(this)
+      }
+    })
+    await modal.present();
+    modal.onDidDismiss()
+    .then(res=> {this.deleted_users=[],this.allow=false})
 
-    this.authorizated_users=[];
-    this.authorizated_users.push(userId);
+  }
+
+  delete ( userId?:number ){
+    this.allow = true;
+    if(this.deleted_users.length == 0){
+      this.deleted_users.push(userId);
+      this.showModal();
+    }else {
       this.userListService.deleteUser(this.authorizated_users).subscribe(
         res => {
           console.log('received ok response from patch request', res);
@@ -146,6 +160,6 @@ export class TableComponent implements OnInit {
           console.error('There was an error during the request');
           console.log(error);
         });
-
+    } 
   }
 }

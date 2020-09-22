@@ -6,10 +6,12 @@ import {
   Validators,
 } from "@angular/forms";
 import { Router } from "@angular/router";
+import { ModalController } from "@ionic/angular";
+import { NotifyModalComponent } from "src/app/_modules/utils/_components/notify-modal/notify-modal.component";
 import { AuthService } from "src/app/_services/auth.service";
 import { HttpService } from "src/app/_services/http.service";
-import { UiService } from 'src/app/_services/ui.service';
-import { environment } from 'src/environments/environment';
+import { UiService } from "src/app/_services/ui.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "waiting-login",
@@ -21,6 +23,7 @@ export class LoginPage implements OnInit {
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
+  private modalCtrl: ModalController;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +36,17 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.redirect();
     this.initforms();
+  }
+
+  async showModal() {
+    const modal = await this.modalCtrl.create({
+      component: NotifyModalComponent,
+      cssClass: "modalMessage",
+      componentProps: {},
+    });
+    await modal.present();
+    modal.onDidDismiss();
+    // .then(res=> alert("success request: "+ JSON.stringify(res)))
   }
 
   redirect() {
@@ -62,16 +76,16 @@ export class LoginPage implements OnInit {
     const formData = new FormData();
     formData.append("username", this.userLoginForm.controls.email.value);
     formData.append("password", this.userLoginForm.controls.password.value);
-    formData.append("grant_type",  environment.rest.grant_type );
-    formData.append("client_id", environment.rest.client_id );
-    formData.append("client_secret", environment.rest.client_secret );
-    formData.append("scope", environment.rest.scope );
+    formData.append("grant_type", environment.rest.grant_type);
+    formData.append("client_id", environment.rest.client_id);
+    formData.append("client_secret", environment.rest.client_secret);
+    formData.append("scope", environment.rest.scope);
 
-    console.log( environment.serverUrl + environment.login.resource, formData);
-    
+    console.log(environment.serverUrl + environment.login.resource, formData);
+
     this.httpService
       .postFormData(
-        (environment.serverUrl + environment.login.resource) ,
+        environment.serverUrl + environment.login.resource,
         formData
       )
       .subscribe(
@@ -79,13 +93,17 @@ export class LoginPage implements OnInit {
           this.ui.dismissLoading();
           if (response.status == 200) {
             this.userLoginForm.reset();
-            this.authService.setAuthenticated( 'Bearer ' + response.body.access_token );
+            this.authService.setAuthenticated(
+              "Bearer " + response.body.access_token
+            );
           }
           this.redirect();
         },
         (e) => {
           console.log(e);
+          this.redirect();
           this.ui.dismissLoading();
+          this.showModal();
         }
       );
   }

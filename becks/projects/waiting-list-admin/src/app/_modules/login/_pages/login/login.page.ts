@@ -44,13 +44,26 @@ export class LoginPage implements OnInit {
   loginUser(): void {
     this.restartCaptcha = true;
     this.setCaptchaStatus(!this.restartCaptcha);
+    const formData = new FormData();
+    formData.append("username", this.userLoginForm.controls.email.value);
+    formData.append("password", this.userLoginForm.controls.password.value);
+    formData.append("grant_type", "password");
+    formData.append("client_id", "c7a551b7-f850-4839-90c5-3d78f03c2031");
+    formData.append("client_secret", "WebAppConsumer");
+    formData.append("scope", "administrator web_app");
+
     this.httpService
-      .post("http://becks.flexitco.co/becks-back/oauth/token?_format=json", {
-        username: this.userLoginForm.controls.email.value,
-        password: this.userLoginForm.controls.password.value,
-      })
+      .postFormData(
+        "http://becks.flexitco.co/becks-back/oauth/token?_format=json",
+        formData
+      )
       .subscribe((resonse) => console.log(resonse));
   }
+
+  showPassword = () => {
+    var pass = document.getElementById("password");
+    console.log("LoginPage -> showPassword -> pass", pass);
+  };
 
   public getClassInput(item: any): string {
     let classreturn = "input-becks";

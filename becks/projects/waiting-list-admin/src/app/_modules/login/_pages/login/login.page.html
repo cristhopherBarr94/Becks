@@ -2,11 +2,7 @@
   <div
     class="container content-flex-all-center full-height flex-direction-column padding-form"
   >
-    <img
-      src="../../../../../assets/img/becks-logoverde.svg"
-      alt="logo"
-      class="margin-top-login-form"
-    />
+    <img src="../../../../../assets/img/becks-logoverde.svg" alt="logo" />
     <h2 class="title-secondary margin-top-form-login">
       BIENVENIDO A <br />
       BECK’S SOCIETY
@@ -51,6 +47,7 @@
         <mat-label>Constraseña</mat-label>
         <input
           matInput
+          id="password"
           formControlName="password"
           placeholder="password"
           type="password"
@@ -70,7 +67,13 @@
       >
       </app-captcha>
 
-      <button class="becks-btn-primary margin-top-button" (click)="loginUser()">
+      <button
+        class="becks-btn-primary margin-top-button"
+        (click)="loginUser()"
+        block="block"
+        color="becks"
+        [ngClass]="{'button-disabled': userLoginForm.invalid || !captchaStatus }"
+      >
         <span>ENTRAR</span>
       </button>
     </form>

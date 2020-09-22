@@ -1,31 +1,82 @@
 <ion-content>
+  <div
+    class="container content-flex-all-center full-height flex-direction-column padding-form"
+  >
+    <img src="../../../../../assets/img/becks-logoverde.svg" alt="logo" />
+    <h2 class="title-secondary margin-top-form-login">
+      BIENVENIDO A <br />
+      BECK’S SOCIETY
+    </h2>
 
-  <div class="container content-flex-all-center full-height flex-direction-column padding-form">
-    <img src="../../../../../assets/img/becks-logoverde.svg" alt="logo">
-    <h2 class="title-secondary"> BIENVENIDO A <br /> BECK’S SOCIETY</h2>
+    <h3 class="font-link">INGRESA TU USUARIO Y CONTRASEÑA</h3>
 
-    <h3 class="title-tertiary max-width-title-secondary">
-      INGRESA TU USUARIO Y CONTRASEÑA
-    </h3>
-
-
-    <form [formGroup]="userLoginForm" class="form-section" autocomplete="off">
-      <app-captcha [restart]="restartCaptcha" (status)="setCaptchaStatus($event)">
-      </app-captcha>
-
-      <mat-form-field appearance="fill" floatLabel="auto" class="fullInput"
-        [ngClass]="getClassInput(userLoginForm.controls.email)">
-        <mat-label>Correo electrónico</mat-label>
-        <input matInput formControlName="email" placeholder="example@example.com" type="email" required
-          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$" maxlength="30" data-qadp="email">
+    <form
+      [formGroup]="userLoginForm"
+      class="form-section margin-top-login-form"
+      autocomplete="off"
+    >
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userLoginForm.controls.email)"
+      >
+        <mat-label>Usuario</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          placeholder="example@example.com"
+          type="email"
+          required
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
+          maxlength="30"
+          data-qadp="email"
+        />
         <mat-error *ngIf="userLoginForm.controls.email.errors">
-          {{ getMessageform(userLoginForm.controls.email, 'email', 0, 30)}}</mat-error>
+          {{ getMessageform(userLoginForm.controls.email, 'email', 0,
+          30)}}</mat-error
+        >
       </mat-form-field>
 
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userLoginForm.controls.password)"
+      >
+        <mat-label>Constraseña</mat-label>
+        <input
+          matInput
+          id="password"
+          formControlName="password"
+          placeholder="password"
+          type="password"
+          required
+          maxlength="30"
+          data-qadp="password"
+        />
+        <mat-error *ngIf="userLoginForm.controls.password.errors">
+          {{ getMessageform(userLoginForm.controls.password, 'password', 0,
+          3)}}</mat-error
+        >
+      </mat-form-field>
+
+      <app-captcha
+        [restart]="restartCaptcha"
+        (status)="setCaptchaStatus($event)"
+      >
+      </app-captcha>
+
+      <button
+        class="becks-btn-primary margin-top-button"
+        (click)="loginUser()"
+        block="block"
+        color="becks"
+        [ngClass]="{'button-disabled': userLoginForm.invalid || !captchaStatus }"
+      >
+        <span>ENTRAR</span>
+      </button>
     </form>
-
-
   </div>
-
+  <app-footer></app-footer>
 </ion-content>
-<app-footer></app-footer>

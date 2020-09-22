@@ -23,14 +23,14 @@ export class LoginPage implements OnInit {
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
-  private modalCtrl: ModalController;
 
   constructor(
     private formBuilder: FormBuilder,
     private httpService: HttpService,
     private authService: AuthService,
     private ui: UiService,
-    private router: Router
+    private router: Router,
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
@@ -44,8 +44,7 @@ export class LoginPage implements OnInit {
       cssClass: "modalMessage",
       componentProps: {},
     });
-    await modal.present();
-    modal.onDidDismiss();
+    modal.present();
     // .then(res=> alert("success request: "+ JSON.stringify(res)))
   }
 

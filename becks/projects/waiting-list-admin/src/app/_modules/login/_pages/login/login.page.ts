@@ -67,7 +67,7 @@ export class LoginPage implements OnInit {
       return 'Ingrese una dirección de correo electrónico válida';
     }
     if (item.hasError('password')) {
-      return 'Contraseña invalida'
+      return 'Contraseña inválida'
     }
   }
 

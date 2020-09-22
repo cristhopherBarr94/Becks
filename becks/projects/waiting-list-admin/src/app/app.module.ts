@@ -20,6 +20,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthGuardService } from './_services/auth-guard.service';
+import { AuthService } from './_services/auth.service';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   providers: [
+    AuthService,
+    AuthGuardService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

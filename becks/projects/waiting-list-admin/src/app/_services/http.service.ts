@@ -14,21 +14,29 @@ export class HttpService {
               private authService: AuthService) {}
 
   getHeaders() {
+    let token = '';
+    if ( typeof(this.authService.getToken()) == 'string' ) {
+      token = this.authService.getToken();
+    }
     return {
       "Content-Type": "application/json; charset=UTF-8",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
       "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
-      "Authorization" : this.authService.getToken()
+      "Authorization" : token
     };
   }
 
   getHeadersFormData() {
+    let token = '';
+    if ( typeof(this.authService.getToken()) == 'string' ) {
+      token = this.authService.getToken();
+    }
     return {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
       "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
-      "Authorization" : this.authService.getToken()
+      "Authorization" : token
     };
   }
 

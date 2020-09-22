@@ -1,15 +1,15 @@
 <ion-content>
 
   <div class="container content-flex-all-center full-height flex-direction-column padding-form">
-    <img src="../../../../../assets/img/becks-logoverde.svg" alt="logo">
-    <h2 class="title-secondary"> BIENVENIDO A <br /> BECK’S SOCIETY</h2>
+    <img src="../../../../../assets/img/becks-logoverde.svg" alt="logo" class="margin-top">
+    <h2 class="title-secondary margin-top-form-login"> BIENVENIDO A <br /> BECK’S SOCIETY</h2>
 
     <h3 class="font-link">
       INGRESA TU USUARIO Y CONTRASEÑA
     </h3>
 
 
-    <form [formGroup]="userLoginForm" class="form-section" autocomplete="off">
+    <form [formGroup]="userLoginForm" class="form-section " autocomplete="off">
 
       <mat-form-field appearance="fill" floatLabel="auto" class="fullInput"
         [ngClass]="getClassInput(userLoginForm.controls.email)">

@@ -34,6 +34,8 @@ export class TableComponent implements OnInit {
   currentPg: number;
   numPage:number;
   sizeUser:number;
+  orderBy:number;
+  way:boolean;
 
   constructor(    
     private httpService: HttpService,
@@ -52,13 +54,15 @@ export class TableComponent implements OnInit {
     this.sizeUser = 10;
     this.loadPage(this.currentPg, this.sizeUser);
   }
-  loadPage( page:number, size:number): void {
+  loadPage( page:number, size:number, order?:number , way?:boolean): void {
     this.uiService.showLoading();
     this.httpService.get('http://becks.flexitco.co/becks-back/api/ab-inbev-api-web-app-user-list-api/?'
         +'page=' + page + ''
         +'&page_size=' + size + ''
         +'&status_waiting_list=' + 'true'
         +'&time_stamp=' + (Math.floor(Date.now()/1000)) + ''
+        +'&order_by=' + order + ''
+        +'&order_desc=' + way +''
     ).subscribe((res: any) => {
       this.uiService.dismissLoading();
       this.dataSource.data = res.body.items as User[];
@@ -136,7 +140,8 @@ export class TableComponent implements OnInit {
     }else if((operation == 'next') && (this.currentPg < finalPg-1 )) {
       this.currentPg += 1;
     }
-    this.loadPage(this.currentPg, this.sizeUser);
+    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way);
+   
   }
 
   async showModal() {
@@ -177,5 +182,11 @@ export class TableComponent implements OnInit {
           console.log(error);
         });
     } 
+  }
+
+  sortTable(orBy:number, wayIn:boolean){
+    this.orderBy = orBy;
+    this.way = wayIn;
+    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way);
   }
 }

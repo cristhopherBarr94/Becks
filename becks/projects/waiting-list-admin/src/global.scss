@@ -24,3 +24,12 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+/* Becks Theme */
+@import "./theme/variables.scss";
+@import "./theme/material.scss";
+@import "./theme/button.scss";
+@import "./theme/content.scss";
+@import "./theme/font.scss";
+@import "./theme/input.scss";
+@import "./theme/img.scss";

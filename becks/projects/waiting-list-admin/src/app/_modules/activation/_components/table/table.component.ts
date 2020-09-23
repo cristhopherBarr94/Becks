@@ -5,8 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
-import { DomSanitizer} from '@angular/platform-browser';
-import { MatIconRegistry} from '@angular/material/icon';
 import { ModalController } from '@ionic/angular';
 import { NotifyModalComponent } from '../../../utils/_components/notify-modal/notify-modal.component';
 import { HttpService } from 'src/app/_services/http.service';
@@ -37,11 +35,12 @@ export class TableComponent implements OnInit {
   sizeUser:number;
   orderBy:number;
   way:boolean;
+  search:string;
+
+  reload = false;
 
   constructor(    
     private httpService: HttpService,
-    iconRegistry: MatIconRegistry, 
-    sanitizer: DomSanitizer,
     private modalCtrl: ModalController,
     private uiService: UiService ) { }
 
@@ -53,9 +52,12 @@ export class TableComponent implements OnInit {
     this.allow = false;
     this.currentPg = 0;
     this.sizeUser = 10;
-    this.loadPage(this.currentPg, this.sizeUser);
+    this.orderBy = 0;
+    this.way = false;
+    this.search = '';
+    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way , this.search);
   }
-  loadPage( page:number, size:number, order?:number , way?:boolean): void {
+  loadPage( page:number, size:number, order?:number , way?:boolean , sh?:string): void {
     this.uiService.showLoading();
     
     this.httpService.get( (environment.serverUrl + environment.validation.resource)
@@ -65,16 +67,30 @@ export class TableComponent implements OnInit {
         +'&time_stamp=' + (Math.floor(Date.now()/1000)) + ''
         +'&order_by=' + order + ''
         +'&order_desc=' + way +''
-    ).subscribe((res: any) => {
-      this.uiService.dismissLoading();
-      this.dataSource.data = res.body.items as User[];
-      this.calculatePages( res.body.total , size);
-    });
+        +'&search=' + sh +''
+    ).subscribe(
+      (res: any) => {
+        this.uiService.dismissLoading();
+        this.dataSource.data = res.body.items as User[];
+        this.calculatePages( res.body.total , size);
+
+        try {
+          if ( this.reload && this.dataSource.data.length == 0 ) {
+            location.reload();
+          }
+        } catch (error) { location.reload(); }
+      },
+      (e) => {
+        // location.reload();
+      }
+    );
     this.authorizated_users = [];
   }
 
   applyFilter(filterValue: String) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    // this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.search = filterValue.trim().toLowerCase();
+    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way , this.search);
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -112,13 +128,11 @@ export class TableComponent implements OnInit {
     this.httpService.patch( (environment.serverUrl + environment.validation.resource) , this.authorizated_users).subscribe(
       res => {
         this.uiService.dismissLoading();
-        console.log('received ok response from patch request', res);
+        this.reload = true;
         this.loadPage(this.currentPg, this.sizeUser);
       },
       error => {
         this.uiService.dismissLoading();
-        console.error('There was an error during the request');
-        console.log(error);
       });
   }
 
@@ -132,7 +146,7 @@ export class TableComponent implements OnInit {
   
   changePage(option:any):void{
     this.sizeUser = option;
-     this.loadPage(this.currentPg, this.sizeUser);
+    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way , this.search);
    }
    
   controlPage(operation:String):void {
@@ -142,8 +156,7 @@ export class TableComponent implements OnInit {
     }else if((operation == 'next') && (this.currentPg < finalPg-1 )) {
       this.currentPg += 1;
     }
-    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way);
-   
+    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way , this.search);   
   }
 
   async showModal() {
@@ -170,18 +183,15 @@ export class TableComponent implements OnInit {
       this.deleted_users.push(userId);
       this.showModal();
     }else {
-      console.log(this.deleted_users);
       this.uiService.showLoading();
       this.httpService.delete( (environment.serverUrl + environment.validation.resource) + '?id=' + this.deleted_users).subscribe(
         res => {
           this.uiService.dismissLoading();
-          console.log('received ok response from patch request', res);
+          this.reload = true;
           this.loadPage(this.currentPg, this.sizeUser);
         },
         error => {
           this.uiService.dismissLoading();
-          console.error('There was an error during the request');
-          console.log(error);
         });
     } 
   }
@@ -189,6 +199,6 @@ export class TableComponent implements OnInit {
   sortTable(orBy:number, wayIn:boolean){
     this.orderBy = orBy;
     this.way = wayIn;
-    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way);
+    this.loadPage(this.currentPg, this.sizeUser, this.orderBy , this.way , this.search);
   }
 }

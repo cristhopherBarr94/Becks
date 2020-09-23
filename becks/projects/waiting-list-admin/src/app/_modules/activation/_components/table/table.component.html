@@ -22,8 +22,8 @@
               <p> ENTRADAS</p>
             </ion-row>
           </div>
-          
-       <input class="input-search" (keyup)="applyFilter($event.target.value)" placeholder="Buscar" >
+        
+       <input class="input-search" (keyup.enter)="applyFilter($event.target.value)" placeholder="Buscar" >
             
         </ion-row>
 
@@ -45,8 +45,8 @@
               <ion-row>
                 NOMBRE 
                 <div>
-                  <button class="btn-order btn-up" (click)="sortTable('0','false')"></button>
-                  <button class="btn-order btn-down" (click)="sortTable('0','true')"></button>
+                  <button class="btn-order btn-up" (click)="sortTable(0,false)"></button>
+                  <button class="btn-order btn-down" (click)="sortTable(0,true)"></button>
                 </div>
               </ion-row>
             </th>
@@ -58,8 +58,8 @@
               <ion-row>
                 APELLIDO 
                 <div>
-                 <button class="btn-order btn-up" (click)="sortTable('1','false')"></button>
-                 <button class="btn-order btn-down" (click)="sortTable('1','true')"></button>
+                 <button class="btn-order btn-up" (click)="sortTable(1,false)"></button>
+                 <button class="btn-order btn-down" (click)="sortTable(1,true)"></button>
                </div>
               </ion-row>
               </th>
@@ -71,8 +71,8 @@
               <ion-row>
                 EMAIL 
                 <div>
-                 <button class="btn-order btn-up" (click)="sortTable('2','false')"></button>
-                 <button class="btn-order btn-down" (click)="sortTable('2','true')"></button>
+                 <button class="btn-order btn-up" (click)="sortTable(2,false)"></button>
+                 <button class="btn-order btn-down" (click)="sortTable(2,true)"></button>
                </div>
               </ion-row>
                </th>
@@ -80,7 +80,7 @@
           </ng-container>
           <!-- cel number Column -->
           <ng-container matColumnDef="mobile_phone">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header > CELULAR </th>
+            <th mat-header-cell *matHeaderCellDef > CELULAR </th>
             <td mat-cell *matCellDef="let element" >{{element.mobile_phone | titlecase }} </td>
           </ng-container>
           <!-- delete element function -->

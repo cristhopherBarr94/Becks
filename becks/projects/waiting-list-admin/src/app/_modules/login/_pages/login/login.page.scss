@@ -29,18 +29,8 @@
   }
 }
 
-.input-password {
-  display: flex !important;
-  justify-content: flex-end;
-}
-
 .margin-top-button {
   margin-top: 23px;
-}
-.icon-password {
-  color: white;
-  justify-content: flex-end;
-  position: absolute;
 }
 
 .checks {
@@ -81,5 +71,5 @@ mat-icon {
 }
 
 ::ng-deep mat-icon:active {
-  font-family: 'Material Icons' !important;
+  font-family: "Material Icons" !important;
 }

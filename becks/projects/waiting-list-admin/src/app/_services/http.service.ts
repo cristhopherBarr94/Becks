@@ -102,8 +102,8 @@ export class HttpService {
 
   handleError(error: HttpErrorResponse) {
     if (error.status === HttpConstants.UNAUTHORIZED) {
-      // this.authService.setAuthenticated( null );
-      // location.reload();
+      this.authService.setAuthenticated( null );
+      location.reload();
     } else if (error.status === HttpConstants.CONFLICT) {
       console.log("mensaje incorrecto");
     } else if (

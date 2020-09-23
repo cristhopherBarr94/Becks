@@ -5,8 +5,8 @@ const routes: Routes = [
   {
     path: "login",
     loadChildren: () =>
-      import("./_modules/home/_pages/login/login.module").then(
-        (m) => m.LoginPageModule
+      import("./_modules/home/_pages/home/home.module").then(
+        (m) => m.HomePageModule
       ),
   },
   {

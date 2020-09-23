@@ -1,0 +1,18 @@
+.my-custom-menu {
+    width: 243px;
+    height: 782px;
+    position: absolute;
+    background: linear-gradient(180deg, #100D10 0%, #222222 100%);
+    padding-top: 17px;
+
+    .btn {
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 12px;   
+      img {
+        padding-right: 20px;
+      }
+    }
+    
+  }

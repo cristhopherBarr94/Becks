@@ -37,6 +37,21 @@
               },
               {
                 "input": "src/global.scss"
+              },
+              {
+                "input": "src/theme/button.scss"
+              },
+              {
+                "input": "src/theme/content.scss"
+              },
+              {
+                "input": "src/theme/font.scss"
+              },
+              {
+                "input": "src/theme/input.scss"
+              },
+              {
+                "input": "src/theme/img.scss"
               }
             ],
             "scripts": []
@@ -53,7 +68,7 @@
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
-              "namedChunks": false,
+              "namedChunks": true,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,

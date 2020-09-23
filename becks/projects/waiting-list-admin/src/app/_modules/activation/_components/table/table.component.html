@@ -105,8 +105,8 @@
                 </p>
               </div>
               <div class="controls">
-                <button class="btn-control" (click)="controlPage('prev')" [disabled]="this.currentPg <= 0"><img src="../../../../../assets/icon/chevron-left.svg" alt=""></button>
-                <button class="btn-control" (click)="controlPage('next')" [disabled]="this.currentPg+1 == this.numPage"><img src="../../../../../assets/icon/chevron-right.svg" alt=""></button>
+                <button class="btn-control ctrl-left" (click)="controlPage('prev')" [disabled]="this.currentPg <= 0"></button>
+                <button class="btn-control ctrl-right" (click)="controlPage('next')" [disabled]="this.currentPg+1 == this.numPage"></button>
               </div>
             </ion-row>
           </div>

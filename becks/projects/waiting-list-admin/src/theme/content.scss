@@ -403,6 +403,12 @@
         width: 199px;
         height: 48px;
     }
+
+    @-moz-document url-prefix() {
+        .label {
+        margin-top: 5px;
+        }
+    }
 }
 
 .modalMessage {

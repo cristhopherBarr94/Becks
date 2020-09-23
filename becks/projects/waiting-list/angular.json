@@ -34,25 +34,7 @@
             ],
             "styles": [
               {
-                "input": "src/theme/variables.scss"
-              },
-              {
                 "input": "src/global.scss"
-              },
-              {
-                "input": "src/theme/button.scss"
-              },
-              {
-                "input": "src/theme/content.scss"
-              },
-              {
-                "input": "src/theme/font.scss"
-              },
-              {
-                "input": "src/theme/input.scss"
-              },
-              {
-                "input": "src/theme/img.scss"
               }
             ],
             "scripts": []

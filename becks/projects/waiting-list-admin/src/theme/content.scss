@@ -295,6 +295,18 @@
       .pageSize {
         margin-left: 48px;
       }
+      .btn-up {
+        background: url('../assets/icon/caret-up-2.svg');
+        background-repeat: no-repeat!important;
+        background-size: contain!important;
+        margin-bottom: 2px;
+      }
+      
+      .btn-down {
+        background: url('../assets/icon/caret-down.svg');
+        background-repeat: no-repeat!important;
+        background-size: contain!important;
+      }
       
       table {
         text-align: center;
@@ -336,7 +348,9 @@
             display: block;
             margin-left: auto;
             margin-right: 0;
-            background: transparent;
+            background: url('../assets/icon/trash-alt.svg');
+            background-repeat: no-repeat!important;
+            background-size: contain!important;
         }
         button:focus{outline: none;}
 
@@ -366,14 +380,35 @@
         margin-right: 39px;
         background: transparent;
     }
+    .ctrl-left {
+        background: url('../assets/icon/chevron-left.svg');
+        background-repeat: no-repeat!important;
+        background-size: contain!important;
+        width: 18px;
+        height: 18px;
+    }
+    
+    .ctrl-right {
+        background: url('../assets/icon/chevron-right.svg');
+        background-repeat: no-repeat!important;
+        background-size: contain!important;
+        width: 18px;
+        height: 18px;
+    }
       
-      .becks-button {
+    .becks-button {
         display: block;
         margin-left: auto;
         margin-right: 0;
         width: 199px;
         height: 48px;
-      }
+    }
+
+    @-moz-document url-prefix() {
+        .label {
+        margin-top: 5px;
+        }
+    }
 }
 
 .modalMessage {

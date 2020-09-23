@@ -11,8 +11,11 @@ export const environment = {
   login: {
     resource: '/oauth/token?_format=json'
   },
+  logout: {
+    resource: '/user/logout'
+  },
   rest: {
-    client_id: "c7a551b7-f850-4839-90c5-3d78f03c2031",
+    client_id: "ed9d6754-a686-487e-ac99-4c1ce919912f",
     client_secret: "WebAppConsumer",
     scope: "administrator web_app",
     grant_type: "password"

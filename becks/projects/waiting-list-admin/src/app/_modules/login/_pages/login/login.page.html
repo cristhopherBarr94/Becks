@@ -2,7 +2,7 @@
   <div
     class="container content-flex-all-center full-height flex-direction-column padding-form"
   >
-    <img src="../../../../../assets/img/becks-logoverde.svg" alt="logo" />
+    <span class="logo-login" alt="logo"> </span>
     <h2 class="title-secondary margin-top-form-login">
       BIENVENIDO A <br />
       BECK’S SOCIETY
@@ -53,7 +53,7 @@
           required
           maxlength="30"
           data-qadp="password"
-          class="input-password"
+          [(ngModel)]="password"
         />
         <mat-icon matSuffix (click)="hide = !hide"
           >{{!hide ? 'visibility_off' : 'visibility'}}</mat-icon
@@ -70,7 +70,7 @@
       >
       </app-captcha>
 
-      <mat-error *ngIf="httpError"> {{ httpError}}</mat-error>
+      <mat-error *ngIf="httpError">{{httpError}}</mat-error>
 
       <button
         class="becks-btn-primary margin-top-button"

@@ -2,7 +2,6 @@
 
 namespace Drupal\ab_inbev_api\Plugin\rest\resource;
 
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Component\Plugin\DependentPluginInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Routing\BcRoute;
@@ -106,13 +105,11 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
                                 LoggerInterface $logger,
                                 Connection $db_connection,
                                 EntityTypeManagerInterface $entity_type_manager,
-                                Request $request,
-                                AccountInterface $account) {
+                                Request $request) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $serializer_formats, $logger);
     $this->dbConnection = $db_connection;
     $this->entityTypeManager = $entity_type_manager;
     $this->currentRequest = $request;
-    $this->currentUser = $account;
   }
 
   /**
@@ -127,8 +124,7 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
       $container->get('logger.factory')->get('rest'),
       $container->get('database'),
       $container->get('entity_type.manager'),
-      $container->get('request_stack')->getCurrentRequest(),
-      $container->get('current_user')
+      $container->get('request_stack')->getCurrentRequest()
     );
   }
 

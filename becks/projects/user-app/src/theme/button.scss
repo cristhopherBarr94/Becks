@@ -97,3 +97,16 @@
     color: #ffffff;
   }
 }
+
+.fb-button {
+  @include btn(
+    #ffffff,
+    #2f487c,
+    2px solid #ffffff,
+    "Helvetica LT Std",
+    14px,
+    316px,
+    56px,
+    3px solid #ffffff
+  );
+}

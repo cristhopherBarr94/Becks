@@ -99,7 +99,14 @@
 }
 
 .fb-button {
-  background-color: #2f487c;
-  margin-top: 25px;
-  width: 316px;
+  @include btn(
+    #ffffff,
+    #2f487c,
+    2px solid #ffffff,
+    "Helvetica LT Std",
+    14px,
+    316px,
+    56px,
+    3px solid #ffffff
+  );
 }

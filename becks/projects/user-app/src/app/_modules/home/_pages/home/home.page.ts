@@ -11,6 +11,7 @@ import { User } from "../../../../_models/User";
 export class HomePage implements OnInit {
   public userRegisterForm: FormGroup;
   public userRegister: User = new User();
+  public userLoginForm: FormGroup;
 
   constructor() {}
 

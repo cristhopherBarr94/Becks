@@ -16,9 +16,15 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { TabsComponent } from "./_components/tabs/tabs.component";
+import { UserLoginComponent } from "./_components/user-login/user-login.component";
 
 @NgModule({
-  declarations: [HomePage, SectionPrincipalFormComponent, TabsComponent],
+  declarations: [
+    HomePage,
+    SectionPrincipalFormComponent,
+    TabsComponent,
+    UserLoginComponent,
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,

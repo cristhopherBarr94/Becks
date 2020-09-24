@@ -1,7 +1,13 @@
 <section class="seccion-tabs">
-  <mat-tab-group class="content-flex-all-center" [selectedIndex]="0">
-    <mat-tab label="INICIAR SESIÓN"> Content 1 </mat-tab>
-    <mat-tab label="CREAR CUENTA" class="border-tab">
+  <mat-tab-group
+    class="content-flex-all-center"
+    [selectedIndex]="0"
+    (selectedTabChange)="selectedTab($event)"
+  >
+    <mat-tab label="INICIAR SESIÓN" id="login">
+      <user-user-login></user-user-login>
+    </mat-tab>
+    <mat-tab label="CREAR CUENTA" id="register">
       <app-section-principal-form
         [principalContent]="principalContent"
       ></app-section-principal-form>

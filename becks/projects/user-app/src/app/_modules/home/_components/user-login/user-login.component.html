@@ -57,13 +57,19 @@
 
       <span class="font-link-small url-hyper">OLVIDE MI CONTRASEÑA</span>
 
+      <app-captcha
+        [restart]="restartCaptcha"
+        (status)="setCaptchaStatus($event)"
+      >
+      </app-captcha>
+
       <button
         class="becks-btn-primary margin-top-button button-width"
         (click)="loginUser()"
         block="block"
         color="becks"
         [ngClass]="{
-          'button-disabled': userLoginForm.invalid
+          'button-disabled': userLoginForm.invalid || !captchaStatus
         }"
       >
         <span>ENTRAR</span>
@@ -71,7 +77,7 @@
     </form>
 
     <div class="separator-box">
-      <span class="separator-login"></span>
+      <span class="separator-login margin-top-button"></span>
       <span class="separator-o">O</span><span class="separator-login"></span>
     </div>
 

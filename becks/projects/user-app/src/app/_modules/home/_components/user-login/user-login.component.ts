@@ -18,6 +18,8 @@ import { AuthService } from "src/app/_services/auth.service";
 export class UserLoginComponent implements OnInit {
   public userLoginForm: FormGroup;
   public httpError: string;
+  public captchaStatus: boolean;
+  public restartCaptcha: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,8 +47,10 @@ export class UserLoginComponent implements OnInit {
   }
 
   loginUser(): void {
-    if (this.userLoginForm.valid) {
+    if (this.userLoginForm.valid && this.captchaStatus) {
       this.ui.showLoading();
+      this.restartCaptcha = true;
+      this.setCaptchaStatus(!this.restartCaptcha);
       const formData = new FormData();
       formData.append("username", this.userLoginForm.controls.email.value);
       formData.append("password", this.userLoginForm.controls.password.value);
@@ -100,5 +104,8 @@ export class UserLoginComponent implements OnInit {
     if (item.hasError("password")) {
       return "Contraseña inválida";
     }
+  }
+  public setCaptchaStatus(status) {
+    this.captchaStatus = status;
   }
 }

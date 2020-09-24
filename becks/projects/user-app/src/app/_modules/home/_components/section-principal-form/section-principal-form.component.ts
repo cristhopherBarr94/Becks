@@ -54,7 +54,11 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
     this.userRegisterForm = this.formBuilder.group({
       name: new FormControl("", [
         Validators.required,
-        Validators.maxLength(40),
+        Validators.maxLength(20),
+      ]),
+      surname: new FormControl("", [
+        Validators.required,
+        Validators.maxLength(20),
       ]),
       idNumber: new FormControl("", [
         Validators.required,

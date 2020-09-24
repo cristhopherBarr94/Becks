@@ -3,10 +3,30 @@
 }
 
 .margin-top {
-  margin-top: 25px;
+  margin-top: 10px;
 }
 
 .button-width {
   width: 316px !important;
   border-radius: 16px 0px 16px 0px;
+}
+
+.separator-login {
+  margin-top: 15px;
+  height: 1px;
+  width: 45%;
+  border: 1px solid #6f6f6f;
+}
+
+.separator-box {
+  display: flex;
+  margin-top: 10px;
+  width: 100%;
+  flex-direction: row;
+}
+
+.separator-o {
+  color: #6f6f6f;
+  padding: 9px;
+  font-weight: bold;
 }

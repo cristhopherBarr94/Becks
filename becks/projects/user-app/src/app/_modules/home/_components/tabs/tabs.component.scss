@@ -3,3 +3,11 @@
   min-height: 100%;
   width: 100%;
 }
+
+::ng-deep .mat-tab-label {
+  font-weight: 300;
+  font-family: "Helvetica LT Std";
+  color: white !important;
+  font-size: 18px;
+  opacity: 1 !important;
+}

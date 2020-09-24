@@ -5,18 +5,34 @@ import { HomeRoutingModule } from "./home-routing.module";
 import { UtilsModule } from "../utils/utils.module";
 import { HomePage } from "./_pages/home/home.page";
 import { IonicModule } from "@ionic/angular";
-import { ReactiveFormsModule } from "@angular/forms";
+import { SectionPrincipalFormComponent } from "./_components/section-principal-form/section-principal-form.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatRadioModule } from "@angular/material/radio";
+import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { TabsComponent } from "./_components/tabs/tabs.component";
 
 @NgModule({
-  declarations: [HomePage, TabsComponent],
+  declarations: [HomePage, SectionPrincipalFormComponent, TabsComponent],
   imports: [
     CommonModule,
-    IonicModule,
-    ReactiveFormsModule,
     HomeRoutingModule,
     UtilsModule,
+    IonicModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule,
     MatTabsModule,
   ],
 })

@@ -1,0 +1,81 @@
+.no-padding {
+  padding: 0px;
+  ion-row,
+  ion-col {
+    padding: 0px;
+  }
+}
+
+.margin-top-button {
+  width: 316px;
+}
+
+.fb-button {
+  background-color: #2f487c;
+  margin-top: 25px;
+  width: 316px;
+}
+.fb-img {
+  background: url("../../../../../assets/icon/FB-Frame.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.checks {
+  cursor: default;
+  font-family: "Helvetica Neue";
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: bold;
+
+  .content-check {
+    margin: 0px;
+    display: flex;
+
+    a {
+      cursor: pointer;
+      color: #219653;
+      text-decoration: underline;
+    }
+  }
+
+  .margin-check {
+    margin-right: 11px;
+  }
+
+  ::ng-deep .mat-slide-toggle-bar {
+    background: linear-gradient(
+      180deg,
+      #2e2e2e 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    border-radius: 10px;
+    height: 20px;
+    width: 38px;
+  }
+
+  ::ng-deep.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background: linear-gradient(180deg, #62f8b2 0%, rgba(7, 200, 137, 0) 100%);
+  }
+  ::ng-deep .mat-slide-toggle-thumb {
+    margin-top: 3px;
+    background: url("../../../../../assets/icon/switch-untick.svg");
+    background-size: 23px;
+    background-repeat: no-repeat;
+    background-position: 0 2px;
+  }
+  ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background: url("../../../../../assets/icon/switch-tick.svg");
+    background-size: 23px;
+    background-repeat: no-repeat;
+    background-position: 1px 2px;
+  }
+
+  mat-error {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+  }
+}

@@ -1,10 +1,10 @@
 <section class="seccion-tabs">
-  <mat-tab-group
-    class="content-flex-all-center"
-    [selectedIndex]="0"
-    [ngClass]="{ first: myConditionForFirst, second: true }"
-  >
+  <mat-tab-group class="content-flex-all-center">
     <mat-tab label="INICIAR SESIÓN"> Content 1 </mat-tab>
-    <mat-tab label="CREAR CUENTA"> Content 2 </mat-tab>
+    <mat-tab label="CREAR CUENTA">
+      <app-section-principal-form
+        [principalContent]="principalContent"
+      ></app-section-principal-form>
+    </mat-tab>
   </mat-tab-group>
 </section>

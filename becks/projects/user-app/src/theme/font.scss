@@ -56,11 +56,11 @@
   $cut-point-3-lh
 ) {
   font-family: $font-family !important;
-  color: $color !important;
-  font-style: $font-style !important;
-  font-weight: $font-weight !important;
-  text-align: center !important;
-  letter-spacing: 0px !important;
+  color: $color;
+  font-style: $font-style;
+  font-weight: $font-weight;
+  text-align: center;
+  letter-spacing: 0px;
 
   @media (min-width: 0px) and (max-width: 360px) {
     font-size: $cut-point-1-fs !important;
@@ -117,7 +117,7 @@
     #ffffff,
     0px,
     normal,
-    bold,
+    normal,
     22px,
     110%,
     22px,
@@ -148,7 +148,6 @@
   font-family: "Helvetica LT Std";
   color: #ffffff;
   font-style: normal;
-  //   font-weight: bold;
   font-size: 16px;
   line-height: 18px;
   text-decoration: none;
@@ -158,7 +157,6 @@
   font-family: "Helvetica LT Std";
   color: #ffffff;
   font-style: normal;
-  font-weight: bold;
   font-size: 22px;
   line-height: 18px;
   margin-bottom: 14px !important;
@@ -176,7 +174,6 @@ p {
   .title-exp {
     font-family: "Helvetica LT Std";
     font-style: normal;
-    font-weight: bold;
     font-size: 19px;
     line-height: 23px;
     color: #ffffff;
@@ -192,7 +189,6 @@ p {
   font-family: "Helvetica LT Std";
   text-decoration: none;
   font-style: normal;
-  font-weight: bold;
   font-size: 11px;
   line-height: 18px;
   color: #ffffff;
@@ -209,7 +205,6 @@ p {
 .font-terms {
   font-family: "Helvetica LT Std";
   font-style: normal;
-  font-weight: bold;
   font-size: 18px;
   line-height: 110%;
   text-transform: capitalize;

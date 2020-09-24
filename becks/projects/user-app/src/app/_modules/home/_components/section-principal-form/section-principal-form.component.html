@@ -33,9 +33,9 @@
           [(ngModel)]="userRegister.first_name"
           data-qadp="name"
         />
-        <mat-error *ngIf="userRegisterForm.controls.name.errors">{{
-          getMessageform(userRegisterForm.controls.name, "nombre", 0, 40)
-        }}</mat-error>
+        <mat-error *ngIf="userRegisterForm.controls.name.errors">
+          *Has ingresado un dato inválido
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field
@@ -55,9 +55,9 @@
           [(ngModel)]="userRegister.email"
           data-qadp="email"
         />
-        <mat-error *ngIf="userRegisterForm.controls.email.errors">{{
-          getMessageform(userRegisterForm.controls.email, "email", 0, 30)
-        }}</mat-error>
+        <mat-error *ngIf="userRegisterForm.controls.email.errors">
+          *Has ingresado un dato inválido
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field
@@ -66,7 +66,7 @@
         class="fullInput"
         [ngClass]="getClassInput(userRegisterForm.controls.telephone)"
       >
-        <mat-label>Número Celular</mat-label>
+        <mat-label>Número de teléfono</mat-label>
         <input
           matInput
           (input)="inputValidatorNumeric($event)"
@@ -77,14 +77,9 @@
           [(ngModel)]="userRegister.mobile_phone"
           data-qadp="phone"
         />
-        <mat-error *ngIf="userRegisterForm.controls.telephone.errors">{{
-          getMessageform(
-            userRegisterForm.controls.telephone,
-            "número celular",
-            7,
-            10
-          )
-        }}</mat-error>
+        <mat-error *ngIf="userRegisterForm.controls.telephone.errors">
+          *Has ingresado un dato inválido
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field
@@ -113,21 +108,20 @@
         appearance="fill"
         floatLabel="auto"
         class="fullInput"
-        [ngClass]="getClassInputSelect(userRegisterForm.controls.document)"
+        [ngClass]="getClassInputSelect(userRegisterForm.controls.typeId)"
       >
         <mat-label>Tipo de documento</mat-label>
         <mat-select
           panelClass="backgroud-panel"
-          formControlName="document"
+          formControlName="typeId"
           required
-          [(ngModel)]="userRegister.document"
-          data-qadp="document"
+          [(ngModel)]="userRegister.typeId"
+          data-qadp="typeId"
         >
-          <mat-option value="F"> Cedula de ciudadanía</mat-option>
-          <mat-option value="M"> Pasaporte</mat-option>
+          <mat-option value="C"> Cedula de ciudadanía</mat-option>
+          <mat-option value="P"> Pasaporte</mat-option>
         </mat-select>
-        <mat-error
-          *ngIf="userRegisterForm.controls.document.hasError('required')"
+        <mat-error *ngIf="userRegisterForm.controls.typeId.hasError('required')"
           >Debes seleccionar un campo</mat-error
         >
       </mat-form-field>
@@ -136,22 +130,22 @@
         appearance="fill"
         floatLabel="auto"
         class="fullInput"
-        [ngClass]="getClassInput(userRegisterForm.controls.surname)"
+        [ngClass]="getClassInput(userRegisterForm.controls.idNumber)"
       >
         <mat-label>Número de identificación</mat-label>
         <input
           matInput
           (input)="inputValidatorNumeric($event)"
-          formControlName="surname"
+          formControlName="idNumber"
           placeholder="Número de id"
           minlength="4"
           maxlength="11"
-          [(ngModel)]="userRegister.last_name"
+          [(ngModel)]="userRegister.idNumber"
           required
           data-qadp="lastName"
         />
-        <mat-error *ngIf="userRegisterForm.controls.surname.errors">{{
-          getMessageform(userRegisterForm.controls.surname, "apellido", 0, 11)
+        <mat-error *ngIf="userRegisterForm.controls.idNumber.errors">{{
+          getMessageform(userRegisterForm.controls.idNumber, "apellido", 0, 11)
         }}</mat-error>
       </mat-form-field>
 

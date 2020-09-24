@@ -25,8 +25,6 @@ declare global {
 export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
   public userRegisterForm: FormGroup;
   public userRegister: User = new User();
-  public captchaStatus: boolean;
-  public restartCaptcha: boolean;
   public httpError: string;
   @Input() principalContent;
 
@@ -56,7 +54,7 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
         Validators.required,
         Validators.maxLength(40),
       ]),
-      surname: new FormControl("", [
+      idNumber: new FormControl("", [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(11),
@@ -72,7 +70,7 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
         Validators.maxLength(10),
       ]),
       gender: new FormControl(null, Validators.required),
-      document: new FormControl(null, Validators.required),
+      typeId: new FormControl(null, Validators.required),
       privacy: new FormControl(null, Validators.required),
       promo: new FormControl(null),
     });
@@ -80,45 +78,33 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
 
   saveUser(): void {
     this.ui.showLoading();
-    this.restartCaptcha = true;
-    this.setCaptchaStatus(!this.restartCaptcha);
-    this.userRegister.captcha_key = Math.floor(
-      Math.random() * (999999999999 - 121212) + 121212
-    );
-    this.userRegister.captcha = SHA512(
-      'setupCaptchaValidator("' +
-        this.userRegister.email +
-        "-" +
-        this.userRegister.captcha_key +
-        '")'
-    ).toString();
     const email256 = SHA256(this.userRegister.email).toString();
-    this.httpService.post("", this.userRegister).subscribe(
-      (data: any) => {
-        try {
-          this.restartCaptcha = false;
-          this.ui.dismissLoading();
-          this.userRegisterForm.reset();
-          window.dataLayer.push({
-            event: "trackEvent",
-            eventCategory: "becks society",
-            eventAction: "finalizar",
-            eventLabel: email256,
+    this.httpService
+      .post("https://becks.flexitco.co/becks-back/api", this.userRegister)
+      .subscribe(
+        (data: any) => {
+          try {
+            this.ui.dismissLoading();
+            this.userRegisterForm.reset();
+            window.dataLayer.push({
+              event: "trackEvent",
+              eventCategory: "becks society",
+              eventAction: "finalizar",
+              eventLabel: email256,
+            });
+          } catch (e) {}
+          this.moveSection();
+          this.router.navigate(["confirm-register"], {
+            queryParamsHandling: "preserve",
           });
-        } catch (e) {}
-        this.moveSection();
-        this.router.navigate(["confirm-register"], {
-          queryParamsHandling: "preserve",
-        });
-      },
-      (err) => {
-        this.restartCaptcha = false;
-        if (err.error) {
-          this.httpError = err.error.message;
+        },
+        (err) => {
+          if (err.error) {
+            this.httpError = err.error.message;
+          }
+          this.ui.dismissLoading();
         }
-        this.ui.dismissLoading();
-      }
-    );
+      );
   }
 
   public moveSection() {
@@ -182,7 +168,7 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public setCaptchaStatus(status) {
-    this.captchaStatus = status;
-  }
+  // public setCaptchaStatus(status) {
+  //   this.captchaStatus = status;
+  // }
 }

@@ -35,7 +35,6 @@ import { MatIconModule } from "@angular/material/icon";
     MatSlideToggleModule,
     ReactiveFormsModule,
     MatTabsModule,
-    // JellyCheckbox,
   ],
 })
 export class HomeModule {}

@@ -109,3 +109,15 @@
   height: 28px;
   margin: 0px 5px;
 }
+
+.recovery-icon {
+  background-image: url("../assets/icon/recovery-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 80px;
+    height: 100px;
+  }
+}

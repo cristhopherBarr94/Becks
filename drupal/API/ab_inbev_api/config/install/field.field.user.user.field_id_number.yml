@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.user.field_mobile_phone
+    - field.storage.user.field_id_number
   module:
     - user
-id: user.user.field_mobile_phone
-field_name: field_mobile_phone
+id: user.user.field_id_number
+field_name: field_id_number
 entity_type: user
 bundle: user
-label: "Mobile phone"
-description: "Número celular"
+label: "Id number"
+description: "Número de documento"
 required: false
 translatable: false
 default_value: {}

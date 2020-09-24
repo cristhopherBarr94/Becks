@@ -156,11 +156,23 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->set("langcode", $lang);
       $user->set("preferred_langcode", $lang);
       $user->set("preferred_admin_langcode", $lang);
-      $user->set("field_status_waiting_list", 1);
+      $user->set("field_type_id", $data['type_id'] );
+      $user->set("field_id_number", $data['id_number'] );
       $user->set("field_first_name", $data['first_name'] );
       $user->set("field_last_name", $data['last_name'] );
       $user->set("field_mobile_phone", $data['mobile_phone'] );
       $user->set("field_gender",  $data['gender'] );
+      
+      if ( isset($data['type_id']) ) {
+        // User from User-APP
+        $user->set("field_status_waiting_list", 0);
+        $user->activate();
+        Util::sendWelcomeEmail( $user->getEmail() , $pass );
+      } else {
+        // User from Waiting-List
+        $user->set("field_status_waiting_list", 1);
+      }
+
       $user->addRole('web_app');
 
       $user->save();
@@ -290,7 +302,9 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       'captcha',
       'captcha_key',
       'privacy',
-      'promo'
+      'promo',
+      'type_id',
+      'id_number'
     ];
 
     // if (count(array_diff(array_keys($record), $allowed_fields)) > 0) {
@@ -345,6 +359,16 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     
     if ( !isset($record['privacy']) || !is_bool($record['privacy']) || $record['privacy'] != true ) {
       throw new BadRequestHttpException('El usuario no puede ser registrado porque hacen falta aceptar la Política y Términos del sitio');
+    }
+    
+    if ( isset($record['type_id']) ) {
+      if ( $record['type_id'] != 'CC' && $record['type_id'] != 'CE' && $record['type_id'] != 'PA' ) {
+        throw new BadRequestHttpException('El "Tipo de Documento" debe ser "CC" (Cédula de ciudadania), "CE" (Cédula de extranjeria) o "PA" (Pasaporte) ');
+      }
+      
+      if (!isset($record['id_number']) || empty($record['id_number']) || strlen($record['id_number']) > 20 ) {
+        throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Número de documento"');
+      }
     }
 
     // Validate Captcha

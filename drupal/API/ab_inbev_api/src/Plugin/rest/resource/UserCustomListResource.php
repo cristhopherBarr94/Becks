@@ -437,16 +437,7 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
         $user->activate();
         $user->set('field_status_waiting_list', FALSE);
         if ( $user->save() ) {
-          $mailManager = \Drupal::service('plugin.manager.mail');
-          $module = 'ab_inbev_api';
-          $key = 'default';
-          $to = $user->getEmail();
-          $params['from'] = "contact@becks.com";
-          $params['subject'] = "Bienvenido a Beck's";
-          $params['message'] = "Usuario: ". $to ." <br/> Contraseña: " . $pass ;
-          $langcode = \Drupal::currentUser()->getPreferredLangcode();
-          $send = TRUE;
-          $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+          Util::sendWelcomeEmail( $user->getEmail() , $pass );
         }
       }
     }

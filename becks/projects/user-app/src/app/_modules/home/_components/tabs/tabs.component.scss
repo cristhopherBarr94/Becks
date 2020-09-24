@@ -11,11 +11,11 @@
 }
 
 ::ng-deep .mat-ink-bar {
-  background: rgb(2, 0, 36);
+  background: rgb(0, 209, 140);
   background: linear-gradient(
     90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(65, 240, 118, 1) 41%,
-    rgba(0, 255, 111, 0.6110819327731092) 100%
+    rgba(0, 209, 140, 0) 0%,
+    rgba(0, 209, 140, 0.5018382352941176) 41%,
+    rgba(0, 209, 140, 1) 100%
   );
 }

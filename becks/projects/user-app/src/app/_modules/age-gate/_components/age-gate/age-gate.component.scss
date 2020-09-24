@@ -1,0 +1,50 @@
+.background-black{
+    background-color: black;
+}
+.margin-top {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.margin-top-button {
+    margin: 30px 0px;
+}
+
+.content-check {
+    margin: 0px 22px;
+    display: flex;
+}
+
+.margin-check {
+    margin-right: 11px;
+}
+
+.mat-error {
+    padding-left: 0px !important;
+}
+
+.no-margin {
+    margin: 0px;
+}
+
+.text-decoration-underline{
+    text-decoration: underline;
+}
+
+::ng-deep .mat-checkbox-frame { 
+    border-color: white 
+}
+
+.max-width-title-primary-age-gate {
+    max-width: 720px;
+    margin: 0px 10px;
+}
+
+.max-width-title-tertiary-age-gate {
+    max-width: 640px;
+    margin: 0px 10px;
+}
+
+.padding-form-age {
+    padding: 15px 0;
+}

@@ -8,8 +8,15 @@ const routes: Routes = [
       import("./_modules/home/home.module").then((m) => m.HomeModule),
   },
   {
+    path: "age-gate",
+    loadChildren: () =>
+      import("./_modules/age-gate/age-gate.module").then(
+        (m) => m.AgeGateModule
+      ),
+  },
+  {
     path: "",
-    redirectTo: "home",
+    redirectTo: "age-gate",
     pathMatch: "full",
   },
 ];

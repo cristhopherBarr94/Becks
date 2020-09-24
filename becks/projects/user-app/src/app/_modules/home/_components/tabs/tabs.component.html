@@ -4,7 +4,9 @@
     [selectedIndex]="0"
     (selectedTabChange)="selectedTab($event)"
   >
-    <mat-tab label="INICIAR SESIÓN" id="login"> Content 1 </mat-tab>
+    <mat-tab label="INICIAR SESIÓN" id="login">
+      <user-user-login></user-user-login>
+    </mat-tab>
     <mat-tab label="CREAR CUENTA" id="register">
       <app-section-principal-form
         [principalContent]="principalContent"

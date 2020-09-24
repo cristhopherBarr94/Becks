@@ -1,0 +1,73 @@
+<section
+  id="formLoginSection"
+  class="fullSection from-section content-flex-all-center"
+>
+  <div
+    class="content-flex-all-center full-height flex-direction-column padding-form"
+  >
+    <form [formGroup]="userLoginForm" class="form-section" autocomplete="off">
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userLoginForm.controls.email)"
+      >
+        <mat-label>Correo Electrónico</mat-label>
+
+        <input
+          matInput
+          formControlName="email"
+          type="email"
+          required
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
+          maxlength="30"
+          data-qadp="email"
+        />
+        <mat-error *ngIf="userLoginForm.controls.email.errors">
+          {{
+            getMessageform(userLoginForm.controls.email, "email", 0, 30)
+          }}</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userLoginForm.controls.password)"
+      >
+        <mat-label>Contraseña</mat-label>
+        <input
+          matInput
+          id="password"
+          formControlName="password"
+          [type]="!hide ? 'password' : 'text'"
+          required
+          maxlength="30"
+          data-qadp="password"
+          [(ngModel)]="password"
+        />
+        <mat-icon matSuffix (click)="hide = !hide">{{
+          !hide ? "visibility_off" : "visibility"
+        }}</mat-icon>
+        <mat-error *ngIf="userLoginForm.controls.password.errors">
+          {{
+            getMessageform(userLoginForm.controls.password, "password", 0, 3)
+          }}</mat-error
+        >
+      </mat-form-field>
+
+      <button
+        class="becks-btn-primary margin-top-button"
+        (click)="loginUser()"
+        block="block"
+        color="becks"
+        [ngClass]="{
+          'button-disabled': userLoginForm.invalid || !captchaStatus
+        }"
+      >
+        <span>ENTRAR</span>
+      </button>
+    </form>
+  </div>
+</section>

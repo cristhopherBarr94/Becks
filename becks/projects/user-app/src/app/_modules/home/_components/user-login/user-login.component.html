@@ -51,15 +51,12 @@
         <mat-icon matSuffix (click)="hide = !hide">{{
           !hide ? "visibility_off" : "visibility"
         }}</mat-icon>
-        <mat-error *ngIf="userLoginForm.controls.password.errors">
-          {{
-            getMessageform(userLoginForm.controls.password, "password", 0, 3)
-          }}</mat-error
-        >
       </mat-form-field>
 
+      <mat-error *ngIf="httpError">{{ httpError }}</mat-error>
+
       <button
-        class="becks-btn-primary margin-top-button"
+        class="becks-btn-primary margin-top-button button-width"
         (click)="loginUser()"
         block="block"
         color="becks"
@@ -73,9 +70,9 @@
     <button
       block="block"
       (click)="saveUser()"
-      class="becks-btn-primary fb-button"
+      class="fb-button margin-top button-width"
     >
-      <span class="fb-img"> </span>
+      <span class="fb-img"></span>
       <span>CONTINUA CON FACEBOOK</span>
     </button>
   </div>

@@ -1,10 +1,14 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
   FormControl,
   Validators,
 } from "@angular/forms";
+import { UiService } from "src/app/_services/ui.service";
+import { environment } from "src/environments/environment";
+import { HttpService } from "src/app/_services/http.service";
+import { AuthService } from "src/app/_services/auth.service";
 
 @Component({
   selector: "user-user-login",
@@ -13,8 +17,14 @@ import {
 })
 export class UserLoginComponent implements OnInit {
   public userLoginForm: FormGroup;
+  public httpError: string;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private ui: UiService,
+    private httpService: HttpService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.initforms();
@@ -32,6 +42,41 @@ export class UserLoginComponent implements OnInit {
         Validators.minLength(3),
       ]),
     });
+  }
+
+  loginUser(): void {
+    if (this.userLoginForm.valid) {
+      this.ui.showLoading();
+      const formData = new FormData();
+      formData.append("username", this.userLoginForm.controls.email.value);
+      formData.append("password", this.userLoginForm.controls.password.value);
+      formData.append("grant_type", environment.rest.grant_type);
+      formData.append("client_id", environment.rest.client_id);
+      formData.append("client_secret", environment.rest.client_secret);
+      formData.append("scope", environment.rest.scope);
+      this.httpService
+        .postFormData(
+          environment.serverUrl + environment.login.resource,
+          formData
+        )
+        .subscribe(
+          (response: any) => {
+            this.ui.dismissLoading();
+            if (response.status == 200) {
+              this.httpError = "";
+              this.userLoginForm.reset();
+              this.authService.setAuthenticated(
+                "Bearer " + response.body.access_token
+              );
+              console.log("esta entrando");
+            }
+          },
+          (e) => {
+            this.httpError = "Usuario y/o contraseña incorrecta";
+            this.ui.dismissLoading();
+          }
+        );
+    }
   }
 
   public getClassInput(item: any): string {

@@ -13,6 +13,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatIconModule } from "@angular/material/icon";
+import { MatTabsModule } from "@angular/material/tabs";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { TabsComponent } from "./_components/tabs/tabs.component";
 
@@ -32,6 +33,7 @@ import { TabsComponent } from "./_components/tabs/tabs.component";
     MatIconModule,
     MatSlideToggleModule,
     ReactiveFormsModule,
+    MatTabsModule,
   ],
 })
 export class HomeModule {}

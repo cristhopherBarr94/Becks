@@ -14,9 +14,10 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatIconModule } from "@angular/material/icon";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { TabsComponent } from "./_components/tabs/tabs.component";
 
 @NgModule({
-  declarations: [HomePage, SectionPrincipalFormComponent],
+  declarations: [HomePage, SectionPrincipalFormComponent, TabsComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
@@ -30,6 +31,7 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
     MatRadioModule,
     MatIconModule,
     MatSlideToggleModule,
+    ReactiveFormsModule,
   ],
 })
 export class HomeModule {}

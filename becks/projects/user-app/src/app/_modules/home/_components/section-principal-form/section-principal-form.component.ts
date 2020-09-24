@@ -25,6 +25,8 @@ declare global {
 export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
   public userRegisterForm: FormGroup;
   public userRegister: User = new User();
+  public captchaStatus: boolean;
+  public restartCaptcha: boolean;
   public httpError: string;
   @Input() principalContent;
 
@@ -78,12 +80,28 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
 
   saveUser(): void {
     this.ui.showLoading();
+    this.restartCaptcha = true;
+    this.setCaptchaStatus(!this.restartCaptcha);
+    this.userRegister.captcha_key = Math.floor(
+      Math.random() * (999999999999 - 121212) + 121212
+    );
+    this.userRegister.captcha = SHA512(
+      'setupCaptchaValidator("' +
+        this.userRegister.email +
+        "-" +
+        this.userRegister.captcha_key +
+        '")'
+    ).toString();
     const email256 = SHA256(this.userRegister.email).toString();
     this.httpService
-      .post("https://becks.flexitco.co/becks-back/api", this.userRegister)
+      .post(
+        "https://becks.flexitco.co/becks-back/api/ab-inbev-api-usercustom/",
+        this.userRegister
+      )
       .subscribe(
         (data: any) => {
           try {
+            this.restartCaptcha = false;
             this.ui.dismissLoading();
             this.userRegisterForm.reset();
             window.dataLayer.push({
@@ -99,6 +117,7 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
           });
         },
         (err) => {
+          this.restartCaptcha = false;
           if (err.error) {
             this.httpError = err.error.message;
           }
@@ -168,7 +187,7 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // public setCaptchaStatus(status) {
-  //   this.captchaStatus = status;
-  // }
+  public setCaptchaStatus(status) {
+    this.captchaStatus = status;
+  }
 }

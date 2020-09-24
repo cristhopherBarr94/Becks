@@ -165,6 +165,7 @@
             class="margin-check"
           >
           </mat-slide-toggle>
+          <!-- <jelly-checkbox></jelly-checkbox> -->
         </div>
 
         <div class="content-check">
@@ -196,9 +197,11 @@
         </div>
       </div>
 
-      <!-- <app-captcha [restart]="restartCaptcha"
-                  (status)="setCaptchaStatus($event)">
-      </app-captcha> -->
+      <app-captcha
+        [restart]="restartCaptcha"
+        (status)="setCaptchaStatus($event)"
+      >
+      </app-captcha>
 
       <br /><mat-error *ngIf="httpError">{{ httpError }}</mat-error>
 

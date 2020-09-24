@@ -71,6 +71,16 @@
   height: 67px;
 }
 
+.fb-img {
+  background-image: url("../assets/icon/FB-Frame.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  width: 32px !important;
+  height: 32px !important;
+}
+
 .social {
   background-image: url("../assets/img/Social.png");
   background-size: contain;

@@ -61,5 +61,21 @@ final class Util
     public static function getCaptchaHash( $value ) {
         return hash("sha512", 'setupCaptchaValidator("'. $value . '")' );
     }
+
+    /*
+    * Email
+    */
+    public static function sendWelcomeEmail ( $email , $pass ) {
+        $mailManager = \Drupal::service('plugin.manager.mail');
+        $module = 'ab_inbev_api';
+        $key = 'default';
+        $to = $email;
+        $params['from'] = "contact@becks.com";
+        $params['subject'] = "Bienvenido a Beck's";
+        $params['message'] = "Usuario: ". $to ." <br/> Contraseña: " . $pass ;
+        $langcode = 'es';
+        $send = TRUE;
+        $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+    }
         
 }

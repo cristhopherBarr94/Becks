@@ -17,9 +17,15 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatIconModule } from "@angular/material/icon";
+import { UserLoginComponent } from "./_components/user-login/user-login.component";
 
 @NgModule({
-  declarations: [HomePage, SectionPrincipalFormComponent, TabsComponent],
+  declarations: [
+    HomePage,
+    SectionPrincipalFormComponent,
+    TabsComponent,
+    UserLoginComponent,
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,

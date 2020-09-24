@@ -15,8 +15,15 @@ const routes: Routes = [
       ),
   },
   {
+    path: "age-gate",
+    loadChildren: () =>
+      import("./_modules/age-gate/age-gate.module").then(
+        (m) => m.AgeGateModule
+      ),
+  },
+  {
     path: "",
-    redirectTo: "home",
+    redirectTo: "age-gate",
     pathMatch: "full",
   },
 ];

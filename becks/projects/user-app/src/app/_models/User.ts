@@ -11,6 +11,9 @@ export class User {
 
   phone?: string;
 
+  type_id?: string;
+  id_number?: string;
+
   captcha?: string;
   captcha_key?: number;
   promo?: boolean;

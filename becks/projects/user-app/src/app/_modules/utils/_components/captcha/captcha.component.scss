@@ -1,0 +1,33 @@
+.becks-captcha {
+  legend {
+    color: white;
+  }
+
+  legend,
+  mat-error {
+    text-align: center;
+  }
+
+  .mat-radio-button {
+    padding: 10px;
+  }
+
+  .active {
+    color: #377f5e;
+  }
+
+  mat-icon {
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+  }
+}
+
+::ng-deep .mat-radio-button .mat-radio-container {
+  width: 0;
+}
+::ng-deep .mat-radio-container .mat-radio-outer-circle,
+::ng-deep .mat-radio-container .mat-radio-inner-circle {
+  border: none;
+  width: 0;
+}

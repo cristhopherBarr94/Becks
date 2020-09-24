@@ -54,9 +54,13 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
     this.userRegisterForm = this.formBuilder.group({
       name: new FormControl("", [
         Validators.required,
-        Validators.maxLength(40),
+        Validators.maxLength(20),
       ]),
       surname: new FormControl("", [
+        Validators.required,
+        Validators.maxLength(20),
+      ]),
+      idNumber: new FormControl("", [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(11),
@@ -72,7 +76,7 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
         Validators.maxLength(10),
       ]),
       gender: new FormControl(null, Validators.required),
-      document: new FormControl(null, Validators.required),
+      typeId: new FormControl(null, Validators.required),
       privacy: new FormControl(null, Validators.required),
       promo: new FormControl(null),
     });
@@ -93,32 +97,37 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
         '")'
     ).toString();
     const email256 = SHA256(this.userRegister.email).toString();
-    this.httpService.post("", this.userRegister).subscribe(
-      (data: any) => {
-        try {
-          this.restartCaptcha = false;
-          this.ui.dismissLoading();
-          this.userRegisterForm.reset();
-          window.dataLayer.push({
-            event: "trackEvent",
-            eventCategory: "becks society",
-            eventAction: "finalizar",
-            eventLabel: email256,
+    this.httpService
+      .post(
+        "https://becks.flexitco.co/becks-back/api/ab-inbev-api-usercustom/",
+        this.userRegister
+      )
+      .subscribe(
+        (data: any) => {
+          try {
+            this.restartCaptcha = false;
+            this.ui.dismissLoading();
+            this.userRegisterForm.reset();
+            window.dataLayer.push({
+              event: "trackEvent",
+              eventCategory: "becks society",
+              eventAction: "finalizar",
+              eventLabel: email256,
+            });
+          } catch (e) {}
+          this.moveSection();
+          this.router.navigate(["confirm-register"], {
+            queryParamsHandling: "preserve",
           });
-        } catch (e) {}
-        this.moveSection();
-        this.router.navigate(["confirm-register"], {
-          queryParamsHandling: "preserve",
-        });
-      },
-      (err) => {
-        this.restartCaptcha = false;
-        if (err.error) {
-          this.httpError = err.error.message;
+        },
+        (err) => {
+          this.restartCaptcha = false;
+          if (err.error) {
+            this.httpError = err.error.message;
+          }
+          this.ui.dismissLoading();
         }
-        this.ui.dismissLoading();
-      }
-    );
+      );
   }
 
   public moveSection() {
@@ -137,6 +146,13 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
     const pattern = /^[a-zA-ZnÑ ]*$/;
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(/[^a-zA-ZnÑ ]/g, "");
+    }
+  }
+
+  public inputValidatorAlphaNumeric(event: any) {
+    const pattern = /^[a-zA-ZnÑ0-9 ]*$/;
+    if (!pattern.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/[^a-zA-ZnÑ0-9 ]/g, "");
     }
   }
 

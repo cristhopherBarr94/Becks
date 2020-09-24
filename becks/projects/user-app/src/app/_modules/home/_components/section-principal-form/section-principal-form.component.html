@@ -129,7 +129,7 @@
           panelClass="backgroud-panel"
           formControlName="typeId"
           required
-          [(ngModel)]="userRegister.typeId"
+          [(ngModel)]="userRegister.type_id"
           data-qadp="typeId"
         >
           <mat-option value="CC"> Cedula de ciudadanía</mat-option>
@@ -155,7 +155,7 @@
           placeholder="Número de id"
           minlength="4"
           maxlength="11"
-          [(ngModel)]="userRegister.idNumber"
+          [(ngModel)]="userRegister.id_number"
           required
           data-qadp="lastName"
         />
@@ -172,14 +172,14 @@
               email de confirmación)
             </i>
           </div>
-          <mat-slide-toggle
+          <mat-checkbox
             id="mat-checkbox-promo"
             formControlName="promo"
             [(ngModel)]="userRegister.promo"
             color="success"
             class="margin-check"
           >
-          </mat-slide-toggle>
+          </mat-checkbox>
         </div>
 
         <div class="content-check">
@@ -200,15 +200,14 @@
               >Por favor lea y acepte las políticas y los términos</mat-error
             >
           </div>
-          <mat-slide-toggle
+          <mat-checkbox
             formControlName="privacy"
             [(ngModel)]="userRegister.privacy"
             color="success"
             class="margin-check"
             required
           >
-          </mat-slide-toggle>
-          <!-- <jelly-checkbox label="Just Do it" checked></jelly-checkbox> -->
+          </mat-checkbox>
         </div>
       </div>
 

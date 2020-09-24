@@ -11,8 +11,8 @@ export class User {
 
   phone?: string;
 
-  typeId?: string;
-  idNumber?: string;
+  type_id?: string;
+  id_number?: string;
 
   captcha?: string;
   captcha_key?: number;

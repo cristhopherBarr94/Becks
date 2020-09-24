@@ -5,13 +5,6 @@
   <div
     class="content-flex-all-center full-height flex-direction-column padding-form"
   >
-    <!-- <h2 class="title-secondary">DÉJANOS TUS DATOS</h2>
-
-    <h3 class="title-tertiary max-width-title-secondary">
-      Déjanos tus datos Regístrate y pronto te contaremos si harás parte de la
-      Beck’s Society
-    </h3> -->
-
     <form
       [formGroup]="userRegisterForm"
       class="form-section"
@@ -157,7 +150,7 @@
         <mat-label>Número de identificación</mat-label>
         <input
           matInput
-          (input)="inputValidatorNumeric($event)"
+          (input)="inputValidatorAlphaNumeric($event)"
           formControlName="idNumber"
           placeholder="Número de id"
           minlength="4"
@@ -166,9 +159,9 @@
           required
           data-qadp="lastName"
         />
-        <mat-error *ngIf="userRegisterForm.controls.idNumber.errors">{{
-          getMessageform(userRegisterForm.controls.idNumber, "apellido", 0, 11)
-        }}</mat-error>
+        <mat-error *ngIf="userRegisterForm.controls.idNumber.errors"
+          >*Este campo es obligatorio</mat-error
+        >
       </mat-form-field>
 
       <div class="checks">
@@ -187,7 +180,6 @@
             class="margin-check"
           >
           </mat-slide-toggle>
-          <!-- <jelly-checkbox></jelly-checkbox> -->
         </div>
 
         <div class="content-check">
@@ -216,6 +208,7 @@
             required
           >
           </mat-slide-toggle>
+          <!-- <jelly-checkbox label="Just Do it" checked></jelly-checkbox> -->
         </div>
       </div>
 

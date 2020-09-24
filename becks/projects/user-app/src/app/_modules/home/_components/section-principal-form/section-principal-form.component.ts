@@ -149,6 +149,13 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
     }
   }
 
+  public inputValidatorAlphaNumeric(event: any) {
+    const pattern = /^[a-zA-ZnÑ0-9 ]*$/;
+    if (!pattern.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/[^a-zA-ZnÑ0-9 ]/g, "");
+    }
+  }
+
   public getClassInput(item: any): string {
     let classreturn = "input-becks";
     if (item.valid) {

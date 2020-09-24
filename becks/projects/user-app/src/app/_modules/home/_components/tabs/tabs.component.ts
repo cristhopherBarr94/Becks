@@ -6,13 +6,15 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./tabs.component.scss"],
 })
 export class TabsComponent implements OnInit {
-  public actuallTab: number = 0;
+  public actuallTab: string = "red";
 
   constructor() {}
 
   ngOnInit() {}
 
   selectedTab = (tab) => {
-    this.actuallTab = tab.index;
+    if (tab.index == 0) {
+      this.actuallTab = "blue";
+    }
   };
 }

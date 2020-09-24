@@ -1,6 +1,10 @@
 <section class="seccion-tabs">
-  <mat-tab-group class="content-flex-all-center">
-    <mat-tab label="INICIAR SESIÓN" focusIndex="0"> Content 1 </mat-tab>
+  <mat-tab-group
+    class="content-flex-all-center"
+    [selectedIndex]="0"
+    [disableRipple]="true"
+  >
+    <mat-tab label="INICIAR SESIÓN"> Content 1 </mat-tab>
     <mat-tab label="CREAR CUENTA"> Content 2 </mat-tab>
   </mat-tab-group>
 </section>

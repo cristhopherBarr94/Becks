@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - text
+    - user
+id: user.field_type_id
+field_name: field_type_id
+entity_type: user
+type: text
+settings:
+  max_length: 2
+module: text
+locked: false
+cardinality: -1
+translatable: true
+indexes: {}
+persist_with_no_fields: false
+custom_storage: false

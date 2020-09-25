@@ -66,13 +66,6 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
   protected $currentRequest;
 
   /**
-   * The current user.
-   *
-   * @var Drupal\Core\Session\AccountInterface;
-   */
-  protected $currentUser;
-
-  /**
    * Vars for the get list
    *
    */
@@ -173,15 +166,15 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
    *   The HTTP response object.
    */
   public function post($data) {
-    $resp = [ 
-      $this->currentUser->getRoles(),
-      $this->currentUser->getEmail(),
-      $this->currentUser->getAccountName(),
-      $this->currentUser->getDisplayName(),
-      $this->currentUser->isAuthenticated(),
-      $this->currentUser->getLastAccessedTime()
-    ];
-    return new ResourceResponse($resp);
+    // $resp = [ 
+    //   $this->currentUser->getRoles(),
+    //   $this->currentUser->getEmail(),
+    //   $this->currentUser->getAccountName(),
+    //   $this->currentUser->getDisplayName(),
+    //   $this->currentUser->isAuthenticated(),
+    //   $this->currentUser->getLastAccessedTime()
+    // ];
+    return new ResourceResponse("");
   }
 
   /**

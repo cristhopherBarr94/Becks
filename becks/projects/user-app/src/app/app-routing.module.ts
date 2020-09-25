@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "age-gate",
+    redirectTo: "profile",
     pathMatch: "full",
   },
 ];

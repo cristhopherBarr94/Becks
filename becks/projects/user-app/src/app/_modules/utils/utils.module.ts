@@ -13,6 +13,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatIconModule } from "@angular/material/icon";
 import { HeaderComponent } from "./_components/header/header.component";
+import { RouterModule } from "@angular/router";
 @NgModule({
   declarations: [
     LoadingComponent,
@@ -31,6 +32,7 @@ import { HeaderComponent } from "./_components/header/header.component";
     MatCheckboxModule,
     MatRadioModule,
     MatIconModule,
+    RouterModule,
   ],
   exports: [
     FooterComponent,

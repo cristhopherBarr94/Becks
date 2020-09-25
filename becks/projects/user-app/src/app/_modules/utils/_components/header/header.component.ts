@@ -7,8 +7,12 @@ import { Component, Input, OnInit } from "@angular/core";
 })
 export class HeaderComponent implements OnInit {
   @Input() title: string;
+  @Input() urlComponent: string;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.title = "";
+    this.urlComponent = "";
+  }
 }

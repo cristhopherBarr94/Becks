@@ -15,7 +15,6 @@ import {
 import { HttpService } from "../../../../../../_services/http.service";
 import { Router } from "@angular/router";
 import { User } from "../../../../../../_models/User";
-import { SHA256, SHA512 } from "crypto-js";
 import { UiService } from "../../../../../../_services/ui.service";
 import { HeaderComponent } from "src/app/_modules/utils/_components/header/header.component";
 
@@ -38,6 +37,7 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
   title: string = "activa tu cuenta";
+  prevUrl: string = "/home";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,6 +52,7 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.header.title = this.title;
+    this.header.urlComponent = this.prevUrl;
   }
 
   initforms() {
@@ -84,6 +85,7 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
           if (response.status == 200) {
             this.httpError = "";
             this.userRegisterForm.reset();
+            this.router.navigate(["recovery/email"]);
           }
         },
         (e) => {

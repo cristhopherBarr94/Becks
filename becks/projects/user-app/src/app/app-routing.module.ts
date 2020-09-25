@@ -22,14 +22,6 @@ const routes: Routes = [
         (m) => m.AgeGateModule
       ),
   },
-
-  {
-    path: "profile",
-    loadChildren: () =>
-      import(
-        "./_modules/user/_modules/profile/profile/profile-routing.module"
-      ).then((m) => m.ProfilePageRoutingModule),
-  },
   {
     path: "",
     redirectTo: "profile",

@@ -40,14 +40,7 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
     this.initforms();
   }
 
-  ngAfterViewInit(): void {
-    try {
-      document
-        .getElementById("mat-checkbox-promo")
-        .getElementsByTagName("input")[0]
-        .setAttribute("data-qadp", "input-marketing");
-    } catch (error) {}
-  }
+  ngAfterViewInit(): void {}
 
   initforms() {
     this.userRegisterForm = this.formBuilder.group({
@@ -68,15 +61,25 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
     }
     return classreturn;
   }
-
-  public getClassInputSelect(item: any): string {
-    let classreturn = "select-becks";
-    if (item.valid) {
-      classreturn = "select-becks-ok";
-    } else if (item.touched) {
-      classreturn = "select-becks-error";
+  sendEmail(): void {
+    if (this.userRegisterForm.valid) {
+      this.ui.showLoading();
+      const formData = new FormData();
+      formData.append("email", this.userRegisterForm.controls.email.value);
+      this.httpService.post("", formData).subscribe(
+        (response: any) => {
+          this.ui.dismissLoading();
+          if (response.status == 200) {
+            this.httpError = "";
+            this.userRegisterForm.reset();
+          }
+        },
+        (e) => {
+          this.httpError = "Email incorrecto";
+          this.ui.dismissLoading();
+        }
+      );
     }
-    return classreturn;
   }
 
   public getMessageform(
@@ -95,9 +98,5 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
     } else if (item.hasError("pattern")) {
       return "Ingrese solo letras";
     }
-  }
-
-  public setCaptchaStatus(status) {
-    this.captchaStatus = status;
   }
 }

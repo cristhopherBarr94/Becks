@@ -14,6 +14,7 @@ const routes: Routes = [
         (m) => m.ProfileModule
       ),
   },
+
   {
     path: "age-gate",
     loadChildren: () =>

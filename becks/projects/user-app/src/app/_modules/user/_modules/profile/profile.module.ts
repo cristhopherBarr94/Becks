@@ -3,8 +3,6 @@ import { CommonModule } from "@angular/common";
 
 import { ProfileRoutingModule } from "./profile-routing.module";
 import { UtilsModule } from "src/app/_modules/utils/utils.module";
-import { SectionForgetPassComponent } from "./_components/section-forget-pass/section-forget-pass.component";
-import { HomePage } from "./_pages/home/home.page";
 
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
@@ -12,11 +10,12 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatIconModule } from "@angular/material/icon";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SectionForgetPassComponent } from "./_components/section-forget-pass/section-forget-pass.component";
 import { SectionRequestConfirmComponent } from "./_components/section-request-confirm/section-request-confirm.component";
 import { SectionChangePassComponent } from "./_components/section-change-pass/section-change-pass.component";
+
 @NgModule({
   declarations: [
-    HomePage,
     SectionForgetPassComponent,
     SectionRequestConfirmComponent,
     SectionChangePassComponent,

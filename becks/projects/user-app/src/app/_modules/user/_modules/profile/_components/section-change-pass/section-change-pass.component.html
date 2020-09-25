@@ -45,14 +45,14 @@
           matInput
           id="passwordVerify"
           formControlName="passwordVerify"
-          [type]="!hide ? 'password' : 'text'"
+          [type]="!hide2 ? 'password' : 'text'"
           required
           maxlength="30"
           data-qadp="passwordVerify"
           [(ngModel)]="passwordVerify"
         />
-        <mat-icon matSuffix (click)="hide = !hide">{{
-          !hide ? "visibility_off" : "visibility"
+        <mat-icon matSuffix (click)="hide2 = !hide2">{{
+          !hide2 ? "visibility_off" : "visibility"
         }}</mat-icon>
       </mat-form-field>
 

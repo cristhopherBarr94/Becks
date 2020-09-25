@@ -1,4 +1,10 @@
-import { Component, OnInit, Input, AfterViewInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  AfterViewInit,
+  ChangeDetectorRef,
+} from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -34,7 +40,8 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     public httpService: HttpService,
     private router: Router,
-    private ui: UiService
+    private ui: UiService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -80,6 +87,13 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
       privacy: new FormControl(null, Validators.required),
       promo: new FormControl(null),
     });
+  }
+
+  methodFB(userInfo: any) {
+    this.userRegisterForm.controls.name.patchValue(userInfo.first_name);
+    this.userRegisterForm.controls.surname.patchValue(userInfo.last_name);
+    this.userRegisterForm.controls.email.patchValue(userInfo.email);
+    this.cdr.detectChanges();
   }
 
   saveUser(): void {

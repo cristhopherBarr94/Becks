@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "user-fb-button",
@@ -6,6 +6,8 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./fb-button.component.scss"],
 })
 export class FbButtonComponent implements OnInit {
+  @Output() fBUserEmiter = new EventEmitter();
+
   constructor() {}
 
   ngOnInit() {
@@ -49,13 +51,14 @@ export class FbButtonComponent implements OnInit {
             (userInfo) => {
               console.log("user information");
               console.log(userInfo);
+              this.fBUserEmiter.emit(userInfo);
             }
           );
         } else {
           console.log("User login failed");
         }
       },
-      { scope: "email" }
+      { scope: "email", perms: "user_address, user_mobile_phone" }
     );
   }
 }

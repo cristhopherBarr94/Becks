@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "user-tabs",
@@ -7,14 +7,13 @@ import { Component, OnInit } from "@angular/core";
 })
 export class TabsComponent implements OnInit {
   public actuallTab: string = "red";
+  @Output() indexTab = new EventEmitter();
 
   constructor() {}
 
   ngOnInit() {}
 
   selectedTab = (tab) => {
-    if (tab.index == 0) {
-      this.actuallTab = "blue";
-    }
+    this.indexTab.emit(tab.index);
   };
 }

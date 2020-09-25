@@ -15,7 +15,7 @@ import { ProfilePictureComponent } from "../../_components/profile-picture/profi
 export class ProfilePage implements OnInit, AfterViewInit {
   @ViewChild(ProfilePictureComponent) picture: ProfilePictureComponent;
   urlPicture: string =
-    "'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y'";
+    "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y";
 
   constructor() {}
 

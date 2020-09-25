@@ -10,7 +10,5 @@ export class ProfilePictureComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.urlImage);
-  }
+  ngOnInit() {}
 }

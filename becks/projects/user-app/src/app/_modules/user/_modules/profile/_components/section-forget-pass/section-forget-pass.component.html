@@ -1,13 +1,49 @@
-<section
-  id="formSection"
-  class="fullSection recovery-section content-flex-all-center"
->
+<section id="formSection" class="fullSection recovery-section">
   <div
     class="content-flex-all-center full-height flex-direction-column padding-form"
   >
-    <span class="logo-2 margin-top-icon" alt="logo"> </span>
-    <span class="logo-2 separator"> </span>
     <span class="recovery-icon"> </span>
-    <h1 class="title-primary">RECUPERAR CONTRASEÑA</h1>
+
+    <form
+      [formGroup]="userRegisterForm"
+      class="form-section"
+      autocomplete="off"
+    >
+      <h1 class="title-secondary">RECUPERAR CONTRASEÑA</h1>
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userRegisterForm.controls.email)"
+      >
+        <mat-label>Correo electrónico</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          placeholder="example@example.com"
+          type="email"
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
+          maxlength="30"
+          [(ngModel)]="userRegister.email"
+          data-qadp="email"
+        />
+        <mat-error *ngIf="userRegisterForm.controls.email.errors">
+          *Has ingresado un dato inválido
+        </mat-error>
+      </mat-form-field>
+      <button
+        block="block"
+        color="becks"
+        (click)="sendEmail()"
+        class="becks-btn-primary margin-top-button button-width"
+        [ngClass]="{
+          'button-disabled': userRegisterForm.invalid
+        }"
+        [disabled]="userRegisterForm.invalid"
+        data-qadp="send-button-form"
+      >
+        <span>RECUPERAR CONTRASEÑA</span>
+      </button>
+    </form>
   </div>
 </section>

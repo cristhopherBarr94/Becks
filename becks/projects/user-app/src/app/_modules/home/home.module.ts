@@ -5,7 +5,6 @@ import { HomeRoutingModule } from "./home-routing.module";
 import { UtilsModule } from "../utils/utils.module";
 import { HomePage } from "./_pages/home/home.page";
 import { IonicModule } from "@ionic/angular";
-import { SectionPrincipalFormComponent } from "./_components/section-principal-form/section-principal-form.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { MatTabsModule } from "@angular/material/tabs";
@@ -18,11 +17,12 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatIconModule } from "@angular/material/icon";
 import { UserLoginComponent } from "./_components/user-login/user-login.component";
+import { UserRegisterComponent } from "./_components/user-register/user-register.component";
 
 @NgModule({
   declarations: [
     HomePage,
-    SectionPrincipalFormComponent,
+    UserRegisterComponent,
     TabsComponent,
     UserLoginComponent,
   ],

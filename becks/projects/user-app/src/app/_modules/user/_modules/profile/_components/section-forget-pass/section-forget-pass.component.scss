@@ -1,22 +1,27 @@
 .recovery-section {
   background: #121212;
   color: #ffffff;
+  padding-top: 108px;
 }
-.margin-top-icon {
-  top: 24px;
+
+.title-secondary {
+  font-weight: 500 !important;
+  font-style: normal !important;
+  font-size: 13px !important;
+  line-height: 50px !important;
 }
-.separator {
-  top: 113px;
-  width: 100%;
-  height: 4px;
-  background: rgb(98, 248, 178);
-  background: linear-gradient(
-    90deg,
-    rgba(98, 248, 178, 1) 0%,
-    rgba(75, 189, 136, 1) 76%,
-    rgba(0, 4, 2, 1) 92%
-  );
-}
+
 .recovery-icon {
-  top: 167px;
+  position: relative !important;
+}
+.no-padding {
+  padding: 0px;
+  ion-row,
+  ion-col {
+    padding: 0px;
+  }
+}
+
+.margin-top-button {
+  width: 316px;
 }

@@ -11,8 +11,16 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatIconModule } from "@angular/material/icon";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SectionRequestConfirmComponent } from "./_components/section-request-confirm/section-request-confirm.component";
+import { SectionChangePassComponent } from "./_components/section-change-pass/section-change-pass.component";
 @NgModule({
-  declarations: [HomePage, SectionForgetPassComponent],
+  declarations: [
+    HomePage,
+    SectionForgetPassComponent,
+    SectionRequestConfirmComponent,
+    SectionChangePassComponent,
+  ],
   imports: [
     CommonModule,
     ProfileRoutingModule,
@@ -22,6 +30,8 @@ import { MatIconModule } from "@angular/material/icon";
     MatCheckboxModule,
     MatRadioModule,
     MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class ProfileModule {}

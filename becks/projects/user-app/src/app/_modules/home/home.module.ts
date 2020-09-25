@@ -18,6 +18,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatIconModule } from "@angular/material/icon";
 import { UserLoginComponent } from "./_components/user-login/user-login.component";
+import { FbButtonComponent } from "./_components/fb-button/fb-button.component";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { UserLoginComponent } from "./_components/user-login/user-login.componen
     SectionPrincipalFormComponent,
     TabsComponent,
     UserLoginComponent,
+    FbButtonComponent,
   ],
   imports: [
     CommonModule,

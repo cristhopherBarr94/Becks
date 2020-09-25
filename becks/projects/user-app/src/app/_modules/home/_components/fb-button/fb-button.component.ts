@@ -16,7 +16,7 @@ export class FbButtonComponent implements OnInit {
     (window as any).fbAsyncInit = function () {
       window["FB"].init({
         appId: "651296645541384",
-        cookie: true,
+        // cookie: true,
         xfbml: true,
         version: "v8.0",
       });

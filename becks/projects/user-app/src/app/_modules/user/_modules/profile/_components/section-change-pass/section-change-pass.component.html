@@ -1,82 +1,84 @@
-<section
-  id="formLoginSection"
-  class="fullSection from-section content-flex-all-center"
->
-  <div
-    class="content-flex-all-center full-height flex-direction-column padding-form"
-    id="formchangeSection"
+<ion-content>
+  <section
+    id="formLoginSection"
+    class="fullSection from-section content-flex-all-center"
   >
-    <span class="plane-icon"> </span>
-    <h1 class="title-secondary">CAMBIAR CONTRASEÑA</h1>
-    <form [formGroup]="userLoginForm" class="form-section" autocomplete="off">
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInput(userLoginForm.controls.password)"
-      >
-        <mat-label>Contraseña</mat-label>
-        <input
-          matInput
-          id="password"
-          formControlName="password"
-          [type]="!hide ? 'password' : 'text'"
-          required
-          maxlength="30"
-          data-qadp="password"
-          [(ngModel)]="password"
-        />
-        <mat-icon matSuffix (click)="hide = !hide">{{
-          !hide ? "visibility_off" : "visibility"
-        }}</mat-icon>
-        <mat-error *ngIf="userLoginForm.controls.password.invalid"
-          >*Este campo es obligatorio</mat-error
+    <div
+      class="content-flex-all-center full-height flex-direction-column padding-form"
+      id="formchangeSection"
+    >
+      <span class="plane-icon"> </span>
+      <h1 class="title-secondary">CAMBIAR CONTRASEÑA</h1>
+      <form [formGroup]="userLoginForm" class="form-section" autocomplete="off">
+        <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userLoginForm.controls.password)"
         >
-      </mat-form-field>
+          <mat-label>Contraseña</mat-label>
+          <input
+            matInput
+            id="password"
+            formControlName="password"
+            [type]="!hide ? 'password' : 'text'"
+            required
+            maxlength="30"
+            data-qadp="password"
+            [(ngModel)]="password"
+          />
+          <mat-icon matSuffix (click)="hide = !hide">{{
+            !hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+          <mat-error *ngIf="userLoginForm.controls.password.invalid"
+            >*Este campo es obligatorio</mat-error
+          >
+        </mat-form-field>
 
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInput(userLoginForm.controls.passwordVerify)"
-      >
-        <mat-label>Contraseña</mat-label>
-        <input
-          matInput
-          id="passwordVerify"
-          formControlName="passwordVerify"
-          [type]="!hide2 ? 'password' : 'text'"
-          required
-          maxlength="30"
-          data-qadp="passwordVerify"
-          [(ngModel)]="passwordVerify"
-        />
-        <mat-icon matSuffix (click)="hide2 = !hide2">{{
-          !hide2 ? "visibility_off" : "visibility"
-        }}</mat-icon>
-      </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userLoginForm.controls.passwordVerify)"
+        >
+          <mat-label>Contraseña</mat-label>
+          <input
+            matInput
+            id="passwordVerify"
+            formControlName="passwordVerify"
+            [type]="!hide2 ? 'password' : 'text'"
+            required
+            maxlength="30"
+            data-qadp="passwordVerify"
+            [(ngModel)]="passwordVerify"
+          />
+          <mat-icon matSuffix (click)="hide2 = !hide2">{{
+            !hide2 ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </mat-form-field>
 
-      <mat-error
-        *ngIf="
-          this.userLoginForm.controls.passwordVerify.value !=
-          this.userLoginForm.controls.password.value
-        "
-        >*Las contraseñas no coinciden</mat-error
-      >
-      <button
-        class="becks-btn-primary margin-top-button button-width"
-        (click)="changePass()"
-        block="block"
-        color="becks"
-        [ngClass]="{
-          'button-disabled':
-            userLoginForm.invalid ||
-            this.userLoginForm.controls.password.value !=
-              this.userLoginForm.controls.passwordVerify.value
-        }"
-      >
-        <span>CAMBIAR CONTRASEÑA</span>
-      </button>
-    </form>
-  </div>
-</section>
+        <mat-error
+          *ngIf="
+            this.userLoginForm.controls.passwordVerify.value !=
+            this.userLoginForm.controls.password.value
+          "
+          >*Las contraseñas no coinciden</mat-error
+        >
+        <button
+          class="becks-btn-primary margin-top-button button-width"
+          (click)="changePass()"
+          block="block"
+          color="becks"
+          [ngClass]="{
+            'button-disabled':
+              userLoginForm.invalid ||
+              this.userLoginForm.controls.password.value !=
+                this.userLoginForm.controls.passwordVerify.value
+          }"
+        >
+          <span>CAMBIAR CONTRASEÑA</span>
+        </button>
+      </form>
+    </div>
+  </section>
+</ion-content>

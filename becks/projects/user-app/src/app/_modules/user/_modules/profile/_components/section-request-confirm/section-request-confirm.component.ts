@@ -16,7 +16,4 @@ export class SectionRequestConfirmComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
-  back() {
-    this.router.navigate(["recovery"]);
-  }
 }

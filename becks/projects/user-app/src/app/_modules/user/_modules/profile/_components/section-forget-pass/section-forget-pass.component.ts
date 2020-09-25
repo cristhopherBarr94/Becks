@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, AfterViewInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  AfterViewInit,
+  Output,
+  ViewChild,
+} from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -10,6 +17,7 @@ import { Router } from "@angular/router";
 import { User } from "../../../../../../_models/User";
 import { SHA256, SHA512 } from "crypto-js";
 import { UiService } from "../../../../../../_services/ui.service";
+import { HeaderComponent } from "src/app/_modules/utils/_components/header/header.component";
 
 declare global {
   interface Window {
@@ -27,7 +35,9 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
-  @Input() principalContent;
+
+  @ViewChild(HeaderComponent) header: HeaderComponent;
+  title: string = "activa tu cuenta";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,7 +50,9 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
     this.initforms();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    this.header.title = this.title;
+  }
 
   initforms() {
     this.userRegisterForm = this.formBuilder.group({

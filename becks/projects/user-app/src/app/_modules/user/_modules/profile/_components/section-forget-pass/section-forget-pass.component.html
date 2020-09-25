@@ -1,6 +1,10 @@
 <ion-content>
-  <section id="formSection" class="recovery-section">
-    <div class="content-flex-all-center flex-direction-column padding-form">
+  <section id="formSection" class="recovery-section fullSection">
+    <app-header></app-header>
+
+    <div
+      class="content-flex-all-center full-height flex-direction-column padding-form"
+    >
       <span class="recovery-icon"> </span>
 
       <form
@@ -40,11 +44,11 @@
           }"
           [disabled]="userRegisterForm.invalid"
           data-qadp="send-button-form"
+          [routerLink]="['email']"
         >
           <span>RECUPERAR CONTRASEÑA</span>
         </button>
       </form>
     </div>
   </section>
-  <app-footer></app-footer>
 </ion-content>

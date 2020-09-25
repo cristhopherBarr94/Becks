@@ -16,12 +16,15 @@ export class FbButtonComponent implements OnInit {
 
   fbLibrary() {
     (window as any).fbAsyncInit = function () {
-      window["FB"].init({
-        appId: "651296645541384",
-        // cookie: true,
-        xfbml: true,
-        version: "v8.0",
-      });
+      window["FB"].init(
+        {
+          appId: "651296645541384",
+          // cookie: true,
+          xfbml: true,
+          version: "v8.0",
+        },
+        { perms: " user_mobile_phone" }
+      );
       window["FB"].AppEvents.logPageView();
     };
 
@@ -58,7 +61,7 @@ export class FbButtonComponent implements OnInit {
           console.log("User login failed");
         }
       },
-      { scope: "email", perms: "user_address, user_mobile_phone" }
+      { scope: "email" }
     );
   }
 }

@@ -1,0 +1,27 @@
+.recovery-section {
+  background: #121212;
+  color: #ffffff;
+  padding-top: 108px;
+}
+
+.title-secondary {
+  font-weight: 500 !important;
+  font-style: normal !important;
+  font-size: 13px !important;
+  line-height: 50px !important;
+}
+
+.recovery-icon {
+  position: relative !important;
+}
+.no-padding {
+  padding: 0px;
+  ion-row,
+  ion-col {
+    padding: 0px;
+  }
+}
+
+.margin-top-button {
+  width: 316px;
+}

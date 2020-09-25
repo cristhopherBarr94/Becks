@@ -1,0 +1,42 @@
+.from-section {
+  background: #121212;
+  color: #ffffff;
+
+  .content-flex-all-center .form-section {
+    margin-top: 0px;
+  }
+
+  .title-secondary {
+    font-weight: 500 !important;
+    font-style: normal !important;
+    font-size: 13px !important;
+    line-height: 50px !important;
+  }
+
+  .plane-icon {
+    position: relative !important;
+  }
+  .no-padding {
+    padding: 0px;
+    ion-row,
+    ion-col {
+      padding: 0px;
+    }
+  }
+  mat-error {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    position: relative;
+    width: auto;
+    right: 55px;
+    bottom: 20px;
+  }
+  mat-icon {
+    cursor: pointer;
+  }
+
+  ::ng-deep mat-icon:active {
+    font-family: "Material Icons" !important;
+  }
+}

@@ -8,6 +8,14 @@ const routes: Routes = [
       import("./_modules/home/home.module").then((m) => m.HomeModule),
   },
   {
+    path: "recovery",
+    loadChildren: () =>
+      import("./_modules/user/_modules/profile/profile.module").then(
+        (m) => m.ProfileModule
+      ),
+  },
+
+  {
     path: "age-gate",
     loadChildren: () =>
       import("./_modules/age-gate/age-gate.module").then(

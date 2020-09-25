@@ -119,3 +119,38 @@
   height: 28px;
   margin: 0px 5px;
 }
+
+.recovery-icon {
+  background-image: url("../assets/icon/recovery-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 123px;
+    height: 81px;
+  }
+}
+
+.plane-icon {
+  background-image: url("../assets/icon/plane-confirm.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 132px;
+    height: 104px;
+  }
+}
+.plane-icon {
+  background-image: url("../assets/icon/lock-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 90px;
+    height: 56px;
+  }
+}

@@ -24,11 +24,11 @@ declare global {
 }
 
 @Component({
-  selector: "app-section-principal-form",
-  templateUrl: "./section-principal-form.component.html",
-  styleUrls: ["./section-principal-form.component.scss"],
+  selector: "app-user-register",
+  templateUrl: "./user-register.component.html",
+  styleUrls: ["./user-register.component.scss"],
 })
-export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
+export class UserRegisterComponent implements OnInit, AfterViewInit {
   public userRegisterForm: FormGroup;
   public userRegister: User = new User();
   public captchaStatus: boolean;

@@ -156,8 +156,6 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->set("langcode", $lang);
       $user->set("preferred_langcode", $lang);
       $user->set("preferred_admin_langcode", $lang);
-      $user->set("field_type_id", $data['type_id'] );
-      $user->set("field_id_number", $data['id_number'] );
       $user->set("field_first_name", $data['first_name'] );
       $user->set("field_last_name", $data['last_name'] );
       $user->set("field_mobile_phone", $data['mobile_phone'] );
@@ -165,6 +163,8 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       
       if ( isset($data['type_id']) ) {
         // User from User-APP
+        $user->set("field_type_id", $data['type_id'] );
+        $user->set("field_id_number", $data['id_number'] );
         $user->set("field_status_waiting_list", 0);
         $user->activate();
         Util::sendWelcomeEmail( $user->getEmail() , $pass );
@@ -210,8 +210,41 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
    *   The HTTP response object.
    */
   public function patch($id, $data) {
-    $this->validate($data);
-    return $this->updateRecord($id, $data);
+    // $this->validate($data);
+
+    if ( $id == 0 ) {
+      // RECOVERY PASSWORD
+      if (!isset($data['email']) || empty($data['email']) ) {
+        throw new BadRequestHttpException('Hace falta el "Email"');
+      }
+      if ( strlen($data['email']) > 254) {
+        throw new BadRequestHttpException('El "Email" sobrepasa los caracteres permitidos');
+      }
+      if ( !filter_var($data['email'], FILTER_VALIDATE_EMAIL) ) {
+        throw new BadRequestHttpException('El "Email" no es valido');
+      }
+
+      // Validate Captcha
+      if ( !isset($data['captcha']) || empty($data['captcha']) ||
+            !isset($data['captcha_key']) || empty($data['captcha_key']) || 
+              $data['captcha_key'] > 999999999999 ) {
+        throw new BadRequestHttpException('Captcha no valido');
+      }
+      $hashed = Util::getCaptchaHash( $data['email'] . '-' . $data['captcha_key'] );
+      if ( $data['captcha'] != $hashed ) {
+        throw new BadRequestHttpException('Captcha no valido');
+      }
+
+      // Validate email for user
+      $user = user_load_by_mail( $data['email'] );
+      if ( !$user ) {
+        throw new BadRequestHttpException('El usuario con correo "'.$data['email'].'" no existe');
+      }
+      $pass = Util::getRandomUserPass();
+      Util::sendWelcomeEmail( $data['email'] , $pass );
+    }
+
+    return new ModifiedResourceResponse( $data['email'] , 202);
   }
 
   /**
@@ -419,35 +452,9 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
   }
 
   /**
-   * Updates record.
-   *
-   * @param int $id
-   *   The ID of the record.
-   * @param array $record
-   *   The record to validate.
-   *
-   * @return \Drupal\rest\ModifiedResourceResponse
-   *   The HTTP response object.
+   * Private Function
+   *  Analytics
    */
-  protected function updateRecord($id, array $record) {
-
-    // // Make sure the record already exists.
-    // $this->loadRecord($id);
-
-    // $this->validate($record);
-
-    // $this->dbConnection->update('ab_inbev_api_usercustom')
-    //   ->fields($record)
-    //   ->condition('id', $id)
-    //   ->execute();
-
-    // $this->logger->notice('UserCustom record @id has been updated.', ['@id' => $id]);
-
-    // // Return the updated record in the response body.
-    // $updated_record = $this->loadRecord($id);
-    // return new ModifiedResourceResponse($updated_record, 200);
-  }
-
   private function __sendTD($name , $lastname , $gender , $phone , $email , $privacy , $promo ) {
     
     // define variable that will be used to tell the __sendTD method if it should send to the production database

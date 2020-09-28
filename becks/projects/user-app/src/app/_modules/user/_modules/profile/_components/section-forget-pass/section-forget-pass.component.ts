@@ -29,7 +29,6 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
   public httpError: string;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
-  title: string = "activa tu cuenta";
   prevUrl: string = "/home";
 
   constructor(
@@ -44,7 +43,6 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.header.title = this.title;
     this.header.urlComponent = this.prevUrl;
   }
 

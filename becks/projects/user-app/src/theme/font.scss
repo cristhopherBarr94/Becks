@@ -111,6 +111,23 @@
   text-transform: uppercase;
 }
 
+.title-profile {
+  @include title(
+    "Eurostile BQ",
+    #ffffff,
+    0px,
+    normal,
+    lighter,
+    14px,
+    6px,
+    14px,
+    6px,
+    27px,
+    49px
+  );
+  text-transform: uppercase;
+}
+
 .title-tertiary {
   @include title(
     "Helvetica LT Std",

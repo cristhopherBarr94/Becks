@@ -12,6 +12,8 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatIconModule } from "@angular/material/icon";
+import { HeaderComponent } from "./_components/header/header.component";
+import { RouterModule } from "@angular/router";
 @NgModule({
   declarations: [
     LoadingComponent,
@@ -20,6 +22,7 @@ import { MatIconModule } from "@angular/material/icon";
     ToolbarComponent,
     NotifyModalComponent,
     CaptchaComponent,
+    HeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +32,7 @@ import { MatIconModule } from "@angular/material/icon";
     MatCheckboxModule,
     MatRadioModule,
     MatIconModule,
+    RouterModule,
   ],
   exports: [
     FooterComponent,
@@ -36,6 +40,7 @@ import { MatIconModule } from "@angular/material/icon";
     ToolbarComponent,
     NotifyModalComponent,
     CaptchaComponent,
+    HeaderComponent,
   ],
 })
 export class UtilsModule {}

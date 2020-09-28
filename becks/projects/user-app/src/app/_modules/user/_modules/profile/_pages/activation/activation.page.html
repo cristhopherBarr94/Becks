@@ -1,14 +1,12 @@
 <ion-content>
-  <section id="formSection" class="recovery-section fullSection">
-    <app-header></app-header>
-
+  <section class="background-black fullSection">
     <div
       class="content-flex-all-center full-height flex-direction-column padding-form"
     >
       <span class="recovery-icon"> </span>
 
       <form
-        [formGroup]="userRegisterForm"
+        [formGroup]="userActivationForm"
         class="form-section"
         autocomplete="off"
       >
@@ -17,22 +15,23 @@
           appearance="fill"
           floatLabel="auto"
           class="fullInput"
-          [ngClass]="getClassInput(userRegisterForm.controls.email)"
+          [ngClass]="getClassInput(userActivationForm.controls.codeNumber)"
         >
-          <mat-label>Correo electrónico</mat-label>
+          <mat-label>Número de identificación</mat-label>
           <input
             matInput
-            formControlName="email"
-            placeholder="example@example.com"
-            type="email"
-            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
-            maxlength="30"
-            [(ngModel)]="userRegister.email"
-            data-qadp="email"
+            (input)="inputValidatorAlphaNumeric($event)"
+            formControlName="codeNumber"
+            placeholder="Número de id"
+            minlength="4"
+            maxlength="11"
+            [(ngModel)]="userActivation.id_number"
+            required
+            data-qadp="codeNumber"
           />
-          <mat-error *ngIf="userRegisterForm.controls.email.errors">
-            *Has ingresado un dato inválido
-          </mat-error>
+          <mat-error *ngIf="userActivationForm.controls.codeNumber.errors"
+            >*Este campo es obligatorio</mat-error
+          >
         </mat-form-field>
         <button
           block="block"
@@ -40,9 +39,9 @@
           (click)="sendEmail()"
           class="becks-btn-primary margin-top-button button-width"
           [ngClass]="{
-            'button-disabled': userRegisterForm.invalid
-          }"
-          [disabled]="userRegisterForm.invalid"
+        'button-disabled': userActivationForm.invalid
+      }"
+          [disabled]="userActivationForm.invalid"
           data-qadp="send-button-form"
           [routerLink]="['/user/email']"
         >
@@ -51,4 +50,5 @@
       </form>
     </div>
   </section>
+  <app-footer></app-footer>
 </ion-content>

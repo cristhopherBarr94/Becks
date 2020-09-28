@@ -6,9 +6,9 @@ import {
   Validators,
 } from "@angular/forms";
 import { UiService } from "src/app/_services/ui.service";
-import { environment } from "src/environments/environment";
 import { HttpService } from "src/app/_services/http.service";
 import { AuthService } from "src/app/_services/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "user-section-change-pass",
@@ -25,7 +25,7 @@ export class SectionChangePassComponent implements OnInit {
     private formBuilder: FormBuilder,
     private ui: UiService,
     private httpService: HttpService,
-    private authService: AuthService
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -65,6 +65,7 @@ export class SectionChangePassComponent implements OnInit {
         (e) => {
           this.httpError = "Contraseña incorrecta";
           this.ui.dismissLoading();
+          this.router.navigate(["home"]);
         }
       );
     }

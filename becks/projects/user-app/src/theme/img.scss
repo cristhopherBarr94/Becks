@@ -162,3 +162,14 @@
     height: 56px;
   }
 }
+.left-arrow-icon {
+  background-image: url("../assets/icon/chevron-left.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 13px;
+    height: 23px;
+  }
+}

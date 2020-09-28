@@ -1,0 +1,32 @@
+.header {
+  position: absolute !important;
+  width: 100%;
+  top: 0;
+  padding: 30px 24px;
+
+  .return-btn {
+    background: transparent;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    :active {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  .title {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 0px;
+    .title-secondary {
+      font-size: 16px !important;
+      line-height: 110% !important;
+    }
+
+    @media (min-width: 0px) and (max-width: 768px) {
+      max-width: 250px;
+    }
+  }
+}

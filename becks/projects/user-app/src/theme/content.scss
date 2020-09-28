@@ -49,6 +49,11 @@
   flex-direction: column;
 }
 
+.flex-direction-row {
+  display: flex;
+  flex-direction: row;
+}
+
 .col-logo-2 {
   @media (min-width: 0px) and (max-width: 990px) {
     padding: 40px;

@@ -8,8 +8,14 @@ import { Component, OnInit, Input } from "@angular/core";
 export class ExperiencesCardComponent implements OnInit {
   @Input() urlImageExperience: string;
   @Input() nameExperience: string;
+  @Input() type: string;
 
+  public typeExp: string;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.type == "cancel") {
+      this.typeExp = "Cancelada";
+    }
+  }
 }

@@ -15,7 +15,7 @@ import { ProfilePictureComponent } from "../../_components/profile-picture/profi
 export class ProfilePage implements OnInit, AfterViewInit {
   @ViewChild(ProfilePictureComponent) picture: ProfilePictureComponent;
   urlPicture: string =
-    "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y";
+    "https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg";
 
   constructor() {}
 

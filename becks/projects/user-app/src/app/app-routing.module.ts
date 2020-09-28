@@ -10,9 +10,7 @@ const routes: Routes = [
   {
     path: "user",
     loadChildren: () =>
-      import("./_modules/user/_modules/profile/profile.module").then(
-        (m) => m.ProfileModule
-      ),
+      import("./_modules/user/user.module").then((m) => m.UserModule),
   },
 
   {
@@ -24,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "profile",
+    redirectTo: "age-gate",
     pathMatch: "full",
   },
 ];

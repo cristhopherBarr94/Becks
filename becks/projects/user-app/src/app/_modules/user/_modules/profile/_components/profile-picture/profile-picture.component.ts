@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class ProfilePictureComponent implements OnInit {
   @Input() urlImage: string;
+  @Input() profile_name: string;
 
   constructor() {}
 

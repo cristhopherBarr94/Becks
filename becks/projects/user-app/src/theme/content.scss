@@ -27,6 +27,7 @@
 .container-home-intro {
   @media (min-width: 0px) and (max-width: 768px) {
     min-height: 100%;
+    width: 100%;
     background-image: linear-gradient(
         0deg,
         rgba(0, 0, 0, 0) 100%,
@@ -42,7 +43,20 @@
 }
 
 .container-profile {
-  background-color: #171717;
+  @media (min-width: 0px) and (max-width: 768px) {
+    min-height: 100%;
+    background-image: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0) 100%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      url("../assets/img/profile_background.png");
+    background-repeat: no-repeat;
+    background-position: start !important;
+    display: flex;
+    background-color: #171717;
+    background-size: 100% 720px;
+  }
 }
 
 .flex-direction-column {

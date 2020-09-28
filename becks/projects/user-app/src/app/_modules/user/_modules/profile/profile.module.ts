@@ -10,6 +10,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatIconModule } from "@angular/material/icon";
+import { MatCardModule } from "@angular/material/card";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ProfilePictureComponent } from "./_components/profile-picture/profile-picture.component";
 import { ProfilePage } from "./_pages/profile/profile.page";
@@ -17,6 +18,7 @@ import { NameTittleComponent } from "./_components/name-tittle/name-tittle.compo
 import { StatisticsProfileComponent } from "./_components/statistics-profile/statistics-profile.component";
 import { SeccionsProfileComponent } from "./_components/seccions-profile/seccions-profile.component";
 import { DayMeterComponent } from "./_components/day-meter/day-meter.component";
+import { ExperiencesCardsComponent } from "./_components/experiences-cards/experiences-cards.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { DayMeterComponent } from "./_components/day-meter/day-meter.component";
     StatisticsProfileComponent,
     SeccionsProfileComponent,
     DayMeterComponent,
+    ExperiencesCardsComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { DayMeterComponent } from "./_components/day-meter/day-meter.component";
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatCardModule,
   ],
 })
 export class ProfileModule {}

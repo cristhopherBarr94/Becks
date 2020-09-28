@@ -16,7 +16,12 @@ import { NameTittleComponent } from "./_components/name-tittle/name-tittle.compo
 import { StatisticsProfileComponent } from "./_components/statistics-profile/statistics-profile.component";
 
 @NgModule({
-  declarations: [ProfilePictureComponent, ProfilePage, NameTittleComponent],
+  declarations: [
+    ProfilePictureComponent,
+    ProfilePage,
+    NameTittleComponent,
+    StatisticsProfileComponent,
+  ],
   imports: [
     CommonModule,
     ProfileRoutingModule,

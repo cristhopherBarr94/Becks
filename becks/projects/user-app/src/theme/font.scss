@@ -215,11 +215,23 @@ p {
   font-family: "Helvetica LT Std";
   text-decoration: none;
   font-style: normal;
+  font-weight: lighter;
   font-size: 11px;
   line-height: 18px;
   color: #ffffff;
   @media (min-width: 769px) {
     font-size: 12px;
+  }
+}
+
+.link-profile {
+  font-family: "Helvetica LT Std";
+  text-decoration: none;
+  font-style: normal;
+  font-size: 11px;
+  color: #ffffff;
+  @media (min-width: 769px) {
+    font-size: 11px;
   }
 }
 

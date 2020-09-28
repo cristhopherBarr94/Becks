@@ -85,7 +85,7 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
           if (response.status == 200) {
             this.httpError = "";
             this.userRegisterForm.reset();
-            this.router.navigate(["recovery/email"]);
+            // this.router.navigate(["user/email"]);
           }
         },
         (e) => {

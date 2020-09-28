@@ -19,6 +19,7 @@ import { StatisticsProfileComponent } from "./_components/statistics-profile/sta
 import { SeccionsProfileComponent } from "./_components/seccions-profile/seccions-profile.component";
 import { DayMeterComponent } from "./_components/day-meter/day-meter.component";
 import { ExperiencesCardsComponent } from "./_components/experiences-cards/experiences-cards.component";
+import { ExperiencesCardComponent } from "./_components/experiences-card/experiences-card.component";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ExperiencesCardsComponent } from "./_components/experiences-cards/exper
     SeccionsProfileComponent,
     DayMeterComponent,
     ExperiencesCardsComponent,
+    ExperiencesCardComponent,
   ],
   imports: [
     CommonModule,

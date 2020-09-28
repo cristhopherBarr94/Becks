@@ -16,6 +16,10 @@ export class ExperiencesCardComponent implements OnInit {
   ngOnInit() {
     if (this.type == "cancel") {
       this.typeExp = "Cancelada";
+    } else if (this.type == "pending") {
+      this.typeExp = "Pendiente";
+    } else {
+      this.typeExp = "Completa";
     }
   }
 }

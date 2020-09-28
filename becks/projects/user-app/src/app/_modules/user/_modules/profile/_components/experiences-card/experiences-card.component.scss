@@ -10,6 +10,10 @@
   width: 33%;
 }
 
+.display-flex {
+  display: flex;
+}
+
 ::ng-deep .mat-card {
   padding: 0px 0px 0px 5px !important;
 }

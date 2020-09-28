@@ -41,8 +41,18 @@
   }
 }
 
+.container-profile {
+  background-color: #171717;
+}
+
 .flex-direction-column {
   flex-direction: column;
+}
+
+.flex-direction-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .col-logo-2 {

@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  AfterViewInit,
-  Output,
-  ViewChild,
-} from "@angular/core";
+import { Component, OnInit, AfterViewInit, ViewChild } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,

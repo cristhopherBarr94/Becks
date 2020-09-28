@@ -14,6 +14,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 import { ActivationPage } from "./_modules/profile/_pages/activation/activation.page";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ActivationPage } from "./_modules/profile/_pages/activation/activation.
     MatRadioModule,
     MatIconModule,
     UtilsModule,
+    MatTooltipModule,
   ],
 })
 export class UserModule {}

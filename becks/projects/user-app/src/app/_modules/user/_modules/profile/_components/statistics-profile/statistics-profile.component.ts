@@ -6,11 +6,9 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./statistics-profile.component.scss"],
 })
 export class StatisticsProfileComponent implements OnInit {
-  @Input() statistics: any;
+  @Input() statistics: string;
 
   constructor() {}
 
-  ngOnInit() {
-    console.log("StatisticsProfileComponent -> statistics", this.statistics);
-  }
+  ngOnInit() {}
 }

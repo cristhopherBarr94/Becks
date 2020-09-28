@@ -1,0 +1,24 @@
+.seccion-tabs {
+  min-height: 100%;
+  width: 100%;
+}
+
+::ng-deep .mat-tab-label {
+  font-family: "Helvetica LT Std";
+  color: #ffffff !important;
+  font-size: 11px;
+  min-width: 0px;
+  border-bottom: 3px solid #c4c4c4;
+}
+
+::ng-deep .mat-tab-label-active {
+  font-family: "Helvetica LT Std";
+  color: #ffffff !important;
+  font-size: 11px;
+  min-width: 0px;
+}
+
+::ng-deep .mat-ink-bar {
+  background: linear-gradient(100deg, #00d18c 100%, #03b87c 100%, #019874 87%);
+  height: 5px !important;
+}

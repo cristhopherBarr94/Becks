@@ -1,3 +1,11 @@
-<p>
-  seccions-profile works!
-</p>
+<section class="seccion-tabs">
+  <mat-tab-group
+    class="content-flex-all-center"
+    [selectedIndex]="0"
+    (selectedTabChange)="selectedTab($event)"
+  >
+    <mat-tab label="CUENTA" id="login"> dos </mat-tab>
+    <mat-tab label="MIS EXPERIENCIAS" id="register"> uno </mat-tab>
+    <mat-tab label="PROMOCIONES" id="register"> uno </mat-tab>
+  </mat-tab-group>
+</section>

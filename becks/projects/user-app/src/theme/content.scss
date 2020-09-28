@@ -42,7 +42,10 @@
 }
 
 .container-profile {
-  background-color: #171717;
+  @media (min-width: 0px) and (max-width: 768px) {
+    min-height: 100%;
+    background-color: #171717;
+  }
 }
 
 .flex-direction-column {

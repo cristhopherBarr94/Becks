@@ -16,6 +16,7 @@ import { ProfilePage } from "./_pages/profile/profile.page";
 import { NameTittleComponent } from "./_components/name-tittle/name-tittle.component";
 import { StatisticsProfileComponent } from "./_components/statistics-profile/statistics-profile.component";
 import { SeccionsProfileComponent } from "./_components/seccions-profile/seccions-profile.component";
+import { DayMeterComponent } from "./_components/day-meter/day-meter.component";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SeccionsProfileComponent } from "./_components/seccions-profile/seccion
     NameTittleComponent,
     StatisticsProfileComponent,
     SeccionsProfileComponent,
+    DayMeterComponent,
   ],
   imports: [
     CommonModule,

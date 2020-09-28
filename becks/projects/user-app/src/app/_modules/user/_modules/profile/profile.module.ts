@@ -16,6 +16,7 @@ import { SectionChangePassComponent } from "./_components/section-change-pass/se
 import { ProfilePictureComponent } from "./_components/profile-picture/profile-picture.component";
 import { ProfilePage } from "./_pages/profile/profile.page";
 import { NameTittleComponent } from "./_components/name-tittle/name-tittle.component";
+import { StatisticsProfileComponent } from "./_components/statistics-profile/statistics-profile.component";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NameTittleComponent } from "./_components/name-tittle/name-tittle.compo
     ProfilePictureComponent,
     ProfilePage,
     NameTittleComponent,
+    StatisticsProfileComponent,
   ],
   imports: [
     CommonModule,

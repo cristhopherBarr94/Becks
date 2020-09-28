@@ -14,6 +14,7 @@ import { ProfilePictureComponent } from "./_components/profile-picture/profile-p
 import { ProfilePage } from "./_pages/profile/profile.page";
 import { NameTittleComponent } from "./_components/name-tittle/name-tittle.component";
 import { StatisticsProfileComponent } from "./_components/statistics-profile/statistics-profile.component";
+import { SeccionsProfileComponent } from "./_components/seccions-profile/seccions-profile.component";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { StatisticsProfileComponent } from "./_components/statistics-profile/sta
     ProfilePage,
     NameTittleComponent,
     StatisticsProfileComponent,
+    SeccionsProfileComponent,
   ],
   imports: [
     CommonModule,

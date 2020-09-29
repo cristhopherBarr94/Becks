@@ -14,6 +14,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 import { ActivationPage } from "./_modules/profile/_pages/activation/activation.page";
+import { UserService } from "src/app/_services/user.service";
 
 @NgModule({
   declarations: [
@@ -35,5 +36,6 @@ import { ActivationPage } from "./_modules/profile/_pages/activation/activation.
     MatIconModule,
     UtilsModule,
   ],
+  providers: [UserService],
 })
 export class UserModule {}

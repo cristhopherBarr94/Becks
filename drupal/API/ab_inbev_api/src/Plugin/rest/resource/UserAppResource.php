@@ -134,17 +134,15 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
    */
   public function get($id) {
     $resp = [ 
-      $this->currentUser->getRoles(),
-      $this->currentUser->getEmail(),
-      $this->currentUser->getAccountName(),
-      $this->currentUser->getDisplayName(),
-      $this->currentUser->isAuthenticated(),
-      $this->currentUser->getLastAccessedTime(),
-      $this->currentUser->get('user_picture')->entity->url(),
-      $this->currentUser->get('field_first_name'),
-      $this->currentUser->get('field_last_name'),
-      $this->currentUser->get('field_mobile_phone'),
-      $this->currentUser->get('field_birthdate'),
+      "roles" => $this->currentUser->getRoles(),
+      "email" => $this->currentUser->getEmail(),
+      "last_login" => $this->currentUser->getLastAccessedTime(),
+      "photo" => $this->currentUser->get('user_picture')->entity->url(),
+      "first_name" => $this->currentUser->get('field_first_name'),
+      "last_name" => $this->currentUser->get('field_last_name'),
+      "mobile_phone" => $this->currentUser->get('field_mobile_phone'),
+      "birthdate" => $this->currentUser->get('field_birthdate'),
+      "status" => $this->currentUser->get('field_status')
     ];
     return new ResourceResponse($resp);
   }
@@ -198,28 +196,29 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
       $user->setPassword( $record['password'] );
       $user->save();
 
-    } else if ( $id == 1 ) {
+    } else 
+      if ( $id == 1 ) {
       // PATCH DATA [ first_name , last_name, mobile_phone, birthdate, photo]
-      $this->validate($data);
+        $this->validate($data);
 
-      $user = User::load($this->currentUser->id());
-  
-      $user->set("field_first_name", $data['first_name'] );
-      $user->set("field_last_name", $data['last_name'] );
-      $user->set("field_mobile_phone", $data['mobile_phone'] );
-      $user->set("field_birthdate", $data['birthdate'] );
-  
-      if ( isset($record['photo']) ) {
-        $image = base64_decode( $record['photo'] );
-        $file = file_save_data($image, $target, FileSystemInterface::EXISTS_REPLACE);
-        $file->save();
-        $user->set('user_picture', $file);
+        $user = User::load($this->currentUser->id());
+    
+        $user->set("field_first_name", $data['first_name'] );
+        $user->set("field_last_name", $data['last_name'] );
+        $user->set("field_mobile_phone", $data['mobile_phone'] );
+        $user->set("field_birthdate", $data['birthdate'] );
+
+        if ( isset($record['photo']) ) {
+          $image = base64_decode( $record['photo'] );
+          $file = file_save_data($image, $target, FileSystemInterface::EXISTS_REPLACE);
+          $file->save();
+          $user->set('user_picture', $file);
+        }
+
+        $user->save();
       }
-  
-      $user->save();
-    }
 
-    return new ModifiedResourceResponse( $user, 201);
+    return $this->get($id);
   }
 
   /**
@@ -297,39 +296,28 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
    */
   protected function validate($record) {
     if (!is_array($record) || count($record) == 0) {
-      throw new BadRequestHttpException('No record content received.');
+      throw new BadRequestHttpException('Petición no valida.');
     }
-    $allowed_fields = [
-      'first_name',
-      'last_name',
-      'mobile_phone',
-      'birthdate',
-      'photo'
-    ];
-
-    // if (count(array_diff(array_keys($record), $allowed_fields)) > 0) {
-    //   throw new BadRequestHttpException('Petición no valida.');
-    // }
 
     if (!isset($record['birthdate']) || empty($record['birthdate']) ) {
       throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta la "Fecha de Nacimiento"');
     }
     if ( strlen($record['birthdate']) > 11) {
-      throw new BadRequestHttpException('El "Fecha de Nacimiento" sobrepasa los caracteres permitidos');
+      throw new BadRequestHttpException('La "Fecha de Nacimiento" sobrepasa los caracteres permitidos');
     }
 
     if (!isset($record['first_name']) || empty($record['first_name'])) {
       throw new BadRequestHttpException('El usuario no puede ser registrado porque hacen falta los "Nombres"');
     }
     if ( strlen($record['first_name']) > 60) {
-      throw new BadRequestHttpException('Los "Nombres" sobrepasa los caracteres permitidos');
+      throw new BadRequestHttpException('Los "Nombres" sobrepasan los caracteres permitidos');
     }
 
     if (!isset($record['last_name']) || empty($record['last_name'])) {
       throw new BadRequestHttpException('El usuario no puede ser registrado porque hacen falta los "Apellidos"');
     }
     if ( strlen($record['last_name']) > 60) {
-      throw new BadRequestHttpException('Los "Apellidos" sobrepasa los caracteres permitidos');
+      throw new BadRequestHttpException('Los "Apellidos" sobrepasan los caracteres permitidos');
     }
 
     if (!isset($record['mobile_phone']) || empty($record['mobile_phone'])) {

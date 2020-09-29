@@ -429,6 +429,7 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
         $user->setPassword($pass);
         $user->activate();
         $user->set('field_status_waiting_list', FALSE);
+        $user->set('field_status', 1);
         if ( $user->save() ) {
           Util::sendWelcomeEmail( $user->getEmail() , $pass );
         }

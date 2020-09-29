@@ -11,15 +11,19 @@ export class ExperiencesCardComponent implements OnInit {
   @Input() type: string;
 
   public typeExp: string;
+  public colorClass: string;
   constructor() {}
 
   ngOnInit() {
     if (this.type == "cancel") {
       this.typeExp = "Cancelada";
+      this.colorClass = "red-color";
     } else if (this.type == "pending") {
       this.typeExp = "Pendiente";
+      this.colorClass = "orange-color";
     } else {
       this.typeExp = "Completa";
+      this.colorClass = "green-color";
     }
   }
 }

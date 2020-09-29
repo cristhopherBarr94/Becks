@@ -2,24 +2,31 @@
   <div class="margin-top">
     <span class="title-secondary red-color">CANCELADAS</span>
     <user-experiences-card
-      *ngFor="let item of cardsCancel"
+      *ngFor="let item of cards"
       [urlImageExperience]="item.urlImageExperience"
       [nameExperience]="item.nameExperience"
-      [type]="item.type"
+      type="cancel"
     >
     </user-experiences-card>
   </div>
   <div class="margin-top">
     <span class="title-secondary orange-color">PENDIENTES</span>
     <user-experiences-card
-      *ngFor="let item of cardsPending"
+      *ngFor="let item of cards"
       [urlImageExperience]="item.urlImageExperience"
       [nameExperience]="item.nameExperience"
-      [type]="item.type"
+      type="pending"
     >
     </user-experiences-card>
   </div>
   <div class="margin-top">
     <span class="title-secondary green-color">COMPLETAS</span>
+    <user-experiences-card
+      *ngFor="let item of cards"
+      [urlImageExperience]="item.urlImageExperience"
+      [nameExperience]="item.nameExperience"
+      type="complete"
+    >
+    </user-experiences-card>
   </div>
 </section>

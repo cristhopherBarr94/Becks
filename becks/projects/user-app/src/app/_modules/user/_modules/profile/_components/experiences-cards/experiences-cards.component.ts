@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { ExpCards } from "./mock-cards";
-import { CARD } from "./mock-cards";
 
 @Component({
   selector: "user-experiences-cards",

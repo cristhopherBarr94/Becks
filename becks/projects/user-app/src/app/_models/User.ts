@@ -26,36 +26,40 @@ export class User {
 
   constructor(data?: any) {
     if (data !== undefined) {
-      this.id = data["id"] !== undefined ? data["id"] : null;
+      this.id = data["id"] !== undefined ? data["id"] : undefined;
       this.first_name =
-        data["first_name"] !== undefined ? data["first_name"] : null;
+        data["first_name"] !== undefined ? data["first_name"] : undefined;
       this.last_name =
-        data["last_name"] !== undefined ? data["last_name"] : null;
+        data["last_name"] !== undefined ? data["last_name"] : undefined;
       this.mobile_phone =
-        data["mobile_phone"] !== undefined ? data["mobile_phone"] : null;
-      this.gender = data["gender"] !== undefined ? data["gender"] : null;
-      this.email = data["email"] !== undefined ? data["email"] : null;
-      this.password = data["password"] !== undefined ? data["password"] : null;
+        data["mobile_phone"] !== undefined ? data["mobile_phone"] : undefined;
+      this.gender = data["gender"] !== undefined ? data["gender"] : undefined;
+      this.email = data["email"] !== undefined ? data["email"] : undefined;
+      this.password =
+        data["password"] !== undefined ? data["password"] : undefined;
       this.waitingState =
-        data["waitingState"] !== undefined ? data["waitingState"] : null;
-      this.delete = data["delete"] !== undefined ? data["delete"] : null;
-      this.status = data["status"] !== undefined ? data["status"] : null;
-      this.phone = data["phone"] !== undefined ? data["phone"] : null;
-      this.type_id = data["type_id"] !== undefined ? data["type_id"] : null;
+        data["waitingState"] !== undefined ? data["waitingState"] : undefined;
+      this.delete = data["delete"] !== undefined ? data["delete"] : undefined;
+      this.status = data["status"] !== undefined ? data["status"] : undefined;
+      this.phone = data["phone"] !== undefined ? data["phone"] : undefined;
+      this.type_id =
+        data["type_id"] !== undefined ? data["type_id"] : undefined;
       this.id_number =
-        data["id_number"] !== undefined ? data["id_number"] : null;
-      this.captcha = data["captcha"] !== undefined ? data["captcha"] : null;
+        data["id_number"] !== undefined ? data["id_number"] : undefined;
+      this.captcha =
+        data["captcha"] !== undefined ? data["captcha"] : undefined;
       this.captcha_key =
-        data["captcha_key"] !== undefined ? data["captcha_key"] : null;
-      this.promo = data["promo"] !== undefined ? data["promo"] : null;
-      this.privacy = data["privacy"] !== undefined ? data["privacy"] : null;
+        data["captcha_key"] !== undefined ? data["captcha_key"] : undefined;
+      this.promo = data["promo"] !== undefined ? data["promo"] : undefined;
+      this.privacy =
+        data["privacy"] !== undefined ? data["privacy"] : undefined;
       this.status_waiting_list =
         data["status_waiting_list"] !== undefined
           ? data["status_waiting_list"]
-          : null;
-      this.photo = data["photo"] !== undefined ? data["photo"] : null;
+          : undefined;
+      this.photo = data["photo"] !== undefined ? data["photo"] : undefined;
       this.last_login =
-        data["last_login"] !== undefined ? data["last_login"] : null;
+        data["last_login"] !== undefined ? data["last_login"] : undefined;
       this.birthdate =
         data["birthdate"] !== undefined ? data["birthdate"] : null;
       this.buy_code = data["buy_code"] !== undefined ? data["buy_code"] : null;

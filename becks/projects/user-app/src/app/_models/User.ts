@@ -13,6 +13,7 @@ export class User {
   status_waiting_list: boolean;
   last_login: string;
   birthdate: string;
+  buy_code: string;
 
   type_id: string;
   id_number: string;
@@ -57,6 +58,7 @@ export class User {
         data["last_login"] !== undefined ? data["last_login"] : null;
       this.birthdate =
         data["birthdate"] !== undefined ? data["birthdate"] : null;
+      this.buy_code = data["buy_code"] !== undefined ? data["buy_code"] : null;
     }
   }
 
@@ -91,6 +93,7 @@ export class User {
     data["photo"] = this.photo !== undefined ? this.photo : null;
     data["last_login"] = this.last_login !== undefined ? this.last_login : null;
     data["birthdate"] = this.birthdate !== undefined ? this.birthdate : null;
+    data["buy_code"] = this.buy_code !== undefined ? this.buy_code : null;
 
     return data;
   }

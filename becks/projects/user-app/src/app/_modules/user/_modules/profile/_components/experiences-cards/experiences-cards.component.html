@@ -1,6 +1,6 @@
 <section class="container-exp">
   <div class="margin-top">
-    <span class="title-secondary red-color">CANCELADAS</span>
+    <span class="title-profile-big red-color">CANCELADAS</span>
     <user-experiences-card
       *ngFor="let item of cancelCards"
       [urlImageExperience]="item.urlImageExperience"
@@ -10,7 +10,7 @@
     </user-experiences-card>
   </div>
   <div class="margin-top">
-    <span class="title-secondary orange-color">PENDIENTES</span>
+    <span class="title-profile-big orange-color">PENDIENTES</span>
     <user-experiences-card
       *ngFor="let item of pendingCards"
       [urlImageExperience]="item.urlImageExperience"
@@ -20,7 +20,7 @@
     </user-experiences-card>
   </div>
   <div class="margin-top">
-    <span class="title-secondary green-color">COMPLETAS</span>
+    <span class="title-profile-big green-color">COMPLETAS</span>
     <user-experiences-card
       *ngFor="let item of acceptCards"
       [urlImageExperience]="item.urlImageExperience"

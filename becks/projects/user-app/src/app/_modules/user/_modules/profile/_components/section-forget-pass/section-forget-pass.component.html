@@ -34,21 +34,25 @@
             *Has ingresado un dato inválido
           </mat-error>
         </mat-form-field>
+        <app-captcha
+          [restart]="restartCaptcha"
+          (status)="setCaptchaStatus($event)"
+        >
+        </app-captcha>
+
         <button
+          class="becks-btn-primary margin-top-button button-width"
+          (click)="sendEmail()"
           block="block"
           color="becks"
-          (click)="sendEmail()"
-          class="becks-btn-primary margin-top-button button-width"
           [ngClass]="{
-            'button-disabled': userRegisterForm.invalid
+            'button-disabled': userRegisterForm.invalid || !captchaStatus
           }"
-          [disabled]="userRegisterForm.invalid"
-          data-qadp="send-button-form"
-          [routerLink]="['/user/email']"
         >
-          <span>RECUPERAR CONTRASEÑA</span>
+          <span>ENTRAR</span>
         </button>
       </form>
     </div>
   </section>
+  <app-footer></app-footer>
 </ion-content>

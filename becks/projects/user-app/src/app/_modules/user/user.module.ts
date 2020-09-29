@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 import { ActivationPage } from "./_modules/profile/_pages/activation/activation.page";
 import { UserService } from "src/app/_services/user.service";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { UserService } from "src/app/_services/user.service";
     MatRadioModule,
     MatIconModule,
     UtilsModule,
+    MatTooltipModule,
   ],
   providers: [UserService],
 })

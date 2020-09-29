@@ -1,0 +1,42 @@
+.separator-becks {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65px;
+  height: 2px;
+  background: rgb(98, 248, 178);
+  background: linear-gradient(
+    90deg,
+    rgba(98, 248, 178, 1) 0%,
+    rgba(18, 18, 18, 1) 80%
+  );
+  position: absolute;
+  top: 60px;
+}
+.title-secondary {
+  width: 235px;
+  height: 39px;
+  font-size: 13.28px !important;
+  line-height: 20px !important;
+  letter-spacing: 0.15px !important;
+}
+
+.title-tertiary {
+  width: 304px;
+  font-weight: bold !important;
+  font-size: 13.28px !important;
+  line-height: 16px !important;
+  text-align: center !important;
+  text-transform: lowercase;
+  color: #038259;
+}
+
+::ng-deep .tooltip-becks {
+  background: #ffffff !important;
+  color: black !important;
+  width: 122px;
+  font-size: 10px !important;
+  line-height: 12px !important;
+  text-align: center !important;
+  text-transform: lowercase;
+}

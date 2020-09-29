@@ -1,51 +1,68 @@
 <ion-content>
-  <section class="background-black fullSection">
+  <app-header></app-header>
+
+  <section class="background-black fullSection content-flex-all-center">
     <div
       class="content-flex-all-center full-height flex-direction-column padding-form"
     >
-      <span class="recovery-icon"> </span>
+      <div class="separator-becks"></div>
 
+      <span class="activation-icon"> </span>
+      <h2 class="title-secondary">INGRESA EL CÓDIGO DE COMPRA</h2>
+      <p class="title-tertiary">
+        Por la compra de un six pack podrás activar tu cuenta por un mes y ser
+        parte de este exclusivo club.
+      </p>
       <form
         [formGroup]="userActivationForm"
         class="form-section"
         autocomplete="off"
       >
-        <h1 class="title-secondary">RECUPERAR CONTRASEÑA</h1>
         <mat-form-field
           appearance="fill"
           floatLabel="auto"
           class="fullInput"
-          [ngClass]="getClassInput(userActivationForm.controls.codeNumber)"
+          [ngClass]="getClassInput(userActivationForm.controls.codeNum)"
         >
-          <mat-label>Número de identificación</mat-label>
+          <mat-label>Ingresa el código de compra</mat-label>
           <input
             matInput
             (input)="inputValidatorAlphaNumeric($event)"
-            formControlName="codeNumber"
+            formControlName="codeNum"
             placeholder="Número de id"
             minlength="4"
             maxlength="11"
             [(ngModel)]="userActivation.id_number"
             required
-            data-qadp="codeNumber"
+            data-qadp="codeNum"
           />
-          <mat-error *ngIf="userActivationForm.controls.codeNumber.errors"
-            >*Este campo es obligatorio</mat-error
-          >
+
+          <mat-icon matSuffix
+            ><span
+              class="help-icon"
+              matTooltip="Si compras tu producto en rappi, recibirás el código de compra"
+              matTooltipClass="tooltip-becks title-tertiary"
+            ></span
+          ></mat-icon>
+
+          <mat-error *ngIf="userActivationForm.controls.codeNum.errors"
+            >*Este campo es obligatorio
+          </mat-error>
         </mat-form-field>
+
         <button
           block="block"
           color="becks"
-          (click)="sendEmail()"
+          (click)="verifyCode()"
           class="becks-btn-primary margin-top-button button-width"
           [ngClass]="{
-        'button-disabled': userActivationForm.invalid
-      }"
+          'button-disabled': userActivationForm.invalid
+        }"
           [disabled]="userActivationForm.invalid"
           data-qadp="send-button-form"
           [routerLink]="['/user/email']"
         >
-          <span>RECUPERAR CONTRASEÑA</span>
+          <span>CONTINUAR</span>
         </button>
       </form>
     </div>

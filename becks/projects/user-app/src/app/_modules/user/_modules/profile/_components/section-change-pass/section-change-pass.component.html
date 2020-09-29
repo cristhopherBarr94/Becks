@@ -1,4 +1,5 @@
 <ion-content>
+  <app-header></app-header>
   <section
     id="formLoginSection"
     class="fullSection from-section content-flex-all-center"
@@ -9,12 +10,16 @@
     >
       <span class="plane-icon"> </span>
       <h1 class="title-secondary">CAMBIAR CONTRASEÑA</h1>
-      <form [formGroup]="userLoginForm" class="form-section" autocomplete="off">
+      <form
+        [formGroup]="userChangeForm"
+        class="form-section"
+        autocomplete="off"
+      >
         <mat-form-field
           appearance="fill"
           floatLabel="auto"
           class="fullInput"
-          [ngClass]="getClassInput(userLoginForm.controls.password)"
+          [ngClass]="getClassInput(userChangeForm.controls.password)"
         >
           <mat-label>Contraseña</mat-label>
           <input
@@ -30,7 +35,7 @@
           <mat-icon matSuffix (click)="hide = !hide">{{
             !hide ? "visibility_off" : "visibility"
           }}</mat-icon>
-          <mat-error *ngIf="userLoginForm.controls.password.invalid"
+          <mat-error *ngIf="userChangeForm.controls.password.invalid"
             >*Este campo es obligatorio</mat-error
           >
         </mat-form-field>
@@ -39,7 +44,7 @@
           appearance="fill"
           floatLabel="auto"
           class="fullInput"
-          [ngClass]="getClassInput(userLoginForm.controls.passwordVerify)"
+          [ngClass]="getClassInput(userChangeForm.controls.passwordVerify)"
         >
           <mat-label>Contraseña</mat-label>
           <input
@@ -59,8 +64,8 @@
 
         <mat-error
           *ngIf="
-            this.userLoginForm.controls.passwordVerify.value !=
-            this.userLoginForm.controls.password.value
+            this.userChangeForm.controls.passwordVerify.value !=
+            this.userChangeForm.controls.password.value
           "
           >*Las contraseñas no coinciden</mat-error
         >
@@ -71,9 +76,9 @@
           color="becks"
           [ngClass]="{
             'button-disabled':
-              userLoginForm.invalid ||
-              this.userLoginForm.controls.password.value !=
-                this.userLoginForm.controls.passwordVerify.value
+              userChangeForm.invalid ||
+              this.userChangeForm.controls.password.value !=
+                this.userChangeForm.controls.passwordVerify.value
           }"
         >
           <span>CAMBIAR CONTRASEÑA</span>
@@ -81,4 +86,5 @@
       </form>
     </div>
   </section>
+  <app-footer></app-footer>
 </ion-content>

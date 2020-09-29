@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  AfterViewInit,
-  Output,
-  ViewChild,
-} from "@angular/core";
+import { Component, OnInit, AfterViewInit, ViewChild } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -17,6 +10,8 @@ import { Router } from "@angular/router";
 import { User } from "../../../../../../_models/User";
 import { UiService } from "../../../../../../_services/ui.service";
 import { HeaderComponent } from "src/app/_modules/utils/_components/header/header.component";
+import { environment } from "src/environments/environment";
+import { SHA256, SHA512 } from "crypto-js";
 
 declare global {
   interface Window {
@@ -36,7 +31,6 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
   public httpError: string;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
-  title: string = "activa tu cuenta";
   prevUrl: string = "/home";
 
   constructor(
@@ -51,7 +45,6 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.header.title = this.title;
     this.header.urlComponent = this.prevUrl;
   }
 
@@ -77,22 +70,50 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
   sendEmail(): void {
     if (this.userRegisterForm.valid) {
       this.ui.showLoading();
-      const formData = new FormData();
-      formData.append("email", this.userRegisterForm.controls.email.value);
-      this.httpService.post("", formData).subscribe(
-        (response: any) => {
-          this.ui.dismissLoading();
-          if (response.status == 200) {
-            this.httpError = "";
-            this.userRegisterForm.reset();
-            // this.router.navigate(["user/email"]);
-          }
-        },
-        (e) => {
-          this.httpError = "Email incorrecto";
-          this.ui.dismissLoading();
-        }
+      this.restartCaptcha = true;
+      this.setCaptchaStatus(!this.restartCaptcha);
+      this.userRegister.captcha_key = Math.floor(
+        Math.random() * (999999999999 - 121212) + 121212
       );
+      this.userRegister.captcha = SHA512(
+        'setupCaptchaValidator("' +
+          this.userRegister.email +
+          "-" +
+          this.userRegister.captcha_key +
+          '")'
+      ).toString();
+      const email256 = SHA256(this.userRegister.email).toString();
+      this.httpService
+        .patch(environment.serverUrl + environment.guest.patchPassword, {
+          email: this.userRegister.email,
+          captcha: this.userRegister.captcha,
+          captcha_key: this.userRegister.captcha_key,
+        })
+        .subscribe(
+          (data: any) => {
+            try {
+              this.restartCaptcha = false;
+              this.ui.dismissLoading();
+              this.userRegisterForm.reset();
+              window.dataLayer.push({
+                event: "trackEvent",
+                eventCategory: "becks society",
+                eventAction: "finalizar",
+                eventLabel: email256,
+              });
+            } catch (e) {}
+            this.router.navigate(["/user/email"], {
+              queryParamsHandling: "preserve",
+            });
+          },
+          (err) => {
+            this.restartCaptcha = false;
+            if (err.error) {
+              this.httpError = err.error.message;
+            }
+            this.ui.dismissLoading();
+          }
+        );
     }
   }
 
@@ -112,5 +133,9 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
     } else if (item.hasError("pattern")) {
       return "Ingrese solo letras";
     }
+  }
+
+  public setCaptchaStatus(status) {
+    this.captchaStatus = status;
   }
 }

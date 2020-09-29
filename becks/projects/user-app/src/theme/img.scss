@@ -173,3 +173,25 @@
     height: 23px;
   }
 }
+.activation-icon {
+  background-image: url("../assets/icon/activation-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 140px;
+    height: 85px;
+  }
+}
+.help-icon {
+  background-image: url("../assets/icon/help-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 7px;
+  width: 11px;
+  height: 11px;
+  @media (min-width: 0px) and (max-width: 768px) {
+  }
+}

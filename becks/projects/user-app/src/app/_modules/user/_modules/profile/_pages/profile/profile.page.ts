@@ -41,6 +41,9 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
     private ui: UiService
   ) {
     platform.ready().then(() => {
+      this.platform.resize.subscribe(() => {
+        this.size = this.ui.getSizeType(platform.width());
+      });
       this.size = this.ui.getSizeType(platform.width());
     });
   }
@@ -48,9 +51,11 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.userSubscription = this.userSvc.user$.subscribe(
       (user: User) => {
-        this.first_name = user.first_name;
-        this.profile_name = user.first_name + " " + user.last_name;
-        this.urlPicture = user.photo;
+        if (user !== undefined) {
+          this.first_name = user.first_name;
+          this.profile_name = user.first_name + " " + user.last_name;
+          this.urlPicture = user.photo;
+        }
       },
       (error: any) => {}
     );
@@ -63,7 +68,7 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.picture.urlImage = this.urlPicture;
     this.picture.profile_name = this.profile_name;
-    this.name.first_name = this.first_name;
+    this.first_name = this.first_name;
     this.statics.statistics = this.statistics;
   }
 }

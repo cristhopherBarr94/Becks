@@ -1,14 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
-  selector: 'user-experiences-card',
-  templateUrl: './experiences-card.component.html',
-  styleUrls: ['./experiences-card.component.scss'],
+  selector: "user-experiences-card",
+  templateUrl: "./experiences-card.component.html",
+  styleUrls: ["./experiences-card.component.scss"],
 })
 export class ExperiencesCardComponent implements OnInit {
+  @Input() urlImageExperience: string;
+  @Input() nameExperience: string;
+  @Input() type: string;
 
-  constructor() { }
+  public typeExp: string;
+  constructor() {}
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    if (this.type == "cancel") {
+      this.typeExp = "Cancelada";
+    } else if (this.type == "pending") {
+      this.typeExp = "Pendiente";
+    } else {
+      this.typeExp = "Completa";
+    }
+  }
 }

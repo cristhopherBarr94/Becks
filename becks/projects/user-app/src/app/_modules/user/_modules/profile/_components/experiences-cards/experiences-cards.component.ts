@@ -6,7 +6,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./experiences-cards.component.scss"],
 })
 export class ExperiencesCardsComponent implements OnInit {
-  cards = ExpCards;
+  cards = ExpCardsCancel;
 
   constructor() {}
 
@@ -19,7 +19,7 @@ export interface CARD {
   urlImageExperience: string;
 }
 
-export const ExpCards: CARD[] = [
+export const ExpCardsCancel: CARD[] = [
   {
     nameExperience: "dia de playa",
     type: "cancel",

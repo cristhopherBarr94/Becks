@@ -1,14 +1,13 @@
 <section class="container-exp">
   <div class="margin-top">
     <span class="title-secondary red-color">CANCELADAS</span>
-    <div *ngFor="let item of cards">
-      <user-experiences-card
-        [urlImageExperience]="item.urlImageExperience"
-        [nameExperience]="item.nameExperience"
-        [type]="item.type"
-      >
-      </user-experiences-card>
-    </div>
+    <user-experiences-card
+      *ngFor="let item of cards"
+      [urlImageExperience]="item.urlImageExperience"
+      [nameExperience]="item.nameExperience"
+      [type]="item.type"
+    >
+    </user-experiences-card>
   </div>
   <div class="margin-top">
     <span class="title-secondary orange-color">PENDIENTES</span>

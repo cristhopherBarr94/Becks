@@ -118,9 +118,9 @@
     0px,
     normal,
     lighter,
-    14px,
+    13px,
     6px,
-    14px,
+    13px,
     6px,
     27px,
     49px
@@ -192,6 +192,16 @@
   color: #ffffff;
   font-style: normal;
   font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+}
+
+.font-link-x-small {
+  font-family: "Helvetica LT Std";
+  color: #ffffff;
+  font-style: normal;
+  font-weight: lighter;
+  font-size: 9px;
   line-height: 18px;
   text-decoration: none;
 }

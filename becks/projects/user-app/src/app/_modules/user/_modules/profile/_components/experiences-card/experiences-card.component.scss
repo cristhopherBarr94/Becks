@@ -1,0 +1,47 @@
+.card-model {
+  margin-top: 24px;
+  background-color: #141313;
+  height: 9.01%;
+  display: flex;
+  color: #ffffff;
+}
+
+.image-card {
+  width: 33%;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.content-card {
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100%;
+  padding: 5px;
+  width: 67%;
+}
+
+.content-card-details {
+  justify-content: flex-end;
+  min-height: 100%;
+  min-width: 98%;
+  position: absolute;
+  align-items: flex-end;
+}
+
+::ng-deep .mat-card {
+  padding: 0px 0px 0px 5px !important;
+}
+
+.red-color {
+  color: #ff0c3e !important;
+}
+
+.orange-color {
+  color: #ff720c !important;
+}
+
+.green-color {
+  color: #038259 !important;
+}

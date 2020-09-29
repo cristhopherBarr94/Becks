@@ -117,7 +117,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     // } else {
     //   return new ResourceResponse($this->loadRecord($text));
     // }
-    return new ResourceResponse($this->loadRecord($text));
+    return new ModifiedResourceResponse(NULL, 204);
   }
 
   /**
@@ -161,15 +161,17 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->set("field_mobile_phone", $data['mobile_phone'] );
       $user->set("field_gender",  $data['gender'] );
       
+      // "type_id" field only come from User-App Form
       if ( isset($data['type_id']) ) {
         // User from User-APP
         $user->set("field_type_id", $data['type_id'] );
         $user->set("field_id_number", $data['id_number'] );
         $user->set("field_status_waiting_list", 0);
+        $user->set("field_status", 1); // 1 = require password change
         $user->activate();
         Util::sendWelcomeEmail( $user->getEmail() , $pass );
       } else {
-        // User from Waiting-List
+        // User come from Waiting-List
         $user->set("field_status_waiting_list", 1);
       }
 
@@ -241,6 +243,13 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
         throw new BadRequestHttpException('El usuario con correo "'.$data['email'].'" no existe');
       }
       $pass = Util::getRandomUserPass();
+
+      //Change Password
+      $user->setPassword($pass);
+      $user->set("field_status", 1);
+      $user->save();
+
+      //Send New Password
       Util::sendWelcomeEmail( $data['email'] , $pass );
     }
 
@@ -270,7 +279,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     // $this->logger->notice('UserCustom record @id has been deleted.', ['@id' => $id]);
 
     // // Deleted responses have an empty body.
-    // return new ModifiedResourceResponse(NULL, 204);
+    return new ModifiedResourceResponse(NULL, 204);
   }
 
   /**
@@ -324,25 +333,6 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     if (!is_array($record) || count($record) == 0) {
       throw new BadRequestHttpException('Petición no valida.');
     }
-    
-    $allowed_fields = [
-      'email',
-      'first_name',
-      'last_name',
-      'mobile_phone',
-      'gender',
-      'email',
-      'captcha',
-      'captcha_key',
-      'privacy',
-      'promo',
-      'type_id',
-      'id_number'
-    ];
-
-    // if (count(array_diff(array_keys($record), $allowed_fields)) > 0) {
-    //   throw new BadRequestHttpException('Petición no valida.');
-    // }
 
     if (!isset($record['email']) || empty($record['email']) ) {
       throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Email"');
@@ -369,31 +359,32 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     }
 
     if (!isset($record['mobile_phone']) || empty($record['mobile_phone'])) {
-      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Numero de celular"');
+      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Número de celular"');
     }
     // if ( $record['mobile_phone'][0] != '+' || 
     //       !preg_match( "/^[1-9][0-9]*$/", str_replace(" ","",substr($record['mobile_phone'], 1)) ) || 
     //         strlen($record['mobile_phone']) < 10 ) {
-    //   throw new BadRequestHttpException('Formato invalido para el "Numero de celular" debe ser tipo "+XX XXXXXXX" ');
+    //   throw new BadRequestHttpException('Formato invalido para el "Número de celular" debe ser tipo "+XX XXXXXXX" ');
     // }
     if ( !is_numeric($record['mobile_phone']) ) {
-      throw new BadRequestHttpException('Formato invalido para el "Numero de celular" debe ser un numero tipo "XXXXXXXXXX" ');
+      throw new BadRequestHttpException('Formato invalido para el "Número de celular" debe ser un Número tipo "XXXXXXXXXX" ');
     }
     if ( strlen($record['mobile_phone']) > 60) {
-      throw new BadRequestHttpException('El "Numero de celular" sobrepasa los caracteres permitidos');
+      throw new BadRequestHttpException('El "Número de celular" sobrepasa los caracteres permitidos');
     }
 
     if (!isset($record['gender']) || empty($record['gender'])) {
-      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Genero"');
+      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Género"');
     }
     if ( strlen($record['gender']) > 1 || ( $record['gender'] != 'M' && $record['gender'] != 'F') ) {
-      throw new BadRequestHttpException('El "Genero" debe ser "M" (Masculino) o "F" (Femenino) ');
+      throw new BadRequestHttpException('El "Género" debe ser "M" (Masculino) o "F" (Femenino) ');
     } 
     
     if ( !isset($record['privacy']) || !is_bool($record['privacy']) || $record['privacy'] != true ) {
-      throw new BadRequestHttpException('El usuario no puede ser registrado porque hacen falta aceptar la Política y Términos del sitio');
+      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta aceptar la Política y Términos del sitio');
     }
     
+    // "type_id" field from User-App Form
     if ( isset($record['type_id']) ) {
       if ( $record['type_id'] != 'CC' && $record['type_id'] != 'CE' && $record['type_id'] != 'PA' ) {
         throw new BadRequestHttpException('El "Tipo de Documento" debe ser "CC" (Cédula de ciudadania), "CE" (Cédula de extranjeria) o "PA" (Pasaporte) ');
@@ -437,7 +428,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
   protected function loadRecord($id) {
     $user = $this->entityTypeManager->getStorage('user')->load($id);
     if (!$user) {
-      throw new NotFoundHttpException('The user was not found.');
+      throw new NotFoundHttpException('Usuario no encontrado');
     }
     $retUser = new UserPublicDTO(  $user );
     return $retUser->get();
@@ -448,6 +439,9 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     $user = $this->entityTypeManager
             ->getStorage('user')
             ->loadByProperties( ['mail' => $email ] );
+    if (!$user) {
+      throw new NotFoundHttpException('Email no encontrado');
+    }
     return $user;
   }
 

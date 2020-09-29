@@ -6,7 +6,9 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./experiences-cards.component.scss"],
 })
 export class ExperiencesCardsComponent implements OnInit {
-  cards = ExpCards;
+  cancelCards = ExpCards;
+  pendingCards = ExpCards;
+  acceptCards = ExpCards;
 
   constructor() {}
 

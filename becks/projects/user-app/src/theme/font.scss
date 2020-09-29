@@ -118,6 +118,23 @@
     0px,
     normal,
     lighter,
+    10px,
+    6px,
+    10px,
+    6px,
+    27px,
+    49px
+  );
+  text-transform: uppercase;
+}
+
+.title-profile-big {
+  @include title(
+    "Eurostile BQ",
+    #ffffff,
+    0px,
+    normal,
+    lighter,
     13px,
     6px,
     13px,

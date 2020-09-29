@@ -20,7 +20,6 @@ const routes: Routes = [
   {
     path: "changePass",
     component: SectionChangePassComponent,
-    canActivate: [AuthGuardService],
   },
   {
     path: "activation",

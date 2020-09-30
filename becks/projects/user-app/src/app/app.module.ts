@@ -21,11 +21,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AuthGuardService } from "./_services/auth-guard.service";
 import { AuthService } from "./_services/auth.service";
 import { HttpService } from "./_services/http.service";
-<<<<<<< HEAD
 import { UtilService } from "./_services/util.service";
-=======
 import { UserService } from "./_services/user.service";
->>>>>>> dev_1
 
 @NgModule({
   declarations: [AppComponent],
@@ -51,11 +48,8 @@ import { UserService } from "./_services/user.service";
     AuthService,
     AuthGuardService,
     HttpService,
-<<<<<<< HEAD
     UtilService,
-=======
     UserService,
->>>>>>> dev_1
   ],
   bootstrap: [AppComponent],
 })

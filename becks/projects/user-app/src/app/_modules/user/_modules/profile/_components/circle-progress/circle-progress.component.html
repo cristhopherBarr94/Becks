@@ -7,8 +7,8 @@
     [space]="-32"
     [innerStrokeColor]="'#121212'"
     [outerStrokeColor]="colorProgress"
-    [animation]="true"
-    [animationDuration]="100"
+    [animation]="false"
+    [animationDuration]="50"
     [showUnits]="false"
     [maxPercent]="30"
     [outerStrokeGradient]="false"
@@ -23,6 +23,7 @@
     [subtitleColor]="'#FFFFFF'"
     [subtitle]="subtitle"
     [backgroundPadding]="-27"
+    [renderOnClick]="false"
   ></circle-progress>
 </section>
 
@@ -32,6 +33,9 @@
     style="--progress-background: {{ colorProgressBar }}"
   ></ion-progress-bar>
 </section>
-<!-- <section class="content-flex-all-center bar">
-  <p>Te quedan {{ remaining_days }} para mantener tu cuenta activa</p>
-</section> -->
+
+<section class="content-flex-all-center">
+  <div class="supp-circle" style="transform: rotate(-{{ progress * 3.6 }}deg)">
+    <div class="clock"></div>
+  </div>
+</section>

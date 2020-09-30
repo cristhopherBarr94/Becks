@@ -1,0 +1,29 @@
+circle-progress {
+  font-family: "Eurostile BQ";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 50px;
+  letter-spacing: 0.15px;
+  border-radius: 100%;
+  height: 180px;
+  width: 180px;
+
+  ::ng-deep {
+    span {
+      font-family: "Helvetica Neue LT Std" !important;
+      font-style: normal !important;
+      font-weight: bold !important;
+      font-size: 13.28px !important;
+      line-height: 16px !important;
+      text-align: center !important;
+    }
+  }
+}
+.bar {
+  margin-top: 30px;
+}
+ion-progress-bar {
+  height: 7px;
+  --background: #1e1e1e;
+}

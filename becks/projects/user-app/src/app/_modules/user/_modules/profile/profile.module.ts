@@ -20,6 +20,8 @@ import { SeccionsProfileComponent } from "./_components/seccions-profile/seccion
 import { DayMeterComponent } from "./_components/day-meter/day-meter.component";
 import { ExperiencesCardsComponent } from "./_components/experiences-cards/experiences-cards.component";
 import { ExperiencesCardComponent } from "./_components/experiences-card/experiences-card.component";
+import { CircleProgressComponent } from "./_components/circle-progress/circle-progress.component";
+import { NgCircleProgressModule } from "ng-circle-progress";
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { ExperiencesCardComponent } from "./_components/experiences-card/experie
     DayMeterComponent,
     ExperiencesCardsComponent,
     ExperiencesCardComponent,
+    CircleProgressComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +48,7 @@ import { ExperiencesCardComponent } from "./_components/experiences-card/experie
     ReactiveFormsModule,
     MatTabsModule,
     MatCardModule,
+    NgCircleProgressModule.forRoot({}),
   ],
 })
 export class ProfileModule {}

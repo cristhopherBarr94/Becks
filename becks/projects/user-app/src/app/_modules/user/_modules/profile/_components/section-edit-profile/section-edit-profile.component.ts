@@ -112,6 +112,6 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
   }
 
   saveChanges() {
-    console.log(this.userEditProfileForm);
+    console.log(this.userEditProfileForm.value);
   }
 }

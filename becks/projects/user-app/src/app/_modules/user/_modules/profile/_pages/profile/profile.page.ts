@@ -15,7 +15,6 @@ import { StatisticsProfileComponent } from "../../_components/statistics-profile
 import { Platform } from "@ionic/angular";
 import { UiService } from "src/app/_services/ui.service";
 import { Router } from "@angular/router";
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: "user-profile",
@@ -48,7 +47,12 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
     this.userSubscription = this.userSvc.user$.subscribe(
       (user: User) => {
         if (user !== undefined) {
-          this.picture.urlImage = user.photo;
+          console.log("ProfilePage -> ngOnInit -> user", user);
+          this.picture.urlImage = !!user.photo
+            ? user.photo
+            : user.gender == "femenino"
+            ? "../../../../../../../assets/img/profile_female.jpg"
+            : "../../../../../../../assets/img/profile_male.jpg";
           this.picture.profile_name = user.first_name + " " + user.last_name;
           this.name.first_name = user.first_name;
           this.statics.statistics = "10";

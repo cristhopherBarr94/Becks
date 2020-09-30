@@ -45,6 +45,13 @@ export class HttpService {
     if (headersIn == null) {
       headersIn = this.getHeaders();
     }
+    if (url.indexOf("?") > -1) {
+      if (url.indexOf("time_stamp") == -1) {
+        url = url + "&time_stamp=" + Math.floor(Date.now() / 1000);
+      }
+    } else {
+      url = url + "?time_stamp=" + Math.floor(Date.now() / 1000);
+    }
     return this.http
       .get(url, {
         headers: headersIn,

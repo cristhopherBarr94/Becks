@@ -50,6 +50,15 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
           this.userEditProfileForm.controls.name.patchValue(user.first_name);
           this.userEditProfileForm.controls.lastName.patchValue(user.last_name);
           this.userEditProfileForm.controls.phone.patchValue(user.mobile_phone);
+          this.userEditProfileForm.controls.day.patchValue(
+            !!user.birthdate && moment("12/03/2010").format("DD")
+          );
+          this.userEditProfileForm.controls.month.patchValue(
+            !!user.birthdate && moment("12/03/2010").format("MM")
+          );
+          this.userEditProfileForm.controls.year.patchValue(
+            !!user.birthdate && moment("12/03/2010").format("YYYY")
+          );
           this.urlPicture = user.photo;
         }
       },

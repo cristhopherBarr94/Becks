@@ -13,6 +13,11 @@ const routes: Routes = [
       import("./_modules/profile/profile.module").then((m) => m.ProfileModule),
   },
   {
+    path: "exp",
+    loadChildren: () =>
+      import("./_modules/exp/exp.module").then((m) => m.ExpModule),
+  },
+  {
     path: "email",
     component: SectionRequestConfirmComponent,
   },

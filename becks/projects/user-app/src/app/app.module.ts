@@ -21,6 +21,7 @@ import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuardService } from './_services/auth-guard.service';
 import { AuthService } from './_services/auth.service';
 import { HttpService } from './_services/http.service';
+import { ExperienciasService } from './_services/experiencias.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -44,7 +45,8 @@ import { HttpService } from './_services/http.service';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthService,
     AuthGuardService,
-    HttpService
+    HttpService,
+    ExperienciasService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -19,16 +25,23 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
   public dataProfile: any;
   public urlPicture: string;
 
-  constructor(private router: Router, private formBuilder: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.initforms();
     this.dataProfile = localStorage.getItem("userData");
     this.urlPicture = this.dataProfile.urlPicture;
-    console.log(
-      "SectionEditProfileComponent -> ngOnInit -> this.dataProfile",
-      this.dataProfile
+    this.userEditProfileForm.controls.name.patchValue(
+      this.dataProfile.first_name
     );
+    this.userEditProfileForm.controls.lastName.patchValue(
+      this.dataProfile.last_name
+    );
+    this.cdr.detectChanges();
   }
 
   ngAfterViewInit() {
@@ -96,5 +109,9 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
     } else if (item.hasError("min") || item.hasError("max")) {
       return "Ingrese un valor entre " + min + " y " + max;
     }
+  }
+
+  saveChanges() {
+    console.log(this.userEditProfileForm);
   }
 }

@@ -13,9 +13,14 @@
     line-height: 50px !important;
   }
 
-  .plane-icon {
+  .lock-icon,
+  .logo-2 {
     position: relative !important;
   }
+  .logo-2 {
+    margin-bottom: 40px;
+  }
+
   .no-padding {
     padding: 0px;
     ion-row,
@@ -38,5 +43,18 @@
 
   ::ng-deep mat-icon:active {
     font-family: "Material Icons" !important;
+  }
+  .margin-top-button {
+    margin: 30px;
+  }
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .logo-2 {
+    display: none;
+  }
+}
+@media (min-width: 769px) {
+  app-header {
+    visibility: hidden;
   }
 }

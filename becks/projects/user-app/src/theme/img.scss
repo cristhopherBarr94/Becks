@@ -138,6 +138,10 @@
     width: 123px;
     height: 81px;
   }
+  @media (min-width: 769px) {
+    width: 147px;
+    height: 74px;
+  }
 }
 
 .plane-icon {
@@ -146,21 +150,17 @@
   background-repeat: no-repeat;
   background-position: center;
   position: absolute;
-  @media (min-width: 0px) and (max-width: 768px) {
-    width: 132px;
-    height: 104px;
-  }
+  width: 132px;
+  height: 104px;
 }
-.plane-icon {
+.lock-icon {
   background-image: url("../assets/icon/lock-icon.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   position: absolute;
-  @media (min-width: 0px) and (max-width: 768px) {
-    width: 90px;
-    height: 56px;
-  }
+  width: 90px;
+  height: 56px;
 }
 .left-arrow-icon {
   background-image: url("../assets/icon/chevron-left.svg");

@@ -4,12 +4,9 @@
 
   .plane-icon {
     position: relative !important;
-    top: 76px;
   }
 
   .confirm-text {
-    margin-top: 106px;
-    width: 214px;
     height: 103px;
     font-size: 13.78px !important;
     line-height: 17px !important;
@@ -17,5 +14,35 @@
   }
 }
 .margin-top-button {
-  margin-top: 30px;
+  margin: 30px;
+}
+
+@media (min-width: 0px) and (max-width: 768px) {
+  .logo-2 {
+    display: none;
+  }
+  .plane-icon {
+    top: 76px;
+  }
+  .confirm-text {
+    margin-top: 106px;
+    width: 214px;
+  }
+}
+@media (min-width: 769px) {
+  app-header {
+    visibility: hidden;
+  }
+  .logo-2 {
+    margin-top: 128px;
+    margin-bottom: 40px;
+    position: relative !important;
+  }
+  .plane-icon {
+    top: 0px;
+  }
+  .confirm-text {
+    margin-top: 40px;
+    width: 301px;
+  }
 }

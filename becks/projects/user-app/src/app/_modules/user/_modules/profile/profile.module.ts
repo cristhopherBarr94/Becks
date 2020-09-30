@@ -22,6 +22,9 @@ import { ExperiencesCardsComponent } from "./_components/experiences-cards/exper
 import { ExperiencesCardComponent } from "./_components/experiences-card/experiences-card.component";
 import { SalesCardsComponent } from "./_components/sales-cards/sales-cards.component";
 import { SalesCardComponent } from "./_components/sales-card/sales-card.component";
+import { CircleProgressComponent } from "./_components/circle-progress/circle-progress.component";
+import { NgCircleProgressModule } from "ng-circle-progress";
+import { SectionEditProfileComponent } from "./_components/section-edit-profile/section-edit-profile.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +38,8 @@ import { SalesCardComponent } from "./_components/sales-card/sales-card.componen
     ExperiencesCardComponent,
     SalesCardsComponent,
     SalesCardComponent,
+    CircleProgressComponent,
+    SectionEditProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +54,7 @@ import { SalesCardComponent } from "./_components/sales-card/sales-card.componen
     ReactiveFormsModule,
     MatTabsModule,
     MatCardModule,
+    NgCircleProgressModule.forRoot({}),
   ],
 })
 export class ProfileModule {}

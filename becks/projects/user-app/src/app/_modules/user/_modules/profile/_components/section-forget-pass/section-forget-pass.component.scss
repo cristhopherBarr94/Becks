@@ -11,7 +11,8 @@
   line-height: 50px !important;
 }
 
-.recovery-icon {
+.recovery-icon,
+.logo-2 {
   position: relative !important;
 }
 .no-padding {
@@ -23,6 +24,18 @@
 }
 
 .margin-top-button {
-  width: 316px;
-  margin-top: 30px;
+  margin: 30px;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .logo-2 {
+    display: none;
+  }
+}
+@media (min-width: 769px) {
+  app-header {
+    visibility: hidden;
+  }
+  .logo-2 {
+    margin-bottom: 40px;
+  }
 }

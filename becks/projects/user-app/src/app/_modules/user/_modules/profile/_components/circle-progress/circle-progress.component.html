@@ -1,3 +1,41 @@
-<p>
-  circle-progress works!
-</p>
+<section class="circle-progress-tool content-flex-all-center">
+  <circle-progress
+    [percent]="progress"
+    [radius]="70"
+    [outerStrokeWidth]="27.5"
+    [showInnerStroke]="true"
+    [space]="-32"
+    [innerStrokeColor]="'#121212'"
+    [outerStrokeColor]="colorProgress"
+    [animation]="false"
+    [animationDuration]="50"
+    [showUnits]="false"
+    [maxPercent]="30"
+    [outerStrokeGradient]="false"
+    [outerStrokeGradientStopColor]="colorProgress"
+    [clockwise]="false"
+    [title]="remaining_days"
+    [titleFontSize]="33"
+    [showBackground]="true"
+    [backgroundGradient]="false"
+    [backgroundColor]="'#121212'"
+    [titleColor]="'#FFFFFF'"
+    [subtitleColor]="'#FFFFFF'"
+    [subtitle]="subtitle"
+    [backgroundPadding]="-27"
+    [renderOnClick]="false"
+  ></circle-progress>
+</section>
+
+<section class="content-flex-all-center bar">
+  <ion-progress-bar
+    [value]="progress / 100 + 0.03"
+    style="--progress-background: {{ colorProgressBar }}"
+  ></ion-progress-bar>
+</section>
+
+<section class="content-flex-all-center">
+  <div class="supp-circle" style="transform: rotate(-{{ progress * 3.6 }}deg)">
+    <div class="clock"></div>
+  </div>
+</section>

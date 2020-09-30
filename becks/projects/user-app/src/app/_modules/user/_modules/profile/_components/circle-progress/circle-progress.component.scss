@@ -1,0 +1,48 @@
+circle-progress {
+  font-family: "Eurostile BQ";
+  font-style: normal !important;
+  line-height: 50px !important;
+  letter-spacing: 0.15px !important;
+  height: 180px;
+  width: 180px;
+
+  ::ng-deep {
+    span {
+      font-family: "Helvetica Neue LT Std" !important;
+      font-style: normal !important;
+      font-weight: bold !important;
+      font-size: 13.28px !important;
+      line-height: 16px !important;
+      text-align: center !important;
+    }
+  }
+}
+.bar {
+  margin-top: 30px;
+}
+ion-progress-bar {
+  height: 7px;
+  width: 301px;
+  --background: #1e1e1e;
+}
+
+.supp-circle {
+  border-radius: 100%;
+  width: 170px;
+  height: 170px;
+  position: absolute;
+  top: 12.8px;
+  margin-left: 15.5px;
+  .clock {
+    width: 27px;
+    height: 27px;
+    background: url(./../../../../../../../assets/icon/clock-icon.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: black;
+    border-radius: 100%;
+    position: relative;
+    top: 1px;
+    left: 43%;
+  }
+}

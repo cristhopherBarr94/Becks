@@ -1,8 +1,10 @@
 <ion-content>
   <div class="container-profile flex-direction-column">
-    <user-name-tittle></user-name-tittle>
+    <user-name-tittle *ngIf="size == 'xs' || size == 'sm' "></user-name-tittle>
     <user-profile-picture></user-profile-picture>
-    <span class="link-profile url-hyper content-flex-all-center margin-top"
+    <span
+      class="link-profile url-hyper content-flex-all-center margin-top"
+      (click)="editProfile()"
       >Editar Perfil</span
     >
     <user-statistics-profile></user-statistics-profile>

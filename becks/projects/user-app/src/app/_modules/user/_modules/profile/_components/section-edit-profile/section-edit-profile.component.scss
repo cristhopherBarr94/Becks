@@ -1,0 +1,35 @@
+.container-edit-profile {
+  min-height: 100%;
+  background-color: #171717;
+}
+
+.header-div {
+  display: flex;
+  align-items: center;
+  margin-top: 63px;
+}
+
+.lateral-div {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+}
+
+.center-div {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+}
+
+.save {
+  color: #038259;
+}
+
+.margint-top {
+  margin-top: 24px;
+}
+
+.with-form {
+  width: 100px;
+  margin-right: 7px;
+}

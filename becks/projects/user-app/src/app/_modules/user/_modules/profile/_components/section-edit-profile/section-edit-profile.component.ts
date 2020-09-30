@@ -46,11 +46,10 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
     this.initforms();
     this.userSubscription = this.userSvc.user$.subscribe(
       (user: User) => {
-        console.log("SectionEditProfileComponent -> ngOnInit -> user1", user);
         if (user !== undefined) {
-          console.log("SectionEditProfileComponent -> ngOnInit -> user2", user);
           this.userEditProfileForm.controls.name.patchValue(user.first_name);
           this.userEditProfileForm.controls.lastName.patchValue(user.last_name);
+          this.userEditProfileForm.controls.phone.patchValue(user.mobile_phone);
           this.urlPicture = user.photo;
         }
       },

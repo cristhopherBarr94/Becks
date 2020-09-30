@@ -28,10 +28,12 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(StatisticsProfileComponent) statics: StatisticsProfileComponent;
   public size: string;
 
-  urlPicture: string =
+  public urlPicture: string =
     "https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg";
-  first_name: string = "Mark";
-  profile_name: string = "Mark Zuckerberg";
+  public first_name: string = "Mark";
+  public profile_name: string = "Mark Zuckerberg";
+  public last_name: string;
+  public phone: number;
 
   statistics: string = "10";
 
@@ -55,13 +57,16 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
     this.userSubscription = this.userSvc.user$.subscribe(
       (user: User) => {
         if (user !== undefined) {
+          console.log("ProfilePage -> ngOnInit -> user", user);
           this.first_name = user.first_name;
           this.profile_name = user.first_name + " " + user.last_name;
+          this.last_name = user.last_name;
           this.urlPicture = user.photo;
           localStorage.setItem(
             "userData",
             JSON.stringify({
               first_name: this.first_name,
+              last_name: this.last_name,
               profile_name: this.profile_name,
               urlPicture: this.urlPicture,
             })

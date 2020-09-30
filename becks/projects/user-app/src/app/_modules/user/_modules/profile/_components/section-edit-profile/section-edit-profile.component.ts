@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -19,16 +25,23 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
   public dataProfile: any;
   public urlPicture: string;
 
-  constructor(private router: Router, private formBuilder: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.initforms();
     this.dataProfile = localStorage.getItem("userData");
     this.urlPicture = this.dataProfile.urlPicture;
-    console.log(
-      "SectionEditProfileComponent -> ngOnInit -> this.dataProfile",
-      this.dataProfile
+    this.userEditProfileForm.controls.name.patchValue(
+      this.dataProfile.first_name
     );
+    this.userEditProfileForm.controls.lastName.patchValue(
+      this.dataProfile.last_name
+    );
+    this.cdr.detectChanges();
   }
 
   ngAfterViewInit() {
@@ -37,7 +50,7 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
 
   initforms() {
     this.userEditProfileForm = this.formBuilder.group({
-      name: new FormControl("", [Validators.required, Validators.maxLength(3)]),
+      name: new FormControl("", [Validators.required, Validators.minLength(3)]),
       lastName: new FormControl("", [
         Validators.required,
         Validators.minLength(3),
@@ -46,7 +59,21 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
         Validators.required,
         Validators.minLength(10),
       ]),
-      day: new FormControl("", [Validators.required, Validators.minLength(1)]),
+      day: new FormControl("", [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(31),
+      ]),
+      month: new FormControl("", [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(12),
+      ]),
+      year: new FormControl("", [
+        Validators.required,
+        Validators.min(1920),
+        Validators.max(2020),
+      ]),
     });
   }
 
@@ -64,5 +91,27 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
     this.router.navigate(["user/profile"], {
       queryParamsHandling: "preserve",
     });
+  }
+
+  public getMessageform(
+    item: any,
+    name: string,
+    minlength?: number,
+    min?: number,
+    max?: number
+  ): string {
+    if (item.hasError("required")) {
+      return "Ingrese un " + name;
+    } else if (item.hasError("minlength")) {
+      return "Ingrese un " + name + " de mínimo " + minlength + " caracteres";
+    } else if (item.hasError("pattern")) {
+      return "Ingrese solo letras";
+    } else if (item.hasError("min") || item.hasError("max")) {
+      return "Ingrese un valor entre " + min + " y " + max;
+    }
+  }
+
+  saveChanges() {
+    console.log(this.userEditProfileForm.value);
   }
 }

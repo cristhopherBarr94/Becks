@@ -2,6 +2,7 @@
   <div class="container-profile flex-direction-column">
     <user-name-tittle *ngIf="size == 'xs' || size == 'sm' "></user-name-tittle>
     <user-profile-picture></user-profile-picture>
+    <p>{{userSvc._user.first_name }}</p>
     <span
       class="link-profile url-hyper content-flex-all-center margin-top"
       (click)="editProfile()"

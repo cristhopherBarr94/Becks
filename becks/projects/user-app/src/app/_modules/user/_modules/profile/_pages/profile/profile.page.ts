@@ -28,10 +28,9 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(StatisticsProfileComponent) statics: StatisticsProfileComponent;
   public size: string;
 
-  public urlPicture: string =
-    "https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg";
-  public first_name: string = "Mark";
-  public profile_name: string = "Mark Zuckerberg";
+  public urlPicture: string;
+  public first_name: string;
+  public profile_name: string;
   public last_name: string;
   public phone: number;
 
@@ -63,12 +62,14 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
           this.profile_name = user.first_name + " " + user.last_name;
         }
       },
-      (error: any) => {}
+      (error: any) => {
+        console.log("ProfilePage -> ngOnInit -> error", error);
+      }
     );
   }
 
   ngOnDestroy(): void {
-    this.userSubscription.unsubscribe();
+    // this.userSubscription.unsubscribe();
   }
 
   ngAfterViewInit() {

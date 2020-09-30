@@ -74,7 +74,7 @@ export class User {
   }
 
   toJS(data?: any) {
-    data = data === undefined ? {} : data;
+    data = {};
     data["id"] = this.id !== undefined ? this.id : null;
     data["first_name"] = this.first_name !== undefined ? this.first_name : null;
     data["last_name"] = this.last_name !== undefined ? this.last_name : null;

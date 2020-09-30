@@ -28,14 +28,6 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(StatisticsProfileComponent) statics: StatisticsProfileComponent;
   public size: string;
 
-  public urlPicture: string;
-  public first_name: string;
-  public profile_name: string;
-  public last_name: string;
-  public phone: number;
-
-  statistics: string = "10";
-
   userSubscription: Subscription;
 
   constructor(
@@ -58,26 +50,24 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
         console.log("ProfilePage -> ngOnInit -> user1", user);
         if (user !== undefined) {
           console.log("ProfilePage -> ngOnInit -> user2", user);
-          this.first_name = user.first_name;
-          this.profile_name = user.first_name + " " + user.last_name;
+          this.picture.urlImage = user.photo;
+          this.picture.profile_name = user.first_name + " " + user.last_name;
+          this.name.first_name = user.first_name;
+          this.statics.statistics = "10";
         }
       },
       (error: any) => {
         console.log("ProfilePage -> ngOnInit -> error", error);
       }
     );
+    this.userSvc.getData();
   }
 
   ngOnDestroy(): void {
     // this.userSubscription.unsubscribe();
   }
 
-  ngAfterViewInit() {
-    this.picture.urlImage = this.urlPicture;
-    this.picture.profile_name = this.profile_name;
-    this.first_name = this.first_name;
-    this.statics.statistics = this.statistics;
-  }
+  ngAfterViewInit() {}
 
   editProfile() {
     this.router.navigate(["user/profile/edit"], {

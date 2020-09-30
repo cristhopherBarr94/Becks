@@ -13,7 +13,9 @@ export class UserService {
   public user$ = this._userSbj.asObservable();
 
   constructor(private http: HttpService) {
-    this._user = new User(JSON.parse(localStorage.getItem("bks_user")));
+    if (localStorage.getItem("bks_user")) {
+      this._user = new User(JSON.parse(localStorage.getItem("bks_user")));
+    }
   }
 
   public getData() {

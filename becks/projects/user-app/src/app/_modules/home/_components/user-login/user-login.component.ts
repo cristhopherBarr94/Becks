@@ -28,8 +28,7 @@ export class UserLoginComponent implements OnInit {
     private ui: UiService,
     private httpService: HttpService,
     private authService: AuthService,
-    private router: Router,
-    private userService: UserService
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -39,7 +38,6 @@ export class UserLoginComponent implements OnInit {
 
   redirect() {
     if (this.authService.isAuthenticated()) {
-      this.userService.getData();
       this.router.navigate(["user/profile"], {
         queryParamsHandling: "preserve",
       });

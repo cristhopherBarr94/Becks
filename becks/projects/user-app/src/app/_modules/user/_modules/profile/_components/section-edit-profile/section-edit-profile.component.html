@@ -18,7 +18,7 @@
     <user-profile-picture></user-profile-picture>
     <span class="link-age-gate link-terms">Cambiar foto de perfil</span>
   </div>
-  <div class="margint-top with-form col-flex-center">
+  <div class="content-flex-all-center">
     <form
       [formGroup]="userEditProfileForm"
       class="form-section"
@@ -30,7 +30,7 @@
         class="fullInput"
         [ngClass]="getClassInput(userEditProfileForm.controls.name)"
       >
-        <mat-label>Nombre</mat-label>
+        <mat-label class="color-green">Nombre</mat-label>
 
         <input
           matInput
@@ -47,7 +47,7 @@
         class="fullInput"
         [ngClass]="getClassInput(userEditProfileForm.controls.lastName)"
       >
-        <mat-label>Apellidos</mat-label>
+        <mat-label class="color-green">Apellidos</mat-label>
 
         <input
           matInput
@@ -64,7 +64,7 @@
         class="fullInput"
         [ngClass]="getClassInput(userEditProfileForm.controls.phone)"
       >
-        <mat-label>Teléfono</mat-label>
+        <mat-label class="color-green">Teléfono</mat-label>
 
         <input
           matInput
@@ -75,6 +75,60 @@
           data-qadp="phone"
         />
       </mat-form-field>
+      <span class="color-green font-link-small">Fecha de nacimiento</span>
+      <div class="flex-direction-row content-flex-all-center">
+        <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="with-form"
+          [ngClass]="getClassInput(userEditProfileForm.controls.phone)"
+        >
+          <mat-label class="color-green">Dia</mat-label>
+
+          <input
+            matInput
+            formControlName="phone"
+            type="number"
+            required
+            maxlength="10"
+            data-qadp="phone"
+          />
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="with-form"
+          [ngClass]="getClassInput(userEditProfileForm.controls.phone)"
+        >
+          <mat-label class="color-green">Mes</mat-label>
+
+          <input
+            matInput
+            formControlName="phone"
+            type="number"
+            required
+            maxlength="10"
+            data-qadp="phone"
+          />
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          style="width: 100px"
+          [ngClass]="getClassInput(userEditProfileForm.controls.phone)"
+        >
+          <mat-label class="color-green">Año</mat-label>
+
+          <input
+            matInput
+            formControlName="phone"
+            type="number"
+            required
+            maxlength="10"
+            data-qadp="phone"
+          />
+        </mat-form-field>
+      </div>
     </form>
   </div>
 </div>

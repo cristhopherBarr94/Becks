@@ -46,6 +46,7 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
         Validators.required,
         Validators.minLength(10),
       ]),
+      day: new FormControl("", [Validators.required, Validators.minLength(1)]),
     });
   }
 

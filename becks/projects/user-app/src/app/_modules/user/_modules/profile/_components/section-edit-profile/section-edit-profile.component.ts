@@ -12,7 +12,11 @@ import {
   Validators,
 } from "@angular/forms";
 import { Router } from "@angular/router";
+import { HttpService } from "src/app/_services/http.service";
+import { UiService } from "src/app/_services/ui.service";
 import { ProfilePictureComponent } from "../profile-picture/profile-picture.component";
+import * as moment from "moment";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "user-section-edit-profile",
@@ -24,11 +28,14 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
   public userEditProfileForm: FormGroup;
   public dataProfile: any;
   public urlPicture: string;
+  public birthDayDate: any;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private ui: UiService,
+    private httpService: HttpService
   ) {}
 
   ngOnInit() {
@@ -112,6 +119,34 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
   }
 
   saveChanges() {
-    console.log(this.userEditProfileForm.value);
+    if (this.userEditProfileForm.valid) {
+      this.ui.showLoading();
+      this.birthDayDate = moment()
+        .day(this.userEditProfileForm.controls.day.value)
+        .month(this.userEditProfileForm.controls.month.value)
+        .year(this.userEditProfileForm.controls.year.value)
+        .format("DD/MM/YYYY");
+      this.httpService
+        .patch(environment.serverUrl + environment.user.patchData, {
+          first_name: this.userEditProfileForm.controls.name.value,
+          last_name: this.userEditProfileForm.controls.lastName.value,
+          mobile_phone: this.userEditProfileForm.controls.phone.value,
+          birthdate: this.birthDayDate,
+        })
+        .subscribe((response: any) => {
+          console.log(
+            "SectionEditProfileComponent -> saveChanges -> response",
+            response
+          );
+          this.ui.dismissLoading();
+          if (response.status == 200) {
+            // this.closeEdit();
+          }
+        }),
+        (e) => {
+          console.log("SectionEditProfileComponent -> saveChanges -> e", e);
+          this.ui.dismissLoading();
+        };
+    }
   }
 }

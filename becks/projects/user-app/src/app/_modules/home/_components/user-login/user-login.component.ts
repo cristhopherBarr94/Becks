@@ -10,6 +10,7 @@ import { UiService } from "src/app/_services/ui.service";
 import { environment } from "src/environments/environment";
 import { HttpService } from "src/app/_services/http.service";
 import { AuthService } from "src/app/_services/auth.service";
+import { UserService } from "src/app/_services/user.service";
 
 @Component({
   selector: "user-user-login",
@@ -27,7 +28,8 @@ export class UserLoginComponent implements OnInit {
     private ui: UiService,
     private httpService: HttpService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -37,6 +39,7 @@ export class UserLoginComponent implements OnInit {
 
   redirect() {
     if (this.authService.isAuthenticated()) {
+      this.userService.getData();
       this.router.navigate(["user/profile"], {
         queryParamsHandling: "preserve",
       });

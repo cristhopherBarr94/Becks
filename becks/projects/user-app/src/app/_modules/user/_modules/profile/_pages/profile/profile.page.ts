@@ -47,9 +47,7 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.userSubscription = this.userSvc.user$.subscribe(
       (user: User) => {
-        console.log("ProfilePage -> ngOnInit -> user1", user);
         if (user !== undefined) {
-          console.log("ProfilePage -> ngOnInit -> user2", user);
           this.picture.urlImage = user.photo;
           this.picture.profile_name = user.first_name + " " + user.last_name;
           this.name.first_name = user.first_name;

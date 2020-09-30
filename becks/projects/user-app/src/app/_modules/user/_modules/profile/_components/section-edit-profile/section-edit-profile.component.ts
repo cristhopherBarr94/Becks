@@ -17,6 +17,9 @@ import { UiService } from "src/app/_services/ui.service";
 import { ProfilePictureComponent } from "../profile-picture/profile-picture.component";
 import * as moment from "moment";
 import { environment } from "src/environments/environment";
+import { Subscription } from "rxjs";
+import { UserService } from "src/app/_services/user.service";
+import { User } from "src/app/_models/User";
 
 @Component({
   selector: "user-section-edit-profile",
@@ -26,11 +29,12 @@ import { environment } from "src/environments/environment";
 export class SectionEditProfileComponent implements OnInit, AfterViewInit {
   @ViewChild(ProfilePictureComponent) picture: ProfilePictureComponent;
   public userEditProfileForm: FormGroup;
-  public dataProfile: any;
   public urlPicture: string;
   public birthDayDate: any;
+  userSubscription: Subscription;
 
   constructor(
+    private userSvc: UserService,
     private router: Router,
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
@@ -40,13 +44,19 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.initforms();
-    this.dataProfile = localStorage.getItem("userData");
-    this.urlPicture = this.dataProfile.urlPicture;
-    this.userEditProfileForm.controls.name.patchValue(
-      this.dataProfile.first_name
-    );
-    this.userEditProfileForm.controls.lastName.patchValue(
-      this.dataProfile.last_name
+    this.userSubscription = this.userSvc.user$.subscribe(
+      (user: User) => {
+        console.log("SectionEditProfileComponent -> ngOnInit -> user1", user);
+        if (user !== undefined) {
+          console.log("SectionEditProfileComponent -> ngOnInit -> user2", user);
+          this.userEditProfileForm.controls.name.patchValue(user.first_name);
+          this.userEditProfileForm.controls.lastName.patchValue(user.last_name);
+          this.urlPicture = user.photo;
+        }
+      },
+      (error: any) => {
+        console.log("ProfilePage -> ngOnInit -> error", error);
+      }
     );
     this.cdr.detectChanges();
   }

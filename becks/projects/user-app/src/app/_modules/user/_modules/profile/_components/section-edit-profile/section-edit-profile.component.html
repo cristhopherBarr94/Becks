@@ -1,8 +1,20 @@
 <div class="container-edit-profile flex-direction-column">
-  <div>
-    <mat-icon matSuffix (click)="hide = !hide"> close </mat-icon>
-    <span class="title-secondary">EDITAR PERFIL</span>
-    <mat-icon matSuffix (click)="hide = !hide"> check </mat-icon>
+  <div id="container" class="header-div">
+    <div id="left" class="lateral-div">
+      <mat-icon matSuffix class="cancel" (click)="closeEdit()">
+        close
+      </mat-icon>
+    </div>
+    <div id="center" class="center-div">
+      <span class="title-secondary">EDITAR PERFIL</span>
+    </div>
+    <div id="right" class="lateral-div">
+      <mat-icon matSuffix class="save" (click)="editProfile()">
+        check
+      </mat-icon>
+    </div>
   </div>
-  <user-profile-picture></user-profile-picture>
+  <div class="margint-top">
+    <user-profile-picture></user-profile-picture>
+  </div>
 </div>

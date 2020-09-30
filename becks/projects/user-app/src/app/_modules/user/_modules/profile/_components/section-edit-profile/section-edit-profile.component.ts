@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 import { ProfilePictureComponent } from "../profile-picture/profile-picture.component";
 
 @Component({
@@ -11,7 +12,7 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
   public dataProfile: any;
   public urlPicture: string;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.dataProfile = localStorage.getItem("userData");
@@ -24,5 +25,11 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.picture.urlImage = this.urlPicture;
+  }
+
+  closeEdit() {
+    this.router.navigate(["user/profile"], {
+      queryParamsHandling: "preserve",
+    });
   }
 }

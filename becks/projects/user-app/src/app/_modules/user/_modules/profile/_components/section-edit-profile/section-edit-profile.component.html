@@ -16,6 +16,65 @@
   </div>
   <div class="margint-top col-flex-center flex-direction-column">
     <user-profile-picture></user-profile-picture>
-    <span>Cambiar foto de perfil</span>
+    <span class="link-age-gate link-terms">Cambiar foto de perfil</span>
+  </div>
+  <div class="margint-top with-form col-flex-center">
+    <form
+      [formGroup]="userEditProfileForm"
+      class="form-section"
+      autocomplete="off"
+    >
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userEditProfileForm.controls.name)"
+      >
+        <mat-label>Nombre</mat-label>
+
+        <input
+          matInput
+          formControlName="name"
+          required
+          maxlength="20"
+          data-qadp="name"
+        />
+      </mat-form-field>
+
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userEditProfileForm.controls.lastName)"
+      >
+        <mat-label>Apellidos</mat-label>
+
+        <input
+          matInput
+          formControlName="lastName"
+          required
+          maxlength="30"
+          data-qadp="lastName"
+        />
+      </mat-form-field>
+
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userEditProfileForm.controls.phone)"
+      >
+        <mat-label>Teléfono</mat-label>
+
+        <input
+          matInput
+          formControlName="phone"
+          type="number"
+          required
+          maxlength="10"
+          data-qadp="phone"
+        />
+      </mat-form-field>
+    </form>
   </div>
 </div>

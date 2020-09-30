@@ -206,6 +206,21 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
         }
 
         $user->save();
+      } else 
+          if ( $id == 2 ) {
+
+            if ( !isset($record['photo']) ) {
+              throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta la "Foto"');
+            }
+
+            $user = User::load($this->currentUser->id());
+            
+            $image = base64_decode( $data['photo'] );
+            $file = file_save_data($image, $target, FileSystemInterface::EXISTS_REPLACE);
+            $file->save();
+            $user->set('user_picture', $file);
+
+            $user->save();
       }
 
       return new ModifiedResourceResponse( $this->loadUser(), 200);
@@ -314,9 +329,6 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
       throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Numero de celular"');
     }
     
-    if ( !isset($record['photo']) ) {
-      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta la "Foto"');
-    }
     // @DCG Add more validation rules here.
   }
 
@@ -341,16 +353,17 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
 
   protected function loadUser() {
     // "photo" => $this->currentUser->get('user_picture')->entity->url(),
-    return [ 
-      "roles" => $this->currentUser->getRoles(),
-      "email" => $this->currentUser->getEmail(),
-      "last_login" => $this->currentUser->getLastAccessedTime(),
-      "first_name" => $this->currentUser->get('field_first_name'),
-      "last_name" => $this->currentUser->get('field_last_name'),
-      "photo" => $this->currentUser->get('user_picture'),
-      "mobile_phone" => $this->currentUser->get('field_mobile_phone'),
-      "birthdate" => $this->currentUser->get('field_birthdate'),
-      "status" => $this->currentUser->get('field_status')
+    $user = User::load($this->currentUser->id());
+    return [
+      "roles" => $user->getRoles(),
+      "email" => $user->getEmail(),
+      "last_login" => $user->getLastAccessedTime(),
+      "first_name" => $user->get('field_first_name')->value(),
+      "last_name" => $user->get('field_last_name')->value(),
+      "photo" => $user->get('user_picture')->value(),
+      "mobile_phone" => $user->get('field_mobile_phone')->value(),
+      "birthdate" => $user->get('field_birthdate')->value(),
+      "status" => $user->get('field_status')->value()
     ];
   }
 

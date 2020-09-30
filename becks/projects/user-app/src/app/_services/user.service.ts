@@ -12,13 +12,16 @@ export class UserService {
   private _userSbj = new Subject<User>();
   public user$ = this._userSbj.asObservable();
 
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpService) {
+    this._user = new User(JSON.parse(localStorage.getItem("bks_user")));
+  }
 
   public getData() {
     this.http.get(environment.serverUrl + environment.user.getData).subscribe(
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
           this._user = new User(response.body);
+          localStorage.setItem("bks_user", this._user.toJSON());
           this._userSbj.next(this._user);
         } else {
           this._userSbj.error({});

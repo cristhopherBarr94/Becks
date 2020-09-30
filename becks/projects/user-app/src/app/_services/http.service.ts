@@ -49,7 +49,6 @@ export class HttpService {
       .get(url, {
         headers: headersIn,
         observe: "response",
-        withCredentials: true,
       })
       .pipe(catchError((error) => this.handleError(error)));
   }
@@ -62,7 +61,6 @@ export class HttpService {
       .post(url, body, {
         headers: headersIn,
         observe: "response",
-        withCredentials: true,
       })
       .pipe(catchError((error) => this.handleError(error)));
   }
@@ -81,7 +79,6 @@ export class HttpService {
       .post(url, body, {
         headers: headersIn,
         observe: "response",
-        withCredentials: true,
       })
       .pipe(catchError((error) => this.handleError(error)));
   }
@@ -94,7 +91,6 @@ export class HttpService {
       .put(url, body, {
         headers: headersIn,
         observe: "response",
-        withCredentials: true,
       })
       .pipe(catchError((error) => this.handleError(error)));
   }
@@ -107,7 +103,6 @@ export class HttpService {
       .patch(url, body, {
         headers: headersIn,
         observe: "response",
-        withCredentials: true,
       })
       .pipe(catchError((error) => this.handleError(error)));
   }
@@ -120,7 +115,6 @@ export class HttpService {
       .delete(url, {
         headers: headersIn,
         observe: "response",
-        withCredentials: true,
       })
       .pipe(catchError((error) => this.handleError(error)));
   }

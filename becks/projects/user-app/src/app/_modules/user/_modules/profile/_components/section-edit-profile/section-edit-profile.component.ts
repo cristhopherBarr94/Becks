@@ -37,7 +37,7 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
 
   initforms() {
     this.userEditProfileForm = this.formBuilder.group({
-      name: new FormControl("", [Validators.required, Validators.maxLength(3)]),
+      name: new FormControl("", [Validators.required, Validators.minLength(3)]),
       lastName: new FormControl("", [
         Validators.required,
         Validators.minLength(3),
@@ -78,5 +78,23 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
     this.router.navigate(["user/profile"], {
       queryParamsHandling: "preserve",
     });
+  }
+
+  public getMessageform(
+    item: any,
+    name: string,
+    minlength?: number,
+    min?: number,
+    max?: number
+  ): string {
+    if (item.hasError("required")) {
+      return "Ingrese un " + name;
+    } else if (item.hasError("minlength")) {
+      return "Ingrese un " + name + " de mínimo " + minlength + " caracteres";
+    } else if (item.hasError("pattern")) {
+      return "Ingrese solo letras";
+    } else if (item.hasError("min") || item.hasError("max")) {
+      return "Ingrese un valor entre " + min + " y " + max;
+    }
   }
 }

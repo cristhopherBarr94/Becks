@@ -1,8 +1,19 @@
 .margin-top-icon {
-  margin-top: 10%;
+  @media (min-width: 0px) and (max-width: 768px) {
+    margin-top: 10%;
+  }
+  @media (min-width: 768px) {
+    margin-top: 5%;
+  }
 }
 
 .tabs-ubication {
-  margin-top: 38%;
-  min-width: 100%;
+  @media (min-width: 0px) and (max-width: 768px) {
+    margin-top: 38%;
+    min-width: 100%;
+  }
+  @media (min-width: 768px) {
+    margin-top: 14%;
+    min-width: 100%;
+  }
 }

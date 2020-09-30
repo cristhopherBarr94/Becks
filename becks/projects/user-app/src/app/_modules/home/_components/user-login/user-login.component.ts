@@ -5,6 +5,7 @@ import {
   FormControl,
   Validators,
 } from "@angular/forms";
+import { Router } from "@angular/router";
 import { UiService } from "src/app/_services/ui.service";
 import { environment } from "src/environments/environment";
 import { HttpService } from "src/app/_services/http.service";
@@ -25,11 +26,21 @@ export class UserLoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private ui: UiService,
     private httpService: HttpService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.initforms();
+    this.redirect();
+  }
+
+  redirect() {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(["user/profile"], {
+        queryParamsHandling: "preserve",
+      });
+    }
   }
 
   initforms() {
@@ -73,6 +84,7 @@ export class UserLoginComponent implements OnInit {
                 "Bearer " + response.body.access_token
               );
             }
+            this.redirect();
           },
           (e) => {
             this.httpError = "Usuario y/o contraseña incorrecta";

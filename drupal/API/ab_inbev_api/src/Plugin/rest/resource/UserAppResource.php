@@ -133,17 +133,7 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
    * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    */
   public function get($id) {
-    $resp = [ 
-      "roles" => $this->currentUser->getRoles(),
-      "email" => $this->currentUser->getEmail(),
-      "last_login" => $this->currentUser->getLastAccessedTime(),
-      "photo" => $this->currentUser->get('user_picture')->entity->url(),
-      "first_name" => $this->currentUser->get('field_first_name'),
-      "last_name" => $this->currentUser->get('field_last_name'),
-      "mobile_phone" => $this->currentUser->get('field_mobile_phone'),
-      "birthdate" => $this->currentUser->get('field_birthdate'),
-      "status" => $this->currentUser->get('field_status')
-    ];
+    $resp = $this->loadUser();
     return new ResourceResponse($resp);
   }
 
@@ -188,12 +178,12 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
     if ( $id == 0 ) {
       // PATCH PASSWORD
 
-      if (!isset($record['password']) || strlen($record['password']) < 5 ) {
+      if (!isset($data['password']) || strlen($data['password']) < 5 ) {
         throw new BadRequestHttpException('Mínimo 5 caracteres para la "Contraseña"');
       }
 
       $user = User::load($this->currentUser->id());
-      $user->setPassword( $record['password'] );
+      $user->setPassword( $data['password'] );
       $user->save();
 
     } else 
@@ -208,8 +198,8 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
         $user->set("field_mobile_phone", $data['mobile_phone'] );
         $user->set("field_birthdate", $data['birthdate'] );
 
-        if ( isset($record['photo']) ) {
-          $image = base64_decode( $record['photo'] );
+        if ( isset($data['photo']) ) {
+          $image = base64_decode( $data['photo'] );
           $file = file_save_data($image, $target, FileSystemInterface::EXISTS_REPLACE);
           $file->save();
           $user->set('user_picture', $file);
@@ -218,7 +208,7 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
         $user->save();
       }
 
-    return $this->get($id);
+      return new ModifiedResourceResponse( $this->loadUser(), 200);
   }
 
   /**
@@ -347,6 +337,21 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
       throw new NotFoundHttpException('The record was not found.');
     }
     return $record;
+  }
+
+  protected function loadUser() {
+    // "photo" => $this->currentUser->get('user_picture')->entity->url(),
+    return [ 
+      "roles" => $this->currentUser->getRoles(),
+      "email" => $this->currentUser->getEmail(),
+      "last_login" => $this->currentUser->getLastAccessedTime(),
+      "first_name" => $this->currentUser->get('field_first_name'),
+      "last_name" => $this->currentUser->get('field_last_name'),
+      "photo" => $this->currentUser->get('user_picture'),
+      "mobile_phone" => $this->currentUser->get('field_mobile_phone'),
+      "birthdate" => $this->currentUser->get('field_birthdate'),
+      "status" => $this->currentUser->get('field_status')
+    ];
   }
 
 }

@@ -22,6 +22,7 @@ import { ExperiencesCardsComponent } from "./_components/experiences-cards/exper
 import { ExperiencesCardComponent } from "./_components/experiences-card/experiences-card.component";
 import { SalesCardsComponent } from "./_components/sales-cards/sales-cards.component";
 import { SalesCardComponent } from "./_components/sales-card/sales-card.component";
+import { SectionEditProfileComponent } from "./_components/section-edit-profile/section-edit-profile.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SalesCardComponent } from "./_components/sales-card/sales-card.componen
     ExperiencesCardComponent,
     SalesCardsComponent,
     SalesCardComponent,
+    SectionEditProfileComponent,
   ],
   imports: [
     CommonModule,

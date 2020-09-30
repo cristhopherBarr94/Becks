@@ -14,6 +14,8 @@ import { ProfilePictureComponent } from "../../_components/profile-picture/profi
 import { StatisticsProfileComponent } from "../../_components/statistics-profile/statistics-profile.component";
 import { Platform } from "@ionic/angular";
 import { UiService } from "src/app/_services/ui.service";
+import { Router } from "@angular/router";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: "user-profile",
@@ -38,7 +40,8 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private userSvc: UserService,
     private platform: Platform,
-    private ui: UiService
+    private ui: UiService,
+    private router: Router
   ) {
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
@@ -55,6 +58,14 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
           this.first_name = user.first_name;
           this.profile_name = user.first_name + " " + user.last_name;
           this.urlPicture = user.photo;
+          localStorage.setItem(
+            "userData",
+            JSON.stringify({
+              first_name: this.first_name,
+              profile_name: this.profile_name,
+              urlPicture: this.urlPicture,
+            })
+          );
         }
       },
       (error: any) => {}
@@ -70,5 +81,11 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
     this.picture.profile_name = this.profile_name;
     this.first_name = this.first_name;
     this.statics.statistics = this.statistics;
+  }
+
+  editProfile() {
+    this.router.navigate(["user/profile/edit"], {
+      queryParamsHandling: "preserve",
+    });
   }
 }

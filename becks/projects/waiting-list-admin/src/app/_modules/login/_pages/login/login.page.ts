@@ -96,7 +96,6 @@ export class LoginPage implements OnInit {
               this.authService.setAuthenticated(
                 "Bearer " + response.body.access_token
               );
-              console.log("esta entrando");
             }
             this.redirect();
           },

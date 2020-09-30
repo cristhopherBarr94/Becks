@@ -23,6 +23,7 @@ export class User {
   promo: boolean;
   privacy: boolean;
   photo: string;
+  cookie_td: string;
 
   constructor(data?: any) {
     if (data !== undefined) {
@@ -63,6 +64,8 @@ export class User {
       this.birthdate =
         data["birthdate"] !== undefined ? data["birthdate"] : null;
       this.buy_code = data["buy_code"] !== undefined ? data["buy_code"] : null;
+      this.cookie_td =
+        data["cookie_td"] !== undefined ? data["cookie_td"] : null;
     }
   }
 
@@ -98,6 +101,7 @@ export class User {
     data["last_login"] = this.last_login !== undefined ? this.last_login : null;
     data["birthdate"] = this.birthdate !== undefined ? this.birthdate : null;
     data["buy_code"] = this.buy_code !== undefined ? this.buy_code : null;
+    data["cookie_td"] = this.cookie_td !== undefined ? this.cookie_td : null;
 
     return data;
   }

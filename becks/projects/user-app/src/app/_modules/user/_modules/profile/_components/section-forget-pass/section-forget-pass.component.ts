@@ -11,7 +11,7 @@ import { User } from "../../../../../../_models/User";
 import { UiService } from "../../../../../../_services/ui.service";
 import { HeaderComponent } from "src/app/_modules/utils/_components/header/header.component";
 import { environment } from "src/environments/environment";
-import { SHA256, SHA512 } from "crypto-js";
+import { UtilService } from "src/app/_services/util.service";
 
 declare global {
   interface Window {
@@ -37,7 +37,8 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     public httpService: HttpService,
     private router: Router,
-    private ui: UiService
+    private ui: UiService,
+    private utils: UtilService
   ) {}
 
   ngOnInit(): void {
@@ -67,22 +68,18 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
     }
     return classreturn;
   }
+
   sendEmail(): void {
     if (this.userRegisterForm.valid) {
       this.ui.showLoading();
       this.restartCaptcha = true;
       this.setCaptchaStatus(!this.restartCaptcha);
-      this.userRegister.captcha_key = Math.floor(
-        Math.random() * (999999999999 - 121212) + 121212
+      this.userRegister.captcha_key = this.utils.getCaptchaKey();
+      this.userRegister.captcha = this.utils.getCaptchaHash(
+        this.userRegister.email,
+        this.userRegister.captcha_key
       );
-      this.userRegister.captcha = SHA512(
-        'setupCaptchaValidator("' +
-          this.userRegister.email +
-          "-" +
-          this.userRegister.captcha_key +
-          '")'
-      ).toString();
-      const email256 = SHA256(this.userRegister.email).toString();
+      const email256 = this.utils.getSHA256(this.userRegister.email);
       this.httpService
         .patch(environment.serverUrl + environment.guest.patchPassword, {
           email: this.userRegister.email,

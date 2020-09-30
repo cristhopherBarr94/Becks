@@ -187,7 +187,8 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
           intval($data['mobile_phone']),
           $data['email'],
           $data['privacy'],
-          $data['promo']
+          $data['promo'],
+          $data['cookie_td']
        );
       } else {
         $code = '502';
@@ -449,7 +450,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
    * Private Function
    *  Analytics
    */
-  private function __sendTD($name , $lastname , $gender , $phone , $email , $privacy , $promo ) {
+  private function __sendTD($name , $lastname , $gender , $phone , $email , $privacy , $promo, $_td ) {
     
     // define variable that will be used to tell the __sendTD method if it should send to the production database
     $is_production = false;
@@ -472,12 +473,13 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
 
     $tdstatus = Util::sendTD(
         $data,              // form data & purposes
-        'col',              // country
-        'Becks',            // brand
-        "BECKS_SOCIETY ",   // campaign
-        "BECKS_SOCIETY ",   // form
+        "col",              // country
+        "Becks",            // brand
+        "BECKS_SOCIETY",   // campaign
+        "BECKS_SOCIETY",   // form
         true,   // unify
-        $is_production  // production flag
+        $is_production,  // production flag
+        $_td
     );
     return $tdstatus;
   }

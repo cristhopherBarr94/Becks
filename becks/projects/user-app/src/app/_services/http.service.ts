@@ -4,39 +4,40 @@ import { Observable } from "rxjs";
 import { throwError } from "rxjs/internal/observable/throwError";
 import { catchError } from "rxjs/operators";
 import { HttpConstants } from "../_constans/HttpConstants";
-import { AuthService } from './auth.service';
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class HttpService {
-  constructor(private http: HttpClient,
-              private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getHeaders() {
-    let token = '';
-    if ( typeof(this.authService.getToken()) == 'string' ) {
+    let token = "";
+    if (typeof this.authService.getToken() == "string") {
       token = this.authService.getToken();
     }
     return {
       "Content-Type": "application/json; charset=UTF-8",
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
       "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
-      "Authorization" : token
+      Authorization: token,
     };
   }
 
   getHeadersFormData() {
-    let token = '';
-    if ( typeof(this.authService.getToken()) == 'string' ) {
+    let token = "";
+    if (typeof this.authService.getToken() == "string") {
       token = this.authService.getToken();
     }
     return {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
       "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
-      "Authorization" : token
+      Authorization: token,
     };
   }
 
@@ -45,7 +46,11 @@ export class HttpService {
       headersIn = this.getHeaders();
     }
     return this.http
-      .get(url, { headers: headersIn, observe: "response" })
+      .get(url, {
+        headers: headersIn,
+        observe: "response",
+        withCredentials: true,
+      })
       .pipe(catchError((error) => this.handleError(error)));
   }
 
@@ -54,7 +59,11 @@ export class HttpService {
       headersIn = this.getHeaders();
     }
     return this.http
-      .post(url, body, { headers: headersIn, observe: "response" })
+      .post(url, body, {
+        headers: headersIn,
+        observe: "response",
+        withCredentials: true,
+      })
       .pipe(catchError((error) => this.handleError(error)));
   }
 
@@ -67,9 +76,13 @@ export class HttpService {
       headersIn = this.getHeadersFormData();
     }
     console.log(url);
-    
+
     return this.http
-      .post(url, body, { headers: headersIn, observe: "response" })
+      .post(url, body, {
+        headers: headersIn,
+        observe: "response",
+        withCredentials: true,
+      })
       .pipe(catchError((error) => this.handleError(error)));
   }
 
@@ -78,7 +91,11 @@ export class HttpService {
       headersIn = this.getHeaders();
     }
     return this.http
-      .put(url, body, { headers: headersIn, observe: "response" })
+      .put(url, body, {
+        headers: headersIn,
+        observe: "response",
+        withCredentials: true,
+      })
       .pipe(catchError((error) => this.handleError(error)));
   }
 
@@ -87,7 +104,11 @@ export class HttpService {
       headersIn = this.getHeaders();
     }
     return this.http
-      .patch(url, body, { headers: headersIn, observe: "response" })
+      .patch(url, body, {
+        headers: headersIn,
+        observe: "response",
+        withCredentials: true,
+      })
       .pipe(catchError((error) => this.handleError(error)));
   }
 
@@ -96,13 +117,17 @@ export class HttpService {
       headersIn = this.getHeaders();
     }
     return this.http
-      .delete(url, { headers: headersIn, observe: "response" })
+      .delete(url, {
+        headers: headersIn,
+        observe: "response",
+        withCredentials: true,
+      })
       .pipe(catchError((error) => this.handleError(error)));
   }
 
   handleError(error: HttpErrorResponse) {
     if (error.status === HttpConstants.UNAUTHORIZED) {
-      this.authService.setAuthenticated( null );
+      this.authService.setAuthenticated(null);
       location.reload();
     } else if (error.status === HttpConstants.CONFLICT) {
       console.log("mensaje incorrecto");

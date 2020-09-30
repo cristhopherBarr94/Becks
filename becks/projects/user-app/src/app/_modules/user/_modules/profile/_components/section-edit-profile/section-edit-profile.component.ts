@@ -59,6 +59,7 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
           this.userEditProfileForm.controls.year.patchValue(
             !!user.birthdate && moment("12/03/2010").format("YYYY")
           );
+          console.log(user.birthdate);
           this.urlPicture = user.photo;
         }
       },

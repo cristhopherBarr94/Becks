@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { environment } from "src/environments/environment";
 import { User } from "../_models/User";
 import { HttpService } from "./http.service";
@@ -8,8 +8,8 @@ import { HttpService } from "./http.service";
   providedIn: "root",
 })
 export class UserService {
-  private _user: User = new User();
-  private _userSbj = new BehaviorSubject<User>(this._user);
+  public _user: User = new User();
+  private _userSbj = new Subject<User>();
   public user$ = this._userSbj.asObservable();
 
   constructor(private http: HttpService) {}

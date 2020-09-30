@@ -124,13 +124,7 @@
           />
           <mat-error *ngIf="userEditProfileForm.controls.day.errors">
             {{
-              getMessageform(
-                userEditProfileForm.controls.day,
-                "teléfono",
-                10,
-                1,
-                31
-              )
+              getMessageform(userEditProfileForm.controls.day, "dia", 10, 1, 31)
             }}</mat-error
           >
         </mat-form-field>
@@ -154,7 +148,7 @@
             {{
               getMessageform(
                 userEditProfileForm.controls.month,
-                "teléfono",
+                "mes",
                 10,
                 1,
                 12

@@ -48,15 +48,15 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
       (user: User) => {
         if (user !== undefined) {
           console.log("ProfilePage -> ngOnInit -> user", user);
-          this.setData( user );
+          this.setData(user);
         }
       },
       (error: any) => {
         console.log("ProfilePage -> ngOnInit -> error", error);
       }
     );
-    this.setData( this.userSvc.getActualUser() );
-    this.userSvc.getData().
+    this.setData(this.userSvc.getActualUser());
+    this.userSvc.getData();
   }
 
   ngOnDestroy(): void {
@@ -71,13 +71,13 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  setData( user: User ) {
-    if ( user ) {
+  setData(user: User) {
+    if (user) {
       this.picture.urlImage = !!user.photo
-                        ? user.photo
-                        : user.gender == "femenino"
-                        ? "../../../../../../../assets/img/profile_female.jpg"
-                        : "../../../../../../../assets/img/profile_male.jpg";
+        ? user.photo
+        : user.gender == "femenino"
+        ? "../../../../../../../assets/img/profile_female.jpg"
+        : "../../../../../../../assets/img/profile_male.jpg";
       this.picture.profile_name = user.first_name + " " + user.last_name;
       this.name.first_name = user.first_name;
       this.statics.statistics = "10";

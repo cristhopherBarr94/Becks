@@ -135,6 +135,7 @@ export class SectionEditProfileComponent implements OnInit {
         .subscribe((response: any) => {
           this.ui.dismissLoading();
           if (response.status == 200) {
+            this.userSvc.getData();
             this.closeEdit();
           }
         }),

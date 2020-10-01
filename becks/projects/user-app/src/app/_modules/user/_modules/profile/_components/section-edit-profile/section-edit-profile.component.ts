@@ -26,8 +26,7 @@ import { User } from "src/app/_models/User";
   templateUrl: "./section-edit-profile.component.html",
   styleUrls: ["./section-edit-profile.component.scss"],
 })
-export class SectionEditProfileComponent implements OnInit, AfterViewInit {
-  @ViewChild(ProfilePictureComponent) picture: ProfilePictureComponent;
+export class SectionEditProfileComponent implements OnInit {
   public user = new User();
   public userEditProfileForm: FormGroup;
   public urlPicture: string;
@@ -46,16 +45,11 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     if (this.userSvc.getActualUser()) {
       this.user = this.userSvc.getActualUser();
-      this.urlPicture = this.user.photo;
     } else {
       this.userSvc.getData();
     }
     this.initforms();
     this.cdr.detectChanges();
-  }
-
-  ngAfterViewInit() {
-    this.picture.urlImage = this.urlPicture;
   }
 
   initforms() {
@@ -149,5 +143,13 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
           this.ui.dismissLoading();
         };
     }
+  }
+
+  profilePicture() {
+    return !!this.user.photo
+      ? this.user.photo
+      : this.user.gender == "female"
+      ? "../../../../../../../assets/img/profile_female.jpg"
+      : "../../../../../../../assets/img/profile_male.jpg";
   }
 }

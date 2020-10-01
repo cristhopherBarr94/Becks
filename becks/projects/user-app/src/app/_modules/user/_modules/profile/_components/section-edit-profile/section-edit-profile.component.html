@@ -17,6 +17,12 @@
   <div class="margint-top col-flex-center flex-direction-column">
     <user-profile-picture [urlImage]="profilePicture()"></user-profile-picture>
     <span class="link-age-gate link-terms">Cambiar foto de perfil</span>
+    <input
+      type="file"
+      (change)="loadImageFromDevice($event)"
+      id="file-input"
+      accept="image/png, image/jpeg"
+    />
   </div>
   <div class="content-flex-all-center">
     <form

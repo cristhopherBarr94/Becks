@@ -155,7 +155,7 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
           );
           this.ui.dismissLoading();
           if (response.status == 200) {
-            // this.closeEdit();
+            this.closeEdit();
           }
         }),
         (e) => {

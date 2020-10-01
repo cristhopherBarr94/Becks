@@ -16,8 +16,11 @@
   </div>
   <div class="margint-top col-flex-center flex-direction-column">
     <user-profile-picture [urlImage]="profilePicture()"></user-profile-picture>
-    <span class="link-age-gate link-terms">Cambiar foto de perfil</span>
+    <span expand="full" class="link-age-gate link-terms" (onclick)="(!hide)"
+      >Cambiar foto de perfil</span
+    >
     <input
+      visible="hide"
       type="file"
       (change)="loadImageFromDevice($event)"
       id="file-input"

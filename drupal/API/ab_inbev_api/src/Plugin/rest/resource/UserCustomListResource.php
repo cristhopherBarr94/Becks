@@ -189,7 +189,7 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
    *   The HTTP response object.
    */
   public function patch($id, $data) {
-    $response_array = [];
+    // $response_array = [];
 
     $uids = json_decode( $data->getContent() , false );
     $uids = $this->validateUids( $uids );

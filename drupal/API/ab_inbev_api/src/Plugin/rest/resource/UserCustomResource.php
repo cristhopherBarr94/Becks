@@ -160,6 +160,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->set("field_last_name", $data['last_name'] );
       $user->set("field_mobile_phone", $data['mobile_phone'] );
       $user->set("field_gender",  $data['gender'] );
+      $user->set("field_photo_uri",  '' );
       
       // "type_id" field only come from User-App Form
       if ( isset($data['type_id']) ) {

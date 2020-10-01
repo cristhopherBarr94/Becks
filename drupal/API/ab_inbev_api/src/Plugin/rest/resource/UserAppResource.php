@@ -14,6 +14,8 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\file\Entity\File;
 
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheableMetadata;
@@ -176,51 +178,138 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
    *
    * @return \Drupal\rest\ModifiedResourceResponse
    *   The HTTP response object.
+   * 
+   *  ISSUE FOR SIMPLE OAUTH
+   *    - Auth revoke on profile update
+   *    https://www.drupal.org/project/simple_oauth/issues/2946882
+   * 
+   * 
    */
   public function patch($id, $data) {
-    $user = [];
-    if ( $id == 0 ) {
-      // PATCH PASSWORD
 
-      if (!isset($data['password']) || strlen($data['password']) < 5 ) {
-        throw new BadRequestHttpException('Mínimo 5 caracteres para la "Contraseña"');
-      }
-
-      $user = User::load($this->currentUser->id());
-      $user->setPassword( $data['password'] );
-      $user->save();
-
-    } else 
-      if ( $id == 1 ) {
-      // PATCH DATA [ first_name , last_name, mobile_phone, birthdate, photo]
+    // Validations
+    switch ( $id ) {
+      case 0: 
+        // PATCH PASSWORD
+        if (!isset($data['password']) || strlen($data['password']) < 5 ) {
+          throw new BadRequestHttpException('Mínimo 5 caracteres para la "Contraseña"');
+        }
+      break;
+      case 1:
+        // PATCH DATA [ first_name , last_name, mobile_phone, birthdate ]
         $this->validate($data);
-
-        $user = User::load($this->currentUser->id());
+      break;
+      case 2: 
+        // PATCH Photo
+        if ( !isset($data['photo']) ) {
+          throw new BadRequestHttpException('El usuario no puede ser editado porque hace falta la "Foto"');
+        }
+      break;
+      default:
+        throw new BadRequestHttpException('Servicio no disponible');
+      break;
+    }
     
-        $user->set("field_first_name", $data['first_name'] );
-        $user->set("field_last_name", $data['last_name'] );
-        $user->set("field_mobile_phone", $data['mobile_phone'] );
-        $user->set("field_birthdate", $data['birthdate'] );
-
+    // User Logged
+    // $user = User::load($this->currentUser->id());
+    // $account = $this->currentUser->getAccount();
+    $response_array = [];
+    
+    // Logic
+    switch ( $id ) {
+      case 0: 
+        // PATCH PASSWORD
+        $user = User::load($this->currentUser->id());
+        $user->setPassword( $data['password'] );
         $user->save();
-      } else 
-          if ( $id == 2 ) {
+        $response_array["password"] = true;
+      break;
+      case 1:
+        // PATCH DATA [ first_name , last_name, mobile_phone, birthdate ]
+        // $user->set("field_first_name", $data['first_name'] );
+        // $user->set("field_last_name", $data['last_name'] );
+        // $user->set("field_mobile_phone", $data['mobile_phone'] );
+        // $user->set("field_birthdate", $data['birthdate'] );
+        // $user->save();
 
-            if ( !isset($record['photo']) ) {
-              throw new BadRequestHttpException('El usuario no puede ser editado porque hace falta la "Foto"');
+        try {
+          $response_array["first_name"] =  $this->dbConnection->update('user__field_first_name')
+                                            ->fields(['field_first_name_value' => $data['first_name']])
+                                            ->condition('entity_id', $this->currentUser->id() )
+                                            ->execute()  == 1;
+        } catch (\Throwable $th) {
+          $response_array["first_name"] = false;
+        }
+        
+        try {
+          $response_array["last_name"] = $this->dbConnection->update('user__field_last_name')
+                    ->fields(['field_last_name_value' => $data['last_name']])
+                    ->condition('entity_id', $this->currentUser->id() )
+                    ->execute()  == 1;
+        } catch (\Throwable $th) {
+          $response_array["last_name"] = false;
+        }
+        
+        try {
+          $response_array["mobile_phone"] = $this->dbConnection->update('user__field_mobile_phone')
+                    ->fields(['field_mobile_phone_value' => $data['mobile_phone']])
+                    ->condition('entity_id', $this->currentUser->id() )
+                    ->execute()  == 1;
+        } catch (\Throwable $th) {
+          $response_array["mobile_phone"] = false;
+        }
+        
+        try {
+          $response_array["birthdate"] = $this->dbConnection->update('user__field_birthdate')
+                    ->fields(['field_birthdate_value' => $data['birthdate']])
+                    ->condition('entity_id', $this->currentUser->id() )
+                    ->execute()  == 1;
+        } catch (\Throwable $th) {
+          $response_array["birthdate"] = false;
+        }
+
+      break;
+      case 2: 
+        // PATCH Photo
+          // $user->set('user_picture', $file);
+          // $response_array["photo"] = $user->save();
+        try {
+          $images_folder = "public://images/";
+          $name = $this->currentUser->getAccount()->uuid();
+          $image = base64_decode( $data['photo'] );
+          $file = file_save_data($image, $images_folder . $name , FileSystemInterface::EXISTS_REPLACE);
+          if ( $file->save() ) {
+            $url = $file->url();
+            $uri = substr( $url , strpos($url, '/sites/') );
+            if ( $this->dbConnection->update('user__field_photo_uri')
+                                        ->fields(['field_photo_uri_value' => $uri ])
+                                        ->condition('entity_id', $this->currentUser->id() )
+                                        ->execute() == 0 ) 
+            {
+              // IF NOT UPDATE , TRYING INSERT
+              $response_array["photo"] = $this->dbConnection->insert('user__field_photo_uri')
+                                          ->fields([
+                                                'bundle ' => 'user' ,
+                                                'entity_id' => $this->currentUser->id() ,
+                                                'revision_id ' => $this->currentUser->id() ,
+                                                'langcode ' => $this->currentUser->getPreferredLangcode() ,
+                                                'delta ' => 0 ,
+                                                'field_photo_uri_value' => $uri
+                                          ])
+                                          ->execute() >= 0;
+            } else {
+              $response_array["photo"] = true;
             }
+          } else {
+            $response_array["photo"] = false;
+          }
+        } catch ( Exception $ex ) {
+          return new ModifiedResourceResponse( ["message" => $ex->getMessage() ], 500);
+        }
+      break;
+    }
 
-            $user = User::load($this->currentUser->id());
-            
-            $image = base64_decode( $data['photo'] );
-            $file = file_save_data($image, $target, FileSystemInterface::EXISTS_REPLACE);
-            $file->save();
-            $user->set('user_picture', $file);
-
-            $user->save();
-      }
-
-      return new ModifiedResourceResponse( $this->loadUser(), 200);
+    return new ModifiedResourceResponse( $response_array, 200);
   }
 
   /**
@@ -302,10 +391,10 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
     }
 
     if (!isset($record['birthdate']) || empty($record['birthdate']) ) {
-      throw new BadRequestHttpException('El usuario no puede ser editado porque hace falta la "Fecha de Nacimiento"');
+      throw new BadRequestHttpException('El usuario no puede ser editado porque hace falta la "Fecha de Nacimiento" tipo MM/DD/YYYY');
     }
     if ( strlen($record['birthdate']) > 11) {
-      throw new BadRequestHttpException('La "Fecha de Nacimiento" sobrepasa los caracteres permitidos');
+      throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser tipo MM/DD/YYYY');
     }
 
     if (!isset($record['first_name']) || empty($record['first_name'])) {
@@ -349,18 +438,18 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
   }
 
   protected function loadUser() {
-    // "photo" => $this->currentUser->get('user_picture')->entity->url(),
+    // "photo" => $user->get('user_picture')->entity->url(),
     $user = User::load($this->currentUser->id());
     return [
       "roles" => $user->getRoles(),
       "email" => $user->getEmail(),
       "last_login" => $user->getLastAccessedTime(),
-      "first_name" => $user->get('field_first_name')->value(),
-      "last_name" => $user->get('field_last_name')->value(),
-      "photo" => $user->get('user_picture')->value(),
-      "mobile_phone" => $user->get('field_mobile_phone')->value(),
-      "birthdate" => $user->get('field_birthdate')->value(),
-      "status" => $user->get('field_status')->value()
+      "first_name" => $user->get('field_first_name')->value,
+      "last_name" => $user->get('field_last_name')->value,
+      "photo" => $user->get('field_photo_uri')->value,
+      "mobile_phone" => $user->get('field_mobile_phone')->value,
+      "birthdate" => $user->get('field_birthdate')->value,
+      "status" => $user->get('field_status')->value
     ];
   }
 

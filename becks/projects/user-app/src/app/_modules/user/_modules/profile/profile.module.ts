@@ -17,7 +17,6 @@ import { ProfilePage } from "./_pages/profile/profile.page";
 import { NameTittleComponent } from "./_components/name-tittle/name-tittle.component";
 import { StatisticsProfileComponent } from "./_components/statistics-profile/statistics-profile.component";
 import { SeccionsProfileComponent } from "./_components/seccions-profile/seccions-profile.component";
-import { DayMeterComponent } from "./_components/day-meter/day-meter.component";
 import { ExperiencesCardsComponent } from "./_components/experiences-cards/experiences-cards.component";
 import { ExperiencesCardComponent } from "./_components/experiences-card/experiences-card.component";
 import { SalesCardsComponent } from "./_components/sales-cards/sales-cards.component";
@@ -33,7 +32,6 @@ import { SectionEditProfileComponent } from "./_components/section-edit-profile/
     NameTittleComponent,
     StatisticsProfileComponent,
     SeccionsProfileComponent,
-    DayMeterComponent,
     ExperiencesCardsComponent,
     ExperiencesCardComponent,
     SalesCardsComponent,

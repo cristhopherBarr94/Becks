@@ -44,7 +44,7 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.initforms();
-    this.cdr.detectChanges();
+
     this.userSubscription = this.userSvc.user$.subscribe((user: User) => {
       console.log("SectionEditProfileComponent -> ngOnInit -> user", user);
       if (user !== undefined) {
@@ -64,6 +64,7 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
         this.urlPicture = user.photo;
       }
     });
+    this.cdr.detectChanges();
   }
 
   ngAfterViewInit() {

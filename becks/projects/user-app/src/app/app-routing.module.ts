@@ -23,6 +23,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: "age-gate-v2",
+    loadChildren: () =>
+      import("./_modules/age-gate-v2/age-gate-v2.module").then(
+        (m) => m.AgeGateV2Module
+      ),
+  },
+  {
     path: "",
     redirectTo: "age-gate",
     pathMatch: "full",

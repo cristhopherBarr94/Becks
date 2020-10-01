@@ -1,58 +1,112 @@
-<section class="fullSection content-flex-all-center flex-direction-column content-section-img padding-logo">
-  <img class="logo" src="./assets/img/becks-logoverde.svg" alt="logo">
+<section
+  class="fullSection content-flex-all-center flex-direction-column content-section-img padding-logo"
+>
+  <img class="logo" src="./assets/img/becks-logoverde.svg" alt="logo" />
 
-    <h1 class="title-primary primary max-width-title-primary-age-gate">
-      Bienvenido a beck’s society
-    </h1>
-    <h3 class="title-tertiary max-width-title-tertiary-age-gate"> para continuar con la experiencia debes ser mayor de edad </h3>
-    
-    <form
-      [formGroup]="ageGateForm"
-      autocomplete="off"
-      class="padding-form-age"
+  <h1 class="title-primary primary max-width-title-primary-age-gate">
+    Bienvenido a beck’s society
+  </h1>
+  <h3 class="title-tertiary max-width-title-tertiary-age-gate">
+    para continuar con la experiencia debes ser mayor de edad
+  </h3>
+
+  <form [formGroup]="ageGateForm" autocomplete="off" class="padding-form-age">
+    <mat-form-field
+      appearance="fill"
+      floatLabel="auto"
+      [ngClass]="getClassInput(ageGateForm.controls.day)"
+      class="input-age margin-top"
     >
+      <mat-label>Día</mat-label>
+      <input
+        matInput
+        formControlName="day"
+        placeholder="DD"
+        minlength="1"
+        maxlength="2"
+        (input)="inputValidatorNumeric($event)"
+        data-qadp="age_gate_day"
+      />
+      <mat-error *ngIf="ageGateForm.controls.day.errors">{{
+        getMessageform(ageGateForm.controls.day, "dia", 2, 2, 1, 31)
+      }}</mat-error>
+    </mat-form-field>
 
-      <mat-form-field appearance="fill" floatLabel="auto" [ngClass]="getClassInput(ageGateForm.controls.day)" class="input-age margin-top">
-        <mat-label>Día</mat-label>
-        <input matInput formControlName="day" placeholder="DD" minlength="1" maxlength="2" (input)="inputValidatorNumeric($event)" data-qadp="age_gate_day"> 
-        <mat-error *ngIf="ageGateForm.controls.day.errors">{{ getMessageform(ageGateForm.controls.day, 'dia', 2, 2, 1, 31) }}</mat-error>
-      </mat-form-field>
+    <mat-form-field
+      appearance="fill"
+      floatLabel="auto"
+      [ngClass]="getClassInput(ageGateForm.controls.month)"
+      class="input-becks input-age"
+    >
+      <mat-label>Mes</mat-label>
+      <input
+        matInput
+        formControlName="month"
+        placeholder="MM"
+        minlength="1"
+        maxlength="2"
+        (input)="inputValidatorNumeric($event)"
+        data-qadp="age_gate_month"
+      />
+      <mat-error *ngIf="ageGateForm.controls.month.errors">{{
+        getMessageform(ageGateForm.controls.month, "mes", 2, 2, 1, 12)
+      }}</mat-error>
+    </mat-form-field>
 
-      <mat-form-field appearance="fill" floatLabel="auto" [ngClass]="getClassInput(ageGateForm.controls.month)" class="input-becks input-age">
-        <mat-label>Mes</mat-label>
-        <input matInput formControlName="month" placeholder="MM" minlength="1" maxlength="2" (input)="inputValidatorNumeric($event)" data-qadp="age_gate_month">
-        <mat-error *ngIf="ageGateForm.controls.month.errors">{{ getMessageform(ageGateForm.controls.month, 'mes', 2, 2, 1, 12) }}</mat-error>
-      </mat-form-field>
+    <mat-form-field
+      appearance="fill"
+      floatLabel="auto"
+      [ngClass]="getClassInput(ageGateForm.controls.year)"
+      class="input-becks input-age"
+    >
+      <mat-label>Año</mat-label>
+      <input
+        matInput
+        formControlName="year"
+        placeholder="AAAA"
+        minlength="4"
+        maxlength="4"
+        (input)="inputValidatorNumeric($event)"
+        data-qadp="age_gate_year"
+      />
+      <mat-error *ngIf="ageGateForm.controls.year.errors">{{
+        getMessageform(ageGateForm.controls.year, "año", 4, 4, 1920, 2020)
+      }}</mat-error>
+    </mat-form-field>
+  </form>
 
-      <mat-form-field appearance="fill" floatLabel="auto" [ngClass]="getClassInput(ageGateForm.controls.year)" class="input-becks input-age">
-        <mat-label>Año</mat-label>
-        <input matInput formControlName="year" placeholder="AAAA" minlength="4" maxlength="4" (input)="inputValidatorNumeric($event)" data-qadp="age_gate_year">
-        <mat-error *ngIf="ageGateForm.controls.year.errors">{{ getMessageform(ageGateForm.controls.year, 'año', 4, 4, 1920, 2020) }}</mat-error>
-      </mat-form-field>
-    </form>
-
-    <div class="content-check">
-      <mat-checkbox color="success" class="margin-check"></mat-checkbox>
-      <div><span class="title-fourthy">RECORDARME *</span> <i class="title-fourthy"> No utilizar en caso de ser un ordenador compartido con menores de edad. </i></div>
+  <div class="content-check">
+    <mat-checkbox color="success" class="margin-check"></mat-checkbox>
+    <div>
+      <span class="title-fourthy">RECORDARME *</span>
+      <i class="title-fourthy">
+        No utilizar en caso de ser un ordenador compartido con menores de edad.
+      </i>
     </div>
+  </div>
 
-    <button
-      block="block"
-      color="becks"
-      (click)="validateAgeGate()"
-      class="becks-btn-primary margin-top-button"
-      [ngClass]="{'button-disabled': ageGateForm.invalid }"
-      [disabled]="ageGateForm.invalid"
-      data-qadp="button_enter_agegate">
-      <span>ENTRAR</span>
-    </button>
-    
-    <div class="title-fourthy max-width-title-fourthy">
-      <p class="no-margin">Este sitio web utiliza cookies que se quedarán almacenadas en el computador con el fin de mejorar su eficiencia. Al proporcionar su fecha de nacimiento, también se acepta el uso de cookies.</p>
-      <a class="color-green text-decoration-underline" href="./privacy-policy">Más Información</a>
-    </div>
+  <button
+    block="block"
+    color="becks"
+    (click)="validateAgeGate()"
+    class="becks-btn-primary margin-top-button"
+    [ngClass]="{ 'button-disabled': ageGateForm.invalid }"
+    [disabled]="ageGateForm.invalid"
+    data-qadp="button_enter_agegate"
+  >
+    <span>ENTRAR</span>
+  </button>
 
-    
+  <div class="title-fourthy max-width-title-fourthy">
+    <p class="no-margin">
+      Este sitio web utiliza cookies que se quedarán almacenadas en el
+      computador con el fin de mejorar su eficiencia. Al proporcionar su fecha
+      de nacimiento, también se acepta el uso de cookies.
+    </p>
+    <a class="color-green text-decoration-underline" href="./privacy-policy"
+      >Más Información</a
+    >
+  </div>
 </section>
 
 <app-footer></app-footer>

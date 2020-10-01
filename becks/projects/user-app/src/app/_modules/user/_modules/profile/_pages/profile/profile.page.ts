@@ -22,11 +22,9 @@ import { Router } from "@angular/router";
   styleUrls: ["./profile.page.scss"],
 })
 export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild(ProfilePictureComponent) picture: ProfilePictureComponent;
-  @ViewChild(NameTittleComponent) name: NameTittleComponent;
-  @ViewChild(StatisticsProfileComponent) statics: StatisticsProfileComponent;
+  public user = new User();
+  public stats = "10";
   public size: string;
-
   userSubscription: Subscription;
 
   constructor(
@@ -48,14 +46,17 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
       (user: User) => {
         if (user !== undefined) {
           console.log("ProfilePage -> ngOnInit -> user", user);
-          this.setData(user);
+          this.user = user;
         }
       },
       (error: any) => {
         console.log("ProfilePage -> ngOnInit -> error", error);
       }
     );
-    this.setData(this.userSvc.getActualUser());
+
+    if (this.userSvc.getActualUser()) {
+      this.user = this.userSvc.getActualUser();
+    }
     this.userSvc.getData();
   }
 
@@ -69,18 +70,5 @@ export class ProfilePage implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(["user/profile/edit"], {
       queryParamsHandling: "preserve",
     });
-  }
-
-  setData(user: User) {
-    if (user) {
-      this.picture.urlImage = !!user.photo
-        ? user.photo
-        : user.gender == "femenino"
-        ? "../../../../../../../assets/img/profile_female.jpg"
-        : "../../../../../../../assets/img/profile_male.jpg";
-      this.picture.profile_name = user.first_name + " " + user.last_name;
-      this.name.first_name = user.first_name;
-      this.statics.statistics = "10";
-    }
   }
 }

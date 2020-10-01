@@ -28,6 +28,7 @@ import { User } from "src/app/_models/User";
 })
 export class SectionEditProfileComponent implements OnInit, AfterViewInit {
   @ViewChild(ProfilePictureComponent) picture: ProfilePictureComponent;
+  public user = new User();
   public userEditProfileForm: FormGroup;
   public urlPicture: string;
   public birthDayDate: any;
@@ -43,27 +44,14 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
+    if (this.userSvc.getActualUser()) {
+      this.user = this.userSvc.getActualUser();
+      this.urlPicture = this.user.photo;
+    } else {
+      this.userSvc.getData();
+    }
     this.initforms();
     this.cdr.detectChanges();
-    this.userSubscription = this.userSvc.user$.subscribe((user: User) => {
-      console.log("SectionEditProfileComponent -> ngOnInit -> user", user);
-      if (user !== undefined) {
-        this.userEditProfileForm.controls.name.patchValue(user.first_name);
-        this.userEditProfileForm.controls.lastName.patchValue(user.last_name);
-        this.userEditProfileForm.controls.phone.patchValue(user.mobile_phone);
-        this.userEditProfileForm.controls.day.patchValue(
-          !!user.birthdate && moment("12/03/2010").format("DD")
-        );
-        this.userEditProfileForm.controls.month.patchValue(
-          !!user.birthdate && moment("12/03/2010").format("MM")
-        );
-        this.userEditProfileForm.controls.year.patchValue(
-          !!user.birthdate && moment("12/03/2010").format("YYYY")
-        );
-        console.log(user.birthdate);
-        this.urlPicture = user.photo;
-      }
-    });
   }
 
   ngAfterViewInit() {
@@ -72,12 +60,15 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
 
   initforms() {
     this.userEditProfileForm = this.formBuilder.group({
-      name: new FormControl("", [Validators.required, Validators.minLength(3)]),
-      lastName: new FormControl("", [
+      name: new FormControl(this.user.first_name, [
         Validators.required,
         Validators.minLength(3),
       ]),
-      phone: new FormControl("", [
+      lastName: new FormControl(this.user.last_name, [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      phone: new FormControl(this.user.mobile_phone, [
         Validators.required,
         Validators.minLength(10),
       ]),

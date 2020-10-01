@@ -1,13 +1,19 @@
 <ion-content>
   <div class="container-profile flex-direction-column">
-    <user-name-tittle *ngIf="size == 'xs' || size == 'sm' "></user-name-tittle>
-    <user-profile-picture></user-profile-picture>
+    <user-name-tittle
+      *ngIf="size == 'xs' || size == 'sm' "
+      [first_name]="user.first_name"
+    ></user-name-tittle>
+    <user-profile-picture
+      [urlImage]="user.photo"
+      [profile_name]=" user.first_name + ' ' + user.last_name "
+    ></user-profile-picture>
     <span
       class="link-profile url-hyper content-flex-all-center margin-top"
       (click)="editProfile()"
       >Editar Perfil</span
     >
-    <user-statistics-profile></user-statistics-profile>
+    <user-statistics-profile [statistics]="stats"></user-statistics-profile>
     <user-seccions-profile></user-seccions-profile>
   </div>
   <app-footer></app-footer>

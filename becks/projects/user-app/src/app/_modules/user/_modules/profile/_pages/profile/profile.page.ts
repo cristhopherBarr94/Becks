@@ -13,7 +13,7 @@ import { Router } from "@angular/router";
 })
 export class ProfilePage implements OnInit, OnDestroy {
   public user = new User();
-  public stats = "10";
+  public stats = { buy: "10", exp: "6", friends: "7" };
   public size: string;
   userSubscription: Subscription;
 

@@ -51,29 +51,6 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
       this.userSvc.getData();
     }
     this.initforms();
-<<<<<<< HEAD
-
-    this.userSubscription = this.userSvc.user$.subscribe((user: User) => {
-      console.log("SectionEditProfileComponent -> ngOnInit -> user", user);
-      if (user !== undefined) {
-        this.userEditProfileForm.controls.name.patchValue(user.first_name);
-        this.userEditProfileForm.controls.lastName.patchValue(user.last_name);
-        this.userEditProfileForm.controls.phone.patchValue(user.mobile_phone);
-        this.userEditProfileForm.controls.day.patchValue(
-          !!user.birthdate && moment("12/03/2010").format("DD")
-        );
-        this.userEditProfileForm.controls.month.patchValue(
-          !!user.birthdate && moment("12/03/2010").format("MM")
-        );
-        this.userEditProfileForm.controls.year.patchValue(
-          !!user.birthdate && moment("12/03/2010").format("YYYY")
-        );
-        console.log(user.birthdate);
-        this.urlPicture = user.photo;
-      }
-    });
-=======
->>>>>>> TEST
     this.cdr.detectChanges();
   }
 

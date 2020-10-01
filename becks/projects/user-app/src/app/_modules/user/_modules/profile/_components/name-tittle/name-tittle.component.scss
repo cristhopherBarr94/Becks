@@ -1,8 +1,28 @@
 .container {
-  margin-left: 25px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .margin-tittle {
-  margin-left: 10px;
+  margin-top: 12px;
+}
+
+.margin-botton {
+  margin-bottom: 22px;
+}
+
+.header-div {
+  display: flex;
+  align-items: center;
+}
+
+.lateral-div {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+}
+
+.center-div {
+  width: 70%;
+  display: flex;
+  justify-content: center;
 }

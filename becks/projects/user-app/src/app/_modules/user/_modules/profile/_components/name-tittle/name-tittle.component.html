@@ -1,5 +1,8 @@
-<div class="flex-direction-row container">
-  <div class="titleLogo margin-top-icon title-secondary"></div>
-  <span class="title-profile margin-tittle">!Hola, {{ first_name }}!</span>
-  <button (click)="logout()">Cerrar Sesión</button>
+<div class="container flex-direction-row header-div margin-botton">
+  <div class="margin-top-icon lateral-div"></div>
+  <div class="col-flex-center flex-direction-column center-div">
+    <div class="titleLogo margin-top-icon title-secondary"></div>
+    <span class="title-profile margin-tittle">!Hola, {{ first_name }}!</span>
+  </div>
+  <div class="singOutLogo margin-top-icon lateral-div" (click)="logout()"></div>
 </div>

@@ -1,0 +1,290 @@
+<section
+  class="fullSection content-flex-all-center flex-direction-column age-aget-background-img padding-logo"
+>
+  <span class="logo-2"></span>
+  <div class="form-section">
+    <h1 class="title-primary">PARA CONTINUAR DEBES SER MAYOR DE EDAD</h1>
+
+    <ion-content>
+      <mat-carousel
+        timings="250ms ease-in"
+        [autoplay]="false"
+        color="primary"
+        maxWidth="600px"
+        proportion="42"
+        minProportion="20"
+        slides="3"
+        [loop]="false"
+        [hideArrows]="false"
+        [hideIndicators]="true"
+        [useKeyboard]="false"
+        [useMouseWheel]="false"
+        orientation="ltr"
+        class="content-flex-all-center"
+      >
+        <mat-carousel-slide
+          #matCarouselSlide
+          overlayColor=""
+          [hideOverlay]="false"
+        >
+          <h3 class="title-tertiary">INGRESA TU AÑO DE NACIMIENTO</h3>
+          <form
+            [formGroup]="yearForm"
+            autocomplete="off"
+            class="content-flex-all-center"
+          >
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              [ngClass]="getClassInput(yearForm.controls.year_1)"
+              class="input-age"
+            >
+              <mat-label>A</mat-label>
+              <input
+                matInput
+                formControlName="year_1"
+                placeholder="A"
+                minlength="1"
+                maxlength="1"
+                generalValidYear="true"
+                (input)="inputValidatorNumeric($event)"
+                data-qadp="year_1"
+              />
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              [ngClass]="getClassInput(yearForm.controls.year_2)"
+              class="input-age"
+            >
+              <mat-label>A</mat-label>
+              <input
+                matInput
+                formControlName="year_2"
+                placeholder="A"
+                minlength="1"
+                maxlength="1"
+                (input)="inputValidatorNumeric($event)"
+                data-qadp="year_2"
+              />
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              [ngClass]="getClassInput(yearForm.controls.year_3)"
+              class="input-age"
+            >
+              <mat-label>A</mat-label>
+              <input
+                matInput
+                formControlName="year_3"
+                placeholder="A"
+                minlength="1"
+                maxlength="1"
+                (input)="inputValidatorNumeric($event)"
+                data-qadp="year_3"
+              />
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              [ngClass]="getClassInput(yearForm.controls.year_4)"
+              class="input-age"
+            >
+              <mat-label>A</mat-label>
+              <input
+                matInput
+                formControlName="year_4"
+                placeholder="A"
+                minlength="1"
+                maxlength="1"
+                (input)="inputValidatorNumeric($event)"
+                data-qadp="year_4"
+              />
+            </mat-form-field>
+          </form>
+          <mat-error
+            #messageYear
+            *ngIf="
+              yearForm.controls.year_1.value +
+                yearForm.controls.year_2.value +
+                yearForm.controls.year_3.value +
+                yearForm.controls.year_4.value >
+                2020 ||
+              (yearForm.controls.year_1.value +
+                yearForm.controls.year_2.value +
+                yearForm.controls.year_3.value +
+                yearForm.controls.year_4.value <
+                1920 &&
+                yearForm.controls.year_1.value != '' &&
+                yearForm.controls.year_2.value != '' &&
+                yearForm.controls.year_3.value != '' &&
+                yearForm.controls.year_4.value != '')
+            "
+            style="margin-left: 30%"
+            >{{ invalidYear() }} *Ingrese un año entre 1920 y 2020</mat-error
+          >
+        </mat-carousel-slide>
+        <mat-carousel-slide overlayColor="" [hideOverlay]="false">
+          <h3 class="title-tertiary">INGRESA TU MES DE NACIMIENTO</h3>
+
+          <form
+            [formGroup]="monthForm"
+            autocomplete="off"
+            class="content-flex-all-center"
+          >
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              [ngClass]="getClassInput(monthForm.controls.month_1)"
+              class="input-age"
+            >
+              <mat-label>M</mat-label>
+              <input
+                matInput
+                formControlName="month_1"
+                placeholder="M"
+                minlength="1"
+                maxlength="1"
+                (input)="inputValidatorNumeric($event)"
+                data-qadp="month_1"
+              />
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              [ngClass]="getClassInput(monthForm.controls.month_2)"
+              class="input-age"
+            >
+              <mat-label>M</mat-label>
+              <input
+                matInput
+                formControlName="month_2"
+                placeholder="M"
+                minlength="1"
+                maxlength="1"
+                (input)="inputValidatorNumeric($event)"
+                data-qadp="month_2"
+              />
+            </mat-form-field>
+          </form>
+          <p class="error-message" [hidden]="!this.invMth">
+            *Ingrese un mes entre 01 y 12
+          </p>
+          <mat-error
+            *ngIf="
+              monthForm.controls.month_1.value +
+                monthForm.controls.month_2.value >
+                12 ||
+              monthForm.controls.month_1.value +
+                monthForm.controls.month_2.value <
+                0
+            "
+          >
+            {{ invalidMonth() }}
+          </mat-error>
+        </mat-carousel-slide>
+        <mat-carousel-slide overlayColor="" [hideOverlay]="false">
+          <h3 class="title-tertiary">INGRESA TU DÍA DE NACIMIENTO</h3>
+
+          <form
+            [formGroup]="dayForm"
+            autocomplete="off"
+            class="content-flex-all-center"
+          >
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              [ngClass]="getClassInput(dayForm.controls.day_1)"
+              class="input-age"
+            >
+              <mat-label>D</mat-label>
+              <input
+                matInput
+                formControlName="day_1"
+                placeholder="D"
+                minlength="1"
+                maxlength="1"
+                (input)="inputValidatorNumeric($event)"
+                data-qadp="day_1"
+              />
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              [ngClass]="getClassInput(dayForm.controls.day_2)"
+              class="input-age"
+            >
+              <mat-label>D</mat-label>
+              <input
+                matInput
+                formControlName="day_2"
+                placeholder="D"
+                minlength="1"
+                maxlength="1"
+                (input)="inputValidatorNumeric($event)"
+                data-qadp="day_2"
+              />
+            </mat-form-field>
+          </form>
+          <p class="error-message" [hidden]="!this.invDy">
+            *Ingrese un día entre 01 y 31
+          </p>
+          <mat-error
+            *ngIf="
+              dayForm.controls.day_1.value + dayForm.controls.day_2.value >
+                31 ||
+              dayForm.controls.day_1.value + dayForm.controls.day_2.value < 0
+            "
+            style="margin-left: 30%"
+          >
+            {{ invalidDay() }}
+          </mat-error>
+        </mat-carousel-slide>
+      </mat-carousel>
+
+      <div class="content-check content-flex-all-center">
+        <ion-row>
+          <mat-checkbox color="success" class="margin-check"></mat-checkbox>
+          <div class="text-before">
+            <span class="title-fourthy">RECUÉRDAME </span>
+            <i class="title-fourthy">
+              *No selecciones esta opción si compartes este computador con
+              menores de edad.
+            </i>
+          </div>
+        </ion-row>
+      </div>
+      <div class="content-flex-all-center">
+        <button
+          block="block"
+          color="becks"
+          (click)="validateAgeGate()"
+          class="becks-btn-primary margin-top-button button-width"
+          [ngClass]="{
+            'button-disabled':
+              yearForm.invalid || monthForm.invalid || dayForm.invalid
+          }"
+          [disabled]="yearForm.invalid || monthForm.invalid || dayForm.invalid"
+          data-qadp="button_enter_agegate"
+        >
+          <span>ENTRAR</span>
+        </button>
+      </div>
+      <div class="title-fourthy title-fourthy-width">
+        <p class="no-margin">
+          Este sitio web utiliza cookies que se quedarán almacenadas en el
+          computador con el fin de mejorar su eficiencia. Al proporcionar su
+          fecha de nacimiento, también se acepta el uso de cookies.
+        </p>
+        <br />
+        <a
+          class="color-green text-decoration-underline"
+          color="becks"
+          href="./privacy-policy"
+          >Más Información</a
+        >
+      </div>
+    </ion-content>
+  </div>
+</section>

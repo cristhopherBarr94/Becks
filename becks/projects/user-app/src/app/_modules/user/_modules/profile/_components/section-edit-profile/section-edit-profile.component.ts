@@ -72,21 +72,18 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
         Validators.required,
         Validators.minLength(10),
       ]),
-      day: new FormControl("", [
-        Validators.required,
-        Validators.min(1),
-        Validators.max(31),
-      ]),
-      month: new FormControl("", [
-        Validators.required,
-        Validators.min(1),
-        Validators.max(12),
-      ]),
-      year: new FormControl("", [
-        Validators.required,
-        Validators.min(1920),
-        Validators.max(2020),
-      ]),
+      day: new FormControl(
+        !!this.user.birthdate && moment(this.user.birthdate).format("DD"),
+        [Validators.required, Validators.min(1), Validators.max(31)]
+      ),
+      month: new FormControl(
+        !!this.user.birthdate && moment(this.user.birthdate).format("MM"),
+        [Validators.required, Validators.min(1), Validators.max(12)]
+      ),
+      year: new FormControl(
+        !!this.user.birthdate && moment(this.user.birthdate).format("YYYY"),
+        [Validators.required, Validators.min(1920), Validators.max(2020)]
+      ),
     });
   }
 
@@ -127,11 +124,13 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
   saveChanges() {
     if (this.userEditProfileForm.valid) {
       this.ui.showLoading();
-      this.birthDayDate = moment()
-        .day(this.userEditProfileForm.controls.day.value)
-        .month(this.userEditProfileForm.controls.month.value)
-        .year(this.userEditProfileForm.controls.year.value)
-        .format("DD/MM/YYYY");
+      this.birthDayDate =
+        this.userEditProfileForm.controls.month.value +
+        "/" +
+        this.userEditProfileForm.controls.day.value +
+        "/" +
+        this.userEditProfileForm.controls.year.value;
+
       this.httpService
         .patch(environment.serverUrl + environment.user.patchData, {
           first_name: this.userEditProfileForm.controls.name.value,
@@ -140,10 +139,6 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
           birthdate: this.birthDayDate,
         })
         .subscribe((response: any) => {
-          console.log(
-            "SectionEditProfileComponent -> saveChanges -> response",
-            response
-          );
           this.ui.dismissLoading();
           if (response.status == 200) {
             this.closeEdit();

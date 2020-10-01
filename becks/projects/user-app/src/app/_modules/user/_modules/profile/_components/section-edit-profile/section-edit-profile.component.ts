@@ -28,6 +28,7 @@ import { User } from "src/app/_models/User";
 })
 export class SectionEditProfileComponent implements OnInit, AfterViewInit {
   @ViewChild(ProfilePictureComponent) picture: ProfilePictureComponent;
+  public user = new User();
   public userEditProfileForm: FormGroup;
   public urlPicture: string;
   public birthDayDate: any;
@@ -43,7 +44,14 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
+    if (this.userSvc.getActualUser()) {
+      this.user = this.userSvc.getActualUser();
+      this.urlPicture = this.user.photo;
+    } else {
+      this.userSvc.getData();
+    }
     this.initforms();
+<<<<<<< HEAD
 
     this.userSubscription = this.userSvc.user$.subscribe((user: User) => {
       console.log("SectionEditProfileComponent -> ngOnInit -> user", user);
@@ -64,6 +72,8 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
         this.urlPicture = user.photo;
       }
     });
+=======
+>>>>>>> TEST
     this.cdr.detectChanges();
   }
 
@@ -73,12 +83,15 @@ export class SectionEditProfileComponent implements OnInit, AfterViewInit {
 
   initforms() {
     this.userEditProfileForm = this.formBuilder.group({
-      name: new FormControl("", [Validators.required, Validators.minLength(3)]),
-      lastName: new FormControl("", [
+      name: new FormControl(this.user.first_name, [
         Validators.required,
         Validators.minLength(3),
       ]),
-      phone: new FormControl("", [
+      lastName: new FormControl(this.user.last_name, [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      phone: new FormControl(this.user.mobile_phone, [
         Validators.required,
         Validators.minLength(10),
       ]),

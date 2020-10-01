@@ -39,6 +39,7 @@
           type="text"
           maxlength="20"
           data-qadp="name"
+          [value]="user.first_name"
         />
         <mat-error *ngIf="userEditProfileForm.controls.name.errors">
           {{

@@ -133,8 +133,12 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
    * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    */
   public function get($id) {
-    $resp = $this->loadUser();
-    return new ResourceResponse($resp);
+    $response = new ResourceResponse($this->loadUser());
+    $disable_cache = new CacheableMetadata();
+    $disable_cache->setCacheContexts(['url.path', 'url.query_args']);
+    $response->addCacheableDependency($disable_cache);
+
+    return $response;
   }
 
   /**
@@ -198,19 +202,12 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
         $user->set("field_mobile_phone", $data['mobile_phone'] );
         $user->set("field_birthdate", $data['birthdate'] );
 
-        if ( isset($data['photo']) ) {
-          $image = base64_decode( $data['photo'] );
-          $file = file_save_data($image, $target, FileSystemInterface::EXISTS_REPLACE);
-          $file->save();
-          $user->set('user_picture', $file);
-        }
-
         $user->save();
       } else 
           if ( $id == 2 ) {
 
             if ( !isset($record['photo']) ) {
-              throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta la "Foto"');
+              throw new BadRequestHttpException('El usuario no puede ser editado porque hace falta la "Foto"');
             }
 
             $user = User::load($this->currentUser->id());
@@ -305,28 +302,28 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
     }
 
     if (!isset($record['birthdate']) || empty($record['birthdate']) ) {
-      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta la "Fecha de Nacimiento"');
+      throw new BadRequestHttpException('El usuario no puede ser editado porque hace falta la "Fecha de Nacimiento"');
     }
     if ( strlen($record['birthdate']) > 11) {
       throw new BadRequestHttpException('La "Fecha de Nacimiento" sobrepasa los caracteres permitidos');
     }
 
     if (!isset($record['first_name']) || empty($record['first_name'])) {
-      throw new BadRequestHttpException('El usuario no puede ser registrado porque hacen falta los "Nombres"');
+      throw new BadRequestHttpException('El usuario no puede ser editado porque hacen falta los "Nombres"');
     }
     if ( strlen($record['first_name']) > 60) {
       throw new BadRequestHttpException('Los "Nombres" sobrepasan los caracteres permitidos');
     }
 
     if (!isset($record['last_name']) || empty($record['last_name'])) {
-      throw new BadRequestHttpException('El usuario no puede ser registrado porque hacen falta los "Apellidos"');
+      throw new BadRequestHttpException('El usuario no puede ser editado porque hacen falta los "Apellidos"');
     }
     if ( strlen($record['last_name']) > 60) {
       throw new BadRequestHttpException('Los "Apellidos" sobrepasan los caracteres permitidos');
     }
 
     if (!isset($record['mobile_phone']) || empty($record['mobile_phone'])) {
-      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Numero de celular"');
+      throw new BadRequestHttpException('El usuario no puede ser editado porque hace falta el "Número de celular"');
     }
     
     // @DCG Add more validation rules here.

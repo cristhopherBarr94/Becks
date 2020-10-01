@@ -8,7 +8,7 @@ import { HttpService } from "./http.service";
   providedIn: "root",
 })
 export class UserService {
-  public _user: User = new User();
+  private _user: User = new User();
   private _userSbj = new Subject<User>();
   public user$ = this._userSbj.asObservable();
 
@@ -16,6 +16,10 @@ export class UserService {
     if (localStorage.getItem("bks_user")) {
       this._user = new User(JSON.parse(localStorage.getItem("bks_user")));
     }
+  }
+
+  public getActualUser(): User {
+    return this._user;
   }
 
   public getData() {

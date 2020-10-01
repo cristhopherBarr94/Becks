@@ -14,6 +14,12 @@ import { MatIconModule } from "@angular/material/icon";
 import { HeaderComponent } from "./_components/header/header.component";
 import { RouterModule } from "@angular/router";
 import { CaptchaComponent } from "./_components/captcha/captcha.component";
+import { LottieModule } from "ngx-lottie";
+import player from "lottie-web";
+
+export function playerFactory() {
+  return player;
+}
 @NgModule({
   declarations: [
     LoadingComponent,
@@ -33,6 +39,7 @@ import { CaptchaComponent } from "./_components/captcha/captcha.component";
     MatRadioModule,
     MatIconModule,
     RouterModule,
+    LottieModule.forRoot({ player: playerFactory }),
   ],
   exports: [
     FooterComponent,

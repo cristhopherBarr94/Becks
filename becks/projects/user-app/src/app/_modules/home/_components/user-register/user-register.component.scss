@@ -1,66 +1,129 @@
-.no-padding {
-  padding: 0px;
-  ion-row,
-  ion-col {
+@media (min-width: 0px) and (max-width: 768px) {
+  .no-padding {
     padding: 0px;
-  }
-}
-
-.margin-top-button {
-  width: 316px;
-  border-radius: 16px 0px 16px 0px;
-}
-
-.checks {
-  cursor: default;
-  font-family: "Helvetica Neue";
-  font-size: 16px;
-  line-height: 19px;
-  font-weight: bold;
-
-  .content-check {
-    margin: 0px;
-    display: flex;
-
-    a {
-      cursor: pointer;
-      color: #219653;
-      text-decoration: underline;
+    ion-row,
+    ion-col {
+      padding: 0px;
     }
   }
 
-  .margin-check {
-    margin-right: 11px;
+  .margin-top-button {
+    width: 316px;
+    border-radius: 16px 0px 16px 0px;
   }
 
-  ::ng-deep .mat-checkbox-frame {
-    border-color: white;
+  .checks {
+    cursor: default;
+    font-family: "Helvetica Neue";
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: bold;
+
+    .content-check {
+      margin: 0px;
+      display: flex;
+      a {
+        cursor: pointer;
+        color: #219653;
+        text-decoration: underline;
+      }
+    }
+
+    .margin-check {
+      margin-right: 11px;
+    }
+
+    ::ng-deep .mat-checkbox-frame {
+      border-color: white;
+    }
+
+    mat-error {
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      font-weight: normal;
+    }
+    .title-fourthy {
+      text-align: left !important;
+    }
+  }
+  app-captcha {
+    margin-top: 30px;
   }
 
-  mat-error {
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    font-size: 14px;
-    font-weight: normal;
+  .separator-login {
+    margin-top: 18px;
+    height: 1px;
+    width: 45%;
+    border: 1px solid #6f6f6f;
+  }
+  .separator-box {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+  }
+
+  .separator-o {
+    color: #6f6f6f;
+    padding: 9px;
+    font-weight: bold;
+  }
+  .section2 {
+    margin-top: 0px !important;
   }
 }
-app-captcha {
-  margin-top: 30px;
-}
+@media (min-width: 769px) {
+  .content-flex-all-center {
+    height: auto;
+    justify-content: center;
 
-.separator-login {
-  margin-top: 18px;
-  height: 1px;
-  width: 45%;
-  border: 1px solid #6f6f6f;
-}
-.separator-box {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-}
+    .general-row {
+      flex-direction: row;
+      width: 800px;
 
-.separator-o {
-  color: #6f6f6f;
-  padding: 9px;
-  font-weight: bold;
+      .form-section {
+        padding: 20px;
+        width: 400px;
+        flex-direction: column;
+        padding: 10px;
+        justify-content: left;
+        align-items: left;
+
+        .fullInput {
+          width: 364px;
+        }
+      }
+    }
+    .section2 {
+      position: absolute;
+      margin-left: 400px;
+    }
+    .checks {
+      padding: 20px;
+      a {
+        cursor: pointer;
+        color: #219653;
+        text-decoration: underline;
+      }
+    }
+    .content-check,
+    mat-error {
+      margin-top: 30px;
+      padding-left: 0px;
+    }
+    .margin-check {
+      margin-left: 20px;
+    }
+    .button-row {
+      justify-content: center;
+      .margin-top-button {
+        margin-right: 16px;
+      }
+      ::ng-deep user-fb-button {
+        margin-left: 30px;
+      }
+      .separator-o {
+        margin-top: 10px;
+      }
+    }
+  }
 }

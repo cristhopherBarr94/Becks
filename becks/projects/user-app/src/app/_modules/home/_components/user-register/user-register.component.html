@@ -1,174 +1,173 @@
 <section id="formSection" class="fullSection content-flex-all-center">
-  <div
-    class="content-flex-all-center full-height flex-direction-column padding-form"
-  >
-    <form
-      [formGroup]="userRegisterForm"
-      class="form-section"
-      autocomplete="off"
-    >
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInput(userRegisterForm.controls.name)"
-      >
-        <mat-label>Nombres</mat-label>
-        <input
-          matInput
-          (input)="inputValidatorAlphabetical($event)"
-          formControlName="name"
-          placeholder="Nombres"
-          maxlength="20"
-          [(ngModel)]="userRegister.first_name"
-          data-qadp="name"
-        />
-        <mat-error *ngIf="userRegisterForm.controls.name.errors">
-          *Has ingresado un dato inválido
-        </mat-error>
-      </mat-form-field>
+  <div class="full-height padding-form">
+    <form [formGroup]="userRegisterForm" autocomplete="off" class="general-row">
+      <ion-row>
+        <div class="form-section section1">
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.name)"
+          >
+            <mat-label>Nombres</mat-label>
+            <input
+              matInput
+              (input)="inputValidatorAlphabetical($event)"
+              formControlName="name"
+              placeholder="Nombres"
+              maxlength="20"
+              [(ngModel)]="userRegister.first_name"
+              data-qadp="name"
+            />
+            <mat-error *ngIf="userRegisterForm.controls.name.errors">
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
 
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInput(userRegisterForm.controls.name)"
-      >
-        <mat-label>Apellidos</mat-label>
-        <input
-          matInput
-          (input)="inputValidatorAlphabetical($event)"
-          formControlName="surname"
-          placeholder="Apellidos"
-          maxlength="20"
-          [(ngModel)]="userRegister.last_name"
-          data-qadp="surname"
-        />
-        <mat-error *ngIf="userRegisterForm.controls.surname.errors">
-          *Has ingresado un dato inválido
-        </mat-error>
-      </mat-form-field>
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.name)"
+          >
+            <mat-label>Apellidos</mat-label>
+            <input
+              matInput
+              (input)="inputValidatorAlphabetical($event)"
+              formControlName="surname"
+              placeholder="Apellidos"
+              maxlength="20"
+              [(ngModel)]="userRegister.last_name"
+              data-qadp="surname"
+            />
+            <mat-error *ngIf="userRegisterForm.controls.surname.errors">
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
 
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInput(userRegisterForm.controls.email)"
-      >
-        <mat-label>Correo electrónico</mat-label>
-        <input
-          matInput
-          formControlName="email"
-          placeholder="example@example.com"
-          type="email"
-          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
-          maxlength="30"
-          [(ngModel)]="userRegister.email"
-          data-qadp="email"
-        />
-        <mat-error *ngIf="userRegisterForm.controls.email.errors">
-          *Has ingresado un dato inválido
-        </mat-error>
-      </mat-form-field>
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.email)"
+          >
+            <mat-label>Correo electrónico</mat-label>
+            <input
+              matInput
+              formControlName="email"
+              placeholder="example@example.com"
+              type="email"
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
+              maxlength="30"
+              [(ngModel)]="userRegister.email"
+              data-qadp="email"
+            />
+            <mat-error *ngIf="userRegisterForm.controls.email.errors">
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
 
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInput(userRegisterForm.controls.telephone)"
-      >
-        <mat-label>Número de teléfono</mat-label>
-        <input
-          matInput
-          (input)="inputValidatorNumeric($event)"
-          formControlName="telephone"
-          placeholder="Número de teléfono"
-          minlength="7"
-          maxlength="10"
-          [(ngModel)]="userRegister.mobile_phone"
-          data-qadp="phone"
-        />
-        <mat-error *ngIf="userRegisterForm.controls.telephone.errors">
-          *Has ingresado un dato inválido
-        </mat-error>
-      </mat-form-field>
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.telephone)"
+          >
+            <mat-label>Número de teléfono</mat-label>
+            <input
+              matInput
+              (input)="inputValidatorNumeric($event)"
+              formControlName="telephone"
+              placeholder="Número de teléfono"
+              minlength="7"
+              maxlength="10"
+              [(ngModel)]="userRegister.mobile_phone"
+              data-qadp="phone"
+            />
+            <mat-error *ngIf="userRegisterForm.controls.telephone.errors">
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-section section2">
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInputSelect(userRegisterForm.controls.gender)"
+          >
+            <mat-label>Sexo</mat-label>
+            <mat-select
+              panelClass="backgroud-panel"
+              formControlName="gender"
+              required
+              [(ngModel)]="userRegister.gender"
+              data-qadp="gender"
+            >
+              <mat-option value="F"> FEMENINO</mat-option>
+              <mat-option value="M"> MASCULINO</mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="userRegisterForm.controls.gender.hasError('required')"
+              >Debes seleccionar un campo</mat-error
+            >
+          </mat-form-field>
 
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInputSelect(userRegisterForm.controls.gender)"
-      >
-        <mat-label>Sexo</mat-label>
-        <mat-select
-          panelClass="backgroud-panel"
-          formControlName="gender"
-          required
-          [(ngModel)]="userRegister.gender"
-          data-qadp="gender"
-        >
-          <mat-option value="F"> FEMENINO</mat-option>
-          <mat-option value="M"> MASCULINO</mat-option>
-        </mat-select>
-        <mat-error *ngIf="userRegisterForm.controls.gender.hasError('required')"
-          >Debes seleccionar un campo</mat-error
-        >
-      </mat-form-field>
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInputSelect(userRegisterForm.controls.typeId)"
+          >
+            <mat-label>Tipo de documento</mat-label>
+            <mat-select
+              panelClass="backgroud-panel"
+              formControlName="typeId"
+              required
+              [(ngModel)]="userRegister.type_id"
+              data-qadp="typeId"
+            >
+              <mat-option value="CC"> Cedula de ciudadanía</mat-option>
+              <mat-option value="CE"> Cedula de extrangería</mat-option>
+              <mat-option value="PA"> Pasaporte</mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="userRegisterForm.controls.typeId.hasError('required')"
+              >Debes seleccionar un campo</mat-error
+            >
+          </mat-form-field>
 
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInputSelect(userRegisterForm.controls.typeId)"
-      >
-        <mat-label>Tipo de documento</mat-label>
-        <mat-select
-          panelClass="backgroud-panel"
-          formControlName="typeId"
-          required
-          [(ngModel)]="userRegister.type_id"
-          data-qadp="typeId"
-        >
-          <mat-option value="CC"> Cedula de ciudadanía</mat-option>
-          <mat-option value="CE"> Cedula de extrangería</mat-option>
-          <mat-option value="PA"> Pasaporte</mat-option>
-        </mat-select>
-        <mat-error *ngIf="userRegisterForm.controls.typeId.hasError('required')"
-          >Debes seleccionar un campo</mat-error
-        >
-      </mat-form-field>
-
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInput(userRegisterForm.controls.idNumber)"
-      >
-        <mat-label>Número de identificación</mat-label>
-        <input
-          matInput
-          (input)="inputValidatorAlphaNumeric($event)"
-          formControlName="idNumber"
-          placeholder="Número de id"
-          minlength="4"
-          maxlength="11"
-          [(ngModel)]="userRegister.id_number"
-          required
-          data-qadp="lastName"
-        />
-        <mat-error *ngIf="userRegisterForm.controls.idNumber.errors"
-          >*Este campo es obligatorio</mat-error
-        >
-      </mat-form-field>
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.idNumber)"
+          >
+            <mat-label>Número de identificación</mat-label>
+            <input
+              matInput
+              (input)="inputValidatorAlphaNumeric($event)"
+              formControlName="idNumber"
+              placeholder="Número de id"
+              minlength="4"
+              maxlength="11"
+              [(ngModel)]="userRegister.id_number"
+              required
+              data-qadp="lastName"
+            />
+            <mat-error *ngIf="userRegisterForm.controls.idNumber.errors"
+              >*Este campo es obligatorio</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </ion-row>
 
       <div class="checks">
         <div class="content-check">
-          <div>
-            <i class="title-fourthy">
-              Me gustaría recibir comunicaciones promocionales (Recibirás un
-              email de confirmación)
-            </i>
-          </div>
+          <i class="title-fourthy">
+            Me gustaría recibir comunicaciones promocionales (Recibirás un email
+            de confirmación)
+          </i>
           <mat-checkbox
             id="mat-checkbox-promo"
             formControlName="promo"
@@ -180,23 +179,17 @@
         </div>
 
         <div class="content-check">
-          <div>
-            <i class="title-fourthy">
-              Declaro que he leído y acepto la
-              <a target="_blank" href="./privacy-policy" data-qadp="link-tc"
-                >Nueva Política de Privacidad</a
-              >
-              y los
-              <a target="_blank" href="./terms-conditions" data-qadp="link-pp"
-                >Terminos y condiciones de
-              </a>
-              Becks.
-            </i>
-            <mat-error
-              *ngIf="userRegisterForm.controls.privacy.hasError('required')"
-              >Por favor lea y acepte las políticas y los términos</mat-error
+          <i class="title-fourthy">
+            Declaro que he leído y acepto la
+            <a target="_blank" href="./privacy-policy" data-qadp="link-tc"
+              >Nueva Política de Privacidad</a
             >
-          </div>
+            y los
+            <a target="_blank" href="./terms-conditions" data-qadp="link-pp"
+              >Terminos y condiciones de
+            </a>
+            Becks.
+          </i>
           <mat-checkbox
             formControlName="privacy"
             [(ngModel)]="userRegister.privacy"
@@ -206,17 +199,25 @@
           >
           </mat-checkbox>
         </div>
+        <div>
+          <mat-error
+            *ngIf="userRegisterForm.controls.privacy.hasError('required')"
+            >Por favor lea y acepte las políticas y los términos</mat-error
+          >
+        </div>
       </div>
+    </form>
 
+    <div class="content-flex-all-center">
       <app-captcha
-        style="margin-top: 30px"
         [restart]="restartCaptcha"
         (status)="setCaptchaStatus($event)"
       >
       </app-captcha>
+    </div>
 
-      <br /><mat-error *ngIf="httpError">{{ httpError }}</mat-error>
-
+    <br /><mat-error *ngIf="httpError">{{ httpError }}</mat-error>
+    <ion-row class="button-row">
       <button
         block="block"
         color="becks"
@@ -230,12 +231,12 @@
       >
         <span>REGÍSTRATE</span>
       </button>
-    </form>
-    <div class="separator-box">
-      <span class="separator-login margin-top-button"></span>
-      <span class="separator-o">O</span><span class="separator-login"></span>
-    </div>
+      <div class="separator-box">
+        <span class="separator-login margin-top-button"></span>
+        <span class="separator-o">O</span><span class="separator-login"></span>
+      </div>
 
-    <user-fb-button></user-fb-button>
+      <user-fb-button></user-fb-button>
+    </ion-row>
   </div>
 </section>

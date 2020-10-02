@@ -13,6 +13,12 @@ export class UpdateFileComponent implements OnInit {
 
   loadImageFromDevice(event) {
     var files = event.target.files;
+    var img = new Image();
+    img = files[0];
+    console.log(
+      "UpdateFileComponent -> loadImageFromDevice -> image",
+      img.sizes
+    );
     this.resizeImage(files[0], 720, 480).then((blob) => {
       if (files && blob) {
         var reader = new FileReader();
@@ -37,6 +43,7 @@ export class UpdateFileComponent implements OnInit {
       image.src = URL.createObjectURL(file);
       image.onload = () => {
         let width = image.width;
+        console.log("UpdateFileComponent -> image.onload -> width", width);
         let height = image.height;
 
         if (width <= maxWidth && height <= maxHeight) {

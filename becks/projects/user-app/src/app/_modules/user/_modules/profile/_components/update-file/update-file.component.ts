@@ -13,7 +13,7 @@ export class UpdateFileComponent implements OnInit {
 
   loadImageFromDevice(event) {
     var files = event.target.files;
-    this.resizeImage(files[0], 200, 200).then((blob) => {
+    this.resizeImage(files[0], 720, 480).then((blob) => {
       if (files && blob) {
         var reader = new FileReader();
         reader.onload = this._handleReaderLoaded.bind(this);

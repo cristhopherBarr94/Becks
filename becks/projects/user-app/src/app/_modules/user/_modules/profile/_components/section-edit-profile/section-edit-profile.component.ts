@@ -118,16 +118,20 @@ export class SectionEditProfileComponent implements OnInit {
   }
 
   saveChanges() {
+    if (!!this.imageBase64) {
+      this.ui.showLoading();
+      console.log("entra aca");
+      this.httpService
+        .patch(environment.serverUrl + environment.user.patchPhoto, {
+          photo: this.imageBase64,
+        })
+        .subscribe((response: any) => {
+          this.ui.dismissLoading();
+        });
+    }
+
     if (this.userEditProfileForm.valid) {
       this.ui.showLoading();
-      if (this.imageBase64) {
-        this.httpService.patch(
-          environment.serverUrl + environment.user.patchPhoto,
-          {
-            photo: this.imageBase64,
-          }
-        );
-      }
       this.birthDayDate =
         this.userEditProfileForm.controls.month.value +
         "/" +
@@ -143,10 +147,10 @@ export class SectionEditProfileComponent implements OnInit {
           birthdate: this.birthDayDate,
         })
         .subscribe((response: any) => {
-          this.ui.dismissLoading();
           if (response.status == 200) {
             this.userSvc.getData();
             this.closeEdit();
+            this.ui.dismissLoading();
           }
         }),
         (e) => {

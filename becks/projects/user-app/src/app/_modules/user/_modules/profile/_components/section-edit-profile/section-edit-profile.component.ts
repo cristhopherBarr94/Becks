@@ -120,7 +120,6 @@ export class SectionEditProfileComponent implements OnInit {
   saveChanges() {
     if (!!this.imageBase64) {
       this.ui.showLoading();
-      console.log("entra aca");
       this.httpService
         .patch(environment.serverUrl + environment.user.patchPhoto, {
           photo: this.imageBase64,

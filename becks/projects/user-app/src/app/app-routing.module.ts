@@ -33,7 +33,8 @@ const routes: Routes = [
     path: "",
     redirectTo: "age-gate",
     pathMatch: "full",
-  },
+  }
+
 ];
 
 @NgModule({

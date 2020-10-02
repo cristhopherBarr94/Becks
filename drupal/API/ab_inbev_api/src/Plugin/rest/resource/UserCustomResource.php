@@ -160,6 +160,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->set("field_last_name", $data['last_name'] );
       $user->set("field_mobile_phone", $data['mobile_phone'] );
       $user->set("field_gender",  $data['gender'] );
+      $user->set("field_birthdate",  $data['birthdate'] );
       $user->set("field_photo_uri",  '' );
       
       // "type_id" field only come from User-App Form
@@ -394,6 +395,24 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       
       if (!isset($record['id_number']) || empty($record['id_number']) || strlen($record['id_number']) > 20 ) {
         throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Número de documento"');
+      }
+    }
+
+    if ( isset($record['birthdate']) ) {
+      try {
+        $curYear = date('Y');
+        $date = explode("/", $record['birthdate']);
+        if ( intval($date[0]) < 1 || intval($date[0]) > 12 ) {
+          throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+        }
+        if ( intval($date[1]) < 1 || intval($date[1]) > 31 ) {
+          throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+        }
+        if ( intval($date[2]) < 1920 || (intval($date[2]) - $curYear) < 18 ) {
+          throw new BadRequestHttpException('"Fecha de Nacimiento" no valida, Debe ser mayor de edad');
+        }
+      } catch ( Exception $ex ) {
+        throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
       }
     }
 

@@ -394,7 +394,22 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
       throw new BadRequestHttpException('El usuario no puede ser editado porque hace falta la "Fecha de Nacimiento" tipo MM/DD/YYYY');
     }
     if ( strlen($record['birthdate']) > 11) {
-      throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser tipo MM/DD/YYYY');
+      throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+    }
+    try {
+      $curYear = date('Y');
+      $date = explode("/", $record['birthdate']);
+      if ( intval($date[0]) < 1 || intval($date[0]) > 12 ) {
+        throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+      }
+      if ( intval($date[1]) < 1 || intval($date[1]) > 31 ) {
+        throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+      }
+      if ( intval($date[2]) < 1920 || (intval($date[2]) - $curYear) < 18 ) {
+        throw new BadRequestHttpException('"Fecha de Nacimiento" no valida, Debe ser mayor de edad');
+      }
+    } catch ( Exception $ex ) {
+      throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
     }
 
     if (!isset($record['first_name']) || empty($record['first_name'])) {

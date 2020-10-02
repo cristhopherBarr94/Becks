@@ -16,11 +16,12 @@
   </div>
   <div class="margint-top col-flex-center flex-direction-column">
     <user-profile-picture [urlImage]="profilePicture()"></user-profile-picture>
-    <span expand="full" class="link-age-gate link-terms" (onclick)="(!hide)"
+    <span class="link-age-gate link-terms" (click)="changePhoto()"
       >Cambiar foto de perfil</span
     >
 
     <input
+      *ngIf="chargePhoto"
       type="file"
       (change)="loadImageFromDevice($event)"
       id="file-input"

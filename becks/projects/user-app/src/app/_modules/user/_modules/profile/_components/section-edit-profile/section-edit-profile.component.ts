@@ -14,7 +14,6 @@ import {
 import { Router } from "@angular/router";
 import { HttpService } from "src/app/_services/http.service";
 import { UiService } from "src/app/_services/ui.service";
-import { ProfilePictureComponent } from "../profile-picture/profile-picture.component";
 import * as moment from "moment";
 import { environment } from "src/environments/environment";
 import { Subscription } from "rxjs";
@@ -31,6 +30,7 @@ export class SectionEditProfileComponent implements OnInit {
   public userEditProfileForm: FormGroup;
   public urlPicture: string;
   public birthDayDate: any;
+  public chargePhoto: boolean = false;
   userSubscription: Subscription;
 
   constructor(
@@ -167,5 +167,9 @@ export class SectionEditProfileComponent implements OnInit {
       let blobURL: string = URL.createObjectURL(blob);
     };
     reader.onerror = (error) => {};
+  }
+
+  changePhoto() {
+    this.chargePhoto = !this.chargePhoto;
   }
 }

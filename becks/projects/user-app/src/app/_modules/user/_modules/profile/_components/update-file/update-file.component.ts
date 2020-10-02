@@ -1,4 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { HttpService } from "src/app/_services/http.service";
+import { UiService } from "src/app/_services/ui.service";
+import { UserService } from "src/app/_services/user.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "user-update-file",
@@ -8,7 +12,11 @@ import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 export class UpdateFileComponent implements OnInit {
   public photo: any;
   @Output() chargePhoto = new EventEmitter();
-  constructor() {}
+  constructor(
+    private ui: UiService,
+    private httpService: HttpService,
+    private userSvc: UserService
+  ) {}
 
   ngOnInit() {}
 
@@ -28,7 +36,15 @@ export class UpdateFileComponent implements OnInit {
   _handleReaderLoaded(readerEvt) {
     var binaryString = readerEvt.target.result;
     this.photo = btoa(binaryString);
-    this.emiteImageBase64(this.photo);
+    this.ui.showLoading();
+    this.httpService
+      .patch(environment.serverUrl + environment.user.patchPhoto, {
+        photo: this.photo,
+      })
+      .subscribe((response: any) => {
+        this.userSvc.getData();
+        this.ui.dismissLoading();
+      });
   }
 
   emiteImageBase64 = (fileBase64) => {
@@ -63,5 +79,19 @@ export class UpdateFileComponent implements OnInit {
       };
       image.onerror = reject;
     });
+  }
+
+  closeModal() {
+    this.ui.dismissModal();
+  }
+
+  deletePhoto() {
+    this.ui.showLoading();
+    this.httpService
+      .delete(environment.serverUrl + environment.user.patchPhoto)
+      .subscribe((response: any) => {
+        this.userSvc.getData();
+        this.ui.dismissLoading();
+      });
   }
 }

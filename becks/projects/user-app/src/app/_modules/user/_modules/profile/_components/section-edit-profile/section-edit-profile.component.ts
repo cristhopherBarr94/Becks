@@ -19,6 +19,7 @@ import { environment } from "src/environments/environment";
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/_services/user.service";
 import { User } from "src/app/_models/User";
+import { UpdateFileComponent } from "../update-file/update-file.component";
 
 @Component({
   selector: "user-section-edit-profile",
@@ -31,7 +32,6 @@ export class SectionEditProfileComponent implements OnInit {
   public urlPicture: string;
   public birthDayDate: any;
   public chargePhoto: boolean = false;
-  public imageBase64: any;
   userSubscription: Subscription;
 
   constructor(
@@ -118,17 +118,6 @@ export class SectionEditProfileComponent implements OnInit {
   }
 
   saveChanges() {
-    if (!!this.imageBase64) {
-      this.ui.showLoading();
-      this.httpService
-        .patch(environment.serverUrl + environment.user.patchPhoto, {
-          photo: this.imageBase64,
-        })
-        .subscribe((response: any) => {
-          this.ui.dismissLoading();
-        });
-    }
-
     if (this.userEditProfileForm.valid) {
       this.ui.showLoading();
       this.birthDayDate =
@@ -169,9 +158,11 @@ export class SectionEditProfileComponent implements OnInit {
 
   changePhoto() {
     this.chargePhoto = !this.chargePhoto;
-  }
-
-  chargeImage(image) {
-    this.imageBase64 = image;
+    this.ui.showModal(
+      UpdateFileComponent,
+      "pop-up-profile-picture",
+      true,
+      true
+    );
   }
 }

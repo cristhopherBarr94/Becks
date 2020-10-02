@@ -52,7 +52,9 @@
 
       <mat-error *ngIf="httpError">{{ httpError }}</mat-error>
 
-      <span class="font-link-small url-hyper" [routerLink]="['/recovery']"
+      <span
+        class="font-link-small url-hyper cursor-pointer"
+        [routerLink]="['/recovery']"
         >OLVIDE MI CONTRASEÑA</span
       >
 

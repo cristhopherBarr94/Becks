@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { AgeGuardService } from "./_services/age-guard.service";
 import { AuthGuardService } from "./_services/auth-guard.service";
 
 const routes: Routes = [
@@ -7,6 +8,7 @@ const routes: Routes = [
     path: "home",
     loadChildren: () =>
       import("./_modules/home/home.module").then((m) => m.HomeModule),
+    canActivate: [AgeGuardService],
   },
   {
     path: "user",
@@ -33,8 +35,7 @@ const routes: Routes = [
     path: "",
     redirectTo: "age-gate",
     pathMatch: "full",
-  }
-
+  },
 ];
 
 @NgModule({

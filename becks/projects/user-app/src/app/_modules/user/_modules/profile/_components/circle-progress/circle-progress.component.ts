@@ -9,7 +9,7 @@ export class CircleProgressComponent implements OnInit {
   remaining_days: any;
   colorProgress: string;
   colorProgressBar: string;
-  progress: number = 15 * (10 / 3);
+  progress: number = 27 * (10 / 3);
   subtitle: string = "Días";
   constructor() {}
 

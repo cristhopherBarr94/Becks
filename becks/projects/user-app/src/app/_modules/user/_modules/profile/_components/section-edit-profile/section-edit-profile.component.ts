@@ -118,11 +118,16 @@ export class SectionEditProfileComponent implements OnInit {
   }
 
   saveChanges() {
-    if (this.imageBase64) {
-      console.log("imagen", this.imageBase64);
-    }
     if (this.userEditProfileForm.valid) {
       this.ui.showLoading();
+      if (this.imageBase64) {
+        this.httpService.patch(
+          environment.serverUrl + environment.user.patchPhoto,
+          {
+            photo: this.imageBase64,
+          }
+        );
+      }
       this.birthDayDate =
         this.userEditProfileForm.controls.month.value +
         "/" +
@@ -165,5 +170,6 @@ export class SectionEditProfileComponent implements OnInit {
 
   chargeImage(image) {
     this.imageBase64 = image;
+    console.log("SectionEditProfileComponent -> chargeImage -> image", image);
   }
 }

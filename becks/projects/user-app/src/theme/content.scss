@@ -601,3 +601,15 @@
     background-size: cover;
   }
 }
+
+.pop-up-profile-picture {
+  height: 100%;
+  opacity: 0.5;
+  align-items: flex-end;
+  .modal-wrapper {
+    overflow: hidden;
+    position: absolute;
+    height: 30% !important;
+    background-color: #171717;
+  }
+}

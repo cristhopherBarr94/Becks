@@ -170,7 +170,12 @@ export class SectionEditProfileComponent implements OnInit {
 
   changePhoto() {
     this.chargePhoto = !this.chargePhoto;
-    this.ui.showModal(UpdateFileComponent, "", true, true);
+    this.ui.showModal(
+      UpdateFileComponent,
+      "pop-up-profile-picture",
+      true,
+      true
+    );
   }
 
   chargeImage(image) {

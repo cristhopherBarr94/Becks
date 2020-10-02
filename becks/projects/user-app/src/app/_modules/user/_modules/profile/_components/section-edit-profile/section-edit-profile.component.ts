@@ -211,4 +211,8 @@ export class SectionEditProfileComponent implements OnInit {
   changePhoto() {
     this.chargePhoto = !this.chargePhoto;
   }
+
+  chargeImage(image) {
+    console.log("ProfilePage -> imageBasa64", image);
+  }
 }

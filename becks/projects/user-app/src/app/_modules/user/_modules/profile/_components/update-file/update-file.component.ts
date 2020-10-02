@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 
 @Component({
   selector: "user-update-file",
@@ -7,6 +7,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class UpdateFileComponent implements OnInit {
   public photo: any;
+  @Output() chargePhoto = new EventEmitter();
   constructor() {}
 
   ngOnInit() {}
@@ -15,10 +16,6 @@ export class UpdateFileComponent implements OnInit {
     var files = event.target.files;
     var img = new Image();
     img = files[0];
-    console.log(
-      "UpdateFileComponent -> loadImageFromDevice -> image",
-      img.sizes
-    );
     this.resizeImage(files[0], 720, 480).then((blob) => {
       if (files && blob) {
         var reader = new FileReader();
@@ -31,11 +28,12 @@ export class UpdateFileComponent implements OnInit {
   _handleReaderLoaded(readerEvt) {
     var binaryString = readerEvt.target.result;
     this.photo = btoa(binaryString);
-    console.log(
-      "UpdateFileComponent -> _handleReaderLoaded -> btoa(binaryString)",
-      btoa(binaryString)
-    );
+    this.emiteImageBase64(this.photo);
   }
+
+  emiteImageBase64 = (fileBase64) => {
+    this.chargePhoto.emit(fileBase64);
+  };
 
   resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
     return new Promise((resolve, reject) => {
@@ -43,16 +41,12 @@ export class UpdateFileComponent implements OnInit {
       image.src = URL.createObjectURL(file);
       image.onload = () => {
         let width = image.width;
-        console.log("UpdateFileComponent -> image.onload -> width", width);
         let height = image.height;
-
         if (width <= maxWidth && height <= maxHeight) {
           resolve(file);
         }
-
         let newWidth;
         let newHeight;
-
         if (width > height) {
           newHeight = height * (maxWidth / width);
           newWidth = maxWidth;
@@ -60,15 +54,11 @@ export class UpdateFileComponent implements OnInit {
           newWidth = width * (maxHeight / height);
           newHeight = maxHeight;
         }
-
         let canvas = document.createElement("canvas");
         canvas.width = newWidth;
         canvas.height = newHeight;
-
         let context = canvas.getContext("2d");
-
         context.drawImage(image, 0, 0, newWidth, newHeight);
-
         canvas.toBlob(resolve, file.type);
       };
       image.onerror = reject;

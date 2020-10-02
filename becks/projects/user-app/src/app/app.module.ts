@@ -22,6 +22,8 @@ import { AuthGuardService } from "./_services/auth-guard.service";
 import { AuthService } from "./_services/auth.service";
 import { HttpService } from "./_services/http.service";
 import { UtilService } from "./_services/util.service";
+import { ExperienciasService } from "./_services/experiencias.service";
+import { AgeGuardService } from "./_services/age-guard.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -46,8 +48,10 @@ import { UtilService } from "./_services/util.service";
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthService,
     AuthGuardService,
+    AgeGuardService,
     HttpService,
     UtilService,
+    ExperienciasService,
   ],
   bootstrap: [AppComponent],
 })

@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 import * as moment from "moment";
 import { Router } from "@angular/router";
+import { UiService } from "src/app/_services/ui.service";
 
 @Component({
   selector: "app-age-gate",
@@ -17,7 +18,11 @@ export class AgeGateComponent implements OnInit {
   public ageGateForm: FormGroup;
   public cheked: boolean;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private ui: UiService
+  ) {}
 
   ngOnInit() {
     this.cheked = false;
@@ -62,6 +67,7 @@ export class AgeGateComponent implements OnInit {
       } else {
         sessionStorage.setItem("user-age-gate-session", moment().toISOString());
       }
+      this.ui.showLoading();
       this.router.navigate(["home"], { queryParamsHandling: "preserve" });
     } else {
       localStorage.removeItem("user-age-gate-local");

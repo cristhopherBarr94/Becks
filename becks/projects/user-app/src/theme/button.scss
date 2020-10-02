@@ -110,7 +110,13 @@
     3px solid #ffffff
   );
 }
+
 .button-width {
   width: 316px !important;
   border-radius: 16px 0px 16px 0px;
+}
+
+.cursor-pointer,
+a {
+  cursor: pointer;
 }

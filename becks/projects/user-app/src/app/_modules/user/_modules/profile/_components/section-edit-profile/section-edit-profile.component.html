@@ -19,14 +19,14 @@
     <span class="link-age-gate link-terms" (click)="changePhoto()"
       >Cambiar foto de perfil</span
     >
-
-    <input
-      *ngIf="chargePhoto"
-      type="file"
-      (change)="loadImageFromDevice($event)"
-      id="file-input"
-      accept="image/png, image/jpeg"
-    />
+    <div *ngIf="chargePhoto" class="col-flex-center flex-direction-column">
+      <input
+        type="file"
+        (change)="loadImageFromDevice($event)"
+        id="file-input"
+        accept="image/png, image/jpeg"
+      /><button>cargar foto</button>
+    </div>
   </div>
   <div class="content-flex-all-center">
     <form

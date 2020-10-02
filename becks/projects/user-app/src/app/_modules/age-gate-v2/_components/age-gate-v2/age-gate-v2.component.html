@@ -5,13 +5,13 @@
   <div class="form-section">
     <h1 class="title-primary">PARA CONTINUAR DEBES SER MAYOR DE EDAD</h1>
 
-    <ion-content>
+    <div>
       <mat-carousel
         timings="250ms ease-in"
         [autoplay]="false"
         color="primary"
         maxWidth="600px"
-        proportion="42"
+        proportion="45"
         minProportion="20"
         slides="3"
         [loop]="false"
@@ -41,6 +41,7 @@
             >
               <mat-label>A</mat-label>
               <input
+                #year1
                 matInput
                 formControlName="year_1"
                 placeholder="A"
@@ -49,6 +50,7 @@
                 generalValidYear="true"
                 (input)="inputValidatorNumeric($event)"
                 data-qadp="year_1"
+                (keyup)="move(year1, year2)"
               />
             </mat-form-field>
             <mat-form-field
@@ -59,6 +61,7 @@
             >
               <mat-label>A</mat-label>
               <input
+                #year2
                 matInput
                 formControlName="year_2"
                 placeholder="A"
@@ -66,6 +69,7 @@
                 maxlength="1"
                 (input)="inputValidatorNumeric($event)"
                 data-qadp="year_2"
+                (keyup)="move(year2, year3)"
               />
             </mat-form-field>
             <mat-form-field
@@ -76,6 +80,7 @@
             >
               <mat-label>A</mat-label>
               <input
+                #year3
                 matInput
                 formControlName="year_3"
                 placeholder="A"
@@ -83,6 +88,7 @@
                 maxlength="1"
                 (input)="inputValidatorNumeric($event)"
                 data-qadp="year_3"
+                (keyup)="move(year3, year4)"
               />
             </mat-form-field>
             <mat-form-field
@@ -93,6 +99,7 @@
             >
               <mat-label>A</mat-label>
               <input
+                #year4
                 matInput
                 formControlName="year_4"
                 placeholder="A"
@@ -141,6 +148,7 @@
             >
               <mat-label>M</mat-label>
               <input
+                #month1
                 matInput
                 formControlName="month_1"
                 placeholder="M"
@@ -148,6 +156,7 @@
                 maxlength="1"
                 (input)="inputValidatorNumeric($event)"
                 data-qadp="month_1"
+                (keyup)="move(month1, month2)"
               />
             </mat-form-field>
             <mat-form-field
@@ -158,6 +167,7 @@
             >
               <mat-label>M</mat-label>
               <input
+                #month2
                 matInput
                 formControlName="month_2"
                 placeholder="M"
@@ -200,6 +210,7 @@
             >
               <mat-label>D</mat-label>
               <input
+                #day1
                 matInput
                 formControlName="day_1"
                 placeholder="D"
@@ -207,6 +218,7 @@
                 maxlength="1"
                 (input)="inputValidatorNumeric($event)"
                 data-qadp="day_1"
+                (keyup)="move(day1, day2)"
               />
             </mat-form-field>
             <mat-form-field
@@ -217,6 +229,7 @@
             >
               <mat-label>D</mat-label>
               <input
+                #day2
                 matInput
                 formControlName="day_2"
                 placeholder="D"
@@ -285,6 +298,6 @@
           >Más Información</a
         >
       </div>
-    </ion-content>
+    </div>
   </div>
 </section>

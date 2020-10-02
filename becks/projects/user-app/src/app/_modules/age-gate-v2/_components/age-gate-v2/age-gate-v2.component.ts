@@ -162,4 +162,11 @@ export class AgeGateV2Component implements OnInit {
     this.dayForm.reset();
     this.dayForm.markAllAsTouched();
   }
+  move(fromtxt, totxt) {
+    var length = fromtxt.length;
+    var maxlength = fromtxt.getAttribute(maxlength);
+    if (length == maxlength) {
+      totxt.focus();
+    }
+  }
 }

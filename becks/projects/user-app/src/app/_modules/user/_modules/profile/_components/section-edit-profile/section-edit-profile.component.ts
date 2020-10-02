@@ -14,7 +14,6 @@ import {
 import { Router } from "@angular/router";
 import { HttpService } from "src/app/_services/http.service";
 import { UiService } from "src/app/_services/ui.service";
-import { ProfilePictureComponent } from "../profile-picture/profile-picture.component";
 import * as moment from "moment";
 import { environment } from "src/environments/environment";
 import { Subscription } from "rxjs";
@@ -31,6 +30,8 @@ export class SectionEditProfileComponent implements OnInit {
   public userEditProfileForm: FormGroup;
   public urlPicture: string;
   public birthDayDate: any;
+  public chargePhoto: boolean = false;
+  public imageBase64: any;
   userSubscription: Subscription;
 
   constructor(
@@ -92,6 +93,7 @@ export class SectionEditProfileComponent implements OnInit {
   }
 
   closeEdit() {
+    this.chargePhoto = false;
     this.router.navigate(["user/profile"], {
       queryParamsHandling: "preserve",
     });
@@ -116,6 +118,9 @@ export class SectionEditProfileComponent implements OnInit {
   }
 
   saveChanges() {
+    if (this.imageBase64) {
+      console.log("imagen", this.imageBase64);
+    }
     if (this.userEditProfileForm.valid) {
       this.ui.showLoading();
       this.birthDayDate =
@@ -152,5 +157,13 @@ export class SectionEditProfileComponent implements OnInit {
       : this.user.gender == "female"
       ? "../../../../../../../assets/img/profile_female.jpg"
       : "../../../../../../../assets/img/profile_male.jpg";
+  }
+
+  changePhoto() {
+    this.chargePhoto = !this.chargePhoto;
+  }
+
+  chargeImage(image) {
+    this.imageBase64 = image;
   }
 }

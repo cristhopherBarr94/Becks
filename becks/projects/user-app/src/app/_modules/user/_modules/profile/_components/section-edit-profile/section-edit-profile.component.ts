@@ -31,7 +31,7 @@ export class SectionEditProfileComponent implements OnInit {
   public urlPicture: string;
   public birthDayDate: any;
   public chargePhoto: boolean = false;
-  public photo: any;
+  public imageBase64: any;
   userSubscription: Subscription;
 
   constructor(
@@ -155,64 +155,12 @@ export class SectionEditProfileComponent implements OnInit {
       : "../../../../../../../assets/img/profile_male.jpg";
   }
 
-  loadImageFromDevice(event) {
-    var files = event.target.files;
-    this.resizeImage(files[0], 200, 200).then((blob) => {
-      if (files && blob) {
-        var reader = new FileReader();
-        reader.onload = this._handleReaderLoaded.bind(this);
-        reader.readAsBinaryString(blob);
-      }
-    });
-  }
-
-  _handleReaderLoaded(readerEvt) {
-    var binaryString = readerEvt.target.result;
-    this.photo = btoa(binaryString);
-  }
-
-  resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
-    return new Promise((resolve, reject) => {
-      let image = new Image();
-      image.src = URL.createObjectURL(file);
-      image.onload = () => {
-        let width = image.width;
-        let height = image.height;
-
-        if (width <= maxWidth && height <= maxHeight) {
-          resolve(file);
-        }
-
-        let newWidth;
-        let newHeight;
-
-        if (width > height) {
-          newHeight = height * (maxWidth / width);
-          newWidth = maxWidth;
-        } else {
-          newWidth = width * (maxHeight / height);
-          newHeight = maxHeight;
-        }
-
-        let canvas = document.createElement("canvas");
-        canvas.width = newWidth;
-        canvas.height = newHeight;
-
-        let context = canvas.getContext("2d");
-
-        context.drawImage(image, 0, 0, newWidth, newHeight);
-
-        canvas.toBlob(resolve, file.type);
-      };
-      image.onerror = reject;
-    });
-  }
-
   changePhoto() {
     this.chargePhoto = !this.chargePhoto;
   }
 
   chargeImage(image) {
+    this.imageBase64 = image;
     console.log("ProfilePage -> imageBasa64", image);
   }
 }

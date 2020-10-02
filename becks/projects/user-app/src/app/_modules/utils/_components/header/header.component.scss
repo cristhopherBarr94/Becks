@@ -6,15 +6,23 @@
 
   .return-btn {
     background: transparent;
-    width: 23px;
-    height: 23px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    :active {
-      width: 15px;
-      height: 15px;
+    @media (min-width: 769px) {
+      display: none;
     }
   }
-
+  .cancel-btn {
+    position: absolute;
+    background: transparent;
+    width: 30px;
+    height: 30px;
+    right: 10%;
+    @media (min-width: 0px) and (max-width: 768px) {
+      display: none;
+    }
+  }
   .title {
     display: block;
     margin-left: auto;

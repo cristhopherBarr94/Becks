@@ -215,3 +215,10 @@
   @media (min-width: 0px) and (max-width: 768px) {
   }
 }
+.cancel-icon {
+  background-image: url("../assets/icon/cancel-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+}

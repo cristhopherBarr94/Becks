@@ -13,12 +13,8 @@
     line-height: 50px !important;
   }
 
-  .lock-icon,
-  .logo-2 {
+  .lock-icon {
     position: relative !important;
-  }
-  .logo-2 {
-    margin-bottom: 40px;
   }
 
   .no-padding {
@@ -54,7 +50,22 @@
   }
 }
 @media (min-width: 769px) {
-  app-header {
-    visibility: hidden;
+  .from-section {
+    background-image: url(./../../../../../../../assets/img/background-blur.png);
+    background-size: cover;
+  }
+  #formchangeSection {
+    background: #121212;
+    width: 507px;
+    height: auto;
+    padding: 20px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    backdrop-filter: blur(20px) !important;
+
+    .lock-icon {
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
   }
 }

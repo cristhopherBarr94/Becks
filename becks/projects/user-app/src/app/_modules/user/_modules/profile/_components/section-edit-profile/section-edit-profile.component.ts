@@ -93,6 +93,7 @@ export class SectionEditProfileComponent implements OnInit {
   }
 
   closeEdit() {
+    this.chargePhoto = false;
     this.router.navigate(["user/profile"], {
       queryParamsHandling: "preserve",
     });
@@ -117,6 +118,9 @@ export class SectionEditProfileComponent implements OnInit {
   }
 
   saveChanges() {
+    if (this.imageBase64) {
+      console.log("imagen", this.imageBase64);
+    }
     if (this.userEditProfileForm.valid) {
       this.ui.showLoading();
       this.birthDayDate =
@@ -161,6 +165,5 @@ export class SectionEditProfileComponent implements OnInit {
 
   chargeImage(image) {
     this.imageBase64 = image;
-    console.log("ProfilePage -> imageBasa64", image);
   }
 }

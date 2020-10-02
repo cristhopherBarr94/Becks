@@ -31,6 +31,7 @@ export class SectionEditProfileComponent implements OnInit {
   public urlPicture: string;
   public birthDayDate: any;
   public chargePhoto: boolean = false;
+  public photo: any;
   userSubscription: Subscription;
 
   constructor(
@@ -155,18 +156,56 @@ export class SectionEditProfileComponent implements OnInit {
   }
 
   loadImageFromDevice(event) {
-    const file = event.target.files[0];
-    console.log(
-      "SectionEditProfileComponent -> loadImageFromDevice -> file",
-      file
-    );
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onload = () => {
-      let blob: Blob = new Blob([new Uint8Array(reader.result as ArrayBuffer)]);
-      let blobURL: string = URL.createObjectURL(blob);
-    };
-    reader.onerror = (error) => {};
+    var files = event.target.files;
+    this.resizeImage(files[0], 200, 200).then((blob) => {
+      if (files && blob) {
+        var reader = new FileReader();
+        reader.onload = this._handleReaderLoaded.bind(this);
+        reader.readAsBinaryString(blob);
+      }
+    });
+  }
+
+  _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.photo = btoa(binaryString);
+  }
+
+  resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
+    return new Promise((resolve, reject) => {
+      let image = new Image();
+      image.src = URL.createObjectURL(file);
+      image.onload = () => {
+        let width = image.width;
+        let height = image.height;
+
+        if (width <= maxWidth && height <= maxHeight) {
+          resolve(file);
+        }
+
+        let newWidth;
+        let newHeight;
+
+        if (width > height) {
+          newHeight = height * (maxWidth / width);
+          newWidth = maxWidth;
+        } else {
+          newWidth = width * (maxHeight / height);
+          newHeight = maxHeight;
+        }
+
+        let canvas = document.createElement("canvas");
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+
+        let context = canvas.getContext("2d");
+
+        context.drawImage(image, 0, 0, newWidth, newHeight);
+
+        canvas.toBlob(resolve, file.type);
+      };
+      image.onerror = reject;
+    });
   }
 
   changePhoto() {

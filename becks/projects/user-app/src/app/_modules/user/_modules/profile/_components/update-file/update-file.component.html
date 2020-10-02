@@ -1,3 +1,9 @@
-<p>
-  update-file works!
-</p>
+<div class="col-flex-center flex-direction-column">
+  <input
+    class="button-open-file font-link-small"
+    type="file"
+    (change)="loadImageFromDevice($event)"
+    id="file-input"
+    accept="image/png, image/jpeg"
+  />
+</div>

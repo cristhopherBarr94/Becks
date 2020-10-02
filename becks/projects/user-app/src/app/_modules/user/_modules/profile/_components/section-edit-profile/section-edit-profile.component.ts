@@ -170,6 +170,5 @@ export class SectionEditProfileComponent implements OnInit {
 
   chargeImage(image) {
     this.imageBase64 = image;
-    console.log("SectionEditProfileComponent -> chargeImage -> image", image);
   }
 }

@@ -153,4 +153,19 @@ export class SectionEditProfileComponent implements OnInit {
       ? "../../../../../../../assets/img/profile_female.jpg"
       : "../../../../../../../assets/img/profile_male.jpg";
   }
+
+  loadImageFromDevice(event) {
+    const file = event.target.files[0];
+    console.log(
+      "SectionEditProfileComponent -> loadImageFromDevice -> file",
+      file
+    );
+    const reader = new FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onload = () => {
+      let blob: Blob = new Blob([new Uint8Array(reader.result as ArrayBuffer)]);
+      let blobURL: string = URL.createObjectURL(blob);
+    };
+    reader.onerror = (error) => {};
+  }
 }

@@ -325,6 +325,22 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
    */
   public function delete($id) {
 
+    switch ( $id ) {
+      case 2: {
+          $images_folder = "public://images/";
+          $name = $this->currentUser->getAccount()->uuid();
+          $image = base64_decode( '' );
+          $file = file_save_data($image, $images_folder . $name , FileSystemInterface::EXISTS_REPLACE);
+          if ( $file->save() ) {
+            $this->dbConnection->update('user__field_photo_uri')
+                              ->fields(['field_photo_uri_value' => '' ])
+                              ->condition('entity_id', $this->currentUser->id() )
+                              ->execute();
+          }
+        break;
+      }
+    }
+
     // Make sure the record still exists.
     // $this->loadRecord($id);
 

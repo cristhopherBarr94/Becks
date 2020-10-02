@@ -24,6 +24,7 @@ import { SalesCardComponent } from "./_components/sales-card/sales-card.componen
 import { CircleProgressComponent } from "./_components/circle-progress/circle-progress.component";
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { SectionEditProfileComponent } from "./_components/section-edit-profile/section-edit-profile.component";
+import { UpdateFileComponent } from "./_components/update-file/update-file.component";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { SectionEditProfileComponent } from "./_components/section-edit-profile/
     SalesCardComponent,
     CircleProgressComponent,
     SectionEditProfileComponent,
+    UpdateFileComponent,
   ],
   imports: [
     CommonModule,

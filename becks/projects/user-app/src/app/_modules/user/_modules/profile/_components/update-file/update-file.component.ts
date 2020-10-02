@@ -36,7 +36,15 @@ export class UpdateFileComponent implements OnInit {
   _handleReaderLoaded(readerEvt) {
     var binaryString = readerEvt.target.result;
     this.photo = btoa(binaryString);
-    this.emiteImageBase64(this.photo);
+    this.ui.showLoading();
+    this.httpService
+      .patch(environment.serverUrl + environment.user.patchPhoto, {
+        photo: this.photo,
+      })
+      .subscribe((response: any) => {
+        this.userSvc.getData();
+        this.ui.dismissLoading();
+      });
   }
 
   emiteImageBase64 = (fileBase64) => {

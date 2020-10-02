@@ -32,7 +32,6 @@ export class SectionEditProfileComponent implements OnInit {
   public urlPicture: string;
   public birthDayDate: any;
   public chargePhoto: boolean = false;
-  public imageBase64: any;
   userSubscription: Subscription;
 
   constructor(
@@ -119,17 +118,6 @@ export class SectionEditProfileComponent implements OnInit {
   }
 
   saveChanges() {
-    if (!!this.imageBase64) {
-      this.ui.showLoading();
-      this.httpService
-        .patch(environment.serverUrl + environment.user.patchPhoto, {
-          photo: this.imageBase64,
-        })
-        .subscribe((response: any) => {
-          this.ui.dismissLoading();
-        });
-    }
-
     if (this.userEditProfileForm.valid) {
       this.ui.showLoading();
       this.birthDayDate =
@@ -176,9 +164,5 @@ export class SectionEditProfileComponent implements OnInit {
       true,
       true
     );
-  }
-
-  chargeImage(image) {
-    this.imageBase64 = image;
   }
 }

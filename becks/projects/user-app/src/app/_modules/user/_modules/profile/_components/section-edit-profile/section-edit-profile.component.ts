@@ -14,12 +14,12 @@ import {
 import { Router } from "@angular/router";
 import { HttpService } from "src/app/_services/http.service";
 import { UiService } from "src/app/_services/ui.service";
-import { ProfilePictureComponent } from "../profile-picture/profile-picture.component";
 import * as moment from "moment";
 import { environment } from "src/environments/environment";
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/_services/user.service";
 import { User } from "src/app/_models/User";
+import { UpdateFileComponent } from "../update-file/update-file.component";
 
 @Component({
   selector: "user-section-edit-profile",
@@ -31,6 +31,7 @@ export class SectionEditProfileComponent implements OnInit {
   public userEditProfileForm: FormGroup;
   public urlPicture: string;
   public birthDayDate: any;
+  public chargePhoto: boolean = false;
   userSubscription: Subscription;
 
   constructor(
@@ -92,6 +93,7 @@ export class SectionEditProfileComponent implements OnInit {
   }
 
   closeEdit() {
+    this.chargePhoto = false;
     this.router.navigate(["user/profile"], {
       queryParamsHandling: "preserve",
     });
@@ -133,10 +135,10 @@ export class SectionEditProfileComponent implements OnInit {
           birthdate: this.birthDayDate,
         })
         .subscribe((response: any) => {
-          this.ui.dismissLoading();
           if (response.status == 200) {
             this.userSvc.getData();
             this.closeEdit();
+            this.ui.dismissLoading();
           }
         }),
         (e) => {
@@ -154,18 +156,13 @@ export class SectionEditProfileComponent implements OnInit {
       : "../../../../../../../assets/img/profile_male.jpg";
   }
 
-  loadImageFromDevice(event) {
-    const file = event.target.files[0];
-    console.log(
-      "SectionEditProfileComponent -> loadImageFromDevice -> file",
-      file
+  changePhoto() {
+    this.chargePhoto = !this.chargePhoto;
+    this.ui.showModal(
+      UpdateFileComponent,
+      "pop-up-profile-picture",
+      true,
+      true
     );
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onload = () => {
-      let blob: Blob = new Blob([new Uint8Array(reader.result as ArrayBuffer)]);
-      let blobURL: string = URL.createObjectURL(blob);
-    };
-    reader.onerror = (error) => {};
   }
 }

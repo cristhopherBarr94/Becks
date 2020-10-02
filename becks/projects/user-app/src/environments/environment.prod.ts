@@ -18,6 +18,7 @@ export const environment = {
     getData: "/api/ab-inbev-api-user-app/",
     patchPassword: "/api/ab-inbev-api-user-app/0",
     patchData: "/api/ab-inbev-api-user-app/1",
+    patchPhoto: "/api/ab-inbev-api-user-app/2",
   },
   rest: {
     client_id: "ed9d6754-a686-487e-ac99-4c1ce919912f",

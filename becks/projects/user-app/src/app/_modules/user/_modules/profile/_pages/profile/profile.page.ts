@@ -15,6 +15,8 @@ export class ProfilePage implements OnInit, OnDestroy {
   public user = new User();
   public stats = { buy: "10", exp: "6", friends: "7" };
   public size: string;
+  public imageBasa64: any;
+
   userSubscription: Subscription;
 
   constructor(

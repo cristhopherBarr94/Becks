@@ -6,11 +6,12 @@ import { LoadingComponent } from "../_modules/utils/_components/loading/loading.
   providedIn: "root",
 })
 export class UiService {
-  loading: any;
+  private loading: any;
+  private modal: any;
 
   constructor(public modalCtrl: ModalController) {}
 
-  async showLoading(text?: string) {
+  async showLoading() {
     try {
       // this.dismissLoading();
       this.loading = await this.modalCtrl.create({
@@ -52,6 +53,44 @@ export class UiService {
       return "md";
     } else {
       return "lg";
+    }
+  }
+
+  dismissModal(timeOut: number = 1000) {
+    try {
+      if (this.modal) {
+        this.modal.dismiss("cancel");
+      }
+    } catch (e) {
+      console.error("dismissModal", e);
+    }
+    setTimeout(() => {
+      this.modalCtrl.getTop().then((topOverlay) => {
+        if (topOverlay !== undefined) {
+          this.modalCtrl.dismiss();
+        }
+      });
+    }, timeOut);
+  }
+
+  async showModal(
+    refComponent,
+    refClass?,
+    withBackdrop = true,
+    allowDismiss = false
+  ) {
+    try {
+      // this.dismissLoading();
+      this.modal = await this.modalCtrl.create({
+        component: refComponent,
+        cssClass: refClass,
+        animated: true,
+        showBackdrop: withBackdrop,
+        backdropDismiss: allowDismiss,
+      });
+      await this.modal.present();
+    } catch (e) {
+      console.error("showLoading", e);
     }
   }
 }

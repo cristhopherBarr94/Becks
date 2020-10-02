@@ -1,3 +1,21 @@
-<p>
-  update-file works!
-</p>
+<div class="col-flex-center flex-direction-column container">
+  <input
+    id="selectedFile"
+    style="display: none"
+    type="file"
+    (change)="loadImageFromDevice($event)"
+    id="file-input"
+    accept="image/png, image/jpeg"
+    #hiddenfileinput
+  />
+  <span class="title-secondary button-pop-up" (click)="hiddenfileinput.click()"
+    >Cargar foto de perfil</span
+  >
+
+  <span class="title-secondary button-pop-up" (click)="deletePhoto()"
+    >Eliminar foto de perfil</span
+  >
+  <span class="title-secondary button-pop-up" (click)="closeModal()"
+    >Cancelar</span
+  >
+</div>

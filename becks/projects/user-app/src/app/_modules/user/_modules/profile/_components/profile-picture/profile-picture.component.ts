@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "user-profile-picture",
@@ -8,8 +9,11 @@ import { Component, OnInit, Input } from "@angular/core";
 export class ProfilePictureComponent implements OnInit {
   @Input() urlImage: string;
   @Input() profile_name: string;
-
+  public time;
+  public url: string = environment.serverUrl;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.time = "?time_stamp=" + Math.floor(Date.now() / 1000);
+  }
 }

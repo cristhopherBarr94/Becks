@@ -325,6 +325,22 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
    */
   public function delete($id) {
 
+    switch ( $id ) {
+      case 2: {
+          $images_folder = "public://images/";
+          $name = $this->currentUser->getAccount()->uuid();
+          $image = base64_decode( '' );
+          $file = file_save_data($image, $images_folder . $name , FileSystemInterface::EXISTS_REPLACE);
+          if ( $file->save() ) {
+            $this->dbConnection->update('user__field_photo_uri')
+                              ->fields(['field_photo_uri_value' => '' ])
+                              ->condition('entity_id', $this->currentUser->id() )
+                              ->execute();
+          }
+        break;
+      }
+    }
+
     // Make sure the record still exists.
     // $this->loadRecord($id);
 
@@ -394,7 +410,22 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
       throw new BadRequestHttpException('El usuario no puede ser editado porque hace falta la "Fecha de Nacimiento" tipo MM/DD/YYYY');
     }
     if ( strlen($record['birthdate']) > 11) {
-      throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser tipo MM/DD/YYYY');
+      throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+    }
+    try {
+      $curYear = date('Y');
+      $date = explode("/", $record['birthdate']);
+      if ( intval($date[0]) < 1 || intval($date[0]) > 12 ) {
+        throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+      }
+      if ( intval($date[1]) < 1 || intval($date[1]) > 31 ) {
+        throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+      }
+      if ( intval($date[2]) < 1920 || (intval($date[2]) - $curYear) < 18 ) {
+        throw new BadRequestHttpException('"Fecha de Nacimiento" no valida, Debe ser mayor de edad');
+      }
+    } catch ( Exception $ex ) {
+      throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
     }
 
     if (!isset($record['first_name']) || empty($record['first_name'])) {

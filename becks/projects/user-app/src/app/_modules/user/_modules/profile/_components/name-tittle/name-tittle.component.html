@@ -1,8 +1,22 @@
 <div class="container flex-direction-row header-div margin-botton">
-  <div class="margin-top-icon lateral-div"></div>
-  <div class="col-flex-center flex-direction-column center-div">
-    <div class="titleLogo margin-top-icon title-secondary"></div>
-    <span class="title-profile margin-tittle">!Hola, {{ first_name }}!</span>
+  <div class="margin-top-icon lateral-div">
+    <div
+      class="titleLogo-desktop"
+      *ngIf="this.size == 'lg' || this.size == 'md'"
+    ></div>
   </div>
-  <div class="singOutLogo margin-top-icon lateral-div" (click)="logout()"></div>
+  <div class="col-flex-center flex-direction-column center-div">
+    <div
+      class="titleLogo margin-top-icon title-secondary"
+      *ngIf="this.size == 'sm' || this.size == 'xs'"
+    ></div>
+    <span
+      class="title-profile margin-tittle"
+      *ngIf="this.size == 'sm' || this.size == 'xs'"
+      >!Hola, {{ first_name }}!</span
+    >
+  </div>
+  <div class="lateral-div">
+    <div class="singOutLogo" (click)="logout()"></div>
+  </div>
 </div>

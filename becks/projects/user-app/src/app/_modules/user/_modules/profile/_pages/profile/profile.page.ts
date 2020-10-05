@@ -37,13 +37,10 @@ export class ProfilePage implements OnInit, OnDestroy {
     this.userSubscription = this.userSvc.user$.subscribe(
       (user: User) => {
         if (user !== undefined) {
-          console.log("ProfilePage -> ngOnInit -> user", user);
           this.user = user;
         }
       },
-      (error: any) => {
-        console.log("ProfilePage -> ngOnInit -> error", error);
-      }
+      (error: any) => {}
     );
 
     if (this.userSvc.getActualUser()) {

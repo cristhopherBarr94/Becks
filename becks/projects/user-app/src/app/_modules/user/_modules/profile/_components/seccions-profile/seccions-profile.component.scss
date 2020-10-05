@@ -112,8 +112,15 @@
 .margin-tittle-desktop {
   margin-top: 32px;
   width: 94%;
+  flex-direction: row;
+  display: flex;
+}
+
+.text-aling {
+  width: 75%;
 }
 
 .text-aling-end {
+  width: 20%;
   text-align: end;
 }

@@ -202,6 +202,10 @@
     width: 140px;
     height: 85px;
   }
+  @media (min-width: 768px) {
+    width: 160px;
+    height: 100px;
+  }
 }
 .help-icon {
   background-image: url("../assets/icon/help-icon.svg");
@@ -212,8 +216,6 @@
   top: 7px;
   width: 11px;
   height: 11px;
-  @media (min-width: 0px) and (max-width: 768px) {
-  }
 }
 .cancel-icon {
   background-image: url("../assets/icon/cancel-icon.svg");

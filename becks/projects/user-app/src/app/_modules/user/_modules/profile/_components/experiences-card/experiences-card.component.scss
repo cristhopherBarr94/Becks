@@ -7,6 +7,12 @@
   margin-bottom: 24px;
 }
 
+.container {
+  @media (min-width: 768px) {
+    margin-left: 24px;
+  }
+}
+
 .image-card {
   width: 33%;
   height: 73px;

@@ -10,6 +10,10 @@
 .image-card {
   width: 33%;
   height: 73px;
+  @media (min-width: 768px) {
+    height: 117px;
+    width: 25%;
+  }
 }
 
 .display-flex {

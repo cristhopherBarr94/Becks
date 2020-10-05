@@ -127,7 +127,24 @@
     6px,
     10px,
     6px,
-    27px,
+    20px,
+    49px
+  );
+  text-transform: uppercase;
+}
+
+.profile-content {
+  @include title(
+    "Eurostile BQ",
+    #ffffff,
+    0px,
+    normal,
+    lighter,
+    8px,
+    6px,
+    8px,
+    6px,
+    18px,
     49px
   );
   text-transform: uppercase;
@@ -144,7 +161,7 @@
     6px,
     13px,
     6px,
-    27px,
+    24px,
     49px
   );
   text-transform: uppercase;

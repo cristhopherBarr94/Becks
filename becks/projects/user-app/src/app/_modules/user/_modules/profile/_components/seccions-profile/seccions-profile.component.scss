@@ -86,13 +86,18 @@
 .card-component-circle {
   background-color: #1d1d1d;
   margin-left: 10%;
-  width: 30%;
-  height: 100%;
+  width: 25%;
+  height: 420px;
+  margin-top: 42px;
+  display: flex;
+  justify-content: center;
 }
 
 .card-component-experiences {
   background-color: #1d1d1d;
-  margin-left: 10%;
-  width: 60%;
-  max-height: 725px;
+  display: flex;
+  margin-top: 42px;
+  margin-left: 3%;
+  width: 53%;
+  height: 420px;
 }

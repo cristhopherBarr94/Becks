@@ -3,6 +3,14 @@
   width: 100%;
 }
 
+.internal-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  flex-direction: column;
+  align-items: center;
+}
+
 .tab-group {
   justify-content: center;
   @media (min-width: 768px) {
@@ -55,4 +63,16 @@
     width: 25%;
     margin-right: 25%;
   }
+}
+
+::ng-deep .mat-tab-body-wrapper {
+  @media (min-width: 768px) {
+    background-color: #171717;
+    min-width: 100%;
+  }
+}
+.container-desktop {
+  height: 100%;
+  min-width: 100%;
+  background-color: #171717;
 }

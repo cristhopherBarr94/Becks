@@ -31,7 +31,7 @@ ion-progress-bar {
   width: 170px;
   height: 170px;
   position: absolute;
-  top: 12.8px;
+  top: 36.8px;
   margin-left: 15.5px;
   .clock {
     width: 27px;
@@ -45,4 +45,8 @@ ion-progress-bar {
     top: 1px;
     left: 43%;
   }
+}
+.margin-top {
+  margin-top: 24px;
+  margin-bottom: 24px;
 }

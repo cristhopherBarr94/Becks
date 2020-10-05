@@ -80,8 +80,19 @@
   min-height: 100%;
   min-width: 100%;
   background-color: #171717;
+  flex-direction: row;
+  display: flex;
 }
-.card-component {
+.card-component-circle {
   background-color: #1d1d1d;
+  margin-left: 10%;
   width: 30%;
+  height: 100%;
+}
+
+.card-component-experiences {
+  background-color: #1d1d1d;
+  margin-left: 10%;
+  width: 60%;
+  max-height: 725px;
 }

@@ -11,3 +11,29 @@
 .mat-icon {
   font-size: 16px;
 }
+
+.margin-top-section {
+  padding-top: 18px;
+}
+
+.separator-line-row {
+  margin-left: 10%;
+  height: 1px;
+  width: 80%;
+  border-top: 0.25px solid #dadada;
+  justify-content: center;
+  display: flex;
+}
+
+.separator-line-column {
+  height: 81px;
+  width: 1px;
+  border-left: 0.25px solid #dadada;
+  justify-content: center;
+  display: flex;
+}
+
+.background-color {
+  background-color: #1d1d1d;
+  height: 10px;
+}

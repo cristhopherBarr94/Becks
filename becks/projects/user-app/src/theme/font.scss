@@ -42,6 +42,11 @@
   src: url("../assets/font/HelveticaNeue.woff") format("woff");
 }
 
+@font-face {
+  font-family: "Droid Sans";
+  src: url("../assets/font/DroidSans-Bold-webfont.woff") format("woff");
+}
+
 @mixin title(
   $font-family,
   $color,
@@ -300,4 +305,17 @@ p {
 .font-table {
   font-family: "Helvetica LT Std";
   font-style: normal;
+}
+
+.font-profile {
+  font-family: "Eurostile BQ";
+  font-style: normal;
+  font-size: 10px;
+  line-height: 110%;
+  text-transform: capitalize;
+  color: #ffffff;
+  @media (min-width: 768px) {
+    font-family: "Droid Sans";
+    font-size: 36px;
+  }
 }

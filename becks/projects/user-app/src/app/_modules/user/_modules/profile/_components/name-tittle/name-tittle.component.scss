@@ -1,5 +1,11 @@
 .container {
-  margin-top: 20px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    margin-top: 20px;
+  }
+  @media (min-width: 768px) {
+    background-color: #171717;
+    height: 90px;
+  }
 }
 
 .margin-tittle {
@@ -7,7 +13,7 @@
 }
 
 .margin-botton {
-  margin-bottom: 22px;
+  padding-bottom: 22px;
 }
 
 .header-div {
@@ -16,13 +22,23 @@
 }
 
 .lateral-div {
-  width: 15%;
   display: flex;
   justify-content: center;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 15%;
+  }
+  @media (min-width: 768px) {
+    width: 30%;
+  }
 }
 
 .center-div {
-  width: 70%;
   display: flex;
   justify-content: center;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 70%;
+  }
+  @media (min-width: 768px) {
+    width: 40%;
+  }
 }

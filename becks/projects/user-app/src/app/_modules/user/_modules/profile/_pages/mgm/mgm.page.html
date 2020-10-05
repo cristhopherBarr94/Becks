@@ -1,0 +1,69 @@
+<ion-content>
+  <section class="MGM">
+    <div class="content-flex-all-center flex-direction-column padding-form">
+      <div class="separator-becks"></div>
+      <span class="mgm-icon"> </span>
+      <h2 class="title-secondary">INVITA A TUS AMIGOS Y GANA BECK’S</h2>
+      <form [formGroup]="userMGMForm" class="form-section" autocomplete="off">
+        <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userMGMForm.controls.email)"
+        >
+          <mat-label>Email de tu amigo </mat-label>
+          <ion-row class="aling-left">
+            <input
+              matInput
+              formControlName="email"
+              placeholder="example@example.com"
+              type="email"
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
+              maxlength="30"
+              [(ngModel)]="userMGM.email"
+              data-qadp="email"
+            />
+            <button
+              class="becks-btn-inner"
+              (click)="inviteFriend()"
+              [ngClass]="{
+               'button-disabled': userMGMForm.invalid
+                }"
+              [disabled]="userMGMForm.invalid"
+              data-qadp="send-button-form"
+            >
+              AÑADIR
+            </button>
+          </ion-row>
+
+          <mat-error *ngIf="userMGMForm.controls.email.errors"
+            >*Este campo es obligatorio
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <h3 class="title-fourthy" [hidden]="guest_users.length ==0">
+        Has invitado a:
+      </h3>
+      <form class="form-section guest_list" autocomplete="off">
+        <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput input-becks"
+          *ngFor="let item of guest_users"
+        >
+          <input matInput disabled [value]="item" />
+          <span matPrefix><mat-icon class="email-icon"></mat-icon></span>
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            class="btn-trash"
+          >
+            <mat-icon class="trash-icon"></mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
+  </section>
+  <app-footer></app-footer>
+</ion-content>

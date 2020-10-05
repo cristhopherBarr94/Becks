@@ -224,3 +224,34 @@
   background-position: center;
   position: absolute;
 }
+.mgm-icon {
+  background-image: url("../assets/icon/mgm-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 132px;
+    height: 89px;
+  }
+  @media (min-width: 768px) {
+    width: 160px;
+    height: 100px;
+  }
+}
+.trash-icon {
+  background-image: url("../assets/icon/trash-alt.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 13px !important;
+  height: 20px !important;
+}
+.email-icon {
+  background-image: url("../assets/icon/email-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 18px !important;
+  height: 13px !important;
+  margin-right: 10px;
+}

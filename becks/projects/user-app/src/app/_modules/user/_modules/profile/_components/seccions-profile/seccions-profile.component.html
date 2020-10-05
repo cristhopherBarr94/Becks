@@ -9,12 +9,12 @@
         class="container-desktop"
         *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
       >
-        <div class="card-component-circle">
+        <section class="card-component-circle">
           <user-circle-progress class="internal-section"></user-circle-progress>
-        </div>
-        <div class="card-component-experiences">
+        </section>
+        <section class="card-component-experiences">
           <user-experiences-cards></user-experiences-cards>
-        </div>
+        </section>
       </div>
     </mat-tab>
     <mat-tab label="Mis Experiencias" id="experiencies">

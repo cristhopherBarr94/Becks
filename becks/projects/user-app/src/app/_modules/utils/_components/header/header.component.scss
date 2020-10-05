@@ -38,8 +38,9 @@
     }
     @media (min-width: 769px) {
       .title-secondary {
-        font-size: 24px !important;
-        line-height: 110% !important;
+        // font-size: 24px !important;
+        // line-height: 110% !important;
+        display: none;
       }
     }
   }

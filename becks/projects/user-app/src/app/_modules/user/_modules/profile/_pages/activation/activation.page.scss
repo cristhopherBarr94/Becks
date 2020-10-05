@@ -43,11 +43,22 @@
   text-align: center !important;
   text-transform: lowercase;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .title-desktop {
+    display: none;
+  }
+}
 
 @media (min-width: 769px) {
   .from-section {
-    background-image: url(./../../../../../../../assets/img/background-blur.png);
+    background-image: linear-gradient(
+        90deg,
+        rgba(158, 158, 158, 0.3) 0%,
+        rgba(158, 158, 158, 0.3) 100%
+      ),
+      url(./../../../../../../../assets/img/frankbn.jpg);
     background-size: cover;
+    background-position: top;
   }
   #formActivationSection {
     background: black;
@@ -56,6 +67,14 @@
     padding: 20px;
     margin-top: 100px;
     margin-bottom: 50px;
+    .title-desktop {
+      margin-bottom: 0;
+      height: 30px !important;
+    }
+    .separator-becks {
+      position: relative;
+      top: 0px;
+    }
 
     .activation-icon {
       margin: 20px;

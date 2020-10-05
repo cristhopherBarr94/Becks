@@ -98,6 +98,7 @@
   flex-direction: column;
   background-color: #1d1d1d;
   display: flex;
+  align-items: center;
   margin-top: 42px;
   margin-left: 3%;
   width: 53%;
@@ -105,4 +106,9 @@
   margin-bottom: 42px;
   contain: strict;
   overflow: auto;
+}
+
+.margin-tittle-desktop {
+  margin-top: 32px;
+  width: 90%;
 }

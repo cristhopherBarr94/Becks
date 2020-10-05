@@ -31,9 +31,43 @@
   border-left: 0.25px solid #dadada;
   justify-content: center;
   display: flex;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    height: 60px;
+  }
 }
 
 .background-color {
   background-color: #1d1d1d;
-  height: 10px;
+}
+
+.seccion-staticstics {
+  width: 35%;
+  margin-left: 15%;
+  margin-bottom: 18px;
+}
+
+.conte-second {
+  @media (min-width: 769px) and (max-width: 1366px) {
+    height: 70px;
+  }
+  height: 90px;
+}
+
+.edit-button {
+  margin-left: 26%;
+  background-color: #121212;
+
+  font-family: "Helvetica LT Std";
+  color: #ffffff !important;
+  border-radius: 16px 0px 16px 0px;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    font-size: 18px;
+    width: 128px;
+    height: 45px;
+  }
+  @media (min-width: 1367px) {
+    font-size: 24px;
+    width: 178px;
+    height: 51px;
+  }
 }

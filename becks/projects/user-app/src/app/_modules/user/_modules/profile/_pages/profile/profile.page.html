@@ -22,10 +22,13 @@
       *ngIf="this.size == 'sm' || this.size == 'xs'"
     ></user-statistics-profile>
     <div
-      class="flex-direction-row"
+      class="flex-direction-row background-color"
       *ngIf="this.size == 'lg' || this.size == 'md'"
     >
-      <user-statistics-profile [statistics]="stats"></user-statistics-profile>
+      <user-statistics-profile
+        [statistics]="stats"
+        class="seccion-staticstics"
+      ></user-statistics-profile>
       <div class="separator-line-column"></div>
     </div>
 

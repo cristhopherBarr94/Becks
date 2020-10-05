@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
   selector: "user-experiences-cards",
@@ -6,13 +6,19 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./experiences-cards.component.scss"],
 })
 export class ExperiencesCardsComponent implements OnInit {
+  @Input() vertical: boolean;
+  public direcionCards: string;
   cancelCards = ExpCards;
   pendingCards = ExpCards;
   acceptCards = ExpCards;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.vertical) {
+      this.direcionCards = "flex-direction-row";
+    }
+  }
 }
 
 export interface CARD {

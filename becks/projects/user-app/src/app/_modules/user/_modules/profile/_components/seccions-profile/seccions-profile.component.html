@@ -35,7 +35,7 @@
         class="container-desktop"
         *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
       >
-        <user-experiences-cards></user-experiences-cards>
+        <user-experiences-cards [vertical]="true"></user-experiences-cards>
       </div>
     </mat-tab>
   </mat-tab-group>

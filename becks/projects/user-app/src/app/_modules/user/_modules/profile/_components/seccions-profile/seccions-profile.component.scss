@@ -91,6 +91,7 @@
   margin-top: 42px;
   display: flex;
   justify-content: center;
+  contain: strict;
   margin-bottom: 20px;
 }
 
@@ -111,4 +112,8 @@
 .margin-tittle-desktop {
   margin-top: 32px;
   width: 94%;
+}
+
+.text-aling-end {
+  text-align: end;
 }

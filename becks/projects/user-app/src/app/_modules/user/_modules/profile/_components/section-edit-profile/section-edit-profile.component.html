@@ -22,7 +22,7 @@
     <!-- <user-update-file *ngIf="chargePhoto" (chargePhoto)="chargeImage($event)">
     </user-update-file> -->
   </div>
-  <div class="content-flex-all-center">
+  <div class="content-flex-all-center" *ngIf="this.size == 'xs'">
     <form
       [formGroup]="userEditProfileForm"
       class="form-section"

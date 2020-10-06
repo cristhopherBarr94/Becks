@@ -20,6 +20,7 @@ import { Subscription } from "rxjs";
 import { UserService } from "src/app/_services/user.service";
 import { User } from "src/app/_models/User";
 import { NameTittleComponent } from "../name-tittle/name-tittle.component";
+import { Platform } from "@ionic/angular";
 
 @Component({
   selector: "user-section-edit-profile",
@@ -32,6 +33,7 @@ export class SectionEditProfileComponent implements OnInit {
   public urlPicture: string;
   public birthDayDate: any;
   public chargePhoto: boolean = false;
+  public size: string;
   userSubscription: Subscription;
 
   constructor(
@@ -40,8 +42,16 @@ export class SectionEditProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
     private ui: UiService,
-    private httpService: HttpService
-  ) {}
+    private httpService: HttpService,
+    private platform: Platform
+  ) {
+    platform.ready().then(() => {
+      this.platform.resize.subscribe(() => {
+        this.size = this.ui.getSizeType(platform.width());
+      });
+      this.size = this.ui.getSizeType(platform.width());
+    });
+  }
 
   ngOnInit() {
     if (this.userSvc.getActualUser()) {

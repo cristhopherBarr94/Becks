@@ -1,6 +1,7 @@
 .container-edit-profile {
   min-height: 100%;
   background-color: #171717;
+  overflow: auto;
 }
 
 .header-div {
@@ -23,6 +24,10 @@
 
 .save {
   color: #038259;
+}
+
+.cancel {
+  color: white;
 }
 
 .margint-top {

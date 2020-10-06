@@ -623,10 +623,14 @@
 .modal-edit-profile {
   align-items: center;
   .modal-wrapper {
-    overflow: hidden;
+    overflow: auto;
+    contain: strict;
     position: absolute;
     height: 80% !important;
     width: 50% !important;
     background-color: #171717;
+    @media (min-width: 769px) and (max-width: 1366px) {
+      width: 70% !important;
+    }
   }
 }

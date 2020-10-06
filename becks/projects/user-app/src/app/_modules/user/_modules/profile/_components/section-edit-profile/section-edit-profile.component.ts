@@ -76,9 +76,8 @@ export class SectionEditProfileComponent implements OnInit {
       ]),
       phone: new FormControl(this.user.mobile_phone, [
         Validators.required,
-        Validators.email,
+        Validators.minLength(10),
       ]),
-
       day: new FormControl(
         !!this.user.birthdate && moment(this.user.birthdate).format("DD"),
         [Validators.required, Validators.min(1), Validators.max(31)]
@@ -138,8 +137,6 @@ export class SectionEditProfileComponent implements OnInit {
       return "Ingrese solo letras";
     } else if (item.hasError("min") || item.hasError("max")) {
       return "Ingrese un valor entre " + min + " y " + max;
-    } else if (item.hasError("email")) {
-      return "Ingrese una dirección de correo electrónico válida";
     }
   }
 

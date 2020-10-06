@@ -19,7 +19,7 @@ import { environment } from "src/environments/environment";
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/_services/user.service";
 import { User } from "src/app/_models/User";
-import { UpdateFileComponent } from "../update-file/update-file.component";
+import { NameTittleComponent } from "../name-tittle/name-tittle.component";
 
 @Component({
   selector: "user-section-edit-profile",
@@ -158,11 +158,6 @@ export class SectionEditProfileComponent implements OnInit {
 
   changePhoto() {
     this.chargePhoto = !this.chargePhoto;
-    this.ui.showModal(
-      UpdateFileComponent,
-      "pop-up-profile-picture",
-      true,
-      true
-    );
+    this.ui.showModal(NameTittleComponent, "", true, true);
   }
 }

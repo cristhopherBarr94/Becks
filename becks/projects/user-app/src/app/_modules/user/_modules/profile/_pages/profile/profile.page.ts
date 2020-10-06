@@ -5,6 +5,8 @@ import { UserService } from "src/app/_services/user.service";
 import { Platform } from "@ionic/angular";
 import { UiService } from "src/app/_services/ui.service";
 import { Router } from "@angular/router";
+import { SectionEditProfileComponent } from "../../_components/section-edit-profile/section-edit-profile.component";
+import { StatisticsProfileComponent } from "../../_components/statistics-profile/statistics-profile.component";
 
 @Component({
   selector: "user-profile",
@@ -57,6 +59,11 @@ export class ProfilePage implements OnInit, OnDestroy {
     this.router.navigate(["user/profile/edit"], {
       queryParamsHandling: "preserve",
     });
+  }
+
+  editProfileDesktop() {
+    console.log("click");
+    this.ui.showModal(StatisticsProfileComponent, "", true, true);
   }
 
   profilePicture() {

@@ -71,6 +71,14 @@
   }
 }
 @media (min-width: 769px) {
+  .background-black {
+    background: #121212 !important;
+    min-height: 100%;
+  }
+  .MGM {
+    width: 80%;
+    min-height: 100vh;
+  }
   .separator-becks {
     position: relative;
   }

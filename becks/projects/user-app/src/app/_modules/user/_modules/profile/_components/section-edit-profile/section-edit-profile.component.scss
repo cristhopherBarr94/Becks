@@ -48,3 +48,19 @@
     margin-right: 12px;
   }
 }
+
+.birthayForm {
+  @media (min-width: 769px) {
+    width: 364px;
+    margin-right: 12px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+}
+
+.margin-left {
+  @media (min-width: 769px) {
+    margin-left: 24px;
+  }
+}

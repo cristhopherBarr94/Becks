@@ -33,7 +33,7 @@
       class="form-section"
       autocomplete="off"
     >
-      <div [ngClass]="screnSize(size)" class="col-flex-center">
+      <div [ngClass]="screnSize(size, false)" class="col-flex-center">
         <mat-form-field
           appearance="fill"
           floatLabel="auto"
@@ -93,7 +93,7 @@
           >
         </mat-form-field>
       </div>
-      <div [ngClass]="screnSize(size)">
+      <div [ngClass]="screnSize(size, true)">
         <mat-form-field
           appearance="fill"
           floatLabel="auto"
@@ -122,8 +122,10 @@
             }}</mat-error
           >
         </mat-form-field>
-        <div class="flex-direction-column">
-          <span class="color-green font-link-small">Fecha de nacimiento</span>
+        <div class="flex-direction-column birthayForm">
+          <span class="color-green font-link-small margin-left"
+            >Fecha de nacimiento</span
+          >
           <div class="flex-direction-row content-flex-all-center">
             <mat-form-field
               appearance="fill"
@@ -213,7 +215,7 @@
         </div>
       </div>
 
-      <div [ngClass]="screnSize(size)" *ngIf="size != 'xs'">
+      <div [ngClass]="screnSize(size, false)" *ngIf="size != 'xs'">
         <mat-form-field
           appearance="fill"
           floatLabel="auto"
@@ -271,9 +273,6 @@
         (click)="saveChanges()"
         block="block"
         color="becks"
-        [ngClass]="{
-          'button-disabled': userEditProfileForm.invalid
-        }"
       >
         <span>ACTUALIZAR</span>
       </button>

@@ -75,8 +75,13 @@ export class SectionEditProfileComponent implements OnInit {
       ]),
       phone: new FormControl(this.user.mobile_phone, [
         Validators.required,
+        Validators.email,
+      ]),
+      email: new FormControl(this.user.email, [
+        Validators.required,
         Validators.minLength(10),
       ]),
+      gender: new FormControl(this.user.gender, [Validators.required]),
       day: new FormControl(
         !!this.user.birthdate && moment(this.user.birthdate).format("DD"),
         [Validators.required, Validators.min(1), Validators.max(31)]
@@ -98,6 +103,16 @@ export class SectionEditProfileComponent implements OnInit {
       classreturn = "input-becks-ok";
     } else if (item.touched) {
       classreturn = "input-becks-error";
+    }
+    return classreturn;
+  }
+
+  public getClassInputSelect(item: any): string {
+    let classreturn = "select-becks";
+    if (item.valid) {
+      classreturn = "select-becks-ok";
+    } else if (item.touched) {
+      classreturn = "select-becks-error";
     }
     return classreturn;
   }
@@ -124,6 +139,8 @@ export class SectionEditProfileComponent implements OnInit {
       return "Ingrese solo letras";
     } else if (item.hasError("min") || item.hasError("max")) {
       return "Ingrese un valor entre " + min + " y " + max;
+    } else if (item.hasError("email")) {
+      return "Ingrese una dirección de correo electrónico válida";
     }
   }
 

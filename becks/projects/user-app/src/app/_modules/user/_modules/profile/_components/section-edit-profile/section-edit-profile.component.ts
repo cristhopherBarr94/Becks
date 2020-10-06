@@ -81,7 +81,7 @@ export class SectionEditProfileComponent implements OnInit {
         Validators.required,
         Validators.minLength(10),
       ]),
-      gender: new FormControl(this.user.gender, [Validators.required]),
+
       day: new FormControl(
         !!this.user.birthdate && moment(this.user.birthdate).format("DD"),
         [Validators.required, Validators.min(1), Validators.max(31)]
@@ -94,6 +94,9 @@ export class SectionEditProfileComponent implements OnInit {
         !!this.user.birthdate && moment(this.user.birthdate).format("YYYY"),
         [Validators.required, Validators.min(1920), Validators.max(2020)]
       ),
+      gender: new FormControl(this.user.gender, [Validators.required]),
+      id: new FormControl(this.user.type_id, [Validators.required]),
+      document: new FormControl(this.user.id_number, [Validators.required]),
     });
   }
 
@@ -196,6 +199,8 @@ export class SectionEditProfileComponent implements OnInit {
   screnSize(size) {
     if (size != "xs") {
       return "flex-direction-row";
+    } else {
+      return "flex-direction-column";
     }
   }
 }

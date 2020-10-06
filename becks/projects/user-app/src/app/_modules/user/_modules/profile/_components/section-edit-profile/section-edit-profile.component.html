@@ -33,7 +33,7 @@
       class="form-section"
       autocomplete="off"
     >
-      <div [ngClass]="screnSize(size)">
+      <div [ngClass]="screnSize(size)" class="col-flex-center">
         <mat-form-field
           appearance="fill"
           floatLabel="auto"
@@ -269,20 +269,21 @@
           appearance="fill"
           floatLabel="auto"
           class="fullInput"
-          [ngClass]="getClassInputSelect(userEditProfileForm.controls.gender)"
+          [ngClass]="getClassInputSelect(userEditProfileForm.controls.id)"
         >
-          <mat-label>Sexo</mat-label>
+          <mat-label>Tipo de documento</mat-label>
           <mat-select
             panelClass="backgroud-panel"
-            formControlName="gender"
+            formControlName="id"
             required
-            data-qadp="gender"
+            data-qadp="id"
           >
-            <mat-option value="F"> FEMENINO</mat-option>
-            <mat-option value="M"> MASCULINO</mat-option>
+            <mat-option value="CC"> Cedula de ciudadanía</mat-option>
+            <mat-option value="CE"> Cedula de extrangería</mat-option>
+            <mat-option value="PA"> Pasaporte</mat-option>
           </mat-select>
           <mat-error
-            *ngIf="userEditProfileForm.controls.gender.hasError('required')"
+            *ngIf="userEditProfileForm.controls.id.hasError('required')"
             >Debes seleccionar un campo</mat-error
           >
         </mat-form-field>
@@ -290,19 +291,19 @@
           appearance="fill"
           floatLabel="auto"
           class="fullInput"
-          [ngClass]="getClassInput(userEditProfileForm.controls.lastName)"
+          [ngClass]="getClassInput(userEditProfileForm.controls.document)"
         >
-          <mat-label class="color-green">Apellidos</mat-label>
+          <mat-label class="color-green">Documento</mat-label>
 
           <input
             matInput
-            formControlName="lastName"
+            formControlName="document"
             type="text"
             required
             maxlength="30"
-            data-qadp="lastName"
+            data-qadp="document"
           />
-          <mat-error *ngIf="userEditProfileForm.controls.lastName.errors">
+          <mat-error *ngIf="userEditProfileForm.controls.document.errors">
             {{
               getMessageform(
                 userEditProfileForm.controls.lastName,

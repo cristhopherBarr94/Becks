@@ -40,3 +40,10 @@
   height: 20px;
   margin-top: 10px;
 }
+
+.fullInput {
+  width: 320px;
+  @media (min-width: 769px) {
+    width: 364px;
+  }
+}

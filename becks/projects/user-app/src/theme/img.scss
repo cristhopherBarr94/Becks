@@ -108,6 +108,12 @@
   position: absolute;
   margin-top: 40px;
   margin-left: 90px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    margin-top: 20px;
+    margin-left: 45px;
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .loadingLogo {

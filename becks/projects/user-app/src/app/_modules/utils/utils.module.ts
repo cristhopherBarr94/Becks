@@ -16,6 +16,7 @@ import { RouterModule } from "@angular/router";
 import { CaptchaComponent } from "./_components/captcha/captcha.component";
 import { LottieModule } from "ngx-lottie";
 import player from "lottie-web";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 export function playerFactory() {
   return player;
@@ -39,6 +40,8 @@ export function playerFactory() {
     MatRadioModule,
     MatIconModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
   exports: [

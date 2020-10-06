@@ -75,6 +75,12 @@
   align-items: center;
 }
 
+.flex-direction-row-reverse {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
 .col-logo-2 {
   @media (min-width: 0px) and (max-width: 990px) {
     padding: 40px;
@@ -610,6 +616,17 @@
     overflow: hidden;
     position: absolute;
     height: 30% !important;
+    background-color: #171717;
+  }
+}
+
+.modal-edit-profile {
+  align-items: center;
+  .modal-wrapper {
+    overflow: hidden;
+    position: absolute;
+    height: 80% !important;
+    width: 50% !important;
     background-color: #171717;
   }
 }

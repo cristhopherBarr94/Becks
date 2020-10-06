@@ -6,15 +6,19 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./experiences-card.component.scss"],
 })
 export class ExperiencesCardComponent implements OnInit {
+  @Input() vertical: boolean;
   @Input() urlImageExperience: string;
   @Input() nameExperience: string;
   @Input() type: string;
 
   public typeExp: string;
   public colorClass: string;
+  public verticalCard: string;
   constructor() {}
 
   ngOnInit() {
+    console.log("vertical", this.vertical);
+
     if (this.type == "cancel") {
       this.typeExp = "Cancelada";
       this.colorClass = "red-color";

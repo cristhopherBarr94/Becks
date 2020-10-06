@@ -1,16 +1,26 @@
 <div class="container-edit-profile flex-direction-column">
   <div id="container" class="header-div">
     <div id="left" class="lateral-div">
-      <mat-icon matSuffix class="cancel" (click)="closeEdit()">
+      <mat-icon
+        matSuffix
+        class="cancel"
+        (click)="closeEdit()"
+        *ngIf="size == 'xs'"
+      >
         close
       </mat-icon>
     </div>
     <div id="center" class="center-div">
       <span class="title-secondary">EDITAR PERFIL</span>
     </div>
-    <div id="right" class="lateral-div">
+    <div id="right" class="lateral-div" *ngIf="size == 'xs'">
       <mat-icon matSuffix class="save" (click)="saveChanges()">
         check
+      </mat-icon>
+    </div>
+    <div id="right" class="lateral-div" *ngIf="size != 'xs'">
+      <mat-icon matSuffix class="cancel" (click)="closeEditDesktop()">
+        close
       </mat-icon>
     </div>
   </div>
@@ -28,168 +38,249 @@
       class="form-section"
       autocomplete="off"
     >
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInput(userEditProfileForm.controls.name)"
-      >
-        <mat-label class="color-green">Nombre</mat-label>
-
-        <input
-          matInput
-          formControlName="name"
-          required
-          type="text"
-          maxlength="20"
-          data-qadp="name"
-          [value]="user.first_name"
-        />
-        <mat-error *ngIf="userEditProfileForm.controls.name.errors">
-          {{
-            getMessageform(userEditProfileForm.controls.name, "nombre", 3, 0, 1)
-          }}</mat-error
-        >
-      </mat-form-field>
-
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInput(userEditProfileForm.controls.lastName)"
-      >
-        <mat-label class="color-green">Apellidos</mat-label>
-
-        <input
-          matInput
-          formControlName="lastName"
-          type="text"
-          required
-          maxlength="30"
-          data-qadp="lastName"
-        />
-        <mat-error *ngIf="userEditProfileForm.controls.lastName.errors">
-          {{
-            getMessageform(
-              userEditProfileForm.controls.lastName,
-              "apellido(s)",
-              3,
-              0,
-              1
-            )
-          }}</mat-error
-        >
-      </mat-form-field>
-
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInput(userEditProfileForm.controls.phone)"
-      >
-        <mat-label class="color-green">Teléfono</mat-label>
-
-        <input
-          matInput
-          formControlName="phone"
-          type="number"
-          required
-          maxlength="10"
-          data-qadp="phone"
-        />
-        <mat-error *ngIf="userEditProfileForm.controls.phone.errors">
-          {{
-            getMessageform(
-              userEditProfileForm.controls.phone,
-              "teléfono",
-              10,
-              0,
-              1
-            )
-          }}</mat-error
-        >
-      </mat-form-field>
-      <span class="color-green font-link-small">Fecha de nacimiento</span>
-      <div class="flex-direction-row content-flex-all-center">
+      <div [ngClass]="screnSize(size, false)" class="col-flex-center">
         <mat-form-field
           appearance="fill"
           floatLabel="auto"
-          class="with-form"
-          [ngClass]="getClassInput(userEditProfileForm.controls.day)"
+          class="fullInput"
+          [ngClass]="getClassInput(userEditProfileForm.controls.name)"
         >
-          <mat-label class="color-green">Dia</mat-label>
+          <mat-label class="color-green">Nombre</mat-label>
 
           <input
             matInput
-            formControlName="day"
-            type="number"
+            formControlName="name"
             required
-            maxlength="2"
-            data-qadp="day"
+            type="text"
+            maxlength="20"
+            data-qadp="name"
+            [value]="user.first_name"
           />
-          <mat-error *ngIf="userEditProfileForm.controls.day.errors">
-            {{
-              getMessageform(userEditProfileForm.controls.day, "dia", 10, 1, 31)
-            }}</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field
-          appearance="fill"
-          floatLabel="auto"
-          class="with-form"
-          [ngClass]="getClassInput(userEditProfileForm.controls.month)"
-        >
-          <mat-label class="color-green">Mes</mat-label>
-
-          <input
-            matInput
-            formControlName="month"
-            type="number"
-            required
-            maxlength="2"
-            data-qadp="month"
-          />
-          <mat-error *ngIf="userEditProfileForm.controls.month.errors">
+          <mat-error *ngIf="userEditProfileForm.controls.name.errors">
             {{
               getMessageform(
-                userEditProfileForm.controls.month,
-                "mes",
-                10,
-                1,
-                12
+                userEditProfileForm.controls.name,
+                "nombre",
+                3,
+                0,
+                1
               )
             }}</mat-error
           >
         </mat-form-field>
+
         <mat-form-field
           appearance="fill"
           floatLabel="auto"
-          style="width: 100px"
-          [ngClass]="getClassInput(userEditProfileForm.controls.year)"
+          class="fullInput"
+          [ngClass]="getClassInput(userEditProfileForm.controls.lastName)"
         >
-          <mat-label class="color-green">Año</mat-label>
+          <mat-label class="color-green">Apellidos</mat-label>
 
           <input
             matInput
-            formControlName="year"
-            type="number"
+            formControlName="lastName"
+            type="text"
             required
-            maxlength="4"
-            data-qadp="year"
+            maxlength="30"
+            data-qadp="lastName"
           />
-          <mat-error *ngIf="userEditProfileForm.controls.year.errors">
+          <mat-error *ngIf="userEditProfileForm.controls.lastName.errors">
             {{
               getMessageform(
-                userEditProfileForm.controls.year,
-                "año",
-                10,
-                1920,
-                2020
+                userEditProfileForm.controls.lastName,
+                "apellido(s)",
+                3,
+                0,
+                1
               )
             }}</mat-error
           >
         </mat-form-field>
       </div>
+      <div [ngClass]="screnSize(size, true)">
+        <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userEditProfileForm.controls.phone)"
+        >
+          <mat-label class="color-green">Teléfono</mat-label>
+
+          <input
+            matInput
+            formControlName="phone"
+            type="number"
+            required
+            maxlength="10"
+            data-qadp="phone"
+          />
+          <mat-error *ngIf="userEditProfileForm.controls.phone.errors">
+            {{
+              getMessageform(
+                userEditProfileForm.controls.phone,
+                "teléfono",
+                10,
+                0,
+                1
+              )
+            }}</mat-error
+          >
+        </mat-form-field>
+        <div class="flex-direction-column birthayForm">
+          <span class="color-green font-link-small margin-left"
+            >Fecha de nacimiento</span
+          >
+          <div class="flex-direction-row content-flex-all-center">
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              class="with-form"
+              [ngClass]="getClassInput(userEditProfileForm.controls.day)"
+            >
+              <mat-label class="color-green">Dia</mat-label>
+
+              <input
+                matInput
+                formControlName="day"
+                type="number"
+                required
+                maxlength="2"
+                data-qadp="day"
+              />
+              <mat-error *ngIf="userEditProfileForm.controls.day.errors">
+                {{
+                  getMessageform(
+                    userEditProfileForm.controls.day,
+                    "dia",
+                    10,
+                    1,
+                    31
+                  )
+                }}</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              class="with-form"
+              [ngClass]="getClassInput(userEditProfileForm.controls.month)"
+            >
+              <mat-label class="color-green">Mes</mat-label>
+
+              <input
+                matInput
+                formControlName="month"
+                type="number"
+                required
+                maxlength="2"
+                data-qadp="month"
+              />
+              <mat-error *ngIf="userEditProfileForm.controls.month.errors">
+                {{
+                  getMessageform(
+                    userEditProfileForm.controls.month,
+                    "mes",
+                    10,
+                    1,
+                    12
+                  )
+                }}</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              style="width: 100px"
+              [ngClass]="getClassInput(userEditProfileForm.controls.year)"
+            >
+              <mat-label class="color-green">Año</mat-label>
+
+              <input
+                matInput
+                formControlName="year"
+                type="number"
+                required
+                maxlength="4"
+                data-qadp="year"
+              />
+              <mat-error *ngIf="userEditProfileForm.controls.year.errors">
+                {{
+                  getMessageform(
+                    userEditProfileForm.controls.year,
+                    "año",
+                    10,
+                    1920,
+                    2020
+                  )
+                }}</mat-error
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div [ngClass]="screnSize(size, false)" *ngIf="size != 'xs'">
+        <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInputSelect(userEditProfileForm.controls.id)"
+        >
+          <mat-label>Tipo de documento</mat-label>
+          <mat-select
+            panelClass="backgroud-panel"
+            formControlName="id"
+            required
+            data-qadp="id"
+          >
+            <mat-option value="CC"> Cedula de ciudadanía</mat-option>
+            <mat-option value="CE"> Cedula de extrangería</mat-option>
+            <mat-option value="PA"> Pasaporte</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="userEditProfileForm.controls.id.hasError('required')"
+            >Debes seleccionar un campo</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userEditProfileForm.controls.document)"
+        >
+          <mat-label class="color-green">Documento</mat-label>
+
+          <input
+            matInput
+            formControlName="document"
+            type="text"
+            required
+            maxlength="30"
+            data-qadp="document"
+          />
+          <mat-error *ngIf="userEditProfileForm.controls.document.errors">
+            {{
+              getMessageform(
+                userEditProfileForm.controls.lastName,
+                "apellido(s)",
+                3,
+                0,
+                1
+              )
+            }}</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <button
+        *ngIf="size != 'xs'"
+        class="becks-btn-primary margin-top-button button-width"
+        (click)="saveChanges()"
+        block="block"
+        color="becks"
+      >
+        <span>ACTUALIZAR</span>
+      </button>
     </form>
   </div>
 </div>

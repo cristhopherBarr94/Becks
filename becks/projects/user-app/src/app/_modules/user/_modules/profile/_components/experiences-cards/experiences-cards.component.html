@@ -1,20 +1,11 @@
 <section class="container-exp" [ngClass]="direcionCards">
   <div class="margin-top">
-    <span class="title-profile red-color">CANCELADAS</span>
-    <user-experiences-card
-      *ngFor="let item of cancelCards"
-      [urlImageExperience]="item.urlImageExperience"
-      [nameExperience]="item.nameExperience"
-      type="cancel"
-    >
-    </user-experiences-card>
-  </div>
-  <div class="margin-top">
     <span class="title-profile orange-color">PENDIENTES</span>
     <user-experiences-card
       *ngFor="let item of pendingCards"
       [urlImageExperience]="item.urlImageExperience"
       [nameExperience]="item.nameExperience"
+      [vertical]="vertical"
       type="pending"
     >
     </user-experiences-card>
@@ -25,7 +16,19 @@
       *ngFor="let item of acceptCards"
       [urlImageExperience]="item.urlImageExperience"
       [nameExperience]="item.nameExperience"
+      [vertical]="vertical"
       type="complete"
+    >
+    </user-experiences-card>
+  </div>
+  <div class="margin-top">
+    <span class="title-profile red-color">CANCELADAS</span>
+    <user-experiences-card
+      *ngFor="let item of cancelCards"
+      [urlImageExperience]="item.urlImageExperience"
+      [nameExperience]="item.nameExperience"
+      [vertical]="vertical"
+      type="cancel"
     >
     </user-experiences-card>
   </div>

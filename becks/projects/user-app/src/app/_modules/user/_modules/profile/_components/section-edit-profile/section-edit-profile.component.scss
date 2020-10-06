@@ -32,6 +32,10 @@
 .with-form {
   width: 100px;
   margin-right: 7px;
+  @media (min-width: 769px) {
+    width: 120px;
+    margin-right: 12px;
+  }
 }
 
 .button-open-file {
@@ -39,4 +43,28 @@
   width: 260px;
   height: 20px;
   margin-top: 10px;
+}
+
+.fullInput {
+  width: 320px;
+  @media (min-width: 769px) {
+    width: 364px;
+    margin-right: 12px;
+  }
+}
+
+.birthayForm {
+  @media (min-width: 769px) {
+    width: 364px;
+    margin-right: 12px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+}
+
+.margin-left {
+  @media (min-width: 769px) {
+    margin-left: 0px;
+  }
 }

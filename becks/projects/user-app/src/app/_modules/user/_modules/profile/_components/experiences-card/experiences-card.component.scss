@@ -7,6 +7,16 @@
   margin-bottom: 24px;
 }
 
+.vertical_card_model {
+  margin-top: 24px;
+  background-color: #141313;
+  height: 9.01%;
+  display: flex;
+  width: 420px;
+  margin-right: 25px;
+  margin-bottom: 24px;
+}
+
 .container {
   @media (min-width: 768px) {
     margin-left: 24px;
@@ -22,11 +32,28 @@
   }
 }
 
+.image-card-vertical {
+  width: 33%;
+  height: 73px;
+  @media (min-width: 768px) {
+    height: 117px;
+    width: 50%;
+  }
+}
+
 .display-flex {
   display: flex;
 }
 
 .content-card {
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100%;
+  padding: 5px;
+  width: 67%;
+}
+
+.content-card-vartical {
   justify-content: center;
   align-items: flex-start;
   min-height: 100%;

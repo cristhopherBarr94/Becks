@@ -232,3 +232,41 @@
   background-position: center;
   position: absolute;
 }
+.mgm-icon {
+  background-image: url("../assets/icon/mgm-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 132px;
+    height: 89px;
+  }
+  @media (min-width: 769px) {
+    width: 163px;
+    height: 110px;
+  }
+}
+.trash-icon {
+  background-image: url("../assets/icon/trash-alt.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 13px !important;
+    height: 20px !important;
+  }
+  @media (min-width: 769px) {
+    width: 18px;
+    height: 22px;
+  }
+}
+.email-icon {
+  background-image: url("../assets/icon/email-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 18px !important;
+  height: 13px !important;
+  margin-right: 10px;
+}

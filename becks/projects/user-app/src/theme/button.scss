@@ -48,7 +48,20 @@
     3px solid #ffffff
   );
 }
-
+.becks-btn-inner {
+  @include btn(
+    #ffffff,
+    #377f5e,
+    2px solid #ffffff,
+    "Helvetica LT Std",
+    14px,
+    114px,
+    52px,
+    3px solid #ffffff
+  );
+  position: absolute;
+  border-radius: 2px;
+}
 .becks-btn-cookies {
   @include btn(
     #ffffff,

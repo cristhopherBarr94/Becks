@@ -5,6 +5,7 @@ import { SectionChangePassComponent } from "./_modules/profile/_components/secti
 import { SectionForgetPassComponent } from "./_modules/profile/_components/section-forget-pass/section-forget-pass.component";
 import { SectionRequestConfirmComponent } from "./_modules/profile/_components/section-request-confirm/section-request-confirm.component";
 import { ActivationPage } from "./_modules/profile/_pages/activation/activation.page";
+import { MGMPage } from "./_modules/profile/_pages/mgm/mgm.page";
 
 const routes: Routes = [
   { path: "recovery", component: SectionForgetPassComponent },
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: "activation",
     component: ActivationPage,
+  },
+  {
+    path: "mgm",
+    component: MGMPage,
   },
 ];
 

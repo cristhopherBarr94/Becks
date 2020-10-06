@@ -1,0 +1,103 @@
+.MGM {
+  background: #171717;
+  padding-top: 80px;
+  height: auto;
+  min-height: 100%;
+
+  .mgm-icon {
+    margin-bottom: 30px;
+  }
+
+  .separator-becks {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65px;
+    height: 2px;
+    background: rgb(98, 248, 178);
+    background: linear-gradient(
+      90deg,
+      rgba(98, 248, 178, 1) 0%,
+      rgba(18, 18, 18, 1) 80%
+    );
+  }
+  .guest_list {
+    margin-top: 10px !important;
+  }
+  ::ng-deep .mat-input-element:disabled {
+    color: #ffffff !important;
+  }
+}
+
+.btn-trash {
+  background: transparent;
+  :active {
+    height: 22px;
+    width: 22px;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 768px) {
+  .separator-becks {
+    position: absolute;
+    top: 60px;
+  }
+  .temporaly {
+    display: none !important;
+  }
+  .title-secondary {
+    font-size: 13px !important;
+    line-height: 14px !important;
+    width: 268px;
+  }
+  .fullInput {
+    width: 316px;
+  }
+  .becks-btn-inner {
+    display: block;
+    margin-left: 190px;
+    top: -23px;
+  }
+  .temporaly {
+    display: block;
+  }
+  .title-fourthy {
+    color: #038259;
+    font-size: 13.78px !important;
+    justify-content: Left !important;
+    margin: 0 !important;
+    padding-right: 70%;
+    width: 316px;
+  }
+}
+@media (min-width: 769px) {
+  .separator-becks {
+    position: relative;
+  }
+  .mgm-icon {
+    margin: 30px;
+  }
+
+  .title-secondary {
+    font-size: 18px !important;
+    line-height: 19px !important;
+    width: 450px;
+  }
+
+  .fullInput {
+    width: 570px;
+  }
+  .becks-btn-inner {
+    display: block;
+    margin-left: 445px;
+    top: -23px;
+  }
+  .title-fourthy {
+    color: #038259;
+    font-size: 16px !important;
+    justify-content: Left !important;
+    margin: 0 !important;
+    padding-right: 470px;
+    width: 570px;
+  }
+}

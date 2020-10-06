@@ -16,6 +16,7 @@ import { IonicModule } from "@ionic/angular";
 import { ActivationPage } from "./_modules/profile/_pages/activation/activation.page";
 import { UserService } from "src/app/_services/user.service";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MGMPage } from "./_modules/profile/_pages/mgm/mgm.page";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     SectionRequestConfirmComponent,
     SectionChangePassComponent,
     ActivationPage,
+    MGMPage,
   ],
   imports: [
     CommonModule,

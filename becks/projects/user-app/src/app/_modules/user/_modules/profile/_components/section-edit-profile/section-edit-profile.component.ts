@@ -175,4 +175,10 @@ export class SectionEditProfileComponent implements OnInit {
       true
     );
   }
+
+  screnSize(size) {
+    if (size != "xs") {
+      return "flex-direction-row";
+    }
+  }
 }

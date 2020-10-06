@@ -9,11 +9,16 @@ import { environment } from "src/environments/environment";
 export class ProfilePictureComponent implements OnInit {
   @Input() urlImage: string;
   @Input() profile_name: string;
+  @Input() profile_view: boolean;
   public time;
   public url: string = environment.serverUrl;
+  public isPofile: string;
   constructor() {}
 
   ngOnInit() {
     this.time = "?time_stamp=" + Math.floor(Date.now() / 1000);
+    if (this.profile_view) {
+      this.isPofile = "background-color-profile";
+    }
   }
 }

@@ -4,6 +4,7 @@
     <user-profile-picture
       [urlImage]="profilePicture()"
       [profile_name]=" user.first_name + ' ' + user.last_name "
+      [profile_view]="true"
     ></user-profile-picture>
     <span
       *ngIf="this.size == 'xs'"

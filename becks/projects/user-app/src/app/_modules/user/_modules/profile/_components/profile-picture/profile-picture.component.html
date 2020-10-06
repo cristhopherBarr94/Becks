@@ -1,7 +1,11 @@
-<div class="content-flex-all-center flex-direction-column container">
+<div
+  class="content-flex-all-center flex-direction-column container"
+  [ngClass]="isPofile"
+>
   <ion-avatar class="image-size-profile">
     <img [src]="url + urlImage + time" *ngIf="time" />
   </ion-avatar>
+  <div class="editPhotoLogo" *ngIf="profile_view"></div>
   <span class="font-profile margin-tittle margin-top-letter">{{
     profile_name
   }}</span>

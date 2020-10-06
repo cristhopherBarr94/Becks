@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import {
   FormControl,
   FormGroup,

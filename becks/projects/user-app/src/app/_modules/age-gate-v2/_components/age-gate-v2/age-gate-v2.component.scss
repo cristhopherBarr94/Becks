@@ -81,6 +81,15 @@
   mat-error {
     margin-left: 35px !important;
   }
+  ::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: #ffffff;
+  }
+  .title-fourthy-width {
+    width: 280px;
+    text-align: justify !important;
+    margin-left: 30px;
+    margin-top: 20px;
+  }
 }
 @media (min-width: 769px) {
   .logo-2 {

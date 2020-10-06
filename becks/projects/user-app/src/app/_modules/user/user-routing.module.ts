@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { AuthGuardService } from "src/app/_services/auth-guard.service";
 import { SectionChangePassComponent } from "./_modules/profile/_components/section-change-pass/section-change-pass.component";
 import { SectionForgetPassComponent } from "./_modules/profile/_components/section-forget-pass/section-forget-pass.component";
 import { SectionRequestConfirmComponent } from "./_modules/profile/_components/section-request-confirm/section-request-confirm.component";
@@ -19,6 +18,7 @@ const routes: Routes = [
     loadChildren: () =>
       import("./_modules/exp/exp.module").then((m) => m.ExpModule),
   },
+
   {
     path: "email",
     component: SectionRequestConfirmComponent,

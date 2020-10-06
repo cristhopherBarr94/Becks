@@ -21,6 +21,7 @@ import { UserService } from "src/app/_services/user.service";
 import { User } from "src/app/_models/User";
 import { NameTittleComponent } from "../name-tittle/name-tittle.component";
 import { Platform } from "@ionic/angular";
+import { UpdateFileComponent } from "../update-file/update-file.component";
 
 @Component({
   selector: "user-section-edit-profile",
@@ -77,10 +78,6 @@ export class SectionEditProfileComponent implements OnInit {
         Validators.required,
         Validators.email,
       ]),
-      email: new FormControl(this.user.email, [
-        Validators.required,
-        Validators.minLength(10),
-      ]),
 
       day: new FormControl(
         !!this.user.birthdate && moment(this.user.birthdate).format("DD"),
@@ -94,7 +91,6 @@ export class SectionEditProfileComponent implements OnInit {
         !!this.user.birthdate && moment(this.user.birthdate).format("YYYY"),
         [Validators.required, Validators.min(1920), Validators.max(2020)]
       ),
-      gender: new FormControl(this.user.gender, [Validators.required]),
       id: new FormControl(this.user.type_id, [Validators.required]),
       document: new FormControl(this.user.id_number, [Validators.required]),
     });
@@ -189,11 +185,15 @@ export class SectionEditProfileComponent implements OnInit {
   changePhoto() {
     this.chargePhoto = !this.chargePhoto;
     this.ui.showModal(
-      NameTittleComponent,
+      UpdateFileComponent,
       "pop-up-profile-picture",
       true,
       true
     );
+  }
+
+  closeEditDesktop() {
+    this.ui.dismissModal();
   }
 
   screnSize(size: string, reverse: boolean) {

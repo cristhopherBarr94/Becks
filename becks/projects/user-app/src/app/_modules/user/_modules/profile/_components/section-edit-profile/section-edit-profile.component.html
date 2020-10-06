@@ -98,36 +98,6 @@
           appearance="fill"
           floatLabel="auto"
           class="fullInput"
-          [ngClass]="getClassInput(userEditProfileForm.controls.email)"
-          *ngIf="size != 'xs'"
-        >
-          <mat-label class="color-green">Correo electrónico</mat-label>
-
-          <input
-            matInput
-            formControlName="email"
-            type="number"
-            required
-            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
-            maxlength="10"
-            data-qadp="email"
-          />
-          <mat-error *ngIf="userEditProfileForm.controls.email.errors">
-            {{
-              getMessageform(
-                userEditProfileForm.controls.email,
-                "email",
-                10,
-                0,
-                1
-              )
-            }}</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field
-          appearance="fill"
-          floatLabel="auto"
-          class="fullInput"
           [ngClass]="getClassInput(userEditProfileForm.controls.phone)"
         >
           <mat-label class="color-green">Teléfono</mat-label>
@@ -152,118 +122,97 @@
             }}</mat-error
           >
         </mat-form-field>
-      </div>
-      <div [ngClass]="screnSize(size)">
-        <span class="color-green font-link-small">Fecha de nacimiento</span>
-        <div class="flex-direction-row content-flex-all-center">
-          <mat-form-field
-            appearance="fill"
-            floatLabel="auto"
-            class="with-form"
-            [ngClass]="getClassInput(userEditProfileForm.controls.day)"
-          >
-            <mat-label class="color-green">Dia</mat-label>
-
-            <input
-              matInput
-              formControlName="day"
-              type="number"
-              required
-              maxlength="2"
-              data-qadp="day"
-            />
-            <mat-error *ngIf="userEditProfileForm.controls.day.errors">
-              {{
-                getMessageform(
-                  userEditProfileForm.controls.day,
-                  "dia",
-                  10,
-                  1,
-                  31
-                )
-              }}</mat-error
+        <div class="flex-direction-column">
+          <span class="color-green font-link-small">Fecha de nacimiento</span>
+          <div class="flex-direction-row content-flex-all-center">
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              class="with-form"
+              [ngClass]="getClassInput(userEditProfileForm.controls.day)"
             >
-          </mat-form-field>
-          <mat-form-field
-            appearance="fill"
-            floatLabel="auto"
-            class="with-form"
-            [ngClass]="getClassInput(userEditProfileForm.controls.month)"
-          >
-            <mat-label class="color-green">Mes</mat-label>
+              <mat-label class="color-green">Dia</mat-label>
 
-            <input
-              matInput
-              formControlName="month"
-              type="number"
-              required
-              maxlength="2"
-              data-qadp="month"
-            />
-            <mat-error *ngIf="userEditProfileForm.controls.month.errors">
-              {{
-                getMessageform(
-                  userEditProfileForm.controls.month,
-                  "mes",
-                  10,
-                  1,
-                  12
-                )
-              }}</mat-error
+              <input
+                matInput
+                formControlName="day"
+                type="number"
+                required
+                maxlength="2"
+                data-qadp="day"
+              />
+              <mat-error *ngIf="userEditProfileForm.controls.day.errors">
+                {{
+                  getMessageform(
+                    userEditProfileForm.controls.day,
+                    "dia",
+                    10,
+                    1,
+                    31
+                  )
+                }}</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              class="with-form"
+              [ngClass]="getClassInput(userEditProfileForm.controls.month)"
             >
-          </mat-form-field>
-          <mat-form-field
-            appearance="fill"
-            floatLabel="auto"
-            style="width: 100px"
-            [ngClass]="getClassInput(userEditProfileForm.controls.year)"
-          >
-            <mat-label class="color-green">Año</mat-label>
+              <mat-label class="color-green">Mes</mat-label>
 
-            <input
-              matInput
-              formControlName="year"
-              type="number"
-              required
-              maxlength="4"
-              data-qadp="year"
-            />
-            <mat-error *ngIf="userEditProfileForm.controls.year.errors">
-              {{
-                getMessageform(
-                  userEditProfileForm.controls.year,
-                  "año",
-                  10,
-                  1920,
-                  2020
-                )
-              }}</mat-error
+              <input
+                matInput
+                formControlName="month"
+                type="number"
+                required
+                maxlength="2"
+                data-qadp="month"
+              />
+              <mat-error *ngIf="userEditProfileForm.controls.month.errors">
+                {{
+                  getMessageform(
+                    userEditProfileForm.controls.month,
+                    "mes",
+                    10,
+                    1,
+                    12
+                  )
+                }}</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              style="width: 100px"
+              [ngClass]="getClassInput(userEditProfileForm.controls.year)"
             >
-          </mat-form-field>
+              <mat-label class="color-green">Año</mat-label>
+
+              <input
+                matInput
+                formControlName="year"
+                type="number"
+                required
+                maxlength="4"
+                data-qadp="year"
+              />
+              <mat-error *ngIf="userEditProfileForm.controls.year.errors">
+                {{
+                  getMessageform(
+                    userEditProfileForm.controls.year,
+                    "año",
+                    10,
+                    1920,
+                    2020
+                  )
+                }}</mat-error
+              >
+            </mat-form-field>
+          </div>
         </div>
-        <mat-form-field
-          *ngIf="size != 'xs'"
-          appearance="fill"
-          floatLabel="auto"
-          class="fullInput"
-          [ngClass]="getClassInputSelect(userEditProfileForm.controls.gender)"
-        >
-          <mat-label>Sexo</mat-label>
-          <mat-select
-            panelClass="backgroud-panel"
-            formControlName="gender"
-            required
-            data-qadp="gender"
-          >
-            <mat-option value="F"> FEMENINO</mat-option>
-            <mat-option value="M"> MASCULINO</mat-option>
-          </mat-select>
-          <mat-error
-            *ngIf="userEditProfileForm.controls.gender.hasError('required')"
-            >Debes seleccionar un campo</mat-error
-          >
-        </mat-form-field>
       </div>
+
       <div [ngClass]="screnSize(size)" *ngIf="size != 'xs'">
         <mat-form-field
           appearance="fill"

@@ -6,6 +6,7 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./experiences-card.component.scss"],
 })
 export class ExperiencesCardComponent implements OnInit {
+  @Input() vertical: boolean;
   @Input() urlImageExperience: string;
   @Input() nameExperience: string;
   @Input() type: string;

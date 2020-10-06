@@ -62,7 +62,12 @@ export class ProfilePage implements OnInit, OnDestroy {
 
   editProfileDesktop() {
     console.log("click");
-    this.ui.showModal(SectionEditProfileComponent, "", true, true);
+    this.ui.showModal(
+      SectionEditProfileComponent,
+      "modal-edit-profile",
+      true,
+      true
+    );
   }
 
   profilePicture() {

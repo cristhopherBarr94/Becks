@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -152,6 +158,11 @@ export class SectionEditProfileComponent implements OnInit {
 
   changePhoto() {
     this.chargePhoto = !this.chargePhoto;
-    this.ui.showModal(NameTittleComponent, "", true, true);
+    this.ui.showModal(
+      NameTittleComponent,
+      "pop-up-profile-picture",
+      true,
+      true
+    );
   }
 }

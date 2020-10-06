@@ -1,4 +1,4 @@
-<mat-card class="card-model">
+<mat-card class="card-model" *ngIf="!vertical">
   <img [src]="urlImageExperience" class="image-card" />
   <div class="flex-direction-column display-flex content-card">
     <span class="profile-content container">{{ nameExperience }}</span>
@@ -8,5 +8,17 @@
   </div>
   <div class="flex-direction-column display-flex content-card-details">
     <span class="font-link-x-small green-color">VER DETALLE</span>
+  </div>
+</mat-card>
+
+<mat-card class="vertical_card_model" *ngIf="vertical">
+  <img [src]="urlImageExperience" class="image-card-vertical" />
+  <div class="flex-direction-column display-flex content-card">
+    <span class="profile-content container">{{ nameExperience }}</span>
+    <span class="font-link-x-small container" [ngClass]="colorClass">{{
+      typeExp
+    }}</span>
+
+    <span class="font-link-x-small green-color container">VER DETALLE</span>
   </div>
 </mat-card>

@@ -18,6 +18,9 @@ export class ExperiencesCardComponent implements OnInit {
 
   ngOnInit() {
     console.log("vertical", this.vertical);
+    if (this.vertical) {
+      this.verticalCard = "vertical_card_model";
+    }
     if (this.type == "cancel") {
       this.typeExp = "Cancelada";
       this.colorClass = "red-color";

@@ -45,6 +45,9 @@ ion-progress-bar {
     top: 1px;
     left: 43%;
   }
+  @media (min-width: 769px) {
+    top: 79px !important;
+  }
 }
 .margin-top {
   margin-top: 36px;

@@ -1,16 +1,16 @@
 <section class="seccion-tabs">
   <mat-tab-group mat-stretch-tabs selectedIndex="0" class="tab-group">
     <mat-tab label="Mi Cuenta" id="count">
-      <user-circle-progress
-        *ngIf="this.size == 'xs'"
-        class="internal-section"
-      ></user-circle-progress>
+      <user-circle-progress *ngIf="this.size == 'xs'"></user-circle-progress>
       <div
         class="container-desktop"
         *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
       >
         <section class="card-component-circle">
-          <user-circle-progress class="internal-section"></user-circle-progress>
+          <user-circle-progress
+            class="internal-section"
+            [screen]="desktop"
+          ></user-circle-progress>
         </section>
         <section class="card-component-experiences">
           <div class="margin-tittle-desktop">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
   selector: "user-circle-progress",
@@ -6,6 +6,8 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./circle-progress.component.scss"],
 })
 export class CircleProgressComponent implements OnInit {
+  @Input() screen: string;
+
   remaining_days: any;
   colorProgress: string;
   colorProgressBar: string;
@@ -14,6 +16,7 @@ export class CircleProgressComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    console.log("CircleProgressComponent -> screen", this.screen);
     this.remaining_days = Math.ceil(this.progress * (30 / 100));
     if (this.progress <= 25) {
       this.colorProgress = "#FF7A00";

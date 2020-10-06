@@ -30,7 +30,7 @@
         *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
       >
         <user-experiences-cards
-          [vertical]="true"
+          [vertical]="this.size == 'lg'"
           class="col-flex-center experioencesCard"
         ></user-experiences-cards>
       </div>

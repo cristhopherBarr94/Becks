@@ -83,7 +83,6 @@ export class UpdateFileComponent implements OnInit {
   }
 
   closeModal() {
-    this.userSvc.editing();
     this.ui.dismissModal();
   }
 
@@ -93,6 +92,7 @@ export class UpdateFileComponent implements OnInit {
       .delete(environment.serverUrl + environment.user.patchPhoto)
       .subscribe((response: any) => {
         this.userSvc.getData();
+        this.userSvc.editing();
         this.ui.dismissLoading();
       });
   }

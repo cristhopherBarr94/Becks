@@ -1,9 +1,15 @@
 <ion-content>
-  <div class="fullSection content-flex-all-center flex-direction-column content-section-img padding-logo">
-    <img class="logo" src="./assets/img/logo.svg" alt="logo">
+  <div
+    class="fullSection content-flex-all-center flex-direction-column content-section-img padding-logo"
+  >
+    <img class="logo" src="./assets/img/logo.svg" alt="logo" />
     <h1 class="title-primary primary max-width-title-primary">
-      GRACIAS POR REGISTRARTE. FALTA POCO PARA QUE SEAS PARTE DE LA BECK’S SOCIETY.
+      GRACIAS POR REGISTRARTE.
     </h1>
+
+    <h3 class="title-tertiary max-width-title-tertiary">
+      BECK´S SOCIETY TE INVITA A DISFRUTAR DE LA EXPERIENCIA "FERIA DEL MILLÓN"
+    </h3>
 
     <div>
       <ion-button
@@ -11,8 +17,10 @@
         color="becks"
         class="becks-btn-primary margin-button-top"
         queryParamsHandling="preserve"
-        routerLink="/principal"
-      >VOLVER AL INICIO</ion-button>
+        href="https://www.feriadelmillon.com.co/becks/"
+        (click)="goToFeria()"
+        >IR A LA FERIA DEL MILLÓN</ion-button
+      >
     </div>
   </div>
   <app-footer></app-footer>

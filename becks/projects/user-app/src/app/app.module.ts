@@ -24,6 +24,7 @@ import { HttpService } from "./_services/http.service";
 import { UtilService } from "./_services/util.service";
 import { ExperienciasService } from "./_services/experiencias.service";
 import { AgeGuardService } from "./_services/age-guard.service";
+import { UserService } from "./_services/user.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -52,6 +53,7 @@ import { AgeGuardService } from "./_services/age-guard.service";
     HttpService,
     UtilService,
     ExperienciasService,
+    UserService,
   ],
   bootstrap: [AppComponent],
 })

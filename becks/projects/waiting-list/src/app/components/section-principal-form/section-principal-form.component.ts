@@ -107,6 +107,7 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
           });
         } catch (e) {}
         this.moveSection();
+        this.setCookie("user_register_wl", "0", 3);
         this.router.navigate(["confirm-register"], {
           queryParamsHandling: "preserve",
         });
@@ -195,5 +196,18 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
       if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
+  }
+
+  private setCookie(
+    name: string,
+    value: string,
+    expireDays: number,
+    path: string = ""
+  ) {
+    let d: Date = new Date();
+    d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
+    let expires: string = `expires=${d.toUTCString()}`;
+    let cpath: string = path ? `; path=${path}` : "";
+    document.cookie = `${name}=${value}; ${expires}${cpath}`;
   }
 }

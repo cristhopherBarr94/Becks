@@ -32,6 +32,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: "**",
+    loadChildren: () =>
+      import("./_modules/not-found/not-found.module").then(
+        (m) => m.NotFoundPageModule
+      ),
+  },
+  {
     path: "",
     redirectTo: "age-gate",
     pathMatch: "full",

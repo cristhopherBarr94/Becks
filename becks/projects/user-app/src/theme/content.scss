@@ -618,6 +618,10 @@
     height: 30% !important;
     background-color: #171717;
   }
+  @media (min-width: 769px) {
+    opacity: 1;
+    align-items: center;
+  }
 }
 
 .modal-edit-profile {

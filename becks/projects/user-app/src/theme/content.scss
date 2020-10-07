@@ -635,7 +635,10 @@
     height: 80% !important;
     width: 50% !important;
     background-color: #171717;
-    @media (min-width: 769px) and (max-width: 1366px) {
+    @media (min-width: 769px) and (max-width: 970px) {
+      width: 90% !important;
+    }
+    @media (min-width: 971px) and (max-width: 1366px) {
       width: 70% !important;
     }
   }

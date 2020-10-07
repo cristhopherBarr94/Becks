@@ -37,7 +37,11 @@
 .with-form {
   width: 100px;
   margin-right: 7px;
-  @media (min-width: 769px) {
+  @media (min-width: 769px) and (max-width: 1366px) {
+    width: 96px;
+    margin-right: 12px;
+  }
+  @media (min-width: 1367px) {
     width: 120px;
     margin-right: 12px;
   }
@@ -52,7 +56,11 @@
 
 .fullInput {
   width: 320px;
-  @media (min-width: 769px) {
+  @media (min-width: 769px) and (max-width: 1366px) {
+    width: 320px;
+    margin-right: 12px;
+  }
+  @media (min-width: 1367px) {
     width: 364px;
     margin-right: 12px;
   }
@@ -60,7 +68,6 @@
 
 .birthayForm {
   @media (min-width: 769px) {
-    width: 364px;
     margin-right: 12px;
     display: flex;
     justify-content: center;

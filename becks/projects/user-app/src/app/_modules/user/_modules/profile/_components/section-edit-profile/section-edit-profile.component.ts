@@ -160,11 +160,10 @@ export class SectionEditProfileComponent implements OnInit {
           if (response.status == 200) {
             this.userSvc.getData();
             this.closeEdit();
-            this.ui.dismissLoading();
           }
+          this.ui.dismissLoading();
         }),
         (e) => {
-          console.log("SectionEditProfileComponent -> saveChanges -> e", e);
           this.ui.dismissLoading();
         };
     }

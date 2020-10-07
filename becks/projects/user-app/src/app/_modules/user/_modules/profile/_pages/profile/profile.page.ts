@@ -72,7 +72,7 @@ export class ProfilePage implements OnInit, OnDestroy {
   profilePicture() {
     return !!this.user.photo
       ? this.user.photo
-      : this.user.gender == "female"
+      : this.user.gender == "F"
       ? "../../../../../../../assets/img/profile_female.jpg"
       : "../../../../../../../assets/img/profile_male.jpg";
   }

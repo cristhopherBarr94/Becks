@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -19,7 +13,6 @@ import { environment } from "src/environments/environment";
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/_services/user.service";
 import { User } from "src/app/_models/User";
-import { NameTittleComponent } from "../name-tittle/name-tittle.component";
 import { Platform } from "@ionic/angular";
 import { UpdateFileComponent } from "../update-file/update-file.component";
 
@@ -57,6 +50,10 @@ export class SectionEditProfileComponent implements OnInit {
   ngOnInit() {
     if (this.userSvc.getActualUser()) {
       this.user = this.userSvc.getActualUser();
+      console.log(
+        "SectionEditProfileComponent -> ngOnInit -> this.user",
+        this.user
+      );
     } else {
       this.userSvc.getData();
     }
@@ -156,6 +153,8 @@ export class SectionEditProfileComponent implements OnInit {
           last_name: this.userEditProfileForm.controls.lastName.value,
           mobile_phone: this.userEditProfileForm.controls.phone.value,
           birthdate: this.birthDayDate,
+          type_id: this.userEditProfileForm.controls.id.value,
+          id_number: this.userEditProfileForm.controls.document.value,
         })
         .subscribe((response: any) => {
           if (response.status == 200) {

@@ -30,9 +30,12 @@
         *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
       >
         <section class="experioencesCard">
+          <span class="title-profile-big" style="margin-top: 30px"
+            >MIS EXPERIENCIAS</span
+          >
           <user-experiences-cards
             style="min-width: 100%"
-            [vertical]="this.size == 'lg'"
+            [vertical]="true"
           ></user-experiences-cards>
         </section>
       </div>

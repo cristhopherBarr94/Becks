@@ -609,7 +609,7 @@
 }
 
 .pop-up-profile-picture {
-  opacity: 0.5;
+  opacity: 1;
   align-items: flex-end;
   .modal-wrapper {
     overflow: hidden;
@@ -620,7 +620,6 @@
     background-color: #1d1d1d;
   }
   @media (min-width: 769px) {
-    opacity: 1;
     align-items: center;
   }
 }

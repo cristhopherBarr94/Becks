@@ -99,6 +99,23 @@
   height: 33px;
 }
 
+.editPhotoLogo {
+  background-image: url("../assets/img/edit_profile_photo.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  margin-top: 40px;
+  margin-left: 90px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    margin-top: 20px;
+    margin-left: 45px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
 .loadingLogo {
   background-image: url("../assets/img/beer_loading.svg");
   background-size: contain;

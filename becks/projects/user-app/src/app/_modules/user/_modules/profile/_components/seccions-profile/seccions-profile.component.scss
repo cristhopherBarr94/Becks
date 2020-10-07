@@ -28,13 +28,15 @@
   }
   @media (min-width: 769px) and (max-width: 1366px) {
     height: 65px;
-    font-size: 18px;
+    font-size: 14px;
     margin-bottom: 18px;
+    border-bottom: 0px solid #c4c4c4;
   }
   @media (min-width: 1367px) {
     height: 65px;
     font-size: 24px;
     margin-bottom: 18px;
+    border-bottom: 0px solid #c4c4c4;
   }
 }
 
@@ -45,11 +47,14 @@
   min-width: 0px;
   @media (min-width: 769px) and (max-width: 1366px) {
     height: 65px;
-    font-size: 18px;
+    font-size: 14px;
+    width: 70px;
+    margin-bottom: 18px;
   }
   @media (min-width: 1367px) {
     height: 65px;
     font-size: 24px;
+    margin-bottom: 18px;
   }
 }
 
@@ -66,6 +71,9 @@
 }
 
 ::ng-deep .mat-tab-body-wrapper {
+  box-sizing: unset !important;
+  background-color: transparent;
+  min-width: 100%;
   @media (min-width: 768px) {
     background-color: #171717;
     min-width: 100%;
@@ -124,4 +132,17 @@
 .text-aling-end {
   width: 20%;
   text-align: end;
+}
+
+.experioencesCard {
+  flex-direction: column;
+  background-color: #1d1d1d;
+  height: 440px;
+  width: 80%;
+  margin-top: 42px;
+  margin-bottom: 42px;
+  align-items: center;
+  contain: strict;
+  overflow: auto;
+  display: flex;
 }

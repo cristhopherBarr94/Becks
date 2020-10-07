@@ -7,19 +7,37 @@
   margin-bottom: 24px;
 }
 
+.vertical_card_model {
+  margin-top: 24px;
+  background-color: #141313;
+  height: 230px;
+  display: flex;
+  width: 193px;
+  margin-right: 25px;
+  margin-bottom: 24px;
+}
+
 .container {
   @media (min-width: 768px) {
-    margin-left: 24px;
+    margin-left: 10px;
   }
 }
 
 .image-card {
   width: 33%;
   height: 73px;
-  @media (min-width: 768px) {
+  @media (min-width: 768px) and (max-width: 1280) {
+    height: 117px;
+    width: 45%;
+  }
+  @media (min-width: 1281px) {
     height: 117px;
     width: 25%;
   }
+}
+
+.image-card-vertical {
+  height: 40%;
 }
 
 .display-flex {
@@ -32,6 +50,12 @@
   min-height: 100%;
   padding: 5px;
   width: 67%;
+}
+
+.content-card-vartical {
+  justify-content: center;
+  align-items: flex-start;
+  height: 50%;
 }
 
 .content-card-details {

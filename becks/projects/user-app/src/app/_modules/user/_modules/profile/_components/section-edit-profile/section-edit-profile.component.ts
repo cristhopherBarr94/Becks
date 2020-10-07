@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -19,6 +13,7 @@ import { environment } from "src/environments/environment";
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/_services/user.service";
 import { User } from "src/app/_models/User";
+import { Platform } from "@ionic/angular";
 import { UpdateFileComponent } from "../update-file/update-file.component";
 
 @Component({
@@ -32,6 +27,7 @@ export class SectionEditProfileComponent implements OnInit {
   public urlPicture: string;
   public birthDayDate: any;
   public chargePhoto: boolean = false;
+  public size: string;
   userSubscription: Subscription;
 
   constructor(
@@ -40,12 +36,24 @@ export class SectionEditProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
     private ui: UiService,
-    private httpService: HttpService
-  ) {}
+    private httpService: HttpService,
+    private platform: Platform
+  ) {
+    platform.ready().then(() => {
+      this.platform.resize.subscribe(() => {
+        this.size = this.ui.getSizeType(platform.width());
+      });
+      this.size = this.ui.getSizeType(platform.width());
+    });
+  }
 
   ngOnInit() {
     if (this.userSvc.getActualUser()) {
       this.user = this.userSvc.getActualUser();
+      console.log(
+        "SectionEditProfileComponent -> ngOnInit -> this.user",
+        this.user
+      );
     } else {
       this.userSvc.getData();
     }
@@ -79,6 +87,8 @@ export class SectionEditProfileComponent implements OnInit {
         !!this.user.birthdate && moment(this.user.birthdate).format("YYYY"),
         [Validators.required, Validators.min(1920), Validators.max(2020)]
       ),
+      id: new FormControl(this.user.type_id, [Validators.required]),
+      document: new FormControl(this.user.id_number, [Validators.required]),
     });
   }
 
@@ -88,6 +98,16 @@ export class SectionEditProfileComponent implements OnInit {
       classreturn = "input-becks-ok";
     } else if (item.touched) {
       classreturn = "input-becks-error";
+    }
+    return classreturn;
+  }
+
+  public getClassInputSelect(item: any): string {
+    let classreturn = "select-becks";
+    if (item.valid) {
+      classreturn = "select-becks-ok";
+    } else if (item.touched) {
+      classreturn = "select-becks-error";
     }
     return classreturn;
   }
@@ -133,16 +153,17 @@ export class SectionEditProfileComponent implements OnInit {
           last_name: this.userEditProfileForm.controls.lastName.value,
           mobile_phone: this.userEditProfileForm.controls.phone.value,
           birthdate: this.birthDayDate,
+          type_id: this.userEditProfileForm.controls.id.value,
+          id_number: this.userEditProfileForm.controls.document.value,
         })
         .subscribe((response: any) => {
           if (response.status == 200) {
             this.userSvc.getData();
             this.closeEdit();
-            this.ui.dismissLoading();
           }
+          this.ui.dismissLoading();
         }),
         (e) => {
-          console.log("SectionEditProfileComponent -> saveChanges -> e", e);
           this.ui.dismissLoading();
         };
     }
@@ -164,5 +185,20 @@ export class SectionEditProfileComponent implements OnInit {
       true,
       true
     );
+  }
+
+  closeEditDesktop() {
+    this.ui.dismissModal();
+  }
+
+  screnSize(size: string, reverse: boolean) {
+    if (size != "xs") {
+      if (reverse) {
+        return "flex-direction-row-reverse";
+      }
+      return "flex-direction-row";
+    } else {
+      return "flex-direction-column";
+    }
   }
 }

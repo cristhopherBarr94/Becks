@@ -14,7 +14,6 @@ import { MatIconModule } from "@angular/material/icon";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 import { ActivationPage } from "./_modules/profile/_pages/activation/activation.page";
-import { UserService } from "src/app/_services/user.service";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MGMPage } from "./_modules/profile/_pages/mgm/mgm.page";
 
@@ -40,6 +39,5 @@ import { MGMPage } from "./_modules/profile/_pages/mgm/mgm.page";
     UtilsModule,
     MatTooltipModule,
   ],
-  providers: [UserService],
 })
 export class UserModule {}

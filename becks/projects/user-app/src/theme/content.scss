@@ -50,6 +50,7 @@
 
 .container-profile {
   min-height: 100%;
+  background-color: #171717;
   @media (min-width: 0px) and (max-width: 768px) {
     background-image: linear-gradient(
         0deg,
@@ -72,6 +73,12 @@
 .flex-direction-row {
   display: flex;
   flex-direction: row;
+  align-items: center;
+}
+
+.flex-direction-row-reverse {
+  display: flex;
+  flex-direction: row-reverse;
   align-items: center;
 }
 
@@ -603,13 +610,36 @@
 }
 
 .pop-up-profile-picture {
-  height: 100%;
-  opacity: 0.5;
+  opacity: 1;
   align-items: flex-end;
   .modal-wrapper {
     overflow: hidden;
     position: absolute;
     height: 30% !important;
+    width: 350px !important;
+    border-radius: 16px 0px 16px 0px;
+    background-color: #1d1d1d;
+  }
+  @media (min-width: 769px) {
+    align-items: center;
+  }
+}
+
+.modal-edit-profile {
+  align-items: center;
+  opacity: 1;
+  .modal-wrapper {
+    overflow: auto;
+    contain: strict;
+    position: absolute;
+    height: 80% !important;
+    width: 50% !important;
     background-color: #171717;
+    @media (min-width: 769px) and (max-width: 970px) {
+      width: 90% !important;
+    }
+    @media (min-width: 971px) and (max-width: 1366px) {
+      width: 70% !important;
+    }
   }
 }

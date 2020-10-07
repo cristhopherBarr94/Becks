@@ -1,6 +1,7 @@
 .container-edit-profile {
   min-height: 100%;
   background-color: #171717;
+  overflow: auto;
 }
 
 .header-div {
@@ -25,6 +26,10 @@
   color: #038259;
 }
 
+.cancel {
+  color: white;
+}
+
 .margint-top {
   margin-top: 24px;
 }
@@ -32,6 +37,14 @@
 .with-form {
   width: 100px;
   margin-right: 7px;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    width: 96px;
+    margin-right: 12px;
+  }
+  @media (min-width: 1367px) {
+    width: 100px;
+    margin-right: 12px;
+  }
 }
 
 .button-open-file {
@@ -39,4 +52,30 @@
   width: 260px;
   height: 20px;
   margin-top: 10px;
+}
+
+.fullInput {
+  width: 320px;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    margin-right: 12px;
+  }
+  @media (min-width: 1367px) {
+    width: 330px;
+    margin-right: 12px;
+  }
+}
+
+.birthayForm {
+  @media (min-width: 769px) {
+    margin-right: 12px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+}
+
+.margin-left {
+  @media (min-width: 769px) {
+    margin-left: 0px;
+  }
 }

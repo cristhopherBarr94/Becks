@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
-  serverUrl: 'https://waitinglist.becksociety.com.co/api',
+  serverUrl: "https://live-cobackendbecks.pantheonsite.io/api",
   user: {
-    list: '/list',
-    addWaiting: '/ab-inbev-api-usercustom'
+    list: "/list",
+    addWaiting: "/ab-inbev-api-usercustom",
   },
   login: {
-    path: '',
-    loginUser: '',
-    loginAdmin: ''
-  }
+    path: "",
+    loginUser: "",
+    loginAdmin: "",
+  },
 };

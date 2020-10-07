@@ -12,6 +12,9 @@ export class UserService {
   private _userSbj = new Subject<User>();
   public user$ = this._userSbj.asObservable();
 
+  private _editingSbj = new Subject<any>();
+  public editing$ = this._editingSbj.asObservable();
+
   constructor(private http: HttpService) {
     if (localStorage.getItem("bks_user")) {
       this._user = new User(JSON.parse(localStorage.getItem("bks_user")));
@@ -78,5 +81,14 @@ export class UserService {
           this._userSbj.error({});
         }
       );
+  }
+
+  public editing() {
+    console.log("changingediting  ", this._editingSbj.observers.entries());
+
+    this._editingSbj.next(true);
+    setTimeout(() => {
+      this._editingSbj.next(false);
+    }, 1500);
   }
 }

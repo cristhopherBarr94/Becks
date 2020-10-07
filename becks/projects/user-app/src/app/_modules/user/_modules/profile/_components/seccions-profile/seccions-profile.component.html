@@ -1,10 +1,7 @@
 <section class="seccion-tabs">
   <mat-tab-group mat-stretch-tabs selectedIndex="0" class="tab-group">
     <mat-tab label="Mi Cuenta" id="count">
-      <user-circle-progress
-        *ngIf="this.size == 'xs'"
-        class="internal-section"
-      ></user-circle-progress>
+      <user-circle-progress *ngIf="this.size == 'xs'"></user-circle-progress>
       <div
         class="container-desktop"
         *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
@@ -27,15 +24,20 @@
       <user-experiences-cards
         *ngIf="this.size == 'xs'"
       ></user-experiences-cards>
-      <div
-        class="container-desktop"
-        *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
-      ></div>
+
       <div
         class="container-desktop"
         *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
       >
-        <user-experiences-cards [vertical]="true"></user-experiences-cards>
+        <section class="experioencesCard">
+          <span class="title-profile-big" style="margin-top: 30px"
+            >MIS EXPERIENCIAS</span
+          >
+          <user-experiences-cards
+            style="min-width: 100%"
+            [vertical]="true"
+          ></user-experiences-cards>
+        </section>
       </div>
     </mat-tab>
   </mat-tab-group>

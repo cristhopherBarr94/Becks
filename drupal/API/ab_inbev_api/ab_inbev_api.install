@@ -23,7 +23,70 @@ function ab_inbev_api_schema_alter(&$schema) {
  * Defines the database tables used by this module.
  */
 function ab_inbev_api_schema() {
-  $schema = array();
+
+  $schema['ab_inbev_code'] = [
+    'description' => 'REST API - Activation Codes.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key',
+      ],
+      'cid' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Unique code ID.',
+      ],
+      'uid' => [
+        'type' => 'int',
+        'description' => 'Unique Foreign User ID.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'description' => 'Code created timestamp.',
+      ],
+      'used' => [
+        'type' => 'int',
+        'description' => 'Code used timestamp.',
+      ],
+      'valid_until' => [
+        'type' => 'int',
+        'description' => 'Code valid timestamp.',
+      ],
+      'owner' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Code owner.',
+      ],
+      'status' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Code status.',
+      ]
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'id' => ['id'],
+      'uid' => ['uid']
+    ],
+    'unique keys' => [
+      '_id' => ['id'],
+      'cid' => ['cid'],
+    ],
+    'foreign keys' => [
+      'uid' => [
+        'table' => 'users',
+        'columns' => [
+          'uid' => 'uid',
+        ],
+      ],
+    ],
+    'mysql_character_set' => 'latin1',
+    'collation' => 'latin1_spanish_ci',
+  ];
+
   return $schema;
 }
 
@@ -56,12 +119,79 @@ function ab_inbev_api_uninstall(){
 
 
 /**
- * Implements hook_update_N().
+ * Update the database.
  *
- * Update the database tables used by this module.
+ * Create the "ab_inbev_code" table for Activation Codes Logic.
  *
  *
  * @ingroup AB-InBev
  */
-function ab_inbev_api_update_8601() {
+function ab_inbev_api_update_8602() {
+
+  $spec = [
+    'description' => 'REST API - Activation Codes.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key',
+      ],
+      'cid' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Unique code ID.',
+      ],
+      'uid' => [
+        'type' => 'int',
+        'description' => 'Unique Foreign User ID.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'description' => 'Code created timestamp.',
+      ],
+      'used' => [
+        'type' => 'int',
+        'description' => 'Code used timestamp.',
+      ],
+      'valid_until' => [
+        'type' => 'int',
+        'description' => 'Code valid timestamp.',
+      ],
+      'owner' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Code owner.',
+      ],
+      'status' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Code status.',
+      ]
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'id' => ['id'],
+      'uid' => ['uid']
+    ],
+    'unique keys' => [
+      '_id' => ['id'],
+      'cid' => ['cid'],
+    ],
+    'foreign keys' => [
+      'uid' => [
+        'table' => 'users',
+        'columns' => [
+          'uid' => 'uid',
+        ],
+      ],
+    ],
+    'mysql_character_set' => 'latin1',
+    'collation' => 'latin1_spanish_ci',
+  ];
+
+  $schema = Database::getConnection()->schema();
+  $schema->createTable('ab_inbev_code', $spec);
+  return $schema;
 }

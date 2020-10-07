@@ -230,49 +230,75 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
         // $user->set("field_last_name", $data['last_name'] );
         // $user->set("field_mobile_phone", $data['mobile_phone'] );
         // $user->set("field_birthdate", $data['birthdate'] );
+        // $user->set("field_type_id", $data['type_id'] );
+        // $user->set("field_id_number", $data['id_number'] );
         // $user->save();
 
-        try {
-          $response_array["first_name"] =  $this->dbConnection->update('user__field_first_name')
-                                            ->fields(['field_first_name_value' => $data['first_name']])
-                                            ->condition('entity_id', $this->currentUser->id() )
-                                            ->execute()  == 1;
-        } catch (\Throwable $th) {
-          $response_array["first_name"] = false;
+        $response_array["first_name"] = false;
+        if ( isset($data['first_name']) ) {
+          try {
+            $response_array["first_name"] =  $this->dbConnection->update('user__field_first_name')
+                                              ->fields(['field_first_name_value' => $data['first_name']])
+                                              ->condition('entity_id', $this->currentUser->id() )
+                                              ->execute()  == 1;
+          } catch (\Throwable $th) {}
         }
         
-        try {
-          $response_array["last_name"] = $this->dbConnection->update('user__field_last_name')
-                    ->fields(['field_last_name_value' => $data['last_name']])
-                    ->condition('entity_id', $this->currentUser->id() )
-                    ->execute()  == 1;
-        } catch (\Throwable $th) {
-          $response_array["last_name"] = false;
+        $response_array["last_name"] = false;
+        if ( isset($data['last_name']) ) {
+          try {
+            $response_array["last_name"] = $this->dbConnection->update('user__field_last_name')
+                      ->fields(['field_last_name_value' => $data['last_name']])
+                      ->condition('entity_id', $this->currentUser->id() )
+                      ->execute()  == 1;
+          } catch (\Throwable $th) {}
         }
         
-        try {
-          $response_array["mobile_phone"] = $this->dbConnection->update('user__field_mobile_phone')
-                    ->fields(['field_mobile_phone_value' => $data['mobile_phone']])
-                    ->condition('entity_id', $this->currentUser->id() )
-                    ->execute()  == 1;
-        } catch (\Throwable $th) {
-          $response_array["mobile_phone"] = false;
+        $response_array["mobile_phone"] = false;
+        if ( isset($data['mobile_phone']) ) {
+          try {
+            $response_array["mobile_phone"] = $this->dbConnection->update('user__field_mobile_phone')
+                      ->fields(['field_mobile_phone_value' => $data['mobile_phone']])
+                      ->condition('entity_id', $this->currentUser->id() )
+                      ->execute()  == 1;
+          } catch (\Throwable $th) {}
         }
         
-        try {
-          $response_array["birthdate"] = $this->dbConnection->update('user__field_birthdate')
-                    ->fields(['field_birthdate_value' => $data['birthdate']])
-                    ->condition('entity_id', $this->currentUser->id() )
-                    ->execute()  == 1;
-        } catch (\Throwable $th) {
-          $response_array["birthdate"] = false;
+        $response_array["birthdate"] = false;
+        if ( isset($data['birthdate']) ) {
+          try {
+            $response_array["birthdate"] = $this->dbConnection->update('user__field_birthdate')
+                      ->fields(['field_birthdate_value' => $data['birthdate']])
+                      ->condition('entity_id', $this->currentUser->id() )
+                      ->execute()  == 1;
+          } catch (\Throwable $th) {}
+        }
+        
+        $response_array["type_id"] = false;
+        if ( isset($data['type_id']) ) {
+          try {
+            $response_array["type_id"] = $this->dbConnection->update('user__field_type_id')
+                      ->fields(['field_type_id_value' => $data['type_id']])
+                      ->condition('entity_id', $this->currentUser->id() )
+                      ->execute()  == 1;
+          } catch (\Throwable $th) {}
+        }
+
+        $response_array["id_number"] = false;
+        if ( isset($data['id_number']) ) {
+          try {
+            $response_array["id_number"] = $this->dbConnection->update('user__field_id_number')
+                      ->fields(['field_id_number_value' => $data['id_number']])
+                      ->condition('entity_id', $this->currentUser->id() )
+                      ->execute()  == 1;
+          } catch (\Throwable $th) {}
         }
 
       break;
       case 2: 
         // PATCH Photo
-          // $user->set('user_picture', $file);
-          // $response_array["photo"] = $user->save();
+        // $user->set('user_picture', $file);
+        // $response_array["photo"] = $user->save();
         try {
           $images_folder = "public://images/";
           $name = $this->currentUser->getAccount()->uuid();
@@ -415,13 +441,14 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
     try {
       $curYear = date('Y');
       $date = explode("/", $record['birthdate']);
+
       if ( intval($date[0]) < 1 || intval($date[0]) > 12 ) {
         throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
       }
       if ( intval($date[1]) < 1 || intval($date[1]) > 31 ) {
         throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
       }
-      if ( intval($date[2]) < 1920 || (intval($date[2]) - $curYear) < 18 ) {
+      if ( intval($date[2]) < 1920 || ($curYear - intval($date[2]) ) < 18 ) {
         throw new BadRequestHttpException('"Fecha de Nacimiento" no valida, Debe ser mayor de edad');
       }
     } catch ( Exception $ex ) {
@@ -445,7 +472,15 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
     if (!isset($record['mobile_phone']) || empty($record['mobile_phone'])) {
       throw new BadRequestHttpException('El usuario no puede ser editado porque hace falta el "Número de celular"');
     }
-    
+
+    if ( isset($record['type_id']) && $record['type_id'] != 'CC' && $record['type_id'] != 'CE' && $record['type_id'] != 'PA' ) {
+      throw new BadRequestHttpException('El "Tipo de Documento" debe ser "CC" (Cédula de ciudadania), "CE" (Cédula de extranjeria) o "PA" (Pasaporte) ');
+    }
+
+    if ( isset($record['id_number']) && (empty($record['id_number']) || strlen($record['id_number']) > 20) ) {
+      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Número de documento"');
+    }
+
     // @DCG Add more validation rules here.
   }
 
@@ -480,7 +515,10 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
       "photo" => $user->get('field_photo_uri')->value,
       "mobile_phone" => $user->get('field_mobile_phone')->value,
       "birthdate" => $user->get('field_birthdate')->value,
-      "status" => $user->get('field_status')->value
+      "gender" => $user->get('field_gender')->value,
+      "type_id" => $user->get('field_type_id')->value,
+      "id_number" => $user->get('field_id_number')->value,
+      "status" => $user->get('field_status')->value,
     ];
   }
 

@@ -4,6 +4,7 @@
     <user-profile-picture
       [urlImage]="profilePicture()"
       [profile_name]=" user.first_name + ' ' + user.last_name "
+      [profile_view]="true"
     ></user-profile-picture>
     <span
       *ngIf="this.size == 'xs'"
@@ -31,7 +32,7 @@
       ></user-statistics-profile>
 
       <div class="separator-line-column"></div>
-      <button class="edit-button">
+      <button class="edit-button" (click)="editProfileDesktop()">
         Editar Perfil <mat-icon>edit</mat-icon>
       </button>
     </div>

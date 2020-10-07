@@ -5,6 +5,7 @@ import { UserService } from "src/app/_services/user.service";
 import { Platform } from "@ionic/angular";
 import { UiService } from "src/app/_services/ui.service";
 import { Router } from "@angular/router";
+import { SectionEditProfileComponent } from "../../_components/section-edit-profile/section-edit-profile.component";
 
 @Component({
   selector: "user-profile",
@@ -59,10 +60,19 @@ export class ProfilePage implements OnInit, OnDestroy {
     });
   }
 
+  editProfileDesktop() {
+    this.ui.showModal(
+      SectionEditProfileComponent,
+      "modal-edit-profile",
+      true,
+      true
+    );
+  }
+
   profilePicture() {
     return !!this.user.photo
       ? this.user.photo
-      : this.user.gender == "female"
+      : this.user.gender == "F"
       ? "../../../../../../../assets/img/profile_female.jpg"
       : "../../../../../../../assets/img/profile_male.jpg";
   }

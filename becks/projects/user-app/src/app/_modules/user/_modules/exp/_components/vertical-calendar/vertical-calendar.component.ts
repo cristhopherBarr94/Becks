@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { sep } from "path";
 
 @Component({
   selector: "user-vertical-calendar",

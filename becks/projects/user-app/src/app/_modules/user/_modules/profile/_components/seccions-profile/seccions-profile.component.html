@@ -29,10 +29,12 @@
         class="container-desktop"
         *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
       >
-        <user-experiences-cards
-          [vertical]="this.size == 'lg'"
-          class="col-flex-center experioencesCard"
-        ></user-experiences-cards>
+        <section class="experioencesCard">
+          <user-experiences-cards
+            [vertical]="this.size == 'lg'"
+            class="col-flex-center"
+          ></user-experiences-cards>
+        </section>
       </div>
     </mat-tab>
   </mat-tab-group>

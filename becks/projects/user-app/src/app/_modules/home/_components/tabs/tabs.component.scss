@@ -12,6 +12,14 @@
   margin-bottom: 0px;
 }
 
+::ng-deep .mat-tab-label-active {
+  font-family: "Eurostile BQ";
+  color: #ffffff !important;
+  font-size: 11px;
+  border-bottom: 3px solid #c4c4c4;
+  margin-bottom: 0px;
+}
+
 ::ng-deep .mat-ink-bar {
   background: linear-gradient(
     100deg,

@@ -43,6 +43,7 @@ export class UpdateFileComponent implements OnInit {
       })
       .subscribe((response: any) => {
         this.userSvc.getData();
+        this.userSvc.editing();
         this.ui.dismissLoading();
       });
   }
@@ -82,6 +83,7 @@ export class UpdateFileComponent implements OnInit {
   }
 
   closeModal() {
+    this.userSvc.editing();
     this.ui.dismissModal();
   }
 

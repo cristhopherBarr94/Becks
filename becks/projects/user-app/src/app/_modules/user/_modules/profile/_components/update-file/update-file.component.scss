@@ -1,18 +1,22 @@
-.button-open-file {
-  background-color: #038259;
-  width: 100%;
-  margin-top: 10px;
-  height: 30%;
-  margin-bottom: 35%;
-  position: absolute;
-}
-.button-pop-up {
-  height: 30%;
-  align-content: center;
-  align-items: center;
-  display: flex;
-}
 .container {
   height: 90%;
   margin: 5%;
+}
+
+.edit-button {
+  background-color: #121212;
+  font-family: "Helvetica LT Std";
+  color: #ffffff !important;
+  border-radius: 16px 0px 16px 0px;
+  margin-top: 24px;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    font-size: 18px;
+    width: 128px;
+    height: 45px;
+  }
+  @media (min-width: 1367px) {
+    font-size: 24px;
+    width: 250px;
+    height: 51px;
+  }
 }

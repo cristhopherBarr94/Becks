@@ -21,6 +21,7 @@ export class ProfilePictureComponent
   @Input() urlImage: string;
   @Input() profile_name: string;
   @Input() profile_view: boolean;
+  @Input() default_photo: boolean;
   public time;
   public url: string = environment.serverUrl;
   public isPofile: string;
@@ -29,12 +30,11 @@ export class ProfilePictureComponent
   constructor(private ui: UiService, private userSvc: UserService) {
     this.pictureSub = this.userSvc.editing$.subscribe((isEditing) => {
       console.log("isE", isEditing);
-
+      console.log("default", this.default_photo);
       this.time = isEditing
         ? ""
         : "?time_stamp=" + Math.floor(Date.now() / 1000);
     });
-    console.log("constructor -> this.pictureSub", this.pictureSub);
   }
 
   ngOnInit() {
@@ -58,5 +58,15 @@ export class ProfilePictureComponent
       true,
       true
     );
+  }
+
+  profilePicture() {
+    console.log("profilePicture -> this.default_photo", {
+      default: this.default_photo,
+      url: this.urlImage,
+    });
+    return this.default_photo
+      ? this.urlImage
+      : this.url + this.urlImage + this.time;
   }
 }

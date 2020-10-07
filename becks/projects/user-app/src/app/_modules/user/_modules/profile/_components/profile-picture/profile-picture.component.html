@@ -3,7 +3,7 @@
   [ngClass]="isPofile"
 >
   <ion-avatar class="image-size-profile">
-    <img [src]="url + urlImage + time" *ngIf="time" />
+    <img [src]="profilePicture()" *ngIf="time" />
   </ion-avatar>
   <div class="editPhotoLogo" *ngIf="profile_view" (click)="editPhot()"></div>
   <span class="font-profile margin-tittle margin-top-letter">{{

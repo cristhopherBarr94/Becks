@@ -16,7 +16,7 @@ export class ProfilePage implements OnInit, OnDestroy {
   public user = new User();
   public stats = { buy: "10", exp: "6", friends: "7" };
   public size: string;
-  public imageBasa64: any;
+  public default_picure: boolean;
 
   userSubscription: Subscription;
 
@@ -70,6 +70,11 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   profilePicture() {
+    this.default_picure = !!!this.user.photo;
+    console.log(
+      "ProfilePage -> profilePicture -> this.user.photo",
+      this.user.photo
+    );
     return !!this.user.photo
       ? this.user.photo
       : this.user.gender == "F"

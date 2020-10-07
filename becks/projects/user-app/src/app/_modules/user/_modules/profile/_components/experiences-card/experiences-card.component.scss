@@ -10,9 +10,9 @@
 .vertical_card_model {
   margin-top: 24px;
   background-color: #141313;
-  height: 9.01%;
+  height: 230px;
   display: flex;
-  width: 420px;
+  width: 193px;
   margin-right: 25px;
   margin-bottom: 24px;
   @media (min-width: 769px) and (max-width: 1366px) {
@@ -22,7 +22,7 @@
 
 .container {
   @media (min-width: 768px) {
-    margin-left: 24px;
+    margin-left: 10px;
   }
 }
 
@@ -36,16 +36,7 @@
 }
 
 .image-card-vertical {
-  width: 33%;
-  height: 73px;
-  @media (min-width: 769px) and (max-width: 1366px) {
-    height: 95px;
-    width: 50%;
-  }
-  @media (min-width: 1367px) {
-    height: 117px;
-    width: 50%;
-  }
+  height: 40%;
 }
 
 .display-flex {
@@ -63,12 +54,7 @@
 .content-card-vartical {
   justify-content: center;
   align-items: flex-start;
-  min-height: 100%;
-  padding: 5px;
-  width: 67%;
-  @media (min-width: 769px) and (max-width: 1366px) {
-    width: 50%;
-  }
+  height: 50%;
 }
 
 .content-card-details {

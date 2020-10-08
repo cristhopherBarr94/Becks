@@ -9,7 +9,7 @@ import { UtilsModule } from "src/app/_modules/utils/utils.module";
 import { ScheduleComponent } from "./_components/schedule/schedule.component";
 import { MatCarouselModule } from "@ngmodule/material-carousel";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatNativeDateModule } from "@angular/material/core";
+import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
 @NgModule({
   declarations: [
     SliderExpComponent,
@@ -25,5 +25,6 @@ import { MatNativeDateModule } from "@angular/material/core";
     MatNativeDateModule,
     MatDatepickerModule,
   ],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: "es-ES" }],
 })
 export class ExpModule {}

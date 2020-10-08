@@ -33,8 +33,8 @@ export class ScheduleComponent implements OnInit {
       title: "Vintage",
       hour: "11:00 PM — 4:00 AM",
       members: {
-        user_2: "@juliana_santa",
-        user_3: "@diana_mal",
+        user_1: "@juliana_santa",
+        user_2: "@diana_mal",
       },
       color: "#DB4843",
       icon: "",
@@ -43,8 +43,18 @@ export class ScheduleComponent implements OnInit {
       title: "Frank video clip",
       hour: "11:00 PM — 4:00 AM",
       members: {
-        user_2: "@juliana_santa",
-        user_3: "@diana_mal",
+        user_1: "@juliana_santa",
+        user_2: "@diana_mal",
+      },
+      color: "#E362F8",
+      icon: "",
+    },
+    {
+      title: "Frank video clip",
+      hour: "11:00 PM — 4:00 AM",
+      members: {
+        user_1: "@juliana_santa",
+        user_2: "@diana_mal",
       },
       color: "#E362F8",
       icon: "",

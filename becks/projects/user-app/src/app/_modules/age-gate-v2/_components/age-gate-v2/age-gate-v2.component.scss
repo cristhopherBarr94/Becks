@@ -1,11 +1,12 @@
+.padding-logo {
+  padding-bottom: 0 !important;
+}
 @media (min-width: 0px) and (max-width: 768px) {
   .logo-2 {
     top: 42px;
     width: 120px;
   }
-  .padding-logo {
-    padding-bottom: 0 !important;
-  }
+
   .form-section {
     position: relative;
     margin-top: 58px;

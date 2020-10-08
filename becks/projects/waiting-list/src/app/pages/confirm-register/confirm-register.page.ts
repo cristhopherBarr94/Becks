@@ -6,20 +6,17 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./confirm-register.page.scss"],
 })
 export class ConfirmRegisterPage implements OnInit {
-  private wasClicked = false;
   constructor() {}
 
   ngOnInit() {}
 
   goToFeria() {
-    if (!this.wasClicked) {
-      this.wasClicked = true;
-      window.dataLayer.push({
-        event: "trackEvent",
-        eventCategory: "becks society",
-        eventAction: "thank you",
-        eventLabel: "feria del millon",
-      });
-    }
+    window.dataLayer.push({
+      event: "trackEvent",
+      eventCategory: "becks society",
+      eventAction: "thank you",
+      eventLabel: "feria del millon",
+    });
+    window.open("https://www.feriadelmillon.com.co/becks/");
   }
 }

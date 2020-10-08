@@ -174,7 +174,9 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
         Util::sendWelcomeEmail( $user->getEmail() , $pass );
       } else {
         // User come from Waiting-List
-        $user->set("field_status_waiting_list", 1);
+        $user->set("field_type_id", "" );
+        $user->set("field_id_number", "" );
+        $user->set("field_status_waiting_list", 1 );
       }
 
       $user->addRole('web_app');
@@ -226,18 +228,18 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
         throw new BadRequestHttpException('El "Email" sobrepasa los caracteres permitidos');
       }
       if ( !filter_var($data['email'], FILTER_VALIDATE_EMAIL) ) {
-        throw new BadRequestHttpException('El "Email" no es valido');
+        throw new BadRequestHttpException('El "Email" no es válido');
       }
 
       // Validate Captcha
       if ( !isset($data['captcha']) || empty($data['captcha']) ||
             !isset($data['captcha_key']) || empty($data['captcha_key']) || 
               $data['captcha_key'] > 999999999999 ) {
-        throw new BadRequestHttpException('Captcha no valido');
+        throw new BadRequestHttpException('Captcha no válido');
       }
       $hashed = Util::getCaptchaHash( $data['email'] . '-' . $data['captcha_key'] );
       if ( $data['captcha'] != $hashed ) {
-        throw new BadRequestHttpException('Captcha no valido');
+        throw new BadRequestHttpException('Captcha no válido');
       }
 
       // Validate email for user
@@ -344,7 +346,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       throw new BadRequestHttpException('El "Email" sobrepasa los caracteres permitidos');
     }
     if ( !filter_var($record['email'], FILTER_VALIDATE_EMAIL) ) {
-      throw new BadRequestHttpException('El "Email" no es valido');
+      throw new BadRequestHttpException('El "Email" no es válido');
     }
 
     if (!isset($record['first_name']) || empty($record['first_name'])) {
@@ -367,10 +369,10 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     // if ( $record['mobile_phone'][0] != '+' || 
     //       !preg_match( "/^[1-9][0-9]*$/", str_replace(" ","",substr($record['mobile_phone'], 1)) ) || 
     //         strlen($record['mobile_phone']) < 10 ) {
-    //   throw new BadRequestHttpException('Formato invalido para el "Número de celular" debe ser tipo "+XX XXXXXXX" ');
+    //   throw new BadRequestHttpException('Formato inválido para el "Número de celular" debe ser tipo "+XX XXXXXXX" ');
     // }
     if ( !is_numeric($record['mobile_phone']) ) {
-      throw new BadRequestHttpException('Formato invalido para el "Número de celular" debe ser un Número tipo "XXXXXXXXXX" ');
+      throw new BadRequestHttpException('Formato inválido para el "Número de celular" debe ser un Número tipo "XXXXXXXXXX" ');
     }
     if ( strlen($record['mobile_phone']) > 60) {
       throw new BadRequestHttpException('El "Número de celular" sobrepasa los caracteres permitidos');
@@ -421,11 +423,11 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     if ( !isset($record['captcha']) || empty($record['captcha']) ||
           !isset($record['captcha_key']) || empty($record['captcha_key']) || 
             $record['captcha_key'] > 999999999999 ) {
-      throw new BadRequestHttpException('Captcha no valido');
+      throw new BadRequestHttpException('Captcha no válido');
     }
     $hashed = Util::getCaptchaHash( $record['email'] . '-' . $record['captcha_key'] );
     if ( $record['captcha'] != $hashed ) {
-      throw new BadRequestHttpException('Captcha no valido');
+      throw new BadRequestHttpException('Captcha no válido');
     }
 
     // Validate email for user

@@ -11,11 +11,68 @@
   }
   .calendar {
     width: 752px;
-    height: 428px;
+    height: 430px;
     background: #171717;
     margin-top: 90px;
     padding: 30px 0;
+
+    .title-secondary {
+      font-weight: 500 !important;
+      font-size: 40px !important;
+      line-height: 50px !important;
+    }
+    ::ng-deep .carousel {
+      height: 400px !important;
+    }
+    mat-calendar {
+      width: 320px;
+      height: 300px !important;
+
+      ::ng-deep .mat-calendar-previous-button {
+        visibility: hidden;
+      }
+      ::ng-deep .mat-calendar-next-button {
+        visibility: hidden;
+      }
+    }
+    .month1 {
+      margin-left: 60px !important;
+    }
+    ::ng-deep .mat-calendar-body-cell-content.mat-focus-indicator {
+      color: #a9d3ab;
+      font-family: "Helvetica LT Std" !important;
+      font-style: normal !important;
+      font-weight: bold !important;
+      font-size: 14px !important;
+      line-height: 22px !important;
+    }
+    ::ng-deep .mat-calendar-table-header {
+      color: #ffffff;
+      font-family: "Helvetica LT Std" !important;
+      font-style: normal !important;
+      font-weight: bold !important;
+      font-size: 14px !important;
+      line-height: 22px !important;
+    }
+    ::ng-deep .mat-calendar-body-selected {
+      border: 2px solid #62f8b2;
+      box-sizing: border-box;
+      filter: drop-shadow(0px 0px 3.5px rgba(98, 248, 178, 0.87));
+      background: transparent;
+    }
+    ::nd-deep .mat-calendar-body-label {
+      visibility: hidden !important;
+    }
+    ::ng-deep .mat-calendar-period-button {
+      font-family: "Eurostile BQ";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      margin-left: 25% !important;
+    }
   }
+
   .schedule {
     background: transparent;
     width: 362px;

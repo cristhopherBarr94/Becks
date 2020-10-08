@@ -8,7 +8,7 @@
       <mat-carousel
         timings="250ms ease-in"
         [autoplay]="false"
-        maxWidth="730px"
+        maxWidth="780px"
         proportion="50"
         color="primary"
         slides="3"
@@ -21,38 +21,45 @@
         class="content-flex-all-center"
       >
         <mat-carousel-slide overlayColor="" [hideOverlay]="false">
-          <h3 class="title-tertiary">slide 1</h3>
-        </mat-carousel-slide>
-        <mat-carousel-slide overlayColor="" [hideOverlay]="false">
-          <h3 class="title-tertiary">slide 2</h3>
-        </mat-carousel-slide>
-        <mat-carousel-slide overlayColor="" [hideOverlay]="false">
-          <h3 class="title-tertiary">slide 3</h3>
+          <h3 class="title-secondary">{{ currentYear }}</h3>
+          <ion-row>
+            <div>
+              <mat-calendar
+                class="month1"
+                [startAt]="startAt"
+                [minDate]="minDate"
+                [maxDate]="maxDate"
+                [selected]="selectedDate"
+                (selectedChange)="onSelect($event)"
+              ></mat-calendar>
+            </div>
+            <div>
+              <mat-calendar
+                class="month2"
+                [startAt]="startAt"
+                [minDate]="minDate2"
+                [maxDate]="maxDate2"
+                [selected]="selectedDate"
+                (selectedChange)="onSelect($event)"
+              ></mat-calendar>
+            </div>
+          </ion-row>
         </mat-carousel-slide>
       </mat-carousel>
     </div>
     <div class="schedule">
       <div>
         <h2 class="title-secondary">próximos eventos</h2>
-        <h4 class="title-tertiary">Mañana,may 2</h4>
+        <h4 class="title-tertiary">{{ DayAndDate }}</h4>
       </div>
-      <div class="schedule-body">
-        <div class="card-schedule">
-          <div class="title-tertiary title-card">Bruno Be</div>
-          <div class="title-tertiary hour-card">9:00 AM - 10:00 AM</div>
-          <div class="guest-card">members</div>
-        </div>
-        <div class="card-schedule">
-          <div class="title-tertiary title-card">Bruno Be</div>
-          <div class="title-tertiary hour-card">9:00 AM - 10:00 AM</div>
-          <div class="guest-card">members</div>
-        </div>
+      <div class="schedule-body" [hidden]="!showEvent">
         <div class="card-schedule">
           <div class="title-tertiary title-card">Bruno Be</div>
           <div class="title-tertiary hour-card">9:00 AM - 10:00 AM</div>
           <div class="guest-card">members</div>
         </div>
       </div>
+      <p [hidden]="showEvent">Ningún evento disponible.</p>
     </div>
   </ion-row>
 </section>

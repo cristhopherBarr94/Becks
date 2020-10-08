@@ -8,7 +8,8 @@ import { VerticalCalendarComponent } from "./_components/vertical-calendar/verti
 import { UtilsModule } from "src/app/_modules/utils/utils.module";
 import { ScheduleComponent } from "./_components/schedule/schedule.component";
 import { MatCarouselModule } from "@ngmodule/material-carousel";
-
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
 @NgModule({
   declarations: [
     SliderExpComponent,
@@ -16,6 +17,13 @@ import { MatCarouselModule } from "@ngmodule/material-carousel";
     VerticalCalendarComponent,
     ScheduleComponent,
   ],
-  imports: [CommonModule, ExpRoutingModule, UtilsModule, MatCarouselModule],
+  imports: [
+    CommonModule,
+    ExpRoutingModule,
+    UtilsModule,
+    MatCarouselModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+  ],
 })
 export class ExpModule {}

@@ -45,7 +45,7 @@
   }
 }
 
-::ng-deep .mat-tab-body-wrapper {
-  background-color: revert;
+:host ::ng-deep .mat-tab-body-wrapper {
+  background-color: transparent;
   min-width: 100%;
 }

@@ -610,15 +610,15 @@
 }
 
 .pop-up-profile-picture {
-  opacity: 1;
   align-items: flex-end;
   .modal-wrapper {
     overflow: hidden;
     position: absolute;
-    height: 30% !important;
-    width: 350px !important;
+    height: 179px !important;
+    width: 100% !important;
     border-radius: 16px 0px 16px 0px;
-    background-color: #1d1d1d;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
   }
   @media (min-width: 769px) {
     align-items: center;

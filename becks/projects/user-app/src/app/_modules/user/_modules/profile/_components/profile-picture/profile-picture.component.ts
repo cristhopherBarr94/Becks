@@ -29,7 +29,6 @@ export class ProfilePictureComponent
 
   constructor(private ui: UiService, private userSvc: UserService) {
     this.pictureSub = this.userSvc.editing$.subscribe((isEditing) => {
-      console.log("constructor -> isEditing", isEditing);
       this.time = isEditing
         ? ""
         : "?time_stamp=" + Math.floor(Date.now() / 1000);

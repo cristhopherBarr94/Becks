@@ -31,7 +31,9 @@
   line-height: 16px !important;
   text-align: center !important;
   text-transform: lowercase;
-  color: #038259;
+  a {
+    color: #038259;
+  }
 }
 
 ::ng-deep .tooltip-becks {
@@ -61,7 +63,8 @@
     background-position: top;
   }
   #formActivationSection {
-    background: black;
+    background: rgba(2, 2, 2, 0.7);
+    border-radius: 8px;
     width: 507px;
     height: auto;
     padding: 20px;

@@ -91,6 +91,9 @@
     margin-left: 10px;
     margin-top: 20px;
   }
+  .no-margin {
+    margin-top: 20px;
+  }
 }
 @media (min-width: 769px) {
   .logo-2 {
@@ -131,6 +134,15 @@
   .text-before {
     width: 334px !important;
   }
+  .content-check {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+    .margin-check {
+      margin-left: 30px;
+    }
+  }
   .margin-top-button,
   .no-margin {
     margin-top: 34px;
@@ -138,9 +150,11 @@
   .title-fourthy-width {
     width: 735px;
     height: 72px;
-    display: block;
+    display: inline-block;
     margin-left: auto;
     margin-right: auto;
+    padding: 20px 170px;
+    text-align: left;
   }
   .input-age {
     max-width: 87px !important;

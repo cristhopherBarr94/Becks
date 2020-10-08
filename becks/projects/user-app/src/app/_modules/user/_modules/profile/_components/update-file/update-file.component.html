@@ -1,4 +1,6 @@
-<div class="col-flex-center flex-direction-column container">
+<div class="flex-direction-column container">
+  <span class="text-update-photo">Cambiar foto de perfil</span>
+  <div class="separator-line-row"></div>
   <input
     id="selectedFile"
     style="display: none"
@@ -9,11 +11,13 @@
     #hiddenfileinput
   />
   <button class="edit-button" (click)="hiddenfileinput.click()">
-    Cargar foto de perfil
+    Nueva foto de perfil
   </button>
 
-  <button class="edit-button" (click)="deletePhoto()">
+  <button class="edit-button" (click)="hiddenfileinput.click()">
+    Importar desde la galeria
+  </button>
+  <button class="edit-button red-color" (click)="deletePhoto()">
     Eliminar foto de perfil
   </button>
-  <button class="edit-button" (click)="closeModal()">Cancelar</button>
 </div>

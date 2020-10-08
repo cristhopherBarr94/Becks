@@ -1,19 +1,28 @@
 .container {
   height: 90%;
   margin: 5%;
+  display: flex;
 }
 
 .edit-button {
-  background-color: #121212;
+  background-color: transparent;
   font-family: "Helvetica LT Std";
-  color: #ffffff !important;
-  border-radius: 16px 0px 16px 0px;
-  margin-top: 24px;
-  font-size: 18px;
-  width: 250px;
-  height: 51px;
-
+  color: #ffffff;
+  margin-top: 14px;
+  font-size: 14px;
+  text-align: start;
   @media (min-width: 1367px) {
     font-size: 24px;
   }
+}
+
+.separator-line-row {
+  height: 1px;
+  width: 100%;
+  border-top: 0.25px solid #c4c4c4;
+  margin-top: 19px;
+}
+
+.red-color {
+  color: #db4843;
 }

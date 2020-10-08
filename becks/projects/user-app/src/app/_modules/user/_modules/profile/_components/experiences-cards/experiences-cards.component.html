@@ -4,8 +4,8 @@
     <div [ngClass]="direcionCards">
       <user-experiences-card
         *ngFor="let item of pendingCards"
-        [urlImageExperience]="item.urlImageExperience"
-        [nameExperience]="item.nameExperience"
+        [urlImageExperience]="item.imagesExp"
+        [nameExperience]="item.titleExp"
         [vertical]="vertical"
         type="pending"
       >
@@ -17,8 +17,8 @@
     <div [ngClass]="direcionCards">
       <user-experiences-card
         *ngFor="let item of acceptCards"
-        [urlImageExperience]="item.urlImageExperience"
-        [nameExperience]="item.nameExperience"
+        [urlImageExperience]="item.imagesExp"
+        [nameExperience]="item.titleExp"
         [vertical]="vertical"
         type="complete"
       >
@@ -30,8 +30,8 @@
     <div [ngClass]="direcionCards">
       <user-experiences-card
         *ngFor="let item of cancelCards"
-        [urlImageExperience]="item.urlImageExperience"
-        [nameExperience]="item.nameExperience"
+        [urlImageExperience]="item.imagesExp"
+        [nameExperience]="item.titleExp"
         [vertical]="vertical"
         type="cancel"
       >

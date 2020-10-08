@@ -46,6 +46,6 @@
 }
 
 ::ng-deep .mat-tab-body-wrapper {
-  background-color: transparent;
+  background-color: revert;
   min-width: 100%;
 }

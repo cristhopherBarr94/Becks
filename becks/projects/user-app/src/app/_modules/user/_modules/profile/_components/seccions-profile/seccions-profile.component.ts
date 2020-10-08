@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Platform } from "@ionic/angular";
 import { UiService } from "src/app/_services/ui.service";
 
@@ -10,7 +11,11 @@ import { UiService } from "src/app/_services/ui.service";
 export class SeccionsProfileComponent implements OnInit {
   public size: string;
 
-  constructor(private platform: Platform, private ui: UiService) {
+  constructor(
+    private platform: Platform,
+    private ui: UiService,
+    private router: Router
+  ) {
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
         this.size = this.ui.getSizeType(platform.width());
@@ -20,4 +25,10 @@ export class SeccionsProfileComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  redirectExp() {
+    this.router.navigate(["user/exp"], {
+      queryParamsHandling: "preserve",
+    });
+  }
 }

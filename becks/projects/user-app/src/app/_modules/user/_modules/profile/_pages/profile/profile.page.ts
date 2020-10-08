@@ -38,6 +38,11 @@ export class ProfilePage implements OnInit, OnDestroy {
     this.userSubscription = this.userSvc.user$.subscribe(
       (user: User) => {
         if (user !== undefined) {
+          if (user.status == 1) {
+            this.router.navigate(["user/changePass"], {
+              queryParamsHandling: "preserve",
+            });
+          }
           this.user = user;
         }
       },
@@ -71,10 +76,6 @@ export class ProfilePage implements OnInit, OnDestroy {
 
   profilePicture() {
     this.default_picure = !!!this.user.photo;
-    console.log(
-      "ProfilePage -> profilePicture -> this.user.photo",
-      this.user.photo
-    );
     return !!this.user.photo
       ? this.user.photo
       : this.user.gender == "F"

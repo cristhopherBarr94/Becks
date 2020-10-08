@@ -15,7 +15,7 @@
   justify-content: center;
   @media (min-width: 768px) {
     align-items: flex-end;
-    margin-top: -68px;
+    margin-top: -78px;
   }
 }
 
@@ -47,11 +47,13 @@
     height: 65px;
     font-size: 14px;
     width: 70px;
+    margin-bottom: 18px;
     padding: revert;
   }
   @media (min-width: 1367px) {
     height: 65px;
     font-size: 24px;
+    margin-bottom: 18px;
     padding: revert;
   }
 }

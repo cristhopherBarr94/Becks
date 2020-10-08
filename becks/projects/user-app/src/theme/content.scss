@@ -622,10 +622,13 @@
     @media (min-width: 769px) {
       width: 439px !important;
       height: 217px !important;
+      backdrop-filter: blur(0px);
+      background-color: #171717;
     }
   }
   @media (min-width: 769px) {
     align-items: center;
+    backdrop-filter: blur(10px);
   }
 }
 

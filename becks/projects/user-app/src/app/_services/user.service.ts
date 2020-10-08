@@ -84,8 +84,6 @@ export class UserService {
   }
 
   public editing() {
-    console.log("changingediting  ", this._editingSbj.observers.entries());
-
     this._editingSbj.next(true);
     setTimeout(() => {
       this._editingSbj.next(false);

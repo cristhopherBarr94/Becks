@@ -40,6 +40,12 @@
 
 ::ng-deep .mat-tab-header {
   @media (min-width: 768px) {
+    width: auto;
     margin-right: 0%;
   }
+}
+
+::ng-deep .mat-tab-body-wrapper {
+  background-color: transparent;
+  min-width: 100%;
 }

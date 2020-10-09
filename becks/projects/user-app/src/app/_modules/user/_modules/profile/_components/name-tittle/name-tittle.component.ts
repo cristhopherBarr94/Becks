@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Router } from "@angular/router";
 import { Platform } from "@ionic/angular";
+import { Subscription } from 'rxjs';
 import { AuthService } from "src/app/_services/auth.service";
 import { HttpService } from "src/app/_services/http.service";
 import { UiService } from "src/app/_services/ui.service";
+import { UserService } from 'src/app/_services/user.service';
 import { environment } from "src/environments/environment";
 
 @Component({
@@ -14,6 +16,8 @@ import { environment } from "src/environments/environment";
 export class NameTittleComponent implements OnInit {
   @Input() first_name: string;
   public size: string;
+  public nameResponsive: any
+  public visibleNAme : boolean
 
   constructor(
     private authService: AuthService,
@@ -21,7 +25,8 @@ export class NameTittleComponent implements OnInit {
     private platform: Platform,
     private ui: UiService,
     private uiService: UiService,
-    private router: Router
+    private router: Router,
+    private userSvc: UserService
   ) {
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
@@ -29,6 +34,9 @@ export class NameTittleComponent implements OnInit {
       });
       this.size = this.ui.getSizeType(platform.width());
     });
+    this.nameResponsive = this.userSvc.dropdownMenu$.subscribe((result)=>{ this.visibleNAme=result})
+   
+    console.log("NameTittleComponent -> this.nameResponsive", this.nameResponsive)
   }
 
   ngOnInit() {}

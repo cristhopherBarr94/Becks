@@ -59,10 +59,6 @@ export class ProfilePictureComponent
   }
 
   profilePicture() {
-    console.log("profilePicture -> this.default_photo", {
-      default: this.default_photo,
-      url: this.urlImage,
-    });
     return this.default_photo
       ? this.urlImage
       : this.url + this.urlImage + this.time;

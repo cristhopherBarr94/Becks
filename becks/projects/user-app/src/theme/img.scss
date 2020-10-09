@@ -289,3 +289,12 @@
   height: 13px !important;
   margin-right: 10px;
 }
+.briefcase-icon {
+  background-image: url("../assets/icon/briefcase-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+}

@@ -86,9 +86,12 @@
     border-color: #ffffff;
   }
   .title-fourthy-width {
-    width: 280px;
+    width: 290px;
     text-align: justify !important;
-    margin-left: 30px;
+    margin-left: 10px;
+    margin-top: 20px;
+  }
+  .no-margin {
     margin-top: 20px;
   }
 }
@@ -118,7 +121,6 @@
   .title-tertiary {
     font-size: 16px !important;
     line-height: 18px !important;
-    margin-top: 30px;
   }
 
   ion-content {
@@ -131,6 +133,15 @@
   .text-before {
     width: 334px !important;
   }
+  .content-check {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+    .margin-check {
+      margin-left: 30px;
+    }
+  }
   .margin-top-button,
   .no-margin {
     margin-top: 34px;
@@ -138,9 +149,11 @@
   .title-fourthy-width {
     width: 735px;
     height: 72px;
-    display: block;
+    display: inline-block;
     margin-left: auto;
     margin-right: auto;
+    padding: 20px 170px;
+    text-align: left;
   }
   .input-age {
     max-width: 87px !important;
@@ -173,7 +186,10 @@
   }
   .error-message {
     color: #f44336;
-    margin-left: 35%;
+    margin-left: 38%;
+  }
+  mat-error {
+    margin-left: 250px !important;
   }
   .margin-check {
     margin-right: 10px;

@@ -13,6 +13,7 @@ export class ExperienciasService {
     const ITEM_FOOTER: Exp[] = [];
     MockExperiencias.forEach((element) => {
       const elementoResponse: Exp = {
+        id: element.id,
         cuentaActiva: element.cuentaActiva,
         detalleExp: element.detalleExp,
         imagesExp: element.imagesExp,

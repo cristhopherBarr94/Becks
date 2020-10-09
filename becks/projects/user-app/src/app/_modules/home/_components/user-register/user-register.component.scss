@@ -20,6 +20,7 @@
     font-weight: bold;
 
     .content-check {
+      justify-content: space-between;
       margin: 0px;
       display: flex;
       a {
@@ -108,9 +109,13 @@
     .content-check {
       margin: 15px;
       padding-left: 0px;
+      justify-content: space-between !important;
     }
-    .margin-check {
-      margin-left: 20px;
+    #mat-checkbox-promo {
+      margin-left: 145px;
+    }
+    #mat-checkbox-privacy {
+      margin-left: 71px;
     }
     .button-row {
       justify-content: center;

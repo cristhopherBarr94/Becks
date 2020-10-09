@@ -492,17 +492,17 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       "abi_phone" => $phone,
       "abi_email" => $email,
       "purpose_name" => $purposes,
+      "td_client_id" => $_td
     );
 
     $tdstatus = Util::sendTD(
         $data,              // form data & purposes
         "col",              // country
         "Becks",            // brand
-        "BECKS_SOCIETY",   // campaign
-        "BECKS_SOCIETY",   // form
+        "BECKS_SOCIETY_FASE_DOS",   // campaign
+        "BECKS_SOCIETY_FASE_DOS",   // form
         true,   // unify
-        $is_production,  // production flag
-        $_td
+        $is_production  // production flag
     );
     return $tdstatus;
   }

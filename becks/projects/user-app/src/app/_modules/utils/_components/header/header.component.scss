@@ -1,9 +1,13 @@
 .header {
   position: absolute !important;
   width: 100%;
-  top: 0;
   padding: 30px 24px;
-
+  @media (min-width: 0px) and (max-width: 768px) {
+    top: 0;
+  }
+  @media (min-width: 769px) {
+    top: 80px;
+  }
   .return-btn {
     background: transparent;
     width: 30px;
@@ -38,8 +42,8 @@
     }
     @media (min-width: 769px) {
       .title-secondary {
-        // font-size: 24px !important;
-        // line-height: 110% !important;
+        font-size: 24px !important;
+        line-height: 26px !important;
         display: none;
       }
     }

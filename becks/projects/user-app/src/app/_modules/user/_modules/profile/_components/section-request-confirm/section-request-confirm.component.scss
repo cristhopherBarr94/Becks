@@ -5,11 +5,11 @@
   .plane-icon {
     position: relative !important;
     @media (min-width: 0px) and (max-width: 768px) {
-      top: 76px;
+      top: -60px;
     }
     @media (min-width: 769px) {
-      top: 0px;
       margin-top: 30px;
+      top: 0px;
     }
   }
 
@@ -19,7 +19,7 @@
     @media (min-width: 0px) and (max-width: 768px) {
       font-size: 13.78px !important;
       line-height: 17px !important;
-      margin-top: 106px;
+      margin-top: 0px;
       width: 214px;
     }
     @media (min-width: 769px) {

@@ -1,7 +1,10 @@
 .from-section {
   background: #121212;
   color: #ffffff;
-
+  @media (min-width: 769px) {
+    background-image: url(./../../../../../../../assets/img/background-blur.png);
+    background-size: cover;
+  }
   .content-flex-all-center .form-section {
     margin-top: 0px;
   }
@@ -15,6 +18,10 @@
 
   .lock-icon {
     position: relative !important;
+    @media (min-width: 769px) {
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
   }
 
   .no-padding {
@@ -41,19 +48,18 @@
     font-family: "Material Icons" !important;
   }
   .margin-top-button {
-    margin: 30px;
+    margin: 10px;
+    @media (min-width: 769px) {
+      margin-top: 0px !important;
+    }
   }
 }
-@media (min-width: 0px) and (max-width: 768px) {
-  .logo-2 {
+.logo-2 {
+  @media (min-width: 0px) and (max-width: 768px) {
     display: none;
   }
 }
 @media (min-width: 769px) {
-  .from-section {
-    background-image: url(./../../../../../../../assets/img/background-blur.png);
-    background-size: cover;
-  }
   #formchangeSection {
     background: rgba(2, 2, 2, 0.7);
     border-radius: 8px;
@@ -63,16 +69,8 @@
     margin-top: 100px;
     margin-bottom: 100px;
     backdrop-filter: blur(20px) !important;
-
-    .lock-icon {
-      margin-top: 50px;
-      margin-bottom: 20px;
-    }
   }
   ::ng-deep .button-width {
     width: 360px !important;
-  }
-  .margin-top-button {
-    margin-top: 0px !important;
   }
 }

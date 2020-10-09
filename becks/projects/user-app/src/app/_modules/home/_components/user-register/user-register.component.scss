@@ -102,7 +102,7 @@
       padding: 20px;
       a {
         cursor: pointer;
-        color: #219653;
+        color: #095228;
         text-decoration: underline;
       }
     }
@@ -125,8 +125,8 @@
       ::ng-deep user-fb-button {
         margin-left: 30px;
       }
-      .separator-o {
-        margin-top: 10px;
+      .separator-box {
+        margin-top: 15px !important;
       }
     }
   }

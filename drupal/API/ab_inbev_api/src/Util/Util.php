@@ -22,7 +22,7 @@ final class Util
     /**
      * 
     */
-    public static function sendTD($form_data, $country, $brand, $campaign, $form, $unify, $production, $_td) {
+    public static function sendTD($form_data, $country, $brand, $campaign, $form, $unify, $production) {
         $td_env = $production ? 'prod' : 'dev';
         $http_protocol = isset($_SERVER['https']) ? 'https://' : 'http://';
         $form_data['abi_brand'] = $brand;
@@ -30,7 +30,6 @@ final class Util
         $form_data['abi_form'] = $form;
         $form_data['td_unify'] = $unify;
         $form_data['td_import_method'] = 'postback-api-1.2';
-        $form_data['td_client_id'] = $_td ?? $_COOKIE['_td'];
         $form_data['td_url'] = $http_protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $form_data['td_host'] = $_SERVER['HTTP_HOST'];
         $td_country = $country;

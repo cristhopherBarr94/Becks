@@ -41,27 +41,27 @@
         <h4 class="title-tertiary">{{ DayAndDate }}</h4>
       </div>
       <div class="schedule-over">
-        <p [hidden]="showEvent">Ningún evento disponible.</p>
+        <p [hidden]="message">Ningún evento disponible.</p>
 
         <div
           class="schedule-body"
-          [hidden]="!showEvent"
           *ngFor="let event of eventList"
         >
           <div
             class="card-schedule"
-            style="border-left: 8px solid {{ event.color }}"
+            [ngClass]="event.colorExp"
+            [hidden] = "DayAndDate != event.fechaExp"
           >
             <ion-row>
               <div>
-                <div class="title-tertiary title-card">{{ event.title }}</div>
-                <div class="title-tertiary hour-card">{{ event.hour }}</div>
+                <div class="title-tertiary title-card"><a [href]="event.urlExp">{{ event.titleExp }}</a></div>
+              <div class="title-tertiary hour-card">{{ event.horaExp }}</div>
               </div>
-              <div class="circle-icon" style="background: {{ event.color }}">
+              <div class="circle-icon" [ngClass]="event.colorExp">
                 <span class="briefcase-icon"> </span>
               </div>
             </ion-row>
-            <div class="guest-card" title="{{ event.members.user_1 }}"></div>
+            <div class="guest-card" title="@usuario"></div>
           </div>
         </div>
       </div>

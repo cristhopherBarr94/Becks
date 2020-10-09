@@ -7,11 +7,14 @@ export const MockExperiencias: Exp[] = [
     detalleExp: false,
     imagesExp: "./assets/img/exp/frank2.jpg",
     titleExp: "FRANK VIDEO CLIP",
-    fechaExp: "Viernes 12 sep, 9pm",
+    fechaExp: "viernes, oct. 16",
+    horaExp: "9:00 AM — 10:00 AM",
     detailExp:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
     urlExp: "/exp1",
     status: "0",
+    colorExp: "green-color",
+
   },
   {
     id: 2,
@@ -19,11 +22,14 @@ export const MockExperiencias: Exp[] = [
     detalleExp: false,
     imagesExp: "./assets/img/exp/frank2.jpg",
     titleExp: "FRANK VIDEO CLIP",
-    fechaExp: "Viernes 12 sep, 9pm",
+    fechaExp: "sábado, oct. 10",
+    horaExp: "11:00 PM — 4:00 AM",
     detailExp:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
     urlExp: "/exp1",
     status: "1",
+    colorExp: "red-color",
+
   },
   {
     id: 3,
@@ -31,10 +37,14 @@ export const MockExperiencias: Exp[] = [
     detalleExp: false,
     imagesExp: "./assets/img/exp/frank2.jpg",
     titleExp: "FRANK VIDEO CLIP",
-    fechaExp: "Viernes 12 sep, 9pm",
+    fechaExp: "domingo, oct. 11",
+    horaExp: "1:00 PM — 3:00 PM",
     detailExp:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
     urlExp: "/exp1",
     status: "2",
+    colorExp: "purple-color",
+
   },
+  
 ];

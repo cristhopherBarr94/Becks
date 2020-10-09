@@ -22,6 +22,8 @@ export class ExperienciasService {
         detailExp: element.detailExp,
         urlExp: element.urlExp,
         status: element.status,
+        colorExp: element.colorExp,
+        horaExp: element.horaExp,
       };
       ITEM_FOOTER.push(elementoResponse);
     });

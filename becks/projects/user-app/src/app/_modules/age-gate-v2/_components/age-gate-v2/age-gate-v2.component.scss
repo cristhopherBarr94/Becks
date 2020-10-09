@@ -121,7 +121,6 @@
   .title-tertiary {
     font-size: 16px !important;
     line-height: 18px !important;
-    margin-top: 30px;
   }
 
   ion-content {
@@ -187,7 +186,10 @@
   }
   .error-message {
     color: #f44336;
-    margin-left: 35%;
+    margin-left: 38%;
+  }
+  mat-error {
+    margin-left: 250px !important;
   }
   .margin-check {
     margin-right: 10px;

@@ -1,52 +1,53 @@
 .confirm-section {
-  background: #121212;
   color: #ffffff;
+  background: #121212;
 
   .plane-icon {
     position: relative !important;
+    @media (min-width: 0px) and (max-width: 768px) {
+      top: 76px;
+    }
+    @media (min-width: 769px) {
+      top: 0px;
+      margin-top: 30px;
+    }
   }
 
   .confirm-text {
     height: 103px;
-    font-size: 13.78px !important;
-    line-height: 17px !important;
     text-transform: lowercase;
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 13.78px !important;
+      line-height: 17px !important;
+      margin-top: 106px;
+      width: 214px;
+    }
+    @media (min-width: 769px) {
+      font-size: 16px !important;
+      line-height: 19px !important;
+      margin-top: 40px;
+      width: 301px;
+      text-align: center;
+    }
   }
 }
 .margin-top-button {
   margin: 30px;
 }
 
-@media (min-width: 0px) and (max-width: 768px) {
-  .plane-icon {
-    top: 76px;
-  }
-  .confirm-text {
-    margin-top: 106px;
-    width: 214px;
-  }
-}
 @media (min-width: 769px) {
   .confirm-section {
     background-image: url(./../../../../../../../assets/img/background-blur.png);
     background-size: cover;
   }
   .section-email {
-    background: #121212;
+    background: rgba(2, 2, 2, 0.7);
+    border-radius: 8px;
     width: 507px;
     height: auto;
     padding: 20px;
     margin-top: 100px;
     margin-bottom: 100px;
     backdrop-filter: blur(20px) !important;
-  }
-  .plane-icon {
-    top: 0px;
-    margin-top: 30px;
-  }
-  .confirm-text {
-    margin-top: 40px;
-    width: 301px;
-    text-align: center;
   }
 }

@@ -135,7 +135,7 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
    * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    */
   public function get($id) {
-    $response = new ResourceResponse($this->loadUser());
+    $response = new ResourceResponse( $this->loadUser() );
     $disable_cache = new CacheableMetadata();
     $disable_cache->setCacheContexts(['url.path', 'url.query_args']);
     $response->addCacheableDependency($disable_cache);
@@ -221,6 +221,9 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
         // PATCH PASSWORD
         $user = User::load($this->currentUser->id());
         $user->setPassword( $data['password'] );
+        if ( $user->get('field_status')->value == 1 ) {
+          $user->set("field_status", 0 );
+        }
         $user->save();
         $response_array["password"] = true;
       break;
@@ -281,6 +284,19 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
                       ->fields(['field_type_id_value' => $data['type_id']])
                       ->condition('entity_id', $this->currentUser->id() )
                       ->execute()  == 1;
+            
+            if( !$response_array["type_id"] ) {
+              $response_array["type_id"] = $this->dbConnection->insert('user__field_type_id')
+                                          ->fields([
+                                                'bundle ' => 'user' ,
+                                                'entity_id' => $this->currentUser->id() ,
+                                                'revision_id ' => $this->currentUser->id() ,
+                                                'langcode ' => $this->currentUser->getPreferredLangcode() ,
+                                                'delta ' => 0 ,
+                                                'field_type_id_value' =>$data['type_id']
+                                          ])->execute() >= 0;
+              
+            }
           } catch (\Throwable $th) {}
         }
 
@@ -291,6 +307,18 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
                       ->fields(['field_id_number_value' => $data['id_number']])
                       ->condition('entity_id', $this->currentUser->id() )
                       ->execute()  == 1;
+            if( !$response_array["id_number"] ) {
+              $response_array["id_number"] = $this->dbConnection->insert('user__field_id_number')
+                                          ->fields([
+                                                'bundle ' => 'user' ,
+                                                'entity_id' => $this->currentUser->id() ,
+                                                'revision_id ' => $this->currentUser->id() ,
+                                                'langcode ' => $this->currentUser->getPreferredLangcode() ,
+                                                'delta ' => 0 ,
+                                                'field_id_number_value' =>$data['id_number']
+                                          ])->execute() >= 0;
+              
+            }
           } catch (\Throwable $th) {}
         }
 
@@ -505,7 +533,11 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
 
   protected function loadUser() {
     // "photo" => $user->get('user_picture')->entity->url(),
-    $user = User::load($this->currentUser->id());
+    
+    $storage = $this->entityTypeManager->getStorage('user');
+    $storage->resetCache([$this->currentUser->id()]);
+    $user = $storage->load( $this->currentUser->id() );
+    // $user = User::load($this->currentUser->id());
     return [
       "roles" => $user->getRoles(),
       "email" => $user->getEmail(),

@@ -17,6 +17,7 @@ import { CaptchaComponent } from "./_components/captcha/captcha.component";
 import { LottieModule } from "ngx-lottie";
 import player from "lottie-web";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MenuComponent } from './_components/menu/menu.component';
 
 export function playerFactory() {
   return player;
@@ -30,6 +31,7 @@ export function playerFactory() {
     NotifyModalComponent,
     CaptchaComponent,
     HeaderComponent,
+    MenuComponent
   ],
   imports: [
     CommonModule,
@@ -51,6 +53,7 @@ export function playerFactory() {
     NotifyModalComponent,
     CaptchaComponent,
     HeaderComponent,
+    MenuComponent
   ],
 })
 export class UtilsModule {}

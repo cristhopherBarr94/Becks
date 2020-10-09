@@ -17,6 +17,49 @@ export class ScheduleComponent implements OnInit {
     "2020/11/19",
     "2020/12/24",
   ];
+  eventList = [
+    {
+      title: "Bruno Be",
+      hour: "9:00 AM — 10:00 AM",
+      members: {
+        user_1: "@mario_casas",
+        user_2: "@juliana_santa",
+        user_3: "@diana_mal",
+      },
+      color: "#038259",
+      icon: "",
+    },
+    {
+      title: "Vintage",
+      hour: "11:00 PM — 4:00 AM",
+      members: {
+        user_1: "@juliana_santa",
+        user_2: "@diana_mal",
+      },
+      color: "#DB4843",
+      icon: "",
+    },
+    {
+      title: "Frank video clip",
+      hour: "11:00 PM — 4:00 AM",
+      members: {
+        user_1: "@juliana_santa",
+        user_2: "@diana_mal",
+      },
+      color: "#E362F8",
+      icon: "",
+    },
+    {
+      title: "Frank video clip",
+      hour: "11:00 PM — 4:00 AM",
+      members: {
+        user_1: "@juliana_santa",
+        user_2: "@diana_mal",
+      },
+      color: "#E362F8",
+      icon: "",
+    },
+  ];
   options = {
     year: "numeric",
     month: "short",
@@ -64,8 +107,6 @@ export class ScheduleComponent implements OnInit {
     const dateValue = dateString.split(" ");
     this.currentYear = new Date().getFullYear();
     this.DayAndDate = dateValue[0] + " " + dateValue[3] + " " + dateValue[1];
-    console.log(this.eventDay);
-    console.log(this.selectedDate);
 
     for (var j = 0; j < this.eventDay.length; j++) {
       if (

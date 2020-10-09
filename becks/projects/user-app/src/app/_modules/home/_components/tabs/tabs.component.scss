@@ -1,5 +1,7 @@
 .seccion-tabs {
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
   min-height: 100%;
   min-width: 100%;
 }

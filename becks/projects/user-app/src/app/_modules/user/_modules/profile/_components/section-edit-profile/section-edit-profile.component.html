@@ -19,9 +19,11 @@
       </mat-icon>
     </div>
     <div id="right" class="lateral-div" *ngIf="size != 'xs'">
-      <mat-icon matSuffix class="cancel" (click)="closeEditDesktop()">
+      <button mat-button  class="cancel" (click)="closeEditDesktop()">
+        <mat-icon matSuffix>
         close
       </mat-icon>
+    </button>
     </div>
   </div>
   <div class="margint-top col-flex-center flex-direction-column">

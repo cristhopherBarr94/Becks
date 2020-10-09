@@ -72,10 +72,10 @@ $hamburger-spacing: 8px;
   width: 100%;
   height: auto;
   position: fixed;
+  z-index: 10;
   padding: 20px 5px;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     padding: 0;
-    position: inherit;
   }
 }
 

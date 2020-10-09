@@ -9,15 +9,15 @@
    
     <div
       class="titleLogo margin-top-icon title-secondary"
-      *ngIf="this.size == 'sm' || this.size == 'xs'"
+      *ngIf=" this.size == 'xs'"
     ></div>
     <span
       class="title-profile margin-tittle"
-      *ngIf="this.size == 'sm' || this.size == 'xs'"
+      *ngIf="this.size == 'xs'"
       >!Hola, {{ first_name }}!</span
     >
   </div>
   <div class="lateral-div">
-    <!-- <button md-fab class="singOutLogo" (click)="logout()"></button> -->
+    <!-- <button md-fab class="singOutLogo" (click)="logout()"  *ngIf=" this.size == 'xs'"></button> -->
   </div>
 </div>

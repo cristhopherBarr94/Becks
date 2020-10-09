@@ -2,6 +2,7 @@ import { Exp } from "../_models/exp";
 
 export const MockExperiencias: Exp[] = [
   {
+    id: 1,
     cuentaActiva: false,
     detalleExp: false,
     imagesExp: "./assets/img/exp/frank2.jpg",
@@ -13,6 +14,7 @@ export const MockExperiencias: Exp[] = [
     status: "0",
   },
   {
+    id: 2,
     cuentaActiva: false,
     detalleExp: false,
     imagesExp: "./assets/img/exp/frank2.jpg",
@@ -24,6 +26,7 @@ export const MockExperiencias: Exp[] = [
     status: "1",
   },
   {
+    id: 3,
     cuentaActiva: false,
     detalleExp: false,
     imagesExp: "./assets/img/exp/frank2.jpg",

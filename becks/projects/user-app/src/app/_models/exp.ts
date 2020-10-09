@@ -1,4 +1,5 @@
 export class Exp {
+  id: number;
   cuentaActiva: boolean;
   detalleExp: boolean;
   imagesExp: string;

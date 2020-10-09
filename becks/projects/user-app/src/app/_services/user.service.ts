@@ -15,6 +15,9 @@ export class UserService {
   private _editingSbj = new Subject<any>();
   public editing$ = this._editingSbj.asObservable();
 
+  private _dropdownMenu = new Subject<boolean>();
+  public dropdownMenu$ = this._dropdownMenu.asObservable();
+
   constructor(private http: HttpService) {
     if (localStorage.getItem("bks_user")) {
       this._user = new User(JSON.parse(localStorage.getItem("bks_user")));
@@ -88,5 +91,9 @@ export class UserService {
     setTimeout(() => {
       this._editingSbj.next(false);
     }, 1500);
+  }
+
+  public dropdownMenu (state:boolean){
+    this._dropdownMenu.next(state)
   }
 }

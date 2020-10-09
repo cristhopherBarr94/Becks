@@ -1,7 +1,7 @@
 <ion-content>
   <div class="container-profile flex-direction-column">
-    <user-name-tittle [first_name]="user.first_name"></user-name-tittle>
-    <user-menu style="position: absolute;"></user-menu>
+    <user-name-tittle [first_name]="user.first_name" *ngIf="this.size == 'xs'"></user-name-tittle>
+    <user-menu  [ngClass]='positionHeader()'></user-menu>
     <user-profile-picture
       [urlImage]="profilePicture()"
       [profile_name]=" user.first_name + ' ' + user.last_name "

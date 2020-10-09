@@ -17,6 +17,7 @@ export class ProfilePage implements OnInit, OnDestroy {
   public stats = { buy: "10", exp: "6", friends: "7" };
   public size: string;
   public default_picure: boolean;
+  public headerPosition : string
 
   userSubscription: Subscription;
 
@@ -81,5 +82,14 @@ export class ProfilePage implements OnInit, OnDestroy {
       : this.user.gender == "F"
       ? "../../../../../../../assets/img/profile_female.jpg"
       : "../../../../../../../assets/img/profile_male.jpg";
+  }
+
+  positionHeader(){
+    if(this.size == 'xs'){
+      return 'positionAbsolute'
+    }
+    else{
+      return 'positionRelative'
+    }
   }
 }

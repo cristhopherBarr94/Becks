@@ -42,15 +42,12 @@ export class ScheduleComponent implements OnInit {
       "2020" + "/" + (new Date().getMonth() + 2) + "/" + "01"
     );
     this.maxDate2 = new Date(new Date().setMonth(new Date().getMonth() + 2));
-    this.currentYear = new Date().getFullYear();
-    this.onSelect(this.selectedDate);
-    
+    this.currentYear = new Date().getFullYear();    
     this.eventList.forEach(fecha =>{
       this.events.push(fecha.fechaExp);
     });
     this. toDate() 
-
-
+    this.onSelect(this.selectedDate);
   }
   toDate() {
     this.events.forEach((singleEvent) => {

@@ -41,7 +41,7 @@
         <h4 class="title-tertiary">{{ DayAndDate }}</h4>
       </div>
       <div class="schedule-over">
-        <p [hidden]="message">Ningún evento disponible.</p>
+        <p [hidden]="showEvent">Ningún evento disponible.</p>
 
         <div
           class="schedule-body"
@@ -50,7 +50,7 @@
           <div
             class="card-schedule"
             [ngClass]="event.colorExp"
-            [hidden] = "DayAndDate != event.fechaExp"
+            [hidden] = "stringCom != event.fechaExp"
           >
             <ion-row>
               <div>

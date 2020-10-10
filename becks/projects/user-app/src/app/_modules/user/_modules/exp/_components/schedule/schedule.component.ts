@@ -10,9 +10,8 @@ import { MockExperiencias } from "../../../../../../_mocks/experiencias-mock";
 })
 export class ScheduleComponent implements OnInit {
   DayAndDate: string;
-  // eventDay = [];
-  // events = [];
-  message: boolean;
+  eventDay = [];
+  events = [];
   eventList = MockExperiencias;
   options = {
     year: "numeric",
@@ -21,6 +20,9 @@ export class ScheduleComponent implements OnInit {
     weekday: "long",
   };
   public selectedDate: Date;
+  public auxDate:string;
+  public showEvent:boolean;
+  public stringCom:string;
   public minDate: Date;
   public maxDate: Date;
   public minDate2: Date;
@@ -42,19 +44,30 @@ export class ScheduleComponent implements OnInit {
     this.maxDate2 = new Date(new Date().setMonth(new Date().getMonth() + 2));
     this.currentYear = new Date().getFullYear();
     this.onSelect(this.selectedDate);
+    
+    this.eventList.forEach(fecha =>{
+      this.events.push(fecha.fechaExp);
+    });
+    this. toDate() 
 
-    this.message=true;
+
   }
-  // toDate() {
-  //   this.events.forEach((singleEvent) => {
-  //     let fecha = new Date(singleEvent)
-  //       .toLocaleDateString("es-ES", this.options)
-  //       .split(" ");
-  //     this.eventDay.push(fecha);
-  //   });
-  // }
+  toDate() {
+    this.events.forEach((singleEvent) => {
+      let fecha = new Date(singleEvent)
+        .toLocaleDateString("es-ES", this.options)
+        .split(" ");
+      this.eventDay.push(fecha);
+      console.log(this.eventDay);
+
+    });
+  }
   onSelect(event) {
-    // this.showEvent = false;
+    this.showEvent = false;
+    this.auxDate = event.toLocaleDateString();
+    let stringDate2 = this.auxDate.split("/");
+    this.stringCom = stringDate2[1]+"/"+stringDate2[0]+"/"+stringDate2[2];
+
     this.selectedDate = event;
     const dateString = this.selectedDate.toLocaleDateString(
       "es-ES",
@@ -63,17 +76,16 @@ export class ScheduleComponent implements OnInit {
     const dateValue = dateString.split(" ");
     this.currentYear = new Date().getFullYear();
     this.DayAndDate = dateValue[0] + " " + dateValue[3] + " " + dateValue[1];
-    console.log(this.DayAndDate);
-    // for (var j = 0; j < this.eventDay.length; j++) {
-    //   if (
-    //     (dateValue[1] == this.eventDay[j][1] &&
-    //       dateValue[3] == this.eventDay[j][3]) ||
-    //     (this.selectedDate[1] == this.eventDay[j][1] &&
-    //       this.selectedDate[3] == this.eventDay[j][3])
-    //   ) {
-    //     this.showEvent = true;
-    //   }
-    // }
+    for (var j = 0; j < this.eventDay.length; j++) {
+      if (
+        (dateValue[1] == this.eventDay[j][1] &&
+          dateValue[3] == this.eventDay[j][3]) ||
+        (this.selectedDate[1] == this.eventDay[j][1] &&
+          this.selectedDate[3] == this.eventDay[j][3])
+      ) {
+        this.showEvent = true;
+      }
+    }
   }
   previousDate() {
     this.calendar1._goToDateInView(

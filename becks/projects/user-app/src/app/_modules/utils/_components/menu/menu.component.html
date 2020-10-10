@@ -1,6 +1,6 @@
 <div class="menu-content">
   <nav class="menu-mobile">
-    <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
+    <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" (click)="openClose()" />
     <label class="menu-open-button" for="menu-open">
       <span class="hamburger hamburger-1"></span>
       <span class="hamburger hamburger-2"></span>
@@ -17,7 +17,7 @@
         class="name-item">Compra</span> </a>
     <a href="#" class="menu-item"> <img class="perfil-img" src="./assets/icon/menu/perfil.jpg" alt="Inicio"> <span
         class="name-item">Mi perfil</span> </a>
-    <a href="#" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out"> <span class="label-out">Salir</span>  </a>
+    <a (click)="logout()" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out"> <span class="label-out">Salir</span>  </a>
   </nav>
   <nav class="menu-desktop">
     <div class="container-menu">
@@ -40,7 +40,7 @@
           <a href="#" class="menu-item-destkop"> <img class="perfil-img" src="./assets/icon/menu/perfil.jpg" alt="Inicio">  </a>
         </li>
         <li>
-          <a href="#" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out"> <span class="label-out">Salir</span>  </a>
+          <a (click)="logout()" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out"> <span class="label-out">Salir</span>  </a>
         </li>
       </ul>
     </div>

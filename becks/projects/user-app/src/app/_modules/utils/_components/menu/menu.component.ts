@@ -19,16 +19,31 @@ export class MenuComponent implements OnInit {
   @Input() default_photo: boolean;
   public menuStatus:boolean = false;
   public url: string = environment.serverUrl;
-
+  public time;
+  private pictureSub: Subscription;
 
   constructor(private userSvc: UserService,   private authService: AuthService,
     private httpService: HttpService,
     private ui: UiService,
-    private router: Router,) { }
+    private router: Router,
+    ) { this.pictureSub = this.userSvc.editing$.subscribe((isEditing) => {
+      this.time = isEditing
+        ? ""
+        : "?time_stamp=" + Math.floor(Date.now() / 1000);
+    });}
 
   ngOnInit() {
     
   }
+
+  ngOnDestroy() {
+    this.pictureSub.unsubscribe();
+  }
+
+  ngAfterViewInit() {
+    this.time = "?time_stamp=" + Math.floor(Date.now() / 1000);
+  }
+
   openClose(){
     this.menuStatus = !this.menuStatus
     this.userSvc.dropdownMenu(this.menuStatus)
@@ -54,6 +69,6 @@ export class MenuComponent implements OnInit {
   profilePicture() {
     return this.default_photo
       ? this.urlImage
-      : this.url + this.urlImage ;
+      : this.url + this.urlImage+ this.time ;
   }
 }

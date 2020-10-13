@@ -1,10 +1,13 @@
 <ion-content>
   <app-header></app-header>
 
-  <section class="fullSection from-section content-flex-all-center">
+  <section class="fullSection from-section content-flex-all-center"
+  [ngClass]="colorBg"
+  >
     <div
       id="formActivationSection"
       class="content-flex-all-center full-height flex-direction-column padding-form"
+      [hidden]="activate"
     >
       <h2 class=" title-desktop">{{title}}</h2>
       <div class="separator-becks"></div>

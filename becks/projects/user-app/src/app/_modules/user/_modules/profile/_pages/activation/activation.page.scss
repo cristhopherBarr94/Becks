@@ -92,8 +92,13 @@
 }
 
 @media (min-width: 769px) {
-  .from-section {
+  .bg-grey {
     background-image: url(./../../../../../../../assets/img/frankbn.jpg);
+    background-size: cover;
+    background-position: top;
+  }
+  .bg-color {
+    background-image: url(./../../../../../../../assets/img/frankcolor.jpg);
     background-size: cover;
     background-position: top;
   }

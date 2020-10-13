@@ -34,6 +34,8 @@ export class ActivationPage implements OnInit, AfterViewInit {
   public title_button_modal:string = "VER EXPERIENCIAS";
   public prom_cod_modal:string = "HJASDYASU5145";
   public allow:boolean;
+  public colorBg:string;
+  public activate:boolean;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
   title: string = "activa tu cuenta";
@@ -48,7 +50,9 @@ export class ActivationPage implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    this.activate=false;
     this.initforms();
+    this.bgActive();
   }
 
   ngAfterViewInit(): void {
@@ -76,6 +80,7 @@ export class ActivationPage implements OnInit, AfterViewInit {
     return classreturn;
   }
   verifyCode(): void {
+
     if (this.userActivationForm.valid) {
       this.ui.showLoading();
       const formData = new FormData();
@@ -117,7 +122,15 @@ export class ActivationPage implements OnInit, AfterViewInit {
 public redirectTo() {
    this.router.navigate(["user/exp"]);
 }
+public bgActive(){
+  if (this.activate) {
+    this.colorBg = "bg-color";
+  } else if (this.activate == false) {
+    this.colorBg =  "bg-grey";
+  }
+}
   async showModal() {
+    this.activate=true;
     const modal = await this.modalCtrl.create({
       component: NotifyModalComponent,
       cssClass: "modalMessage",
@@ -132,6 +145,10 @@ public redirectTo() {
     });
     await modal.present();
     modal.onDidDismiss().then((res) => {
+      this.activate=false;
     });
+    this.bgActive();
+
   }
+  
 }

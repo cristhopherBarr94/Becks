@@ -21,6 +21,7 @@ export class NotifyModalComponent implements OnInit {
   }
   activateUserParent() {
     this.Func();
+    this.close();
   }
   ngOnInit() {}
 

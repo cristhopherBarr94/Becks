@@ -79,7 +79,6 @@ export class UserLoginComponent implements OnInit {
           (response: any) => {
             this.ui.dismissLoading();
             if (response.status == 200) {
-              this.httpError = "";
               this.userLoginForm.reset();
               this.authService.setAuthenticated(
                 "Bearer " + response.body.access_token
@@ -108,14 +107,9 @@ export class UserLoginComponent implements OnInit {
   public getMessageform(
     item: any,
     name: string,
-    min?: number,
-    max?: number
   ): string {
-    if (item.hasError("email") && name === "email") {
+    if (item.hasError("email")) {
       return "Ingrese una dirección de correo electrónico válida";
-    }
-    if (item.hasError("password")) {
-      return "Contraseña inválida";
     }
   }
   public setCaptchaStatus(status) {

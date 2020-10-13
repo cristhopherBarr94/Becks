@@ -23,7 +23,7 @@
         <mat-icon matSuffix>mail_outline</mat-icon>
         <mat-error *ngIf="userLoginForm.controls.email.errors">
           {{
-            getMessageform(userLoginForm.controls.email, "email", 0, 30)
+            getMessageform(userLoginForm.controls.email, "email")
           }}</mat-error
         >
       </mat-form-field>

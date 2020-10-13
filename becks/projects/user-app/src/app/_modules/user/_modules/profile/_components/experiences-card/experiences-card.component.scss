@@ -1,5 +1,9 @@
 .card-model {
-  margin-top: 24px;
+  height: 72px;
+  @media (min-width: 768px) {
+    height: 117px;
+  }
+  margin-top: 24px;  
   background-color: #141313;
   width: 90%;
   display: flex;
@@ -23,21 +27,39 @@
   }
 }
 
+.image-box {
+  height: 72px;
+  width: 108px; 
+  @media (min-width: 768px) {
+    height: 117px;
+    width: 218px;
+  }
+  display: flex;
+  justify-content: center;
+  
+}
+
+.image-box-vertical {
+  height: 104px;
+  width: 193px;  
+  display: flex;
+  justify-content: center;  
+}
+
 .image-card {
-  width: 33%;
-  height: 73px;
-  @media (min-width: 768px) and (max-width: 1280) {
+  height: 72px;
+  max-width: 108px;
+  // background: -webkit-gradient(linear, left, right, color-stop(0%,#2C2F36), color-stop(100%,#141313));
+  @media (min-width: 768px) {
     height: 117px;
-    width: 45%;
+    max-width: 218px;
   }
-  @media (min-width: 1281px) {
-    height: 117px;
-    width: 25%;
-  }
+  
 }
 
 .image-card-vertical {
-  height: 50%;
+  height: 104px;
+  max-width: 193px;
 }
 
 .display-flex {

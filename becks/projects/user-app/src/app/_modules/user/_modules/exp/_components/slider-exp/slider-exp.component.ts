@@ -9,11 +9,7 @@ import { ExperienciasService } from 'src/app/_services/experiencias.service';
   styleUrls: ['./slider-exp.component.scss'],
 })
 export class SliderExpComponent implements OnInit {
-
-  slideOpts = {
-    direction: "vertical",
-    speed: 400
-  };
+  public initialSlide
 
   experienciaContent: Exp[] = [];
 
@@ -24,7 +20,7 @@ export class SliderExpComponent implements OnInit {
   ngOnInit() {
     this.experienciaService.getExpContent().subscribe(response => {
       this.experienciaContent = response;
-      console.log('esta es la data ->', this.experienciaContent);
+      console.log("SliderExpComponent -> ngOnInit -> response", response)
     });
   }
 
@@ -34,6 +30,22 @@ export class SliderExpComponent implements OnInit {
 
   detalleExperiencia(item: any) {
     this.experienciaContent[item].detalleExp = !this.experienciaContent[item].detalleExp;
+  }
+
+  slideOpts = {
+    initialSlide: this.compareId(2),
+    direction: "vertical",
+    speed: 400
+  };  
+
+
+  compareId(idExp:number){
+    for(let i=0 ; i<this.experienciaContent.length; i++){      
+      if(this.experienciaContent[i].id == idExp ){
+        return i
+      }     
+    }
+    return 2 
   }
 
 }

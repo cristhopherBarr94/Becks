@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Exp } from 'src/app/_models/exp';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
 
@@ -9,25 +10,28 @@ import { ExperienciasService } from 'src/app/_services/experiencias.service';
   styleUrls: ['./slider-exp.component.scss'],
 })
 export class SliderExpComponent implements OnInit {
-  @Input() id: number;
+  public id: number;
   public initialSlide
   public slideOpts
 
   experienciaContent: Exp[] = [];
 
   constructor(
-    private experienciaService: ExperienciasService
+    private experienciaService: ExperienciasService,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    this.id = Number(this.router.url.replace("/user/exp/",""))
     this.experienciaService.getExpContent().subscribe(response => {
       this.experienciaContent = response;
       this.slideOpts = {
-        initialSlide: this.compareId(!!this.id ? this.id : 0),
+        initialSlide: this.compareId(this.id == NaN ? 0: this.id),
         direction: "vertical",
         speed: 400
       };  
     });
+   console.log( this.router.url)
   }
 
   activarCuenta(item: any) {

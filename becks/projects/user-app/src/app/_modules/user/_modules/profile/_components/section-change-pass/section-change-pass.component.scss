@@ -31,6 +31,15 @@
       padding: 0px;
     }
   }
+  .confirm-pass-text {
+    font-family: "Helvetica LT Std";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 10px;
+    letter-spacing: 0.15px;
+    width: 100%;
+  }
   mat-error {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 14px;

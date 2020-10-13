@@ -52,18 +52,16 @@
             >*Este campo es obligatorio
           </mat-error>
         </mat-form-field>
-
         <button
           block="block"
           color="becks"
-          (click)="verifyCode()"
           class="becks-btn-primary margin-top-button button-width"
           [ngClass]="{
           'button-disabled': userActivationForm.invalid
         }"
           [disabled]="userActivationForm.invalid"
           data-qadp="send-button-form"
-          [routerLink]="['/user/email']"
+          (click)="verifyCode()"
         >
           <span>PARTICIPAR</span>
         </button>

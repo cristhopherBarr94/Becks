@@ -4,16 +4,17 @@
     (click)="close()"
     >X</button>
     </span>
+    <span class="logo-brand-modal"> </span>
+
     <span class="modal-body">
       <div>
-        <h1>!</h1>
+        <h1 class="title">{{title}}</h1>
       </div>
     <div>
-      <h3 [hidden]="allow==true">VAS A DARLE ACCESO A {{amount}} USUARIOS</h3>
-      <h3 [hidden]="allow==false">VAS A ELIMINAR A ESTE USUARIO</h3>
+      <h3 [hidden]="allow==true" class="sub_title">{{sub_title}}</h3>
     </div>
     <div>
-      <p>¿DESEAS CONTINUAR?</p>
+      <p [hidden]="true">{{prom_cod}}</p>
     </div>
     </span>
     <span>
@@ -21,11 +22,6 @@
       [hidden]="allow==true"
       class="modal-btn"
       (click)="activateUserParent()"
-      >CONTINUAR</button>
-      <button
-      [hidden]="allow==false"
-      class="modal-btn"
-      (click)="deleteUserParent()"
-      >ELIMINAR</button>
+      >{{title_button}}</button>
     </span>
 </div>

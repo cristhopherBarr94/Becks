@@ -76,15 +76,23 @@
 }
 .modal-btn {
   @include btn(
-    #3a8361,
     #ffffff,
+    #377f5e,
     2px solid #ffffff,
     "Helvetica LT Std",
     16px,
-    167px,
+    "",
     35px,
     3px solid #ffffff
   );
+  border-radius: 16px 0px 16px 0px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 190px;
+  }
+  @media (min-width: 769px) {
+    width: 335px;
+    height: 60px;
+  }
 }
 .admin-btn-sidebar {
   @include btn(

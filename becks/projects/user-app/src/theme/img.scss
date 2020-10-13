@@ -298,3 +298,21 @@
   width: 30px;
   height: 30px;
 }
+.logo-brand-modal {
+  background-image: url("../assets/icon/menu/logo_brand.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    left: 45%;
+    width: 27px !important;
+    height: 33px !important;
+  }
+  @media (min-width: 769px) {
+    left: 48%;
+    width: 35px !important;
+    height: 43px !important;
+  }
+}

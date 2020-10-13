@@ -72,6 +72,12 @@
       font-size: 14px !important;
       line-height: 22px !important;
     }
+
+    ::ng-deep
+      .mat-calendar-body-disabled
+      > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+      color: #3c3844 !important;
+    }
     ::ng-deep .mat-calendar-table-header {
       color: #ffffff;
       font-family: "Helvetica LT Std" !important;
@@ -102,6 +108,8 @@
       font-size: 16px;
       line-height: 24px;
       margin-left: 25% !important;
+      color: #ffffff;
+      cursor: initial;
     }
   }
 

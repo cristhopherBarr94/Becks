@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/_models/User';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
@@ -13,14 +15,20 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  public menuStatus:boolean = false
+  @Input() urlImage: string;
+  @Input() default_photo: boolean;
+  public menuStatus:boolean = false;
+  public url: string = environment.serverUrl;
+
 
   constructor(private userSvc: UserService,   private authService: AuthService,
     private httpService: HttpService,
     private ui: UiService,
     private router: Router,) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
   openClose(){
     this.menuStatus = !this.menuStatus
     this.userSvc.dropdownMenu(this.menuStatus)
@@ -41,5 +49,11 @@ export class MenuComponent implements OnInit {
           this.router.navigate(["home"]);
         }
       );
+  }
+
+  profilePicture() {
+    return this.default_photo
+      ? this.urlImage
+      : this.url + this.urlImage ;
   }
 }

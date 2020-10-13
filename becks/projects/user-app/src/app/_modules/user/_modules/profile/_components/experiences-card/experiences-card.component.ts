@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "user-experiences-card",
@@ -10,15 +11,14 @@ export class ExperiencesCardComponent implements OnInit {
   @Input() urlImageExperience: string;
   @Input() nameExperience: string;
   @Input() type: string;
+  @Input() id: number;
 
   public typeExp: string;
   public colorClass: string;
   public verticalCard: string;
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
-    console.log("vertical", this.vertical);
-
     if (this.type == "cancel") {
       this.typeExp = "Cancelada";
       this.colorClass = "red-color";
@@ -30,4 +30,11 @@ export class ExperiencesCardComponent implements OnInit {
       this.colorClass = "green-color";
     }
   }
+
+  redirectExpId() {
+    this.router.navigate([`user/exp/${this.id}`], {
+      queryParamsHandling: "preserve",
+    });
+  }
+
 }

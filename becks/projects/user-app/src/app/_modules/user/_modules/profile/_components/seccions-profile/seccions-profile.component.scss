@@ -30,11 +30,13 @@
     height: 65px;
     font-size: 14px;
     border-bottom: 0px solid #c4c4c4;
+    width: revert;
   }
   @media (min-width: 1367px) {
     height: 65px;
     font-size: 24px;
     border-bottom: 0px solid #c4c4c4;
+    width: revert;
   }
 }
 
@@ -49,12 +51,14 @@
     width: 70px;
     margin-bottom: 18px;
     padding: revert;
+    width: revert;
   }
   @media (min-width: 1367px) {
     height: 65px;
     font-size: 24px;
     margin-bottom: 18px;
     padding: revert;
+    width: revert;
   }
 }
 

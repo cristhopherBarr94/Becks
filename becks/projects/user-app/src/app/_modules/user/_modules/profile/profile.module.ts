@@ -40,8 +40,7 @@ import { MenuComponent } from 'src/app/_modules/utils/_components/menu/menu.comp
     SalesCardComponent,
     CircleProgressComponent,
     SectionEditProfileComponent,
-    UpdateFileComponent,
-    MenuComponent
+    UpdateFileComponent
   ],
   imports: [
     CommonModule,

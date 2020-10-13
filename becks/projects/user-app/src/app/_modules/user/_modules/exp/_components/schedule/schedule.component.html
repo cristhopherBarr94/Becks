@@ -1,70 +1,75 @@
-<section
-  class="content-flex-all-center  flex-direction-column container-schedule-component"
->
-  <h1 class="title-primary">calendario</h1>
-  <span class="separator-white"></span>
-  <ion-row>
-    <div class="calendar">
-      <h3 class="title-secondary">{{ currentYear }}</h3>
-      <ion-row>
-        <button (click)="previousDate()" class="btn btn-left">
-          <span class="left-arrow-icon"> </span>
-        </button>
-        <button (click)="nextDate()" class="btn btn-right">
-          <span class="left-arrow-icon"> </span>
-        </button>
-      </ion-row>
-      <ion-row>
-        <div>
-          <mat-calendar
-            #calendar1
-            class="month1"
-            [minDate]="minDate"
-            [selected]="selectedDate"
-            (selectedChange)="onSelect($event)"
-          ></mat-calendar>
-        </div>
-        <div>
-          <mat-calendar
-            #calendar2
-            class="month2"
-            [minDate]="minDate2"
-            [selected]="selectedDate"
-            (selectedChange)="onSelect($event)"
-          ></mat-calendar>
-        </div>
-      </ion-row>
-    </div>
-    <div class="schedule">
-      <div>
-        <h2 class="title-secondary">próximos eventos</h2>
-        <h4 class="title-tertiary">{{ DayAndDate }}</h4>
-      </div>
-      <div class="schedule-over">
-        <p [hidden]="showEvent">Ningún evento disponible.</p>
+<ion-content>
+  <user-menu></user-menu>
 
-        <div
-          class="schedule-body"
-          *ngFor="let event of eventList"
-        >
+  <section
+    class="content-flex-all-center flex-direction-column container-schedule-component"
+  >
+    <h1 class="title-primary">calendario</h1>
+    <span class="separator-white"></span>
+    <ion-row>
+      <div class="calendar">
+        <h3 class="title-secondary">{{ currentYear }}</h3>
+        <ion-row>
+          <button (click)="previousDate()" class="btn btn-left">
+            <span class="left-arrow-icon"> </span>
+          </button>
+          <button (click)="nextDate()" class="btn btn-right">
+            <span class="left-arrow-icon"> </span>
+          </button>
+        </ion-row>
+        <ion-row>
+          <div>
+            <mat-calendar
+              #calendar1
+              class="month1"
+              [minDate]="minDate"
+              [selected]="selectedDate"
+              (selectedChange)="onSelect($event)"
+            ></mat-calendar>
+          </div>
+          <div>
+            <mat-calendar
+              #calendar2
+              class="month2"
+              [minDate]="minDate2"
+              [selected]="selectedDate"
+              (selectedChange)="onSelect($event)"
+            ></mat-calendar>
+          </div>
+        </ion-row>
+      </div>
+      <div class="schedule">
+        <div>
+          <h2 class="title-secondary">próximos eventos</h2>
+          <h4 class="title-tertiary">{{ DayAndDate }}</h4>
+        </div>
+        <div class="schedule-over">
+          <p [hidden]="showEvent">Ningún evento disponible.</p>
+  
           <div
-            class="card-schedule"
-            [ngClass]="event.colorExp"
-            [hidden] = "stringCom != event.fechaExp"
+            class="schedule-body"
+            *ngFor="let event of eventList"
           >
-            <ion-row>
-              <div>
-                <div class="title-tertiary title-card"><a [href]="event.urlExp">{{ event.titleExp }}</a></div>
-              <div class="title-tertiary hour-card">{{ event.horaExp }}</div>
-              </div>
-              <div class="circle-icon" [ngClass]="event.colorExp">
-                <span class="briefcase-icon"> </span>
-              </div>
-            </ion-row>
-            <div class="guest-card" title="@usuario"></div>
+            <div
+              class="card-schedule"
+              [ngClass]="event.colorExp"
+              [hidden] = "stringCom != event.fechaExp"
+            >
+              <ion-row>
+                <div>
+                  <div class="title-tertiary title-card"><a [href]="event.urlExp">{{ event.titleExp }}</a></div>
+                <div class="title-tertiary hour-card">{{ event.horaExp }}</div>
+                </div>
+                <div class="circle-icon" [ngClass]="event.colorExp">
+                  <span class="briefcase-icon"> </span>
+                </div>
+              </ion-row>
+              <div class="guest-card" title="@usuario"></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </ion-row>
-</section>
+    </ion-row>
+  </section>
+</ion-content>
+

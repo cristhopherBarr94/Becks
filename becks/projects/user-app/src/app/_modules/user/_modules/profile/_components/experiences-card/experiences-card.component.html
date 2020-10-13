@@ -1,5 +1,7 @@
 <mat-card class="card-model" *ngIf="!vertical">
-  <img [src]="urlImageExperience" class="image-card" />
+  <div class="image-box">
+    <img [src]="urlImageExperience" class="image-card" />
+  </div>
   <div class="flex-direction-column display-flex content-card">
     <span class="profile-content container">{{ nameExperience }}</span>
     <span class="font-link-x-small container" [ngClass]="colorClass">{{
@@ -21,7 +23,7 @@
   </div>
   <button
     class="font-link-x-small green-color container trasparent-button view-details"
-    style="margin-left: 90px"
+    style="margin-left: 90px" (click)="redirectExpId()"
     >VER DETALLE</button
   >
 </mat-card>

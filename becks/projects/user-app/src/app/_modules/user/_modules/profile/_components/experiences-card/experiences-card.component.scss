@@ -1,5 +1,6 @@
 .card-model {
   margin-top: 24px;
+  height: 117px;
   background-color: #141313;
   width: 90%;
   display: flex;
@@ -23,16 +24,23 @@
   }
 }
 
+.image-box {
+  height: 117px;
+  width: 218px;
+  @media (min-width: 768px) {}
+  display: flex;
+  justify-content: center;
+  
+}
+
 .image-card {
-  width: 33%;
-  height: 73px;
+  height: 72px;
+  // background: -webkit-gradient(linear, left, right, color-stop(0%,#2C2F36), color-stop(100%,#141313));
   @media (min-width: 768px) and (max-width: 1280) {
     height: 117px;
-    width: 45%;
   }
   @media (min-width: 1281px) {
     height: 117px;
-    width: 25%;
   }
 }
 

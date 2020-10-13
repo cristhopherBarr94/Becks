@@ -15,7 +15,9 @@
 </mat-card>
 
 <mat-card class="vertical_card_model flex-direction-column" *ngIf="vertical">
-  <img [src]="urlImageExperience" class="image-card-vertical" />
+  <div class="image-box-vertical">
+    <img [src]="urlImageExperience" class="image-card-vertical" />  
+  </div>
   <div class="flex-direction-column display-flex content-card-vartical">
     <span class="profile-content container">{{ nameExperience }}</span>
     <span class="font-link-x-small container" [ngClass]="colorClass">{{

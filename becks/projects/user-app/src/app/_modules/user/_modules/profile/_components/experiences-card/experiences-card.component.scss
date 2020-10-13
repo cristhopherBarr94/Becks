@@ -1,6 +1,9 @@
 .card-model {
-  margin-top: 24px;
-  height: 117px;
+  height: 72px;
+  @media (min-width: 768px) {
+    height: 117px;
+  }
+  margin-top: 24px;  
   background-color: #141313;
   width: 90%;
   display: flex;
@@ -25,12 +28,22 @@
 }
 
 .image-box {
-  height: 117px;
-  width: 218px;
-  @media (min-width: 768px) {}
+  height: 72px;
+  width: 108px; 
+  @media (min-width: 768px) {
+    height: 117px;
+    width: 218px;
+  }
   display: flex;
   justify-content: center;
   
+}
+
+.image-box-vertical {
+  height: 104px;
+  width: 193px;  
+  display: flex;
+  justify-content: center;  
 }
 
 .image-card {
@@ -45,7 +58,7 @@
 }
 
 .image-card-vertical {
-  height: 50%;
+  height: 104px;
 }
 
 .display-flex {

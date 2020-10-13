@@ -21,6 +21,7 @@ export class MenuComponent implements OnInit {
   public url: string = environment.serverUrl;
   public time;
   private pictureSub: Subscription;
+  userSubscription: Subscription;
 
   constructor(private userSvc: UserService,   private authService: AuthService,
     private httpService: HttpService,
@@ -33,7 +34,18 @@ export class MenuComponent implements OnInit {
     });}
 
   ngOnInit() {
-    
+    if(!this.urlImage){
+      this.userSvc.getData();
+      this.userSubscription = this.userSvc.user$.subscribe(
+        (user: User) => {
+          if (user !== undefined) {           
+            this.urlImage = user.photo;
+            this.default_photo = !!!user.photo;
+          }
+        },
+        (error: any) => {}
+      );
+    }
   }
 
   ngOnDestroy() {

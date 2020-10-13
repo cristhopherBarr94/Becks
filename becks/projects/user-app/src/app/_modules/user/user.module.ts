@@ -16,6 +16,10 @@ import { IonicModule } from "@ionic/angular";
 import { ActivationPage } from "./_modules/profile/_pages/activation/activation.page";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MGMPage } from "./_modules/profile/_pages/mgm/mgm.page";
+import { MatCarouselModule } from '@ngmodule/material-carousel';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ScheduleComponent } from './_modules/exp/_components/schedule/schedule.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,8 @@ import { MGMPage } from "./_modules/profile/_pages/mgm/mgm.page";
     SectionChangePassComponent,
     ActivationPage,
     MGMPage,
+    ScheduleComponent,
+
   ],
   imports: [
     CommonModule,
@@ -38,6 +44,10 @@ import { MGMPage } from "./_modules/profile/_pages/mgm/mgm.page";
     MatIconModule,
     UtilsModule,
     MatTooltipModule,
+    MatCarouselModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: "es-ES" }],
 })
 export class UserModule {}

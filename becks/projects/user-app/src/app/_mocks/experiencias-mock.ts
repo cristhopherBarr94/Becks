@@ -21,8 +21,8 @@ export const MockExperiencias: Exp[] = [
     cuentaActiva: false,
     detalleExp: false,
     imagesExp: "./assets/img/exp/frank2.jpg",
-    titleExp: "Vintage",
-    fechaExp: "10/14/2020",
+    titleExp: "FRANK VIDEO CLIP2",
+    fechaExp: "10/10/2020",
     horaExp: "11:00 PM — 4:00 AM",
     detailExp:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
@@ -36,8 +36,8 @@ export const MockExperiencias: Exp[] = [
     cuentaActiva: false,
     detalleExp: false,
     imagesExp: "./assets/img/exp/frank2.jpg",
-    titleExp: "Frank video clip",
-    fechaExp: "10/13/2020",
+    titleExp: "FRANK VIDEO CLIP3",
+    fechaExp: "10/11/2020",
     horaExp: "1:00 PM — 3:00 PM",
     detailExp:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",

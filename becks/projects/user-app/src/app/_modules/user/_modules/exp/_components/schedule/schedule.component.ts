@@ -55,7 +55,7 @@ export class ScheduleComponent implements OnInit {
         .toLocaleDateString("es-ES", this.options)
         .split(" ");
       this.eventDay.push(fecha);
-      console.log(this.eventDay);
+      // console.log(this.eventDay);
 
     });
   }
@@ -98,7 +98,7 @@ export class ScheduleComponent implements OnInit {
   }
   nextDate() {
     this.calendar1._goToDateInView(
-      (this.minDate = new Date(new Date().setMonth(new Date().getMonth() + 1))),
+      (this.minDate = new Date( this.currentYear + "/" + (new Date().getMonth() + 2) + "/" + "01")),
       "month"
     );
     this.calendar2._goToDateInView(

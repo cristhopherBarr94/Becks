@@ -15,7 +15,7 @@
         class="name-item">Invita</span> </a>
     <a href="#" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/comprar.svg" alt="Inicio"> <span
         class="name-item">Compra</span> </a>
-    <a href="#" class="menu-item"> <img class="perfil-img" src="./assets/icon/menu/perfil.jpg" alt="Inicio"> <span
+    <a href="/user/profile" class="menu-item"> <img class="perfil-img" [src]="profilePicture()" alt="perfil"> <span
         class="name-item">Mi perfil</span> </a>
     <a (click)="logout()" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out"> <span class="label-out">Salir</span>  </a>
   </nav>
@@ -37,7 +37,7 @@
           <a href="#" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/comprar.svg" alt="Inicio">  </a>
         </li>
         <li>
-          <a href="#" class="menu-item-destkop"> <img class="perfil-img" src="./assets/icon/menu/perfil.jpg" alt="Inicio">  </a>
+          <a href="/user/profile" class="menu-item-destkop"> <img class="perfil-img" [src]="profilePicture()" alt="perfil"> </a>
         </li>
         <li>
           <a (click)="logout()" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out"> <span class="label-out">Salir</span>  </a>

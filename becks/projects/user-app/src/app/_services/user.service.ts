@@ -18,6 +18,9 @@ export class UserService {
   private _dropdownMenu = new Subject<boolean>();
   public dropdownMenu$ = this._dropdownMenu.asObservable();
 
+  private _imagenProfile = new Subject<string>();
+  public imagenProfile$ = this._imagenProfile.asObservable();
+
   constructor(private http: HttpService) {
     if (localStorage.getItem("bks_user")) {
       this._user = new User(JSON.parse(localStorage.getItem("bks_user")));
@@ -95,5 +98,9 @@ export class UserService {
 
   public dropdownMenu (state:boolean){
     this._dropdownMenu.next(state)
+  }
+
+  public profilePicture (state:string){
+    this._imagenProfile.next(state)
   }
 }

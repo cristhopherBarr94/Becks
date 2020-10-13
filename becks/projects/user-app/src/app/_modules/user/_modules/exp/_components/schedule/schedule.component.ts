@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatCalendar } from "@angular/material/datepicker";
+import { MockExperiencias } from "../../../../../../_mocks/experiencias-mock";
+
 
 @Component({
   selector: "user-schedule",
@@ -9,57 +11,8 @@ import { MatCalendar } from "@angular/material/datepicker";
 export class ScheduleComponent implements OnInit {
   DayAndDate: string;
   eventDay = [];
-  showEvent: boolean;
-  events = [
-    "10/08/2020",
-    "19/10/2020",
-    "2020/11/11",
-    "2020/11/19",
-    "2020/12/24",
-  ];
-  eventList = [
-    {
-      title: "Bruno Be",
-      hour: "9:00 AM — 10:00 AM",
-      members: {
-        user_1: "@mario_casas",
-        user_2: "@juliana_santa",
-        user_3: "@diana_mal",
-      },
-      color: "#038259",
-      icon: "",
-    },
-    {
-      title: "Vintage",
-      hour: "11:00 PM — 4:00 AM",
-      members: {
-        user_1: "@juliana_santa",
-        user_2: "@diana_mal",
-      },
-      color: "#DB4843",
-      icon: "",
-    },
-    {
-      title: "Frank video clip",
-      hour: "11:00 PM — 4:00 AM",
-      members: {
-        user_1: "@juliana_santa",
-        user_2: "@diana_mal",
-      },
-      color: "#E362F8",
-      icon: "",
-    },
-    {
-      title: "Frank video clip",
-      hour: "11:00 PM — 4:00 AM",
-      members: {
-        user_1: "@juliana_santa",
-        user_2: "@diana_mal",
-      },
-      color: "#E362F8",
-      icon: "",
-    },
-  ];
+  events = [];
+  eventList = MockExperiencias;
   options = {
     year: "numeric",
     month: "short",
@@ -67,18 +20,21 @@ export class ScheduleComponent implements OnInit {
     weekday: "long",
   };
   public selectedDate: Date;
+  public auxDate:string;
+  public showEvent:boolean;
+  public stringCom:string;
   public minDate: Date;
   public maxDate: Date;
   public minDate2: Date;
   public maxDate2: Date;
   public count: number = 0;
+  public colorClass: string;
   currentYear = new Date().getFullYear();
   @ViewChild("calendar1", { static: false }) calendar1: MatCalendar<Date>;
   @ViewChild("calendar2", { static: false }) calendar2: MatCalendar<Date>;
   constructor() {}
 
   ngOnInit() {
-    this.toDate();
     this.selectedDate = new Date();
     this.minDate = new Date();
     this.maxDate = new Date(new Date().setMonth(new Date().getMonth() + 1));
@@ -86,7 +42,11 @@ export class ScheduleComponent implements OnInit {
       "2020" + "/" + (new Date().getMonth() + 2) + "/" + "01"
     );
     this.maxDate2 = new Date(new Date().setMonth(new Date().getMonth() + 2));
-    this.currentYear = new Date().getFullYear();
+    this.currentYear = new Date().getFullYear();    
+    this.eventList.forEach(fecha =>{
+      this.events.push(fecha.fechaExp);
+    });
+    this. toDate() 
     this.onSelect(this.selectedDate);
   }
   toDate() {
@@ -95,10 +55,16 @@ export class ScheduleComponent implements OnInit {
         .toLocaleDateString("es-ES", this.options)
         .split(" ");
       this.eventDay.push(fecha);
+      console.log(this.eventDay);
+
     });
   }
   onSelect(event) {
     this.showEvent = false;
+    this.auxDate = event.toLocaleDateString();
+    let stringDate2 = this.auxDate.split("/");
+    this.stringCom = stringDate2[1]+"/"+stringDate2[0]+"/"+stringDate2[2];
+
     this.selectedDate = event;
     const dateString = this.selectedDate.toLocaleDateString(
       "es-ES",
@@ -107,7 +73,6 @@ export class ScheduleComponent implements OnInit {
     const dateValue = dateString.split(" ");
     this.currentYear = new Date().getFullYear();
     this.DayAndDate = dateValue[0] + " " + dateValue[3] + " " + dateValue[1];
-
     for (var j = 0; j < this.eventDay.length; j++) {
       if (
         (dateValue[1] == this.eventDay[j][1] &&
@@ -143,4 +108,5 @@ export class ScheduleComponent implements OnInit {
       "month"
     );
   }
+
 }

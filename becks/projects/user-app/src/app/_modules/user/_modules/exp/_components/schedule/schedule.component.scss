@@ -145,9 +145,14 @@
         border-radius: 4px;
         padding: 24px 20px;
         margin-top: 16px;
+        border-left: 8px solid;
 
         .title-card {
           color: #ffffff !important;
+          a {
+            text-decoration: none;
+            color: #ffffff;
+          }
         }
         .hour-card {
           font-size: 16px !important;
@@ -172,6 +177,18 @@
           background: #ffffff;
         }
       }
+    }
+    .red-color {
+      border-color: #db4843 !important;
+      background: #db4843;
+    }
+    .green-color {
+      border-color: #038259 !important;
+      background: #038259;
+    }
+    .purple-color {
+      border-color: #e362f8 !important;
+      background: #e362f8;
     }
   }
 }

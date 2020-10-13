@@ -1,3 +1,12 @@
+.button-width {
+  border-radius: 16px 0px 16px 0px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 316px !important;
+  }
+  @media (min-width: 769px) {
+    width: 365px !important;
+  }
+}
 @media (min-width: 0px) and (max-width: 768px) {
   .no-padding {
     padding: 0px;
@@ -5,11 +14,6 @@
     ion-col {
       padding: 0px;
     }
-  }
-
-  .margin-top-button {
-    width: 316px;
-    border-radius: 16px 0px 16px 0px;
   }
 
   .checks {
@@ -120,10 +124,10 @@
     .button-row {
       justify-content: center;
       .margin-top-button {
-        margin-right: 16px;
+        margin-right: 5px;
       }
       ::ng-deep user-fb-button {
-        margin-left: 30px;
+        margin-left: 10px;
       }
       .separator-box {
         margin-top: 15px !important;

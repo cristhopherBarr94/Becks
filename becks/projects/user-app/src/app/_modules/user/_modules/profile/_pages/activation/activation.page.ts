@@ -10,6 +10,8 @@ import { Router } from "@angular/router";
 import { User } from "../../../../../../_models/User";
 import { UiService } from "../../../../../../_services/ui.service";
 import { HeaderComponent } from "src/app/_modules/utils/_components/header/header.component";
+import { ModalController } from '@ionic/angular';
+import { NotifyModalComponent } from 'src/app/_modules/utils/_components/notify-modal/notify-modal.component';
 
 declare global {
   interface Window {
@@ -27,6 +29,11 @@ export class ActivationPage implements OnInit, AfterViewInit {
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
+  public title_modal:string = "TIENES TU CUENTA ACTIVA POR 30 DÍAS";
+  public sub_title_modal:string = "Mira las nuevas experiencias que tenemos para ti"; 
+  public title_button_modal:string = "VER EXPERIENCIAS";
+  public prom_cod_modal:string = "HJASDYASU5145";
+  public allow:boolean;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
   title: string = "activa tu cuenta";
@@ -36,7 +43,8 @@ export class ActivationPage implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     public httpService: HttpService,
     private router: Router,
-    private ui: UiService
+    private ui: UiService,
+    private modalCtrl: ModalController,
   ) {}
 
   ngOnInit(): void {
@@ -81,7 +89,7 @@ export class ActivationPage implements OnInit, AfterViewInit {
           if (response.status == 200) {
             this.httpError = "";
             this.userActivationForm.reset();
-            // this.router.navigate(["user/email"]);
+            this.showModal();
           }
         },
         (e) => {
@@ -105,5 +113,25 @@ export class ActivationPage implements OnInit, AfterViewInit {
     } else if (item.hasError("pattern")) {
       return "Ingrese solo letras y números";
     }
+  }
+public redirectTo() {
+   this.router.navigate(["user/exp"]);
+}
+  async showModal() {
+    const modal = await this.modalCtrl.create({
+      component: NotifyModalComponent,
+      cssClass: "modalMessage",
+      componentProps: {
+        title: this.title_modal,
+        sub_title: this.sub_title_modal,
+        title_button: this.title_button_modal,
+        prom_cod:this.prom_cod_modal,
+        allow: this.allow,
+        Func: this.redirectTo.bind(this),
+      },
+    });
+    await modal.present();
+    modal.onDidDismiss().then((res) => {
+    });
   }
 }

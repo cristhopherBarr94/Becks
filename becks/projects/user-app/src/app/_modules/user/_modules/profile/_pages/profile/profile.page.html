@@ -12,7 +12,7 @@
       *ngIf="this.size == 'xs'"
       class="link-profile url-hyper content-flex-all-center margin-top"
       (click)="editProfile()"
-      >Editar Perfil <mat-icon>edit</mat-icon></span
+      >Editar Perfil <div class="editLogo "></div></span
     >
     <div
       class="background-color margin-top-section"
@@ -35,8 +35,8 @@
       ></user-statistics-profile>
 
       <!-- <div class="separator-line-column sin-stadisticas"></div> -->
-      <button class="edit-button" (click)="editProfileDesktop()">
-        Editar Perfil <mat-icon>edit</mat-icon>
+      <button class="edit-button flex-direction-row" (click)="editProfileDesktop()">
+        Editar Perfil <div class="editLogo margin-left-tt"></div>
       </button>
     </div>
 

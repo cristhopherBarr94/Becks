@@ -698,13 +698,13 @@
 
 .modal-edit-profile {
   align-items: center;
-  opacity: 1;
+  backdrop-filter: blur(10px);
   .modal-wrapper {
     overflow: auto;
     contain: strict;
     position: absolute;
     height: 80% !important;
-    width: 50% !important;
+    width: 50% !important;   
     background-color: #171717;
     @media (min-width: 769px) and (max-width: 970px) {
       width: 90% !important;

@@ -1,6 +1,6 @@
+<h1 class="title-exp">Home</h1>
 <ion-slides loop="false" pager="true" spaceBetween="0" [options]="slideOpts" slidesPerView="1" effect="slide"
   pager="true" zoom="false" class="exp-slider">
-  <h1 class="title-exp">Home</h1>
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !exp.cuentaActiva, 'active': exp.cuentaActiva}">
     <img [src]="exp.imagesExp" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"

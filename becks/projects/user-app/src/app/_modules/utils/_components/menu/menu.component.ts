@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 export class MenuComponent implements OnInit {
   @Input() urlImage: string;
   @Input() default_photo: boolean;
+  @Input() transparent: boolean = false;
   public menuStatus:boolean = false;
   public url: string = environment.serverUrl;
   public time;
@@ -76,6 +77,12 @@ export class MenuComponent implements OnInit {
           this.router.navigate(["home"]);
         }
       );
+  }
+
+  transparentStyle(){
+    if(this.transparent){
+     return "position-menu-absolute"
+    }
   }
 
   profilePicture() {

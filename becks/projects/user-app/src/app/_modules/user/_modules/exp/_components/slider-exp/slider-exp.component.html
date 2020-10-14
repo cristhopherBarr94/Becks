@@ -1,38 +1,59 @@
 <ion-slides loop="false" pager="true" spaceBetween="0" [options]="slideOpts" slidesPerView="1" effect="slide"
   pager="true" zoom="false" class="exp-slider">
+  <h1 class="title-exp">Home</h1>
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !exp.cuentaActiva, 'active': exp.cuentaActiva}">
     <img [src]="exp.imagesExp" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
       [ngClass]="{'animate__animated animate__bounceInLeft': exp.cuentaActiva}">
-    <div class="content-exp" *ngIf="!exp.detalleExp">
-      <h2
+    <div class="content-exp animate__animated animate__bounceInLeft animate__delay-1s">
+      <h2 *ngIf="!exp.detalleExp"
         class="title-primary primary max-width-title-primary-age-gate animate__animated animate__bounceInLeft animate__delay-1s"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">{{exp.titleExp}}
       </h2>
-      <a (click)="detalleExperiencia(i)"
-        class="exp-link-value title-fourthy animate__animated animate__bounceInLeft animate__delay-1s"
+      <p class="detail-content content-desk detail-place animate__animated animate__bounceInLeft animate__delay-1s" [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">{{exp.fechaExp}}
+      </p>
+      <p class="detail-content content-desk detail-place animate__animated animate__bounceInLeft animate__delay-1s" [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">{{exp.placeExp}}
+      </p>
+      <p class="detail-content content-desk paf-desk animate__animated animate__bounceInLeft animate__delay-1s" [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">{{exp.detailExp}}</p>
+      <a (click)="detalleExperiencia(i)" *ngIf="!exp.detalleExp"
+        class="exp-link-value more-info title-fourthy animate__animated animate__bounceInLeft animate__delay-1s"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}"><i
           class="far fa-eye"></i> Conoce más</a>
+      <button *ngIf="!exp.cuentaActiva" block="block" color="becks" (click)="activarCuenta(i)"
+        class="becks-btn-primary margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+        [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
+        <span>Activar tu cuenta</span>
+      </button>
+
+      <button *ngIf="exp.cuentaActiva" block="block" color="becks" [routerLink]="['/']"
+        class="becks-btn-primary margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+        [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
+        <span>Participa</span>
+      </button>
     </div>
     <div class="exp-detail animate__animated animate__backInUp" *ngIf="exp.detalleExp">
       <div class="detail-close">
         <a (click)="detalleExperiencia(i)">Cerrar<i class="fal fa-times"></i></a>
       </div>
-      <h2 class="title-primary primary max-width-title-primary-age-gate title-detail animate__animated animate__bounceInLeft animate__delay-1s">{{exp.titleExp}}</h2>
-      <p class="detail-content detail-place animate__animated animate__bounceInLeft animate__delay-1s">{{exp.fechaExp}}</p>
+      <h2
+        class="title-primary primary max-width-title-primary-age-gate title-detail animate__animated animate__bounceInLeft animate__delay-1s">
+        {{exp.titleExp}}</h2>
+      <p class="detail-content detail-place animate__animated animate__bounceInLeft animate__delay-1s">{{exp.fechaExp}}
+      </p>
+      <p class="detail-content detail-place animate__animated animate__bounceInLeft animate__delay-1s">{{exp.placeExp}}
+      </p>
       <p class="detail-content animate__animated animate__bounceInLeft animate__delay-1s">{{exp.detailExp}}</p>
     </div>
     <button *ngIf="!exp.cuentaActiva" block="block" color="becks" (click)="activarCuenta(i)"
-      class="becks-btn-primary margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
-      [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
-      <span>Activar tu cuenta</span>
-    </button>
+        class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+        [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
+        <span>Activar tu cuenta</span>
+      </button>
 
-    <button *ngIf="exp.cuentaActiva" block="block" color="becks" [routerLink]="['/']"
-      class="becks-btn-primary margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
-      [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
-      <span>Participa</span>
-    </button>
-
+      <button *ngIf="exp.cuentaActiva" block="block" color="becks" [routerLink]="['/']"
+        class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+        [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
+        <span>Participa</span>
+      </button>
   </ion-slide>
 </ion-slides>

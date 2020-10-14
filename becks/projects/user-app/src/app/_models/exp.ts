@@ -4,6 +4,7 @@ export class Exp {
   imagesExp: string;
   titleExp: string;
   fechaExp: string;
+  placeExp: string;
   detailExp: string;
   urlExp: string;
   status: string;

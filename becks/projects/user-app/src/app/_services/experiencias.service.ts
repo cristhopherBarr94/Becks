@@ -19,6 +19,7 @@ export class ExperienciasService {
         titleExp: element.titleExp,
         fechaExp: element.fechaExp,
         detailExp: element.detailExp,
+        placeExp: element.placeExp,
         urlExp: element.urlExp,
         status: element.status,
       };

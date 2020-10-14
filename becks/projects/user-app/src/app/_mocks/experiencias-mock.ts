@@ -9,6 +9,7 @@ export const MockExperiencias: Exp[] = [
     fechaExp: "Viernes 12 sep, 9pm",
     detailExp:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
+    placeExp: "Live instagram Beck’s",
     urlExp: "/exp1",
     status: "0",
   },
@@ -20,6 +21,7 @@ export const MockExperiencias: Exp[] = [
     fechaExp: "Viernes 12 sep, 9pm",
     detailExp:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
+    placeExp: "Live instagram Beck’s",
     urlExp: "/exp1",
     status: "1",
   },
@@ -31,6 +33,7 @@ export const MockExperiencias: Exp[] = [
     fechaExp: "Viernes 12 sep, 9pm",
     detailExp:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
+    placeExp: "Live instagram Beck’s",
     urlExp: "/exp1",
     status: "2",
   },

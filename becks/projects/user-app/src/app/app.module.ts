@@ -3,7 +3,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { RouteReuseStrategy } from "@angular/router";
 
 import { IonicModule, IonicRouteStrategy } from "@ionic/angular";
-import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 
 import { AppComponent } from "./app.component";
@@ -25,7 +24,6 @@ import { UtilService } from "./_services/util.service";
 import { ExperienciasService } from "./_services/experiencias.service";
 import { AgeGuardService } from "./_services/age-guard.service";
 import { UserService } from "./_services/user.service";
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -41,11 +39,10 @@ import { UserService } from "./_services/user.service";
     MatButtonModule,
     MatDialogModule,
     HttpClientModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule,    
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
+    StatusBar,    
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthService,
     AuthGuardService,

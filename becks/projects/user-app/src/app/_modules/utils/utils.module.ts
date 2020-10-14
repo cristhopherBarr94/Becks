@@ -18,6 +18,8 @@ import { LottieModule } from "ngx-lottie";
 import player from "lottie-web";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MenuComponent } from './_components/menu/menu.component';
+import { SplashScreenComponent } from './_components/splash-screen/splash-screen.component';
+
 
 export function playerFactory() {
   return player;
@@ -31,7 +33,8 @@ export function playerFactory() {
     NotifyModalComponent,
     CaptchaComponent,
     HeaderComponent,
-    MenuComponent
+    MenuComponent,
+    SplashScreenComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +56,8 @@ export function playerFactory() {
     NotifyModalComponent,
     CaptchaComponent,
     HeaderComponent,
-    MenuComponent
+    MenuComponent,
+    SplashScreenComponent    
   ],
 })
 export class UtilsModule {}

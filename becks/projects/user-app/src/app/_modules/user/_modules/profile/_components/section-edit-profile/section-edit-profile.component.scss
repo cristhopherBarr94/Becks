@@ -93,3 +93,18 @@
   text-decoration: underline;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #C4C4C4;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #313132;
+  border-radius: 8px;
+  background-clip: padding-box;
+}

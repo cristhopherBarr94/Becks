@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
+import { UiService } from 'src/app/_services/ui.service';
 
 @Component({
   selector: 'user-onboarding',
@@ -18,9 +20,11 @@ export class OnboardingComponent implements OnInit {
 
   @ViewChild('slides') ionSlides: IonSlides;
 
-  constructor() { }
+  constructor(private ui: UiService, private router: Router,) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.ui.dismissLoading()
+  }
 
   swipeNext(){
     this.ionSlides.slideNext();
@@ -33,6 +37,11 @@ export class OnboardingComponent implements OnInit {
       data[0] ? this.disablePrevBtn = true : this.disablePrevBtn = false;
       data[1] ? this.disableNextBtn = true : this.disableNextBtn = false;
     });
+  }
+
+  joinredirection(){
+    this.ui.showLoading();
+      this.router.navigate(["home"], { queryParamsHandling: "preserve" });
   }
 
 }

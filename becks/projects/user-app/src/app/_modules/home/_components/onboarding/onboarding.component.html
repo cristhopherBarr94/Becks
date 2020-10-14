@@ -31,6 +31,6 @@
     </div>
     <button class="btn-onboarding btn-omitir">Omitir</button>
     <button class="btn-onboarding btn-action" (click)="swipeNext()" *ngIf="!disableNextBtn">Siguiente</button>
-    <button class="btn-onboarding btn-action " *ngIf="disableNextBtn">Unirse</button>
+    <button class="btn-onboarding btn-action " *ngIf="disableNextBtn" (click)="joinredirection()">Unirse</button>
   </ion-slide>
 </ion-slides>

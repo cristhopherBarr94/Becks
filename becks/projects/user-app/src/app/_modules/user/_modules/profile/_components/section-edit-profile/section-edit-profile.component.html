@@ -28,11 +28,13 @@
   </div>
   <div class="margint-top col-flex-center flex-direction-column">
     <user-profile-picture [urlImage]="profilePicture()"></user-profile-picture>
-    <button class="link-age-gate link-terms trasparent-button with" (click)="changePhoto()"
+    <button class="link-age-gate link-terms trasparent-button with underline" (click)="changePhoto()"
       >Cambiar foto de perfil</button
     >
     <!-- <user-update-file *ngIf="chargePhoto" (chargePhoto)="chargeImage($event)">
     </user-update-file> -->
+    <span *ngIf="size != 'xs'" class="font-profile margin-tittle flex-direction-row ">{{user.first_name}}
+      {{user.last_name}} <div class="editLogo"></div></span>
   </div>
   <div class="content-flex-all-center">
     <form

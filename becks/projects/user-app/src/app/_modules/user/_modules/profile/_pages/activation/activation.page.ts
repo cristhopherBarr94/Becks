@@ -12,6 +12,7 @@ import { UiService } from "../../../../../../_services/ui.service";
 import { HeaderComponent } from "src/app/_modules/utils/_components/header/header.component";
 import { ModalController } from '@ionic/angular';
 import { NotifyModalComponent } from 'src/app/_modules/utils/_components/notify-modal/notify-modal.component';
+import { environment } from 'src/environments/environment';
 
 declare global {
   interface Window {
@@ -52,6 +53,7 @@ export class ActivationPage implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.activate=false;
     this.initforms();
+    this.getActiveCode();
     this.bgActive();
   }
 
@@ -79,31 +81,52 @@ export class ActivationPage implements OnInit, AfterViewInit {
     }
     return classreturn;
   }
-  verifyCode(): void {
+  
+ getActiveCode(): void {
+  // this.ui.showLoading();
+    this.httpService.get(environment.serverUrl + environment.user.getCodes).subscribe(
+      (res: any) => {
+        // this.ui.dismissLoading();
+        if (res.status == 200) {
+          this.activate=true;
+          this.bgActive();
+          this.showModal();
 
+        }
+      },
+      (err) => {
+          this.verifyCode();
+      }
+    );
+
+  }
+  verifyCode():void {
     if (this.userActivationForm.valid) {
       this.ui.showLoading();
       
-     
-      this.httpService.post("", {
-        code: this.userActivationForm.controls.codeNum.value
+      this.httpService.patch(environment.serverUrl + environment.user.patchActivate, {
+        cid: this.userActivationForm.controls.codeNum.value
       }).subscribe(
         (response: any) => {
           this.ui.dismissLoading();
           if (response.status == 200) {
+            this.activate=true;
+            this.bgActive();
+            this.showModal();
             this.httpError = "";
             this.userActivationForm.reset();
-            this.showModal();
+           
           }
         },
         (e) => {
-          this.httpError = "código inválido";
+          this.httpError = "código invalido";
           this.ui.dismissLoading();
+          this.activate=false; 
+          this.userActivationForm.reset();
         }
       );
     }
   }
-
   public inputValidatorAlphaNumeric(event: any) {
     const pattern = /^[a-zA-ZnÑ0-9 ]*$/;
     if (!pattern.test(event.target.value)) {
@@ -122,32 +145,31 @@ public redirectTo() {
    this.router.navigate(["user/exp"]);
 }
 public bgActive(){
-  if (this.activate) {
+  if (this.activate==true) {
     this.colorBg = "bg-color";
   } else if (this.activate == false) {
     this.colorBg =  "bg-grey";
   }
 }
   async showModal() {
-    this.activate=true;
-    const modal = await this.modalCtrl.create({
-      component: NotifyModalComponent,
-      cssClass: "modalMessage",
-      componentProps: {
-        title: this.title_modal,
-        sub_title: this.sub_title_modal,
-        title_button: this.title_button_modal,
-        prom_cod:this.prom_cod_modal,
-        allow: this.allow,
-        Func: this.redirectTo.bind(this),
-      },
-    });
-    await modal.present();
-    modal.onDidDismiss().then((res) => {
-      this.activate=false;
-    });
-    this.bgActive();
-
+      const modal = await this.modalCtrl.create({
+        component: NotifyModalComponent,
+        cssClass: "modalMessage",
+        componentProps: {
+          title: this.title_modal,
+          sub_title: this.sub_title_modal,
+          title_button: this.title_button_modal,
+          prom_cod:this.prom_cod_modal,
+          allow: this.allow,
+          Func: this.redirectTo.bind(this),
+        },
+        backdropDismiss:false,
+        keyboardClose:false,
+        swipeToClose:false,
+      });
+      await modal.present();
+      modal.onDidDismiss().then((res) => {
+        this.router.navigate(["user/profile"]);
+      });
   }
-  
 }

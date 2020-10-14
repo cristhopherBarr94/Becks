@@ -51,9 +51,7 @@
             ></span
           ></mat-icon>
 
-          <mat-error *ngIf="userActivationForm.controls.codeNum.errors"
-            >*Este campo es obligatorio
-          </mat-error>
+          <mat-error *ngIf="httpError">{{ httpError }}</mat-error>
         </mat-form-field>
         <button
           block="block"

@@ -19,6 +19,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { UserLoginComponent } from "./_components/user-login/user-login.component";
 import { UserRegisterComponent } from "./_components/user-register/user-register.component";
 import { FbButtonComponent } from "./_components/fb-button/fb-button.component";
+import { OnboardingComponent } from './_components/onboarding/onboarding.component';
+import { OnboardingPagePage } from './_pages/onboarding-page/onboarding-page.page';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { FbButtonComponent } from "./_components/fb-button/fb-button.component";
     TabsComponent,
     UserLoginComponent,
     FbButtonComponent,
+    OnboardingComponent,
+    OnboardingPagePage
   ],
   imports: [
     CommonModule,

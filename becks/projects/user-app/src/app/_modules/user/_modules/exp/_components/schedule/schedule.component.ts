@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatCalendar } from "@angular/material/datepicker";
+import { MatCalendar, MatCalendarCellClassFunction, MatCalendarCellCssClasses } from "@angular/material/datepicker";
 import { MockExperiencias } from "../../../../../../_mocks/experiencias-mock";
 
 
@@ -12,6 +12,7 @@ export class ScheduleComponent implements OnInit {
   DayAndDate: string;
   eventDay = [];
   events = [];
+  datesToHighlight = ["2020/10/23","2020/10/18","2020/10/29"];
   eventList = MockExperiencias;
   options = {
     year: "numeric",
@@ -32,6 +33,8 @@ export class ScheduleComponent implements OnInit {
   currentYear = new Date().getFullYear();
   @ViewChild("calendar1", { static: false }) calendar1: MatCalendar<Date>;
   @ViewChild("calendar2", { static: false }) calendar2: MatCalendar<Date>;
+
+ 
   constructor() {}
 
   ngOnInit() {
@@ -49,14 +52,13 @@ export class ScheduleComponent implements OnInit {
     this. toDate() 
     this.onSelect(this.selectedDate);
   }
+ 
   toDate() {
     this.events.forEach((singleEvent) => {
       let fecha = new Date(singleEvent)
         .toLocaleDateString("es-ES", this.options)
         .split(" ");
       this.eventDay.push(fecha);
-      // console.log(this.eventDay);
-
     });
   }
   onSelect(event) {
@@ -107,6 +109,15 @@ export class ScheduleComponent implements OnInit {
       )),
       "month"
     );
+  }
+
+   dateClass() {
+    return (date: Date): MatCalendarCellCssClasses => {
+      const highlightDate = this.events
+        .map(strDate => new Date(strDate))
+        .some(d => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear());
+      return highlightDate ? 'special-date' : '';
+    };
   }
 
 }

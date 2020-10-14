@@ -92,6 +92,11 @@
       filter: drop-shadow(0px 0px 3.5px rgba(98, 248, 178, 0.87));
       background: transparent;
     }
+    ::ng-deep.special-date {
+      background: orange;
+      border-radius: 100%;
+      width: 50px !important;
+    }
     ::ng-deep.mat-calendar-body-label {
       visibility: hidden !important;
     }
@@ -153,7 +158,7 @@
         border-radius: 4px;
         padding: 24px 20px;
         margin-top: 16px;
-        border-left: 8px solid;
+        border-left: 8px solid #038259;
 
         .title-card {
           color: #ffffff !important;
@@ -172,9 +177,19 @@
           border-radius: 100%;
           position: relative;
           left: 80px;
-          .briefcase-icon {
-            margin: 8px;
-          }
+        }
+
+        .img-exp {
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          position: absolute;
+          width: 40px;
+          height: 40px;
+          border-radius: 100%;
+          border: 1px solid rgba(98, 248, 178, 0.87);
+          box-sizing: border-box;
+          padding: 15px;
         }
 
         .guest-card {
@@ -185,18 +200,6 @@
           background: #ffffff;
         }
       }
-    }
-    .red-color {
-      border-color: #db4843 !important;
-      background: #db4843;
-    }
-    .green-color {
-      border-color: #038259 !important;
-      background: #038259;
-    }
-    .purple-color {
-      border-color: #e362f8 !important;
-      background: #e362f8;
     }
   }
 }

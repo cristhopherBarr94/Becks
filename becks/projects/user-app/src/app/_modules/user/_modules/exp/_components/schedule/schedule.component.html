@@ -25,6 +25,7 @@
               [minDate]="minDate"
               [selected]="selectedDate"
               (selectedChange)="onSelect($event)"
+              [dateClass]="dateClass()"
             ></mat-calendar>
           </div>
           <div>
@@ -34,6 +35,7 @@
               [minDate]="minDate2"
               [selected]="selectedDate"
               (selectedChange)="onSelect($event)"
+              [dateClass]="dateClass()"
             ></mat-calendar>
           </div>
         </ion-row>
@@ -52,7 +54,6 @@
           >
             <div
               class="card-schedule"
-              [ngClass]="event.colorExp"
               [hidden] = "stringCom != event.fechaExp"
             >
               <ion-row>
@@ -60,8 +61,8 @@
                   <div class="title-tertiary title-card"><a [href]="event.urlExp">{{ event.titleExp }}</a></div>
                 <div class="title-tertiary hour-card">{{ event.horaExp }}</div>
                 </div>
-                <div class="circle-icon" [ngClass]="event.colorExp">
-                  <span class="briefcase-icon"> </span>
+                <div class="circle-icon">
+                  <span class="img-exp" [ngStyle]="{'background-image': 'url(' + event.imagesExp + ')'}"> </span>
                 </div>
               </ion-row>
               <div class="guest-card" title="@usuario"></div>

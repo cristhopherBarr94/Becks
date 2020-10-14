@@ -1,6 +1,6 @@
 {
-  "name": "waiting-list",
-  "short_name": "waiting-list",
+  "name": "user-app",
+  "short_name": "user-app",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

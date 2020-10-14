@@ -25,6 +25,8 @@ import { UtilService } from "./_services/util.service";
 import { ExperienciasService } from "./_services/experiencias.service";
 import { AgeGuardService } from "./_services/age-guard.service";
 import { UserService } from "./_services/user.service";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,6 +44,7 @@ import { UserService } from "./_services/user.service";
     MatDialogModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     StatusBar,

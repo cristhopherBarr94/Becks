@@ -23,19 +23,23 @@
   font-family: "Helvetica LT Std";
   color: #ffffff !important;
   font-size: 11px;
+  min-width: 0px;
   @media (min-width: 0px) and (max-width: 768px) {
     border-bottom: 3px solid #c4c4c4;
   }
   @media (min-width: 769px) and (max-width: 1366px) {
     height: 65px;
     font-size: 14px;
+    width: 70px;
     border-bottom: 0px solid #c4c4c4;
+    padding: revert;
     width: revert;
   }
   @media (min-width: 1367px) {
     height: 65px;
     font-size: 24px;
     border-bottom: 0px solid #c4c4c4;
+    padding: revert;
     width: revert;
   }
 }

@@ -126,6 +126,8 @@
   margin-bottom: 42px;
   contain: strict;
   overflow: auto;
+  scrollbar-width: 10px;
+ 
 }
 
 .margin-tittle-desktop {
@@ -140,7 +142,7 @@
 }
 
 .text-aling-end {
-  width: 10%;
+  width: 15%;
   text-align: end;
 }
 

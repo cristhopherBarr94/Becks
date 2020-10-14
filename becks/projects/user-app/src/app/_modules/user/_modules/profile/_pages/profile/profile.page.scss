@@ -56,7 +56,7 @@
 .edit-button {
   margin-left: 26%;
   background-color: #121212;
-
+  justify-content: center;
   font-family: "Helvetica LT Std";
   color: #ffffff !important;
   border-radius: 16px 0px 16px 0px;
@@ -70,6 +70,10 @@
     width: 178px;
     height: 51px;
   }
+}
+
+.margin-left-tt{
+  margin-left: 20px ;
 }
 
 .sin-stadisticas {

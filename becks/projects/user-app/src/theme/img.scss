@@ -107,6 +107,10 @@
   width: 17px;
   height: 25px;
   background-color: transparent;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 10px;
+  height: 18px;
+  }
 }
 
 .editPhotoLogo {

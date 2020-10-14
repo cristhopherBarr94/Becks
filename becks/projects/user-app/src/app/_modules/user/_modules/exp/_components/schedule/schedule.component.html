@@ -56,8 +56,8 @@
               class="card-schedule"
               [hidden] = "stringCom != event.fechaExp"
             >
-              <ion-row>
-                <div>
+            <ion-row>
+              <div class="width-box">
                   <div class="title-tertiary title-card"><a [href]="event.urlExp">{{ event.titleExp }}</a></div>
                 <div class="title-tertiary hour-card">{{ event.horaExp }}</div>
                 </div>
@@ -65,7 +65,12 @@
                   <span class="img-exp" [ngStyle]="{'background-image': 'url(' + event.imagesExp + ')'}"> </span>
                 </div>
               </ion-row>
-              <div class="guest-card" title="@usuario"></div>
+              <ion-row>
+                <div class="guest-card" title="@usuario"></div>
+                <div class="guest-card" title="@usuario"></div>
+                <div class="guest-card" title="@usuario"></div>
+                <div class="guest-card" title="@usuario"></div>
+              </ion-row>
             </div>
           </div>
         </div>

@@ -40,7 +40,7 @@ export class ScheduleComponent implements OnInit {
   ngOnInit() {
     this.selectedDate = new Date();
     this.minDate = new Date();
-    this.maxDate = new Date(new Date().setMonth(new Date().getMonth() + 1));
+    this.maxDate = new Date(new Date().setMonth(new Date().getMonth()));
     this.minDate2 = new Date(
       "2020" + "/" + (new Date().getMonth() + 2) + "/" + "01"
     );

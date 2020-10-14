@@ -123,14 +123,9 @@
     }
     .button-row {
       justify-content: center;
-      .margin-top-button {
-        margin-right: 5px;
-      }
-      ::ng-deep user-fb-button {
-        margin-left: 10px;
-      }
+
       .separator-box {
-        margin-top: 15px !important;
+        margin: 15px !important;
       }
     }
   }

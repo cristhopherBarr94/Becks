@@ -93,9 +93,11 @@
       background: transparent;
     }
     ::ng-deep.special-date {
-      background: orange;
-      border-radius: 100%;
-      width: 50px !important;
+      background: url("../../../../../../../assets/icon/highlight-icon.svg");
+      background-position: top;
+      background-size: 5px;
+      background-repeat: no-repeat;
+      background-position-y: 7px;
     }
     ::ng-deep.mat-calendar-body-label {
       visibility: hidden !important;
@@ -171,12 +173,16 @@
           font-size: 16px !important;
           line-height: 24px !important;
         }
+        .width-box {
+          width: 200px !important;
+        }
         .circle-icon {
           width: 48px;
           height: 48px;
           border-radius: 100%;
           position: relative;
-          left: 80px;
+          left: 30px;
+          top: 30px;
         }
 
         .img-exp {
@@ -187,9 +193,8 @@
           width: 40px;
           height: 40px;
           border-radius: 100%;
-          border: 1px solid rgba(98, 248, 178, 0.87);
+          border: 1px outset rgba(98, 248, 178, 0.87);
           box-sizing: border-box;
-          padding: 15px;
         }
 
         .guest-card {
@@ -197,6 +202,7 @@
           height: 32px;
           border-radius: 100%;
           margin-top: 20px;
+          margin-right: 8px;
           background: #ffffff;
         }
       }

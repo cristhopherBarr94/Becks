@@ -39,6 +39,10 @@
   margin-top: 24px;
 }
 
+.margin-left-tt{
+  margin-left: 20px ;
+}
+
 .with-form {
   width: 100px;
   margin-right: 7px;
@@ -83,4 +87,24 @@
   @media (min-width: 769px) {
     margin-left: 0px;
   }
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #C4C4C4;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #313132;
+  border-radius: 8px;
+  background-clip: padding-box;
 }

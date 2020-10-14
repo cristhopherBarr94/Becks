@@ -1,4 +1,4 @@
-<div class="menu-content">
+<div class="menu-content" [ngClass]="transparentStyle()">
   <nav class="menu-mobile">
     <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" (click)="openClose()" />
     <label class="menu-open-button" for="menu-open">
@@ -7,34 +7,37 @@
       <span class="hamburger hamburger-3"></span>
     </label>
 
-    <a href="#" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/home.svg" alt="Inicio"> <span
+    <a href="/user/exp" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/home.svg" alt="Inicio"> <span
         class="name-item">Inicio</span> </a>
-    <a href="#" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/calendario.svg" alt="Calendario">
+    <a href="user/calendar" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/calendario.svg"
+        alt="Calendario">
       <span class="name-item">Calendario</span> </a>
-    <a href="#" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita"> <span
+    <a href="user/mgm" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita"> <span
         class="name-item">Invita</span> </a>
-    <a href="#" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/comprar.svg" alt="Inicio"> <span
+    <a href="#" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/comprar.svg" alt="Compra"> <span
         class="name-item">Compra</span> </a>
     <a href="/user/profile" class="menu-item"> <img class="perfil-img" [src]="profilePicture()" alt="perfil"> <span
         class="name-item">Mi perfil</span> </a>
     <a (click)="logout()" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out"> <span class="label-out">Salir</span>  </a>
   </nav>
-  <nav class="menu-desktop">
+  <nav class="menu-desktop" [ngClass]="transparentStyle()">
     <div class="container-menu">
       <img class="logo-brand" src="./assets/icon/menu/logo_brand.svg" alt="logo">
       <ul class="content-top-bar">
         <li>
-          <a href="#" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/home.svg" alt="Inicio">  </a>
+          <a href="/user/exp" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/home.svg" alt="Inicio">
+          </a>
         </li>
         <li>
-          <a href="#" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/calendario.svg"
+          <a href="user/calendar" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/calendario.svg"
               alt="Calendario"> </a>
         </li>
         <li>
-          <a href="#" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita">  </a>
+          <a href="user/mgm" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita">
+          </a>
         </li>
         <li>
-          <a href="#" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/comprar.svg" alt="Inicio">  </a>
+          <a href="#" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/comprar.svg" alt="Compra"> </a>
         </li>
         <li>
           <a href="/user/profile" class="menu-item-destkop"> <img class="perfil-img" [src]="profilePicture()" alt="perfil"> </a>

@@ -83,12 +83,11 @@ export class ActivationPage implements OnInit, AfterViewInit {
 
     if (this.userActivationForm.valid) {
       this.ui.showLoading();
-      const formData = new FormData();
-      formData.append(
-        "codeNum",
-        this.userActivationForm.controls.codeNum.value
-      );
-      this.httpService.post("", formData).subscribe(
+      
+     
+      this.httpService.post("", {
+        code: this.userActivationForm.controls.codeNum.value
+      }).subscribe(
         (response: any) => {
           this.ui.dismissLoading();
           if (response.status == 200) {

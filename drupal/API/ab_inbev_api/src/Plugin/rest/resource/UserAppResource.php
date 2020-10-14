@@ -28,7 +28,7 @@ use Drupal\user\Entity\User;
  *
  * @RestResource (
  *   id = "ab_inbev_api_user_app",
- *   label = @Translation("UserApp"),
+ *   label = @Translation("Web App - User App"),
  *   uri_paths = {
  *     "canonical" = "/api/ab-inbev-api-user-app/{id}",
  *     "https://www.drupal.org/link-relations/create" = "/api/ab-inbev-api-user-app"

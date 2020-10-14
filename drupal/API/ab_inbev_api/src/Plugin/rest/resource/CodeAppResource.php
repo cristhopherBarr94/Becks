@@ -12,13 +12,23 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Request;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\file\Entity\File;
 
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\ab_inbev_api\DTO\UserPublicDTO;
+use Drupal\ab_inbev_api\Util\Util;
+use Drupal\user\Entity\User;
 /**
  * Represents Code App records as resources.
  *
  * @RestResource (
  *   id = "ab_inbev_api_code_app",
- *   label = @Translation("Code App"),
+ *   label = @Translation("Web App - Code App"),
  *   uri_paths = {
  *     "canonical" = "/api/ab-inbev-api-code-app/{id}",
  *     "https://www.drupal.org/link-relations/create" = "/api/ab-inbev-api-code-app"
@@ -171,8 +181,31 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
    *   The HTTP response object.
    */
   public function patch($id, $data) {
-    $this->validate($data);
-    return $this->updateRecord($id, $data);
+
+    // Validations
+    switch ( $id ) {
+      case 0: 
+        // PATCH DATA [ valid_until , status, owner ]
+        // $this->validate($data); 
+      break;
+      case 1:
+        // PATCH USER
+        if (!isset($data['code']) || strlen($data['code']) < 8 ) {
+          throw new BadRequestHttpException('Codigo no válido');
+        }
+        $record = [
+          "uid"=>$this->currentUser->id(),
+          "used"=> time(),
+          "valid_until"=> time() + (30 * 24 * 60 * 60),
+          "status"=> 1,
+        ];
+        return $this->updateRecord( $data['code'], $record );   
+      break;
+      default:
+        throw new BadRequestHttpException('Servicio no disponible');
+      break;
+    }
+    
   }
 
   /**
@@ -283,28 +316,53 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
    *
    * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
    */
+  protected function loadRecord($cid) {
+    return $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE cid = :cid', [':cid' => $cid])->fetchAssoc();
+  }
+
   protected function loadRecords($typeQuery) {
     
     switch ($typeQuery) {
       case 0:
         // All the codes
         // Only Admin Role
-        return $this->dbConnection->query('SELECT * FROM {ab_inbev_code} ')->fetchAssoc();
+        // $result = $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} ');
+        $records = [];
+        while($record = $result->fetchAssoc()) {
+          $records[] = $record;
+        }
+        return $records;
       break;
 
       case 1:
         // All my codes
-        return $this->dbConnection->query('SELECT * FROM {ab_inbev_code} WHERE uid = :uid', [':uid' => $this->currentUser->id()])->fetchAssoc();
+        $result = $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE uid = :uid', [':uid' => $this->currentUser->id()]);
+        $records = [];
+        while($record = $result->fetchAssoc()) {
+          $records[] = $record;
+        }
+        return $records;
       break;
 
       case 2:
         // All my active codes
-        return $this->dbConnection->query('SELECT * FROM {ab_inbev_code} WHERE status = 0 AND uid = :uid', [':uid' => $this->currentUser->id()])->fetchAssoc();
+        $result = $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE status = 0 AND uid = :uid', [':uid' => $this->currentUser->id()]);
+        $records = [];
+        while($record = $result->fetchAssoc()) {
+          $records[] = $record;
+        }
+        return $records;
       break;
 
       case 3:
         // All my inactive codes
-       return $this->dbConnection->query('SELECT * FROM {ab_inbev_code} WHERE status = 1 AND uid = :uid', [':uid' => $this->currentUser->id()])->fetchAssoc();
+        $result = $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE status = 1 AND uid = :uid', [':uid' => $this->currentUser->id()]);
+        $records = [];
+        while($record = $result->fetchAssoc()) {
+          $records[] = $record;
+        }
+        return $records;
+      break;
 
       default:
         throw new NotFoundHttpException('Petición no valida');
@@ -334,23 +392,24 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
    * @return \Drupal\rest\ModifiedResourceResponse
    *   The HTTP response object.
    */
-  protected function updateRecord($id, array $record) {
+  protected function updateRecord($cid, array $record) {
 
     // Make sure the record already exists.
-    $this->loadRecord($id);
+    $code = $this->loadRecord($cid);
+    if ( !$code || $code['status'] != 0 ) {
+      throw new NotFoundHttpException('Codigo no válido o en uso');
+    }
 
-    $this->validate($record);
-
-    $this->dbConnection->update('ab_inbev_api_code_app')
-      ->fields($record)
-      ->condition('id', $id)
-      ->execute();
-
-    $this->logger->notice('Code App record @id has been updated.', ['@id' => $id]);
-
-    // Return the updated record in the response body.
-    $updated_record = $this->loadRecord($id);
-    return new ModifiedResourceResponse($updated_record, 200);
+    //$this->validate($record);
+    if ( $this->dbConnection->update('ab_inbev_code')
+          ->fields($record)
+          ->condition('cid', $cid)
+          ->execute() == 1 ) {
+        $updated_record = $this->loadRecord($cid);
+        return new ModifiedResourceResponse($updated_record, 200);
+      } else {
+        return new ModifiedResourceResponse(["message" => "Internal Error"], 500);
+      }
   }
 
 }

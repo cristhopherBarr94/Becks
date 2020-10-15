@@ -160,22 +160,21 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->set("field_last_name", $data['last_name'] );
       $user->set("field_mobile_phone", $data['mobile_phone'] );
       $user->set("field_gender",  $data['gender'] );
-      $user->set("field_birthdate",  $data['birthdate'] );
-      $user->set("field_photo_uri",  '' );
+      // FASE II - FIELDS
+      $user->set("field_birthdate",  $data['birthdate'] ?? "" );
+      $user->set("field_type_id", $data['type_id'] ?? "" );
+      $user->set("field_id_number", $data['id_number'] ?? "" );
+      $user->set("field_photo_uri",  $data['photo'] ?? "" );
       
       // "type_id" field only come from User-App Form
       if ( isset($data['type_id']) ) {
         // User from User-APP
-        $user->set("field_type_id", $data['type_id'] );
-        $user->set("field_id_number", $data['id_number'] );
         $user->set("field_status_waiting_list", 0);
         $user->set("field_status", 1); // 1 = require password change
         $user->activate();
         Util::sendWelcomeEmail( $user->getEmail() , $pass );
       } else {
         // User come from Waiting-List
-        $user->set("field_type_id", "" );
-        $user->set("field_id_number", "" );
         $user->set("field_status_waiting_list", 1 );
       }
 

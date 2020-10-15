@@ -6,6 +6,7 @@ export class Exp {
   titleExp: string;
   fechaExp: string;
   horaExp: string;
+  placeExp: string;
   detailExp: string;
   urlExp: string;
   status: string;

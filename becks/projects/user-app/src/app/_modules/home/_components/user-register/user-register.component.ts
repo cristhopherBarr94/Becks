@@ -16,6 +16,7 @@ import { Router } from "@angular/router";
 import { User } from "../../../../_models/User";
 import { UiService } from "../../../../_services/ui.service";
 import { UtilService } from "src/app/_services/util.service";
+import { environment } from 'src/environments/environment';
 
 declare global {
   interface Window {
@@ -110,8 +111,8 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
     this.userRegister.cookie_td = this.utils.getCookie("_td");
     this.httpService
       .post(
-        "https://becks.flexitco.co/becks-back/api/ab-inbev-api-usercustom/",
-        this.userRegister
+        environment.serverUrl + environment.guest.postForm,
+        this.userRegister.toJSON()
       )
       .subscribe(
         (data: any) => {

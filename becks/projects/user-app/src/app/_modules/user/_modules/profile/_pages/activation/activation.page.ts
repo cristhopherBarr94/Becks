@@ -120,9 +120,6 @@ export class ActivationPage implements OnInit, AfterViewInit {
         (response: any) => {
           this.ui.dismissLoading();
           if (response.status == 200 && response.body.length >0) {
-            this.activate=true;
-            this.bgActive();
-            this.showModal();
             this.httpError = "";
             this.userActivationForm.reset();
             window.dataLayer.push({
@@ -132,7 +129,6 @@ export class ActivationPage implements OnInit, AfterViewInit {
               'eventLabel': code256,
             });
             window.location.reload();
-
           }
         },
         (e) => {

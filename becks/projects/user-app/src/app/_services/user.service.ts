@@ -103,8 +103,14 @@ export class UserService {
   public profilePicture (state:string){
     this._imagenProfile.next(state)
   }
+
   public setActivate(status:boolean) {
     this._user.activate = status;
+    this._userSbj.next(this._user);
+  }
+
+  public logout() {
+    this._user = new User();
     this._userSbj.next(this._user);
   }
 }

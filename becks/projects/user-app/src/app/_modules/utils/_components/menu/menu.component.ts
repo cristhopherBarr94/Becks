@@ -68,6 +68,7 @@ export class MenuComponent implements OnInit {
   logout() {
     this.ui.showLoading();
     this.authService.setAuthenticated("");
+    this.userSvc.logout();
     this.httpService
       .get(environment.serverUrl + environment.logout.resource)
       .subscribe(

@@ -478,22 +478,23 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
       if ( strlen($record['birthdate']) > 11) {
         throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
       }
-    }
-    try {
-      $curYear = date('Y');
-      $date = explode("/", $record['birthdate']);
+      
+      try {
+        $curYear = date('Y');
+        $date = explode("/", $record['birthdate']);
 
-      if ( intval($date[0]) < 1 || intval($date[0]) > 12 ) {
+        if ( intval($date[0]) < 1 || intval($date[0]) > 12 ) {
+          throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+        }
+        if ( intval($date[1]) < 1 || intval($date[1]) > 31 ) {
+          throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+        }
+        if ( intval($date[2]) < 1920 || ($curYear - intval($date[2]) ) < 18 ) {
+          throw new BadRequestHttpException('"Fecha de Nacimiento" no valida, Debe ser mayor de edad');
+        }
+      } catch ( Exception $ex ) {
         throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
       }
-      if ( intval($date[1]) < 1 || intval($date[1]) > 31 ) {
-        throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
-      }
-      if ( intval($date[2]) < 1920 || ($curYear - intval($date[2]) ) < 18 ) {
-        throw new BadRequestHttpException('"Fecha de Nacimiento" no valida, Debe ser mayor de edad');
-      }
-    } catch ( Exception $ex ) {
-      throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
     }
 
     if (!isset($record['first_name']) || empty($record['first_name'])) {

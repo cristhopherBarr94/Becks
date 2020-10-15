@@ -22,6 +22,8 @@ export class UserLoginComponent implements OnInit {
   public httpError: string;
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
+  public hide: boolean;
+  public password: string;
 
   constructor(
     private formBuilder: FormBuilder,

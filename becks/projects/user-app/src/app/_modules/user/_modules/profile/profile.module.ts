@@ -14,7 +14,6 @@ import { MatCardModule } from "@angular/material/card";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ProfilePictureComponent } from "./_components/profile-picture/profile-picture.component";
 import { ProfilePage } from "./_pages/profile/profile.page";
-import { NameTittleComponent } from "./_components/name-tittle/name-tittle.component";
 import { StatisticsProfileComponent } from "./_components/statistics-profile/statistics-profile.component";
 import { SeccionsProfileComponent } from "./_components/seccions-profile/seccions-profile.component";
 import { ExperiencesCardsComponent } from "./_components/experiences-cards/experiences-cards.component";
@@ -25,12 +24,12 @@ import { CircleProgressComponent } from "./_components/circle-progress/circle-pr
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { SectionEditProfileComponent } from "./_components/section-edit-profile/section-edit-profile.component";
 import { UpdateFileComponent } from "./_components/update-file/update-file.component";
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
     ProfilePictureComponent,
     ProfilePage,
-    NameTittleComponent,
     StatisticsProfileComponent,
     SeccionsProfileComponent,
     ExperiencesCardsComponent,
@@ -44,6 +43,7 @@ import { UpdateFileComponent } from "./_components/update-file/update-file.compo
   imports: [
     CommonModule,
     ProfileRoutingModule,
+    IonicModule,
     UtilsModule,
     MatInputModule,
     MatSelectModule,

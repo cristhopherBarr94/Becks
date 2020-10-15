@@ -9,11 +9,13 @@ import { AgeGateV2PageRoutingModule } from "./age-gate-v2-routing.module";
 import { AgeGateV2Component } from "./_components/age-gate-v2/age-gate-v2.component";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatCarouselModule } from "@ngmodule/material-carousel";
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [AgeGateV2Page, AgeGateV2Component],
   imports: [
     CommonModule,
+    IonicModule,
     AgeGateV2PageRoutingModule,
     ReactiveFormsModule,
     MatCheckboxModule,

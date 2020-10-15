@@ -8,6 +8,7 @@ import { HttpService } from "./http.service";
   providedIn: "root",
 })
 export class UserService {
+  private user_code_active = false;
   private _user: User = new User();
   private _userSbj = new Subject<User>();
   public user$ = this._userSbj.asObservable();
@@ -35,9 +36,8 @@ export class UserService {
     this.http.get(environment.serverUrl + environment.user.getData).subscribe(
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
-          const activate = this._user.activate;
           this._user = new User(response.body);
-          this._user.activate = activate;
+          this._user.activate = this.user_code_active;
           localStorage.setItem("bks_user", this._user.toJSON());
           this._userSbj.next(this._user);
         } else {
@@ -58,9 +58,8 @@ export class UserService {
       .subscribe(
         (response: any) => {
           if (response.status >= 200 && response.status < 300) {
-            const activate = this._user.activate;
             this._user = new User(response.body);
-            this._user.activate = activate;
+            this._user.activate = this.user_code_active;
             this._userSbj.next(this._user);
           } else {
             this._userSbj.error({});
@@ -81,9 +80,8 @@ export class UserService {
       .subscribe(
         (response: any) => {
           if (response.status >= 200 && response.status < 300) {
-            const activate = this._user.activate;
             this._user = new User(response.body);
-            this._user.activate = activate;
+            this._user.activate = this.user_code_active;
             this._userSbj.next(this._user);
           } else {
             this._userSbj.error({});
@@ -111,12 +109,15 @@ export class UserService {
   }
 
   public setActivate(status:boolean) {
-    this._user.activate = status;
+    this.user_code_active = status;
+    this._user.activate = this.user_code_active;
+    localStorage.setItem("bks_user", this._user.toJSON());
     this._userSbj.next(this._user);
   }
 
   public logout() {
     this._user = new User();
+    localStorage.setItem("bks_user", this._user.toJSON());
     this._userSbj.next(this._user);
   }
 }

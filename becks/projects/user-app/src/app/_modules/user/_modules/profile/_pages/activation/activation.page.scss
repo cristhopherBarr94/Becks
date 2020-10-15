@@ -89,6 +89,11 @@
   .title-desktop {
     display: none;
   }
+  .bg-color {
+    background-image: url(./../../../../../../../assets/img/frankcolor.jpg);
+    background-size: cover;
+    background-position: top;
+  }
 }
 
 @media (min-width: 769px) {

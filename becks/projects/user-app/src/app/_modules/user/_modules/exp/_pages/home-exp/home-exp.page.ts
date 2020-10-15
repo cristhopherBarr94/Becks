@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'user-home-exp',
@@ -8,11 +7,8 @@ import { ModalController } from '@ionic/angular';
 })
 export class HomeExpPage implements OnInit {
 
-  constructor(public modalCtrl: ModalController) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.modalCtrl.dismiss();
-
-  }
+  ngOnInit() { }
 
 }

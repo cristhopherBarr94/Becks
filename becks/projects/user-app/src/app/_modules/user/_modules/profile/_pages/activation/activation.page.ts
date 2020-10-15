@@ -146,7 +146,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
 
         },
         (e) => {
-          this.httpError = "código invalido";
+          this.httpError = "código inválido o en uso";
           this.ui.dismissLoading();
           this.activate=false; 
           this.userActivationForm.reset();

@@ -112,6 +112,7 @@ export class UserService {
     this.user_code_active = status;
     this._user.activate = this.user_code_active;
     localStorage.setItem("bks_user", this._user.toJSON());
+    localStorage.setItem("bks_user_activate", status? '1' : '0');
     this._userSbj.next(this._user);
   }
 

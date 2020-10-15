@@ -19,6 +19,7 @@ import player from "lottie-web";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MenuComponent } from './_components/menu/menu.component';
 import { SplashScreenComponent } from './_components/splash-screen/splash-screen.component';
+import { SectionForgetPassComponent } from './_components/section-forget-pass/section-forget-pass.component';
 
 
 export function playerFactory() {
@@ -34,7 +35,8 @@ export function playerFactory() {
     CaptchaComponent,
     HeaderComponent,
     MenuComponent,
-    SplashScreenComponent
+    SplashScreenComponent,
+    SectionForgetPassComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +59,8 @@ export function playerFactory() {
     CaptchaComponent,
     HeaderComponent,
     MenuComponent,
-    SplashScreenComponent    
+    SplashScreenComponent,
+    SectionForgetPassComponent 
   ],
 })
 export class UtilsModule {}

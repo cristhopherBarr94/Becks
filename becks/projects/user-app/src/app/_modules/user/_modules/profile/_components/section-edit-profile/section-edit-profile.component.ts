@@ -49,11 +49,7 @@ export class SectionEditProfileComponent implements OnInit {
 
   ngOnInit() {
     if (this.userSvc.getActualUser()) {
-      this.user = this.userSvc.getActualUser();
-      console.log(
-        "SectionEditProfileComponent -> ngOnInit -> this.user",
-        this.user
-      );
+      this.user = this.userSvc.getActualUser();     
     } else {
       this.userSvc.getData();
     }
@@ -157,7 +153,8 @@ export class SectionEditProfileComponent implements OnInit {
           id_number: this.userEditProfileForm.controls.document.value,
         })
         .subscribe((response: any) => {
-          if (response.status == 200) {
+         
+          if (response.status == 200) {            
             this.userSvc.getData();
             this.closeEdit();
           }

@@ -49,7 +49,7 @@ export class UserLoginComponent implements OnInit {
       email: new FormControl("", [
         Validators.required,
         Validators.email,
-        Validators.maxLength(30),
+        Validators.maxLength(40),
       ]),
       password: new FormControl("", [
         Validators.required,

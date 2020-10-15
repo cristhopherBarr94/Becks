@@ -127,12 +127,8 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
               eventAction: "finalizar fase 3",
               eventLabel: email256,
             });
-
+            window.location.reload();
           } catch (e) {}
-          this.moveSection();
-          this.router.navigate(["confirm-register"], {
-            queryParamsHandling: "preserve",
-          });
         },
         (err) => {
           this.restartCaptcha = false;

@@ -13,7 +13,7 @@ import { HeaderComponent } from "src/app/_modules/utils/_components/header/heade
 import { ModalController } from '@ionic/angular';
 import { NotifyModalComponent } from 'src/app/_modules/utils/_components/notify-modal/notify-modal.component';
 import { environment } from 'src/environments/environment';
-
+import * as moment from 'moment';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -30,13 +30,16 @@ export class ActivationPage implements OnInit, AfterViewInit {
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
-  public title_modal:string = "TIENES TU CUENTA ACTIVA POR 30 DÍAS";
+  public title_modal:string;
   public sub_title_modal:string = "Mira las nuevas experiencias que tenemos para ti"; 
   public title_button_modal:string = "VER EXPERIENCIAS";
   public prom_cod_modal:string = "HJASDYASU5145";
   public allow:boolean;
   public colorBg:string;
   public activate:boolean;
+  public date_til : any;
+  public used_date : any;
+  public days_ramaining : any;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
   title: string = "activa tu cuenta";
@@ -83,15 +86,22 @@ export class ActivationPage implements OnInit, AfterViewInit {
   }
   
  getActiveCode(): void {
-  // this.ui.showLoading();
+  this.ui.showLoading();
     this.httpService.get(environment.serverUrl + environment.user.getCodes).subscribe(
       (res: any) => {
-        // this.ui.dismissLoading();
-        if (res.status == 200) {
+
+        this.date_til = moment(new Date(res.body[0].valid_until * 1000));
+        this.used_date = moment(new Date(res.body[0].used* 1000));
+        this.days_ramaining =  this.date_til.diff(this.used_date, 'days');
+        this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ this.days_ramaining+ " DÍAS";
+        console.log(this.days_ramaining);
+        
+        this.ui.dismissLoading();
+
+        if (res.status == 200 && res.body.length >0) {
           this.activate=true;
           this.bgActive();
           this.showModal();
-
         }
       },
       (err) => {
@@ -109,7 +119,7 @@ export class ActivationPage implements OnInit, AfterViewInit {
       }).subscribe(
         (response: any) => {
           this.ui.dismissLoading();
-          if (response.status == 200) {
+          if (response.status == 200 && response.body.length >0) {
             this.activate=true;
             this.bgActive();
             this.showModal();
@@ -169,7 +179,6 @@ public bgActive(){
       });
       await modal.present();
       modal.onDidDismiss().then((res) => {
-        this.router.navigate(["user/profile"]);
       });
   }
 }

@@ -118,7 +118,6 @@ export class ActivationPage implements OnInit, AfterViewInit {
         cid: this.userActivationForm.controls.codeNum.value
       }).subscribe(
         (response: any) => {
-          this.ui.dismissLoading();
           if (response.status == 200 && response.body.length >0) {
             this.httpError = "";
             this.userActivationForm.reset();
@@ -128,14 +127,17 @@ export class ActivationPage implements OnInit, AfterViewInit {
               'eventAction': 'continuar codigo de compra',
               'eventLabel': code256,
             });
-            window.location.reload();
           }
+          this.ui.dismissLoading();
+          window.location.reload();
+
         },
         (e) => {
           this.httpError = "código invalido";
           this.ui.dismissLoading();
           this.activate=false; 
           this.userActivationForm.reset();
+
         }
       );
     }

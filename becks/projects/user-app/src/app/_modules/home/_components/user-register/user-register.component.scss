@@ -7,6 +7,13 @@
     width: 365px !important;
   }
 }
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: #ffffff;
+}
+.error-http {
+  justify-content: center;
+  align-items: center;
+}
 @media (min-width: 0px) and (max-width: 768px) {
   .no-padding {
     padding: 0px;

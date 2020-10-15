@@ -23,6 +23,10 @@ export class SectionChangePassComponent implements OnInit, AfterViewInit {
   public httpError: string;
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
+  public hide: boolean;
+  public password: string;
+  public hide2: boolean;
+  public passwordVerify: string;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
   prevUrl: string = "/home";

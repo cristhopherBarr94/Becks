@@ -30,6 +30,7 @@ export class MGMPage implements OnInit {
   public restartCaptcha: boolean;
   public httpError: string;
   public guest_users: any = [];
+  public hide: boolean;
 
   constructor(
     private formBuilder: FormBuilder,

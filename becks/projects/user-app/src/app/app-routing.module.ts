@@ -26,13 +26,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: "age-gate-v2",
-    loadChildren: () =>
-      import("./_modules/age-gate-v2/age-gate-v2.module").then(
-        (m) => m.AgeGateV2Module
-      ),
-  },
-  {
     path: "privacy-policy",
     loadChildren: () =>
       import("./_modules/utils/_pages/privacy-policy/privacy-policy.module").then(

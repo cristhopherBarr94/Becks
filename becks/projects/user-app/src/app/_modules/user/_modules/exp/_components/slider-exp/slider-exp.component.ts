@@ -63,4 +63,6 @@ export class SliderExpComponent implements OnInit {
     return 0 
   }
 
+  activarCuenta( res ) {}
+
 }

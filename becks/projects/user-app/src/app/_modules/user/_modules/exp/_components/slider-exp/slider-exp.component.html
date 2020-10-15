@@ -20,7 +20,7 @@
         class="exp-link-value more-info title-fourthy animate__animated animate__bounceInLeft animate__delay-1s"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}"><i
           class="far fa-eye"></i> Conoce más</a>
-      <button *ngIf="!exp.cuentaActiva" block="block" color="becks" (click)="activarCuenta(i)"
+      <button *ngIf="!exp.cuentaActiva" block="block" color="becks" [routerLink]="['/user/activation']"
         class="becks-btn-primary margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
         <span>Activar tu cuenta</span>

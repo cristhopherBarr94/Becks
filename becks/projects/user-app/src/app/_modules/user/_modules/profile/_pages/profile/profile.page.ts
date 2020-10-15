@@ -6,6 +6,8 @@ import { Platform } from "@ionic/angular";
 import { UiService } from "src/app/_services/ui.service";
 import { Router } from "@angular/router";
 import { SectionEditProfileComponent } from "../../_components/section-edit-profile/section-edit-profile.component";
+import { environment } from 'src/environments/environment';
+import { HttpService } from 'src/app/_services/http.service';
 
 @Component({
   selector: "user-profile",
@@ -25,7 +27,8 @@ export class ProfilePage implements OnInit, OnDestroy {
     private userSvc: UserService,
     private platform: Platform,
     private ui: UiService,
-    private router: Router
+    private router: Router,
+    public httpService: HttpService
   ) {
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
@@ -50,6 +53,13 @@ export class ProfilePage implements OnInit, OnDestroy {
       },
       (error: any) => {}
     );
+
+    this.httpService.get(environment.serverUrl + environment.user.getCodes).subscribe(
+      (res: any) => {
+        if (res.status == 200 && res.body.length >0) {
+          this.userSvc.setActivate(true);
+        }
+      })
 
     if (this.userSvc.getActualUser()) {
       this.user = this.userSvc.getActualUser();

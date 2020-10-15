@@ -24,7 +24,7 @@
         </section>
       </div>
     </mat-tab>
-    <mat-tab label="Mis Experiencias" id="experiencies">
+    <mat-tab label="Mis Experiencias" id="experiencies" [disabled]="isActive">
       <user-experiences-cards
         *ngIf="this.size == 'xs'"
       ></user-experiences-cards>

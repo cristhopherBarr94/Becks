@@ -37,7 +37,7 @@ export class ExperiencesCardsComponent implements OnInit {
     if (this.vertical) {
       this.direcionCards = "flex-direction-row";
     }
-    
+
     for (let i = 0; i < MockExperiencias.length; i++) {
       if (MockExperiencias[i].status == "0") {
         this.acceptCards.push(MockExperiencias[i]);

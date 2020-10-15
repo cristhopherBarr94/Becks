@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Platform } from "@ionic/angular";
 import { UiService } from "src/app/_services/ui.service";
@@ -10,6 +10,8 @@ import { UiService } from "src/app/_services/ui.service";
 })
 export class SeccionsProfileComponent implements OnInit {
   public size: string;
+  @Input() isActive : boolean
+ 
 
   constructor(
     private platform: Platform,
@@ -24,7 +26,7 @@ export class SeccionsProfileComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { console.log("SeccionsProfileComponent -> isActive", this.isActive)}
 
   redirectExp() {
     this.router.navigate(["user/exp"], {

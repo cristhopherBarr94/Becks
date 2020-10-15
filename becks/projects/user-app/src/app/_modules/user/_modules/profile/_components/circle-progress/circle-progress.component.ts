@@ -31,13 +31,13 @@ export class CircleProgressComponent implements OnInit {
  getDays(): void {
     this.httpService.get(environment.serverUrl + environment.user.getCodes).subscribe(
       (res: any) => {
-
+        if (res.status == 200 && res.body.length >0) {
         let date_til = moment(new Date(res.body[0].valid_until * 1000));
         let used_date = moment(new Date(res.body[0].used* 1000));
         this.daysR =  date_til.diff(used_date, 'days');
         this.progress = this.daysR * (10 / 3);
         this.remaining_days = Math.ceil(this.progress * (30 / 100));
-        if (this.progress <= 25) {
+       if (this.progress <= 25) {
           this.colorProgress = "#FF7A00";
           this.colorProgressBar =
             "linear-gradient(180deg, #E66E48 0%, #FF7A00 100%)";
@@ -61,6 +61,16 @@ export class CircleProgressComponent implements OnInit {
           this.httpError=" ";
           return this.daysR;
         }
+      }
+      else {
+        this.progress = 0 * (10 / 3);
+        this.remaining_days = Math.ceil(this.progress * (30 / 100));
+        console.log(this.daysR);
+        if(this.progress == 0) {
+          this.colorProgress = "#DB4843";
+          this.colorProgressBar = "#1E1E1E";
+        }
+      }
       },
       (err) => {
         this.httpError = "Usuario inactivo";

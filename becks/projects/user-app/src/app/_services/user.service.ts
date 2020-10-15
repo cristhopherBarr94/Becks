@@ -105,6 +105,6 @@ export class UserService {
   }
   public setActivate(status:boolean) {
     this._user.activate = status;
-    this._userSbj.next();
+    this._userSbj.next(this._user);
   }
 }

@@ -470,12 +470,14 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
     if (!is_array($record) || count($record) == 0) {
       throw new BadRequestHttpException('Petición no valida.');
     }
+    if ( isset($record['birthdate']) ) {
 
-    if (!isset($record['birthdate']) || empty($record['birthdate']) ) {
-      throw new BadRequestHttpException('El usuario no puede ser editado porque hace falta la "Fecha de Nacimiento" tipo MM/DD/YYYY');
-    }
-    if ( strlen($record['birthdate']) > 11) {
-      throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+      if ( empty($record['birthdate']) ) {
+        throw new BadRequestHttpException('El usuario no puede ser editado porque hace falta la "Fecha de Nacimiento" tipo MM/DD/YYYY');
+      }
+      if ( strlen($record['birthdate']) > 11) {
+        throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+      }
     }
     try {
       $curYear = date('Y');

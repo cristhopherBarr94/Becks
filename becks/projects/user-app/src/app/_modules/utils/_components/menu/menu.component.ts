@@ -9,6 +9,7 @@ import { UiService } from 'src/app/_services/ui.service';
 import { UserService } from 'src/app/_services/user.service';
 import { environment } from 'src/environments/environment';
 
+
 @Component({
   selector: 'user-menu',
   templateUrl: './menu.component.html',
@@ -20,6 +21,7 @@ export class MenuComponent implements OnInit {
   @Input() transparent: boolean = false;
   public menuStatus:boolean = false;
   public url: string = environment.serverUrl;
+  public gender:string
   public time;
   private pictureSub: Subscription;
   userSubscription: Subscription;
@@ -42,6 +44,7 @@ export class MenuComponent implements OnInit {
           if (user !== undefined) {           
             this.urlImage = user.photo;
             this.default_photo = !!!user.photo;
+            this.gender = user.gender
           }
         },
         (error: any) => {}
@@ -87,7 +90,9 @@ export class MenuComponent implements OnInit {
 
   profilePicture() {
     return this.default_photo
-      ? this.urlImage
+      ? this.gender == "F"
+        ? "../../../../../assets/img/profile_female.jpg"
+        : "../../../../../assets/img/profile_male.jpg"
       : this.url + this.urlImage+ this.time ;
   }
 }

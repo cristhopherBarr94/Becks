@@ -1,11 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
-<<<<<<< HEAD
 import { Router } from '@angular/router';
-=======
 import { HttpService } from 'src/app/_services/http.service';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
->>>>>>> 5a9b46ad9f4aecdd81a2a0ad05dceb65ab10bf5b
 
 @Component({
   selector: "user-circle-progress",
@@ -13,14 +10,6 @@ import * as moment from 'moment';
   styleUrls: ["./circle-progress.component.scss"],
 })
 export class CircleProgressComponent implements OnInit {
-<<<<<<< HEAD
-  remaining_days: any;
-  colorProgress: string;
-  colorProgressBar: string;
-  progress: number = 12 * (10 / 3);
-  subtitle: string = "Días";
-  constructor(private router: Router) {}
-=======
   public httpError: string;
   public remaining_days: any;
   public colorProgress: string;
@@ -30,9 +19,8 @@ export class CircleProgressComponent implements OnInit {
   public daysR:any;
   
   constructor(
-    public httpService: HttpService,
+    public httpService: HttpService,private router: Router
   ) {}
->>>>>>> 5a9b46ad9f4aecdd81a2a0ad05dceb65ab10bf5b
 
   ngOnInit() {
     this.getDays();

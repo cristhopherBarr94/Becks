@@ -63,7 +63,6 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
     this.activate=false;
     this.subscribe = this.userSvc.user$.subscribe(user =>{
       this.user = user;
-      this.activate = this.user.activate;
     })
     this.initforms();
     this.getActiveCode();
@@ -111,6 +110,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
           this.used_date = moment(new Date(res.body[0].used* 1000));
           this.days_ramaining =  this.date_til.diff(this.used_date, 'days');
           this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ this.days_ramaining+ " DÍAS";
+          this.activate = true;
           this.userSvc.setActivate(true);
           this.bgActive();
           this.showModal();

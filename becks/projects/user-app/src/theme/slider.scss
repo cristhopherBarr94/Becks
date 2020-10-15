@@ -12,10 +12,10 @@
   font-family: "Eurostile BQ" !important;
   color: #ffffff;
   text-align: center;
-  z-index: 10;
+  z-index: 9;
   &:after {
     position: absolute;
-    content: '';
+    content: "";
     width: 72px;
     height: 3px;
     background-color: #ffffff;
@@ -48,14 +48,14 @@
       position: relative;
 
       &.swiper-pagination-bullet-active {
-          background-color: #62F8B2;
+        background-color: #62f8b2;
         &::before {
           position: absolute;
-          content: '';
+          content: "";
           width: 16px;
           height: 16px;
           background-color: transparent;
-          border: 1px solid #62F8B2;
+          border: 1px solid #62f8b2;
           border-radius: 50%;
           top: -4px;
           left: -4px;
@@ -63,20 +63,19 @@
         }
       }
     }
-
   }
 
   .btn-exp {
-      position: absolute;
-      bottom: 20px;
-      z-index: 2;
-      text-transform: uppercase;
-      @media (min-width: 1024px) {
-        position: relative;
-        margin-top: 10px;
-        bottom: 0;
-        padding-left: 20px;
-      }
+    position: absolute;
+    bottom: 20px;
+    z-index: 2;
+    text-transform: uppercase;
+    @media (min-width: 1024px) {
+      position: relative;
+      margin-top: 10px;
+      bottom: 0;
+      padding-left: 20px;
+    }
   }
 
   .content-desk {
@@ -117,91 +116,89 @@
     }
     &:nth-child(even) {
       @media (min-width: 1024px) {
-      align-items: flex-end;
+        align-items: flex-end;
       }
     }
     .content-exp {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        align-content: flex-end;
-        justify-content: flex-end;
-        padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-content: flex-end;
+      justify-content: flex-end;
+      padding: 20px;
+      @media (min-width: 1024px) {
+        padding-left: 100px;
+        align-items: flex-start;
+      }
+      &:nth-child(even) {
         @media (min-width: 1024px) {
-          padding-left: 100px;
-          align-items: flex-start;
+          padding-right: 100px;
         }
-        &:nth-child(even) {
-          @media (min-width: 1024px) {
-            padding-right: 100px;
-          }
-        }
-        
-        .exp-link-value {
-            margin: 10px 0 85px;
-            text-transform: uppercase;
-        }
+      }
+
+      .exp-link-value {
+        margin: 10px 0 85px;
+        text-transform: uppercase;
+      }
     }
 
     .exp-detail {
-        width: 100%;
-        height: 65%;
-        border-top-left-radius: 50px;
-        border-top-right-radius: 50px;
-        overflow: hidden;
-        position: relative;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        padding: 30px;
-        .detail-close {
-            text-align: right;
-            padding-bottom: 20px;
-        }
-        .title-detail{
-            margin-bottom: 15px;
-            text-align: left;
-        }
+      width: 100%;
+      height: 65%;
+      border-top-left-radius: 50px;
+      border-top-right-radius: 50px;
+      overflow: hidden;
+      position: relative;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 30px;
+      .detail-close {
+        text-align: right;
+        padding-bottom: 20px;
+      }
+      .title-detail {
+        margin-bottom: 15px;
+        text-align: left;
+      }
 
-        .detail-place {
-            margin-top: 20px !important;  
-            text-align: left;
-        }
+      .detail-place {
+        margin-top: 20px !important;
+        text-align: left;
+      }
 
-        .detail-content {
-            font-family: "Helvetica LT Std";
-            font-style: normal;
-            font-weight: bold;
-            text-align: left;
-
-        }
-
+      .detail-content {
+        font-family: "Helvetica LT Std";
+        font-style: normal;
+        font-weight: bold;
+        text-align: left;
+      }
     }
 
     &.inactive {
-        position: relative;
-        .exp-images {
-            filter: grayscale(100%);
-        }
-        &:before {
-            position: absolute;
-            content: '';
-            width: 100%;
-            height: 100%;
-            background-color: rgba($color: #000000, $alpha: 0.5);
-            z-indeX: -1;
-        }
+      position: relative;
+      .exp-images {
+        filter: grayscale(100%);
+      }
+      &:before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: #000000, $alpha: 0.5);
+        z-index: -1;
+      }
     }
 
     &.active {
-        position: relative;
-        &:before {
-            position: absolute;
-            content: '';
-            width: 100%;
-            height: 100%;
-            background-color: rgba($color: #000000, $alpha: 0.3);
-            z-indeX: -1;
-        }
+      position: relative;
+      &:before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: #000000, $alpha: 0.3);
+        z-index: -1;
+      }
     }
 
     .exp-images {
@@ -212,7 +209,7 @@
     }
   }
 
-  @supports(object-fit: cover) {
+  @supports (object-fit: cover) {
     .item-exp {
       .exp-images {
         height: 100%;
@@ -221,7 +218,6 @@
       }
     }
   }
-
 }
 
 /** slider onboarding */
@@ -309,14 +305,14 @@
       position: relative;
 
       &.swiper-pagination-bullet-active {
-          background-color: #62F8B2;
+        background-color: #62f8b2;
         &::before {
           position: absolute;
-          content: '';
+          content: "";
           width: 16px;
           height: 16px;
           background-color: transparent;
-          border: 1px solid #62F8B2;
+          border: 1px solid #62f8b2;
           border-radius: 50%;
           top: -4px;
           left: -4px;
@@ -324,15 +320,12 @@
         }
       }
     }
-
   }
 
   .onboarding-img {
     width: 100%;
     position: relative;
   }
-
-
 }
 
 .content-onboarding {
@@ -344,7 +337,7 @@
   height: 100vh;
   @media (min-width: 1024px) {
     --background: transparent;
-    background-image: url('../assets/img/onboarding/backgrounddesk.jpg');
+    background-image: url("../assets/img/onboarding/backgrounddesk.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }

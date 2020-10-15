@@ -9,7 +9,7 @@ $open-distance: 105px;
 $opening-angle: $pi * 2;
 
 %goo {
-  filter: url("#shadowed-goo");
+  // filter: url("#shadowed-goo");
   // debug
   //background:rgba(255,0,0,0.2);
 }
@@ -80,10 +80,10 @@ $hamburger-spacing: 8px;
   }
 }
 
-.position-menu-absolute{
-  position: absolute;
-  @media (min-width: 0px) and (max-width: 796px) {
-  background-color: transparent !important;}
+.position-menu-absolute {
+  // position: absolute;
+  // @media (min-width: 0px) and (max-width: 796px) {
+  // background-color: transparent !important;}
 }
 
 .menu-mobile {

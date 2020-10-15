@@ -33,7 +33,6 @@ export class CircleProgressComponent implements OnInit {
     this.httpService.get(environment.serverUrl + environment.user.getCodes).subscribe(
       (res: any) => {
         if (res.status == 200 && res.body.length >0) {
-          this.userSvc.setActivate(true);
         let date_til = moment(new Date(res.body[0].valid_until * 1000));
         let used_date = moment(new Date(res.body[0].used* 1000));
         this.daysR =  date_til.diff(used_date, 'days');

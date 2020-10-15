@@ -38,7 +38,7 @@ export class UiService {
     setTimeout(() => {
       this.modalCtrl.getTop().then((topOverlay) => {
         if (topOverlay !== undefined) {
-          this.modalCtrl.dismiss();
+          this.loading.dismiss();
         }
       });
     }, timeOut);

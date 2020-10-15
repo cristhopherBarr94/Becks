@@ -31,7 +31,7 @@ export class SliderExpComponent implements OnInit {
       (user: User) => {
         if (user !== undefined) {       
             this.experienciaContent.forEach(exp =>{
-              exp.cuentaActiva = user.activate;
+              exp.cuentaActiva = localStorage.getItem('bks_user_activate')=='1';
             });
         }
       },
@@ -62,5 +62,7 @@ export class SliderExpComponent implements OnInit {
     }
     return 0 
   }
+
+  activarCuenta( res ) {}
 
 }

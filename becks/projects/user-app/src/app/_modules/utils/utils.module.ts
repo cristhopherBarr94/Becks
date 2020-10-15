@@ -20,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MenuComponent } from './_components/menu/menu.component';
 import { SplashScreenComponent } from './_components/splash-screen/splash-screen.component';
 import { SectionForgetPassComponent } from './_components/section-forget-pass/section-forget-pass.component';
+import { NameTittleComponent } from '../user/_modules/profile/_components/name-tittle/name-tittle.component';
 
 
 export function playerFactory() {
@@ -36,7 +37,8 @@ export function playerFactory() {
     HeaderComponent,
     MenuComponent,
     SplashScreenComponent,
-    SectionForgetPassComponent
+    SectionForgetPassComponent,
+    NameTittleComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ export function playerFactory() {
     HeaderComponent,
     MenuComponent,
     SplashScreenComponent,
-    SectionForgetPassComponent 
+    SectionForgetPassComponent,
+    NameTittleComponent
   ],
 })
 export class UtilsModule {}

@@ -8,11 +8,13 @@ import { MatInputModule } from "@angular/material/input";
 import { UtilsModule } from "../utils/utils.module";
 import { AgeGateComponent } from "./_components/age-gate/age-gate.component";
 import { AgeGatePage } from "./_pages/age-gate/age-gate.page";
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [AgeGateComponent, AgeGatePage],
   imports: [
     CommonModule,
+    IonicModule,
     AgeGateRoutingModule,
     ReactiveFormsModule,
     MatCheckboxModule,

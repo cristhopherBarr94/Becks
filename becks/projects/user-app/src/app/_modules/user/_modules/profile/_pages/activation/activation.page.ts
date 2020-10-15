@@ -60,9 +60,10 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
   ) {}
 
   ngOnInit(): void {
-    this.activate=false;
+    this.activate=localStorage.getItem('bks_user_activate')=='1';
     this.subscribe = this.userSvc.user$.subscribe(user =>{
       this.user = user;
+      this.activate = this.user.activate;
     })
     this.initforms();
     this.getActiveCode();
@@ -110,7 +111,6 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
           this.used_date = moment(new Date(res.body[0].used* 1000));
           this.days_ramaining =  this.date_til.diff(this.used_date, 'days');
           this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ this.days_ramaining+ " DÍAS";
-          this.activate = true;
           this.userSvc.setActivate(true);
           this.bgActive();
           this.showModal();
@@ -170,7 +170,9 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
     }
   }
 public redirectTo() {
-   this.router.navigate(["user/exp"]);
+  this.router.navigate(["user/exp"], {
+    queryParamsHandling: "preserve",
+  });
 }
 public bgActive(){
   if (this.activate==true) {

@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 
 import { Platform } from "@ionic/angular";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-root",
@@ -13,7 +14,8 @@ export class AppComponent {
 
   constructor(
     private platform: Platform,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private router: Router
   ) {
     this.initializeApp();
   }
@@ -24,6 +26,9 @@ export class AppComponent {
     });
     setTimeout(() => {
       this.showSplash = !this.showSplash;
+      if ( location.pathname == '' || location.pathname == '/' || location.pathname == '\\' ) {
+        this.router.navigate(['age-gate']);
+      }
     }, 2500);
   }
 }

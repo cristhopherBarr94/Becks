@@ -5,13 +5,13 @@ import {
   FormControl,
   Validators,
 } from "@angular/forms";
-import { HttpService } from "../../../../../../_services/http.service";
 import { Router } from "@angular/router";
-import { User } from "../../../../../../_models/User";
-import { UiService } from "../../../../../../_services/ui.service";
 import { HeaderComponent } from "src/app/_modules/utils/_components/header/header.component";
 import { environment } from "src/environments/environment";
 import { UtilService } from "src/app/_services/util.service";
+import { User } from 'src/app/_models/User';
+import { HttpService } from 'src/app/_services/http.service';
+import { UiService } from 'src/app/_services/ui.service';
 
 declare global {
   interface Window {

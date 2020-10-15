@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { UserRoutingModule } from "./user-routing.module";
-import { SectionForgetPassComponent } from "./_modules/profile/_components/section-forget-pass/section-forget-pass.component";
 import { SectionRequestConfirmComponent } from "./_modules/profile/_components/section-request-confirm/section-request-confirm.component";
 import { SectionChangePassComponent } from "./_modules/profile/_components/section-change-pass/section-change-pass.component";
 import { UtilsModule } from "../utils/utils.module";
@@ -23,13 +22,11 @@ import { ScheduleComponent } from './_modules/exp/_components/schedule/schedule.
 
 @NgModule({
   declarations: [
-    SectionForgetPassComponent,
     SectionRequestConfirmComponent,
     SectionChangePassComponent,
     ActivationPage,
     MGMPage,
     ScheduleComponent,
-
   ],
   imports: [
     CommonModule,

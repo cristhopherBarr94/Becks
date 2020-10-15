@@ -25,7 +25,6 @@ import { CircleProgressComponent } from "./_components/circle-progress/circle-pr
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { SectionEditProfileComponent } from "./_components/section-edit-profile/section-edit-profile.component";
 import { UpdateFileComponent } from "./_components/update-file/update-file.component";
-import { MenuComponent } from 'src/app/_modules/utils/_components/menu/menu.component';
 
 @NgModule({
   declarations: [

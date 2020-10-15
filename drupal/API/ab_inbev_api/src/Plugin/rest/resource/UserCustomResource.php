@@ -486,7 +486,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     // here it's possible to add additional purposes to the purpose array
     // runs the __sendTD method with parameters got from the request, it should be changed based on your form fields, country, brand, campaign, form, and whether if it's running in the production environment or not
     $data = array(
-      "abi_firstname" => $name,
+      "abi_name" => $name,
       "abi_lastname" => $lastname,
       "abi_gender" => $gender,
       "abi_phone" => $phone,
@@ -499,8 +499,8 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
         $data,              // form data & purposes
         "col",              // country
         "Becks",            // brand
-        "BECKS_SOCIETY_FASE_DOS",   // campaign
-        "BECKS_SOCIETY_FASE_DOS",   // form
+        "BECKS_EXPERIENCIAS",   // campaign
+        "BECKS_EXPERIENCIAS",   // form
         true,   // unify
         $is_production  // production flag
     );

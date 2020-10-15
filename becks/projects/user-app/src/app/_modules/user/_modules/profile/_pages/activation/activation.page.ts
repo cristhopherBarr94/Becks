@@ -14,6 +14,7 @@ import { ModalController } from '@ionic/angular';
 import { NotifyModalComponent } from 'src/app/_modules/utils/_components/notify-modal/notify-modal.component';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
+import { SHA256 } from 'crypto-js';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -113,7 +114,7 @@ export class ActivationPage implements OnInit, AfterViewInit {
   verifyCode():void {
     if (this.userActivationForm.valid) {
       this.ui.showLoading();
-      
+      const code256 = SHA256(this.userActivationForm.controls.codeNum.value).toString();
       this.httpService.patch(environment.serverUrl + environment.user.patchActivate, {
         cid: this.userActivationForm.controls.codeNum.value
       }).subscribe(
@@ -125,7 +126,12 @@ export class ActivationPage implements OnInit, AfterViewInit {
             this.showModal();
             this.httpError = "";
             this.userActivationForm.reset();
-           
+            window.dataLayer.push({
+              'event': 'trackEvent',
+              'eventCategory': 'fase 3',
+              'eventAction': 'continuar codigo de compra',
+              'eventLabel': code256,
+            });
           }
         },
         (e) => {
@@ -179,6 +185,7 @@ public bgActive(){
       });
       await modal.present();
       modal.onDidDismiss().then((res) => {
+       this.router.navigate(["user/exp"]);
       });
   }
 }

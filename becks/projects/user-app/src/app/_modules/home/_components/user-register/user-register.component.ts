@@ -17,6 +17,7 @@ import { User } from "../../../../_models/User";
 import { UiService } from "../../../../_services/ui.service";
 import { UtilService } from "src/app/_services/util.service";
 import { environment } from 'src/environments/environment';
+import { SHA256 } from "crypto-js";
 
 declare global {
   interface Window {
@@ -77,7 +78,7 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
       email: new FormControl("", [
         Validators.required,
         Validators.email,
-        Validators.maxLength(30),
+        Validators.maxLength(40),
       ]),
       telephone: new FormControl("", [
         Validators.required,
@@ -107,7 +108,7 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
       this.userRegister.email,
       this.userRegister.captcha_key
     );
-    const email256 = this.utils.getSHA256(this.userRegister.email);
+    const email256 = SHA256(this.userRegister.email).toString();
     this.userRegister.cookie_td = this.utils.getCookie("_td");
     this.httpService
       .post(
@@ -122,10 +123,11 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
             this.userRegisterForm.reset();
             window.dataLayer.push({
               event: "trackEvent",
-              eventCategory: "becks society",
-              eventAction: "finalizar",
+              eventCategory: "fase 3",
+              eventAction: "finalizar fase 3",
               eventLabel: email256,
             });
+
           } catch (e) {}
           this.moveSection();
           this.router.navigate(["confirm-register"], {

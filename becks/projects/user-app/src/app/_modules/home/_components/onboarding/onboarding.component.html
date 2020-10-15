@@ -7,9 +7,9 @@
       <p class="title-primary primary max-width-title-primary-age-gate animate__animated animate__bounceInRight">Regístrate</p>
       <p class="detail-content animate__animated animate__bounceInRight animate__delay-1s">Sé miembro de la Beck's Society</p>
     </div>
-    <button class="btn-onboarding btn-omitir">Omitir</button>
+    <button class="btn-onboarding btn-omitir" (click)="joinredirection()">Omitir</button>
     <button class="btn-onboarding btn-action" (click)="swipeNext()" *ngIf="!disableNextBtn">Siguiente</button>
-    <button class="btn-onboarding btn-action" *ngIf="finalSlider">Unirse</button>
+    <button class="btn-onboarding btn-action" *ngIf="finalSlider" (click)="joinredirection()">Unirse</button>
   </ion-slide>
   <ion-slide>
     <img src="./assets/img/onboarding/slider_2.png" alt="slider_2" class="onboarding-img animate__animated animate__bounceInRight">
@@ -18,7 +18,7 @@
       <p class="title-primary primary max-width-title-primary-age-gate animate__animated animate__bounceInRight">COMPRA BECKS</p>
       <p class="detail-content animate__animated animate__bounceInRight animate__delay-1s">Compra tu six pack de Beck’s para poder activar las experiencias de este mes</p>
     </div>
-    <button class="btn-onboarding btn-omitir">Omitir</button>
+    <button class="btn-onboarding btn-omitir" (click)="joinredirection()">Omitir</button>
     <button class="btn-onboarding btn-action" (click)="swipeNext()" *ngIf="!disableNextBtn">Siguiente</button>
     <button class="btn-onboarding btn-action" *ngIf="finalSlider">Unirse</button>
   </ion-slide>

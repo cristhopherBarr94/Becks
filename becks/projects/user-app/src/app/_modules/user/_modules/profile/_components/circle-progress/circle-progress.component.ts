@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "user-circle-progress",
@@ -11,7 +12,7 @@ export class CircleProgressComponent implements OnInit {
   colorProgressBar: string;
   progress: number = 12 * (10 / 3);
   subtitle: string = "Días";
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.remaining_days = Math.ceil(this.progress * (30 / 100));
@@ -35,5 +36,11 @@ export class CircleProgressComponent implements OnInit {
     if (this.progress < 0) {
       this.progress = 0;
     }
+  }
+
+  redirectSales() {
+    this.router.navigate(["user/profile"], {
+      queryParamsHandling: "preserve",
+    });
   }
 }

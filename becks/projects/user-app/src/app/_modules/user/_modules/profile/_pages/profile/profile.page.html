@@ -22,8 +22,9 @@
     </div>
     <user-statistics-profile
       [statistics]="stats"
-      *ngIf=" this.size == 'xs'"
+      *ngIf=" false"
     ></user-statistics-profile>
+    <div style="height: 75px;"></div>
     <div
       class="flex-direction-row background-color conte-second"
       *ngIf=" this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
@@ -34,7 +35,7 @@
         *ngIf="false"
       ></user-statistics-profile>
 
-      <!-- <div class="separator-line-column sin-stadisticas"></div> -->
+      <!-- <div class="separator-line-column sin-stadisticas" *ngIf=" this.size == 'xs'"></div> -->
       <button class="edit-button flex-direction-row" (click)="editProfileDesktop()">
         Editar Perfil <div class="editLogo margin-left-tt"></div>
       </button>

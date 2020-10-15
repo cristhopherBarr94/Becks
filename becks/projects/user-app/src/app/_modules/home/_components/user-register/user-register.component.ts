@@ -76,7 +76,7 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
       email: new FormControl("", [
         Validators.required,
         Validators.email,
-        Validators.maxLength(30),
+        Validators.maxLength(40),
       ]),
       telephone: new FormControl("", [
         Validators.required,
@@ -111,7 +111,7 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
     this.httpService
       .post(
         "https://becks.flexitco.co/becks-back/api/ab-inbev-api-usercustom/",
-        this.userRegister
+        this.userRegister.toJSON()
       )
       .subscribe(
         (data: any) => {

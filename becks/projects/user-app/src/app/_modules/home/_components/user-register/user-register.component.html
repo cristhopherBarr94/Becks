@@ -58,7 +58,7 @@
               placeholder="example@example.com"
               type="email"
               pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
-              maxlength="30"
+              maxlength="40"
               [(ngModel)]="userRegister.email"
               data-qadp="email"
             />
@@ -127,8 +127,8 @@
               [(ngModel)]="userRegister.type_id"
               data-qadp="typeId"
             >
-              <mat-option value="CC"> Cedula de ciudadanía</mat-option>
-              <mat-option value="CE"> Cedula de extrangería</mat-option>
+              <mat-option value="CC"> Cédula de ciudadanía</mat-option>
+              <mat-option value="CE"> Cédula de extranjería</mat-option>
               <mat-option value="PA"> Pasaporte</mat-option>
             </mat-select>
             <mat-error

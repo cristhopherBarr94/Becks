@@ -45,7 +45,7 @@
       </p>
       <p class="detail-content animate__animated animate__bounceInLeft animate__delay-1s">{{exp.detailExp}}</p>
     </div>
-    <button *ngIf="!exp.cuentaActiva" block="block" color="becks" (click)="activarCuenta(i)"
+    <button *ngIf="!exp.cuentaActiva" block="block" color="becks" [routerLink]="['/user/activation']"
         class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
         <span>Activar tu cuenta</span>

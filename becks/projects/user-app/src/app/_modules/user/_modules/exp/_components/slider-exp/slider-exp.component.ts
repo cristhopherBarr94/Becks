@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Exp } from 'src/app/_models/exp';
+import { User } from 'src/app/_models/User';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
+import { UserService } from 'src/app/_services/user.service';
 
 
 @Component({
@@ -13,15 +16,29 @@ export class SliderExpComponent implements OnInit {
   public id: number;
   public initialSlide
   public slideOpts
+  userSubscription: Subscription;
 
   experienciaContent: Exp[] = [];
 
   constructor(
     private experienciaService: ExperienciasService,
-    private router: Router
+    private router: Router,
+    private userSvc: UserService
   ) { }
 
   ngOnInit() {
+    this.userSubscription = this.userSvc.user$.subscribe(
+      (user: User) => {
+        if (user !== undefined) {       
+          console.log(user);
+            this.experienciaContent.forEach(exp =>{
+              exp.cuentaActiva = user.activate;
+            });
+        }
+      },
+      (error: any) => {}
+    );
+    
     this.id = Number(this.router.url.replace("/user/exp/",""))
     this.experienciaService.getExpContent().subscribe(response => {
       this.experienciaContent = response;
@@ -32,10 +49,6 @@ export class SliderExpComponent implements OnInit {
       };  
     });
    console.log( this.router.url)
-  }
-
-  activarCuenta(item: any) {
-    this.experienciaContent[item].cuentaActiva = !this.experienciaContent[item].cuentaActiva;
   }
 
   detalleExperiencia(item: any) {

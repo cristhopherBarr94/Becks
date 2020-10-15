@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from "@angular/core";
+import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -15,6 +15,8 @@ import { NotifyModalComponent } from 'src/app/_modules/utils/_components/notify-
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
 import { SHA256 } from 'crypto-js';
+import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/_services/user.service';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -25,7 +27,7 @@ declare global {
   templateUrl: "./activation.page.html",
   styleUrls: ["./activation.page.scss"],
 })
-export class ActivationPage implements OnInit, AfterViewInit {
+export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
   public userActivationForm: FormGroup;
   public userActivation: User = new User();
   public captchaStatus: boolean;
@@ -41,6 +43,8 @@ export class ActivationPage implements OnInit, AfterViewInit {
   public date_til : any;
   public used_date : any;
   public days_ramaining : any;
+  public user:User;
+  private subscribe:Subscription;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
   title: string = "activa tu cuenta";
@@ -52,13 +56,22 @@ export class ActivationPage implements OnInit, AfterViewInit {
     private router: Router,
     private ui: UiService,
     private modalCtrl: ModalController,
+    private userSvc: UserService,
   ) {}
 
   ngOnInit(): void {
     this.activate=false;
+    this.subscribe = this.userSvc.user$.subscribe(user =>{
+      this.user = user;
+      this.activate = this.user.activate;
+    })
     this.initforms();
     this.getActiveCode();
     this.bgActive();
+  }
+
+  ngOnDestroy(){
+    this.subscribe.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -98,7 +111,7 @@ export class ActivationPage implements OnInit, AfterViewInit {
           this.used_date = moment(new Date(res.body[0].used* 1000));
           this.days_ramaining =  this.date_til.diff(this.used_date, 'days');
           this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ this.days_ramaining+ " DÍAS";
-          this.activate=true;
+          this.userSvc.setActivate(true);
           this.bgActive();
           this.showModal();
         }else {

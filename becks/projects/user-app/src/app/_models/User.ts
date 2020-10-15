@@ -14,6 +14,7 @@ export class User {
   last_login: string;
   birthdate: string;
   buy_code: string;
+  activate  :boolean;
 
   type_id: string;
   id_number: string;

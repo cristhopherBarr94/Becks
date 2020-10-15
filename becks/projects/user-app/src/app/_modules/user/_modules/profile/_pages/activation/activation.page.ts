@@ -88,30 +88,29 @@ export class ActivationPage implements OnInit, AfterViewInit {
   
  getActiveCode(): void {
   this.ui.showLoading();
+
     this.httpService.get(environment.serverUrl + environment.user.getCodes).subscribe(
       (res: any) => {
 
-        this.date_til = moment(new Date(res.body[0].valid_until * 1000));
-        this.used_date = moment(new Date(res.body[0].used* 1000));
-        this.days_ramaining =  this.date_til.diff(this.used_date, 'days');
-        this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ this.days_ramaining+ " DÍAS";
-        console.log(this.days_ramaining);
-        
-        this.ui.dismissLoading();
-
         if (res.status == 200 && res.body.length >0) {
+          this.ui.dismissLoading();
+          this.date_til = moment(new Date(res.body[0].valid_until * 1000));
+          this.used_date = moment(new Date(res.body[0].used* 1000));
+          this.days_ramaining =  this.date_til.diff(this.used_date, 'days');
+          this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ this.days_ramaining+ " DÍAS";
           this.activate=true;
           this.bgActive();
           this.showModal();
+        }else {
+          this.verifyCode();
         }
       },
-      (err) => {
-          this.verifyCode();
-      }
+      (err) => { }
     );
 
   }
   verifyCode():void {
+    this.ui.dismissLoading();
     if (this.userActivationForm.valid) {
       this.ui.showLoading();
       const code256 = SHA256(this.userActivationForm.controls.codeNum.value).toString();
@@ -132,6 +131,8 @@ export class ActivationPage implements OnInit, AfterViewInit {
               'eventAction': 'continuar codigo de compra',
               'eventLabel': code256,
             });
+            window.location.reload();
+
           }
         },
         (e) => {

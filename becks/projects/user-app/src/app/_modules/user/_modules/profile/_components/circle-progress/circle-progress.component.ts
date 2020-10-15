@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { Router } from '@angular/router';
 import { HttpService } from 'src/app/_services/http.service';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
@@ -18,7 +19,7 @@ export class CircleProgressComponent implements OnInit {
   public daysR:any;
   
   constructor(
-    public httpService: HttpService,
+    public httpService: HttpService,private router: Router
   ) {}
 
   ngOnInit() {
@@ -66,5 +67,11 @@ export class CircleProgressComponent implements OnInit {
       }
     );
 
+  }
+
+  redirectSales() {
+    this.router.navigate(["user/profile"], {
+      queryParamsHandling: "preserve",
+    });
   }
 }

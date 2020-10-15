@@ -82,7 +82,7 @@ $hamburger-spacing: 8px;
 
 .position-menu-absolute{
   position: absolute;
-  @media (min-width: 768px) {
+  @media (min-width: 0px) and (max-width: 796px) {
   background-color: transparent !important;}
 }
 

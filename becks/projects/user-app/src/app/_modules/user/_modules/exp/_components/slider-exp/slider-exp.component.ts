@@ -30,7 +30,6 @@ export class SliderExpComponent implements OnInit {
     this.userSubscription = this.userSvc.user$.subscribe(
       (user: User) => {
         if (user !== undefined) {       
-          console.log(user);
             this.experienciaContent.forEach(exp =>{
               exp.cuentaActiva = user.activate;
             });

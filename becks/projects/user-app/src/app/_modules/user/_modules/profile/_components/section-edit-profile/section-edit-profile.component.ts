@@ -136,12 +136,12 @@ export class SectionEditProfileComponent implements OnInit {
   saveChanges() {
     if (this.userEditProfileForm.valid) {
       this.ui.showLoading();
-      this.birthDayDate =
-        this.userEditProfileForm.controls.month.value +
+      this.birthDayDate =!!this.userEditProfileForm.controls.day.value ? 
+          this.userEditProfileForm.controls.month.value +
         "/" +
         this.userEditProfileForm.controls.day.value +
         "/" +
-        this.userEditProfileForm.controls.year.value;
+        this.userEditProfileForm.controls.year.value: undefined
 
       this.httpService
         .patch(environment.serverUrl + environment.user.patchData, {

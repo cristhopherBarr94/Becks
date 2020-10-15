@@ -35,7 +35,9 @@ export class UserService {
     this.http.get(environment.serverUrl + environment.user.getData).subscribe(
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
+          const activate = this._user.activate;
           this._user = new User(response.body);
+          this._user.activate = activate;
           localStorage.setItem("bks_user", this._user.toJSON());
           this._userSbj.next(this._user);
         } else {
@@ -56,7 +58,9 @@ export class UserService {
       .subscribe(
         (response: any) => {
           if (response.status >= 200 && response.status < 300) {
+            const activate = this._user.activate;
             this._user = new User(response.body);
+            this._user.activate = activate;
             this._userSbj.next(this._user);
           } else {
             this._userSbj.error({});
@@ -77,7 +81,9 @@ export class UserService {
       .subscribe(
         (response: any) => {
           if (response.status >= 200 && response.status < 300) {
+            const activate = this._user.activate;
             this._user = new User(response.body);
+            this._user.activate = activate;
             this._userSbj.next(this._user);
           } else {
             this._userSbj.error({});

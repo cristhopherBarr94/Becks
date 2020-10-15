@@ -54,6 +54,7 @@ export class ProfilePage implements OnInit, OnDestroy {
       this.user = this.userSvc.getActualUser();
     }
     this.userSvc.getData();
+    this.ui.dismissLoading();
   }
 
   ngOnDestroy(): void {

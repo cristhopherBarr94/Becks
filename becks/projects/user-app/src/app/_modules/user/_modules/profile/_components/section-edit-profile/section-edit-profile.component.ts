@@ -49,11 +49,7 @@ export class SectionEditProfileComponent implements OnInit {
 
   ngOnInit() {
     if (this.userSvc.getActualUser()) {
-      this.user = this.userSvc.getActualUser();
-      console.log(
-        "SectionEditProfileComponent -> ngOnInit -> this.user",
-        this.user
-      );
+      this.user = this.userSvc.getActualUser();     
     } else {
       this.userSvc.getData();
     }

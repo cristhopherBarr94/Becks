@@ -32,6 +32,20 @@ const routes: Routes = [
       ),
   },
   {
+    path: "privacy-policy",
+    loadChildren: () =>
+      import("./_modules/utils/_pages/privacy-policy/privacy-policy.module").then(
+        (m) => m.PrivacyPolicyPageModule
+      ),
+  },
+  {
+    path: "terms-conditions",
+    loadChildren: () =>
+      import("./_modules/utils/_pages/terms-conditions/terms-conditions.module").then(
+        (m) => m.TermsConditionsPageModule
+      ),
+  },
+  {
     path: "**",
     loadChildren: () =>
       import("./_modules/not-found/not-found.module").then(

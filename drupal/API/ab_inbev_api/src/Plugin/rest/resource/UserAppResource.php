@@ -274,6 +274,17 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
                       ->fields(['field_birthdate_value' => $data['birthdate']])
                       ->condition('entity_id', $this->currentUser->id() )
                       ->execute()  == 1;
+            if( !$response_array["birthdate"] ) {
+              $response_array["birthdate"] = $this->dbConnection->insert('user__field_birthdate')
+                                          ->fields([
+                                                'bundle ' => 'user' ,
+                                                'entity_id' => $this->currentUser->id() ,
+                                                'revision_id ' => $this->currentUser->id() ,
+                                                'langcode ' => $this->currentUser->getPreferredLangcode() ,
+                                                'delta ' => 0 ,
+                                                'field_birthdate_value' =>$data['birthdate']
+                                          ])->execute() >= 0;
+            }
           } catch (\Throwable $th) {}
         }
         

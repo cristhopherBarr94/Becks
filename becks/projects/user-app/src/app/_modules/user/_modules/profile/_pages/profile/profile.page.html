@@ -24,7 +24,7 @@
       [statistics]="stats"
       *ngIf=" false"
     ></user-statistics-profile>
-    <div style="height: 75px;"></div>
+    <div style="height: 75px;" *ngIf=" this.size == 'xs' "></div>
     <div
       class="flex-direction-row background-color conte-second"
       *ngIf=" this.size == 'sm' || this.size == 'lg' || this.size == 'md'"

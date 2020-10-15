@@ -25,7 +25,6 @@ export class CircleProgressComponent implements OnInit {
 
   ngOnInit() {
     this.getDays();
-    console.log(this.daysR);
   }
 
   

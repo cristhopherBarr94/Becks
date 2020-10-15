@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpService } from 'src/app/_services/http.service';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: "user-circle-progress",
@@ -19,7 +20,7 @@ export class CircleProgressComponent implements OnInit {
   public daysR:any;
   
   constructor(
-    public httpService: HttpService,private router: Router
+    public httpService: HttpService,private router: Router,private userSvc: UserService,
   ) {}
 
   ngOnInit() {
@@ -32,6 +33,7 @@ export class CircleProgressComponent implements OnInit {
     this.httpService.get(environment.serverUrl + environment.user.getCodes).subscribe(
       (res: any) => {
         if (res.status == 200 && res.body.length >0) {
+          this.userSvc.setActivate(true);
         let date_til = moment(new Date(res.body[0].valid_until * 1000));
         let used_date = moment(new Date(res.body[0].used* 1000));
         this.daysR =  date_til.diff(used_date, 'days');

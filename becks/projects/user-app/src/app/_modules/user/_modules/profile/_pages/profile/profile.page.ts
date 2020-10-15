@@ -39,6 +39,7 @@ export class ProfilePage implements OnInit, OnDestroy {
     this.userSubscription = this.userSvc.user$.subscribe(
       (user: User) => {
         if (user !== undefined) {
+          console.log("ProfilePage -> ngOnInit -> user", user)
           if (user.status == 1) {
             this.router.navigate(["user/changePass"], {
               queryParamsHandling: "preserve",

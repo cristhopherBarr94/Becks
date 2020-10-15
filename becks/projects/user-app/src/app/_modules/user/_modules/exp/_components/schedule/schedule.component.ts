@@ -119,5 +119,6 @@ export class ScheduleComponent implements OnInit {
       return highlightDate ? 'special-date' : '';
     };
   }
-
+ 
+  
 }

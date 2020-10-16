@@ -55,8 +55,7 @@ export class MenuComponent implements OnInit {
       );      
     }
     this.ubication = this.router.url.replace("/user/","")   
-    this.menuS.statusMenu( this.ubication.split('/')[0] )
-    
+    this.menuS.statusMenu( this.ubication.split('/')[0] )    
   }
 
   ngOnDestroy() {

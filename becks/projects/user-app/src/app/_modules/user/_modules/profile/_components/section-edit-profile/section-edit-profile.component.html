@@ -33,7 +33,8 @@
     >
     <!-- <user-update-file *ngIf="chargePhoto" (chargePhoto)="chargeImage($event)">
     </user-update-file> -->
-    <span *ngIf="size != 'xs'" class=" margint-top font-profile margin-tittle flex-direction-row ">{{user.first_name}}
+    <span *ngIf="size != 'xs'"
+      class=" margint-top font-profile margin-tittle flex-direction-row name-box">{{user.first_name}}
       {{user.last_name}} <div class="editLogo margin-left-tt"></div></span>
   </div>
   <div class="content-flex-all-center">
@@ -66,6 +67,7 @@
                 userEditProfileForm.controls.name,
                 "nombre",
                 3,
+                20,
                 0,
                 1
               )
@@ -95,6 +97,7 @@
                 userEditProfileForm.controls.lastName,
                 "apellido(s)",
                 3,
+                20,
                 0,
                 1
               )
@@ -124,6 +127,7 @@
               getMessageform(
                 userEditProfileForm.controls.phone,
                 "teléfono",
+                10,
                 10,
                 0,
                 1
@@ -158,6 +162,7 @@
                     userEditProfileForm.controls.day,
                     "dia",
                     10,
+                    10,
                     1,
                     31
                   )
@@ -186,6 +191,7 @@
                     userEditProfileForm.controls.month,
                     "mes",
                     10,
+                    10,
                     1,
                     12
                   )
@@ -213,6 +219,7 @@
                   getMessageform(
                     userEditProfileForm.controls.year,
                     "año",
+                    10,
                     10,
                     1920,
                     2020
@@ -266,9 +273,10 @@
           <mat-error *ngIf="userEditProfileForm.controls.document.errors">
             {{
               getMessageform(
-                userEditProfileForm.controls.lastName,
-                "apellido(s)",
+                userEditProfileForm.controls.document,
+                "documento",
                 3,
+                10,
                 0,
                 1
               )
@@ -278,7 +286,7 @@
       </div>
       <button
         *ngIf="size != 'xs'"
-        class="becks-btn-primary margin-top-button button-width"
+        class="becks-btn-primary margin-top-button button-width margin-bottom"
         (click)="saveChanges()"
         block="block"
         color="becks"

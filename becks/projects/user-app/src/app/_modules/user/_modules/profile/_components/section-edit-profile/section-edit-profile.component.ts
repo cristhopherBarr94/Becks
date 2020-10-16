@@ -62,10 +62,12 @@ export class SectionEditProfileComponent implements OnInit {
       name: new FormControl(this.user.first_name, [
         Validators.required,
         Validators.minLength(3),
+        Validators.maxLength(20)
       ]),
       lastName: new FormControl(this.user.last_name, [
         Validators.required,
         Validators.minLength(3),
+        Validators.maxLength(20)
       ]),
       phone: new FormControl(this.user.mobile_phone, [
         Validators.required,
@@ -83,8 +85,8 @@ export class SectionEditProfileComponent implements OnInit {
         !!this.user.birthdate && moment(this.user.birthdate).format("YYYY"),
         [Validators.required, Validators.min(1920), Validators.max(2020)]
       ),
-      id: new FormControl(this.user.type_id, [Validators.required]),
-      document: new FormControl(this.user.id_number, [Validators.required]),
+      id: new FormControl(this.user.type_id),
+      document: new FormControl(this.user.id_number,[Validators.required]),
     });
   }
 
@@ -119,6 +121,7 @@ export class SectionEditProfileComponent implements OnInit {
     item: any,
     name: string,
     minlength?: number,
+    maxlength?: number,
     min?: number,
     max?: number
   ): string {
@@ -126,7 +129,9 @@ export class SectionEditProfileComponent implements OnInit {
       return "Ingrese un " + name;
     } else if (item.hasError("minlength")) {
       return "Ingrese un " + name + " de mínimo " + minlength + " caracteres";
-    } else if (item.hasError("pattern")) {
+    } else if (item.hasError("maxLength")) {
+      return "Ingrese un " + name + " de maximo " + maxlength + " caracteres";
+    }else if (item.hasError("pattern")) {
       return "Ingrese solo letras";
     } else if (item.hasError("min") || item.hasError("max")) {
       return "Ingrese un valor entre " + min + " y " + max;

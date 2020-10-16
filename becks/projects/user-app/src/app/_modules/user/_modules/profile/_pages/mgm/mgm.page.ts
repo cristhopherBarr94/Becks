@@ -12,6 +12,7 @@ import { UiService } from "../../../../../../_services/ui.service";
 import { HeaderComponent } from "src/app/_modules/utils/_components/header/header.component";
 import { environment } from "src/environments/environment";
 import { UtilService } from "src/app/_services/util.service";
+import { MenuStatusService } from 'src/app/_services/menu-status.service';
 
 declare global {
   interface Window {
@@ -37,11 +38,13 @@ export class MGMPage implements OnInit {
     public httpService: HttpService,
     private router: Router,
     private ui: UiService,
-    private utils: UtilService
+    private utils: UtilService,
+    private menuS : MenuStatusService,
   ) {}
 
   ngOnInit(): void {
     this.initforms();
+    this.menuS.statusMenu("mgm") 
   }
 
   initforms() {

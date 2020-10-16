@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuStatusService } from 'src/app/_services/menu-status.service';
 
 @Component({
   selector: 'user-home-exp',
@@ -7,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeExpPage implements OnInit {
 
-  constructor() { }
+  constructor(private menuS : MenuStatusService,) { }
 
-  ngOnInit() { }
+  ngOnInit() { this.menuS.statusMenu("exp") }
 
 }

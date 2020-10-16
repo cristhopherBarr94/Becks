@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import {  Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/_models/User';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { MenuStatusService } from 'src/app/_services/menu-status.service';
 import { UiService } from 'src/app/_services/ui.service';
 import { UserService } from 'src/app/_services/user.service';
 import { environment } from 'src/environments/environment';
@@ -24,17 +24,24 @@ export class MenuComponent implements OnInit {
   public gender:string
   public time;
   private pictureSub: Subscription;
+  private menuOption : string
   userSubscription: Subscription;
+  menuSubscription: Subscription
 
   constructor(private userSvc: UserService,   private authService: AuthService,
     private httpService: HttpService,
     private ui: UiService,
     private router: Router,
+    private menuS : MenuStatusService,
     ) { this.pictureSub = this.userSvc.editing$.subscribe((isEditing) => {
       this.time = isEditing
         ? ""
         : "?time_stamp=" + Math.floor(Date.now() / 1000);
-    });}
+    }); 
+    this.userSubscription = this.menuS.menuStatus$.subscribe(
+      (result)=>{ this.menuOption = result}    
+    )       
+  }
 
   ngOnInit() {
     if(this.urlImage == undefined){      
@@ -48,16 +55,19 @@ export class MenuComponent implements OnInit {
           }
         },
         (error: any) => {}
-      );
+      );      
     }
+    
+    console.log("ngOnInit -> userSubscription", this.menuOption)
   }
+  
 
   ngOnDestroy() {
     this.pictureSub.unsubscribe();
   }
 
   ngAfterViewInit() {
-    this.time = "?time_stamp=" + Math.floor(Date.now() / 1000);
+    this.time = "?time_stamp=" + Math.floor(Date.now() / 1000);    
   }
 
   openClose(){
@@ -95,5 +105,11 @@ export class MenuComponent implements OnInit {
         ? "../../../../../assets/img/profile_female.jpg"
         : "../../../../../assets/img/profile_male.jpg"
       : this.url + this.urlImage+ this.time ;
+  }
+
+  selected(seccion:string){
+    if(seccion == this.menuOption){
+      return "border-green"
+    }
   }
 }

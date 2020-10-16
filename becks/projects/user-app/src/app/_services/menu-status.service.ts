@@ -4,8 +4,12 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class MenuStatusService {
-  private _menuStatus = new Subject<string>();
+  private _menuStatus = new Subject<any>();
   public menuStatus$ = this._menuStatus.asObservable();
 
-  constructor() { }
+  constructor() {}
+
+  public statusMenu (state:string){
+    this._menuStatus.next(state)
+  }
 }

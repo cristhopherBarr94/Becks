@@ -61,13 +61,30 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
   ) {}
 
   ngOnInit(): void {
-    this.activate=localStorage.getItem('bks_user_activate')=='1';
     this.subscribe = this.userSvc.user$.subscribe(user =>{
       this.user = user;
-      this.activate = this.user.activate;
-    })
+    });
+    
+    this.subsCodes = this.userSvc.userCodes$.subscribe(
+      ( codes ) => {
+        this.ui.dismissLoading();
+        if ( codes && codes.length>0 ) {
+          this.activate = true;
+          this.activate = this.user.activate;
+          this.date_til = moment(new Date(codes[0].valid_until * 1000));
+          this.used_date = moment(new Date(codes[0].used* 1000));
+          this.days_ramaining =  this.date_til.diff(this.used_date, 'days');
+          this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ this.days_ramaining+ " DÍAS";
+          this.bgActive();
+          this.showModal();
+        } else {
+          this.verifyCode();
+        }
+      }
+    );
+    
+    this.userSvc.getCodes();
     this.initforms();
-    this.getActiveCode();
     this.bgActive();
   }
 
@@ -99,25 +116,6 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
       classreturn = "input-becks-error";
     }
     return classreturn;
-  }
-  
-  getActiveCode(): void {
-    this.subsCodes = this.userSvc.userCodes$.subscribe(
-      ( codes ) => {
-        if ( codes.length >0) {
-          this.ui.dismissLoading();
-          this.date_til = moment(new Date(codes[0].valid_until * 1000));
-          this.used_date = moment(new Date(codes[0].used* 1000));
-          this.days_ramaining =  this.date_til.diff(this.used_date, 'days');
-          this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ this.days_ramaining+ " DÍAS";
-          this.bgActive();
-          this.showModal();
-        } else {
-          this.verifyCode();
-        }
-      }
-    )
-    this.userSvc.getCodes();
   }
 
   verifyCode():void {

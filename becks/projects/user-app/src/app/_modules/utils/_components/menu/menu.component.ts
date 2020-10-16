@@ -37,7 +37,6 @@ export class MenuComponent implements OnInit {
     });}
 
   ngOnInit() {
-    console.log("MenuComponent -> ngOnInit -> this.urlImage", this.urlImage)
     if(this.urlImage == undefined){      
       this.userSvc.getData();
       this.userSubscription = this.userSvc.user$.subscribe(

@@ -60,5 +60,5 @@ export class VerticalCalendarComponent implements OnInit {
   ];
   constructor(private menuS : MenuStatusService) {}
 
-  ngOnInit() {this.menuS.statusMenu("calendar")}
+  ngOnInit() {this.menuS.statusMenu("calendarmob")}
 }

@@ -73,12 +73,12 @@ export class HttpService {
     if (error.status === HttpConstants.UNAUTHORIZED) {
       localStorage.clear();
     } else if (error.status === HttpConstants.CONFLICT) {
-      console.log("mensaje incorrecto");
+      // console.log("mensaje incorrecto");
     } else if (
       error.status === HttpConstants.INTERNAL_SERVER_ERROR ||
       error.status === HttpConstants.SERVICE_UNAVAILABLE
     ) {
-      console.log("mensaje de servidor error");
+      // console.log("mensaje de servidor error");
     } else if (!error.ok) {
       console.log("ERROR ::: ", error);
     }

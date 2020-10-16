@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Subject } from "rxjs";
+import { Subject } from "rxjs";
 import { environment } from "src/environments/environment";
 import { User } from "../_models/User";
 import { HttpService } from "./http.service";
@@ -8,7 +8,11 @@ import { HttpService } from "./http.service";
   providedIn: "root",
 })
 export class UserService {
-  private user_code_active = false;
+
+  private _userCodes = [];
+  private _userCodeSbj = new Subject<any[]>();
+  public userCodes$ = this._userCodeSbj.asObservable();
+
   private _user: User = new User();
   private _userSbj = new Subject<User>();
   public user$ = this._userSbj.asObservable();
@@ -26,6 +30,9 @@ export class UserService {
     if (localStorage.getItem("bks_user")) {
       this._user = new User(JSON.parse(localStorage.getItem("bks_user")));
     }
+    if (localStorage.getItem("bks_user_codes")) {
+      this._userCodes = (JSON.parse(localStorage.getItem("bks_user_codes")));
+    }
   }
 
   public getActualUser(): User {
@@ -37,7 +44,7 @@ export class UserService {
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
           this._user = new User(response.body);
-          this._user.activate = this.user_code_active;
+          this._user.activate = this._userCodes && this._userCodes.length > 0;
           localStorage.setItem("bks_user", this._user.toJSON());
           this._userSbj.next(this._user);
         } else {
@@ -50,6 +57,28 @@ export class UserService {
     );
   }
 
+  public getCodes() {
+    
+    if ( this._userCodes.length > 0 ) {
+      this._userCodeSbj.next(this._userCodes);
+      this._userSbj.next(this._user);
+    } else {
+      this.http.get(environment.serverUrl + environment.user.getCodes).subscribe(
+        (res: any) => {
+          if (res.status == 200 && res.body.length >0) {
+            this._userCodes = res.body;
+            this._user.activate = this._userCodes && this._userCodes.length > 0;
+            localStorage.setItem("bks_user", this._user.toJSON());
+            localStorage.setItem("bks_user_codes", JSON.stringify(this._userCodes) );
+            this._userCodeSbj.next(this._userCodes);
+            this._userSbj.next(this._user);
+          }
+        }
+      );
+    }
+    
+  }
+
   public patchPassword(newPassword: string) {
     this.http
       .patch(environment.serverUrl + environment.user.patchPassword, {
@@ -59,7 +88,7 @@ export class UserService {
         (response: any) => {
           if (response.status >= 200 && response.status < 300) {
             this._user = new User(response.body);
-            this._user.activate = this.user_code_active;
+            this._user.activate = this._userCodes && this._userCodes.length > 0;
             this._userSbj.next(this._user);
           } else {
             this._userSbj.error({});
@@ -81,7 +110,7 @@ export class UserService {
         (response: any) => {
           if (response.status >= 200 && response.status < 300) {
             this._user = new User(response.body);
-            this._user.activate = this.user_code_active;
+            this._user.activate = this._userCodes && this._userCodes.length > 0;
             this._userSbj.next(this._user);
           } else {
             this._userSbj.error({});
@@ -106,14 +135,6 @@ export class UserService {
 
   public profilePicture (state:string){
     this._imagenProfile.next(state)
-  }
-
-  public setActivate(status:boolean) {
-    this.user_code_active = status;
-    this._user.activate = this.user_code_active;
-    localStorage.setItem("bks_user", this._user.toJSON());
-    localStorage.setItem("bks_user_activate", status? '1' : '0');
-    this._userSbj.next(this._user);
   }
 
   public logout() {

@@ -53,13 +53,7 @@ export class ProfilePage implements OnInit, OnDestroy {
       (error: any) => {}
     );
 
-    this.httpService.get(environment.serverUrl + environment.user.getCodes).subscribe(
-      (res: any) => {
-        if (res.status == 200 && res.body.length >0) {
-          this.userSvc.setActivate(true);
-        }
-      })
-
+    this.userSvc.getCodes();
     if (this.userSvc.getActualUser()) {
       this.user = this.userSvc.getActualUser();
     }

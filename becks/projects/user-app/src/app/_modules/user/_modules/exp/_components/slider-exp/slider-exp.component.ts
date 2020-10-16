@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Exp } from 'src/app/_models/exp';
@@ -12,11 +12,12 @@ import { UserService } from 'src/app/_services/user.service';
   templateUrl: './slider-exp.component.html',
   styleUrls: ['./slider-exp.component.scss'],
 })
-export class SliderExpComponent implements OnInit {
+export class SliderExpComponent implements OnInit, OnDestroy {
   public id: number;
   public initialSlide
   public slideOpts
-  userSubscription: Subscription;
+  private codes;
+  private userCodeSubs: Subscription;
 
   experienciaContent: Exp[] = [];
 
@@ -27,16 +28,6 @@ export class SliderExpComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userSubscription = this.userSvc.user$.subscribe(
-      (user: User) => {
-        if (user !== undefined) {       
-            this.experienciaContent.forEach(exp =>{
-              exp.cuentaActiva = localStorage.getItem('bks_user_activate')=='1';
-            });
-        }
-      },
-      (error: any) => {}
-    );
     
     this.id = Number(this.router.url.replace("/user/exp/",""))
     this.experienciaService.getExpContent().subscribe(response => {
@@ -45,9 +36,22 @@ export class SliderExpComponent implements OnInit {
         initialSlide: this.compareId(this.id == NaN ? 0: this.id),
         direction: "vertical",
         speed: 400
-      };  
+      };
+      this.checkCodes();
     });
-   console.log( this.router.url)
+
+    this.userCodeSubs = this.userSvc.userCodes$.subscribe( 
+      ( codes ) => {
+        this.codes = codes;
+        this.checkCodes();
+      }
+    );
+    this.userSvc.getCodes();
+    
+  }
+
+  ngOnDestroy(): void {
+    this.userCodeSubs.unsubscribe();
   }
 
   detalleExperiencia(item: any) {
@@ -64,5 +68,13 @@ export class SliderExpComponent implements OnInit {
   }
 
   activarCuenta( res ) {}
+
+  checkCodes() {
+    if ( this.codes.length > 0 ) {       
+      this.experienciaContent.forEach(exp =>{
+        exp.cuentaActiva = true;
+      });
+    }
+  }
 
 }

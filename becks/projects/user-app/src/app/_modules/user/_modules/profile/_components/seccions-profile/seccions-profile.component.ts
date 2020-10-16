@@ -26,7 +26,9 @@ export class SeccionsProfileComponent implements OnInit {
     });
   }
 
-  ngOnInit() { console.log("SeccionsProfileComponent -> isActive", this.isActive)}
+  ngOnInit() { 
+    // console.log("SeccionsProfileComponent -> isActive", this.isActive)
+  }
 
   redirectExp() {
     this.router.navigate(["user/exp"], {

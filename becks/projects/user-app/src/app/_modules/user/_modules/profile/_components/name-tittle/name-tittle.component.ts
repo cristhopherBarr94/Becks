@@ -36,7 +36,7 @@ export class NameTittleComponent implements OnInit {
     });
     this.nameResponsive = this.userSvc.dropdownMenu$.subscribe((result)=>{ this.visibleNAme=result})
    
-    console.log("NameTittleComponent -> this.nameResponsive", this.nameResponsive)
+    // console.log("NameTittleComponent -> this.nameResponsive", this.nameResponsive)
   }
 
   ngOnInit() {}

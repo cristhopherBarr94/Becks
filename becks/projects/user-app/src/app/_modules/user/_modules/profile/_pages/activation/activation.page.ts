@@ -44,7 +44,8 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
   public used_date : any;
   public days_ramaining : any;
   public user:User;
-  private subscribe:Subscription;
+  private subscribe: Subscription;
+  private subsCodes: Subscription;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
   title: string = "activa tu cuenta";
@@ -72,6 +73,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
 
   ngOnDestroy(){
     this.subscribe.unsubscribe();
+    this.subsCodes.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -99,29 +101,25 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
     return classreturn;
   }
   
- getActiveCode(): void {
-  this.ui.showLoading();
-
-    this.httpService.get(environment.serverUrl + environment.user.getCodes).subscribe(
-      (res: any) => {
-
-        if (res.status == 200 && res.body.length >0) {
+  getActiveCode(): void {
+    this.subsCodes = this.userSvc.userCodes$.subscribe(
+      ( codes ) => {
+        if ( codes.length >0) {
           this.ui.dismissLoading();
-          this.date_til = moment(new Date(res.body[0].valid_until * 1000));
-          this.used_date = moment(new Date(res.body[0].used* 1000));
+          this.date_til = moment(new Date(codes[0].valid_until * 1000));
+          this.used_date = moment(new Date(codes[0].used* 1000));
           this.days_ramaining =  this.date_til.diff(this.used_date, 'days');
           this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ this.days_ramaining+ " DÍAS";
-          this.userSvc.setActivate(true);
           this.bgActive();
           this.showModal();
-        }else {
+        } else {
           this.verifyCode();
         }
-      },
-      (err) => { }
-    );
-
+      }
+    )
+    this.userSvc.getCodes();
   }
+
   verifyCode():void {
     this.ui.dismissLoading();
     if (this.userActivationForm.valid) {

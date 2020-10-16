@@ -85,8 +85,8 @@ export class SectionEditProfileComponent implements OnInit {
         !!this.user.birthdate && moment(this.user.birthdate).format("YYYY"),
         [Validators.required, Validators.min(1920), Validators.max(2020)]
       ),
-      id: new FormControl(this.user.type_id, [Validators.required]),
-      document: new FormControl(this.user.id_number, [Validators.required]),
+      id: new FormControl(this.user.type_id),
+      document: new FormControl(this.user.id_number,[Validators.required]),
     });
   }
 

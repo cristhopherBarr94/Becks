@@ -41,7 +41,7 @@ export class UserLoginComponent implements OnInit {
 
   redirect() {
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(["user/profile"], {
+      this.router.navigate(["user/exp"], {
         queryParamsHandling: "preserve",
       });
     }

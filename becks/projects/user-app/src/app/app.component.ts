@@ -26,7 +26,8 @@ export class AppComponent {
     });
     setTimeout(() => {
       this.showSplash = !this.showSplash;
-      if ( location.pathname == '' || location.pathname == 'app' || location.pathname == '/app' || 
+      if ( location.pathname == '' || location.pathname == 'app' || 
+            location.pathname == '/app' || location.pathname == '/app/' ||
             location.pathname == '/' || location.pathname == '\\' ) {
         this.router.navigate(['age-gate']);
       }

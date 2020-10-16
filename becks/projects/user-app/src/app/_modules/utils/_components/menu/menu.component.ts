@@ -51,14 +51,12 @@ export class MenuComponent implements OnInit {
           if (user !== undefined) {           
             this.urlImage = user.photo;
             this.default_photo = !!!user.photo;
-            this.gender = user.gender
+            this.gender = user.gender;
           }
         },
         (error: any) => {}
       );      
     }
-    
-    console.log("ngOnInit -> userSubscription", this.menuOption)
   }
   
 

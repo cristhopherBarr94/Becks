@@ -31,6 +31,7 @@ export class UpdateFileComponent implements OnInit {
         reader.readAsBinaryString(blob);
       }
     });
+    this.ui.dismissModal()
   }
 
   _handleReaderLoaded(readerEvt) {

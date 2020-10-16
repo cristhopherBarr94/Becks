@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 import { SectionEditProfileComponent } from "../../_components/section-edit-profile/section-edit-profile.component";
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/_services/http.service';
+import { MenuStatusService } from 'src/app/_services/menu-status.service';
 
 @Component({
   selector: "user-profile",
@@ -21,14 +22,15 @@ export class ProfilePage implements OnInit, OnDestroy {
   public default_picure: boolean;
   public headerPosition : string
 
-  userSubscription: Subscription;
+  userSubscription: Subscription;  
 
   constructor(
     private userSvc: UserService,
     private platform: Platform,
     private ui: UiService,
     private router: Router,
-    public httpService: HttpService
+    public httpService: HttpService,
+    private menuS : MenuStatusService,
   ) {
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
@@ -59,6 +61,7 @@ export class ProfilePage implements OnInit, OnDestroy {
     }
     this.userSvc.getData();
     this.ui.dismissLoading();
+    this.menuS.statusMenu("profile")   
   }
 
   ngOnDestroy(): void {

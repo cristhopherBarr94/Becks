@@ -17,6 +17,7 @@ import * as moment from 'moment';
 import { SHA256 } from 'crypto-js';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/_services/user.service';
+import { MenuStatusService } from 'src/app/_services/menu-status.service';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -58,6 +59,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
     private ui: UiService,
     private modalCtrl: ModalController,
     private userSvc: UserService,
+    private menuS : MenuStatusService
   ) {}
 
   ngOnInit(): void {
@@ -86,6 +88,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
     this.userSvc.getCodes();
     this.initforms();
     this.bgActive();
+    this.menuS.statusMenu("activate") 
   }
 
   ngOnDestroy(){

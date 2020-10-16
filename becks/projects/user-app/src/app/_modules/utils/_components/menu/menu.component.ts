@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import {  Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/_models/User';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -23,21 +22,25 @@ export class MenuComponent implements OnInit {
   public menuStatus:boolean = false;
   public url: string = environment.serverUrl;
   public gender:string
-  public ubication: string
   public time;
   private pictureSub: Subscription;
+  private menuOption : string
   userSubscription: Subscription;
+  menuSubscription: Subscription
 
   constructor(private userSvc: UserService,   private authService: AuthService,
     private httpService: HttpService,
     private ui: UiService,
     private router: Router,
-    private menuS : MenuStatusService
+    private menuS : MenuStatusService,
     ) { this.pictureSub = this.userSvc.editing$.subscribe((isEditing) => {
       this.time = isEditing
         ? ""
         : "?time_stamp=" + Math.floor(Date.now() / 1000);
-    });    
+    }); 
+    this.userSubscription = this.menuS.menuStatus$.subscribe(
+      (result)=>{ this.menuOption = result}    
+    )       
   }
 
   ngOnInit() {
@@ -54,16 +57,17 @@ export class MenuComponent implements OnInit {
         (error: any) => {}
       );      
     }
-    this.ubication = this.router.url.replace("/user/","")   
-    this.menuS.statusMenu( this.ubication.split('/')[0] )    
+    
+    console.log("ngOnInit -> userSubscription", this.menuOption)
   }
+  
 
   ngOnDestroy() {
     this.pictureSub.unsubscribe();
   }
 
   ngAfterViewInit() {
-    this.time = "?time_stamp=" + Math.floor(Date.now() / 1000);
+    this.time = "?time_stamp=" + Math.floor(Date.now() / 1000);    
   }
 
   openClose(){
@@ -103,5 +107,9 @@ export class MenuComponent implements OnInit {
       : this.url + this.urlImage+ this.time ;
   }
 
-  
+  selected(seccion:string){
+    if(seccion == this.menuOption){
+      return "border-green"
+    }
+  }
 }

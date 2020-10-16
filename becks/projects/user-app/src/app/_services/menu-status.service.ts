@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class MenuStatusService {
-  private _menuStatus = new Subject<any>();
+  private _menuStatus = new Subject<string>();
   public menuStatus$ = this._menuStatus.asObservable();
 
   constructor() {}

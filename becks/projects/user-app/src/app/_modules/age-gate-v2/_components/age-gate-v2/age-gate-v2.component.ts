@@ -38,12 +38,12 @@ export class AgeGateV2Component implements OnInit {
   ngOnInit() {
     this.cheked = false;
     this.initforms();
-    console.log(
-      this.yearForm.controls.year_1.value +
-        this.yearForm.controls.year_2.value +
-        this.yearForm.controls.year_3.value +
-        this.yearForm.controls.year_4.value
-    );
+    // console.log(
+    //   this.yearForm.controls.year_1.value +
+    //     this.yearForm.controls.year_2.value +
+    //     this.yearForm.controls.year_3.value +
+    //     this.yearForm.controls.year_4.value
+    // );
   }
 
   initforms() {

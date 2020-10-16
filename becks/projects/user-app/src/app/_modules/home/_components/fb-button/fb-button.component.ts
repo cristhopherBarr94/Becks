@@ -44,7 +44,7 @@ export class FbButtonComponent implements OnInit {
   loginFB() {
     window["FB"].login(
       (response) => {
-        console.log("login response", response);
+        // console.log("login response", response);
         if (response.authResponse) {
           window["FB"].api(
             "/me",
@@ -52,8 +52,8 @@ export class FbButtonComponent implements OnInit {
               fields: "last_name, first_name, email, birthday, gender",
             },
             (userInfo) => {
-              console.log("user information");
-              console.log(userInfo);
+              // console.log("user information");
+              // console.log(userInfo);
               this.fBUserEmiter.emit(userInfo);
             }
           );

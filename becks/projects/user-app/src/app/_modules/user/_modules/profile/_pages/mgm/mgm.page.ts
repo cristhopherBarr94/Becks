@@ -68,7 +68,7 @@ export class MGMPage implements OnInit {
       // this.ui.showLoading();
       const email256 = this.utils.getSHA256(this.userMGM.email);
       this.guest_users.push(this.userMGM.email);
-      console.log(this.guest_users);
+      // console.log(this.guest_users);
       // this.httpService
       //   .patch(environment.serverUrl + environment.guest.patchPassword, {
       //     email: this.userMGM.email,

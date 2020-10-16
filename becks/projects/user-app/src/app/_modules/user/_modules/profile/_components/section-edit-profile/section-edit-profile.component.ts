@@ -164,12 +164,6 @@ export class SectionEditProfileComponent implements OnInit {
           this.ui.dismissLoading();
         };
 
-        this.httpService.get(environment.serverUrl + environment.user.getCodes).subscribe(
-          (res: any) => {
-            if (res.status == 200 && res.body.length >0) {
-              this.userSvc.setActivate(true);
-            }
-          })
     }
   }
 

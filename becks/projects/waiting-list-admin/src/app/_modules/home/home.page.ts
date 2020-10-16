@@ -28,6 +28,6 @@ export class HomePage {
     }
 
     activateUser(){
-      console.log("funcion activar usuarios desde la futura table");
+      // console.log("funcion activar usuarios desde la futura table");
     }
 }

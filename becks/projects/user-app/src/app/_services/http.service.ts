@@ -80,7 +80,7 @@ export class HttpService {
     if (headersIn == null) {
       headersIn = this.getHeadersFormData();
     }
-    console.log(url);
+    // console.log(url);
 
     return this.http
       .post(url, body, {
@@ -131,12 +131,12 @@ export class HttpService {
       this.authService.setAuthenticated(null);
       location.reload();
     } else if (error.status === HttpConstants.CONFLICT) {
-      console.log("mensaje incorrecto");
+      // console.log("mensaje incorrecto");
     } else if (
       error.status === HttpConstants.INTERNAL_SERVER_ERROR ||
       error.status === HttpConstants.SERVICE_UNAVAILABLE
     ) {
-      console.log("mensaje de servidor error");
+      // console.log("mensaje de servidor error");
     } else if (!error.ok) {
       console.log("ERROR ::: ", error);
     }

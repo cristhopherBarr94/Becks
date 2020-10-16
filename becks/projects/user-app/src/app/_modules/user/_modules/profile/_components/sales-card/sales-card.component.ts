@@ -10,6 +10,6 @@ export class SalesCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.urlImageSales);
+    // console.log(this.urlImageSales);
   }
 }

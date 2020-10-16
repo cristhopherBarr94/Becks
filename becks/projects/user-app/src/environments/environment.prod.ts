@@ -15,7 +15,7 @@ export const environment = {
     patchPassword: "/api/ab-inbev-api-usercustom/0",
   },
   user: {
-    getData: "/api/ab-inbev-api-user-app/",
+    getData: "/api/ab-inbev-api-user-app/0",
     patchPassword: "/api/ab-inbev-api-user-app/0",
     patchData: "/api/ab-inbev-api-user-app/1",
     patchPhoto: "/api/ab-inbev-api-user-app/2",

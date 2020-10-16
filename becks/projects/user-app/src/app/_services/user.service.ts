@@ -44,9 +44,11 @@ export class UserService {
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
           this._user = new User(response.body);
-          this._user.activate = this._userCodes && this._userCodes.length > 0;
-          localStorage.setItem("bks_user", this._user.toJSON());
-          this._userSbj.next(this._user);
+          if ( this._user.email != undefined ) {
+            this._user.activate = this._userCodes && this._userCodes.length > 0;
+            localStorage.setItem("bks_user", this._user.toJSON());
+            this._userSbj.next(this._user);
+          }
         } else {
           this._userSbj.error({});
         }

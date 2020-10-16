@@ -30,7 +30,8 @@ export class UserLoginComponent implements OnInit {
     private ui: UiService,
     private httpService: HttpService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private userSvc: UserService
   ) {}
 
   ngOnInit() {
@@ -62,16 +63,21 @@ export class UserLoginComponent implements OnInit {
 
   loginUser(): void {
     if (this.userLoginForm.valid && this.captchaStatus) {
-      this.ui.showLoading();
-      this.restartCaptcha = true;
-      this.setCaptchaStatus(!this.restartCaptcha);
       const formData = new FormData();
-      formData.append("username", this.userLoginForm.controls.email.value);
-      formData.append("password", this.userLoginForm.controls.password.value);
-      formData.append("grant_type", environment.rest.grant_type);
-      formData.append("client_id", environment.rest.client_id);
-      formData.append("client_secret", environment.rest.client_secret);
-      formData.append("scope", environment.rest.scope);
+      try {
+        this.userSvc.logout();
+        this.restartCaptcha = true;
+        this.setCaptchaStatus(!this.restartCaptcha);
+        formData.append("username", this.userLoginForm.controls.email.value);
+        formData.append("password", this.userLoginForm.controls.password.value);
+        formData.append("grant_type", environment.rest.grant_type);
+        formData.append("client_id", environment.rest.client_id);
+        formData.append("client_secret", environment.rest.client_secret);
+        formData.append("scope", environment.rest.scope);
+      } catch (error) {
+        return;
+      }
+      this.ui.showLoading();
       this.httpService
         .postFormData(
           environment.serverUrl + environment.login.resource,
@@ -85,12 +91,14 @@ export class UserLoginComponent implements OnInit {
               this.authService.setAuthenticated(
                 "Bearer " + response.body.access_token
               );
+              this.redirect();
+            } else {
+              this.httpError = "Usuario y/o contraseña incorrecta";
             }
-            this.redirect();
           },
           (e) => {
-            this.httpError = "Usuario y/o contraseña incorrecta";
             this.ui.dismissLoading();
+            this.httpError = "Usuario y/o contraseña incorrecta";
           }
         );
     }

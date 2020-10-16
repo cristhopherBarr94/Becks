@@ -66,6 +66,7 @@
                 userEditProfileForm.controls.name,
                 "nombre",
                 3,
+                20,
                 0,
                 1
               )
@@ -95,6 +96,7 @@
                 userEditProfileForm.controls.lastName,
                 "apellido(s)",
                 3,
+                20,
                 0,
                 1
               )
@@ -124,6 +126,7 @@
               getMessageform(
                 userEditProfileForm.controls.phone,
                 "teléfono",
+                10,
                 10,
                 0,
                 1
@@ -158,6 +161,7 @@
                     userEditProfileForm.controls.day,
                     "dia",
                     10,
+                    10,
                     1,
                     31
                   )
@@ -186,6 +190,7 @@
                     userEditProfileForm.controls.month,
                     "mes",
                     10,
+                    10,
                     1,
                     12
                   )
@@ -213,6 +218,7 @@
                   getMessageform(
                     userEditProfileForm.controls.year,
                     "año",
+                    10,
                     10,
                     1920,
                     2020
@@ -267,8 +273,9 @@
             {{
               getMessageform(
                 userEditProfileForm.controls.lastName,
-                "apellido(s)",
+                "Documento",
                 3,
+                10
                 0,
                 1
               )

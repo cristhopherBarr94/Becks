@@ -25,9 +25,11 @@ import { NgCircleProgressModule } from "ng-circle-progress";
 import { SectionEditProfileComponent } from "./_components/section-edit-profile/section-edit-profile.component";
 import { UpdateFileComponent } from "./_components/update-file/update-file.component";
 import { IonicModule } from '@ionic/angular';
+import { LogOutComponent } from './_components/log-out/log-out.component';
 
 @NgModule({
   declarations: [
+    LogOutComponent,
     ProfilePictureComponent,
     ProfilePage,
     StatisticsProfileComponent,

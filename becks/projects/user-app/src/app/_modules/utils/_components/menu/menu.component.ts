@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/_models/User';
+import { LogOutComponent } from 'src/app/_modules/user/_modules/profile/_components/log-out/log-out.component';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
 import { MenuStatusService } from 'src/app/_services/menu-status.service';
@@ -73,22 +74,14 @@ export class MenuComponent implements OnInit {
     this.userSvc.dropdownMenu(this.menuStatus)
   }
 
-  logout() {
-    this.ui.showLoading();
-    this.authService.setAuthenticated("");
-    this.userSvc.logout();
-    this.httpService
-      .get(environment.serverUrl + environment.logout.resource)
-      .subscribe(
-        (r) => {
-          this.ui.dismissLoading();
-          this.router.navigate(["home"]);
-        },
-        (e) => {
-          this.ui.dismissLoading();
-          this.router.navigate(["home"]);
-        }
-      );
+  logout() {    
+      this.ui.showModal(
+        LogOutComponent,
+        "pop-up-profile-picture",
+        true,
+        true
+      ); 
+      console.log('salir')       
   }
 
   transparentStyle(){

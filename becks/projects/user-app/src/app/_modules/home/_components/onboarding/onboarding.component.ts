@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 import { UiService } from 'src/app/_services/ui.service';
@@ -8,7 +8,7 @@ import { UiService } from 'src/app/_services/ui.service';
   templateUrl: './onboarding.component.html',
   styleUrls: ['./onboarding.component.scss'],
 })
-export class OnboardingComponent implements OnInit {
+export class OnboardingComponent implements OnInit, AfterViewInit {
 
   slideOpts = {
     speed: 400
@@ -22,10 +22,11 @@ export class OnboardingComponent implements OnInit {
 
   constructor(private ui: UiService, private router: Router,) { }
 
-  ngOnInit() {
-    this.ui.dismissLoading()
+  ngOnInit() { }
+  
+  ngAfterViewInit() {
+    this.ui.dismissLoading();
   }
-
   swipeNext(){
     this.ionSlides.slideNext();
   }

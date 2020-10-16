@@ -49,11 +49,11 @@ export class SectionChangePassComponent implements OnInit, AfterViewInit {
     this.userChangeForm = this.formBuilder.group({
       passwordVerify: new FormControl("", [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(4),
       ]),
       password: new FormControl("", [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(4),
       ]),
     });
   }

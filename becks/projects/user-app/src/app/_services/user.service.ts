@@ -68,7 +68,7 @@ export class UserService {
       this.http.get(environment.serverUrl + environment.user.getCodes).subscribe(
         (res: any) => {
           if (res.status == 200 ) {
-            this._userCodes = res.body;
+            this._userCodes = res.body || [];
             this._user.activate = this._userCodes && this._userCodes.length > 0;
             localStorage.setItem("bks_user", this._user.toJSON());
             localStorage.setItem("bks_user_codes", JSON.stringify(this._userCodes) );
@@ -141,7 +141,7 @@ export class UserService {
 
   public logout() {
     this._user = undefined;
-    this._userCodes = undefined;
+    this._userCodes = [];
     localStorage.removeItem("bks_user");
     localStorage.removeItem("bks_user_codes");
     this._userSbj.next(this._user);

@@ -41,7 +41,7 @@
       </button>
     </div>
 
-    <user-seccions-profile class="seccions" [isActive]="user.activate"></user-seccions-profile>
+    <user-seccions-profile class="seccions" [isActive]="user && user.activate"></user-seccions-profile>
   </div>
   <app-footer></app-footer>
 </ion-content>

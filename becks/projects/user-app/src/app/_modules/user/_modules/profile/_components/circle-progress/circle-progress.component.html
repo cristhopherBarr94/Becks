@@ -14,14 +14,13 @@
     [outerStrokeGradient]="false"
     [outerStrokeGradientStopColor]="colorProgress"
     [clockwise]="false"
-    [title]="remaining_days"
-    [titleFontSize]="33"
+    [showTitle]="false"
     [showBackground]="true"
     [backgroundGradient]="false"
     [backgroundColor]="'#121212'"
-    [titleColor]="'#FFFFFF'"
     [subtitleColor]="'#FFFFFF'"
-    [subtitle]="subtitle"
+    [subtitle]="remaining_days"
+    [subtitleFontSize]="33"
     [backgroundPadding]="-27"
     [renderOnClick]="false"
   ></circle-progress>
@@ -33,7 +32,11 @@
     style="--progress-background: {{ colorProgressBar }}"
   ></ion-progress-bar>
 </section>
-
+<section class="content-flex-all-center">
+  <div class="subtitle-days">
+    <p>Días</p>
+  </div>
+</section>
 <section class="content-flex-all-center">
   <div class="supp-circle" style="transform: rotate(-{{ progress * 3.6 }}deg)">
     <div class="clock"></div>
@@ -47,6 +50,6 @@
   color="becks"
   (click)= "redirectSales()"
 >
-  <span>OBTÉN MÁS DÍAS</span>
+  <span>ACTIVA TU CUENTA</span>
 </button>
 </div>

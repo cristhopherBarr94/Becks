@@ -17,7 +17,6 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
   public colorProgress: string;
   public colorProgressBar: string;
   public progress: number;
-  public subtitle: string = "Días";
   public daysR:any;
   private subscription: Subscription;
   

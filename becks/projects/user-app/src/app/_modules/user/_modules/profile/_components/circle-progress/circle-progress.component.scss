@@ -5,17 +5,6 @@ circle-progress {
   letter-spacing: 0.15px !important;
   height: 180px;
   width: 180px;
-
-  ::ng-deep {
-    span {
-      font-family: "Helvetica Neue LT Std" !important;
-      font-style: normal !important;
-      font-weight: bold !important;
-      font-size: 13.28px !important;
-      line-height: 16px !important;
-      text-align: center !important;
-    }
-  }
 }
 .bar {
   margin-top: 30px;
@@ -50,6 +39,24 @@ ion-progress-bar {
   }
 }
 
+.subtitle-days {
+  position: absolute;
+  margin-left: 15px;
+  height: 180px;
+  width: 180px;
+  font-family: "Helvetica LT Std" !important;
+  font-style: normal !important;
+  font-weight: bold !important;
+  font-size: 13.28px !important;
+  line-height: 16px !important;
+  text-align: center !important;
+  @media (min-width: 0px) and (max-width: 768px) {
+    top: 135px;
+  }
+  @media (min-width: 768px) and (max-width: 1350px) {
+    top: 185px;
+  }
+}
 .margin-top {
   margin-top: 24px;
   margin-bottom: 24px;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { MenuStatusService } from 'src/app/_services/menu-status.service';
 
 @Component({
   selector: "user-vertical-calendar",
@@ -57,7 +58,7 @@ export class VerticalCalendarComponent implements OnInit {
       img: "assets/img/exp-card-1.png",
     },
   ];
-  constructor() {}
+  constructor(private menuS : MenuStatusService) {}
 
-  ngOnInit() {}
+  ngOnInit() {this.menuS.statusMenu("calendarmob")}
 }

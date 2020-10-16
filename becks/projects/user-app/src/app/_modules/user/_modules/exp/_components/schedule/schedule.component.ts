@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatCalendar, MatCalendarCellClassFunction, MatCalendarCellCssClasses } from "@angular/material/datepicker";
+import { MenuStatusService } from 'src/app/_services/menu-status.service';
 import { MockExperiencias } from "../../../../../../_mocks/experiencias-mock";
 
 
@@ -35,7 +36,7 @@ export class ScheduleComponent implements OnInit {
   @ViewChild("calendar2", { static: false }) calendar2: MatCalendar<Date>;
 
  
-  constructor() {}
+  constructor(private menuS : MenuStatusService,) {}
 
   ngOnInit() {
     this.selectedDate = new Date();
@@ -51,6 +52,7 @@ export class ScheduleComponent implements OnInit {
     });
     this. toDate() 
     this.onSelect(this.selectedDate);
+    this.menuS.statusMenu("calendar")  
   }
  
   toDate() {

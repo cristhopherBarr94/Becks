@@ -77,13 +77,15 @@ export class UiService {
     refComponent,
     refClass?,
     withBackdrop = true,
-    allowDismiss = false
+    allowDismiss = false,
+    compProps?
   ) {
     try {
       // this.dismissLoading();
       this.modal = await this.modalCtrl.create({
         component: refComponent,
         cssClass: refClass,
+        componentProps: compProps,
         animated: true,
         showBackdrop: withBackdrop,
         backdropDismiss: allowDismiss,

@@ -39,13 +39,14 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
   public prom_cod_modal:string = "HJASDYASU5145";
   public allow:boolean;
   public colorBg:string;
-  public activate:boolean;
+  public activate:boolean=false;
   public date_til : any;
   public used_date : any;
   public days_ramaining : any;
-  public user:User;
+  public user: User;
   private subscribe: Subscription;
   private subsCodes: Subscription;
+  private modal: any;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
   title: string = "activa tu cuenta";
@@ -67,16 +68,21 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
     
     this.subsCodes = this.userSvc.userCodes$.subscribe(
       ( codes ) => {
-        this.ui.dismissLoading();
         if ( codes && codes.length>0 ) {
           this.activate = true;
-          this.activate = this.user.activate;
           this.date_til = moment(new Date(codes[0].valid_until * 1000));
           this.used_date = moment(new Date(codes[0].used* 1000));
           this.days_ramaining =  this.date_til.diff(this.used_date, 'days');
           this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ this.days_ramaining+ " DÍAS";
           this.bgActive();
-          this.showModal();
+          this.ui.showModal( NotifyModalComponent, "modalMessage", true, false, {
+            title: this.title_modal,
+            sub_title: this.sub_title_modal,
+            title_button: this.title_button_modal,
+            prom_cod:this.prom_cod_modal,
+            allow: this.allow,
+            Func: this.redirectTo.bind(this),
+          });          
         } else {
           this.verifyCode();
         }
@@ -166,6 +172,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
     }
   }
 public redirectTo() {
+  this.ui.dismissModal();
   this.router.navigate(["user/exp"], {
     queryParamsHandling: "preserve",
   });
@@ -177,25 +184,5 @@ public bgActive(){
     this.colorBg =  "bg-grey";
   }
 }
-  async showModal() {
-      const modal = await this.modalCtrl.create({
-        component: NotifyModalComponent,
-        cssClass: "modalMessage",
-        componentProps: {
-          title: this.title_modal,
-          sub_title: this.sub_title_modal,
-          title_button: this.title_button_modal,
-          prom_cod:this.prom_cod_modal,
-          allow: this.allow,
-          Func: this.redirectTo.bind(this),
-        },
-        backdropDismiss:false,
-        keyboardClose:false,
-        swipeToClose:false,
-      });
-      await modal.present();
-      modal.onDidDismiss().then((res) => {
-       this.router.navigate(["user/exp"]);
-      });
-  }
+
 }

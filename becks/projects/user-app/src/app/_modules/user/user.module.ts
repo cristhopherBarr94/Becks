@@ -19,6 +19,8 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ScheduleComponent } from './_modules/exp/_components/schedule/schedule.component';
+import { InteractionViewComponent } from './_modules/exp/_components/interaction-view/interaction-view.component';
+import { InteractionConfirmComponent } from './_modules/exp/_components/interaction-confirm/interaction-confirm.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { ScheduleComponent } from './_modules/exp/_components/schedule/schedule.
     ActivationPage,
     MGMPage,
     ScheduleComponent,
+    InteractionViewComponent,
+    InteractionConfirmComponent
   ],
   imports: [
     CommonModule,

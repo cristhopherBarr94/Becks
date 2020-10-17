@@ -109,7 +109,7 @@
   background-color: transparent;
   @media (min-width: 0px) and (max-width: 768px) {
     width: 10px;
-  height: 18px;
+    height: 18px;
   }
 }
 
@@ -327,5 +327,20 @@
     left: 48%;
     width: 35px !important;
     height: 43px !important;
+  }
+}
+
+.interaction-icon {
+  background-image: url("../assets/icon/interaction-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 132px;
+    height: 89px;
+  }
+  @media (min-width: 769px) {
+    width: 135px;
+    height: 87px;
   }
 }

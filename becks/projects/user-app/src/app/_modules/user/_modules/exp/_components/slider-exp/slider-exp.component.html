@@ -26,7 +26,7 @@
         <span>Activar tu cuenta</span>
       </button>
 
-      <button *ngIf="exp.cuentaActiva" block="block" color="becks" [routerLink]="['/user/interaction']"
+      <button *ngIf="exp.cuentaActiva" block="block" color="becks" [routerLink]="['/user/interaction/', exp.id]"
         class="becks-btn-primary margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
         <span>Participar</span>
@@ -51,7 +51,7 @@
         <span>Activar tu cuenta</span>
       </button>
 
-      <button *ngIf="exp.cuentaActiva" block="block" color="becks" [routerLink]="['/user/interaction']"
+      <button *ngIf="exp.cuentaActiva" block="block" color="becks" [routerLink]="['/user/interaction/', exp.id]"
         class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
         <span>Participa</span>

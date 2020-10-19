@@ -32,11 +32,11 @@ const routes: Routes = [
     component: ScheduleComponent
   },
   {
-    path: "confirm-interaction",
+    path: "confirm-interaction/:id",
     component: InteractionConfirmComponent
   },
   {
-    path: "interaction",
+    path: "interaction/:id",
     component: InteractionViewComponent
   },
   {

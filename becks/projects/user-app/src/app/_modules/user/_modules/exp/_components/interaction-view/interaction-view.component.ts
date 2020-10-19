@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { MockExperiencias } from 'src/app/_mocks/experiencias-mock';
 import { HeaderComponent } from 'src/app/_modules/utils/_components/header/header.component';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
@@ -11,13 +12,30 @@ import { UiService } from 'src/app/_services/ui.service';
 })
 export class InteractionViewComponent implements OnInit , AfterViewInit {
   @ViewChild(HeaderComponent) header: HeaderComponent;
-  prevUrl: string = "/user/profile";
+  public prevUrl: string = "/user/profile";
+  public experience:any = MockExperiencias;
+  public bgExp:string;
+  public id: number;
   constructor(
     public httpService: HttpService,
+    private router: Router,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.id = Number(this.router.url.replace("/user/interaction/",""))
+    this.experience.forEach(exp => {
+      if(this.id == exp.id){
+        this.bgExp= exp.imagesExp;
+      }
+    });
+
+  }
   ngAfterViewInit(): void {
     this.header.urlComponent = this.prevUrl;
+  }
+  redirecWithId() {
+    this.router.navigate([`user/confirm-interaction/${this.id}`], {
+      queryParamsHandling: "preserve",
+    });
   }
 }

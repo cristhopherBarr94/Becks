@@ -1,9 +1,26 @@
 .interaction-section {
   color: #ffffff;
-  background-color: #121212;
-
+  font-style: normal !important;
+  background-size: cover;
+  background-position: top;
+  @media (min-width: 0px) and (max-width: 768px) {
+    background-image: (
+      linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 99.66%),
+      url(./../../../../../../../assets/img/exp/frank2.jpg)
+    );
+  }
+  @media (min-width: 769px) {
+    background-image: (
+      linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 99.66%),
+      url(./../../../../../../../assets/img/frankcolor.jpg)
+    );
+  }
   .main-title {
     @media (min-width: 0px) and (max-width: 768px) {
+      font-weight: 500 !important;
+      font-size: 16px !important;
+      line-height: 50px !important;
+      margin-top: 20px;
     }
     @media (min-width: 769px) {
       font-size: 24px !important;
@@ -32,7 +49,8 @@
 
   .interaction-icon {
     @media (min-width: 0px) and (max-width: 768px) {
-      margin: 30px;
+      margin-top: 130px;
+      margin-bottom: 0px;
     }
     @media (min-width: 769px) {
       margin: 30px;
@@ -40,45 +58,56 @@
   }
 
   .sub-title {
+    font-style: normal !important;
+    font-weight: 500 !important;
+
     @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 16px !important;
+      line-height: 50px !important;
     }
     @media (min-width: 769px) {
-      font-style: normal !important;
-      font-weight: 500 !important;
       font-size: 18.72px !important;
       line-height: 30px !important;
     }
   }
   .interaction-text {
-    height: 103px;
+    text-align: center;
     text-transform: lowercase;
+    font-style: normal !important;
+    font-size: 14px !important;
+    line-height: 128% !important;
     @media (min-width: 0px) and (max-width: 768px) {
+      width: 304px;
+      height: 67px;
+      margin-bottom: 30px;
     }
     @media (min-width: 769px) {
-      font-size: 14px !important;
-      line-height: 128% !important;
-      font-style: normal !important;
       width: 360px;
-      text-align: center;
+      height: 103px;
     }
   }
   .question-box {
     text-align: left !important;
     justify-content: left !important;
+    text-align: center;
+    text-transform: none;
     @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 14px !important;
+      line-height: 128% !important;
+      font-style: normal !important;
+      width: 330px;
     }
     @media (min-width: 769px) {
       font-size: 14px !important;
       line-height: 128% !important;
       font-style: normal !important;
       width: 360px;
-      text-align: center;
-      text-transform: none;
     }
 
     .title-question,
     .answer-question {
       color: #01c586 !important;
+      margin-left: 10px;
     }
 
     .input-becks {
@@ -119,13 +148,15 @@
 ::ng-deep.item .sc-ion-label-md-h {
   border: none !important;
   color: #ffffff;
+  font-style: normal !important;
+  font-family: "Helvetica LT Std";
+  font-size: 14px !important;
+
   @media (min-width: 0px) and (max-width: 768px) {
+    line-height: 24px !important;
   }
   @media (min-width: 769px) {
-    font-family: "Helvetica LT Std";
-    font-size: 14px !important;
     line-height: 128% !important;
-    font-style: normal !important;
   }
 }
 ::ng-deep.ion-radio {

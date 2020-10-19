@@ -11,7 +11,7 @@ import { UiService } from 'src/app/_services/ui.service';
 })
 export class InteractionViewComponent implements OnInit , AfterViewInit {
   @ViewChild(HeaderComponent) header: HeaderComponent;
-  prevUrl: string = "/home";
+  prevUrl: string = "/user/profile";
   constructor(
     public httpService: HttpService,
   ) {}

@@ -8,7 +8,7 @@ import { HeaderComponent } from 'src/app/_modules/utils/_components/header/heade
 })
 export class InteractionConfirmComponent implements OnInit, AfterViewInit {
   @ViewChild(HeaderComponent) header: HeaderComponent;
-  prevUrl: string = "/home";
+  prevUrl: string = "/user/profile";
 
   constructor() { }
 

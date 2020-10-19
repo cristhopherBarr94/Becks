@@ -1,9 +1,25 @@
-.section-question-confirm {
+.interaction-section-confirm {
   color: #ffffff;
-  background-color: #121212;
-
+  background-size: cover;
+  background-position: top;
+  @media (min-width: 0px) and (max-width: 768px) {
+    background-image: (
+      linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 99.66%),
+      url(./../../../../../../../assets/img/exp/frank2.jpg)
+    );
+  }
+  @media (min-width: 769px) {
+    background-image: (
+      linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 99.66%),
+      url(./../../../../../../../assets/img/frankcolor.jpg)
+    );
+  }
   .main-confirm-title {
     @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 13.28px !important;
+      font-weight: 500 !important;
+      line-height: 20px !important;
+      width: 195px !important;
     }
     @media (min-width: 769px) {
       font-size: 24px !important;
@@ -15,7 +31,10 @@
 
   .logo-brand-modal {
     @media (min-width: 0px) and (max-width: 768px) {
-      margin: 30px;
+      position: relative !important;
+      top: 44px !important;
+      left: 0px !important;
+      margin-bottom: 50px !important;
     }
     @media (min-width: 769px) {
       position: relative !important;
@@ -29,23 +48,24 @@
   margin: 10px;
 }
 
-@media (min-width: 769px) {
-  .interaction-section-confirm {
-    background-image: (
-      linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 99.66%),
-      url(./../../../../../../../assets/img/frankcolor.jpg)
-    );
-    background-size: cover;
-    background-position: top;
-    z-index: 1;
-  }
-  .section-question-confirm {
-    background: rgba(2, 2, 2, 0.7);
-    border-radius: 8px;
-    width: 439px;
-    height: auto;
+.section-question-confirm {
+  background: rgba(2, 2, 2, 0.7);
+  border-radius: 8px;
+  backdrop-filter: blur(20px) !important;
+  height: auto;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 249px !important;
     padding: 20px;
-    backdrop-filter: blur(20px) !important;
-    z-index: 2;
+  }
+  @media (min-width: 769px) {
+    width: 439px;
+    padding: 20px;
+  }
+}
+.button-width {
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 199px !important;
+    height: 35px !important;
   }
 }

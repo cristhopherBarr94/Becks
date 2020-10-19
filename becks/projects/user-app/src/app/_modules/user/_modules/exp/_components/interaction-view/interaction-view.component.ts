@@ -14,8 +14,6 @@ export class InteractionViewComponent implements OnInit , AfterViewInit {
   prevUrl: string = "/home";
   constructor(
     public httpService: HttpService,
-    private router: Router,
-    private ui: UiService
   ) {}
 
   ngOnInit() {}

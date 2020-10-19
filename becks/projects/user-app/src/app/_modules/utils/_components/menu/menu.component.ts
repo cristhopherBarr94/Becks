@@ -45,14 +45,14 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.urlImage == undefined){      
+    if(this.urlImage == undefined) {
       this.userSvc.getData();
       this.userSubscription = this.userSvc.user$.subscribe(
         (user: User) => {
           if (user !== undefined) {           
             this.urlImage = user.photo;
-            this.default_photo = !!!user.photo;
             this.gender = user.gender;
+            this.default_photo = (!user.photo || 0 === user.photo.length);
           }
         },
         (error: any) => {}
@@ -80,8 +80,7 @@ export class MenuComponent implements OnInit {
         "pop-up-profile-picture",
         true,
         true
-      ); 
-      console.log('salir')       
+      );
   }
 
   transparentStyle(){
@@ -91,11 +90,12 @@ export class MenuComponent implements OnInit {
   }
 
   profilePicture() {
-    return this.default_photo
-      ? this.gender == "F"
-        ? "../../../../../assets/img/profile_female.jpg"
-        : "../../../../../assets/img/profile_male.jpg"
-      : this.url + this.urlImage+ this.time ;
+    if ( this.urlImage ) {
+      return this.url + this.urlImage + this.time;
+    } else {
+      return this.gender == "F" ? "../../../../../assets/img/profile_female.jpg"
+                              : "../../../../../assets/img/profile_male.jpg";
+    }
   }
 
   selected(seccion:string){

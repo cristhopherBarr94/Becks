@@ -12,6 +12,8 @@ import { UtilService } from "src/app/_services/util.service";
 import { User } from 'src/app/_models/User';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
+import { UserService } from 'src/app/_services/user.service';
+import { AuthService } from 'src/app/_services/auth.service';
 
 declare global {
   interface Window {
@@ -38,7 +40,9 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
     public httpService: HttpService,
     private router: Router,
     private ui: UiService,
-    private utils: UtilService
+    private utils: UtilService,
+    private userSvc: UserService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -99,7 +103,9 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
                 eventLabel: email256,
               });
             } catch (e) {}
-            this.router.navigate(["/user/email"], {
+            this.userSvc.logout();
+            this.auth.setAuthenticated(null);
+            this.router.navigate(["/user/exp"], {
               queryParamsHandling: "preserve",
             });
           },

@@ -64,9 +64,9 @@ export class UserLoginComponent implements OnInit {
 
   loginUser(): void {
     if (this.userLoginForm.valid && this.captchaStatus) {
+      this.userSvc.logout();
       const formData = new FormData();
       try {
-        this.userSvc.logout();
         this.restartCaptcha = true;
         this.setCaptchaStatus(!this.restartCaptcha);
         formData.append("username", this.userLoginForm.controls.email.value);
@@ -78,7 +78,6 @@ export class UserLoginComponent implements OnInit {
       } catch (error) {
         return;
       }
-      this.userSvc.logout();
       this.ui.showLoading();
       this.httpService
         .postFormData(

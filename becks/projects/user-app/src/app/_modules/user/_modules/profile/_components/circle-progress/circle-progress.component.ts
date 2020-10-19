@@ -31,8 +31,8 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
       ( codes ) => {
         if ( codes.length >0) {
           let date_til = moment(new Date(codes[0].valid_until * 1000));
-          let used_date = moment(new Date(codes[0].used* 1000));
-          this.daysR =  date_til.diff(used_date, 'days');
+          let cur_date = moment(new Date);
+          this.daysR =  date_til.diff(cur_date, 'days');
           this.progress = this.daysR * (10 / 3);
           this.remaining_days = Math.ceil(this.progress * (30 / 100));
          if (this.progress <= 25) {

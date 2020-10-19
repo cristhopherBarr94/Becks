@@ -1,11 +1,11 @@
 <ion-content>
   <app-header></app-header>
 
-  <section class="fullSection interaction-section content-flex-all-center">
+  <section class="fullSection interaction-section content-flex-all-center"  [style.background-image]="'linear-gradient(90deg, rgba(2, 2, 2, 0.5) 0%, rgba(2, 2, 2, 0.5) 100%), url('+bgExp+')'">
     <div
       class="content-flex-all-center full-height flex-direction-column section-question"
     >
-      <h1 class="title-secondary main-title">FRANK VIDEO CLIP</h1>
+      <h1 class="title-secondary main-title">FERIA DEL MILLÓN</h1>
       <div class="separator-becks"></div>
       <span class="interaction-icon"> </span>
       <h2 class="title-secondary sub-title">¿Cómo Participar?</h2>
@@ -47,7 +47,7 @@
         block="block"
         color="becks"
         class="becks-btn-primary margin-top-button button-width"
-        [routerLink]="['/user/confirm-interaction']"
+        (click)="redirecWithId()"
       >
         <span>PARTICIPAR</span>
       </button>

@@ -224,6 +224,7 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
         if ( $user->get('field_status')->value == 1 ) {
           $user->set("field_status", 0 );
         }
+        $user->activate();
         $user->save();
         $response_array["password"] = true;
       break;

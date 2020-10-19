@@ -25,8 +25,6 @@ export class LogOutComponent implements OnInit {
 
   logout() { 
   this.ui.showLoading();
-  this.authService.setAuthenticated("");
-  this.userSvc.logout();
   this.httpService
     .get(environment.serverUrl + environment.logout.resource)
     .subscribe(
@@ -42,6 +40,8 @@ export class LogOutComponent implements OnInit {
         
       }
     );
+    this.authService.setAuthenticated("");
+    this.userSvc.logout();
 }
 
 close (){

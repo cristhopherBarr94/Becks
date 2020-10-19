@@ -29,6 +29,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     
+    this.userSvc.getData();
     this.id = Number(this.router.url.replace("/user/exp/",""))
     this.experienciaService.getExpContent().subscribe(response => {
       this.experienciaContent = response;
@@ -70,7 +71,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   activarCuenta( res ) {}
 
   checkCodes() {
-    if ( this.codes.length > 0 ) {       
+    if ( this.codes && this.codes.length > 0 ) {       
       this.experienciaContent.forEach(exp =>{
         exp.cuentaActiva = true;
       });

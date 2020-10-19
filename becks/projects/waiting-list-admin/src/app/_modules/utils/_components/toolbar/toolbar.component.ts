@@ -23,12 +23,12 @@ export class ToolbarComponent implements OnInit {
 
   logout() {
     this.uiService.showLoading();
-    this.authService.setAuthenticated('');
-    this.userSvc.logout();
     this.httpService.get( environment.serverUrl + environment.logout.resource ).subscribe(
       (r) => { this.uiService.dismissLoading(); this.router.navigate(['login']); },
       (e) => { this.uiService.dismissLoading(); this.router.navigate(['login']); },
     );
+    this.authService.setAuthenticated('');
+    this.userSvc.logout();
     
   }
 

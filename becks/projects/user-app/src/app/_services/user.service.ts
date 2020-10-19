@@ -61,7 +61,7 @@ export class UserService {
 
   public getCodes() {
     
-    if ( this._userCodes.length > 0 ) {
+    if ( this._userCodes && this._userCodes.length > 0 ) {
       this._userCodeSbj.next(this._userCodes);
       this._userSbj.next(this._user);
     } else {

@@ -61,6 +61,7 @@ export class ProfilePage implements OnInit, OnDestroy {
     }
     this.userSvc.getData();
     this.ui.dismissLoading();
+    this.ui.dismissModal(2500);
     this.menuS.statusMenu("profile")   
   }
 

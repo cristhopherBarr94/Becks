@@ -44,6 +44,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     this.userCodeSubs = this.userSvc.userCodes$.subscribe( 
       ( codes ) => {
         this.codes = codes;
+        console.log(this.codes);
         this.checkCodes();
       }
     );

@@ -5,8 +5,8 @@ export const MockExperiencias: Exp[] = [
     id: 1,
     cuentaActiva: false,
     detalleExp: false,
-    imagesExp: "./assets/img/exp/frank2.jpg",
-    titleExp: "Bruno Be",
+    imagesExp: "./assets/img/exp/feriaD.png",
+    titleExp: "FERIA DEL MILLÓN",
     fechaExp: "10/15/2020",
     horaExp: "9:00 AM — 10:00 AM",
     detailExp:

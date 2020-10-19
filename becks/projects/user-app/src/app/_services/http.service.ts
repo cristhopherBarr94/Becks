@@ -10,6 +10,8 @@ import { AuthService } from "./auth.service";
   providedIn: "root",
 })
 export class HttpService {
+
+  private error_counter = 0;
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getHeaders() {
@@ -128,7 +130,7 @@ export class HttpService {
 
   handleError(error: HttpErrorResponse) {
     if (error.status === HttpConstants.UNAUTHORIZED) {
-      if ( this.authService.isAuthenticated() ) {
+      if ( this.error_counter++ > 2 && this.authService.isAuthenticated() ) {
         this.authService.setAuthenticated(null);
         location.reload();
       }
@@ -142,6 +144,7 @@ export class HttpService {
     } else if (!error.ok) {
       console.log("ERROR ::: ", error);
     }
+    this.error_counter = 0;
     return throwError(error);
   }
 }

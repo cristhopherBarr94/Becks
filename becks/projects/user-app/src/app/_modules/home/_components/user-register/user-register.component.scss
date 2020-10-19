@@ -7,6 +7,11 @@
     width: 365px !important;
   }
 }
+
+.becks-btn-primary {
+  margin: 0 auto;
+}
+
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
   border-color: #ffffff;
 }
@@ -32,8 +37,7 @@
 
     .content-check {
       justify-content: space-between;
-      margin: 0px;
-      display: flex;
+      margin: 20px 0px;
       a {
         cursor: pointer;
         color: #219653;
@@ -121,12 +125,6 @@
       margin: 15px;
       padding-left: 0px;
       justify-content: space-between !important;
-    }
-    #mat-checkbox-promo {
-      margin-left: 300px;
-    }
-    #mat-checkbox-privacy {
-      margin-left: 308px;
     }
     .button-row {
       justify-content: center;

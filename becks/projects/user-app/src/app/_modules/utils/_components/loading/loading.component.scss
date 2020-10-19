@@ -1,4 +1,4 @@
-/* Loading */
+/* Loading * /
 .loading {
   min-width: 100% !important;
   min-height: 100% !important;
@@ -11,4 +11,17 @@
 }
 .animation-div {
   height: 50% !important;
+}
+
+/* Loading */
+.loading {
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.1);
+
+  ion-spinner {
+    left: 50%;
+    top: 50%;
+    transform: scale(2);
+  }
 }

@@ -30,7 +30,8 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   ngOnInit() {
     
     this.userSvc.getData();
-    this.id = Number(this.router.url.replace("/user/exp/",""))
+    const s = this.router.url;
+    this.id = Number(s.substr(s.lastIndexOf('/') + 1))
     this.experienciaService.getExpContent().subscribe(response => {
       this.experienciaContent = response;
       this.slideOpts = {
@@ -44,7 +45,6 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     this.userCodeSubs = this.userSvc.userCodes$.subscribe( 
       ( codes ) => {
         this.codes = codes;
-        console.log(this.codes);
         this.checkCodes();
       }
     );

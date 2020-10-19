@@ -37,6 +37,7 @@ export class UserLoginComponent implements OnInit {
   ngOnInit() {
     this.initforms();
     this.redirect();
+    this.ui.dismissLoading();
   }
 
   redirect() {
@@ -77,6 +78,7 @@ export class UserLoginComponent implements OnInit {
       } catch (error) {
         return;
       }
+      this.userSvc.logout();
       this.ui.showLoading();
       this.httpService
         .postFormData(

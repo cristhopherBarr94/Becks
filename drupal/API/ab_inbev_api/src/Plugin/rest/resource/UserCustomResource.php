@@ -145,7 +145,12 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
 
       $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
       $user = $this->entityTypeManager->getStorage('user')->create();
-      $pass = Util::getRandomUserPass();
+
+      if ( $data['password'] ) {
+        $pass =  trim( $data['password'] );
+      } else {
+        $pass = Util::getRandomUserPass();
+      }
 
       $user->setUsername($data['email']);
       $user->setPassword($pass);
@@ -171,7 +176,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       if ( isset($data['type_id']) ) {
         // User from User-APP
         $user->set("field_status_waiting_list", 0);
-        $user->set("field_status", 1); // 1 = require password change
+        $user->set("field_status", 0); // 0 = normal, 1 = require password change
         Util::sendWelcomeEmail( $user->getEmail() , $pass );
       } else {
         // User come from Waiting-List
@@ -416,6 +421,12 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
         }
       } catch ( Exception $ex ) {
         throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+      }
+    }
+    
+    if ( $data['password'] ) {
+      if ( strlen(trim($data['password'])) < 4 ) {
+        throw new BadRequestHttpException('Contraseña muy corta');
       }
     }
 

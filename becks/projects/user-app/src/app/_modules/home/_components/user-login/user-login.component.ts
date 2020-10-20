@@ -124,6 +124,9 @@ export class UserLoginComponent implements OnInit {
     }
   }
   public setCaptchaStatus(status) {
-    this.captchaStatus = status;
+    setTimeout( ()=>{
+      this.captchaStatus = status;
+      this.restartCaptcha = false;
+    }, 500);
   }
 }

@@ -9,6 +9,7 @@ import { SectionEditProfileComponent } from "../../_components/section-edit-prof
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/_services/http.service';
 import { MenuStatusService } from 'src/app/_services/menu-status.service';
+import { SectionChangePassComponent } from '../../_components/section-change-pass/section-change-pass.component';
 
 @Component({
   selector: "user-profile",
@@ -73,6 +74,15 @@ export class ProfilePage implements OnInit, OnDestroy {
     this.router.navigate(["user/profile/edit"], {
       queryParamsHandling: "preserve",
     });
+  }
+
+  editPassword() {
+    this.ui.showModal(
+      SectionChangePassComponent,
+      "modal-edit-profile",
+      true,
+      true
+    );
   }
 
   editProfileDesktop() {

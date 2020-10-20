@@ -191,8 +191,8 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
     switch ( $id ) {
       case 0: 
         // PATCH PASSWORD
-        if (!isset($data['password']) || strlen($data['password']) < 5 ) {
-          throw new BadRequestHttpException('Mínimo 5 caracteres para la "Contraseña"');
+        if (!isset($data['password']) || strlen($data['password']) < 4 ) {
+          throw new BadRequestHttpException('Mínimo 4 caracteres para la "Contraseña"');
         }
       break;
       case 1:

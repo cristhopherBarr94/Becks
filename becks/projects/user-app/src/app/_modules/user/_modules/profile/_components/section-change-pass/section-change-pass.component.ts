@@ -11,6 +11,8 @@ import { Router } from "@angular/router";
 import { HeaderComponent } from "src/app/_modules/utils/_components/header/header.component";
 import { environment } from "src/environments/environment";
 import { User } from "src/app/_models/User";
+import { UserService } from 'src/app/_services/user.service';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: "user-section-change-pass",
@@ -35,7 +37,9 @@ export class SectionChangePassComponent implements OnInit {
     private formBuilder: FormBuilder,
     private ui: UiService,
     private httpService: HttpService,
-    private router: Router
+    private router: Router,
+    private userSvc: UserService,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
@@ -72,7 +76,12 @@ export class SectionChangePassComponent implements OnInit {
             if (response.status == 200) {
               this.httpError = "";
               this.userChangeForm.reset();
+              this.userSvc.logout();
+              this.auth.setAuthenticated(null);
+              this.ui.dismissModal();
               this.router.navigate(["home"]);
+            } else {
+              this.httpError = response.body;
             }
           },
           (e) => {

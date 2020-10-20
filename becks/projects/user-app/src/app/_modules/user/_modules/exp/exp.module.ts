@@ -8,13 +8,11 @@ import { UtilsModule } from "src/app/_modules/utils/utils.module";
 import { MatCarouselModule } from "@ngmodule/material-carousel";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
-import { VerticalCalendarComponent } from './_components/vertical-calendar/vertical-calendar.component';
 import { IonicModule } from '@ionic/angular';
 @NgModule({
   declarations: [
     SliderExpComponent,
     HomeExpPage,
-    VerticalCalendarComponent
   ],
   imports: [
     CommonModule,

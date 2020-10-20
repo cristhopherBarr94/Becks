@@ -18,9 +18,10 @@ import { MGMPage } from "./_modules/profile/_pages/mgm/mgm.page";
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { ScheduleComponent } from './_modules/exp/_components/schedule/schedule.component';
-import { InteractionViewComponent } from './_modules/exp/_components/interaction-view/interaction-view.component';
-import { InteractionConfirmComponent } from './_modules/exp/_components/interaction-confirm/interaction-confirm.component';
+import { VerticalCalendarComponent } from './_components/vertical-calendar/vertical-calendar.component';
+import { ScheduleComponent } from './_components/schedule/schedule.component';
+import { InteractionConfirmComponent } from './_components/interaction-confirm/interaction-confirm.component';
+import { InteractionViewComponent } from './_components/interaction-view/interaction-view.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { InteractionConfirmComponent } from './_modules/exp/_components/interact
     MGMPage,
     ScheduleComponent,
     InteractionViewComponent,
-    InteractionConfirmComponent
+    InteractionConfirmComponent,
+    VerticalCalendarComponent
+
   ],
   imports: [
     CommonModule,

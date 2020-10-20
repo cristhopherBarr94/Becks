@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { SectionForgetPassComponent } from '../utils/_components/section-forget-pass/section-forget-pass.component';
-import { InteractionConfirmComponent } from './_modules/exp/_components/interaction-confirm/interaction-confirm.component';
-import { InteractionViewComponent } from './_modules/exp/_components/interaction-view/interaction-view.component';
-import { ScheduleComponent } from './_modules/exp/_components/schedule/schedule.component';
-import { VerticalCalendarComponent } from './_modules/exp/_components/vertical-calendar/vertical-calendar.component';
+import { InteractionConfirmComponent } from './_components/interaction-confirm/interaction-confirm.component';
+import { InteractionViewComponent } from './_components/interaction-view/interaction-view.component';
+import { ScheduleComponent } from './_components/schedule/schedule.component';
+import { VerticalCalendarComponent } from './_components/vertical-calendar/vertical-calendar.component';
 import { SectionChangePassComponent } from "./_modules/profile/_components/section-change-pass/section-change-pass.component";
 import { SectionRequestConfirmComponent } from "./_modules/profile/_components/section-request-confirm/section-request-confirm.component";
 import { ActivationPage } from "./_modules/profile/_pages/activation/activation.page";

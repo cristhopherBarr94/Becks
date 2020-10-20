@@ -11,5 +11,7 @@ export class VerticalCalendarComponent implements OnInit {
   public amount_exp: any = MockExperiencias;
   constructor(private menuS : MenuStatusService) {}
 
-  ngOnInit() {this.menuS.statusMenu("calendarmob")}
+  ngOnInit() {this.menuS.statusMenu("calendarmob");
+  console.log(this.amount_exp);
+}
 }

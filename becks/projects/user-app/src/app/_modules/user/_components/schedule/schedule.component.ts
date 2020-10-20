@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatCalendar, MatCalendarCellClassFunction, MatCalendarCellCssClasses } from "@angular/material/datepicker";
+import { MockExperiencias } from 'src/app/_mocks/experiencias-mock';
 import { MenuStatusService } from 'src/app/_services/menu-status.service';
-import { MockExperiencias } from "../../../../../../_mocks/experiencias-mock";
 
 
 @Component({

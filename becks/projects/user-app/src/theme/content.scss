@@ -715,3 +715,19 @@
     }
   }
 }
+.modal-edit-password {
+  align-items: center;
+  backdrop-filter: blur(10px);
+  .modal-wrapper {
+    overflow: none;
+    contain: strict;
+    position: absolute;
+    height: 100% !important;
+    width: 100% !important;
+    background-color: #171717 !important;
+    @media (min-width: 769px) {
+      width: 70% !important;
+      height: 80% !important;
+    }
+  }
+}

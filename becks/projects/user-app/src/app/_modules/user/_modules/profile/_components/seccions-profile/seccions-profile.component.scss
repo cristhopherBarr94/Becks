@@ -105,7 +105,7 @@
 .card-component-circle {
   background-color: #1d1d1d;
   margin-left: 10%;
-  width: 25%;
+  width: 80%;
   height: 440px;
   margin-top: 42px;
   display: flex;
@@ -127,7 +127,6 @@
   contain: strict;
   overflow: auto;
   scrollbar-width: 10px;
- 
 }
 
 .margin-tittle-desktop {
@@ -164,7 +163,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #C4C4C4;
+  background: #c4c4c4;
   border-radius: 8px;
   background-clip: padding-box;
 }
@@ -175,3 +174,41 @@
   background-clip: padding-box;
 }
 
+.title-not-activate {
+  font-family: "Eurostile BQ";
+  font-style: normal;
+  justify-content: center;
+  text-transform: uppercase;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 80px;
+
+  .title1 {
+    font-weight: 500;
+
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 13px !important;
+      line-height: 20px;
+    }
+    @media (min-width: 769px) {
+      font-size: 16px !important;
+      line-height: 20px;
+    }
+  }
+  .title2 {
+    font-weight: 500;
+
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 8px !important;
+    }
+    @media (min-width: 769px) {
+      font-size: 13px !important;
+      line-height: 20px;
+    }
+  }
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 252px;
+  }
+}

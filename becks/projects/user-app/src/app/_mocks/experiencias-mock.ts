@@ -7,13 +7,13 @@ export const MockExperiencias: Exp[] = [
     detalleExp: false,
     imagesExp: "./assets/img/exp/feriaD.png",
     titleExp: "FERIA DEL MILLÓN",
-    fechaExp: "10/15/2020",
+    fechaExp: "10/26/2020",
     horaExp: "9:00 AM — 10:00 AM",
     detailExp:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
     placeExp: "Live instagram Beck’s",
     urlExp: "/exp1",
-    status: "0",
+    status: "1",
     colorExp: "green-color",
 
   },

@@ -17,7 +17,7 @@ import { User } from "src/app/_models/User";
   templateUrl: "./section-change-pass.component.html",
   styleUrls: ["./section-change-pass.component.scss"],
 })
-export class SectionChangePassComponent implements OnInit, AfterViewInit {
+export class SectionChangePassComponent implements OnInit {
   public userChangeForm: FormGroup;
   public userChange: User = new User();
   public httpError: string;
@@ -41,9 +41,9 @@ export class SectionChangePassComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.initforms();
   }
-  ngAfterViewInit(): void {
-    this.header.urlComponent = this.prevUrl;
-  }
+  // ngAfterViewInit(): void {
+  //   this.header.urlComponent = this.prevUrl;
+  // }
 
   initforms() {
     this.userChangeForm = this.formBuilder.group({
@@ -105,5 +105,8 @@ export class SectionChangePassComponent implements OnInit, AfterViewInit {
   }
   public setCaptchaStatus(status) {
     this.captchaStatus = status;
+  }
+  public closeChange() {
+    this.ui.dismissModal();
   }
 }

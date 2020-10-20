@@ -33,13 +33,13 @@
       <ul class="content-top-bar">
         <li>
           <a href="./user/exp" class="menu-item-destkop" [ngClass]="selected('exp')"> <img class="icon-item"
-              src="./assets/icon/menu/home.svg" alt="Inicio">
+              src="./assets/icon/menu/home.svg" alt="Inicio" title="Inicio">
           </a>
         </li>
         <li>
           <a href="./user/calendar" class="menu-item-destkop" [ngClass]="selected('calendar')"> <img class="icon-item"
               src="./assets/icon/menu/calendario.svg"
-              alt="Calendario"> </a>
+              alt="Calendario" title="Calendario"> </a>
         </li>
         <!-- <li>
           <a href="./user/mgm" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita">
@@ -51,10 +51,10 @@
         </li> -->
         <li>
           <a href="./user/profile" class="menu-item-destkop" [ngClass]="selected('profile')"> <img class="perfil-img"
-              [src]="profilePicture()" alt="perfil"> </a>
+              [src]="profilePicture()" alt="Perfil" title="Perfil"> </a>
         </li>
         <li>
-          <a (click)="logout()" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out"> <span class="label-out">Salir</span>  </a>
+          <a (click)="logout()" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out" title="Salir"> <span class="label-out">Salir</span>  </a>
         </li>
       </ul>
     </div>

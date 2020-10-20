@@ -5,7 +5,7 @@
 >
 <h1 class="calendar-title title-secondary">Experiencias</h1>
 <span class="calendar-span"> </span>
-  <section>
+  <section class="margin-top-section">
     <div class="card-event" *ngFor="let item of amount_exp">
       <ion-row>
         <div class="lateral-month">
@@ -18,8 +18,9 @@
           [style.background-image]="'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url('+ item.imagesExp +')'"
         >
           <div class="event-description">
-            <a [routerLink]="['/user/exp/', item.id]"><p class="title-secondary">{{ item.titleExp }}</p></a>
+            <a [routerLink]="['/user/exp/', item.id]"><p class="title-secondary">{{ item.titleExp }}</p>
             <p class="title-tertiary">{{ item.fechaExp  | date:'EEEE'}} {{item.fechaExp | date:'dd'}} {{item.fechaExp | date:'LLL'}}</p>
+            </a>
           </div>
         </div>
       </ion-row>

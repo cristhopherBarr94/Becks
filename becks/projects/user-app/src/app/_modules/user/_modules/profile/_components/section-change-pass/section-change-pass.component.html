@@ -1,13 +1,17 @@
 <ion-content>
-  <app-header></app-header>
   <section
     id="formLoginSection"
-    class="fullSection from-section content-flex-all-center"
+    class="from-section content-flex-all-center"
   >
     <div
-      class="content-flex-all-center full-height flex-direction-column padding-form"
+      class="content-flex-all-center flex-direction-column padding-form"
       id="formchangeSection"
     >
+    <span class="modal-hader">
+      <button class="btn-cancel"
+      (click)="activateUserParent()"
+      >X</button>
+      </span>
       <span class="lock-icon"> </span>
       <h1 class="title-secondary">CAMBIAR CONTRASEÑA</h1>
       <form
@@ -86,5 +90,4 @@
       </form>
     </div>
   </section>
-  <app-footer></app-footer>
 </ion-content>

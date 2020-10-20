@@ -106,4 +106,7 @@ export class SectionChangePassComponent implements OnInit {
   public setCaptchaStatus(status) {
     this.captchaStatus = status;
   }
+  public closeChange() {
+    this.ui.dismissModal();
+  }
 }

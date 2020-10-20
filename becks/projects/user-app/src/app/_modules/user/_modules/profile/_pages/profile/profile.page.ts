@@ -79,7 +79,7 @@ export class ProfilePage implements OnInit, OnDestroy {
   editPassword() {
     this.ui.showModal(
       SectionChangePassComponent,
-      "modal-edit-profile",
+      "modal-edit-password",
       true,
       true
     );

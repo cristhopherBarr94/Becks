@@ -26,8 +26,8 @@ export class MenuComponent implements OnInit {
   public time;
   private pictureSub: Subscription;
   private menuOption : string
-  userSubscription: Subscription;
-  menuSubscription: Subscription
+  private userSubscription: Subscription;
+  private menuSubscription: Subscription;
 
   constructor(private userSvc: UserService,   private authService: AuthService,
     private httpService: HttpService,
@@ -38,31 +38,37 @@ export class MenuComponent implements OnInit {
       this.time = isEditing
         ? ""
         : "?time_stamp=" + Math.floor(Date.now() / 1000);
-    }); 
-    this.userSubscription = this.menuS.menuStatus$.subscribe(
-      (result)=>{ this.menuOption = result}    
-    )       
+    });
   }
 
   ngOnInit() {
+    this.userSubscription = this.userSvc.user$.subscribe(
+      (user: User) => {
+        if (user !== undefined) {           
+          this.urlImage = user.photo;
+          this.gender = user.gender;
+          this.default_photo = (!user.photo || 0 === user.photo.length);
+        }
+      },
+      (error: any) => {}
+    ); 
+
     if(this.urlImage == undefined) {
-      this.userSvc.getData();
-      this.userSubscription = this.userSvc.user$.subscribe(
-        (user: User) => {
-          if (user !== undefined) {           
-            this.urlImage = user.photo;
-            this.gender = user.gender;
-            this.default_photo = (!user.photo || 0 === user.photo.length);
-          }
-        },
-        (error: any) => {}
-      );      
+      this.userSvc.getData();   
     }
+    
+    this.menuSubscription = this.menuS.menuStatus$.subscribe(
+      (result)=>{
+        this.menuOption = result;
+      }
+    );
   }
   
 
   ngOnDestroy() {
     this.pictureSub.unsubscribe();
+    this.userSubscription.unsubscribe();
+    this.menuSubscription.unsubscribe();
   }
 
   ngAfterViewInit() {

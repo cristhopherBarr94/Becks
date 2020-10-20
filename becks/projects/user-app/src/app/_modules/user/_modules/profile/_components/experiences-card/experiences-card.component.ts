@@ -34,6 +34,7 @@ export class ExperiencesCardComponent implements OnInit {
   redirectExpId() {
     this.router.navigate([`user/exp/${this.id}`], {
       queryParamsHandling: "preserve",
+      state: { reload: 'true' }
     });
   }
 

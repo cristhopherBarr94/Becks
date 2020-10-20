@@ -25,13 +25,19 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     private experienciaService: ExperienciasService,
     private router: Router,
     private userSvc: UserService
-  ) { }
+  ) {
+    if(this.router.getCurrentNavigation().extras.state?.reload) {
+      // TODO :: FIX THIS ISSUE FROM CSS
+      // AVOID RELOAD
+      location.reload();
+    }
+  }
 
   ngOnInit() {
     
     this.userSvc.getData();
     const s = this.router.url;
-    this.id = Number(s.substr(s.lastIndexOf('/') + 1))
+    this.id = Number(s.substr(s.lastIndexOf('/') + 1));
     this.experienciaService.getExpContent().subscribe(response => {
       this.experienciaContent = response;
       this.slideOpts = {

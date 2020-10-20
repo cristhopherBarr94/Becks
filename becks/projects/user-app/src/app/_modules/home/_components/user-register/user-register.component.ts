@@ -31,12 +31,15 @@ declare global {
   styleUrls: ["./user-register.component.scss"],
 })
 export class UserRegisterComponent implements OnInit, AfterViewInit {
+  @Input() principalContent;
   public userRegisterForm: FormGroup;
   public userRegister: User = new User();
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
-  @Input() principalContent;
+
+  public hide: boolean;
+  public password: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -89,6 +92,10 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
       typeId: new FormControl(null, Validators.required),
       privacy: new FormControl(null, Validators.required),
       promo: new FormControl(null),
+      password: new FormControl("", [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
     });
   }
 

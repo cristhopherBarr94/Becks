@@ -53,8 +53,17 @@
   height: 90px;
 }
 
+.buttons-edition {
+  width: 100%;
+  display: inline-flex;
+  margin-left: 10%;
+
+  @media (min-width: 769px) and (max-width: 1366px) {
+    margin-left: 5%;
+  }
+}
+
 .edit-button {
-  margin-left: 26%;
   background-color: #121212;
   justify-content: center;
   font-family: "Helvetica LT Std";
@@ -72,8 +81,8 @@
   }
 }
 
-.margin-left-tt{
-  margin-left: 20px ;
+.margin-left-tt {
+  margin-left: 20px;
 }
 
 .sin-stadisticas {
@@ -87,4 +96,3 @@
 .positionRelative {
   position: relative;
 }
-

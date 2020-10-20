@@ -146,7 +146,6 @@
             <mat-label>Número de identificación</mat-label>
             <input
               matInput
-              (input)="inputValidatorAlphaNumeric($event)"
               formControlName="idNumber"
               placeholder="Número de id"
               minlength="4"
@@ -159,6 +158,34 @@
               >*Este campo es obligatorio</mat-error
             >
           </mat-form-field>
+
+          
+          <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userRegisterForm.controls.password)"
+        >
+          <mat-label>Contraseña</mat-label>
+          <input
+            matInput
+            id="password"
+            formControlName="password"
+            [type]="!hide ? 'password' : 'text'"
+            required
+            minlength="4"
+            maxlength="30"
+            data-qadp="password"
+            [(ngModel)]="userRegister.password"
+          />
+          <mat-icon matSuffix (click)="hide = !hide">{{
+            !hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+          <mat-error *ngIf="userRegisterForm.controls.password.invalid"
+            >*Este campo es obligatorio</mat-error
+          >
+        </mat-form-field>
+
         </div>
       </ion-row>
 

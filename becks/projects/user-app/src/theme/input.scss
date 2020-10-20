@@ -196,3 +196,9 @@ input[type="number"] {
     }
   }
 }
+
+.mat-form-field {
+  mat-icon {
+    cursor: pointer;
+  }
+}

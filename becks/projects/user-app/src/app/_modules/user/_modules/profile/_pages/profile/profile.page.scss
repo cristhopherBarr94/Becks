@@ -58,7 +58,7 @@
   display: inline-flex;
   margin-left: 10%;
 
-  @media (min-width: 769px) and (max-width: 1366px) {
+  @media (max-width: 900px) {
     margin-left: 5%;
   }
 }

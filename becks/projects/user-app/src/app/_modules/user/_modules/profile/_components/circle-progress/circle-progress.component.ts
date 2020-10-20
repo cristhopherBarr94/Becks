@@ -61,7 +61,7 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
           if (this.progress < 0) {
             this.progress = 0;
           }
-          if (this.progress == 30){
+          if (this.progress == 100){
           this.buttonTitle = "VER EXPERIENCIAS";
           }
           if ( codes.length >0 ) {

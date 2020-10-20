@@ -13,7 +13,7 @@ export const MockExperiencias: Exp[] = [
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
     placeExp: "Live instagram Beck’s",
     urlExp: "/exp1",
-    status: "0",
+    status: "1",
     colorExp: "green-color",
 
   },
@@ -29,7 +29,7 @@ export const MockExperiencias: Exp[] = [
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
     placeExp: "Live instagram Beck’s",
     urlExp: "/exp1",
-    status: "1",
+    status: "0",
     colorExp: "green-color",
 
   },
@@ -45,7 +45,7 @@ export const MockExperiencias: Exp[] = [
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
     placeExp: "Live instagram Beck’s",
     urlExp: "/exp1",
-    status: "2",
+    status: "0",
     colorExp: "green-color",
 
   },

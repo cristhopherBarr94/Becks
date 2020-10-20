@@ -18,6 +18,7 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
   public colorProgressBar: string;
   public progress: number;
   public daysR:any;
+  public buttonTitle:String;
   private subscription: Subscription;
   
   constructor(
@@ -33,8 +34,9 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
           let date_til = moment(new Date(codes[0].valid_until * 1000));
           let cur_date = moment(new Date);
           this.daysR =  date_til.diff(cur_date, 'days');
-          this.progress = this.daysR * (10 / 3);
+          this.progress = (this.daysR +1)* (10 / 3);
           this.remaining_days = Math.ceil(this.progress * (30 / 100));
+          this.buttonTitle = "OBTÉN MÁS DÍAS";
          if (this.progress <= 25) {
             this.colorProgress = "#FF7A00";
             this.colorProgressBar =
@@ -63,6 +65,7 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
         else {
           this.progress = 0 * (10 / 3);
           this.remaining_days = Math.ceil(this.progress * (30 / 100));
+          this.buttonTitle = "ACTIVA TU CUENTA";
           if(this.progress == 0) {
             this.colorProgress = "#DB4843";
             this.colorProgressBar = "#1E1E1E";

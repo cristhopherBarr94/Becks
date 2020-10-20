@@ -16,6 +16,8 @@ export class InteractionViewComponent implements OnInit , AfterViewInit {
   public experience:any = MockExperiencias;
   public bgExp:string;
   public id: number;
+  public titleExpView:string;
+
   constructor(
     public httpService: HttpService,
     private router: Router,
@@ -25,7 +27,8 @@ export class InteractionViewComponent implements OnInit , AfterViewInit {
     this.id = Number(this.router.url.replace("/user/interaction/",""))
     this.experience.forEach(exp => {
       if(this.id == exp.id){
-        this.bgExp= exp.imagesExp;
+        this.bgExp = exp.imagesExp;
+        this.titleExpView = exp.titleExp;
       }
     });
 

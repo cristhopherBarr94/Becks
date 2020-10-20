@@ -3,22 +3,23 @@
   <section
   class="content-flex-all-center full-height flex-direction-column calendar-slider-background"
 >
+<h1 class="calendar-title title-secondary">Experiencias</h1>
+<span class="calendar-span"> </span>
   <section>
     <div class="card-event" *ngFor="let item of amount_exp">
       <ion-row>
         <div class="lateral-month">
-          <h1 class="title-tertiary">{{ item.mes }}</h1>
-          <h2 class="day-event title-tertiary">{{ item.dia }}</h2>
+          <h1 class="title-tertiary">{{ (item.fechaExp) | date:'MMM'}}</h1>
+          <h2 class="day-event title-tertiary">{{ item.fechaExp.split('/')[1] }}</h2>
           <div class="vertical_dotted_line"></div>
         </div>
         <div
           class="img-event"
-          style="
-        background-image: url('{{ item.img }}');"
+          [style.background-image]="'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url('+ item.imagesExp +')'"
         >
           <div class="event-description">
-            <p class="title-secondary title">{{ item.titulo }}</p>
-            <p class="title-tertiary">{{ item.fecha }}</p>
+            <a [routerLink]="['/user/exp/', item.id]"><p class="title-secondary">{{ item.titleExp }}</p></a>
+            <p class="title-tertiary">{{ item.fechaExp  | date:'EEEE'}} {{item.fechaExp | date:'dd'}} {{item.fechaExp | date:'LLL'}}</p>
           </div>
         </div>
       </ion-row>

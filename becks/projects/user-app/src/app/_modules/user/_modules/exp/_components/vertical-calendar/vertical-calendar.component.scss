@@ -1,6 +1,28 @@
 .calendar-slider-background {
   background: #121212;
   padding-top: 30px !important;
+
+  .calendar-title {
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-weight: 500 !important;
+      font-size: 16px !important;
+      line-height: 110% !important;
+    }
+    @media (min-width: 769px) {
+      font-weight: 500 !important;
+      font-size: 16px !important;
+      line-height: 110% !important;
+    }
+  }
+
+  .calendar-span {
+    @media (min-width: 0px) and (max-width: 768px) {
+      width: 74px;
+      height: 4px;
+      border: 2px solid #ffffff;
+      margin-bottom: 30px;
+    }
+  }
   .card-event {
     height: 180px;
     width: 100%;
@@ -40,17 +62,19 @@
         #121212 6.96%,
         rgba(44, 47, 54, 0) 99.66%
       );
-
+      background-position: center;
+      background-size: cover;
+      mix-blend-mode: normal;
       .event-description {
-        width: 150px;
+        width: 200px;
         margin-top: 110px;
         .title-secondary {
-          font-size: 16px !important;
-          line-height: 50px !important;
-          letter-spacing: 0.15px !important;
           font-style: normal !important;
           font-weight: normal !important;
-          text-transform: capitalize;
+          text-transform: capitalize !important;
+          font-size: 11px !important;
+          line-height: 50px !important;
+          letter-spacing: 0.15px !important;
           margin: 0 !important;
           height: 35px;
         }
@@ -62,6 +86,15 @@
           color: #ffffff;
           margin: 0 !important;
         }
+        .title-secondary,
+        .title-tertiary {
+          justify-content: left !important;
+          text-align: left !important;
+          margin-left: 14px !important;
+        }
+      }
+      a {
+        text-decoration: none;
       }
     }
   }

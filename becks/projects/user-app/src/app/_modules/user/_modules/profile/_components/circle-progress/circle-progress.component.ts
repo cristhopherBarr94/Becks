@@ -36,7 +36,7 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
           let date_til = moment(new Date(codes[0].valid_until * 1000));
           let cur_date = moment(new Date);
           this.daysR =  date_til.diff(cur_date, 'days');
-          this.progress = (this.daysR)* (10 / 3);
+          this.progress = (this.daysR+1)* (10 / 3);
           this.remaining_days = Math.ceil(this.progress * (30 / 100));
           this.buttonTitle = "OBTÉN MÁS DÍAS";
           this.textDays = "Disfruta de las nuevas experiencias";
@@ -61,7 +61,7 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
           if (this.progress < 0) {
             this.progress = 0;
           }
-          if (this.progress == 30){
+          if (this.progress == 100){
           this.buttonTitle = "VER EXPERIENCIAS";
           }
           if ( codes.length >0 ) {

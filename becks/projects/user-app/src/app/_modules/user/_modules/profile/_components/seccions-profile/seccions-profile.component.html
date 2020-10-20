@@ -9,7 +9,7 @@
         <section class="card-component-circle">
           <user-circle-progress class="internal-section"></user-circle-progress>
         </section>
-        <section class="card-component-experiences">
+        <!-- <section class="card-component-experiences">
           <div class="margin-tittle-desktop">
             <div class="text-aling">
               <span class="title-profile-big">MIS EXPERIENCIAS</span>
@@ -21,14 +21,21 @@
             >
           </div>
           <user-experiences-cards style="min-width:90%"></user-experiences-cards>
-        </section>
+        </section> -->
       </div>
     </mat-tab>
-    <mat-tab label="Mis Experiencias" id="experiencies" [disabled]="!isActive">
+    <mat-tab label="Mis Experiencias" id="experiencies">
       <user-experiences-cards
         *ngIf="this.size == 'xs'"
       ></user-experiences-cards>
-
+      <div  [hidden]="isActive" class="title-not-activate" *ngIf="this.size == 'xs'">
+        <p class="title1">
+          Aún no cuentas con ninguna experiencia       
+        </p>
+        <p class="title2">
+          para vivir nuevas experiencias debes activar tu cuenta
+        </p>
+      </div>
       <div
         class="container-desktop container-desktop-exp"
         *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
@@ -41,6 +48,14 @@
             style="min-width: 100%"
             [vertical]="true"
           ></user-experiences-cards>
+          <div  [hidden]="isActive" class="title-not-activate">
+            <p class="title1">
+              Aún no cuentas con ninguna experiencia       
+            </p>
+            <p class="title2">
+              para vivir nuevas experiencias debes activar tu cuenta
+            </p>
+          </div>
         </section>
       </div>
     </mat-tab>

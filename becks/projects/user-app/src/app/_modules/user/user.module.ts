@@ -22,6 +22,7 @@ import { VerticalCalendarComponent } from './_components/vertical-calendar/verti
 import { ScheduleComponent } from './_components/schedule/schedule.component';
 import { InteractionConfirmComponent } from './_components/interaction-confirm/interaction-confirm.component';
 import { InteractionViewComponent } from './_components/interaction-view/interaction-view.component';
+import { LOCALE_ID } from '@angular/core'; 
 
 @NgModule({
   declarations: [
@@ -52,6 +53,6 @@ import { InteractionViewComponent } from './_components/interaction-view/interac
     MatNativeDateModule,
     MatDatepickerModule,
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: "es-ES" }],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: "es-ES" },],
 })
 export class UserModule {}

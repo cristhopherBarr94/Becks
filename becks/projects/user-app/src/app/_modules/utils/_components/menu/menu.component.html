@@ -1,5 +1,5 @@
-<div class="menu-content">
-  <nav class="menu-mobile" [ngClass]="transparentStyle()">
+<div class="menu-content" [ngClass]="transparentStyle()">
+  <nav class="menu-mobile">
     <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" (click)="openClose()" />
     <label class="menu-open-button" for="menu-open">
       <span class="hamburger hamburger-1"></span>
@@ -17,10 +17,10 @@
       <span class="name-item">Calendario</span> </a>
     <!-- <a href="./user/mgm" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita"> <span
         class="name-item">Invita</span> </a> -->
-    <a href="./user/activation" class="menu-item" [ngClass]="selected('activation')"> <img class="icon-item"
+    <!-- <a href="./user/activation" class="menu-item" [ngClass]="selected('activation')"> <img class="icon-item"
         src="./assets/icon/menu/comprar.svg" alt="Compra">
       <span
-        class="name-item">Compra</span> </a>
+        class="name-item">Compra</span> </a> -->
     <a href="./user/profile" class="menu-item" [ngClass]="selected('profile')"> <img class="perfil-img"
         [src]="profilePicture()" alt="perfil">
       <span
@@ -45,10 +45,10 @@
           <a href="./user/mgm" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita">
           </a>
         </li>-->
-        <li>
+        <!-- <li>
           <a href="./user/activation" class="menu-item-destkop" [ngClass]="selected('activation')"> <img class="icon-item"
               src="./assets/icon/menu/comprar.svg" alt="Compra"> </a>
-        </li>
+        </li> -->
         <li>
           <a href="./user/profile" class="menu-item-destkop" [ngClass]="selected('profile')"> <img class="perfil-img"
               [src]="profilePicture()" alt="perfil"> </a>

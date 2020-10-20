@@ -9,6 +9,7 @@ import { MatCarouselModule } from "@ngmodule/material-carousel";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
 import { IonicModule } from '@ionic/angular';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     SliderExpComponent,
@@ -22,6 +23,7 @@ import { IonicModule } from '@ionic/angular';
     MatCarouselModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatIconModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: "es-ES" }],
 })

@@ -89,7 +89,7 @@ export class MenuComponent implements OnInit {
       );
   }
 
-  transparentStyle(){
+  transparentStyle() {
     if(this.transparent){
      return "position-menu-absolute"
     }

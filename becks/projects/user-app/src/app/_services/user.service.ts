@@ -69,6 +69,7 @@ export class UserService {
         (res: any) => {
           if (res.status == 200 ) {
             this._userCodes = res.body || [];
+            if ( !this._user ) { this._user = new User(); }
             this._user.activate = this._userCodes && this._userCodes.length > 0;
             localStorage.setItem("bks_user", this._user.toJSON());
             localStorage.setItem("bks_user_codes", JSON.stringify(this._userCodes) );

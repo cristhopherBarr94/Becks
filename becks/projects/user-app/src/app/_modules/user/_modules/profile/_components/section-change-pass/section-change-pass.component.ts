@@ -30,6 +30,7 @@ export class SectionChangePassComponent implements OnInit {
   public password: string;
   public hide2: boolean;
   public passwordVerify: string;
+  public passwordPrev: string;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
   prevUrl: string = "/home";

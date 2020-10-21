@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
-import { SectionForgetPassComponent } from './_modules/utils/_components/section-forget-pass/section-forget-pass.component';
 import { AgeGuardService } from "./_services/age-guard.service";
 import { AuthGuardService } from "./_services/auth-guard.service";
 
@@ -39,10 +38,7 @@ const routes: Routes = [
         (m) => m.TermsConditionsPageModule
       ),
   },
-  {
-    path: "recovery",
-    component: SectionForgetPassComponent
-  },
+ 
   {
     path: "**",
     loadChildren: () =>

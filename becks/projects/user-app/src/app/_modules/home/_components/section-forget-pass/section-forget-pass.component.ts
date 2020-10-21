@@ -111,7 +111,7 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
             } catch (e) {}
             this.userSvc.logout();
             this.auth.setAuthenticated(null);
-            this.router.navigate(["/user/exp"], {
+            this.router.navigate(["/home/recovery-confirm"], {
               queryParamsHandling: "preserve",
             });
           },

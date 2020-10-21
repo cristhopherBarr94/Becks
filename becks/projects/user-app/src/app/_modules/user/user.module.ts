@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { UserRoutingModule } from "./user-routing.module";
-import { SectionRequestConfirmComponent } from "./_modules/profile/_components/section-request-confirm/section-request-confirm.component";
 import { SectionChangePassComponent } from "./_modules/profile/_components/section-change-pass/section-change-pass.component";
 import { UtilsModule } from "../utils/utils.module";
 import { MatInputModule } from "@angular/material/input";
@@ -29,7 +28,6 @@ import { registerLocaleData } from '@angular/common';
 registerLocaleData(es);
 @NgModule({
   declarations: [
-    SectionRequestConfirmComponent,
     SectionChangePassComponent,
     ActivationPage,
     MGMPage,

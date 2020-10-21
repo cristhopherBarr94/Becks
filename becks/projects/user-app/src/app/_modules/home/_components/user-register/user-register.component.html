@@ -90,7 +90,7 @@
               !hide ? "visibility_off" : "visibility"
             }}</mat-icon>
             <mat-error *ngIf="userRegisterForm.controls.password.invalid"
-              >*Este campo es obligatorio</mat-error
+              >*Este campo es obligatorio, mínimo 4 caracteres</mat-error
             >
           </mat-form-field>
 
@@ -114,10 +114,10 @@
             <mat-icon matSuffix (click)="hideConfirm = !hideConfirm">{{
               !hideConfirm ? "visibility_off" : "visibility"
             }}</mat-icon>
-            <mat-error *ngIf="userRegisterForm.controls.password_confirm.invalid">*Este campo es obligatorio</mat-error>
+            <mat-error *ngIf="userRegisterForm.controls.password_confirm.invalid">*Este campo es obligatorio, mínimo 4 caracteres</mat-error>
           </mat-form-field>
           
-          <mat-error *ngIf="userRegisterForm.controls.password.value != userRegisterForm.controls.password_confirm.value">*Las contraseñas no coinciden</mat-error>
+          <mat-error *ngIf="userRegisterForm.controls.password.value && userRegisterForm.controls.password.value != userRegisterForm.controls.password_confirm.value">*Las contraseñas no coinciden</mat-error>
         </div>
         <div class="form-section section2">
           <mat-form-field

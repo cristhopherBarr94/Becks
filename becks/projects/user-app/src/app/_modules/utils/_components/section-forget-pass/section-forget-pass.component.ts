@@ -30,7 +30,7 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
   public userRegister: User = new User();
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
-  private allowCaptchaError: boolean;
+  public allowCaptchaError: boolean;
   public httpError: string;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;

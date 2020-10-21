@@ -21,8 +21,9 @@ export class ProfilePage implements OnInit, OnDestroy {
   public user = new User();
   public stats = { buy: "10", exp: "6", friends: "7" };
   public size: string;
-  public default_picure: boolean;
+  public default_picure : boolean;
   public headerPosition : string
+  public profile_picture : string;
 
   userSubscription: Subscription;
   userCodeSubscription: Subscription;
@@ -54,6 +55,7 @@ export class ProfilePage implements OnInit, OnDestroy {
           }
           this.user = user;
           this.user.activate = this.isActivate;
+          this.user.photo = this.profile_picture;
         }
       },
       (error: any) => {}

@@ -75,7 +75,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
           this.date_til = moment(new Date(codes[0].valid_until * 1000));
           let cur_date = moment(new Date);
           this.days_ramaining =  this.date_til.diff(cur_date, 'days');
-          this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ this.days_ramaining+ " DÍAS";
+          this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ (this.days_ramaining+1)+ " DÍAS";
           this.bgActive();
           this.ui.showModal( NotifyModalComponent, "modalMessage", true, false, {
             title: this.title_modal,

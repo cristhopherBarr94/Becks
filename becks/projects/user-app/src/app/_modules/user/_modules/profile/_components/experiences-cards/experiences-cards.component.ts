@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/_models/User';
 import { UserService } from 'src/app/_services/user.service';
@@ -9,7 +9,7 @@ import { MockExperiencias } from "../../../../../../_mocks/experiencias-mock";
   templateUrl: "./experiences-cards.component.html",
   styleUrls: ["./experiences-cards.component.scss"],
 })
-export class ExperiencesCardsComponent implements OnInit {
+export class ExperiencesCardsComponent implements OnInit, OnDestroy {
   @Input() vertical: boolean;
   public user = new User();
   public direcionCards: string;
@@ -18,21 +18,18 @@ export class ExperiencesCardsComponent implements OnInit {
   pendingCards = new Array();
   acceptCards = new Array();
 
-  userSubscription: Subscription;
+  userCodeSubscription: Subscription;
 
   constructor(
     private userSvc: UserService,
   ) {}
 
   ngOnInit() {
-    this.userSubscription = this.userSvc.user$.subscribe(
-      (user: User) => {
-        if (user !== undefined) {       
-          this.isActive = user.activate;
-        }
-      },
-      (error: any) => {}
-    );
+    this.userCodeSubscription = this.userSvc.userCodes$.subscribe(codes =>{
+      if(codes && codes.length>0){
+        this.isActive = true;
+      }
+    });
 
     if (this.vertical) {
       this.direcionCards = "flex-direction-row";
@@ -49,5 +46,9 @@ export class ExperiencesCardsComponent implements OnInit {
         this.cancelCards.push(MockExperiencias[i]);
       }
     }
+    this.userSvc.getCodes();
+  }
+  ngOnDestroy(): void {
+    this.userCodeSubscription.unsubscribe();
   }
 }

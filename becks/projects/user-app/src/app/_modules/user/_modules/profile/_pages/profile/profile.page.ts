@@ -68,6 +68,7 @@ export class ProfilePage implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();
+    this.userCodeSubscription.unsubscribe();
   }
 
   editProfile() {

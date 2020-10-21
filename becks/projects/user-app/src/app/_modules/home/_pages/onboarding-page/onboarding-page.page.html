@@ -1,3 +1,4 @@
 <ion-content [fullscreen]="true" class="content-onboarding">
-  <user-onboarding></user-onboarding>
+  <user-onboarding *ngIf="mobile" ></user-onboarding>
+  <user-onboarding-desk *ngIf="!mobile"></user-onboarding-desk>
 </ion-content>

@@ -32,9 +32,9 @@ import { SectionForgetPassComponent } from './_components/section-forget-pass/se
     UserLoginComponent,
     FbButtonComponent,
     OnboardingComponent,
-    OnboardingPagePage,
     SectionRequestConfirmComponent,
-    SectionForgetPassComponent
+    SectionForgetPassComponent,
+    OnboardingPagePage
   ],
   imports: [
     CommonModule,

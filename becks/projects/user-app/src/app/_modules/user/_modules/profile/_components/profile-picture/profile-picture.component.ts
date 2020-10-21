@@ -18,31 +18,38 @@ import { UpdateFileComponent } from "../update-file/update-file.component";
 })
 export class ProfilePictureComponent
   implements OnInit, AfterViewInit, OnDestroy {
-  @Input() urlImage: string;
   @Input() profile_name: string;
   @Input() profile_view: boolean;
-  @Input() default_photo: boolean;
   public time;
   public url: string = environment.serverUrl;
   public isPofile: string;
+  public user;
   private pictureSub: Subscription;
+  private userSub: Subscription;
 
   constructor(private ui: UiService, private userSvc: UserService) {
-    this.pictureSub = this.userSvc.editing$.subscribe((isEditing) => {
-      this.time = isEditing
-        ? ""
-        : "?time_stamp=" + Math.floor(Date.now() / 1000);
-    });
+    this.user = userSvc.getActualUser();
   }
 
   ngOnInit() {
     if (this.profile_view) {
       this.isPofile = "background-color-profile";
     }
+    
+    this.pictureSub = this.userSvc.editing$.subscribe((isEditing) => {
+      this.time = isEditing
+        ? ""
+        : "?time_stamp=" + Math.floor(Date.now() / 1000);
+    });
+
+    this.userSub = this.userSvc.user$.subscribe( (user) => {
+      this.user = user;
+    });
   }
 
   ngOnDestroy() {
     this.pictureSub.unsubscribe();
+    this.userSub.unsubscribe();
   }
 
   ngAfterViewInit() {
@@ -59,8 +66,6 @@ export class ProfilePictureComponent
   }
 
   profilePicture() {
-    return this.default_photo
-      ? this.urlImage
-      : this.url + this.urlImage + this.time;
+    return this.url + this.user.photo + this.time;
   }
 }

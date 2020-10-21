@@ -1,10 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {  Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/_models/User';
 import { LogOutComponent } from 'src/app/_modules/user/_modules/profile/_components/log-out/log-out.component';
 import { AuthService } from 'src/app/_services/auth.service';
-import { HttpService } from 'src/app/_services/http.service';
 import { MenuStatusService } from 'src/app/_services/menu-status.service';
 import { UiService } from 'src/app/_services/ui.service';
 import { UserService } from 'src/app/_services/user.service';
@@ -19,20 +17,17 @@ import { environment } from 'src/environments/environment';
 export class MenuComponent implements OnInit {
   @Input() default_photo: boolean;
   @Input() transparent: boolean = false;
-  public urlImage: string;
   public menuStatus:boolean = false;
   public url: string = environment.serverUrl;
-  public gender:string
   public time;
+  public user;
   private pictureSub: Subscription;
   private menuOption : string
   private userSubscription: Subscription;
   private menuSubscription: Subscription;
 
   constructor(private userSvc: UserService,   private authService: AuthService,
-    private httpService: HttpService,
     private ui: UiService,
-    private router: Router,
     private menuS : MenuStatusService,
     ) { this.pictureSub = this.userSvc.editing$.subscribe((isEditing) => {
       this.time = isEditing
@@ -44,19 +39,14 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.userSubscription = this.userSvc.user$.subscribe(
       (user: User) => {
-        if (user !== undefined) {           
-          this.urlImage = user.photo;
-          this.gender = user.gender;
-          this.default_photo = (!user.photo || 0 === user.photo.length);
-          console.log(user);
-          this.profilePicture();
-        }
+        this.user = user;
       },
       (error: any) => {}
     ); 
 
-    if(this.urlImage == undefined) {
-      this.userSvc.getData();   
+    this.user = this.userSvc.getActualUser();
+    if ( !this.user ) {
+      this.userSvc.getData();
     }
     
     this.menuSubscription = this.menuS.menuStatus$.subscribe(
@@ -94,15 +84,6 @@ export class MenuComponent implements OnInit {
   transparentStyle() {
     if(this.transparent){
      return "position-menu-absolute"
-    }
-  }
-
-  profilePicture() {
-    if ( this.urlImage ) {
-      return this.url + this.urlImage + this.time;
-    } else {
-      return this.gender == "F" ? "../../../../../assets/img/profile_female.jpg"
-                              : "../../../../../assets/img/profile_male.jpg";
     }
   }
 

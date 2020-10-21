@@ -72,8 +72,14 @@ export class SectionChangePassComponent implements OnInit {
   changePass(): void {
     if (this.userChangeForm.valid) {
       this.ui.showLoading();
-      this.userChange.password = this.userChangeForm.controls.password.value;
-      this.userChange.passwordPrev = this.userChangeForm.controls.passwordPrev.value;
+      this.userChange.password = this.userChangeForm.controls.password.value.trim();
+      this.userChange.passwordPrev = this.userChangeForm.controls.passwordPrev.value.trim();
+
+      if ( this.userChange.password == this.userChange.passwordPrev ) {
+        this.ui.dismissLoading();
+        this.httpError = "La nueva contraseña debe ser diferente a la anterior";
+        return;
+      }
 
       this.httpService
         .patch(environment.serverUrl + environment.user.patchPassword, {
@@ -81,7 +87,6 @@ export class SectionChangePassComponent implements OnInit {
         })
         .subscribe(
           (response: any) => {
-            this.ui.dismissLoading();
             if (response.status == 200) {
               if ( response.body.password ) {
                 this.userChangeForm.reset();
@@ -92,10 +97,12 @@ export class SectionChangePassComponent implements OnInit {
                   description: "Cerrando sesión de forma segura",
                 });
                 this.ui.dismissModal();
-                setTimeout( () => { 
-                  this.router.navigate(["home"]); 
+                setTimeout( () => {
+                  this.ui.dismissLoading();
+                  this.router.navigate(["home"]);
                 } , 3000 );
               } else {
+                this.ui.dismissLoading();
                 this.httpError = response.body.message ? response.body.message : "Contraseña actual no valida";
               }
             } else {

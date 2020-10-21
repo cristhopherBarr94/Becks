@@ -20,6 +20,7 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
   public daysR:any;
   public buttonTitle:String = "ACTIVA TU CUENTA";
   public textDays:string = "Tu cuenta se encuentra inactiva";
+  public pathTo:string ="activation"
   private subscription: Subscription;
 
   
@@ -63,6 +64,7 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
           }
           if (this.progress > 99){
           this.buttonTitle = "VER EXPERIENCIAS";
+          this.pathTo = "exp";
           }
           if ( codes.length >0 ) {
             this.httpError=" ";
@@ -91,7 +93,7 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
   }
 
   redirectSales() {
-    this.router.navigate(["user/activation"], {
+    this.router.navigate(["user/"+ this.pathTo], {
       queryParamsHandling: "preserve",
     });
   }

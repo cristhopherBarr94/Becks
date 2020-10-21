@@ -22,6 +22,7 @@ export class ProfilePage implements OnInit, OnDestroy {
   public stats = { buy: "10", exp: "6", friends: "7" };
   public size: string;
   public headerPosition : string
+  private statusFlag: boolean;
 
   userSubscription: Subscription;
   userCodeSubscription: Subscription;
@@ -46,7 +47,8 @@ export class ProfilePage implements OnInit, OnDestroy {
     this.userSubscription = this.userSvc.user$.subscribe(
       (user: User) => {
         if (user !== undefined) {
-          if (user.status == 1) {
+          if (!this.statusFlag && user.status == 1) {
+            this.statusFlag = true;
             this.editPassword();
           }
           this.user = user;

@@ -31,13 +31,14 @@ export class LogOutComponent implements OnInit {
       (r) => {
         this.ui.dismissLoading();
         this.ui.dismissModal()
-        this.router.navigate(["home"]);
+        //this.router.navigate(["home"]);
+        location.reload();
       },
       (e) => {
         this.ui.dismissLoading();
         this.ui.dismissModal()
-        this.router.navigate(["home"]);
-        
+        //this.router.navigate(["home"]);
+        location.reload();
       }
     );
     this.authService.setAuthenticated("");

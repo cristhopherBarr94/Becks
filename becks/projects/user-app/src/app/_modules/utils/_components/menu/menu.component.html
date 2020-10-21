@@ -23,15 +23,17 @@
           <img class="icon-item" src="./assets/icon/menu/comprar.svg" alt="Compra" />
           <span class="name-item">Compra</span> 
         </a> -->
-    <a *ngIf="user && time" href="./user/profile" class="menu-item" [ngClass]="selected('profile')">
+    <a *ngIf="(user && time); else defaultPicMobile" href="./user/profile" class="menu-item" [ngClass]="selected('profile')">
         <img *ngIf="user.photo" [src]="url + user.photo + time" class="perfil-img" alt="Perfil" title="Perfil"/>
         <img *ngIf="user.photo == undefined && user.gender == 'M'" [src]="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
         <img *ngIf="user.photo == undefined && user.gender == 'F'" [src]="'./assets/img/profile_female.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
         <span class="name-item">Mi perfil</span>
     </a>
-    <a *ngIf="!user" href="./user/profile" class="menu-item" [ngClass]="selected('profile')">
-      <img src="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
-    </a>
+    <ng-template #defaultPicMobile>
+      <a href="./user/profile" class="menu-item" [ngClass]="selected('profile')">
+        <img [src]="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
+      </a>
+    </ng-template>
     <a (click)="logout()" class="sign-out">
       <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Salir"/>
       <span class="label-out">Salir</span>
@@ -68,16 +70,19 @@
           </a>
         </li> -->
         <li>
-          <a *ngIf="user && time" href="./user/profile" class="menu-item-destkop" [ngClass]="selected('profile')">
+          <a *ngIf="(user && time); else defaultPicDesktop" href="./user/profile" class="menu-item-destkop" [ngClass]="selected('profile')">
             <img *ngIf="user.photo" [src]="url + user.photo + time" class="perfil-img" alt="Perfil" title="Perfil" />
             <img *ngIf="user.photo == undefined && user.gender == 'M'" [src]="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil" />
             <img *ngIf="user.photo == undefined && user.gender == 'F'" [src]="'./assets/img/profile_female.jpg'" class="perfil-img" alt="Perfil" title="Perfil" />
             <span class="name-item">Mi perfil</span>
           </a>
         </li>
-        <a *ngIf="!user" href="./user/profile" class="menu-item" [ngClass]="selected('profile')">
-          <img [src]="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
-        </a>
+        <ng-template #defaultPicDesktop>
+          <a href="./user/profile" class="menu-item" [ngClass]="selected('profile')">
+            <img [src]="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
+          </a>
+        </ng-template>
+        
         <li>
           <a (click)="logout()" class="sign-out">
             <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out" title="Salir" />

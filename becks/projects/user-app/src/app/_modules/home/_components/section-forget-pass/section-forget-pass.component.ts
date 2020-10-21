@@ -97,17 +97,22 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
           captcha_key: this.userRegister.captcha_key,
         })
         .subscribe(
-          (data: any) => {
+          (res: any) => {
+            
             try {
-              this.restartCaptcha = false;
-              this.ui.dismissLoading();
-              this.userRegisterForm.reset();
-              window.dataLayer.push({
-                event: "trackEvent",
-                eventCategory: "becks society",
-                eventAction: "finalizar",
-                eventLabel: email256,
-              });
+              if ( res.status == 200 ) {
+                this.restartCaptcha = false;
+                this.ui.dismissLoading();
+                this.userRegisterForm.reset();
+                window.dataLayer.push({
+                  event: "trackEvent",
+                  eventCategory: "becks society",
+                  eventAction: "finalizar",
+                  eventLabel: email256,
+                });
+              } else {
+                this.httpError = res.body.message;
+              }
             } catch (e) {}
             this.userSvc.logout();
             this.auth.setAuthenticated(null);
@@ -147,4 +152,5 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
   public setCaptchaStatus(status) {
     this.captchaStatus = status;
   }
+
 }

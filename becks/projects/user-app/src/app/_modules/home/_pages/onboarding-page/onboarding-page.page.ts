@@ -7,14 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OnboardingPagePage implements OnInit {
 
-  mobile = true;
-
   constructor() { }
 
   ngOnInit() {
-    if (window.screen.width >= 1024) {
-      this.mobile = false;
-    }
   }
 
 }

@@ -21,7 +21,6 @@ import { UserRegisterComponent } from "./_components/user-register/user-register
 import { FbButtonComponent } from "./_components/fb-button/fb-button.component";
 import { OnboardingComponent } from './_components/onboarding/onboarding.component';
 import { OnboardingPagePage } from './_pages/onboarding-page/onboarding-page.page';
-import { OnboardingDeskComponent } from './_components/onboarding-desk/onboarding-desk.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +30,6 @@ import { OnboardingDeskComponent } from './_components/onboarding-desk/onboardin
     UserLoginComponent,
     FbButtonComponent,
     OnboardingComponent,
-    OnboardingDeskComponent,
     OnboardingPagePage
   ],
   imports: [

@@ -17,9 +17,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  @Input() urlImage: string;
   @Input() default_photo: boolean;
   @Input() transparent: boolean = false;
+  public urlImage: string;
   public menuStatus:boolean = false;
   public url: string = environment.serverUrl;
   public gender:string
@@ -48,6 +48,7 @@ export class MenuComponent implements OnInit {
           this.urlImage = user.photo;
           this.gender = user.gender;
           this.default_photo = (!user.photo || 0 === user.photo.length);
+          this.profilePicture();
         }
       },
       (error: any) => {}

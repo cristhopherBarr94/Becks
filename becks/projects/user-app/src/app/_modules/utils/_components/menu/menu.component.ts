@@ -48,6 +48,7 @@ export class MenuComponent implements OnInit {
           this.urlImage = user.photo;
           this.gender = user.gender;
           this.default_photo = (!user.photo || 0 === user.photo.length);
+          console.log(user);
           this.profilePicture();
         }
       },

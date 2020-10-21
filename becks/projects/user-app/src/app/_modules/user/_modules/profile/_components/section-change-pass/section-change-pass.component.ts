@@ -27,8 +27,9 @@ export class SectionChangePassComponent implements OnInit {
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
   public hide: boolean;
-  public password: string;
+  public hide1: boolean;
   public hide2: boolean;
+  public password: string;
   public passwordVerify: string;
   public passwordPrev: string;
 

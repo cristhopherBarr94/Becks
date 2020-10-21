@@ -35,7 +35,6 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     
-    this.userSvc.getData();
     const s = this.router.url;
     this.id = Number(s.substr(s.lastIndexOf('/') + 1));
     this.experienciaService.getExpContent().subscribe(response => {

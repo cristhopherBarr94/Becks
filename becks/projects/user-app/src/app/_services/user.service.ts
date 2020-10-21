@@ -40,7 +40,7 @@ export class UserService {
   }
 
   public getData() {
-    this.http.get(environment.serverUrl + environment.user.getData).subscribe(
+    this.http.get( environment.serverUrl + environment.user.getData + "?time_stamp=" + new Date().getTime() ).subscribe(
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
           this._user = new User(response.body);
@@ -63,9 +63,13 @@ export class UserService {
     
     if ( this._userCodes && this._userCodes.length > 0 ) {
       this._userCodeSbj.next(this._userCodes);
-      this._userSbj.next(this._user);
+      if ( this._user && this._user.email ) {
+        this._userSbj.next(this._user);
+      } else {
+        this.getData();
+      }
     } else {
-      this.http.get(environment.serverUrl + environment.user.getCodes).subscribe(
+      this.http.get(environment.serverUrl + environment.user.getCodes + "?time_stamp=" + new Date().getTime() ).subscribe(
         (res: any) => {
           if (res.status == 200 ) {
             this._userCodes = res.body || [];

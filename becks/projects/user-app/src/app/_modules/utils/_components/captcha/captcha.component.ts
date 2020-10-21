@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class CaptchaComponent implements OnInit {
 
+  @Input() showError;
   @Input()set restart(res: boolean) { if ( res ) { this.initCaptcha(); } }
   @Output('status') statusEmitter = new EventEmitter();
 

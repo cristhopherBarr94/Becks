@@ -22,6 +22,7 @@ export class UserLoginComponent implements OnInit {
   public httpError: string;
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
+  private allowCaptchaError: boolean;
   public hide: boolean;
   public password: string;
 
@@ -57,8 +58,13 @@ export class UserLoginComponent implements OnInit {
       ]),
       password: new FormControl("", [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(4),
       ]),
+    });
+
+    this.allowCaptchaError = false;
+    this.userLoginForm.valueChanges.subscribe(val => {
+      this.allowCaptchaError = val.password;
     });
   }
 

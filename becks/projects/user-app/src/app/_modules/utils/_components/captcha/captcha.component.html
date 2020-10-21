@@ -13,5 +13,5 @@
           >{{ answer.icon }}</mat-icon>
     </mat-radio-button>
   </mat-radio-group>
-  <mat-error [hidden]="captchaAnswer.value == userAnswer.value">Captcha no valido</mat-error>
+  <mat-error *ngIf="showError" [hidden]="captchaAnswer.value == userAnswer.value">Captcha no válido</mat-error>
 </fieldset>

@@ -37,6 +37,7 @@
           </mat-error>
         </mat-form-field>
         <app-captcha
+          [showError]="allowCaptchaError"
           [restart]="restartCaptcha"
           (status)="setCaptchaStatus($event)"
         >

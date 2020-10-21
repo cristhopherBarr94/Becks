@@ -13,6 +13,7 @@ import { environment } from "src/environments/environment";
 import { User } from "src/app/_models/User";
 import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
+import { BasicAlertComponent } from 'src/app/_modules/utils/_components/basic-alert/basic-alert.component';
 
 @Component({
   selector: "user-section-change-pass",
@@ -80,12 +81,21 @@ export class SectionChangePassComponent implements OnInit {
           (response: any) => {
             this.ui.dismissLoading();
             if (response.status == 200) {
-              this.httpError = "";
-              this.userChangeForm.reset();
-              this.userSvc.logout();
-              this.auth.setAuthenticated(null);
-              this.ui.dismissModal();
-              this.router.navigate(["home"]);
+              if ( response.body.password ) {
+                this.userChangeForm.reset();
+                this.userSvc.logout();
+                this.auth.setAuthenticated(null);
+                this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
+                  title: "Contraseña Actualizada",
+                  description: "Cerrando sesión de forma segura",
+                });
+                this.ui.dismissModal();
+                setTimeout( () => { 
+                  this.router.navigate(["home"]); 
+                } , 3000 );
+              } else {
+                this.httpError = response.body.message ? response.body.message : "Contraseña actual no valida";
+              }
             } else {
               this.httpError = response.body;
             }

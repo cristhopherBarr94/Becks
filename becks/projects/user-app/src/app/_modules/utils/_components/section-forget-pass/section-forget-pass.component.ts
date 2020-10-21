@@ -30,6 +30,7 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
   public userRegister: User = new User();
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
+  private allowCaptchaError: boolean;
   public httpError: string;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
@@ -60,6 +61,11 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
         Validators.email,
         Validators.maxLength(40),
       ]),
+    });
+
+    this.allowCaptchaError = false;
+    this.userRegisterForm.valueChanges.subscribe(val => {
+      this.allowCaptchaError = val.email;
     });
   }
 

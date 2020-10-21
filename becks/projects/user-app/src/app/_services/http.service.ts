@@ -4,7 +4,9 @@ import { Observable } from "rxjs";
 import { throwError } from "rxjs/internal/observable/throwError";
 import { catchError } from "rxjs/operators";
 import { HttpConstants } from "../_constans/HttpConstants";
+import { BasicAlertComponent } from '../_modules/utils/_components/basic-alert/basic-alert.component';
 import { AuthService } from "./auth.service";
+import { UiService } from './ui.service';
 
 @Injectable({
   providedIn: "root",
@@ -12,7 +14,9 @@ import { AuthService } from "./auth.service";
 export class HttpService {
 
   private error_counter = 0;
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient,
+              private authService: AuthService,
+              private ui: UiService) {}
 
   getHeaders() {
     let token = "";
@@ -129,10 +133,16 @@ export class HttpService {
   }
 
   handleError(error: HttpErrorResponse) {
-    if (error.status === HttpConstants.UNAUTHORIZED) {
+    if (error.status === HttpConstants.UNAUTHORIZED || error.status === HttpConstants.FORBIDDEN ) {
       if ( this.error_counter++ > 2 && this.authService.isAuthenticated() ) {
         this.authService.setAuthenticated(null);
-        location.reload();
+        this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
+          title: "Sesión expirada",
+          description: "Cerrando sesión de forma segura",
+        });
+        setTimeout( () => { location.reload(); } , 5000 );
+      } else {
+        this.error_counter = 0;
       }
     } else if (error.status === HttpConstants.CONFLICT) {
       // console.log("mensaje incorrecto");
@@ -144,7 +154,6 @@ export class HttpService {
     } else if (!error.ok) {
       console.log("ERROR ::: ", error);
     }
-    this.error_counter = 0;
     return throwError(error);
   }
 }

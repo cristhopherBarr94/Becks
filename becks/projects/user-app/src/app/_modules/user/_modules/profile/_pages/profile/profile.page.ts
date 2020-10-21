@@ -17,13 +17,15 @@ import { SectionChangePassComponent } from '../../_components/section-change-pas
   styleUrls: ["./profile.page.scss"],
 })
 export class ProfilePage implements OnInit, OnDestroy {
+  private isActivate = false;
   public user = new User();
   public stats = { buy: "10", exp: "6", friends: "7" };
   public size: string;
   public default_picure: boolean;
   public headerPosition : string
 
-  userSubscription: Subscription;  
+  userSubscription: Subscription;
+  userCodeSubscription: Subscription;
 
   constructor(
     private userSvc: UserService,
@@ -51,16 +53,23 @@ export class ProfilePage implements OnInit, OnDestroy {
             });
           }
           this.user = user;
+          this.user.activate = this.isActivate;
         }
       },
       (error: any) => {}
     );
 
+    this.userCodeSubscription = this.userSvc.userCodes$.subscribe(
+      (codes) => {
+        this.isActivate = (codes && codes.length > 0);
+        if ( this.user ) {
+          this.user.activate = this.isActivate;
+        }
+      }
+    );
+
     this.userSvc.getCodes();
-    if (this.userSvc.getActualUser()) {
-      this.user = this.userSvc.getActualUser();
-    }
-    this.userSvc.getData();
+    
     this.ui.dismissLoading();
     this.ui.dismissModal(2500);
     this.menuS.statusMenu("profile")   
@@ -96,12 +105,12 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   profilePicture() {
-    this.default_picure = !!!this.user.photo;
-    return !!this.user.photo
-      ? this.user.photo
-      : this.user.gender == "F"
-      ? "../../../../../../../assets/img/profile_female.jpg"
-      : "../../../../../../../assets/img/profile_male.jpg";
+    this.default_picure = !this.user.photo;
+    if ( this.default_picure ) {
+      return this.user.gender == "F" ? "../../../../../../../assets/img/profile_female.jpg" : "../../../../../../../assets/img/profile_male.jpg";
+    } else {
+      return this.user.photo;
+    }
   }
 
   positionHeader(){

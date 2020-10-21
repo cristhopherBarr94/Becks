@@ -7,65 +7,72 @@
       <span class="hamburger hamburger-3"></span>
     </label>
 
-    <a href="./user/exp" class="menu-item" [ngClass]="selected('exp')"> <img class="icon-item"
-        src="./assets/icon/menu/home.svg" alt="Inicio">
-      <span
-        class="name-item">Inicio</span> </a>
-    <a href="./user/calendarmob" class="menu-item" [ngClass]="selected('calendarmob')"> <img class="icon-item"
-        src="./assets/icon/menu/calendario.svg"
-        alt="Calendario">
-      <span class="name-item">Calendario</span> </a>
-    <!-- <a href="./user/mgm" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita"> <span
-        class="name-item">Invita</span> </a> -->
-    <!-- <a href="./user/activation" class="menu-item" [ngClass]="selected('activation')"> <img class="icon-item"
-        src="./assets/icon/menu/comprar.svg" alt="Compra">
-      <span
-        class="name-item">Compra</span> </a> -->
-    <a href="./user/profile" class="menu-item" [ngClass]="selected('profile')"> <img class="perfil-img"
-        [src]="profilePicture()" alt="perfil">
-      <span
-        class="name-item">Mi perfil</span> </a>
-    <a (click)="logout()" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out"> <span class="label-out">Salir</span>  </a>
+    <!-- <a href="./user/exp" class="menu-item" [ngClass]="selected('exp')">
+      <img class="icon-item" src="./assets/icon/menu/home.svg" alt="Inicio" />
+      <span class="name-item">Inicio</span>
+    </a> -->
+    <a href="./user/calendarmob" class="menu-item" [ngClass]="selected('calendarmob')">
+      <img class="icon-item" src="./assets/icon/menu/calendario.svg" alt="Calendario" />
+      <span class="name-item">Calendario</span>
+    </a>
+    <!-- <a href="./user/mgm" class="menu-item">
+            <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita" />
+            <span class="name-item">Invita</span> 
+          </a> -->
+    <!-- <a href="./user/activation" class="menu-item" [ngClass]="selected('activation')"> 
+          <img class="icon-item" src="./assets/icon/menu/comprar.svg" alt="Compra" />
+          <span class="name-item">Compra</span> 
+        </a> -->
+    <a href="./user/profile" class="menu-item" [ngClass]="selected('profile')">
+        <img class="perfil-img" [src]="profilePicture()" alt="perfil" />
+        <span class="name-item">Mi perfil</span>
+    </a>
+    <a (click)="logout()" class="sign-out">
+      <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Salir"/>
+      <span class="label-out">Salir</span>
+    </a>
   </nav>
   <nav class="menu-desktop" [ngClass]="transparentStyle()">
     <div class="container-menu">
       <div>
         <a href="./user/exp"> 
-          <img class="logo-brand" src="./assets/icon/menu/logo_brand.svg" alt="logo"></a>
-          <img class="becks-brand" src="./assets/icon/menu/Heading.svg" alt="becks">
+          <img class="logo-brand" src="./assets/icon/menu/logo_brand.svg" alt="logo" />
+        </a>
+        <img class="becks-brand" src="./assets/icon/menu/Heading.svg" alt="becks" />
       </div>
       <ul class="content-top-bar">
         <li>
-          <a href="./user/exp" class="menu-item-destkop" [ngClass]="selected('exp')"> <img class="icon-item"
-              src="./assets/icon/menu/home.svg" alt="Inicio" title="Inicio">
-              <span
-              class="name-item">Inicio</span> 
+          <a href="./user/exp" class="menu-item-destkop" [ngClass]="selected('exp')">
+              <img class="icon-item" src="./assets/icon/menu/home.svg" alt="Inicio" title="Inicio" />
+              <span class="name-item">Inicio</span> 
           </a>
         </li>
         <li>
-          <a href="./user/calendar" class="menu-item-destkop" [ngClass]="selected('calendar')"> <img class="icon-item"
-              src="./assets/icon/menu/calendario.svg"
-              alt="Calendario" title="Calendario"> 
-              <span class="name-item">Calendario</span>
-            </a>
+          <a href="./user/calendar" class="menu-item-destkop" [ngClass]="selected('calendar')">
+            <img class="icon-item" src="./assets/icon/menu/calendario.svg" alt="Calendario" title="Calendario" />
+            <span class="name-item">Calendario</span>
+          </a>
         </li>
-        <!-- <li>
-          <a href="./user/mgm" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita">
+        <!--<li>
+            <a href="./user/mgm" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita" />
           </a>
         </li>-->
         <!-- <li>
-          <a href="./user/activation" class="menu-item-destkop" [ngClass]="selected('activation')"> <img class="icon-item"
-              src="./assets/icon/menu/comprar.svg" alt="Compra"> </a>
+          <a href="./user/activation" class="menu-item-destkop" [ngClass]="selected('activation')">
+            <img class="icon-item" src="./assets/icon/menu/comprar.svg" alt="Compra" />
+          </a>
         </li> -->
         <li>
-          <a href="./user/profile" class="menu-item-destkop" [ngClass]="selected('profile')"> <img class="perfil-img"
-              [src]="profilePicture()" alt="Perfil" title="Perfil">
-              <span
-              class="name-item">Mi perfil</span>
-            </a>
+          <a href="./user/profile" class="menu-item-destkop" [ngClass]="selected('profile')">
+            <img class="perfil-img" [src]="profilePicture()" alt="Perfil" title="Perfil" />
+            <span class="name-item">Mi perfil</span>
+          </a>
         </li>
         <li>
-          <a (click)="logout()" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out" title="Salir"> <span class="label-out">Salir</span>  </a>
+          <a (click)="logout()" class="sign-out">
+            <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out" title="Salir" />
+            <span class="label-out">Salir</span>
+          </a>
         </li>
       </ul>
     </div>

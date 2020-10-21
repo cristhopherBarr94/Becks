@@ -7,6 +7,7 @@ import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { UserService } from 'src/app/_services/user.service';
 
 
+
 @Component({
   selector: 'user-slider-exp',
   templateUrl: './slider-exp.component.html',

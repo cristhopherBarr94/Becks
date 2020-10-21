@@ -29,7 +29,7 @@
   display: flex;
   min-height: 100%;
   background-repeat: no-repeat;
-  background-position: start !important;
+  background-position: top !important;
   background-size: cover;
   @media (min-width: 0px) and (max-width: 768px) {
     width: 100%;
@@ -38,12 +38,12 @@
         rgba(0, 0, 0, 0) 100%,
         rgba(0, 0, 0, 0) 100%
       ),
-      url("../assets/img/backGround_Responsive_Login.png");
+      url("../assets/img/bg_backgroundregister_mobile.jpg");
 
     background-color: #2f3b2f;
   }
   @media (min-width: 768px) {
-    background-image: url("../assets/img/bg_home_user.png");
+    background-image: url("../assets/img/bg_beckregist2.jpg");
     background-color: #171717;
   }
 }

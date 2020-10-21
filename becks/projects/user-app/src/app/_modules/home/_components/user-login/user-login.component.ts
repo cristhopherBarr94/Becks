@@ -22,7 +22,7 @@ export class UserLoginComponent implements OnInit {
   public httpError: string;
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
-  private allowCaptchaError: boolean;
+  public allowCaptchaError: boolean;
   public hide: boolean;
   public password: string;
 

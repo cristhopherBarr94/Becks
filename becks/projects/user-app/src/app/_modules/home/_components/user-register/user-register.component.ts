@@ -35,7 +35,7 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
   public userRegisterForm: FormGroup;
   public userRegister: User = new User();
   public captchaStatus: boolean;
-  private allowCaptchaError: boolean;
+  public allowCaptchaError: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
 

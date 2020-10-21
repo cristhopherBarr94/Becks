@@ -29,14 +29,14 @@
             matInput
             id="passwordPrev"
             formControlName="passwordPrev"
-            [type]="!hid ? 'password' : 'text'"
+            [type]="!hide1 ? 'password' : 'text'"
             required
             maxlength="30"
             data-qadp="passwordPrev"
-            [(ngModel)]="passwordPrev"
+            [(ngModel)]="password"
           />
-          <mat-icon matSuffix (click)="hid = !hid">{{
-            !hid ? "visibility_off" : "visibility"
+          <mat-icon matSuffix (click)="hide1 = !hide1">{{
+            !hide1 ? "visibility_off" : "visibility"
           }}</mat-icon>
           <mat-error *ngIf="userChangeForm.controls.passwordPrev.invalid"
             >*Este campo es obligatorio</mat-error

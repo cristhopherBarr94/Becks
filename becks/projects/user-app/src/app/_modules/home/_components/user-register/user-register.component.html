@@ -67,27 +67,57 @@
             </mat-error>
           </mat-form-field>
 
+          
           <mat-form-field
-            appearance="fill"
-            floatLabel="auto"
-            class="fullInput"
-            [ngClass]="getClassInput(userRegisterForm.controls.telephone)"
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userRegisterForm.controls.password)"
           >
-            <mat-label>Número de teléfono</mat-label>
+            <mat-label>Contraseña</mat-label>
             <input
               matInput
-              (input)="inputValidatorNumeric($event)"
-              formControlName="telephone"
-              placeholder="Número de teléfono"
-              minlength="7"
-              maxlength="10"
-              [(ngModel)]="userRegister.mobile_phone"
-              data-qadp="phone"
+              id="password"
+              formControlName="password"
+              [type]="!hide ? 'password' : 'text'"
+              required
+              minlength="4"
+              maxlength="30"
+              data-qadp="password"
+              [(ngModel)]="userRegister.password"
             />
-            <mat-error *ngIf="userRegisterForm.controls.telephone.errors">
-              *Has ingresado un dato inválido
-            </mat-error>
+            <mat-icon matSuffix (click)="hide = !hide">{{
+              !hide ? "visibility_off" : "visibility"
+            }}</mat-icon>
+            <mat-error *ngIf="userRegisterForm.controls.password.invalid"
+              >*Este campo es obligatorio</mat-error
+            >
           </mat-form-field>
+
+          <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userRegisterForm.controls.password)"
+          >
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input
+              matInput
+              id="password_confirm"
+              formControlName="password_confirm"
+              [type]="!hideConfirm ? 'password' : 'text'"
+              required
+              minlength="4"
+              maxlength="30"
+              data-qadp="password_confirm"
+            />
+            <mat-icon matSuffix (click)="hideConfirm = !hideConfirm">{{
+              !hideConfirm ? "visibility_off" : "visibility"
+            }}</mat-icon>
+            <mat-error *ngIf="userRegisterForm.controls.password_confirm.invalid">*Este campo es obligatorio</mat-error>
+          </mat-form-field>
+          
+          <mat-error *ngIf="userRegisterForm.controls.password.value != userRegisterForm.controls.password_confirm.value">*Las contraseñas no coinciden</mat-error>
         </div>
         <div class="form-section section2">
           <mat-form-field
@@ -159,32 +189,27 @@
             >
           </mat-form-field>
 
-          
           <mat-form-field
-          appearance="fill"
-          floatLabel="auto"
-          class="fullInput"
-          [ngClass]="getClassInput(userRegisterForm.controls.password)"
-        >
-          <mat-label>Contraseña</mat-label>
-          <input
-            matInput
-            id="password"
-            formControlName="password"
-            [type]="!hide ? 'password' : 'text'"
-            required
-            minlength="4"
-            maxlength="30"
-            data-qadp="password"
-            [(ngModel)]="userRegister.password"
-          />
-          <mat-icon matSuffix (click)="hide = !hide">{{
-            !hide ? "visibility_off" : "visibility"
-          }}</mat-icon>
-          <mat-error *ngIf="userRegisterForm.controls.password.invalid"
-            >*Este campo es obligatorio</mat-error
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.telephone)"
           >
-        </mat-form-field>
+            <mat-label>Número de teléfono</mat-label>
+            <input
+              matInput
+              (input)="inputValidatorNumeric($event)"
+              formControlName="telephone"
+              placeholder="Número de teléfono"
+              minlength="7"
+              maxlength="10"
+              [(ngModel)]="userRegister.mobile_phone"
+              data-qadp="phone"
+            />
+            <mat-error *ngIf="userRegisterForm.controls.telephone.errors">
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
 
         </div>
       </ion-row>

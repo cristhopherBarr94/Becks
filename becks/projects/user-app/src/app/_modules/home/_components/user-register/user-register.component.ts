@@ -40,6 +40,7 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
   public httpError: string;
 
   public hide: boolean;
+  public hideConfirm: boolean;
   public password: string;
 
   constructor(
@@ -94,6 +95,10 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
       privacy: new FormControl(null, Validators.required),
       promo: new FormControl(null),
       password: new FormControl("", [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+      password_confirm: new FormControl("", [
         Validators.required,
         Validators.minLength(4),
       ]),

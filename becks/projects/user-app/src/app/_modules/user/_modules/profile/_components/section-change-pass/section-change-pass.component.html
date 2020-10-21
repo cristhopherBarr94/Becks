@@ -96,6 +96,8 @@
           "
           >*Las contraseñas no coinciden</mat-error
         >
+        
+        <mat-error *ngIf="httpError" > {{ httpError }} </mat-error>
         <button
           class="becks-btn-primary margin-top-button button-width"
           (click)="changePass()"

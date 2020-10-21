@@ -35,6 +35,7 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
   public userRegisterForm: FormGroup;
   public userRegister: User = new User();
   public captchaStatus: boolean;
+  private allowCaptchaError: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
 
@@ -96,6 +97,11 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
         Validators.required,
         Validators.minLength(4),
       ]),
+    });
+
+    this.allowCaptchaError = false;
+    this.userRegisterForm.valueChanges.subscribe(val => {
+      this.allowCaptchaError = val.password;
     });
   }
 

@@ -23,6 +23,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\ab_inbev_api\DTO\UserPublicDTO;
 use Drupal\ab_inbev_api\Util\Util;
 use Drupal\user\Entity\User;
+use Drupal\Core\Password\PasswordInterface;
 /**
  * Represents UserApp records as resources.
  *
@@ -74,6 +75,7 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
    * @var Drupal\Core\Session\AccountInterface;
    */
   protected $currentUser;
+  protected $passwordHasher;
 
   /**
    * Constructs a Drupal\rest\Plugin\rest\resource\EntityResource object.
@@ -98,12 +100,14 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
                                 Connection $db_connection,
                                 EntityTypeManagerInterface $entity_type_manager,
                                 Request $request,
-                                AccountInterface $account) {
+                                AccountInterface $account,
+                                PasswordInterface $password_hasher) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $serializer_formats, $logger);
     $this->dbConnection = $db_connection;
     $this->entityTypeManager = $entity_type_manager;
     $this->currentRequest = $request;
     $this->currentUser = $account;
+    $this->passwordHasher = $password_hasher;
   }
 
   /**
@@ -119,7 +123,8 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
       $container->get('database'),
       $container->get('entity_type.manager'),
       $container->get('request_stack')->getCurrentRequest(),
-      $container->get('current_user')
+      $container->get('current_user'),
+      $container->get('password')
     );
   }
 
@@ -191,7 +196,8 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
     switch ( $id ) {
       case 0: 
         // PATCH PASSWORD
-        if (!isset($data['password']) || strlen($data['password']) < 4 ) {
+        if ( !isset($data['passwordPrev']) || strlen( trim($data['passwordPrev']) ) < 4  ||
+              !isset($data['password']) || strlen( trim($data['password']) ) < 4 ) {
           throw new BadRequestHttpException('Mínimo 4 caracteres para la "Contraseña"');
         }
       break;
@@ -220,13 +226,22 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
       case 0: 
         // PATCH PASSWORD
         $user = User::load($this->currentUser->id());
-        $user->setPassword( $data['password'] );
-        if ( $user->get('field_status')->value == 1 ) {
-          $user->set("field_status", 0 );
+        $password = trim( $data['passwordPrev'] );
+        $old_hashed_password = $user->getPassword();
+        $hashed_password = $this->passwordHasher->hash($password);
+
+        $response_array["password"] = $this->passwordHasher->check($password, $old_hashed_password);
+        if ( $response_array["password"] ) {
+          // PASSWORD MATCH
+          $user->setPassword( trim( $data['password'] ) );
+          if ( $user->get('field_status')->value == 1 ) {
+            $user->set("field_status", 0 );
+          }
+          $user->activate();
+          $user->save();
+        } else {
+          $response_array["message"] = "Contraseña actual no válida";
         }
-        $user->activate();
-        $user->save();
-        $response_array["password"] = true;
       break;
       case 1:
         // PATCH DATA [ first_name , last_name, mobile_phone, birthdate ]

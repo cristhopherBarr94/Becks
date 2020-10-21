@@ -133,16 +133,19 @@ export class HttpService {
   }
 
   handleError(error: HttpErrorResponse) {
+    
     if (error.status === HttpConstants.UNAUTHORIZED || error.status === HttpConstants.FORBIDDEN ) {
-      if ( this.error_counter++ > 2 && this.authService.isAuthenticated() ) {
-        this.authService.setAuthenticated(null);
-        this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
-          title: "Sesión expirada",
-          description: "Cerrando sesión de forma segura",
-        });
-        setTimeout( () => { location.reload(); } , 5000 );
-      } else {
-        this.error_counter = 0;
+      if ( this.error_counter++ > 2 ) {
+        if ( this.authService.isAuthenticated() ) {
+          this.authService.setAuthenticated(null);
+          this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
+            title: "Sesión expirada",
+            description: "Cerrando sesión de forma segura",
+          });
+          setTimeout( () => { location.reload(); } , 3000 );
+        } else {
+          this.error_counter = 0;
+        }
       }
     } else if (error.status === HttpConstants.CONFLICT) {
       // console.log("mensaje incorrecto");

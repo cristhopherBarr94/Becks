@@ -233,6 +233,7 @@
 
     <div class="content-flex-all-center">
       <app-captcha
+        [showError]="allowCaptchaError"
         [restart]="restartCaptcha"
         (status)="setCaptchaStatus($event)"
       >

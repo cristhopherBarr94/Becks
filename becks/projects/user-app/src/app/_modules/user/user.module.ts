@@ -23,7 +23,10 @@ import { ScheduleComponent } from './_components/schedule/schedule.component';
 import { InteractionConfirmComponent } from './_components/interaction-confirm/interaction-confirm.component';
 import { InteractionViewComponent } from './_components/interaction-view/interaction-view.component';
 import { LOCALE_ID } from '@angular/core'; 
+import es from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
 
+registerLocaleData(es);
 @NgModule({
   declarations: [
     SectionRequestConfirmComponent,
@@ -53,6 +56,6 @@ import { LOCALE_ID } from '@angular/core';
     MatNativeDateModule,
     MatDatepickerModule,
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: "es-ES" },],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: "es-ES" }, { provide: LOCALE_ID, useValue: 'es-CO' }],
 })
 export class UserModule {}

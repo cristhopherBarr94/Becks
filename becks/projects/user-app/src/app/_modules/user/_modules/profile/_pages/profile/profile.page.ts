@@ -47,9 +47,7 @@ export class ProfilePage implements OnInit, OnDestroy {
       (user: User) => {
         if (user !== undefined) {
           if (user.status == 1) {
-            this.router.navigate(["user/changePass"], {
-              queryParamsHandling: "preserve",
-            });
+            this.editPassword();
           }
           this.user = user;
           this.user.activate = this.isActivate;

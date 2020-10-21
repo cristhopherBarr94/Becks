@@ -29,6 +29,9 @@
         <img *ngIf="user.photo == undefined && user.gender == 'F'" [src]="'./assets/img/profile_female.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
         <span class="name-item">Mi perfil</span>
     </a>
+    <a *ngIf="!user" href="./user/profile" class="menu-item" [ngClass]="selected('profile')">
+      <img src="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
+    </a>
     <a (click)="logout()" class="sign-out">
       <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Salir"/>
       <span class="label-out">Salir</span>
@@ -72,6 +75,9 @@
             <span class="name-item">Mi perfil</span>
           </a>
         </li>
+        <a *ngIf="!user" href="./user/profile" class="menu-item" [ngClass]="selected('profile')">
+          <img [src]="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
+        </a>
         <li>
           <a (click)="logout()" class="sign-out">
             <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out" title="Salir" />

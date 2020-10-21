@@ -18,6 +18,30 @@
         class="form-section"
         autocomplete="off"
       >
+      <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userChangeForm.controls.passwordPrev)"
+        >
+          <mat-label>Contraseña anterior</mat-label>
+          <input
+            matInput
+            id="passwordPrev"
+            formControlName="passwordPrev"
+            [type]="!hid ? 'password' : 'text'"
+            required
+            maxlength="30"
+            data-qadp="passwordPrev"
+            [(ngModel)]="passwordPrev"
+          />
+          <mat-icon matSuffix (click)="hid = !hid">{{
+            !hid ? "visibility_off" : "visibility"
+          }}</mat-icon>
+          <mat-error *ngIf="userChangeForm.controls.passwordPrev.invalid"
+            >*Este campo es obligatorio</mat-error
+          >
+        </mat-form-field>
         <mat-form-field
           appearance="fill"
           floatLabel="auto"

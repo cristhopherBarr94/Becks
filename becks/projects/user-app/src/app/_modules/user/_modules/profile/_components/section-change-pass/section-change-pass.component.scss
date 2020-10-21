@@ -90,12 +90,14 @@
 .modal-hader {
   display: block;
   margin-right: auto;
-  margin-top: 11.29px;
   @media (min-width: 0px) and (max-width: 768px) {
     margin-left: 90%;
+    margin-top: 11.29px;
   }
   @media (min-width: 769px) {
-    margin-left: 95%;
+    position: absolute;
+    left: 95%;
+    top: 30px;
   }
   .btn-cancel {
     background-color: transparent !important;

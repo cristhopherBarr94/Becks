@@ -5,6 +5,7 @@ export class User {
   mobile_phone: string;
   gender: string;
   email: string;
+  passwordPrev: string;
   password: string;
   phone: string;
   delete: boolean;
@@ -39,6 +40,8 @@ export class User {
       this.email = data["email"] !== undefined ? data["email"] : undefined;
       this.password =
         data["password"] !== undefined ? data["password"] : undefined;
+        this.passwordPrev =
+        data["passwordPrev"] !== undefined ? data["passwordPrev"] : undefined;
       this.waitingState =
         data["waitingState"] !== undefined ? data["waitingState"] : undefined;
       this.delete = data["delete"] !== undefined ? data["delete"] : undefined;
@@ -84,6 +87,7 @@ export class User {
     data["gender"] = this.gender !== undefined ? this.gender : null;
     data["email"] = this.email !== undefined ? this.email : null;
     data["password"] = this.password !== undefined ? this.password : null;
+    data["passwordPrev"] = this.passwordPrev !== undefined ? this.passwordPrev : null;
     data["phone"] = this.phone !== undefined ? this.phone : null;
     data["delete"] = this.delete !== undefined ? this.delete : null;
     data["waitingState"] =

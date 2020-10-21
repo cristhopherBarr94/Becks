@@ -59,6 +59,10 @@ export class SectionChangePassComponent implements OnInit {
         Validators.required,
         Validators.minLength(4),
       ]),
+      passwordPrev: new FormControl("", [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
     });
   }
 
@@ -66,9 +70,11 @@ export class SectionChangePassComponent implements OnInit {
     if (this.userChangeForm.valid) {
       this.ui.showLoading();
       this.userChange.password = this.userChangeForm.controls.password.value;
+      this.userChange.passwordPrev = this.userChangeForm.controls.passwordPrev.value;
+
       this.httpService
         .patch(environment.serverUrl + environment.user.patchPassword, {
-          password: this.userChange.password,
+          password: this.userChange.password, passwordPrev: this.userChange.passwordPrev,
         })
         .subscribe(
           (response: any) => {

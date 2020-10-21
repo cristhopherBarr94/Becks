@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, AfterViewChecked, AfterViewInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { User } from "src/app/_models/User";
 import { UserService } from "src/app/_services/user.service";
@@ -21,9 +21,7 @@ export class ProfilePage implements OnInit, OnDestroy {
   public user = new User();
   public stats = { buy: "10", exp: "6", friends: "7" };
   public size: string;
-  public default_picure : boolean;
   public headerPosition : string
-  public profile_picture : string;
 
   userSubscription: Subscription;
   userCodeSubscription: Subscription;
@@ -55,7 +53,6 @@ export class ProfilePage implements OnInit, OnDestroy {
           }
           this.user = user;
           this.user.activate = this.isActivate;
-          this.user.photo = this.profile_picture;
         }
       },
       (error: any) => {}
@@ -104,15 +101,6 @@ export class ProfilePage implements OnInit, OnDestroy {
       true,
       true
     );
-  }
-
-  profilePicture() {
-    this.default_picure = !this.user.photo;
-    if ( this.default_picure ) {
-      return this.user.gender == "F" ? "../../../../../../../assets/img/profile_female.jpg" : "../../../../../../../assets/img/profile_male.jpg";
-    } else {
-      return this.user.photo;
-    }
   }
 
   positionHeader(){

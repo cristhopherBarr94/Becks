@@ -183,14 +183,6 @@ export class SectionEditProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  profilePicture() {
-    return !!this.user.photo
-      ? this.user.photo
-      : this.user.gender == "female"
-      ? "../../../../../../../assets/img/profile_female.jpg"
-      : "../../../../../../../assets/img/profile_male.jpg";
-  }
-
   changePhoto() {
     this.chargePhoto = !this.chargePhoto;
     this.ui.showModal(

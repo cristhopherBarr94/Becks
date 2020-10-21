@@ -53,8 +53,8 @@ export class SliderExpComponent implements OnInit, OnDestroy {
         this.checkCodes();
       }
     );
-    this.userSvc.getCodes();
     
+    this.userSvc.getCodes();
   }
 
   ngOnDestroy(): void {

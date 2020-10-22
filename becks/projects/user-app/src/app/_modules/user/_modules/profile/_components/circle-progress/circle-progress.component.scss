@@ -1,3 +1,12 @@
+.circle-progress-tool {
+  margin-bottom: 0px !important;
+  position: relative;
+  height: 170px;
+  width: 170px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 circle-progress {
   font-family: "Eurostile BQ";
   font-style: normal !important;
@@ -6,9 +15,7 @@ circle-progress {
   height: 170px;
   width: 170px;
 }
-.circle-progress-tool {
-  margin-bottom: 0px !important;
-}
+
 .text-notify {
   font-style: normal !important;
   font-size: 13.78px !important;
@@ -27,12 +34,11 @@ ion-progress-bar {
 }
 
 .supp-circle {
+  position: absolute;
   border-radius: 100%;
   width: 170px;
   height: 170px;
-  position: absolute;
-  top: 13px;
-  margin-left: 26px;
+  top: 17px;
   .clock {
     width: 27px;
     height: 27px;
@@ -42,17 +48,12 @@ ion-progress-bar {
     background-color: black;
     border-radius: 100%;
     position: relative;
-    top: 1px;
-    left: 41.5%;
-  }
-  @media (min-width: 768px) {
-    top: 60px;
+    left: 0px;
   }
 }
 
 .subtitle-days {
   position: absolute;
-  margin-left: 25px;
   height: 170px;
   width: 170px;
   font-family: "Helvetica LT Std" !important;
@@ -61,12 +62,9 @@ ion-progress-bar {
   font-size: 13.28px !important;
   line-height: 16px !important;
   text-align: center !important;
-  @media (min-width: 0px) and (max-width: 768px) {
-    top: 15px;
-  }
-  @media (min-width: 768px) {
-    top: 60px;
-  }
+  top: 15px;
+  left: 12px;
+
   .title_1 {
     margin-top: 45px;
     margin-bottom: 40px;

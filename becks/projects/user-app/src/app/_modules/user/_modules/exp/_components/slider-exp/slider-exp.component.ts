@@ -7,6 +7,7 @@ import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { UserService } from 'src/app/_services/user.service';
 
 
+
 @Component({
   selector: 'user-slider-exp',
   templateUrl: './slider-exp.component.html',
@@ -25,11 +26,18 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     private experienciaService: ExperienciasService,
     private router: Router,
     private userSvc: UserService
-  ) { }
+  ) {
+    if(this.router.getCurrentNavigation().extras.state?.reload) {
+      // TODO :: FIX THIS ISSUE FROM CSS
+      // AVOID RELOAD
+      location.reload();
+    }
+  }
 
   ngOnInit() {
     
-    this.id = Number(this.router.url.replace("/user/exp/",""))
+    const s = this.router.url;
+    this.id = Number(s.substr(s.lastIndexOf('/') + 1));
     this.experienciaService.getExpContent().subscribe(response => {
       this.experienciaContent = response;
       this.slideOpts = {
@@ -46,8 +54,8 @@ export class SliderExpComponent implements OnInit, OnDestroy {
         this.checkCodes();
       }
     );
-    this.userSvc.getCodes();
     
+    this.userSvc.getCodes();
   }
 
   ngOnDestroy(): void {
@@ -70,11 +78,15 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   activarCuenta( res ) {}
 
   checkCodes() {
-    if ( this.codes.length > 0 ) {       
+    if ( this.codes && this.codes.length > 0 ) {       
       this.experienciaContent.forEach(exp =>{
         exp.cuentaActiva = true;
       });
     }
+  }
+
+  redirInteraction() {
+    window.open("https://www.feriadelmillon.com.co/becks/");
   }
 
 }

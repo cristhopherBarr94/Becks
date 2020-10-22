@@ -40,7 +40,7 @@ export class UserService {
   }
 
   public getData() {
-    this.http.get(environment.serverUrl + environment.user.getData).subscribe(
+    this.http.get( environment.serverUrl + environment.user.getData + "?time_stamp=" + new Date().getTime() ).subscribe(
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
           this._user = new User(response.body);
@@ -61,19 +61,21 @@ export class UserService {
 
   public getCodes() {
     
-    if ( this._userCodes.length > 0 ) {
-      this._userCodeSbj.next(this._userCodes);
+    if ( this._user != undefined && this._user.email ) {
       this._userSbj.next(this._user);
     } else {
-      this.http.get(environment.serverUrl + environment.user.getCodes).subscribe(
+      this.getData();
+    }
+
+    if ( this._userCodes && this._userCodes.length > 0 ) {
+      this._userCodeSbj.next(this._userCodes);
+    } else {
+      this.http.get(environment.serverUrl + environment.user.getCodes + "?time_stamp=" + new Date().getTime() ).subscribe(
         (res: any) => {
           if (res.status == 200 ) {
             this._userCodes = res.body || [];
-            this._user.activate = this._userCodes && this._userCodes.length > 0;
-            localStorage.setItem("bks_user", this._user.toJSON());
             localStorage.setItem("bks_user_codes", JSON.stringify(this._userCodes) );
             this._userCodeSbj.next(this._userCodes);
-            this._userSbj.next(this._user);
           }
         }
       );
@@ -142,6 +144,8 @@ export class UserService {
   public logout() {
     this._user = undefined;
     this._userCodes = [];
+    localStorage.setItem("bks_user", null);
+    localStorage.setItem("bks_user_codes", null);
     localStorage.removeItem("bks_user");
     localStorage.removeItem("bks_user_codes");
     this._userSbj.next(this._user);

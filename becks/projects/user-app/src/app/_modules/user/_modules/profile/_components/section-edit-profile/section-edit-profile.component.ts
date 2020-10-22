@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -21,7 +21,7 @@ import { UpdateFileComponent } from "../update-file/update-file.component";
   templateUrl: "./section-edit-profile.component.html",
   styleUrls: ["./section-edit-profile.component.scss"],
 })
-export class SectionEditProfileComponent implements OnInit {
+export class SectionEditProfileComponent implements OnInit, OnDestroy {
   public user = new User();
   public userEditProfileForm: FormGroup;
   public urlPicture: string;
@@ -48,6 +48,13 @@ export class SectionEditProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userSubscription = this.userSvc.user$.subscribe(
+      (user) => {
+        if ( user ) {
+          this.user =  user;
+        }
+      }
+    );
     if (this.userSvc.getActualUser()) {
       this.user = this.userSvc.getActualUser();     
     } else {
@@ -55,6 +62,10 @@ export class SectionEditProfileComponent implements OnInit {
     }
     this.initforms();
     this.cdr.detectChanges();
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 
   initforms() {
@@ -170,14 +181,6 @@ export class SectionEditProfileComponent implements OnInit {
         };
 
     }
-  }
-
-  profilePicture() {
-    return !!this.user.photo
-      ? this.user.photo
-      : this.user.gender == "female"
-      ? "../../../../../../../assets/img/profile_female.jpg"
-      : "../../../../../../../assets/img/profile_male.jpg";
   }
 
   changePhoto() {

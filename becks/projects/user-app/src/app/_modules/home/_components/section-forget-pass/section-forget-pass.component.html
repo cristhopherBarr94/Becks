@@ -37,10 +37,15 @@
           </mat-error>
         </mat-form-field>
         <app-captcha
+          [showError]="allowCaptchaError"
           [restart]="restartCaptcha"
           (status)="setCaptchaStatus($event)"
         >
         </app-captcha>
+        <br/>
+        <mat-error *ngIf="httpError">
+          {{ httpError }}
+        </mat-error>
 
         <button
           class="becks-btn-primary margin-top-button button-width"

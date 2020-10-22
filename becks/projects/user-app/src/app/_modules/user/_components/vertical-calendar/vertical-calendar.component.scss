@@ -1,9 +1,32 @@
 .calendar-slider-background {
   background: #121212;
   padding-top: 30px !important;
+  .margin-top-section {
+    margin-top: 30px !important;
+  }
+  .calendar-title {
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-weight: 500 !important;
+      font-size: 16px !important;
+      line-height: 110% !important;
+      position: absolute;
+      top: 30px;
+    }
+  }
+
+  .calendar-span {
+    @media (min-width: 0px) and (max-width: 768px) {
+      width: 74px;
+      height: 4px;
+      border: 2px solid #ffffff;
+      position: absolute;
+      top: 60px;
+    }
+  }
   .card-event {
     height: 180px;
     width: 100%;
+
     .lateral-month {
       width: 37px;
       min-height: 180px;
@@ -13,7 +36,7 @@
     }
     .vertical_dotted_line {
       border-left: 5px dotted #303030;
-      height: 120px;
+      height: 100px;
       margin: 10px 16px;
     }
     .title-tertiary {
@@ -40,17 +63,19 @@
         #121212 6.96%,
         rgba(44, 47, 54, 0) 99.66%
       );
-
+      background-position: center;
+      background-size: cover;
+      mix-blend-mode: normal;
       .event-description {
-        width: 150px;
+        width: 200px;
         margin-top: 110px;
         .title-secondary {
-          font-size: 16px !important;
-          line-height: 50px !important;
-          letter-spacing: 0.15px !important;
           font-style: normal !important;
           font-weight: normal !important;
-          text-transform: capitalize;
+          text-transform: capitalize !important;
+          font-size: 11px !important;
+          line-height: 50px !important;
+          letter-spacing: 0.15px !important;
           margin: 0 !important;
           height: 35px;
         }
@@ -62,6 +87,15 @@
           color: #ffffff;
           margin: 0 !important;
         }
+        .title-secondary,
+        .title-tertiary {
+          justify-content: left !important;
+          text-align: left !important;
+          margin-left: 14px !important;
+        }
+      }
+      a {
+        text-decoration: none;
       }
     }
   }

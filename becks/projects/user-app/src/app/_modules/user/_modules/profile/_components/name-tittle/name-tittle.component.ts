@@ -43,8 +43,6 @@ export class NameTittleComponent implements OnInit {
 
   logout() {
     this.uiService.showLoading();
-    this.authService.setAuthenticated("");
-    this.userSvc.logout();
     this.httpService
       .get(environment.serverUrl + environment.logout.resource)
       .subscribe(
@@ -57,5 +55,7 @@ export class NameTittleComponent implements OnInit {
           this.router.navigate(["home"]);
         }
       );
+      this.authService.setAuthenticated("");
+      this.userSvc.logout();
   }
 }

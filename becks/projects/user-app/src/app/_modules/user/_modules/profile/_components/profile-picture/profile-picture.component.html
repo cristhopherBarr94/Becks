@@ -2,8 +2,10 @@
   class="content-flex-all-center flex-direction-column container"
   [ngClass]="isPofile"
 >
-  <ion-avatar class="image-size-profile">
-    <img [src]="profilePicture()" *ngIf="time" />
+  <ion-avatar *ngIf="time && user" class="image-size-profile">
+    <img *ngIf="user.photo" [src]="url + user.photo + time" />
+    <img *ngIf="user.photo == undefined && user.gender == 'M'" [src]="'./assets/img/profile_male.jpg'" />
+    <img *ngIf="user.photo == undefined && user.gender == 'F'" [src]="'./assets/img/profile_female.jpg'" />
   </ion-avatar>
   <button md-fab class="editPhotoLogo" *ngIf="profile_view" (click)="editPhot()"></button>
   <span class="font-profile margin-tittle margin-top-letter">{{

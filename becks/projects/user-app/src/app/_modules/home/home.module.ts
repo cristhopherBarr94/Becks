@@ -21,6 +21,8 @@ import { UserRegisterComponent } from "./_components/user-register/user-register
 import { FbButtonComponent } from "./_components/fb-button/fb-button.component";
 import { OnboardingComponent } from './_components/onboarding/onboarding.component';
 import { OnboardingPagePage } from './_pages/onboarding-page/onboarding-page.page';
+import { SectionRequestConfirmComponent } from './_components/section-request-confirm/section-request-confirm.component';
+import { SectionForgetPassComponent } from './_components/section-forget-pass/section-forget-pass.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { OnboardingPagePage } from './_pages/onboarding-page/onboarding-page.pag
     UserLoginComponent,
     FbButtonComponent,
     OnboardingComponent,
+    SectionRequestConfirmComponent,
+    SectionForgetPassComponent,
     OnboardingPagePage
   ],
   imports: [

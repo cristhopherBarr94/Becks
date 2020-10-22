@@ -12,6 +12,8 @@ import { UtilService } from "src/app/_services/util.service";
 import { User } from 'src/app/_models/User';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
+import { UserService } from 'src/app/_services/user.service';
+import { AuthService } from 'src/app/_services/auth.service';
 
 declare global {
   interface Window {
@@ -28,6 +30,7 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
   public userRegister: User = new User();
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
+  public allowCaptchaError: boolean;
   public httpError: string;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
@@ -38,7 +41,9 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
     public httpService: HttpService,
     private router: Router,
     private ui: UiService,
-    private utils: UtilService
+    private utils: UtilService,
+    private userSvc: UserService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +61,11 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
         Validators.email,
         Validators.maxLength(40),
       ]),
+    });
+
+    this.allowCaptchaError = false;
+    this.userRegisterForm.valueChanges.subscribe(val => {
+      this.allowCaptchaError = val.email;
     });
   }
 
@@ -87,19 +97,26 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
           captcha_key: this.userRegister.captcha_key,
         })
         .subscribe(
-          (data: any) => {
+          (res: any) => {
+            
             try {
-              this.restartCaptcha = false;
-              this.ui.dismissLoading();
-              this.userRegisterForm.reset();
-              window.dataLayer.push({
-                event: "trackEvent",
-                eventCategory: "becks society",
-                eventAction: "finalizar",
-                eventLabel: email256,
-              });
+              if ( res.status == 200 ) {
+                this.restartCaptcha = false;
+                this.ui.dismissLoading();
+                this.userRegisterForm.reset();
+                window.dataLayer.push({
+                  event: "trackEvent",
+                  eventCategory: "becks society",
+                  eventAction: "finalizar",
+                  eventLabel: email256,
+                });
+              } else {
+                this.httpError = res.body.message;
+              }
             } catch (e) {}
-            this.router.navigate(["/user/email"], {
+            this.userSvc.logout();
+            this.auth.setAuthenticated(null);
+            this.router.navigate(["/home/recovery-confirm"], {
               queryParamsHandling: "preserve",
             });
           },
@@ -135,4 +152,5 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
   public setCaptchaStatus(status) {
     this.captchaStatus = status;
   }
+
 }

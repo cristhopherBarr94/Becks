@@ -40,8 +40,8 @@
   margin-top: 24px;
 }
 
-.margin-left-tt{
-  margin-left: 20px ;
+.margin-left-tt {
+  margin-left: 20px;
 }
 
 .with-form {
@@ -84,7 +84,7 @@
   }
 }
 
-.margin-bottom{
+.margin-bottom {
   margin-bottom: 25px;
 }
 
@@ -98,7 +98,7 @@
   text-decoration: underline;
 }
 
-.name-box{
+.name-box {
   max-width: 60%;
 }
 
@@ -107,7 +107,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #C4C4C4;
+  background: #c4c4c4;
   border-radius: 8px;
   background-clip: padding-box;
 }
@@ -116,4 +116,23 @@
   background: #313132;
   border-radius: 8px;
   background-clip: padding-box;
+}
+
+.separator-becks {
+  margin-left: auto;
+  margin-right: auto;
+  width: 65px;
+  height: 2px;
+  background: rgb(98, 248, 178);
+  background: linear-gradient(
+    90deg,
+    rgba(98, 248, 178, 1) 0%,
+    rgba(18, 18, 18, 1) 100%
+  );
+  position: relative;
+  top: 10px;
+  @media (min-width: 769px) {
+    position: relative;
+    top: 0px;
+  }
 }

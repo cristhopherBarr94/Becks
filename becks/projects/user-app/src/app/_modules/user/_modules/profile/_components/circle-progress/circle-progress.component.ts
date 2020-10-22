@@ -16,9 +16,13 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
   public remaining_days: any;
   public colorProgress: string;
   public colorProgressBar: string;
-  public progress: number;
+  public progress: number = 0;
   public daysR:any;
+  public buttonTitle:String = "ACTIVA TU CUENTA";
+  public textDays:string = "Tu cuenta se encuentra inactiva";
+  public pathTo:string ="activation"
   private subscription: Subscription;
+
   
   constructor(
     public httpService: HttpService,
@@ -31,10 +35,13 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
       ( codes ) => {
         if ( codes.length >0) {
           let date_til = moment(new Date(codes[0].valid_until * 1000));
-          let used_date = moment(new Date(codes[0].used* 1000));
-          this.daysR =  date_til.diff(used_date, 'days');
-          this.progress = this.daysR * (10 / 3);
+          let cur_date = moment(new Date);
+          this.daysR =  date_til.diff(cur_date, 'days');
+          this.progress = (this.daysR+0.8)* (10 / 3);
           this.remaining_days = Math.ceil(this.progress * (30 / 100));
+          this.buttonTitle = "OBTÉN MÁS DÍAS";
+          this.textDays = "Disfruta de las nuevas experiencias";
+
          if (this.progress <= 25) {
             this.colorProgress = "#FF7A00";
             this.colorProgressBar =
@@ -55,6 +62,10 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
           if (this.progress < 0) {
             this.progress = 0;
           }
+          if (this.progress > 99){
+          this.buttonTitle = "VER EXPERIENCIAS";
+          this.pathTo = "exp";
+          }
           if ( codes.length >0 ) {
             this.httpError=" ";
             return this.daysR;
@@ -63,9 +74,10 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
         else {
           this.progress = 0 * (10 / 3);
           this.remaining_days = Math.ceil(this.progress * (30 / 100));
+       
           if(this.progress == 0) {
             this.colorProgress = "#DB4843";
-            this.colorProgressBar = "#1E1E1E";
+            this.colorProgressBar = "#DB4843";
           }
         }
       },
@@ -81,7 +93,7 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
   }
 
   redirectSales() {
-    this.router.navigate(["user/activation"], {
+    this.router.navigate(["user/"+ this.pathTo], {
       queryParamsHandling: "preserve",
     });
   }

@@ -25,7 +25,7 @@ export class OnboardingComponent implements OnInit, AfterViewInit {
   ngOnInit() { }
   
   ngAfterViewInit() {
-    this.ui.dismissLoading();
+    this.ui.dismissLoading(2500);
   }
   swipeNext(){
     this.ionSlides.slideNext();

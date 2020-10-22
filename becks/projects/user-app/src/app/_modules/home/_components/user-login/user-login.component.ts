@@ -22,6 +22,7 @@ export class UserLoginComponent implements OnInit {
   public httpError: string;
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
+  public allowCaptchaError: boolean;
   public hide: boolean;
   public password: string;
 
@@ -37,6 +38,7 @@ export class UserLoginComponent implements OnInit {
   ngOnInit() {
     this.initforms();
     this.redirect();
+    this.ui.dismissLoading();
   }
 
   redirect() {
@@ -56,16 +58,21 @@ export class UserLoginComponent implements OnInit {
       ]),
       password: new FormControl("", [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(4),
       ]),
+    });
+
+    this.allowCaptchaError = false;
+    this.userLoginForm.valueChanges.subscribe(val => {
+      this.allowCaptchaError = val.password;
     });
   }
 
   loginUser(): void {
     if (this.userLoginForm.valid && this.captchaStatus) {
+      this.userSvc.logout();
       const formData = new FormData();
       try {
-        this.userSvc.logout();
         this.restartCaptcha = true;
         this.setCaptchaStatus(!this.restartCaptcha);
         formData.append("username", this.userLoginForm.controls.email.value);
@@ -123,6 +130,9 @@ export class UserLoginComponent implements OnInit {
     }
   }
   public setCaptchaStatus(status) {
-    this.captchaStatus = status;
+    setTimeout( ()=>{
+      this.captchaStatus = status;
+      this.restartCaptcha = false;
+    }, 500);
   }
 }

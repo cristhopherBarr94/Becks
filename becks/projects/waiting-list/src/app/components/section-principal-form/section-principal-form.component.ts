@@ -63,7 +63,7 @@ export class SectionPrincipalFormComponent implements OnInit, AfterViewInit {
       email: new FormControl("", [
         Validators.required,
         Validators.email,
-        Validators.maxLength(30),
+        Validators.maxLength(60),
       ]),
       telephone: new FormControl("", [
         Validators.required,

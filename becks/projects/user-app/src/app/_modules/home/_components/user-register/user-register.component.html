@@ -67,27 +67,57 @@
             </mat-error>
           </mat-form-field>
 
+          
           <mat-form-field
-            appearance="fill"
-            floatLabel="auto"
-            class="fullInput"
-            [ngClass]="getClassInput(userRegisterForm.controls.telephone)"
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userRegisterForm.controls.password)"
           >
-            <mat-label>Número de teléfono</mat-label>
+            <mat-label>Contraseña</mat-label>
             <input
               matInput
-              (input)="inputValidatorNumeric($event)"
-              formControlName="telephone"
-              placeholder="Número de teléfono"
-              minlength="7"
-              maxlength="10"
-              [(ngModel)]="userRegister.mobile_phone"
-              data-qadp="phone"
+              id="password"
+              formControlName="password"
+              [type]="!hide ? 'password' : 'text'"
+              required
+              minlength="4"
+              maxlength="30"
+              data-qadp="password"
+              [(ngModel)]="userRegister.password"
             />
-            <mat-error *ngIf="userRegisterForm.controls.telephone.errors">
-              *Has ingresado un dato inválido
-            </mat-error>
+            <mat-icon matSuffix (click)="hide = !hide">{{
+              !hide ? "visibility_off" : "visibility"
+            }}</mat-icon>
+            <mat-error *ngIf="userRegisterForm.controls.password.invalid"
+              >*Este campo es obligatorio, mínimo 4 caracteres</mat-error
+            >
           </mat-form-field>
+
+          <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userRegisterForm.controls.password)"
+          >
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input
+              matInput
+              id="password_confirm"
+              formControlName="password_confirm"
+              [type]="!hideConfirm ? 'password' : 'text'"
+              required
+              minlength="4"
+              maxlength="30"
+              data-qadp="password_confirm"
+            />
+            <mat-icon matSuffix (click)="hideConfirm = !hideConfirm">{{
+              !hideConfirm ? "visibility_off" : "visibility"
+            }}</mat-icon>
+            <mat-error *ngIf="userRegisterForm.controls.password_confirm.invalid">*Este campo es obligatorio, mínimo 4 caracteres</mat-error>
+          </mat-form-field>
+          
+          <mat-error *ngIf="userRegisterForm.controls.password.value && userRegisterForm.controls.password.value != userRegisterForm.controls.password_confirm.value">*Las contraseñas no coinciden</mat-error>
         </div>
         <div class="form-section section2">
           <mat-form-field
@@ -146,7 +176,6 @@
             <mat-label>Número de identificación</mat-label>
             <input
               matInput
-              (input)="inputValidatorAlphaNumeric($event)"
               formControlName="idNumber"
               placeholder="Número de id"
               minlength="4"
@@ -159,14 +188,34 @@
               >*Este campo es obligatorio</mat-error
             >
           </mat-form-field>
+
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.telephone)"
+          >
+            <mat-label>Número de teléfono</mat-label>
+            <input
+              matInput
+              (input)="inputValidatorNumeric($event)"
+              formControlName="telephone"
+              placeholder="Número de teléfono"
+              minlength="7"
+              maxlength="10"
+              [(ngModel)]="userRegister.mobile_phone"
+              data-qadp="phone"
+            />
+            <mat-error *ngIf="userRegisterForm.controls.telephone.errors">
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
+
         </div>
       </ion-row>
 
       <div class="checks">
         <div class="content-check">
-          <i class="title-fourthy">
-            Deseo recibir información de eventos y promociones de Becks.
-          </i>
           <mat-checkbox
             id="mat-checkbox-promo"
             formControlName="promo"
@@ -175,16 +224,12 @@
             class="margin-check"
           >
           </mat-checkbox>
+          <i class="title-fourthy">
+            Deseo recibir información de eventos y promociones de Becks.
+          </i>
         </div>
 
         <div class="content-check">
-          <i class="title-fourthy">
-            He leído, entendido y aceptado los 
-            <a target="_blank" href="./terms-conditions" data-qadp="link-pp">Terminos y condiciones </a>
-             y la 
-             <a target="_blank" href="./privacy-policy" data-qadp="link-tc"> política de protección de datos personales</a
-          >  , en particular el procesamiento de mi información personal por parte de Bavaria & Cía S.C.A. con las finalidades y usos requeridos por ésta descritos en la mencionada política.
-          </i>
           <mat-checkbox
             id="mat-checkbox-privacy"
             formControlName="privacy"
@@ -194,6 +239,13 @@
             required
           >
           </mat-checkbox>
+          <i class="title-fourthy">
+            He leído, entendido y aceptado los 
+            <a target="_blank" href="./terms-conditions" data-qadp="link-pp">Terminos y condiciones </a>
+             y la 
+             <a target="_blank" href="./privacy-policy" data-qadp="link-tc"> política de protección de datos personales</a
+          >  , en particular el procesamiento de mi información personal por parte de Bavaria & Cía S.C.A. con las finalidades y usos requeridos por ésta descritos en la mencionada política.
+          </i>
         </div>
         <div>
           <mat-error
@@ -206,6 +258,7 @@
 
     <div class="content-flex-all-center">
       <app-captcha
+        [showError]="allowCaptchaError"
         [restart]="restartCaptcha"
         (status)="setCaptchaStatus($event)"
       >

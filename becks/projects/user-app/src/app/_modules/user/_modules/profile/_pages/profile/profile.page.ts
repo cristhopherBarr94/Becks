@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, AfterViewChecked, AfterViewInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { User } from "src/app/_models/User";
 import { UserService } from "src/app/_services/user.service";
@@ -9,6 +9,7 @@ import { SectionEditProfileComponent } from "../../_components/section-edit-prof
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/_services/http.service';
 import { MenuStatusService } from 'src/app/_services/menu-status.service';
+import { SectionChangePassComponent } from '../../_components/section-change-pass/section-change-pass.component';
 
 @Component({
   selector: "user-profile",
@@ -16,13 +17,15 @@ import { MenuStatusService } from 'src/app/_services/menu-status.service';
   styleUrls: ["./profile.page.scss"],
 })
 export class ProfilePage implements OnInit, OnDestroy {
+  private isActivate = false;
   public user = new User();
   public stats = { buy: "10", exp: "6", friends: "7" };
   public size: string;
-  public default_picure: boolean;
   public headerPosition : string
+  private statusFlag: boolean;
 
-  userSubscription: Subscription;  
+  userSubscription: Subscription;
+  userCodeSubscription: Subscription;
 
   constructor(
     private userSvc: UserService,
@@ -44,34 +47,51 @@ export class ProfilePage implements OnInit, OnDestroy {
     this.userSubscription = this.userSvc.user$.subscribe(
       (user: User) => {
         if (user !== undefined) {
-          if (user.status == 1) {
-            this.router.navigate(["user/changePass"], {
-              queryParamsHandling: "preserve",
-            });
+          if (!this.statusFlag && user.status == 1) {
+            this.statusFlag = true;
+            this.editPassword();
           }
           this.user = user;
+          this.user.activate = this.isActivate;
         }
       },
       (error: any) => {}
     );
 
+    this.userCodeSubscription = this.userSvc.userCodes$.subscribe(
+      (codes) => {
+        this.isActivate = (codes && codes.length > 0);
+        if ( this.user ) {
+          this.user.activate = this.isActivate;
+        }
+      }
+    );
+
     this.userSvc.getCodes();
-    if (this.userSvc.getActualUser()) {
-      this.user = this.userSvc.getActualUser();
-    }
-    this.userSvc.getData();
+    
     this.ui.dismissLoading();
+    this.ui.dismissModal(2500);
     this.menuS.statusMenu("profile")   
   }
 
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();
+    this.userCodeSubscription.unsubscribe();
   }
 
   editProfile() {
     this.router.navigate(["user/profile/edit"], {
       queryParamsHandling: "preserve",
     });
+  }
+
+  editPassword() {
+    this.ui.showModal(
+      SectionChangePassComponent,
+      "modal-edit-password",
+      true,
+      true
+    );
   }
 
   editProfileDesktop() {
@@ -81,15 +101,6 @@ export class ProfilePage implements OnInit, OnDestroy {
       true,
       true
     );
-  }
-
-  profilePicture() {
-    this.default_picure = !!!this.user.photo;
-    return !!this.user.photo
-      ? this.user.photo
-      : this.user.gender == "F"
-      ? "../../../../../../../assets/img/profile_female.jpg"
-      : "../../../../../../../assets/img/profile_male.jpg";
   }
 
   positionHeader(){

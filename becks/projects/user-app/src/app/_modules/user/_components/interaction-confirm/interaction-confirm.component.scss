@@ -1,0 +1,61 @@
+.interaction-section-confirm {
+  color: #ffffff;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat;
+
+  .main-confirm-title {
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 13.28px !important;
+      font-weight: 500 !important;
+      line-height: 20px !important;
+      width: 195px !important;
+    }
+    @media (min-width: 769px) {
+      font-size: 24px !important;
+      line-height: 110% !important;
+      font-style: normal !important;
+      width: 343px !important;
+    }
+  }
+
+  .logo-brand-modal {
+    @media (min-width: 0px) and (max-width: 768px) {
+      position: relative !important;
+      top: 44px !important;
+      left: 0px !important;
+      margin-bottom: 50px !important;
+    }
+    @media (min-width: 769px) {
+      position: relative !important;
+      top: 85px !important;
+      left: 0px !important;
+      margin-bottom: 100px !important;
+    }
+  }
+}
+.margin-top-button {
+  margin: 10px;
+}
+
+.section-question-confirm {
+  background: rgba(2, 2, 2, 0.7);
+  border-radius: 8px;
+  backdrop-filter: blur(20px) !important;
+  height: auto;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 249px !important;
+    padding: 20px;
+  }
+  @media (min-width: 769px) {
+    width: 439px;
+    padding: 20px;
+  }
+}
+.button-width {
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 199px !important;
+    height: 35px !important;
+  }
+}

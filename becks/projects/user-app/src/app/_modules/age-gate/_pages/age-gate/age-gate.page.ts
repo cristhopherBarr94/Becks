@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: "app-age-gate-page",
@@ -7,7 +8,8 @@ import { Router } from "@angular/router";
   styleUrls: ["./age-gate.page.scss"],
 })
 export class AgeGatePage implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+              private auth: AuthService) {}
 
   ngOnInit() {
     if (
@@ -15,6 +17,10 @@ export class AgeGatePage implements OnInit {
       sessionStorage.getItem("user-age-gate-session")
     ) {
       this.router.navigate(["home"], { queryParamsHandling: "preserve" });
+    }
+
+    if ( this.auth.isAuthenticated() ) {
+      this.router.navigate(["user/exp"], { queryParamsHandling: "preserve" });
     }
   }
 }

@@ -33,6 +33,7 @@ export class SeccionsProfileComponent implements OnInit {
   redirectExp() {
     this.router.navigate(["user/exp"], {
       queryParamsHandling: "preserve",
+      state: { reload: 'true' }
     });
   }
 }

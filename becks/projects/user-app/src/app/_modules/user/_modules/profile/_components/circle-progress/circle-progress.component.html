@@ -26,12 +26,7 @@
   ></circle-progress>
 </section>
 
-<section class="content-flex-all-center bar">
-  <ion-progress-bar
-    [value]="progress / 100 + 0.03"
-    style="--progress-background: {{ colorProgressBar }}"
-  ></ion-progress-bar>
-</section>
+
 <section class="content-flex-all-center">
   <div class="subtitle-days">
     <p>Días</p>
@@ -42,7 +37,17 @@
     <div class="clock"></div>
   </div>
 </section>
-
+<section class="content-flex-all-center bar">
+  <ion-progress-bar
+    [value]="progress / 100 + 0.03"
+    style="--progress-background: {{ colorProgressBar }}"
+  ></ion-progress-bar>
+</section>
+<div class="content-flex-all-center title-tertiary text-notify">
+  <p>
+  {{textDays}}
+  </p>
+</div>
 <div class="content-flex-all-center">
 <button
   class="becks-btn-primary button-width margin-top"
@@ -50,6 +55,6 @@
   color="becks"
   (click)= "redirectSales()"
 >
-  <span>ACTIVA TU CUENTA</span>
+  <span>{{buttonTitle}}</span>
 </button>
 </div>

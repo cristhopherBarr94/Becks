@@ -1,13 +1,16 @@
 <ion-content>
-  <app-header></app-header>
   <section
-    id="formLoginSection"
-    class="fullSection from-section content-flex-all-center"
+    class="from-section content-flex-all-center"
   >
     <div
-      class="content-flex-all-center full-height flex-direction-column padding-form"
+      class="content-flex-all-center flex-direction-column padding-form"
       id="formchangeSection"
     >
+    <span class="modal-hader">
+      <button class="btn-cancel"
+      (click)="closeChange()"
+      >X</button>
+      </span>
       <span class="lock-icon"> </span>
       <h1 class="title-secondary">CAMBIAR CONTRASEÑA</h1>
       <form
@@ -15,6 +18,30 @@
         class="form-section"
         autocomplete="off"
       >
+      <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userChangeForm.controls.passwordPrev)"
+        >
+          <mat-label>Contraseña anterior</mat-label>
+          <input
+            matInput
+            id="passwordPrev"
+            formControlName="passwordPrev"
+            [type]="!hide1 ? 'password' : 'text'"
+            required
+            maxlength="30"
+            data-qadp="passwordPrev"
+            [(ngModel)]="passwordPrev"
+          />
+          <mat-icon matSuffix (click)="hide1 = !hide1">{{
+            !hide1 ? "visibility_off" : "visibility"
+          }}</mat-icon>
+          <mat-error *ngIf="userChangeForm.controls.passwordPrev.invalid"
+            >*Este campo es obligatorio</mat-error
+          >
+        </mat-form-field>
         <mat-form-field
           appearance="fill"
           floatLabel="auto"
@@ -69,6 +96,8 @@
           "
           >*Las contraseñas no coinciden</mat-error
         >
+        
+        <mat-error *ngIf="httpError" > {{ httpError }} </mat-error>
         <button
           class="becks-btn-primary margin-top-button button-width"
           (click)="changePass()"
@@ -86,5 +115,4 @@
       </form>
     </div>
   </section>
-  <app-footer></app-footer>
 </ion-content>

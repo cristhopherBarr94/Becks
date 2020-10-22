@@ -1,0 +1,21 @@
+<ion-content>
+  <app-header></app-header>
+
+  <section class="fullSection interaction-section-confirm content-flex-all-center" [style.background-image]="'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url('+bgExp+')'">
+
+    <div class="section-question-confirm content-flex-all-center flex-direction-column">
+      <span class="logo-brand-modal"> </span>
+      <h1 class="title-secondary main-confirm-title">HAS PARTICIPADO EN {{expTitleC}}</h1>
+      <button
+        block="block"
+        color="becks"
+        class="becks-btn-primary margin-top-button button-width"
+        [routerLink]="['/user/exp']"
+      >
+        <span>IR AL HOME</span>
+      </button>
+    </div>
+
+  </section>
+  <app-footer></app-footer>
+</ion-content>

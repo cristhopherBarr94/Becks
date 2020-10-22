@@ -7,54 +7,87 @@
       <span class="hamburger hamburger-3"></span>
     </label>
 
-    <a href="./user/exp" class="menu-item" [ngClass]="selected('exp')"> <img class="icon-item"
-        src="./assets/icon/menu/home.svg" alt="Inicio">
-      <span
-        class="name-item">Inicio</span> </a>
-    <a href="./user/calendarmob" class="menu-item" [ngClass]="selected('calendarmob')"> <img class="icon-item"
-        src="./assets/icon/menu/calendario.svg"
-        alt="Calendario">
-      <span class="name-item">Calendario</span> </a>
-    <!-- <a href="./user/mgm" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita"> <span
-        class="name-item">Invita</span> </a> -->
-    <a href="./user/activation" class="menu-item" [ngClass]="selected('activation')"> <img class="icon-item"
-        src="./assets/icon/menu/comprar.svg" alt="Compra">
-      <span
-        class="name-item">Compra</span> </a>
-    <a href="./user/profile" class="menu-item" [ngClass]="selected('profile')"> <img class="perfil-img"
-        [src]="profilePicture()" alt="perfil">
-      <span
-        class="name-item">Mi perfil</span> </a>
-    <a (click)="logout()" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out"> <span class="label-out">Salir</span>  </a>
+    <a href="./user/exp" class="menu-item" [ngClass]="selected('exp')">
+      <img class="icon-item" src="./assets/icon/menu/home.svg" alt="Inicio" />
+      <span class="name-item">Inicio</span>
+    </a>
+    <a href="./user/calendarmob" class="menu-item" [ngClass]="selected('calendarmob')">
+      <img class="icon-item" src="./assets/icon/menu/calendario.svg" alt="Calendario" />
+      <span class="name-item">Agenda</span>
+    </a>
+    <!-- <a href="./user/mgm" class="menu-item">
+            <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita" />
+            <span class="name-item">Invita</span> 
+          </a> -->
+    <!-- <a href="./user/activation" class="menu-item" [ngClass]="selected('activation')"> 
+          <img class="icon-item" src="./assets/icon/menu/comprar.svg" alt="Compra" />
+          <span class="name-item">Compra</span> 
+        </a> -->
+    <a *ngIf="(user && time); else defaultPicMobile" href="./user/profile" class="menu-item" [ngClass]="selected('profile')">
+        <img *ngIf="user.photo" [src]="url + user.photo + time" class="perfil-img" alt="Perfil" title="Perfil"/>
+        <img *ngIf="user.photo == undefined && user.gender == 'M'" [src]="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
+        <img *ngIf="user.photo == undefined && user.gender == 'F'" [src]="'./assets/img/profile_female.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
+        <span class="name-item">Mi perfil</span>
+    </a>
+    <ng-template #defaultPicMobile>
+      <a href="./user/profile" class="menu-item" [ngClass]="selected('profile')">
+        <img [src]="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
+      </a>
+    </ng-template>
+    <a (click)="logout()" class="sign-out">
+      <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Salir"/>
+      <span class="label-out">Salir</span>
+    </a>
   </nav>
   <nav class="menu-desktop" [ngClass]="transparentStyle()">
     <div class="container-menu">
-      <img class="logo-brand" src="./assets/icon/menu/logo_brand.svg" alt="logo">
+      <div style="margin-top: 15px;">
+        <a href="./user/exp"> 
+          <img class="logo-brand" src="./assets/icon/menu/logo_brand.svg" alt="logo" />
+          <img class="becks-brand" src="./assets/icon/menu/Heading.svg" alt="becks" />
+      </a>
+      </div>
       <ul class="content-top-bar">
-        <li>
-          <a href="./user/exp" class="menu-item-destkop" [ngClass]="selected('exp')"> <img class="icon-item"
-              src="./assets/icon/menu/home.svg" alt="Inicio">
+        <!-- <li>
+          <a href="./user/exp" class="menu-item-destkop" [ngClass]="selected('exp')">
+              <img class="icon-item" src="./assets/icon/menu/home.svg" alt="Inicio" title="Inicio" />
+              <span class="name-item">Inicio</span> 
           </a>
-        </li>
+        </li> -->
         <li>
-          <a href="./user/calendar" class="menu-item-destkop" [ngClass]="selected('calendar')"> <img class="icon-item"
-              src="./assets/icon/menu/calendario.svg"
-              alt="Calendario"> </a>
+          <a href="./user/calendar" class="menu-item-destkop" [ngClass]="selected('calendar')">
+            <img class="icon-item" src="./assets/icon/menu/calendario.svg" alt="Calendario" title="Calendario" />
+            <span class="name-item">Agenda</span>
+          </a>
         </li>
         <!-- <li>
-          <a href="./user/mgm" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita">
+            <a href="./user/mgm" class="menu-item-destkop"> <img class="icon-item" src="./assets/icon/menu/invitar.svg" alt="invita" />
           </a>
-        </li>-->
+        </li> -->
+        <!-- <li>
+          <a href="./user/activation" class="menu-item-destkop" [ngClass]="selected('activation')">
+            <img class="icon-item" src="./assets/icon/menu/comprar.svg" alt="Compra" />
+          </a>
+        </li> -->
         <li>
-          <a href="./user/activation" class="menu-item-destkop" [ngClass]="selected('activation')"> <img class="icon-item"
-              src="./assets/icon/menu/comprar.svg" alt="Compra"> </a>
+          <a *ngIf="(user && time); else defaultPicDesktop" href="./user/profile" class="menu-item-destkop" [ngClass]="selected('profile')">
+            <img *ngIf="user.photo" [src]="url + user.photo + time" class="perfil-img" alt="Perfil" title="Perfil" />
+            <img *ngIf="user.photo == undefined && user.gender == 'M'" [src]="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil" />
+            <img *ngIf="user.photo == undefined && user.gender == 'F'" [src]="'./assets/img/profile_female.jpg'" class="perfil-img" alt="Perfil" title="Perfil" />
+            <span class="name-item">Mi perfil</span>
+          </a>
         </li>
+        <ng-template #defaultPicDesktop>
+          <a href="./user/profile" class="menu-item" [ngClass]="selected('profile')">
+            <img [src]="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
+          </a>
+        </ng-template>
+        
         <li>
-          <a href="./user/profile" class="menu-item-destkop" [ngClass]="selected('profile')"> <img class="perfil-img"
-              [src]="profilePicture()" alt="perfil"> </a>
-        </li>
-        <li>
-          <a (click)="logout()" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out"> <span class="label-out">Salir</span>  </a>
+          <a (click)="logout()" class="sign-out">
+            <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out" title="Salir" />
+            <span class="label-out">Salir</span>
+          </a>
         </li>
       </ul>
     </div>

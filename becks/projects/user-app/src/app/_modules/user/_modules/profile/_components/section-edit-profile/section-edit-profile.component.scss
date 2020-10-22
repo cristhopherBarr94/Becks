@@ -194,3 +194,7 @@ seccion-tabs {
   background-color: transparent;
   min-width: 100%;
 }
+
+::ng-deep mat-icon:active {
+  font-family: "Material Icons" !important;
+}

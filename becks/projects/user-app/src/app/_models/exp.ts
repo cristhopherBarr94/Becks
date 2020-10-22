@@ -12,4 +12,5 @@ export class Exp {
   status: string;
   colorExp:string;
   type: string;
+  urlRedirect:string;
 }

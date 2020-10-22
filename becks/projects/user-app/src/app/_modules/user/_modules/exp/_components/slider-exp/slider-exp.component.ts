@@ -85,8 +85,16 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     }
   }
 
+
+
   redirInteraction() {
     window.open("https://www.feriadelmillon.com.co/becks/");
   }
+
+  
+participateExperience(type:string){
+  console.log("SliderExpComponent -> participateExperience -> type", type)
+}
+
 
 }

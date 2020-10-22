@@ -23,7 +23,7 @@ export const MockExperiencias: Exp[] = [
     id: 2,
     cuentaActiva: false,
     detalleExp: false,
-    imagesExp: "./assets/img/exp/frank2.jpg",
+    imagesExp: "./assets/img/exp/frankDesktop.jpg",
     titleExp: "FRANK VIDEO CLIP",
     fechaExp: "11/13/2020",
     horaExp: "11:00 PM — 4:00 AM",

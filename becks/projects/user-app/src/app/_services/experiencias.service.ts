@@ -25,6 +25,8 @@ export class ExperienciasService {
         status: element.status,
         colorExp: element.colorExp,
         horaExp: element.horaExp,
+        type:element.type,
+        urlRedirect:element.urlRedirect
       };
       ITEM_FOOTER.push(elementoResponse);
     });

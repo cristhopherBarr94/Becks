@@ -85,8 +85,21 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     }
   }
 
+
+
   redirInteraction() {
     window.open("https://www.feriadelmillon.com.co/becks/");
   }
+
+  
+participateExperience(arrayObject:number){
+  if(this.experienciaContent[arrayObject].type == "0"){
+    window.open(this.experienciaContent[arrayObject].urlRedirect);
+  }
+  else if(this.experienciaContent[arrayObject].type == "1"){
+    this.router.navigate([`user/interaction/${this.experienciaContent[arrayObject].id}`]);
+  }
+}
+
 
 }

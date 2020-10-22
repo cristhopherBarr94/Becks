@@ -39,6 +39,9 @@ export class CircleProgressComponent implements OnInit, OnDestroy {
           this.daysR =  date_til.diff(cur_date, 'days');
           this.progress = (this.daysR+0.8)* (10 / 3);
           this.remaining_days = Math.ceil(this.progress * (30 / 100));
+          if(this.remaining_days >30){
+            this.remaining_days = 30;
+          }
           this.buttonTitle = "OBTÉN MÁS DÍAS";
           this.textDays = "Disfruta de las nuevas experiencias";
 

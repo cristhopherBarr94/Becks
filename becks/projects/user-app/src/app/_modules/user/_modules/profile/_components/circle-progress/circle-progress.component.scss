@@ -31,7 +31,7 @@ ion-progress-bar {
   width: 170px;
   height: 170px;
   position: absolute;
-  top: 36.8px;
+  top: 13px;
   margin-left: 26px;
   .clock {
     width: 27px;
@@ -46,7 +46,7 @@ ion-progress-bar {
     left: 41.5%;
   }
   @media (min-width: 768px) {
-    top: 72px;
+    top: 60px;
   }
 }
 
@@ -62,29 +62,28 @@ ion-progress-bar {
   line-height: 16px !important;
   text-align: center !important;
   @media (min-width: 0px) and (max-width: 768px) {
-    top: 36.8px;
+    top: 15px;
   }
   @media (min-width: 768px) {
-    top: 72px;
+    top: 60px;
   }
   .title_1 {
     margin-top: 45px;
     margin-bottom: 40px;
   }
 }
-.margin-top {
-  margin-top: 24px;
-  margin-bottom: 24px;
-  @media (min-width: 768px) and (max-width: 1350px) {
-    width: 190px !important;
-  }
-}
+
 .becks-btn-primary,
 .button-disabled,
 .button-disabled:hover,
 .button-disabled:active {
+  margin-top: 24px;
+  margin-bottom: 24px;
   padding-left: 35px;
+  width: 316px !important;
+
   @media (min-width: 0px) and (max-width: 768px) {
+    font-size: 11px !important;
     background-position-x: 10px;
     &:hover {
       background-position-x: 7px;

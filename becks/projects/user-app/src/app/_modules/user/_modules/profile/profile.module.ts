@@ -26,6 +26,7 @@ import { SectionEditProfileComponent } from "./_components/section-edit-profile/
 import { UpdateFileComponent } from "./_components/update-file/update-file.component";
 import { IonicModule } from '@ionic/angular';
 import { LogOutComponent } from './_components/log-out/log-out.component';
+import { EditFormComponent } from './_components/edit-form/edit-form.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LogOutComponent } from './_components/log-out/log-out.component';
     SalesCardComponent,
     CircleProgressComponent,
     SectionEditProfileComponent,
-    UpdateFileComponent
+    UpdateFileComponent,
+    EditFormComponent
   ],
   imports: [
     CommonModule,

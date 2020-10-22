@@ -142,3 +142,22 @@
 ::ng-deep.ion-radio {
   margin-right: 10px !important;
 }
+.becks-btn-primary,
+.button-disabled,
+.button-disabled:hover,
+.button-disabled:active {
+  padding-left: 35px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    background-position-x: 50px;
+    &:hover {
+      background-position-x: 47px;
+    }
+  }
+  @media (min-width: 769px) {
+    background-position-x: 50px;
+
+    &:hover {
+      background-position-x: 47px;
+    }
+  }
+}

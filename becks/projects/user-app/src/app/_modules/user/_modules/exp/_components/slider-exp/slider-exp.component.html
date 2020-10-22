@@ -60,7 +60,7 @@
       </button>
       <!-- [routerLink]="['/user/interaction/', exp.id]" -->
       <button *ngIf="exp.cuentaActiva" block="block" color="becks" 
-        (click)="participateExperience(exp.type)"
+        (click)="participateExperience(exp)"
         class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
         <span>Participar</span>

@@ -92,11 +92,13 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   }
 
   
-participateExperience(type:string){
-  if(type == "0"){
-    window.open(this.experienciaContent[0].urlRedirect);
+participateExperience(arrayObject:number){
+  if(this.experienciaContent[arrayObject].type == "0"){
+    window.open(this.experienciaContent[arrayObject].urlRedirect);
   }
-  console.log("SliderExpComponent -> participateExperience -> type", type)
+  else if(this.experienciaContent[arrayObject].type == "1"){
+    this.router.navigate([`user/interaction/${this.experienciaContent[arrayObject].id}`]);
+  }
 }
 
 

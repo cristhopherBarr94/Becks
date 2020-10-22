@@ -38,6 +38,16 @@
       class=" margint-top font-profile margin-tittle flex-direction-row name-box">{{user.first_name}}
       {{user.last_name}} <div class="editLogo margin-left-tt"></div></span>
   </div>
-  <user-edit-form></user-edit-form>
+  <section class="seccion-tabs" *ngIf="size != 'xs'">
+    <mat-tab-group class="content-flex-all-center" [selectedIndex]="0" (selectedTabChange)="selectedTab($event)">
+      <mat-tab label="Editar Perfil" id="edit">
+        <user-edit-form></user-edit-form>
+      </mat-tab>
+      <mat-tab label="Cambiar Contraseña" id="pass">
+        <div></div>
+      </mat-tab>
+      </mat-tab-group>
+      </section>
+      <user-edit-form *ngIf="size == 'xs'"></user-edit-form>
   
 </div>

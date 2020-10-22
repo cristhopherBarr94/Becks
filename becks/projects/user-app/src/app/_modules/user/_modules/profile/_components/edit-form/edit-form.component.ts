@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './edit-form.component.html',
   styleUrls: ['./edit-form.component.scss'],
 })
-export class EditFormComponent implements OnInit {
+export class EditFormComponent implements OnInit,OnDestroy {
   public user = new User();
   public userEditProfileForm: FormGroup;
   public birthDayDate: any;
@@ -23,7 +23,6 @@ export class EditFormComponent implements OnInit {
   userSubscription: Subscription;
 
   constructor( private userSvc: UserService,
-    private router: Router,
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
     private ui: UiService,

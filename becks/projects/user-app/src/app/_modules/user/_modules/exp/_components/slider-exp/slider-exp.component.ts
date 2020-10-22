@@ -93,6 +93,9 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   
 participateExperience(type:string){
+  if(type == "0"){
+    window.open(this.experienciaContent[0].urlRedirect);
+  }
   console.log("SliderExpComponent -> participateExperience -> type", type)
 }
 

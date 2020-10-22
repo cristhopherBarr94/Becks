@@ -268,11 +268,6 @@
     font-size: 22px !important;
     line-height: 23px !important;
   }
-
-  // @media (min-width: 1024px) {
-  //   max-height: 663px;
-  // }
-
   .swiper-slide {
     flex-direction: column;
     align-content: flex-start;
@@ -306,6 +301,11 @@
     position: absolute;
     bottom: 13px;
     left: 8px;
+    @media (min-width: 1024px) {
+      bottom: 26px;
+      left: 16px;
+    }
+
   }
 
   .btn-action {
@@ -313,6 +313,10 @@
     position: absolute;
     bottom: 13px;
     right: 8px;
+    @media (min-width: 1024px) {
+      bottom: 26px;
+      right: 16px;
+    }
   }
 
   .swiper-pagination.swiper-pagination-bullets {
@@ -320,6 +324,9 @@
     left: 0;
     width: 30%;
     margin: auto;
+    @media (min-width: 1024px) {
+      bottom: 26px;
+    }
 
     .swiper-pagination-bullet {
       width: 10px;

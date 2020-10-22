@@ -38,6 +38,9 @@
   .swiper-pagination.swiper-pagination-bullets {
     right: auto;
     left: 10px;
+    @media (min-width: 1024px) {
+      left: 30px;
+    }
 
     .swiper-pagination-bullet {
       width: 10px;
@@ -111,37 +114,43 @@
     align-content: flex-end;
     justify-content: flex-end;
     @media (min-width: 1024px) {
-      align-items: flex-start;
+      align-items: center;
       align-content: center;
       justify-content: center;
     }
-    &:nth-child(even) {
+    .container-exp {
       @media (min-width: 1024px) {
-      align-items: flex-end;
+      display: flex;
+      position: relative;
+      width: 100%;
+      max-width: 1024px;
+      align-items: flex-start;
       }
     }
-    .content-exp {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        align-content: flex-end;
-        justify-content: flex-end;
-        padding: 20px;
+    &:nth-child(even) {
         @media (min-width: 1024px) {
-          padding-left: 100px;
-          align-items: flex-start;
+        .container-exp {
+          align-items: flex-end !important;
+          justify-content: flex-end;
         }
-        &:nth-child(even) {
-          @media (min-width: 1024px) {
-            padding-right: 100px;
-          }
-        }
-        
-        .exp-link-value {
-            margin: 10px 0 85px;
-            text-transform: uppercase;
-        }
+      }
     }
+      .content-exp {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          align-content: flex-end;
+          justify-content: flex-end;
+          padding: 20px;
+          @media (min-width: 1024px) {
+            align-items: flex-start;
+          }
+          .exp-link-value {
+              margin: 10px 0 85px;
+              text-transform: uppercase;
+          }
+      }
 
     .exp-detail {
         width: 100%;

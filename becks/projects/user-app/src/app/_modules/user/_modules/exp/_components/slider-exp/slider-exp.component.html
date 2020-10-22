@@ -5,7 +5,8 @@
     [ngClass]="{'inactive': !exp.cuentaActiva, 'active': exp.cuentaActiva}">
     <img [src]="exp.imagesExp" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
       [ngClass]="{'animate__animated animate__bounceInLeft': exp.cuentaActiva}">
-    <div class="content-exp animate__animated animate__bounceInLeft animate__delay-1s">
+      <div class="container-exp">
+        <div class="content-exp animate__animated animate__bounceInLeft animate__delay-1s">
       <h2 *ngIf="!exp.detalleExp"
         class="title-primary primary max-width-title-primary-age-gate animate__animated animate__bounceInLeft animate__delay-1s"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">{{exp.titleExp}}
@@ -30,6 +31,7 @@
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
         <span>Participa</span>
       </button>
+        </div>
     </div>
     <div class="exp-detail animate__animated animate__backInUp" *ngIf="exp.detalleExp">
       <div class="detail-close">

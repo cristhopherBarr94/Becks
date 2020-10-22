@@ -41,13 +41,14 @@
 
       
       <div class="buttons-edition">
+        <button class="edit-button flex-direction-row" (click)="editPassword()">
+          Cambiar Contraseña
+        </button>
         <button class="edit-button flex-direction-row" (click)="editProfileDesktop()">
           Editar Perfil <div class="editLogo margin-left-tt"></div>
         </button>
 
-        <button class="edit-button flex-direction-row" (click)="editPassword()">
-          Cambiar Contraseña <div class="editLogo margin-left-tt"></div>
-        </button>
+        
       </div>
       <div class="separator-line-column sin-stadisticas" *ngIf=" this.size != 'xs'"></div>
       </div>

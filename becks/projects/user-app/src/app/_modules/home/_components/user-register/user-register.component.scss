@@ -23,10 +23,10 @@
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .no-padding {
-    padding: 0px;
+    padding: 5px;
     ion-row,
     ion-col {
-      padding: 0px;
+      padding: 5px;
     }
   }
 
@@ -85,8 +85,14 @@
     padding: 9px;
     font-weight: bold;
   }
+
+  .section1,
   .section2 {
-    margin-top: 0px !important;
+    // margin-top: 0px !important;
+    margin: 0 auto;
+  }
+  .section1 {
+    margin-top: 30px;
   }
 }
 @media (min-width: 769px) {

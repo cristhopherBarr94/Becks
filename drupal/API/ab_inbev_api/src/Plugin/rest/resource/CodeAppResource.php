@@ -190,7 +190,7 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
       break;
       case 1:
         // PATCH USER
-        if (!isset($data['cid']) || strlen($data['cid']) < 8 ) {
+        if (!isset($data['cid']) || strlen( trim($data['cid'])) < 8 ) {
           throw new BadRequestHttpException('Codigo no válido');
         }
         $record = [
@@ -199,7 +199,7 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
           "valid_until"=> time() + (30 * 24 * 60 * 60),
           "status"=> 1,
         ];
-        return $this->updateRecord( $data['cid'], $record );   
+        return $this->updateRecord( trim($data['cid']), $record );   
       break;
       default:
         throw new BadRequestHttpException('Servicio no disponible');

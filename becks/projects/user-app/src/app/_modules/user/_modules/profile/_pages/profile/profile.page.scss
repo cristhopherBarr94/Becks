@@ -68,17 +68,22 @@
   justify-content: center;
   font-family: "Helvetica LT Std";
   color: #ffffff !important;
-  border-radius: 16px 0px 16px 0px;
+  border-radius: 16px 0px 16px 0px ;
+  border:1px solid  #ffffff;
+  width: 45%;
   @media (min-width: 769px) and (max-width: 1366px) {
     font-size: 18px;
-    width: 138px;
     height: 45px;
   }
   @media (min-width: 1367px) {
-    font-size: 24px;
-    width: 178px;
+    font-size: 24px;    
     height: 51px;
   }
+}
+
+.button-edit{
+  width: 35%;
+  margin-left: 5%;
 }
 
 .margin-left-tt {
@@ -86,7 +91,7 @@
 }
 
 .sin-stadisticas {
-  margin-left: 50%;
+  margin-right: 50%;
 }
 
 .positionAbsolute {

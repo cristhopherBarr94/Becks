@@ -25,6 +25,7 @@ export class UserLoginComponent implements OnInit {
   public allowCaptchaError: boolean;
   public hide: boolean;
   public password: string;
+  public showError: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,11 +61,6 @@ export class UserLoginComponent implements OnInit {
         Validators.required,
         Validators.minLength(4),
       ]),
-    });
-
-    this.allowCaptchaError = false;
-    this.userLoginForm.valueChanges.subscribe(val => {
-      this.allowCaptchaError = val.password;
     });
   }
 
@@ -108,6 +104,11 @@ export class UserLoginComponent implements OnInit {
             this.httpError = "Usuario y/o contraseña incorrecta";
           }
         );
+    } else {
+      this.showError = true;
+      (<any>Object).values(this.userLoginForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
     }
   }
 

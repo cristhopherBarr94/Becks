@@ -7,11 +7,12 @@ export class AgeGuardService implements CanActivate {
   constructor(private router: Router,
               private auth: AuthService) {}
   canActivate(): boolean {
-    if (
-      !this.auth.isAuthenticated() && 
-      ( !localStorage.getItem('"user-age-gate-local') &&
-        !sessionStorage.getItem("user-age-gate-session") )
-    ) {
+    if ( this.auth.isAuthenticated() ) {
+      this.router.navigate(["user/exp"]);
+      return false;
+    }
+    if ( !localStorage.getItem('"user-age-gate-local') &&
+        !sessionStorage.getItem("user-age-gate-session") ) {
       this.router.navigate(["age-gate"]);
       return false;
     }

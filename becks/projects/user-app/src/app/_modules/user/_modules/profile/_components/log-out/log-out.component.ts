@@ -31,28 +31,20 @@ export class LogOutComponent implements OnInit {
       (r) => {
         this.ui.dismissLoading();
         this.ui.dismissModal();
-        if ( location.href.indexOf("/app/") > -1 ) {
-          location.href = "app/home";
-        } else {
-          location.href = "home";
-        }
+        location.href = "home";
       },
       (e) => {
         this.ui.dismissLoading();
         this.ui.dismissModal();
-        if ( location.href.indexOf("/app/") > -1 ) {
-          location.href = "app/home";
-        } else {
-          location.href = "home";
-        }
+        location.href = "home";
       }
     );
     this.authService.setAuthenticated("");
     this.userSvc.logout();
 }
 
-close (){
-  this.ui.dismissModal()
+close(){
+  this.ui.dismissModal();
 }
 
 }

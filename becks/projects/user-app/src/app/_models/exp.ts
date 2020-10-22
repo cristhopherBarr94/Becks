@@ -11,4 +11,5 @@ export class Exp {
   urlExp: string;
   status: string;
   colorExp:string;
+  type: string;
 }

@@ -26,6 +26,8 @@ import { SectionEditProfileComponent } from "./_components/section-edit-profile/
 import { UpdateFileComponent } from "./_components/update-file/update-file.component";
 import { IonicModule } from '@ionic/angular';
 import { LogOutComponent } from './_components/log-out/log-out.component';
+import { EditFormComponent } from './_components/edit-form/edit-form.component';
+import { SectionChangePassComponent } from './_components/section-change-pass/section-change-pass.component';
 
 @NgModule({
   declarations: [
@@ -38,9 +40,11 @@ import { LogOutComponent } from './_components/log-out/log-out.component';
     ExperiencesCardComponent,
     SalesCardsComponent,
     SalesCardComponent,
+    SectionChangePassComponent,
     CircleProgressComponent,
     SectionEditProfileComponent,
-    UpdateFileComponent
+    UpdateFileComponent,
+    EditFormComponent
   ],
   imports: [
     CommonModule,

@@ -43,7 +43,7 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
   public hide: boolean;
   public hideConfirm: boolean;
   public password: string;
-  private showError: boolean;
+  public showError: boolean;
 
   constructor(
     private formBuilder: FormBuilder,

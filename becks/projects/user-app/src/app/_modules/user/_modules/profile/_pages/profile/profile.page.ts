@@ -111,4 +111,8 @@ export class ProfilePage implements OnInit, OnDestroy {
       return 'positionRelative'
     }
   }
+
+  isNotXS() {
+    return this.size != 'xs';
+  }
 }

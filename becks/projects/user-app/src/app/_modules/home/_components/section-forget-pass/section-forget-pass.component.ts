@@ -55,17 +55,13 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
   }
 
   initforms() {
+    this.allowCaptchaError = false;
     this.userRegisterForm = this.formBuilder.group({
       email: new FormControl("", [
         Validators.required,
         Validators.email,
         Validators.maxLength(40),
       ]),
-    });
-
-    this.allowCaptchaError = false;
-    this.userRegisterForm.valueChanges.subscribe(val => {
-      this.allowCaptchaError = val.email;
     });
   }
 
@@ -128,6 +124,8 @@ export class SectionForgetPassComponent implements OnInit, AfterViewInit {
             this.ui.dismissLoading();
           }
         );
+    } else {
+      this.allowCaptchaError = true;
     }
   }
 

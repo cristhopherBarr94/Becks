@@ -18,6 +18,8 @@ import { UiService } from "../../../../_services/ui.service";
 import { UtilService } from "src/app/_services/util.service";
 import { environment } from 'src/environments/environment';
 import { SHA256 } from "crypto-js";
+import { BasicAlertComponent } from 'src/app/_modules/utils/_components/basic-alert/basic-alert.component';
+import { AuthService } from 'src/app/_services/auth.service';
 
 declare global {
   interface Window {
@@ -35,13 +37,13 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
   public userRegisterForm: FormGroup;
   public userRegister: User = new User();
   public captchaStatus: boolean;
-  public allowCaptchaError: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
 
   public hide: boolean;
   public hideConfirm: boolean;
   public password: string;
+  private showError: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -49,7 +51,8 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
     private router: Router,
     private ui: UiService,
     private cdr: ChangeDetectorRef,
-    private utils: UtilService
+    private utils: UtilService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -91,7 +94,6 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
         Validators.maxLength(10),
       ]),
       gender: new FormControl(null, Validators.required),
-      typeId: new FormControl(null, Validators.required),
       privacy: new FormControl(null, Validators.required),
       promo: new FormControl(null),
       password: new FormControl("", [
@@ -103,11 +105,6 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
         Validators.minLength(4),
       ]),
     });
-
-    this.allowCaptchaError = false;
-    this.userRegisterForm.valueChanges.subscribe(val => {
-      this.allowCaptchaError = val.password;
-    });
   }
 
   methodFB(userInfo: any) {
@@ -118,8 +115,18 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
   }
 
   saveUser(): void {
+
+    if ( this.userRegisterForm.invalid || !this.captchaStatus ) {
+      this.showError = true;
+      (<any>Object).values(this.userRegisterForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
+      return;
+    }
+
     this.ui.showLoading();
     this.restartCaptcha = true;
+    this.showError = false;
     this.setCaptchaStatus(!this.restartCaptcha);
     this.userRegister.captcha_key = this.utils.getCaptchaKey();
     this.userRegister.captcha = this.utils.getCaptchaHash(
@@ -128,27 +135,78 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
     );
     const email256 = SHA256(this.userRegister.email).toString();
     this.userRegister.cookie_td = this.utils.getCookie("_td");
+    this.userRegister.type_id = "CC";
     this.httpService
       .post(
         environment.serverUrl + environment.guest.postForm,
         this.userRegister.toJSON()
       )
       .subscribe(
-        (data: any) => {
+        (res: any) => {
           try {
-            this.restartCaptcha = false;
-            this.ui.dismissLoading();
-            this.userRegisterForm.reset();
-            window.dataLayer.push({
-              event: "trackEvent",
-              eventCategory: "fase 3",
-              eventAction: "finalizar fase 3",
-              eventLabel: email256,
-            });
-            window.location.reload();
-          } catch (e) {}
+            if ( res.status >= 200 && res.status < 300 ) {
+                window.dataLayer.push({
+                  event: "trackEvent",
+                  eventCategory: "fase 3",
+                  eventAction: "finalizar fase 3",
+                  eventLabel: email256,
+                });
+                // window.location.reload();
+                // this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
+                //   title: "Bienvenido a Beck's",
+                //   description: "Ingresando de forma segura",
+                // });
+
+                const formData = new FormData();
+                try {
+                  this.restartCaptcha = true;
+                  this.setCaptchaStatus(!this.restartCaptcha);
+                  formData.append("username", this.userRegisterForm.controls.email.value);
+                  formData.append("password", this.userRegisterForm.controls.password.value);
+                  formData.append("grant_type", environment.rest.grant_type);
+                  formData.append("client_id", environment.rest.client_id);
+                  formData.append("client_secret", environment.rest.client_secret);
+                  formData.append("scope", environment.rest.scope);
+                } catch (error) {
+                  return;
+                }
+                this.userRegisterForm.reset();
+                this.httpService
+                .postFormData(
+                  environment.serverUrl + environment.login.resource,
+                  formData
+                )
+                .subscribe(
+                  (response: any) => {
+                    this.ui.dismissLoading();
+                    if ( response.status >= 200 && response.status < 300 ) {
+                      this.restartCaptcha = false;
+                      this.router.navigate(["user/exp"]);
+                      this.ui.dismissModal(2500);
+                      this.ui.dismissLoading(2500);
+                      this.authService.setAuthenticated(
+                        "Bearer " + response.body.access_token
+                      );
+                      this.router.navigate(["user/exp"], {
+                        queryParamsHandling: "preserve",
+                      });
+                    } else {
+                      location.reload();  
+                    }
+                  }, (e) => {
+                    location.reload();
+                  });
+                  
+            } else {
+              this.showError = true;
+            }
+            
+          } catch (e) {
+            this.showError = true;
+          }
         },
         (err) => {
+          this.showError = true;
           this.restartCaptcha = false;
           if (err.error) {
             this.httpError = err.error.message;

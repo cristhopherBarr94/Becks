@@ -59,7 +59,7 @@ export class UserService {
     );
   }
 
-  public getCodes() {
+  public getCodes( forceUpdate? ) {
     
     if ( this._user != undefined && this._user.email ) {
       this._userSbj.next(this._user);
@@ -67,7 +67,7 @@ export class UserService {
       this.getData();
     }
 
-    if ( this._userCodes && this._userCodes.length > 0 ) {
+    if ( !forceUpdate && (this._userCodes && this._userCodes.length > 0) ) {
       this._userCodeSbj.next(this._userCodes);
     } else {
       this.http.get(environment.serverUrl + environment.user.getCodes + "?time_stamp=" + new Date().getTime() ).subscribe(

@@ -94,7 +94,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
       }
     );
     
-    this.userSvc.getCodes();
+    this.userSvc.getCodes(true);
     this.initforms();
     this.bgActive();
     this.menuS.statusMenu("activate") 
@@ -134,9 +134,10 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
     this.ui.dismissLoading();
     if (this.userActivationForm.valid) {
       this.ui.showLoading();
-      const code256 = SHA256(this.userActivationForm.controls.codeNum.value).toString();
+      const cid = this.userActivationForm.controls.codeNum.value.trim();
+      const code256 = SHA256(cid).toString();
       this.httpService.patch(environment.serverUrl + environment.user.patchActivate, {
-        cid: this.userActivationForm.controls.codeNum.value
+        cid: cid
       }).subscribe(
         (response: any) => {
           if (response.status == 200 && response.body.length >0) {

@@ -31,6 +31,7 @@
             maxlength="40"
             [(ngModel)]="userRegister.email"
             data-qadp="email"
+            required
           />
           <mat-error *ngIf="userRegisterForm.controls.email.errors">
             *Has ingresado un dato inválido

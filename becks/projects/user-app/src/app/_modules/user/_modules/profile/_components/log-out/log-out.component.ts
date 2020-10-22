@@ -30,15 +30,21 @@ export class LogOutComponent implements OnInit {
     .subscribe(
       (r) => {
         this.ui.dismissLoading();
-        this.ui.dismissModal()
-        //this.router.navigate(["home"]);
-        location.reload();
+        this.ui.dismissModal();
+        if ( location.href.indexOf("/app/") > -1 ) {
+          location.href = "app/home";
+        } else {
+          location.href = "home";
+        }
       },
       (e) => {
         this.ui.dismissLoading();
-        this.ui.dismissModal()
-        //this.router.navigate(["home"]);
-        location.reload();
+        this.ui.dismissModal();
+        if ( location.href.indexOf("/app/") > -1 ) {
+          location.href = "app/home";
+        } else {
+          location.href = "home";
+        }
       }
     );
     this.authService.setAuthenticated("");

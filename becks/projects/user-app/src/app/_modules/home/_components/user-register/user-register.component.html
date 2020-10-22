@@ -18,8 +18,9 @@
               maxlength="20"
               [(ngModel)]="userRegister.first_name"
               data-qadp="name"
+              required
             />
-            <mat-error *ngIf="userRegisterForm.controls.name.errors">
+            <mat-error *ngIf="userRegisterForm.controls.name.touched &&  userRegisterForm.controls.name.errors">
               *Has ingresado un dato inválido
             </mat-error>
           </mat-form-field>
@@ -39,8 +40,9 @@
               maxlength="20"
               [(ngModel)]="userRegister.last_name"
               data-qadp="lastName"
+              required
             />
-            <mat-error *ngIf="userRegisterForm.controls.surname.errors">
+            <mat-error *ngIf="userRegisterForm.controls.surname.touched &&  userRegisterForm.controls.surname.errors">
               *Has ingresado un dato inválido
             </mat-error>
           </mat-form-field>
@@ -61,12 +63,83 @@
               maxlength="40"
               [(ngModel)]="userRegister.email"
               data-qadp="email"
+              required
             />
-            <mat-error *ngIf="userRegisterForm.controls.email.errors">
+            <mat-error *ngIf="userRegisterForm.controls.email.touched &&  userRegisterForm.controls.email.errors">
               *Has ingresado un dato inválido
             </mat-error>
           </mat-form-field>
 
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.telephone)"
+          >
+            <mat-label>Número de teléfono</mat-label>
+            <input
+              matInput
+              (input)="inputValidatorNumeric($event)"
+              formControlName="telephone"
+              placeholder="Número de teléfono"
+              minlength="7"
+              maxlength="10"
+              [(ngModel)]="userRegister.mobile_phone"
+              data-qadp="phone"
+              required
+            />
+            <mat-error *ngIf="userRegisterForm.controls.telephone.touched &&  userRegisterForm.controls.telephone.errors">
+              *Has ingresado un número inválido
+            </mat-error>
+          </mat-form-field>
+          
+        </div>
+        <div class="form-section section2">
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInputSelect(userRegisterForm.controls.gender)"
+          >
+            <mat-label>Sexo</mat-label>
+            <mat-select
+              panelClass="backgroud-panel"
+              formControlName="gender"
+              required
+              [(ngModel)]="userRegister.gender"
+              data-qadp="gender"
+            >
+              <mat-option value="F"> FEMENINO</mat-option>
+              <mat-option value="M"> MASCULINO</mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="userRegisterForm.controls.gender.touched &&  userRegisterForm.controls.gender.hasError('required')"
+              >Debes seleccionar un campo</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.idNumber)"
+          >
+            <mat-label>Número de identificación</mat-label>
+            <input
+              matInput
+              formControlName="idNumber"
+              placeholder="Número de id"
+              minlength="4"
+              maxlength="11"
+              (input)="inputValidatorNumeric($event)"
+              [(ngModel)]="userRegister.id_number"
+              required
+              data-qadp="numId"
+            />
+            <mat-error *ngIf="userRegisterForm.controls.idNumber.touched &&  userRegisterForm.controls.idNumber.errors"
+              >*Este campo es obligatorio</mat-error
+            >
+          </mat-form-field>
           
           <mat-form-field
           appearance="fill"
@@ -89,7 +162,7 @@
             <mat-icon matSuffix (click)="hide = !hide">{{
               !hide ? "visibility_off" : "visibility"
             }}</mat-icon>
-            <mat-error *ngIf="userRegisterForm.controls.password.invalid"
+            <mat-error *ngIf="userRegisterForm.controls.password.touched &&  userRegisterForm.controls.password.invalid"
               >*Este campo es obligatorio, mínimo 4 caracteres</mat-error
             >
           </mat-form-field>
@@ -114,151 +187,67 @@
             <mat-icon matSuffix (click)="hideConfirm = !hideConfirm">{{
               !hideConfirm ? "visibility_off" : "visibility"
             }}</mat-icon>
-            <mat-error *ngIf="userRegisterForm.controls.password_confirm.invalid">*Este campo es obligatorio, mínimo 4 caracteres</mat-error>
-          </mat-form-field>
-          
-          <mat-error *ngIf="userRegisterForm.controls.password.value && userRegisterForm.controls.password.value != userRegisterForm.controls.password_confirm.value">*Las contraseñas no coinciden</mat-error>
-        </div>
-        <div class="form-section section2">
-          <mat-form-field
-            appearance="fill"
-            floatLabel="auto"
-            class="fullInput"
-            [ngClass]="getClassInputSelect(userRegisterForm.controls.gender)"
-          >
-            <mat-label>Sexo</mat-label>
-            <mat-select
-              panelClass="backgroud-panel"
-              formControlName="gender"
-              required
-              [(ngModel)]="userRegister.gender"
-              data-qadp="gender"
-            >
-              <mat-option value="F"> FEMENINO</mat-option>
-              <mat-option value="M"> MASCULINO</mat-option>
-            </mat-select>
-            <mat-error
-              *ngIf="userRegisterForm.controls.gender.hasError('required')"
-              >Debes seleccionar un campo</mat-error
-            >
-          </mat-form-field>
-
-          <mat-form-field
-            appearance="fill"
-            floatLabel="auto"
-            class="fullInput"
-            [ngClass]="getClassInputSelect(userRegisterForm.controls.typeId)"
-          >
-            <mat-label>Tipo de documento</mat-label>
-            <mat-select
-              panelClass="backgroud-panel"
-              formControlName="typeId"
-              required
-              [(ngModel)]="userRegister.type_id"
-              data-qadp="typeId"
-            >
-              <mat-option value="CC"> Cédula de ciudadanía</mat-option>
-              <mat-option value="CE"> Cédula de extranjería</mat-option>
-              <mat-option value="PA"> Pasaporte</mat-option>
-            </mat-select>
-            <mat-error
-              *ngIf="userRegisterForm.controls.typeId.hasError('required')"
-              >Debes seleccionar un campo</mat-error
-            >
-          </mat-form-field>
-
-          <mat-form-field
-            appearance="fill"
-            floatLabel="auto"
-            class="fullInput"
-            [ngClass]="getClassInput(userRegisterForm.controls.idNumber)"
-          >
-            <mat-label>Número de identificación</mat-label>
-            <input
-              matInput
-              formControlName="idNumber"
-              placeholder="Número de id"
-              minlength="4"
-              maxlength="11"
-              [(ngModel)]="userRegister.id_number"
-              required
-              data-qadp="numId"
-            />
-            <mat-error *ngIf="userRegisterForm.controls.idNumber.errors"
-              >*Este campo es obligatorio</mat-error
-            >
-          </mat-form-field>
-
-          <mat-form-field
-            appearance="fill"
-            floatLabel="auto"
-            class="fullInput"
-            [ngClass]="getClassInput(userRegisterForm.controls.telephone)"
-          >
-            <mat-label>Número de teléfono</mat-label>
-            <input
-              matInput
-              (input)="inputValidatorNumeric($event)"
-              formControlName="telephone"
-              placeholder="Número de teléfono"
-              minlength="7"
-              maxlength="10"
-              [(ngModel)]="userRegister.mobile_phone"
-              data-qadp="phone"
-            />
-            <mat-error *ngIf="userRegisterForm.controls.telephone.errors">
-              *Has ingresado un dato inválido
+            <mat-error *ngIf="userRegisterForm.controls.password_confirm.touched &&  userRegisterForm.controls.password_confirm.invalid">
+              *Este campo es obligatorio, mínimo 4 caracteres
             </mat-error>
           </mat-form-field>
+          
+          <mat-error *ngIf="userRegisterForm.controls.password.touched &&  (userRegisterForm.controls.password.value && 
+                            userRegisterForm.controls.password.value != userRegisterForm.controls.password_confirm.value)">
+                            *Las contraseñas no coinciden
+          </mat-error>
+        </div>
 
+        <div class="checks">
+          <div class="content-check">
+            <mat-checkbox
+              id="mat-checkbox-promo"
+              formControlName="promo"
+              [(ngModel)]="userRegister.promo"
+              color="success"
+              class="margin-check"
+            >
+            </mat-checkbox>
+            <i class="title-fourthy">
+              Deseo recibir información de eventos y promociones de Becks.
+            </i>
+          </div>
+
+          <div class="content-check">
+            <mat-checkbox
+              id="mat-checkbox-privacy"
+              formControlName="privacy"
+              [(ngModel)]="userRegister.privacy"
+              color="success"
+              class="margin-check"
+              required
+            >
+            </mat-checkbox>
+            <i class="title-fourthy">
+              He leído, entendido y aceptado los 
+              <a target="_blank" href="./terms-conditions" data-qadp="link-pp">Terminos y condiciones </a>
+              y la 
+              <a target="_blank" href="./privacy-policy" data-qadp="link-tc"> política de protección de datos personales</a
+            >  , en particular el procesamiento de mi información personal por parte de Bavaria & Cía S.C.A. con las finalidades y usos requeridos por ésta descritos en la mencionada política.
+            </i>
+          </div>
+          <div>
+            <mat-error
+              *ngIf="userRegisterForm.controls.privacy.touched && userRegisterForm.controls.privacy.invalid"
+              >Por favor lea y acepte las políticas y los términos</mat-error
+            >
+          </div>
         </div>
       </ion-row>
 
-      <div class="checks">
-        <div class="content-check">
-          <mat-checkbox
-            id="mat-checkbox-promo"
-            formControlName="promo"
-            [(ngModel)]="userRegister.promo"
-            color="success"
-            class="margin-check"
-          >
-          </mat-checkbox>
-          <i class="title-fourthy">
-            Deseo recibir información de eventos y promociones de Becks.
-          </i>
-        </div>
-
-        <div class="content-check">
-          <mat-checkbox
-            id="mat-checkbox-privacy"
-            formControlName="privacy"
-            [(ngModel)]="userRegister.privacy"
-            color="success"
-            class="margin-check"
-            required
-          >
-          </mat-checkbox>
-          <i class="title-fourthy">
-            He leído, entendido y aceptado los 
-            <a target="_blank" href="./terms-conditions" data-qadp="link-pp">Terminos y condiciones </a>
-             y la 
-             <a target="_blank" href="./privacy-policy" data-qadp="link-tc"> política de protección de datos personales</a
-          >  , en particular el procesamiento de mi información personal por parte de Bavaria & Cía S.C.A. con las finalidades y usos requeridos por ésta descritos en la mencionada política.
-          </i>
-        </div>
-        <div>
-          <mat-error
-            *ngIf="userRegisterForm.controls.privacy.hasError('required')"
-            >Por favor lea y acepte las políticas y los términos</mat-error
-          >
-        </div>
-      </div>
+      <ion-row>
+        
+      </ion-row>
     </form>
 
     <div class="content-flex-all-center">
       <app-captcha
-        [showError]="allowCaptchaError"
+        [showError]="showError"
         [restart]="restartCaptcha"
         (status)="setCaptchaStatus($event)"
       >
@@ -275,7 +264,6 @@
         [ngClass]="{
           'button-disabled': userRegisterForm.invalid || !captchaStatus
         }"
-        [disabled]="userRegisterForm.invalid || !captchaStatus"
         data-qadp="send-button-form"
       >
         <span>REGÍSTRATE</span>

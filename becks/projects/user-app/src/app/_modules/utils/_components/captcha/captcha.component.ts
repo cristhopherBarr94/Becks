@@ -50,6 +50,7 @@ export class CaptchaComponent implements OnInit {
   }
 
   public initCaptcha() {
+    this.showError = false;
     this.userAnswer = this.defaultObj;
     this.captchaAnswer = this.defaultObj;
     this.userCaptcha.question = null;
@@ -79,6 +80,7 @@ export class CaptchaComponent implements OnInit {
   }
 
   public checkCaptcha( answer ) {
+    this.showError = true;
     this.userAnswer = answer;
     this.statusEmitter.emit( this.captchaAnswer.value == this.userAnswer.value );
   }

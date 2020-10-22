@@ -39,7 +39,7 @@
         *ngIf="false"
       ></user-statistics-profile>
 
-      <!-- <div class="separator-line-column sin-stadisticas" *ngIf=" this.size == 'xs'"></div> -->
+      
       <div class="buttons-edition">
         <button class="edit-button flex-direction-row" (click)="editProfileDesktop()">
           Editar Perfil <div class="editLogo margin-left-tt"></div>
@@ -49,10 +49,13 @@
           Cambiar Contraseña <div class="editLogo margin-left-tt"></div>
         </button>
       </div>
-      
-    </div>
+      <div class="separator-line-column sin-stadisticas" *ngIf=" this.size != 'xs'"></div>
+      </div>
+
+  
 
     <user-seccions-profile class="seccions" [isActive]="user && user.activate"></user-seccions-profile>
+  
   </div>
   <app-footer></app-footer>
 </ion-content>

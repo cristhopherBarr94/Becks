@@ -424,8 +424,8 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       }
     }
     
-    if ( $data['password'] ) {
-      if ( strlen(trim($data['password'])) < 4 ) {
+    if ( $record['password'] ) {
+      if ( strlen(trim($record['password'])) < 4 ) {
         throw new BadRequestHttpException('Contraseña muy corta');
       }
     }

@@ -15,7 +15,7 @@ export const MockExperiencias: Exp[] = [
     urlExp: "/exp1",
     status: "1",
     colorExp: "green-color",
-    type:'0'
+    type:"0"
 
   },
   {
@@ -32,7 +32,7 @@ export const MockExperiencias: Exp[] = [
     urlExp: "/exp1",
     status: "1",
     colorExp: "green-color",
-    type:'1'
+    type:"1"
   },
   // {
   //   id: 3,

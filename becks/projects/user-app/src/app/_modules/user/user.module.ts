@@ -28,14 +28,12 @@ import { registerLocaleData } from '@angular/common';
 registerLocaleData(es);
 @NgModule({
   declarations: [
-    SectionChangePassComponent,
     ActivationPage,
     MGMPage,
     ScheduleComponent,
     InteractionViewComponent,
     InteractionConfirmComponent,
     VerticalCalendarComponent
-
   ],
   imports: [
     CommonModule,

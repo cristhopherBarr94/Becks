@@ -20,7 +20,7 @@
 
   span {
     font-size: $font-size;
-    font-weight: bold;
+    font-weight: normal;
   }
 
   &:hover {
@@ -41,12 +41,35 @@
     #ffffff,
     #377f5e,
     2px solid #ffffff,
-    "Helvetica LT Std",
-    14px,
+    "Eurostile BQ" !important,
+    18px,
     267px,
     56px,
     3px solid #ffffff
   );
+  line-height: 16px;
+  text-transform: uppercase;
+  font-style: normal !important;
+  font-weight: 500;
+  background-image: url(../assets/icon/becks-btn-icon.svg) !important;
+  background-size: 25px;
+  background-repeat: no-repeat !important;
+  background-position-y: 15px;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    background-position-x: 30px;
+    &:hover {
+      background-position-y: 12px;
+      background-position-x: 27px;
+    }
+  }
+  @media (min-width: 769px) {
+    background-position-x: 40px;
+    &:hover {
+      background-position-x: 37px;
+      background-position-y: 12px;
+    }
+  }
 }
 .becks-btn-inner {
   @include btn(
@@ -80,14 +103,15 @@
     #377f5e,
     2px solid #ffffff,
     "Helvetica LT Std",
-    16px,
+    "",
     "",
     35px,
     3px solid #ffffff
   );
   border-radius: 16px 0px 16px 0px;
   @media (min-width: 0px) and (max-width: 768px) {
-    width: 190px;
+    width: 200px;
+    height: 40px;
   }
   @media (min-width: 769px) {
     width: 335px;
@@ -113,9 +137,28 @@
 .button-disabled:hover,
 .button-disabled:active {
   background: #bdbdbd;
+  background-image: url(../assets/icon/becks-btn-icon-dis.svg) !important;
+  background-size: 25px;
+  background-repeat: no-repeat !important;
   opacity: 1;
   span {
-    color: #ffffff;
+    color: #828282;
+  }
+  background-position-y: 15px;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    background-position-x: 30px;
+    &:hover {
+      background-position-y: 12px;
+      background-position-x: 27px;
+    }
+  }
+  @media (min-width: 769px) {
+    background-position-x: 40px;
+    &:hover {
+      background-position-y: 12px;
+      background-position-x: 37px;
+    }
   }
 }
 
@@ -145,4 +188,41 @@ a {
 .trasparent-button {
   background-color: transparent;
   width: 100%;
+}
+
+.exp-btn-inactive {
+  @include btn(
+    #ffffff,
+    #377f5e,
+    2px solid #ffffff,
+    "Eurostile BQ" !important,
+    18px,
+    267px,
+    56px,
+    3px solid #ffffff
+  );
+  line-height: 16px;
+  text-transform: uppercase;
+  font-style: normal !important;
+  font-weight: 500;
+  padding-left: 40px !important;
+  background-image: url(../assets/icon/becks-btn-icon.svg) !important;
+  background-size: 25px;
+  background-repeat: no-repeat !important;
+  background-position-x: 10px;
+  background-position-y: 15px;
+  border-radius: 16px 0px 16px 0px;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    &:hover {
+      background-position-y: 12px;
+      background-position-x: 7px;
+    }
+  }
+  @media (min-width: 769px) {
+    &:hover {
+      background-position-x: 7px;
+      background-position-y: 12px;
+    }
+  }
 }

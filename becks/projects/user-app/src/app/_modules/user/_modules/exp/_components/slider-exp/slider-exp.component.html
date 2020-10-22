@@ -25,9 +25,9 @@
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}"><i
           class="far fa-eye"></i> Conoce más</a>
       <button *ngIf="!exp.cuentaActiva" block="block" color="becks" [routerLink]="['/user/activation']"
-        class="becks-btn-primary margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+        class="exp-btn-inactive margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
-        <span>Activar tu cuenta</span>
+        <span>Activa tu cuenta</span>
       </button>
       
       <!-- [routerLink]="['/user/interaction/', exp.id]" -->
@@ -40,7 +40,7 @@
     </div>
     <div class="exp-detail animate__animated animate__backInUp" *ngIf="exp.detalleExp">
       <div class="detail-close">
-        <a (click)="detalleExperiencia(i)"> <mat-icon matSuffix>close</mat-icon> <i class="fal fa-times"></i></a>
+        <a (click)="detalleExperiencia(i)"> <mat-icon matSuffix style="color: #ffffff;">close</mat-icon> <i class="fal fa-times"></i></a>
       </div>
       <h2
         class="title-primary primary max-width-title-primary-age-gate title-detail animate__animated animate__bounceInLeft animate__delay-1s">
@@ -54,9 +54,9 @@
       <p class="detail-content animate__animated animate__bounceInLeft animate__delay-1s">{{exp.detailExp}}</p>
     </div>
     <button *ngIf="!exp.cuentaActiva" block="block" color="becks" [routerLink]="['/user/activation']"
-        class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+        class="exp-btn-inactive more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
-        <span>Activar tu cuenta</span>
+        <span>Activa tu cuenta</span>
       </button>
       <!-- [routerLink]="['/user/interaction/', exp.id]" -->
       <button *ngIf="exp.cuentaActiva" block="block" color="becks" 

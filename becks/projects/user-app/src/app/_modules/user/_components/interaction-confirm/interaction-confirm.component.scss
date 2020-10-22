@@ -59,3 +59,21 @@
     height: 35px !important;
   }
 }
+
+.becks-btn-primary,
+.button-disabled,
+.button-disabled:hover,
+.button-disabled:active {
+  @media (min-width: 0px) and (max-width: 768px) {
+    background-position-x: 10px;
+    &:hover {
+      background-position-x: 7px;
+    }
+  }
+  @media (min-width: 769px) {
+    background-position-x: 70px;
+    &:hover {
+      background-position-x: 67px;
+    }
+  }
+}

@@ -41,6 +41,15 @@
   margin-top: 20px;
 }
 
+.becks-btn-icon-dis {
+  @media (min-width: 0px) and (max-width: 768px) {
+    margin-left: 30px;
+    margin-right: 50px;
+  }
+  @media (min-width: 769px) {
+    margin: 0px 50px;
+  }
+}
 mat-error {
   margin-bottom: 20px;
 }

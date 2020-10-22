@@ -73,11 +73,11 @@
 ::ng-deep .tooltip-becks {
   background: #ffffff !important;
   color: black !important;
-  width: 122px;
+  width: 266px;
   font-size: 10px !important;
   line-height: 12px !important;
   text-align: center !important;
-  text-transform: lowercase;
+  text-transform: none;
 
   @media (min-width: 769px) {
     width: 190px;
@@ -137,6 +137,26 @@
     .button-width {
       margin: 20px;
       width: 328px;
+    }
+  }
+}
+.becks-btn-primary,
+.button-disabled,
+.button-disabled:hover,
+.button-disabled:active {
+  padding-left: 35px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    background-position-x: 7px;
+    font-size: 11px !important;
+    &:hover {
+      background-position-x: 4px;
+    }
+  }
+  @media (min-width: 769px) {
+    background-position-x: 10px;
+
+    &:hover {
+      background-position-x: 7px;
     }
   }
 }

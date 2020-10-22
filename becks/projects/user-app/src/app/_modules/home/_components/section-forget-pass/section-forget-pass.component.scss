@@ -2,6 +2,11 @@
   background: #121212;
   color: #ffffff;
   padding-top: 108px;
+
+  @media (min-width: 769px) {
+    background-image: url(./../../../../../assets/img/bg_beckregist2.jpg);
+    background-size: cover;
+  }
 }
 
 .title-secondary {
@@ -10,9 +15,31 @@
   font-size: 13px !important;
   line-height: 50px !important;
 }
+.title-tertiary {
+  width: 301px;
+  font-style: normal !important;
+  font-weight: bold !important;
+  text-transform: none !important;
+  margin-bottom: 30px;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    font-size: 16px !important;
+    line-height: 19px !important;
+  }
+  @media (min-width: 769px) {
+    font-size: 16px !important;
+    line-height: 19px !important;
+  }
+}
 
 .recovery-icon {
   position: relative !important;
+
+  @media (min-width: 769px) {
+    width: 120px;
+    height: 120px;
+    margin-top: 20px;
+  }
 }
 .no-padding {
   padding: 0px;
@@ -24,13 +51,14 @@
 
 .margin-top-button {
   margin: 30px;
+
+  @media (min-width: 769px) {
+    margin: 20px;
+    width: 364px !important;
+  }
 }
 
 @media (min-width: 769px) {
-  .recovery-section {
-    background-image: url(./../../../../../assets/img/bg_beckregist2.jpg);
-    background-size: cover;
-  }
   .padding-form {
     background: rgba(2, 2, 2, 0.7);
     border-radius: 8px;
@@ -39,15 +67,6 @@
     padding: 20px;
     margin-bottom: 100px;
     backdrop-filter: blur(20px) !important;
-  }
-  .recovery-icon {
-    width: 120px;
-    height: 120px;
-    margin-top: 20px;
-  }
-  .margin-top-button {
-    margin: 20px;
-    width: 364px !important;
   }
   .title-secondary {
     font-size: 18px !important;

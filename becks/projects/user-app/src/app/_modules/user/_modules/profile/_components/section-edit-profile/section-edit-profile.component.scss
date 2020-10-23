@@ -147,8 +147,9 @@ seccion-tabs {
 
 ::ng-deep .mat-tab-label {
   font-family: "Eurostile BQ";
-  color: #ffffff !important;
-  font-size: 11px;
+  color: #c4c4c4!important;
+  font-size: 13px;
+  font-weight: 700;
   border-bottom: 3px solid #c4c4c4;
   margin-bottom: 0px;
   @media (min-width: 768px) {
@@ -158,7 +159,8 @@ seccion-tabs {
 ::ng-deep .mat-tab-label-active {
   font-family: "Eurostile BQ";
   color: #ffffff !important;
-  font-size: 11px;
+  font-size: 13px;
+  font-weight: 700;
   border-bottom: 3px solid #c4c4c4;
   margin-bottom: 0px;
   @media (min-width: 768px) {
@@ -183,10 +185,11 @@ seccion-tabs {
   }
 }
 
-::ng-deep .mat-tab-header {
+:host ::ng-deep .mat-tab-header {
   @media (min-width: 768px) {
-    width: 80%;
+    width: 70%;
     margin-right: 0%;
+    margin-top: 40px;
   }
 }
 

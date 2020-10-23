@@ -29,7 +29,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   ) {
     if(this.router.getCurrentNavigation().extras.state?.reload) {
       // TODO :: FIX THIS ISSUE FROM CSS
-      // AVOID RELOAD
+      // AVOID RELOAD - state: {reload: true}
       location.reload();
     }
   }

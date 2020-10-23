@@ -20,7 +20,7 @@ export class AgeGatePage implements OnInit {
     }
 
     if ( this.auth.isAuthenticated() ) {
-      this.router.navigate(["user/exp"], { queryParamsHandling: "preserve" });
+      this.router.navigate(["user/exp"], { queryParamsHandling: "preserve", state: {reload: true} });
     }
   }
 }

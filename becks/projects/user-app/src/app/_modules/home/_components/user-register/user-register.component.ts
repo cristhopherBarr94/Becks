@@ -181,7 +181,6 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
                     this.ui.dismissLoading();
                     if ( response.status >= 200 && response.status < 300 ) {
                       this.restartCaptcha = false;
-                      this.router.navigate(["user/exp"]);
                       this.ui.dismissModal(2500);
                       this.ui.dismissLoading(2500);
                       this.authService.setAuthenticated(

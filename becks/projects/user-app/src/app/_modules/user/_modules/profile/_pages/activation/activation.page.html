@@ -9,7 +9,7 @@
       class="content-flex-all-center full-height flex-direction-column padding-form"
       [hidden]="activate"
     >
-    <div id="left" class="lateral-div">
+    <div id="left" class="lateral-div" *ngIf="size != 'xs'">
       <mat-icon matSuffix class="cancel" (click)="closeActivation()">
         close
       </mat-icon>

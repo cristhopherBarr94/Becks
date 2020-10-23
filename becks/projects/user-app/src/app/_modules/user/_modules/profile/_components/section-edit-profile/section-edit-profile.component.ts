@@ -87,4 +87,8 @@ export class SectionEditProfileComponent implements OnInit, OnDestroy {
   selectedTab = (tab) => {
     this.indexTab.emit(tab.index);
   };
+
+  saveChanges(){
+    
+  }
 }

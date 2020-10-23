@@ -131,7 +131,7 @@ export class EditFormComponent implements OnInit,OnDestroy {
     }
   }
 
-  saveChanges() {
+  public saveChanges() {
     if (this.userEditProfileForm.valid) {
       this.ui.showLoading();
       this.birthDayDate =!!this.userEditProfileForm.controls.day.value ? 

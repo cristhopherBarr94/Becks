@@ -192,4 +192,10 @@ public bgActive(){
   }
 }
 
+closeActivation(){
+  this.router.navigate(["user/exp"], {
+    queryParamsHandling: "preserve",
+  });
+}
+
 }

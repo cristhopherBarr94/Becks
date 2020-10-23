@@ -27,7 +27,7 @@
         <img *ngIf="user.photo" [src]="url + user.photo + time" class="perfil-img" alt="Perfil" title="Perfil"/>
         <img *ngIf="user.photo == undefined && user.gender == 'M'" [src]="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
         <img *ngIf="user.photo == undefined && user.gender == 'F'" [src]="'./assets/img/profile_female.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
-        <span class="name-item">Mi perfil</span>
+        <span class="name-item">Perfil</span>
     </a>
     <ng-template #defaultPicMobile>
       <a href="./user/profile" class="menu-item" [ngClass]="selected('profile')">
@@ -74,7 +74,7 @@
             <img *ngIf="user.photo" [src]="url + user.photo + time" class="perfil-img" alt="Perfil" title="Perfil" />
             <img *ngIf="user.photo == undefined && user.gender == 'M'" [src]="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil" />
             <img *ngIf="user.photo == undefined && user.gender == 'F'" [src]="'./assets/img/profile_female.jpg'" class="perfil-img" alt="Perfil" title="Perfil" />
-            <span class="name-item">Mi perfil</span>
+            <span class="name-item">Perfil</span>
           </a>
         </li>
         <ng-template #defaultPicDesktop>

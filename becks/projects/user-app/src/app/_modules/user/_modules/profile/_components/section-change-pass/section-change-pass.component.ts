@@ -14,6 +14,7 @@ import { User } from "src/app/_models/User";
 import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { BasicAlertComponent } from 'src/app/_modules/utils/_components/basic-alert/basic-alert.component';
+import { Platform } from "@ionic/angular";
 
 @Component({
   selector: "user-section-change-pass",
@@ -32,6 +33,7 @@ export class SectionChangePassComponent implements OnInit {
   public password: string;
   public passwordVerify: string;
   public passwordPrev: string;
+  public size: string;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
   prevUrl: string = "/home";
@@ -42,8 +44,16 @@ export class SectionChangePassComponent implements OnInit {
     private httpService: HttpService,
     private router: Router,
     private userSvc: UserService,
-    private auth: AuthService
-  ) {}
+    private auth: AuthService,
+    private platform: Platform,
+  ) {
+    platform.ready().then(() => {
+      this.platform.resize.subscribe(() => {
+        this.size = this.ui.getSizeType(platform.width());
+      });
+      this.size = this.ui.getSizeType(platform.width());
+    });
+  }
 
   ngOnInit() {
     this.initforms();

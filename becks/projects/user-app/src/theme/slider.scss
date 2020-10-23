@@ -147,8 +147,10 @@
       }
       .exp-link-value {
         margin: 10px 0 85px;
+        color: #62f8b2;
         text-transform: uppercase;
         mat-icon {
+          margin-top: 5px !important;
           color: #62f8b2;
         }
       }

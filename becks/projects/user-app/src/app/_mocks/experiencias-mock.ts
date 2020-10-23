@@ -8,9 +8,9 @@ export const MockExperiencias: Exp[] = [
     imagesExp: "./assets/img/exp/artista-domicilio.jpg",
     imagesExpMob: "./assets/img/exp/artista-domicilio-mobile.jpg",
     titleExp: "ARTISTA A DOMICILIO",
-    fechaExp: "11/02/2020",
+    fechaExp: "11/2/2020",
     fechaAlt: "2 al 9 de noviembre",
-    horaExp: "",
+    horaExp: "2 al 9 de noviembre",
     detailExp:
       "Activando esta experiencia, un artista emergente tocará tu puerta para crear una pieza oroginal sin moverte de casa. Habilitaremos 5 cupos diarios durante 6 días ¡No te quedes sin el tuyo!",
     placeExp: "Tu casa",

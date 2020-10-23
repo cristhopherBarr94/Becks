@@ -17,6 +17,7 @@ export class SectionEditProfileComponent implements OnInit, OnDestroy {
   public user = new User();
   public chargePhoto: boolean = false;
   public size: string;
+  public saveBtn: boolean;
   userSubscription: Subscription;
 
   constructor(
@@ -88,7 +89,8 @@ export class SectionEditProfileComponent implements OnInit, OnDestroy {
     this.indexTab.emit(tab.index);
   };
 
-  saveChanges(){
-    
+  saveChanges() {
+    this.saveBtn = true;
+    setTimeout( ()=>{this.saveBtn = false;} , 1000);
   }
 }

@@ -118,7 +118,7 @@
       <mat-form-field appearance="fill" floatLabel="auto" class="fullInput"
         [ngClass]="getClassInputSelect(userEditProfileForm.controls.id)">
         <mat-label>Tipo de documento</mat-label>
-        <mat-select panelClass="backgroud-panel" formControlName="id" required data-qadp="id">
+        <mat-select panelClass="backgroud-panel" formControlName="id" data-qadp="id">
           <mat-option value="CC"> Cédula de ciudadanía</mat-option>
           <mat-option value="CE"> Cédula de extranjería</mat-option>
           <mat-option value="PA"> Pasaporte</mat-option>
@@ -129,7 +129,7 @@
         [ngClass]="getClassInput(userEditProfileForm.controls.document)">
         <mat-label class="color-green">Documento</mat-label>
 
-        <input matInput formControlName="document" type="text" required maxlength="30" data-qadp="document" />
+        <input matInput formControlName="document" type="text" maxlength="30" data-qadp="document" />
         <mat-error *ngIf="userEditProfileForm.controls.document.errors">
           {{
             getMessageform(

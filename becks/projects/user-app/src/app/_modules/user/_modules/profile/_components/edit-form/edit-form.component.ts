@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./edit-form.component.scss'],
 })
 export class EditFormComponent implements OnInit,OnDestroy {
+  @Input()set save(res: boolean) { if ( res ) { this.saveChanges(); } }
   public user = new User();
   public userEditProfileForm: FormGroup;
   public birthDayDate: any;
@@ -85,7 +86,7 @@ export class EditFormComponent implements OnInit,OnDestroy {
         !!this.user.birthdate && moment(this.user.birthdate).format("YYYY"),
         [Validators.required, Validators.min(1920), Validators.max(2020)]
       ),
-      id: new FormControl(this.user.type_id),
+      id: new FormControl(this.user.type_id,[Validators.required]),
       document: new FormControl(this.user.id_number,[Validators.required]),
     });
   }
@@ -132,34 +133,73 @@ export class EditFormComponent implements OnInit,OnDestroy {
   }
 
   public saveChanges() {
-    if (this.userEditProfileForm.valid) {
-      this.ui.showLoading();
-      this.birthDayDate =!!this.userEditProfileForm.controls.day.value ? 
-          this.userEditProfileForm.controls.month.value +
-        "/" +
-        this.userEditProfileForm.controls.day.value +
-        "/" +
-        this.userEditProfileForm.controls.year.value: undefined
+    const isValidForm = this.userEditProfileForm.valid;
+    
+    if ( this.size != "xs" ) {
+      //DESKTOP
+      if (isValidForm) {
+        this.ui.showLoading();
+        this.birthDayDate =!!this.userEditProfileForm.controls.day.value.trim() ? 
+                            this.userEditProfileForm.controls.month.value.trim() +
+                          "/" +
+                          this.userEditProfileForm.controls.day.value.trim() +
+                          "/" +
+                          this.userEditProfileForm.controls.year.value.trim() : undefined;
 
-      this.httpService
-        .patch(environment.serverUrl + environment.user.patchData, {
-          first_name: this.userEditProfileForm.controls.name.value,
-          last_name: this.userEditProfileForm.controls.lastName.value,
-          mobile_phone: this.userEditProfileForm.controls.phone.value,
-          birthdate: this.birthDayDate,
-          type_id: this.userEditProfileForm.controls.id.value,
-          id_number: this.userEditProfileForm.controls.document.value,
-        })
-        .subscribe((response: any) => {         
-          if (response.status == 200) {            
-            this.userSvc.getData();
-          }
-          this.ui.dismissLoading();
-        }),
-        (e) => {
-          this.ui.dismissLoading();
-        };
-
+        this.httpService
+          .patch(environment.serverUrl + environment.user.patchData, {
+            first_name: this.userEditProfileForm.controls.name.value,
+            last_name: this.userEditProfileForm.controls.lastName.value,
+            mobile_phone: this.userEditProfileForm.controls.phone.value,
+            birthdate: this.birthDayDate,
+            type_id: this.userEditProfileForm.controls.id.value,
+            id_number: this.userEditProfileForm.controls.document.value,
+          })
+          .subscribe((response: any) => {         
+            if (response.status == 200) {            
+              this.userSvc.getData();
+            }
+            this.ui.dismissLoading();
+          },
+          (e) => {
+            this.ui.dismissLoading();
+          });
+      }
+    } else {
+      //MOBILE
+      
+      if ( !this.userEditProfileForm.controls.name.invalid &&
+            !this.userEditProfileForm.controls.lastName.invalid && 
+            !this.userEditProfileForm.controls.phone.invalid && 
+            !this.userEditProfileForm.controls.month.invalid &&
+            !this.userEditProfileForm.controls.day.invalid &&
+            !this.userEditProfileForm.controls.year.invalid ) {
+        this.ui.showLoading();
+        this.birthDayDate =!!this.userEditProfileForm.controls.day.value.trim() ? 
+                            this.userEditProfileForm.controls.month.value.trim() +
+                          "/" +
+                          this.userEditProfileForm.controls.day.value.trim() +
+                          "/" +
+                          this.userEditProfileForm.controls.year.value.trim() : undefined;
+        this.httpService
+          .patch(environment.serverUrl + environment.user.patchData, {
+            first_name: this.userEditProfileForm.controls.name.value,
+            last_name: this.userEditProfileForm.controls.lastName.value,
+            mobile_phone: this.userEditProfileForm.controls.phone.value,
+            birthdate: this.birthDayDate
+          })
+          .subscribe((response: any) => {         
+            if (response.status == 200) {            
+              this.userSvc.getData();
+            } else {
+              //httpError => HTML httpError
+            }
+            this.ui.dismissLoading();
+          },
+          (e) => {
+            this.ui.dismissLoading();
+          });
+      }
     }
   }
 

@@ -5,12 +5,12 @@ export class Exp {
   imagesExp: string;
   titleExp: string;
   fechaExp: string;
+  fechaAlt: string;
   horaExp: string;
   placeExp: string;
   detailExp: string;
   urlExp: string;
   status: string;
-  colorExp:string;
   type: string;
   urlRedirect:string;
 }

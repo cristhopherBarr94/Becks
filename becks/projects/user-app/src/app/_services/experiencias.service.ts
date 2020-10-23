@@ -19,11 +19,11 @@ export class ExperienciasService {
         imagesExp: element.imagesExp,
         titleExp: element.titleExp,
         fechaExp: element.fechaExp,
+        fechaAlt: element.fechaAlt,
         detailExp: element.detailExp,
         placeExp: element.placeExp,
         urlExp: element.urlExp,
         status: element.status,
-        colorExp: element.colorExp,
         horaExp: element.horaExp,
         type:element.type,
         urlRedirect:element.urlRedirect

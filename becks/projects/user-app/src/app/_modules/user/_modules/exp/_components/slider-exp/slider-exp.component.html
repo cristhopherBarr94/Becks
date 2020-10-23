@@ -34,13 +34,13 @@
       </button>
       
       <!-- [routerLink]="['/user/interaction/', exp.id]" -->
-      <button *ngIf="exp.cuentaActiva && exp.status != 0" block="block" color="becks"
+      <button *ngIf="exp.cuentaActiva && exp.status != 2" block="block" color="becks"
         (click)="participateExperience(exp.type)"
         class="becks-btn-primary margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
         <span>Participar</span>
       </button>
-      <button *ngIf="exp.cuentaActiva && exp.status == 0" block="block" color="becks"
+      <button *ngIf="exp.cuentaActiva && exp.status == 2" block="block" color="becks"
         (click)="participateExperience(exp.type)"
         class="becks-btn-soon margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.proxExp}"
@@ -72,13 +72,13 @@
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
         <span>Activa tu cuenta</span>
       </button>
-      <button *ngIf="exp.cuentaActiva && exp.status != 0" block="block" color="becks" 
+      <button *ngIf="exp.cuentaActiva && exp.status != 2" block="block" color="becks" 
         (click)="participateExperience(exp)"
         class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
         <span>Participar</span>
       </button>
-      <button *ngIf="exp.cuentaActiva && exp.status == 0" block="block" color="becks" 
+      <button *ngIf="exp.cuentaActiva && exp.status == 2" block="block" color="becks" 
       (click)="participateExperience(exp)"
       class="becks-btn-soon more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
       [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}"

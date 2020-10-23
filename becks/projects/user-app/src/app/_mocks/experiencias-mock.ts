@@ -14,7 +14,7 @@ export const MockExperiencias: Exp[] = [
       "Grandes artistas pueden visitar tu casa y compartir un six pack de cerveza beck’s gracias a este exclusivo Club.",
     placeExp: "EN VIVO, !desde tu casa!",
     urlExp: "/exp1",
-    status: "0",
+    status: "2",
     type:"1",
     urlRedirect:""
 

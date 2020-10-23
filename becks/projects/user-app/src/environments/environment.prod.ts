@@ -25,7 +25,7 @@ export const environment = {
   rest: {
     client_id: "ed9d6754-a686-487e-ac99-4c1ce919912f",
     client_secret: "WebAppConsumer",
-    scope: "administrator web_app",
+    scope: "web_app",
     grant_type: "password",
   },
 };

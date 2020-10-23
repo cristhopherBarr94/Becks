@@ -17,6 +17,7 @@ export class ExperienciasService {
         cuentaActiva: element.cuentaActiva,
         detalleExp: element.detalleExp,
         imagesExp: element.imagesExp,
+        imagesExpMob: element.imagesExpMob,
         titleExp: element.titleExp,
         fechaExp: element.fechaExp,
         fechaAlt: element.fechaAlt,

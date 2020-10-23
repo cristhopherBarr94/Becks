@@ -1,9 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Exp } from 'src/app/_models/exp';
 import { User } from 'src/app/_models/User';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
+import { UiService } from 'src/app/_services/ui.service';
 import { UserService } from 'src/app/_services/user.service';
 
 
@@ -17,6 +19,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   public id: number;
   public initialSlide
   public slideOpts
+  public size: string;
   private codes;
   private userCodeSubs: Subscription;
 
@@ -25,13 +28,24 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   constructor(
     private experienciaService: ExperienciasService,
     private router: Router,
-    private userSvc: UserService
+    private userSvc: UserService,
+    private platform: Platform,
+    private ui: UiService,
+
   ) {
     if(this.router.getCurrentNavigation().extras.state?.reload) {
       // TODO :: FIX THIS ISSUE FROM CSS
       // AVOID RELOAD
       location.reload();
     }
+    platform.ready().then(() => {
+      this.platform.resize.subscribe(() => {
+        this.size = this.ui.getSizeType(platform.width());
+      });
+      this.size = this.ui.getSizeType(platform.width());
+      console.log(this.size);
+
+    });
   }
 
   ngOnInit() {

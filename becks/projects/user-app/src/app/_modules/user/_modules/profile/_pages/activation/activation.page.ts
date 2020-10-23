@@ -51,7 +51,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
   title: string = "activa tu cuenta";
-  prevUrl: string = "/user/profile";
+  prevUrl: string = "/user/exp";
 
   constructor(
     private formBuilder: FormBuilder,

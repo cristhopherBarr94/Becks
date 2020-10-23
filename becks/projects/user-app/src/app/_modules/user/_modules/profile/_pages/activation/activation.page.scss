@@ -1,6 +1,9 @@
 .fullSection {
   background-color: black;
 }
+#formActivationSection {
+  position: relative !important;
+}
 .separator-becks {
   display: block;
   margin-left: auto;
@@ -20,6 +23,22 @@
     top: 0px;
   }
 }
+.cancel-btn {
+  position: absolute;
+  background: transparent;
+  width: 35px;
+  height: 35px;
+  right: 20px;
+  top: 20px;
+  padding-right: 30px !important;
+  img {
+    max-width: none !important;
+  }
+  @media (min-width: 0px) and (max-width: 768px) {
+    display: none;
+  }
+}
+
 .activation-icon {
   @media (min-width: 0px) and (max-width: 768px) {
     margin-top: 65px;
@@ -181,11 +200,4 @@
       background-position-x: 7px;
     }
   }
-}
-
-.lateral-div {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  cursor: pointer;
 }

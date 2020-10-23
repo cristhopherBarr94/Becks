@@ -17,16 +17,6 @@
       display: none;
     }
   }
-  .cancel-btn {
-    position: absolute;
-    background: transparent;
-    width: 30px;
-    height: 30px;
-    right: 10%;
-    @media (min-width: 0px) and (max-width: 768px) {
-      display: none;
-    }
-  }
   .title {
     display: block;
     margin-left: auto;

@@ -5,18 +5,18 @@ export const MockExperiencias: Exp[] = [
     id: 1,
     cuentaActiva: false,
     detalleExp: false,
-    imagesExp: "./assets/img/exp/feriaD.png",
-    titleExp: "FERIA DEL MILLÓN",
-    fechaExp: "10/26/2020",
+    imagesExp: "./assets/img/exp/artista-domicilio.jpg",
+    titleExp: "ARTISTA A DOMICILIO",
+    fechaExp: "",
+    fechaAlt: "A definir con el artista",
     horaExp: "9:00 AM — 10:00 AM",
     detailExp:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
-    placeExp: "Live instagram Beck’s",
+      "Grandes artistas pueden visitar tu casa y compartir un six pack de cerveza beck’s gracias a este exclusivo Club.",
+    placeExp: "EN VIVO, !desde tu casa!",
     urlExp: "/exp1",
-    status: "1",
-    colorExp: "green-color",
-    type:"0",
-    urlRedirect:"https://www.feriadelmillon.com.co/becks/"
+    status: "2",
+    type:"1",
+    urlRedirect:""
 
   },
   {
@@ -26,13 +26,13 @@ export const MockExperiencias: Exp[] = [
     imagesExp: "./assets/img/exp/frankDesktop.jpg",
     titleExp: "FRANK VIDEO CLIP",
     fechaExp: "11/13/2020",
+    fechaAlt: "",
     horaExp: "11:00 PM — 4:00 AM",
     detailExp:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
     placeExp: "Live instagram Beck’s",
-    urlExp: "/exp1",
+    urlExp: "/exp2",
     status: "1",
-    colorExp: "green-color",
     type:"1",
     urlRedirect:""
   },

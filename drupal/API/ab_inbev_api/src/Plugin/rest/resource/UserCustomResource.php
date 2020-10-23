@@ -146,8 +146,8 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
       $user = $this->entityTypeManager->getStorage('user')->create();
 
-      if ( $data['password'] ) {
-        $pass =  trim( $data['password'] );
+      if ( isset($data['password']) ) {
+        $pass =  trim( trim($data['password']) );
       } else {
         $pass = Util::getRandomUserPass();
       }

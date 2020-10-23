@@ -71,8 +71,8 @@ export class UserLoginComponent implements OnInit {
       try {
         this.restartCaptcha = true;
         this.setCaptchaStatus(!this.restartCaptcha);
-        formData.append("username", this.userLoginForm.controls.email.value);
-        formData.append("password", this.userLoginForm.controls.password.value);
+        formData.append("username", this.userLoginForm.controls.email.value.trim());
+        formData.append("password", this.userLoginForm.controls.password.value.trim());
         formData.append("grant_type", environment.rest.grant_type);
         formData.append("client_id", environment.rest.client_id);
         formData.append("client_secret", environment.rest.client_secret);

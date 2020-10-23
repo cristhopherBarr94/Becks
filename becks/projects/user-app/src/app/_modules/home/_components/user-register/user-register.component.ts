@@ -161,8 +161,8 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
                 try {
                   this.restartCaptcha = true;
                   this.setCaptchaStatus(!this.restartCaptcha);
-                  formData.append("username", this.userRegisterForm.controls.email.value);
-                  formData.append("password", this.userRegisterForm.controls.password.value);
+                  formData.append("username", this.userRegisterForm.controls.email.value.trim());
+                  formData.append("password", this.userRegisterForm.controls.password.value.trim());
                   formData.append("grant_type", environment.rest.grant_type);
                   formData.append("client_id", environment.rest.client_id);
                   formData.append("client_secret", environment.rest.client_secret);

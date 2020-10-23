@@ -2,6 +2,32 @@
   color: #ffffff;
   background: #121212;
 
+  .logo-2 {
+    width: 120px;
+    height: 120px;
+    @media (min-width: 0px) and (max-width: 768px) {
+      display: none;
+    }
+  }
+  .margin-top-icon {
+    top: 10px;
+  }
+  .cancel-btn {
+    position: absolute;
+    background: transparent;
+    width: 35px;
+    height: 35px;
+    right: 20px;
+    top: 20px;
+    padding-right: 30px !important;
+    img {
+      max-width: none !important;
+    }
+    @media (min-width: 0px) and (max-width: 768px) {
+      display: none;
+    }
+  }
+
   .plane-icon {
     position: relative !important;
     @media (min-width: 0px) and (max-width: 768px) {

@@ -122,7 +122,7 @@
         display: flex;
         position: relative;
         width: 100%;
-        max-width: 1024px;
+        /* max-width: 1024px; // TODO :: content to left to right behavior*/
         align-items: flex-start;
       }
     }
@@ -149,6 +149,7 @@
         margin: 10px 0 85px;
         color: #62f8b2;
         text-transform: uppercase;
+        color: #62f8b2;
         mat-icon {
           margin-top: 5px !important;
           color: #62f8b2;
@@ -291,6 +292,11 @@
     font-family: "Helvetica LT Std";
     font-style: normal;
     font-weight: normal !important;
+  }
+
+  .content-onbording {
+    position: absolute;
+    bottom: 50px;
   }
 
   .btn-onboarding {

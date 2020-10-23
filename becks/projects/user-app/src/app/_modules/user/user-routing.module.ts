@@ -4,7 +4,6 @@ import { InteractionConfirmComponent } from './_components/interaction-confirm/i
 import { InteractionViewComponent } from './_components/interaction-view/interaction-view.component';
 import { ScheduleComponent } from './_components/schedule/schedule.component';
 import { VerticalCalendarComponent } from './_components/vertical-calendar/vertical-calendar.component';
-import { SectionChangePassComponent } from "./_modules/profile/_components/section-change-pass/section-change-pass.component";
 import { ActivationPage } from "./_modules/profile/_pages/activation/activation.page";
 import { MGMPage } from "./_modules/profile/_pages/mgm/mgm.page";
 
@@ -40,10 +39,6 @@ const routes: Routes = [
   {
     path: "calendarmob",
     component: VerticalCalendarComponent
-  },
-  {
-    path: "changePass",
-    component: SectionChangePassComponent,
   },
   {
     path: "activation",

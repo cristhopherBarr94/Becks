@@ -1,3 +1,10 @@
+.exp-slider .item-exp .content-exp {
+  margin-left: 50px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    margin-left: 0px;
+  }
+}
+
 .becks-btn-primary,
 .button-disabled,
 .button-disabled:hover,

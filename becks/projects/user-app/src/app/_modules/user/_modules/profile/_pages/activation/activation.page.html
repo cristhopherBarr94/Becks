@@ -8,14 +8,14 @@
       class="content-flex-all-center full-height flex-direction-column padding-form"
       [hidden]="activate"
     >
-    <div id="left" class="lateral-div" *ngIf="size != 'xs'">
+    <!-- <div id="left" class="lateral-div" *ngIf="size != 'xs'">
       <mat-icon matSuffix class="cancel" (click)="closeActivation()">
         close
       </mat-icon>
-    </div>
-    <!-- <button class="cancel-btn" [routerLink]="'/user/exp'">
+    </div> -->
+    <button class="cancel-btn" [routerLink]="'/user/exp'">
       <img src="./assets/icon/cancel-icon.svg" alt="cancel" />
-    </button> -->
+    </button>
       <h2 class=" title-desktop">{{title}}</h2>
       <div class="separator-becks"></div>
       <span class="activation-icon"> </span>

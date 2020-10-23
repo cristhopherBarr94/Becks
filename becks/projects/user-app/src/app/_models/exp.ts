@@ -3,6 +3,7 @@ export class Exp {
   cuentaActiva: boolean;
   detalleExp: boolean;
   imagesExp: string;
+  imagesExpMob: string;
   titleExp: string;
   fechaExp: string;
   fechaAlt: string;

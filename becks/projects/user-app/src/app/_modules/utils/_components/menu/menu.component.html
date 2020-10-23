@@ -34,9 +34,9 @@
         <img [src]="'./assets/img/profile_male.jpg'" class="perfil-img" alt="Perfil" title="Perfil"/>
       </a>
     </ng-template>
-    <a (click)="logout()" class="sign-out">
-      <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Salir"/>
-      <span class="label-out">Salir</span>
+    <a (click)="logout()" class="menu-item">
+      <img class="icon-item" src="./assets/icon/menu/sign-out-alt.svg" alt="Salir" />
+      <span class="name-item">Salir</span>
     </a>
   </nav>
   <nav class="menu-desktop" [ngClass]="transparentStyle()">

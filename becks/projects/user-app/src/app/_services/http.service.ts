@@ -13,7 +13,7 @@ import { UiService } from './ui.service';
 })
 export class HttpService {
 
-  // private error_counter = 0;
+  private error_counter = 0;
   constructor(private http: HttpClient,
               private authService: AuthService,
               private ui: UiService) {}
@@ -135,15 +135,15 @@ export class HttpService {
   handleError(error: HttpErrorResponse) {
     
     if (error.status === HttpConstants.UNAUTHORIZED || error.status === HttpConstants.FORBIDDEN ) {
-      // if ( this.error_counter++ > 2 ) {
-      //   this.error_counter = 0;
+      if ( this.error_counter++ > 1 ) {
+        this.error_counter = 0;
         this.authService.setAuthenticated(null);
         this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
           title: "Sesión expirada",
           description: "Cerrando sesión de forma segura",
         });
         setTimeout( () => { location.reload(); } , 3000 );
-      // }
+      }
     } else if (error.status === HttpConstants.CONFLICT) {
       // console.log("mensaje incorrecto");
     } else if (

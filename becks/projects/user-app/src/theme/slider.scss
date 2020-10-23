@@ -38,6 +38,9 @@
   .swiper-pagination.swiper-pagination-bullets {
     right: auto;
     left: 10px;
+    @media (min-width: 1024px) {
+      left: 30px;
+    }
 
     .swiper-pagination-bullet {
       width: 10px;
@@ -110,16 +113,29 @@
     align-content: flex-end;
     justify-content: flex-end;
     @media (min-width: 1024px) {
-      align-items: flex-start;
+      align-items: center;
       align-content: center;
       justify-content: center;
     }
+    .container-exp {
+      @media (min-width: 1024px) {
+        display: flex;
+        position: relative;
+        width: 100%;
+        max-width: 1024px;
+        align-items: flex-start;
+      }
+    }
     &:nth-child(even) {
       @media (min-width: 1024px) {
-        align-items: flex-end;
+        .container-exp {
+          align-items: flex-end !important;
+          justify-content: flex-end;
+        }
       }
     }
     .content-exp {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -127,20 +143,14 @@
       justify-content: flex-end;
       padding: 20px;
       @media (min-width: 1024px) {
-        padding-left: 100px;
         align-items: flex-start;
       }
-      &:nth-child(even) {
-        @media (min-width: 1024px) {
-          padding-right: 100px;
-        }
-      }
-
       .exp-link-value {
         margin: 10px 0 85px;
         text-transform: uppercase;
-        text-decoration: underline !important;
-        color: #62f8b2;
+        mat-icon {
+          color: #62f8b2;
+        }
       }
     }
 
@@ -263,11 +273,6 @@
     font-size: 22px !important;
     line-height: 23px !important;
   }
-
-  // @media (min-width: 1024px) {
-  //   max-height: 663px;
-  // }
-
   .swiper-slide {
     flex-direction: column;
     align-content: flex-start;
@@ -301,6 +306,10 @@
     position: absolute;
     bottom: 13px;
     left: 8px;
+    @media (min-width: 1024px) {
+      bottom: 26px;
+      left: 16px;
+    }
   }
 
   .btn-action {
@@ -308,6 +317,10 @@
     position: absolute;
     bottom: 13px;
     right: 8px;
+    @media (min-width: 1024px) {
+      bottom: 26px;
+      right: 16px;
+    }
   }
 
   .swiper-pagination.swiper-pagination-bullets {
@@ -315,6 +328,9 @@
     left: 0;
     width: 30%;
     margin: auto;
+    @media (min-width: 1024px) {
+      bottom: 26px;
+    }
 
     .swiper-pagination-bullet {
       width: 10px;

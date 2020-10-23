@@ -185,7 +185,6 @@ $hamburger-spacing: 8px;
 }
 
 .sign-out {
-  padding-top: 7px;
   width: 45px;
   height: 45px;
   display: flex;
@@ -197,19 +196,23 @@ $hamburger-spacing: 8px;
   flex-direction: column;
   color: #62f8b2;
   @media (min-width: 1024px) {
-    margin-left: 20px;
+    margin-top: 0px;
   }
   .icon-out {
-    width: 20px;
-    height: auto;
+    width: 37px;
+    height: 37px;
   }
   .label-out {
-    color: #62f8b2;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     font-size: 10px;
     font-weight: bold;
     text-align: center;
     font-family: "Helvetica LT Std" !important;
     width: 100%;
+    text-transform: uppercase;
   }
 }
 

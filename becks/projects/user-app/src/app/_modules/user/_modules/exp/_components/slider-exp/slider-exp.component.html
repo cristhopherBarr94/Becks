@@ -4,13 +4,10 @@
   pager="true" zoom="false" class="exp-slider">
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !exp.cuentaActiva, 'active': exp.cuentaActiva}">
-
-    <img *ngIf="!exp.cuentaActiva && this.size == 'lg' || this.size == 'md'" [src]="exp.imagesExp" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
-      [ngClass]="{'animate__animated animate__bounceInLeft': exp.cuentaActiva}"> 
-
-    <img *ngIf="!exp.cuentaActiva && this.size == 'xs'" [src]="exp.imagesExpMob" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
+    <img *ngIf="this.size == 'lg' || this.size == 'md'"  [src]="exp.imagesExp" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
       [ngClass]="{'animate__animated animate__bounceInLeft': exp.cuentaActiva}">
-
+      <img *ngIf="this.size == 'xs'"  [src]="exp.imagesExpMob" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
+      [ngClass]="{'animate__animated animate__bounceInLeft': exp.cuentaActiva}">
       <div class="container-exp">
         <div class="content-exp animate__animated animate__bounceInLeft animate__delay-1s">
       <h2 *ngIf="!exp.detalleExp"
@@ -91,4 +88,4 @@
       <span>PRÓXIMAMENTE</span>
     </button>
   </ion-slide>
-</ion-slides>|
+</ion-slides>

@@ -37,10 +37,6 @@ const routes: Routes = [
     component: InteractionViewComponent
   },
   {
-    path: "calendarmob",
-    component: VerticalCalendarComponent
-  },
-  {
     path: "activation",
     component: ActivationPage,
   },

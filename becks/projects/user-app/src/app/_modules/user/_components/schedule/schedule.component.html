@@ -3,6 +3,7 @@
 
   <section
     class="content-flex-all-center flex-direction-column container-schedule-component"
+    *ngIf="this.size == 'lg' || this.size == 'md'"
   >
     <h1 class="title-primary">calendario</h1>
     <span class="separator-white"></span>
@@ -77,6 +78,8 @@
       </div>
     </ion-row>
   </section>
+
+  <user-vertical-calendar *ngIf="this.size == 'xs'"></user-vertical-calendar>
   <app-footer></app-footer>
 </ion-content>
 

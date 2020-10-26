@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatCalendar, MatCalendarCellClassFunction, MatCalendarCellCssClasses } from "@angular/material/datepicker";
+import { Platform } from '@ionic/angular';
+import { platform } from 'os';
 import { MockExperiencias } from 'src/app/_mocks/experiencias-mock';
 import { MenuStatusService } from 'src/app/_services/menu-status.service';
+import { UiService } from 'src/app/_services/ui.service';
 
 
 @Component({
@@ -31,12 +34,22 @@ export class ScheduleComponent implements OnInit {
   public maxDate2: Date;
   public count: number = 0;
   public colorClass: string;
+  public size: string;
+
   currentYear = new Date().getFullYear();
   @ViewChild("calendar1", { static: false }) calendar1: MatCalendar<Date>;
   @ViewChild("calendar2", { static: false }) calendar2: MatCalendar<Date>;
 
  
-  constructor(private menuS : MenuStatusService,) {}
+  constructor(private menuS : MenuStatusService, private platform: Platform, private ui: UiService) {
+    platform.ready().then(() => {
+      this.platform.resize.subscribe(() => {
+        this.size = this.ui.getSizeType(platform.width());
+      });
+      this.size = this.ui.getSizeType(platform.width());
+      console.log(this.size);
+    });
+  }
 
   ngOnInit() {
     this.selectedDate = new Date();

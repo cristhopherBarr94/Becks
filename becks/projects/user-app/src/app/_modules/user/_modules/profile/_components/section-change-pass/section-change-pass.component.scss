@@ -21,6 +21,9 @@
     font-style: normal !important;
     font-size: 13px !important;
     line-height: 50px !important;
+    @media (min-width: 0px) and (max-width: 768px) {
+      display: none;
+    }
   }
 
   .lock-icon {
@@ -28,6 +31,9 @@
     @media (min-width: 769px) {
       margin-top: 50px;
       margin-bottom: 20px;
+    }
+    @media (min-width: 0px) and (max-width: 768px) {
+      display: none;
     }
   }
 
@@ -94,8 +100,7 @@
   display: block;
   margin-right: auto;
   @media (min-width: 0px) and (max-width: 768px) {
-    margin-left: 90%;
-    margin-top: 11.29px;
+    display: none;
   }
   @media (min-width: 769px) {
     position: absolute;

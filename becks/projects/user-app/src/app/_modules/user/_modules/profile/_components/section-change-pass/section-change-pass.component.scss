@@ -9,6 +9,9 @@
     height: 550px !important;
     overflow: hidden;
   }
+  @media (min-width: 0px) and (max-width: 768px) {
+    padding-top: 50px !important;
+  }
   .content-flex-all-center .form-section {
     margin-top: 0px;
   }
@@ -108,4 +111,6 @@
   }
 }
 
-.margin-bottom {margin-bottom: 26px;}
+.margin-bottom {
+  margin-bottom: 26px;
+}

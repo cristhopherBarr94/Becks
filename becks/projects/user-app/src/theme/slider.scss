@@ -121,7 +121,9 @@
       @media (min-width: 1024px) {
         display: flex;
         position: relative;
-        width: 100%;
+        width: 37%;
+        margin-left: 0px;
+        margin-right: auto;
         /* max-width: 1024px; // TODO :: content to left to right behavior*/
         align-items: flex-start;
       }

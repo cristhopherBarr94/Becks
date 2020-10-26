@@ -193,6 +193,7 @@ seccion-tabs {
 }
 
 :host ::ng-deep .mat-tab-header {
+  width: 90%;
   @media (min-width: 768px) {
     width: 70%;
     margin-right: 0%;

@@ -13,6 +13,7 @@
       </user-experiences-card>
     </div>
   </div>
+  <div class="separator-exp" *ngIf="pendingCards.length > 0 && acceptCards.length > 0"></div>
   <div class="margin-top">
     <span class="title-profile green-color" *ngIf="acceptCards.length > 0">COMPLETAS</span>
     <div [ngClass]="direcionCards">
@@ -27,6 +28,8 @@
       </user-experiences-card>
     </div>
   </div>
+  <div class="separator-exp" *ngIf="acceptCards.length > 0 && cancelCards.length > 0"></div>
+  <div class="separator-exp" *ngIf="pendingCards.length > 0 && cancelCards.length > 0 && acceptCards.length == 0"></div>
   <div class="margin-top">
     <span class="title-profile red-color" *ngIf="cancelCards.length > 0">CANCELADAS</span>
     <div [ngClass]="direcionCards">

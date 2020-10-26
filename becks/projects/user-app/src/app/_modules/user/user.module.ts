@@ -32,7 +32,7 @@ registerLocaleData(es);
     ScheduleComponent,
     InteractionViewComponent,
     InteractionConfirmComponent,
-    VerticalCalendarComponent
+    VerticalCalendarComponent,
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,7 @@
 <ion-slides loop="false" pager="true" spaceBetween="0" [options]="slideOpts" slidesPerView="1" effect="slide"
 *ngIf="experienciaContent.length>0" 
   pager="true" zoom="false" class="exp-slider">
+  <user-announcer-days></user-announcer-days>
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !exp.cuentaActiva, 'active': exp.cuentaActiva}">
     <img *ngIf="this.size == 'lg' || this.size == 'md'"  [src]="exp.imagesExp" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"

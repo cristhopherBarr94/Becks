@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatCalendar, MatCalendarCellClassFunction, MatCalendarCellCssClasses } from "@angular/material/datepicker";
 import { Platform } from '@ionic/angular';
-import { platform } from 'os';
 import { MockExperiencias } from 'src/app/_mocks/experiencias-mock';
 import { MenuStatusService } from 'src/app/_services/menu-status.service';
 import { UiService } from 'src/app/_services/ui.service';
@@ -102,6 +101,7 @@ export class ScheduleComponent implements OnInit {
     }
   }
   previousDate() {
+    console.log("atras");
     this.calendar1._goToDateInView(
       (this.minDate = new Date(new Date().setMonth(new Date().getMonth()))),
       "month"

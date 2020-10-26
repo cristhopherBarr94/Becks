@@ -53,26 +53,30 @@ export class AgeGateComponent implements OnInit {
   }
 
   validateAgeGate() {
-    if (
-      moment().diff(
-        moment()
-          .day(this.ageGateForm.controls.day.value)
-          .month(this.ageGateForm.controls.month.value)
-          .year(this.ageGateForm.controls.year.value),
-        "years"
-      ) >= 18
-    ) {
-      if (this.cheked) {
-        localStorage.setItem("user-age-gate-local", moment().toISOString());
-      } else {
-        sessionStorage.setItem("user-age-gate-session", moment().toISOString());
-      }
-      this.ui.showLoading();
-      this.router.navigate(["home/onboarding"], { queryParamsHandling: "preserve" });
+    if ( this.ageGateForm.invalid ) {
+      (<any>Object).values(this.ageGateForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
     } else {
-      localStorage.removeItem("user-age-gate-local");
-      sessionStorage.removeItem("user-age-gate-session");
-      window.location.href = "https://www.tapintoyourbeer.com/age_check.cfm";
+      if (  moment().diff(
+              moment()
+              .day(this.ageGateForm.controls.day.value)
+              .month(this.ageGateForm.controls.month.value)
+              .year(this.ageGateForm.controls.year.value),
+              "years"
+            ) >= 18 ) {
+        if (this.cheked) {
+          localStorage.setItem("user-age-gate-local", moment().toISOString());
+        } else {
+          sessionStorage.setItem("user-age-gate-session", moment().toISOString());
+        }
+        this.ui.showLoading();
+        this.router.navigate(["home/onboarding"], { queryParamsHandling: "preserve" });
+      } else {
+        localStorage.removeItem("user-age-gate-local");
+        sessionStorage.removeItem("user-age-gate-session");
+        window.location.href = "https://www.tapintoyourbeer.com/age_check.cfm";
+      }
     }
   }
 

@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 import { User } from "../../../../../../_models/User";
 import { UiService } from "../../../../../../_services/ui.service";
 import { HeaderComponent } from "src/app/_modules/utils/_components/header/header.component";
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { NotifyModalComponent } from 'src/app/_modules/utils/_components/notify-modal/notify-modal.component';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
@@ -48,10 +48,11 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
   private subscribe: Subscription;
   private subsCodes: Subscription;
   private modal: any;
+  public size: string;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
   title: string = "activa tu cuenta";
-  prevUrl: string = "/user/profile";
+  prevUrl: string = "/user/exp";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,8 +61,15 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
     private ui: UiService,
     private modalCtrl: ModalController,
     private userSvc: UserService,
-    private menuS : MenuStatusService
-  ) {}
+    private menuS : MenuStatusService,
+    private platform: Platform ) { 
+      platform.ready().then(() => {
+        this.platform.resize.subscribe(() => {
+          this.size = this.ui.getSizeType(platform.width());
+        });
+        this.size = this.ui.getSizeType(platform.width());
+      });
+    }
 
   ngOnInit(): void {
     this.subscribe = this.userSvc.user$.subscribe(user =>{
@@ -182,6 +190,7 @@ public redirectTo() {
   this.ui.dismissModal();
   this.router.navigate(["user/exp"], {
     queryParamsHandling: "preserve",
+    state: {reload: true}
   });
 }
 public bgActive(){
@@ -195,6 +204,7 @@ public bgActive(){
 closeActivation(){
   this.router.navigate(["user/exp"], {
     queryParamsHandling: "preserve",
+    state: {reload: true}
   });
 }
 

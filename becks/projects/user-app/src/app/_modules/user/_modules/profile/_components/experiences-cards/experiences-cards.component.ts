@@ -42,9 +42,6 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
       if (MockExperiencias[i].status == "1" || MockExperiencias[i].status == "2") {
         this.pendingCards.push(MockExperiencias[i]);
       }
-      // if (MockExperiencias[i].status == "2") {
-      //   this.cancelCards.push(MockExperiencias[i]);
-      // }
     }
     this.userSvc.getCodes();
   }

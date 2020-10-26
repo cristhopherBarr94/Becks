@@ -1,6 +1,6 @@
 .circle-progress-tool {
   margin-bottom: 0px !important;
-  position: relative;
+  position: relative !important;
   height: 170px;
   width: 170px;
   margin-left: auto;
@@ -14,6 +14,7 @@ circle-progress {
   letter-spacing: 0.15px !important;
   height: 170px;
   width: 170px;
+  margin: 0 !important;
 }
 
 .text-notify {
@@ -34,12 +35,14 @@ ion-progress-bar {
 }
 
 .supp-circle {
-  position: absolute;
+  position: absolute !important;
   border-radius: 100%;
   width: 170px;
   height: 170px;
-  top: 17px;
+  top: 14px;
+  left: 14px;
   .clock {
+    position: absolute !important;
     width: 27px;
     height: 27px;
     background: url(./../../../../../../../assets/icon/clock-icon.svg);
@@ -47,13 +50,12 @@ ion-progress-bar {
     background-position: center;
     background-color: black;
     border-radius: 100%;
-    position: relative;
-    left: 0px;
+    left: 70px;
+    top: 0px;
   }
 }
-
 .subtitle-days {
-  position: absolute;
+  position: absolute !important;
   height: 170px;
   width: 170px;
   font-family: "Helvetica LT Std" !important;

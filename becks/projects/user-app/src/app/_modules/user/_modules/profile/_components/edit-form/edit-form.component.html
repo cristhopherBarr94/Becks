@@ -44,7 +44,7 @@
         <mat-label class="color-green">Teléfono</mat-label>
 
         <input matInput formControlName="phone" type="number" required maxlength="10" data-qadp="phone" />
-        <mat-error *ngIf="userEditProfileForm.controls.phone.errors">
+        <mat-error *ngIf="userEditProfileForm.controls.phone.error">
           {{
             getMessageform(
               userEditProfileForm.controls.phone,

@@ -143,7 +143,7 @@
           }}</mat-error>
       </mat-form-field>
     </div>
-    <button class="becks-btn-primary margin-top-button button-width margin-bottom"
+    <button *ngIf="size != 'xs'" class="becks-btn-primary margin-top-button button-width margin-bottom"
       (click)="saveChanges()" block="block" color="becks">
       <span>ACTUALIZAR</span>
     </button>

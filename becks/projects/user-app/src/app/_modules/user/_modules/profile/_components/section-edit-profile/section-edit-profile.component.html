@@ -53,7 +53,11 @@
       <section class="seccion-tabs-mobile" *ngIf="size == 'xs'">
         <mat-tab-group class="content-flex-all-center" [selectedIndex]="0" (selectedTabChange)="selectedTab($event)">
           <mat-tab label="Datos" id="edit">
-            <user-edit-form *ngIf="size == 'xs'" [save]="saveBtn"></user-edit-form>
+            <user-edit-form *ngIf="size == 'xs'" [save]="saveBtn"></user-edit-form>        
+            <div class="content-flex-all-center">
+              <button class="becks-btn-primary margin-top-button button-width margin-bottom" (click)="saveChanges()" color="becks">
+                <span>ACTUALIZAR</span>
+              </button></div>
           </mat-tab>
           <mat-tab id="pass">
             <ng-template mat-tab-label>

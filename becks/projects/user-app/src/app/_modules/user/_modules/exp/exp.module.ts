@@ -10,10 +10,15 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
 import { IonicModule } from '@ionic/angular';
 import { MatIconModule } from '@angular/material/icon';
+import { AnnouncerDaysComponent } from '../../_components/announcer-days/announcer-days.component';
+import { CircleProgressComponent } from '../profile/_components/circle-progress/circle-progress.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 @NgModule({
   declarations: [
     SliderExpComponent,
     HomeExpPage,
+    AnnouncerDaysComponent,
+    CircleProgressComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatNativeDateModule,
     MatDatepickerModule,
     MatIconModule,
+    NgCircleProgressModule.forRoot({}),
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: "es-ES" }],
 })

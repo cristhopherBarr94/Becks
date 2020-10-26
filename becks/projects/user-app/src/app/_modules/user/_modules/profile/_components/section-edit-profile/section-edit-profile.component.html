@@ -48,6 +48,17 @@
       </mat-tab>
       </mat-tab-group>
       </section>
-      <user-edit-form *ngIf="size == 'xs'" [save]="saveBtn"></user-edit-form>
+
+
+      <section class="seccion-tabs-mobile" *ngIf="size == 'xs'">
+        <mat-tab-group class="content-flex-all-center" [selectedIndex]="0" (selectedTabChange)="selectedTab($event)">
+          <mat-tab label="Datos" id="edit">
+            <user-edit-form *ngIf="size == 'xs'" [save]="saveBtn"></user-edit-form>
+          </mat-tab>
+          <mat-tab label="Cambiar Contraseña" id="pass">
+            <user-section-change-pass></user-section-change-pass>
+          </mat-tab>
+          </mat-tab-group>
+          </section>
   
 </div>

@@ -1,7 +1,8 @@
 .container-edit-profile {
   min-height: 100%;
   background-color: #171717;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   margin-bottom: 25px;
 }
 
@@ -107,13 +108,13 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #c4c4c4;
+  background: #313132;
   border-radius: 8px;
   background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #313132;
+  background: #c4c4c4;
   border-radius: 8px;
   background-clip: padding-box;
 }
@@ -147,13 +148,14 @@ seccion-tabs {
 
 ::ng-deep .mat-tab-label {
   font-family: "Eurostile BQ";
-  color: #c4c4c4!important;
+  color: #c4c4c4 !important;
   font-size: 13px;
   font-weight: 700;
   border-bottom: 3px solid #c4c4c4;
   margin-bottom: 0px;
   @media (min-width: 768px) {
-  width: 80%;}
+    width: 80%;
+  }
 }
 
 ::ng-deep .mat-tab-label-active {
@@ -164,7 +166,8 @@ seccion-tabs {
   border-bottom: 3px solid #c4c4c4;
   margin-bottom: 0px;
   @media (min-width: 768px) {
-  width: 80%;}
+    width: 80%;
+  }
 }
 
 ::ng-deep .mat-ink-bar {

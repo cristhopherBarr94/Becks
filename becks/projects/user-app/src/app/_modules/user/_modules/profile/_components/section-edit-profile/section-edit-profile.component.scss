@@ -155,9 +155,6 @@ seccion-tabs {
   margin-bottom: 0px;
   width: 50%;
   display: inline-flex;
-  @media (min-width: 0px) and (max-width:767px) {
-    height: 15%;
-  }
   @media (min-width: 768px) {
     width: 80%;
   }

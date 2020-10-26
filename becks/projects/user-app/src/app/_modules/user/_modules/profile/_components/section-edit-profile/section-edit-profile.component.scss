@@ -153,6 +153,8 @@ seccion-tabs {
   font-weight: 700;
   border-bottom: 3px solid #c4c4c4;
   margin-bottom: 0px;
+  width: 50%;
+  display: inline-flex;
   @media (min-width: 768px) {
     width: 80%;
   }
@@ -165,6 +167,8 @@ seccion-tabs {
   font-weight: 700;
   border-bottom: 3px solid #c4c4c4;
   margin-bottom: 0px;
+  width: 50%;
+  display: inline-flex;
   @media (min-width: 768px) {
     width: 80%;
   }
@@ -189,6 +193,7 @@ seccion-tabs {
 }
 
 :host ::ng-deep .mat-tab-header {
+  width: 100%;
   @media (min-width: 768px) {
     width: 70%;
     margin-right: 0%;

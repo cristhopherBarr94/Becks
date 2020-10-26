@@ -13,11 +13,11 @@
     <div id="center" class="center-div">
       <span class="title-secondary">EDITAR PERFIL</span>
     </div>
-    <div id="right" class="lateral-div" *ngIf="size == 'xs'">
+    <!-- <div id="right" class="lateral-div" *ngIf="size == 'xs'">
       <mat-icon matSuffix class="save" (click)="saveChanges()">
         check
       </mat-icon>
-    </div>
+    </div> -->
     <div id="right" class="lateral-div" *ngIf="size != 'xs'">
       <button mat-button  class="cancel" (click)="closeEditDesktop()">
         <mat-icon matSuffix>
@@ -53,9 +53,16 @@
       <section class="seccion-tabs-mobile" *ngIf="size == 'xs'">
         <mat-tab-group class="content-flex-all-center" [selectedIndex]="0" (selectedTabChange)="selectedTab($event)">
           <mat-tab label="Datos" id="edit">
-            <user-edit-form *ngIf="size == 'xs'" [save]="saveBtn"></user-edit-form>
+            <user-edit-form *ngIf="size == 'xs'" [save]="saveBtn"></user-edit-form>        
+            <div class="content-flex-all-center">
+              <button class="becks-btn-primary margin-top-button button-width margin-bottom" (click)="saveChanges()" color="becks">
+                <span>ACTUALIZAR</span>
+              </button></div>
           </mat-tab>
-          <mat-tab label="Cambiar Contraseña" id="pass">
+          <mat-tab id="pass">
+            <ng-template mat-tab-label>
+              <div>Cambiar<br>Contraseña</div>
+            </ng-template>
             <user-section-change-pass></user-section-change-pass>
           </mat-tab>
           </mat-tab-group>

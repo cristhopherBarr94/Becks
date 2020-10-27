@@ -105,11 +105,15 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   
 participateExperience(arrayObject:number){
-  if(this.experienciaContent[arrayObject].type == "0"){
+  console.log(arrayObject);
+  if(this.experienciaContent[arrayObject-1].type == "0"){
     window.open(this.experienciaContent[arrayObject].urlRedirect);
   }
-  else if(this.experienciaContent[arrayObject].type == "1"){
-    this.router.navigate([`user/interaction/${this.experienciaContent[arrayObject].id}`]);
+  else if(this.experienciaContent[arrayObject-1].type == "1"){
+    this.router.navigate([`user/interaction/${arrayObject}`]);
+  }
+  else if(this.experienciaContent[arrayObject-1].type == "2"){
+    this.router.navigate([`user/confirm-interaction/${arrayObject}`]);
   }
 }
 

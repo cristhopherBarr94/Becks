@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 import { MockExperiencias } from 'src/app/_mocks/experiencias-mock';
 import { HeaderComponent } from 'src/app/_modules/utils/_components/header/header.component';
 import { HttpService } from 'src/app/_services/http.service';
+import { UiService } from 'src/app/_services/ui.service';
 
 @Component({
   selector: 'user-interaction-confirm',
@@ -11,20 +13,40 @@ import { HttpService } from 'src/app/_services/http.service';
 })
 export class InteractionConfirmComponent implements OnInit, AfterViewInit {
   @ViewChild(HeaderComponent) header: HeaderComponent;
-  prevUrl: string = "/user/profile";
+  prevUrl: string = "/user/exp";
   public experience:any = MockExperiencias;
-  public bgExp:string;
+  public bgExpDes:string;
+  public bgExpMob:string;
   public id: number;
   public expTitleC:string;
+  public expLocation:string;
+  public expDescRed:string;
+  public size: string;
+  public allow:boolean=false;
+
 
   constructor(   public httpService: HttpService,
-    private router: Router,) { }
+    private router: Router, private platform: Platform,
+    private ui: UiService,) { 
+
+      platform.ready().then(() => {
+        this.platform.resize.subscribe(() => {
+          this.size = this.ui.getSizeType(platform.width());
+        });
+        this.size = this.ui.getSizeType(platform.width());
+      });
+    }
   ngOnInit() {
     this.id = Number(this.router.url.replace("/user/confirm-interaction/",""))
     this.experience.forEach(exp => {
+      console.log(this.size);
       if(this.id == exp.id){
-        this.bgExp = exp.imagesExp;
+        this.bgExpMob = exp.imagesExpMob;
+        this.bgExpDes = exp.imagesExp;
         this.expTitleC = exp.titleExp; 
+        this.expLocation = exp.placeExp;
+        this.expDescRed = "Enviaremos a tu correo las instrucciones para vivir esta experiencia.";
+        this.allow=true;
       }
     });
 

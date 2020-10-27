@@ -5,7 +5,7 @@
   <user-announcer-days class="animate__animated animate__bounceInLeft animate__delay-1s"></user-announcer-days>
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !exp.cuentaActiva, 'active': exp.cuentaActiva}">
-    <user-announcer-amount *ngIf="exp.cuentaActiva && exp.status == 2" [state]="exp.status"></user-announcer-amount>
+    <user-announcer-amount *ngIf="exp.cuentaActiva && (exp.status == 2 || exp.status== 1)" [state]="exp.status"></user-announcer-amount>
     <user-sold-message *ngIf="exp.cuentaActiva && exp.status == 2" [state]="exp.status"></user-sold-message>
     <img *ngIf="this.size == 'lg' || this.size == 'md'"  [src]="exp.imagesExp" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
       [ngClass]="{'animate__animated animate__bounceInLeft': exp.cuentaActiva}">
@@ -40,13 +40,12 @@
       
       <!-- [routerLink]="['/user/interaction/', exp.id]" -->
       <button *ngIf="exp.cuentaActiva && exp.status != 2" block="block" color="becks"
-        (click)="participateExperience(exp.type)"
+        (click)="participateExperience(exp.id)"
         class="becks-btn-primary margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
         <span>Participar</span>
       </button>
       <button *ngIf="exp.cuentaActiva && exp.status == 2" block="block" color="becks"
-        (click)="participateExperience(exp.type)"
         class="becks-btn-soon margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.proxExp}"
         [disabled]="true"
@@ -78,13 +77,12 @@
         <span>Activa tu cuenta</span>
       </button>
       <button *ngIf="exp.cuentaActiva && exp.status != 2" block="block" color="becks" 
-        (click)="participateExperience(exp)"
+        (click)="participateExperience(exp.id)"
         class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
         <span>Participar</span>
       </button>
       <button *ngIf="exp.cuentaActiva && exp.status == 2" block="block" color="becks" 
-      (click)="participateExperience(exp)"
       class="becks-btn-soon more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
       [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}"
       [disabled]="true">

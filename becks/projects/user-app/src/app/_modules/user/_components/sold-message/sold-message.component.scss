@@ -1,0 +1,68 @@
+.message-container {
+  position: absolute;
+  background: rgba(2, 2, 2, 1);
+  border: 1px solid #038259;
+  box-sizing: border-box;
+  box-shadow: 4px 4px 8px #000000;
+  border-radius: 8px;
+  z-index: 15;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 100px auto;
+    width: 260px;
+    height: 387px;
+  }
+  @media (min-width: 769px) {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 10px 20% auto auto;
+    width: 450px;
+    height: 550px;
+  }
+  .logo-green {
+    position: relative;
+    margin: 35px auto 25px auto;
+    background: url(../../../../../assets/icon/becks-btn-icon-soon.svg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 148px;
+    height: 180px;
+    @media (min-width: 769px) {
+      margin: 120px auto 25px auto;
+    }
+  }
+  p {
+    font-family: "Eurostile BQ";
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: center;
+    text-transform: uppercase;
+    margin: auto;
+    width: 229px;
+    @media (min-width: 769px) {
+      width: 281px;
+      font-size: 16px;
+      line-height: 128.3%;
+    }
+  }
+  .text-green {
+    color: #038259;
+    margin-bottom: 30px;
+  }
+  .text-white {
+    color: #ffffff;
+  }
+}

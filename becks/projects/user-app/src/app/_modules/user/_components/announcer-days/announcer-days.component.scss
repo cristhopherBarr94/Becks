@@ -1,6 +1,5 @@
 .announce-section {
   position: absolute;
-  top: 110px;
   left: auto;
   right: 0;
   background: rgba(18, 18, 18, 0.7);
@@ -13,10 +12,12 @@
   @media (min-width: 0px) and (max-width: 768px) {
     width: 99px;
     height: 110px;
+    top: 140px;
   }
   @media (min-width: 769px) {
     width: 150px;
     height: 161px;
+    top: 230px;
   }
 
   .relative {
@@ -93,12 +94,15 @@
       font-size: 14px;
       line-height: 17px;
     }
+    .units {
+      margin-bottom: 5px !important;
+    }
     .days {
       font-family: "Eurostile BQ" !important;
       font-style: normal;
       font-weight: 500;
       font-size: 30px;
-      line-height: 0px;
+      line-height: 5px;
       letter-spacing: 0.15px;
     }
   }
@@ -107,13 +111,12 @@
     font-style: normal;
     font-weight: bold;
     font-size: 10px;
-    line-height: 110%;
+    line-height: 100%;
     display: flex;
     align-items: center;
     text-align: center;
     text-decoration-line: underline;
     text-transform: uppercase;
-    margin-left: 10px;
     width: 34px;
     margin-left: auto;
     margin-right: auto;

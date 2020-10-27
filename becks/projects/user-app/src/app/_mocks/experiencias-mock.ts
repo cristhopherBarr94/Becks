@@ -20,24 +20,24 @@ export const MockExperiencias: Exp[] = [
     urlRedirect:""
 
   },
-  // {
-  //   id: 2,
-  //   cuentaActiva: false,
-  //   detalleExp: false,
-  //   imagesExp: "./assets/img/exp/frankDesktop.jpg",
-  //   imagesExpMob: "./assets/img/exp/frank2.jpg",
-  //   titleExp: "FRANK VIDEO CLIP",
-  //   fechaExp: "11/13/2020",
-  //   fechaAlt: "",
-  //   horaExp: "11:00 PM — 4:00 AM",
-  //   detailExp:
-  //     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
-  //   placeExp: "Live instagram Beck’s",
-  //   urlExp: "/exp2",
-  //   status: "1",
-  //   type:"1",
-  //   urlRedirect:""
-  // },
+  {
+    id: 2,
+    cuentaActiva: false,
+    detalleExp: false,
+    imagesExp: "./assets/img/exp/frankDesktop.jpg",
+    imagesExpMob: "./assets/img/exp/frank2.jpg",
+    titleExp: "FRANK VIDEO CLIP",
+    fechaExp: "11/13/2020",
+    fechaAlt: "",
+    horaExp: "11:00 PM — 4:00 AM",
+    detailExp:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
+    placeExp: "Live instagram Beck’s",
+    urlExp: "/exp2",
+    status: "1",
+    type:"1",
+    urlRedirect:""
+  },
   // {
   //   id: 3,
   //   cuentaActiva: false,

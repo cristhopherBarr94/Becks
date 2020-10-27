@@ -2,9 +2,11 @@
 <ion-slides loop="false" pager="true" spaceBetween="0" [options]="slideOpts" slidesPerView="1" effect="slide"
 *ngIf="experienciaContent.length>0" 
   pager="true" zoom="false" class="exp-slider">
-  <user-announcer-days></user-announcer-days>
+  <user-announcer-days class="animate__animated animate__bounceInLeft animate__delay-1s"></user-announcer-days>
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !exp.cuentaActiva, 'active': exp.cuentaActiva}">
+    <user-announcer-amount *ngIf="exp.cuentaActiva && exp.status == 2" [state]="exp.status"></user-announcer-amount>
+    <user-sold-message *ngIf="exp.cuentaActiva && exp.status == 2" [state]="exp.status"></user-sold-message>
     <img *ngIf="this.size == 'lg' || this.size == 'md'"  [src]="exp.imagesExp" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
       [ngClass]="{'animate__animated animate__bounceInLeft': exp.cuentaActiva}">
       <img *ngIf="this.size == 'xs'"  [src]="exp.imagesExpMob" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"

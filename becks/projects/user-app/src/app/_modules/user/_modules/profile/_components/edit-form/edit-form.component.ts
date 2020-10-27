@@ -72,7 +72,7 @@ export class EditFormComponent implements OnInit,OnDestroy {
       ]),
       phone: new FormControl(this.user.mobile_phone, [
         Validators.required,
-        Validators.minLength(10),
+        Validators.minLength(6),
       ]),
       day: new FormControl(
         !!this.user.birthdate && moment(this.user.birthdate).format("DD"),

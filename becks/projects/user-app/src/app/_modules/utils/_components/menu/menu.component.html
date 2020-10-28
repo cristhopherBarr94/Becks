@@ -1,13 +1,14 @@
-<div class="menu-content" [ngClass]="transparentStyle()">
-  <nav class="menu-mobile">
-    <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" (click)="openClose()" />
-    <label class="menu-open-button" for="menu-open">
-      <span class="hamburger hamburger-1"></span>
-      <span class="hamburger hamburger-2"></span>
-      <span class="hamburger hamburger-3"></span>
-    </label>
 
-    <a href="./user/exp" class="menu-item" [ngClass]="selected('exp')">
+<div class="menu-content" [ngClass]="{'menu-activo': openMenu}">
+  <nav class="menu-mobile">
+    <a class="menu-open" name="menu-open" id="menu-open" (click)="abrirMenu()" [ngClass]="{'menu-checked': openMenu}" >
+    <div class="menu-open-button" for="menu-open">
+      <span class="hamburger hamburger-1" [ngClass]="{'close': closeMenu}"></span>
+      <span class="hamburger hamburger-2" [ngClass]="{'close': closeMenu}"></span>
+      <span class="hamburger hamburger-3" [ngClass]="{'close': closeMenu}"></span>
+    </div>
+    </a>
+<a href="./user/exp" class="menu-item" [ngClass]="selected('exp')">
       <img class="icon-item" src="./assets/icon/menu/home.svg" alt="Inicio" />
       <span class="name-item">Inicio</span>
     </a>
@@ -38,8 +39,9 @@
       <img class="icon-item" src="./assets/icon/menu/sign-out-alt.svg" alt="Salir" />
       <span class="name-item">Salir</span>
     </a>
+    <a href="#" class="icon-brand"> <img class="icon-out" src="./assets/img/logo_menu.svg" alt="berck"> <span class="label-brand">Inicio</span>  </a>
   </nav>
-  <nav class="menu-desktop" [ngClass]="transparentStyle()">
+  <nav class="menu-desktop">
     <div class="container-menu">
       <div style="margin-top: 15px;">
         <a href="./user/exp"> 
@@ -93,3 +95,4 @@
     </div>
   </nav>
 </div>
+

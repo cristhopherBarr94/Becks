@@ -82,7 +82,7 @@
 
     display: flex;
     @media (min-width: 0px) and (max-width: 768px) {
-      font-size: 10px;
+      font-size: 11px;
       line-height: 12px;
       width: 210px;
     }
@@ -102,7 +102,7 @@
   margin: 10px;
 }
 
-.section-redemtion-confirm {
+.section-redemption-confirm {
   background: rgba(2, 2, 2, 0.5);
   border-radius: 8px;
   backdrop-filter: blur(20px) !important;
@@ -117,6 +117,13 @@
     padding: 20px;
   }
 }
+
+.mat-error {
+  @media (min-width: 0px) and (max-width: 768px) {
+    font-size: 10px;
+    padding-left: 0;
+  }
+}
 .button-width {
   @media (min-width: 0px) and (max-width: 768px) {
     width: 206px !important;
@@ -124,7 +131,7 @@
   }
 }
 
-.btn-cancel-redemtion {
+.btn-cancel-redemption {
   font-family: "Eurostile BQ";
   font-style: normal;
   font-weight: 500;

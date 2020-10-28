@@ -7,6 +7,7 @@ import { User } from 'src/app/_models/User';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { UiService } from 'src/app/_services/ui.service';
 import { UserService } from 'src/app/_services/user.service';
+import { SoldMessageComponent } from 'src/app/_modules/user/_components/sold-message/sold-message.component';
 
 
 
@@ -93,6 +94,14 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     if ( this.codes && this.codes.length > 0 ) {       
       this.experienciaContent.forEach(exp =>{
         exp.cuentaActiva = true;
+        if(exp.cuentaActiva && exp.status == '2'){
+          this.ui.showModal(
+            SoldMessageComponent,
+            "modal-sold-message",
+            true,
+            true
+          );
+        }
       });
     }
   }

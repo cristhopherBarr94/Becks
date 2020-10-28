@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UiService } from 'src/app/_services/ui.service';
 
 @Component({
   selector: 'user-sold-message',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SoldMessageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ui: UiService,) { }
 
   ngOnInit() {}
 
+  close() {
+    this.ui.dismissModal();
+  }
 }

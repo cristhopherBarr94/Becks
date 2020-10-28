@@ -5,7 +5,19 @@ import { MockExperiencias } from 'src/app/_mocks/experiencias-mock';
 import { HeaderComponent } from 'src/app/_modules/utils/_components/header/header.component';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from "@angular/forms";
+import { User } from 'src/app/_models/User';
 
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
 @Component({
   selector: 'user-interaction-confirm',
   templateUrl: './interaction-confirm.component.html',
@@ -15,6 +27,9 @@ export class InteractionConfirmComponent implements OnInit, AfterViewInit {
   @ViewChild(HeaderComponent) header: HeaderComponent;
   prevUrl: string = "/user/exp";
   public experience:any = MockExperiencias;
+  public userRegisterForm: FormGroup;
+  public userRegister: User= new User();
+  public httpError: string;
   public bgExpDes:string;
   public bgExpMob:string;
   public id: number;
@@ -25,9 +40,12 @@ export class InteractionConfirmComponent implements OnInit, AfterViewInit {
   public allow:boolean=false;
 
 
-  constructor(   public httpService: HttpService,
-    private router: Router, private platform: Platform,
-    private ui: UiService,) { 
+  constructor(   
+    public httpService: HttpService,
+    private router: Router, 
+    private platform: Platform,
+    private ui: UiService,
+    private formBuilder: FormBuilder,) { 
 
       platform.ready().then(() => {
         this.platform.resize.subscribe(() => {
@@ -49,10 +67,24 @@ export class InteractionConfirmComponent implements OnInit, AfterViewInit {
         this.allow=true;
       }
     });
-
+    this.initforms();
   }
   
   ngAfterViewInit(): void {
     this.header.urlComponent = this.prevUrl;
+  }
+
+  initforms() {
+    this.userRegisterForm = this.formBuilder.group({
+      privacy: new FormControl(null, Validators.required),
+    });
+  }
+  redempExp() {
+    if ( this.userRegisterForm.invalid) {
+      (<any>Object).values(this.userRegisterForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
+      return;
+    }
   }
 }

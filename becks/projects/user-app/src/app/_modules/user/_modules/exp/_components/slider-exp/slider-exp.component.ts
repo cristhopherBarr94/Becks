@@ -7,6 +7,7 @@ import { User } from 'src/app/_models/User';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { UiService } from 'src/app/_services/ui.service';
 import { UserService } from 'src/app/_services/user.service';
+import { SoldMessageComponent } from 'src/app/_modules/user/_components/sold-message/sold-message.component';
 
 
 
@@ -20,6 +21,8 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   public initialSlide
   public slideOpts
   public size: string;
+  public isActivate:boolean=false;
+  private modalIsShowed:boolean=false;
   private codes;
   private userCodeSubs: Subscription;
 
@@ -62,8 +65,12 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
     this.userCodeSubs = this.userSvc.userCodes$.subscribe( 
       ( codes ) => {
-        this.codes = codes;
-        this.checkCodes();
+        if(codes && codes.length>0){
+          this.isActivate = true;
+          this.codes = codes;
+          this.checkCodes();
+        }
+
       }
     );
     
@@ -76,6 +83,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   detalleExperiencia(item: any) {
     this.experienciaContent[item].detalleExp = !this.experienciaContent[item].detalleExp;
+    console.log(this.experienciaContent[item].id);
   }
 
   compareId(idExp:number){   
@@ -92,7 +100,18 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   checkCodes() {
     if ( this.codes && this.codes.length > 0 ) {       
       this.experienciaContent.forEach(exp =>{
-        exp.cuentaActiva = true;
+        if(this.isActivate && exp.status == '2' && this.modalIsShowed==false){
+          this.modalIsShowed = true;
+          this.ui.showModal(
+            SoldMessageComponent,
+            "modal-sold-message",
+            true,
+            true,
+            {
+              Func: this.closeModal.bind(this),
+            }
+          );
+        }
       });
     }
   }
@@ -105,13 +124,20 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   
 participateExperience(arrayObject:number){
-  if(this.experienciaContent[arrayObject].type == "0"){
+  console.log(arrayObject);
+  if(this.experienciaContent[arrayObject-1].type == "0"){
     window.open(this.experienciaContent[arrayObject].urlRedirect);
   }
-  else if(this.experienciaContent[arrayObject].type == "1"){
-    this.router.navigate([`user/interaction/${this.experienciaContent[arrayObject].id}`]);
+  else if(this.experienciaContent[arrayObject-1].type == "1"){
+    this.router.navigate([`user/interaction/${arrayObject}`]);
+  }
+  else if(this.experienciaContent[arrayObject-1].type == "2"){
+    this.router.navigate([`user/confirm-interaction/${arrayObject}`]);
   }
 }
 
-
+public closeModal() {
+  this.ui.dismissModal();
+  this.modalIsShowed = false;
+}
 }

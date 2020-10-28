@@ -13,12 +13,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { AnnouncerDaysComponent } from '../../_components/announcer-days/announcer-days.component';
 import { CircleProgressComponent } from '../profile/_components/circle-progress/circle-progress.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { AnnouncerAmountComponent } from '../../_components/announcer-amount/announcer-amount.component';
+import { SoldMessageComponent } from '../../_components/sold-message/sold-message.component';
 @NgModule({
   declarations: [
     SliderExpComponent,
     HomeExpPage,
     AnnouncerDaysComponent,
-    CircleProgressComponent
+    CircleProgressComponent,
+    AnnouncerAmountComponent,
+    SoldMessageComponent
   ],
   imports: [
     CommonModule,

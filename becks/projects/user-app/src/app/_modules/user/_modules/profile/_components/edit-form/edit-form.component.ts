@@ -166,10 +166,8 @@ export class EditFormComponent implements OnInit,OnDestroy {
           (e) => {
             this.ui.dismissLoading();
           });
-      }
-      else {
-        this.httpError = "Campos del formulario invalidos"
-        console.log('fallido')
+      } else {
+        this.httpError = "Campos del formulario invalidos";
       }
     } else {
       //MOBILE
@@ -198,14 +196,16 @@ export class EditFormComponent implements OnInit,OnDestroy {
             if (response.status == 200) {            
               this.userSvc.getData();
             } else {
-              this.httpError = "Campos del formulario invalidos"
+              this.httpError = "Campos del formulario invalidos";
             }
             this.ui.dismissLoading();
           },
           (e) => {
             this.ui.dismissLoading();
-            this.httpError = "Campos del formulario invalidos"
+            this.httpError = "Campos del formulario invalidos";
           });
+      } else {
+        this.httpError = "Campos del formulario invalidos";
       }
     }
   }

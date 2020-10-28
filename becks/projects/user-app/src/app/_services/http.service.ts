@@ -135,7 +135,7 @@ export class HttpService {
   handleError(error: HttpErrorResponse) {
     
     if (error.status === HttpConstants.UNAUTHORIZED || error.status === HttpConstants.FORBIDDEN ) {
-      if ( this.error_counter++ > 1 ) {
+      if ( ++this.error_counter > 1 ) {
         this.error_counter = 0;
         this.authService.setAuthenticated(null);
         this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {

@@ -56,7 +56,9 @@
   background-size: 25px;
   background-repeat: no-repeat !important;
   background-position-y: 15px;
-
+  &:active {
+    background-image: url(../assets/icon/becks-btn-icon-soon.svg) !important;
+  }
   @media (min-width: 0px) and (max-width: 768px) {
     background-position-x: 30px;
     &:hover {
@@ -231,8 +233,8 @@ a {
 }
 .becks-btn-soon {
   @include btn(
-    #377f5e,
     #ffffff,
+    #000000,
     "",
     "Eurostile BQ" !important,
     18px,
@@ -246,15 +248,16 @@ a {
   font-style: normal !important;
   font-weight: 500;
   padding-left: 40px !important;
-  background-image: url(../assets/icon/becks-btn-icon-soon.svg) !important;
+  background-image: url(../assets/icon/becks-btn-icon.svg) !important;
   background-size: 25px !important;
   background-repeat: no-repeat !important;
   background-position-x: 20px !important;
   background-position-y: 15px !important;
+  border: 1px solid #ffffff;
   border-radius: 16px 0px 16px 0px;
-
   &:active {
-    background: #ffffff;
+    background: #000000;
+    background-image: url(../assets/icon/becks-btn-icon-soon.svg) !important;
     span {
       color: #377f5e;
     }

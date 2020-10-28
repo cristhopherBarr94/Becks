@@ -12,7 +12,7 @@ import { UiService } from 'src/app/_services/ui.service';
 })
 export class InteractionViewComponent implements OnInit , AfterViewInit {
   @ViewChild(HeaderComponent) header: HeaderComponent;
-  public prevUrl: string = "/user/profile";
+  public prevUrl: string = "/user/exp";
   public experience:any = MockExperiencias;
   public bgExp:string;
   public id: number;

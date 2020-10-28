@@ -1,19 +1,70 @@
 <ion-content>
   <app-header></app-header>
 
-  <section class="fullSection interaction-section-confirm content-flex-all-center" [style.background-image]="'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url('+bgExp+')'">
+  <section class="fullSection interaction-section-confirm content-flex-all-center" [style.background-image]="'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url('+bgExpMob+')'">
 
-    <div class="section-question-confirm content-flex-all-center flex-direction-column">
+    <div class="section-redemption-confirm content-flex-all-center flex-direction-column">
+      <button class="cancel-btn" [routerLink]="'/home'">
+        <img src="./assets/icon/cancel-icon.svg" alt="cancel" />
+      </button>
       <span class="logo-brand-modal"> </span>
-      <h1 class="title-secondary main-confirm-title">HAS PARTICIPADO EN {{expTitleC}}</h1>
+      <div *ngIf="this.allow" class="width-content-exp">
+        <h1 class="title-secondary">¡FELICITACIONES!</h1>
+        <p class=" exp-content">Experiencia: {{expTitleC}}</p>
+        <p class=" exp-content">Ubicación: {{expLocation}}</p>
+        <p class=" exp-content">{{expDescRed}}</p>
+      </div>
+      <div *ngIf="!this.allow" class="width-content-exp-alt">
+        <p class=" exp-content">
+          Ya participaste de esta experiencia, sigue atento a nuestras redes sociales y a la Becks Society para vivir nuevas experiencias.
+        </p>
+      </div>
+    
+
+      <form [formGroup]="userRegisterForm" autocomplete="off" class="general-row">
+        <ion-row>
+          <div *ngIf="this.allow"  class="content-check">
+
+            <mat-checkbox
+            id="mat-checkbox-privacy"
+            formControlName="privacy"
+            [(ngModel)]="userRegister.privacy"
+            color="success"
+            class="margin-check"
+            required
+            >
+            </mat-checkbox>
+            <p class="text-checkbox">
+              Debes aceptar los 
+              <a target="_blank" href="./terms-conditions" data-qadp="link-tc">Terminos y condiciones </a>
+              de Becks para disfrutar de esta experiencia.
+            </p>
+           
+          </div>
+        </ion-row>
+     <ion-row>
+      <div>
+        <mat-error
+        *ngIf="userRegisterForm.controls.privacy.touched && userRegisterForm.controls.privacy.invalid"
+          >Por favor lea y acepte los términos y condiciones</mat-error
+        >
+      </div>
+     </ion-row>
+      </form>
+
+     
       <button
         block="block"
         color="becks"
+        (click)="redempExp()"
         class="becks-btn-primary margin-top-button button-width"
-        [routerLink]="['/user/exp']"
+        [ngClass]="{
+          'button-disabled': userRegisterForm.invalid 
+        }"
       >
-        <span>HOME</span>
+        <span>aceptar</span>
       </button>
+      <a *ngIf="this.allow"  [routerLink]="['/user/exp']" class="btn-cancel-redemption">cancelar</a>
     </div>
 
   </section>

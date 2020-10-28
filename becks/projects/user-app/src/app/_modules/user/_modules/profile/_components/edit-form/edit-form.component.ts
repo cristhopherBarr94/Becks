@@ -169,6 +169,7 @@ export class EditFormComponent implements OnInit,OnDestroy {
       }
       else {
         this.httpError = "Campos del formulario invalidos"
+        console.log('fallido')
       }
     } else {
       //MOBILE

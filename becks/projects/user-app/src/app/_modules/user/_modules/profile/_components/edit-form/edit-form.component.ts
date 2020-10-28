@@ -21,6 +21,7 @@ export class EditFormComponent implements OnInit,OnDestroy {
   public userEditProfileForm: FormGroup;
   public birthDayDate: any;
   public size: string;
+  public httpError: string
   userSubscription: Subscription;
 
   constructor( private userSvc: UserService,
@@ -72,7 +73,8 @@ export class EditFormComponent implements OnInit,OnDestroy {
       ]),
       phone: new FormControl(this.user.mobile_phone, [
         Validators.required,
-        Validators.minLength(10),
+        Validators.minLength(6),
+        Validators.maxLength(10)
       ]),
       day: new FormControl(
         !!this.user.birthdate && moment(this.user.birthdate).format("DD"),
@@ -164,6 +166,8 @@ export class EditFormComponent implements OnInit,OnDestroy {
           (e) => {
             this.ui.dismissLoading();
           });
+      } else {
+        this.httpError = "Campos del formulario invalidos";
       }
     } else {
       //MOBILE
@@ -192,13 +196,16 @@ export class EditFormComponent implements OnInit,OnDestroy {
             if (response.status == 200) {            
               this.userSvc.getData();
             } else {
-              //httpError => HTML httpError
+              this.httpError = "Campos del formulario invalidos";
             }
             this.ui.dismissLoading();
           },
           (e) => {
             this.ui.dismissLoading();
+            this.httpError = "Campos del formulario invalidos";
           });
+      } else {
+        this.httpError = "Campos del formulario invalidos";
       }
     }
   }

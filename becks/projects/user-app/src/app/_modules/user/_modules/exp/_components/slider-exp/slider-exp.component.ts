@@ -21,6 +21,8 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   public initialSlide
   public slideOpts
   public size: string;
+  public isActivate:boolean=false;
+  private modalIsShowed:boolean=false;
   private codes;
   private userCodeSubs: Subscription;
 
@@ -63,8 +65,12 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
     this.userCodeSubs = this.userSvc.userCodes$.subscribe( 
       ( codes ) => {
-        this.codes = codes;
-        this.checkCodes();
+        if(codes && codes.length>0){
+          this.isActivate = true;
+          this.codes = codes;
+          this.checkCodes();
+        }
+
       }
     );
     
@@ -77,6 +83,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   detalleExperiencia(item: any) {
     this.experienciaContent[item].detalleExp = !this.experienciaContent[item].detalleExp;
+    console.log(this.experienciaContent[item].id);
   }
 
   compareId(idExp:number){   
@@ -93,13 +100,16 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   checkCodes() {
     if ( this.codes && this.codes.length > 0 ) {       
       this.experienciaContent.forEach(exp =>{
-        exp.cuentaActiva = true;
-        if(exp.cuentaActiva && exp.status == '2'){
+        if(this.isActivate && exp.status == '2' && this.modalIsShowed==false){
+          this.modalIsShowed = true;
           this.ui.showModal(
             SoldMessageComponent,
             "modal-sold-message",
             true,
-            true
+            true,
+            {
+              Func: this.closeModal.bind(this),
+            }
           );
         }
       });
@@ -126,5 +136,8 @@ participateExperience(arrayObject:number){
   }
 }
 
-
+public closeModal() {
+  this.ui.dismissModal();
+  this.modalIsShowed = false;
+}
 }

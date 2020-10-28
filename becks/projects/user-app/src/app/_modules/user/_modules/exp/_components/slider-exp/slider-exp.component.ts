@@ -1,6 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import { IonSlides, Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Exp } from 'src/app/_models/exp';
 import { User } from 'src/app/_models/User';
@@ -8,7 +8,6 @@ import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { UiService } from 'src/app/_services/ui.service';
 import { UserService } from 'src/app/_services/user.service';
 import { SoldMessageComponent } from 'src/app/_modules/user/_components/sold-message/sold-message.component';
-
 
 
 @Component({
@@ -27,6 +26,8 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   private userCodeSubs: Subscription;
 
   experienciaContent: Exp[] = [];
+
+  @ViewChild('slides') slides: IonSlides;
 
   constructor(
     private experienciaService: ExperienciasService,
@@ -60,7 +61,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
         direction: "vertical",
         speed: 400
       };
-      this.checkCodes();
+      // this.checkCodes();
     });
 
     this.userCodeSubs = this.userSvc.userCodes$.subscribe( 
@@ -68,9 +69,8 @@ export class SliderExpComponent implements OnInit, OnDestroy {
         if(codes && codes.length>0){
           this.isActivate = true;
           this.codes = codes;
-          this.checkCodes();
+          this.getIndex();
         }
-
       }
     );
     
@@ -97,10 +97,13 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   activarCuenta( res ) {}
 
+
   checkCodes() {
-    if ( this.codes && this.codes.length > 0 ) {       
+
+    if ( this.codes && this.codes.length > 0 ) { 
       this.experienciaContent.forEach(exp =>{
-        if(this.isActivate && exp.status == '2' && this.modalIsShowed==false){
+        console.log(exp.status);
+        if(exp.status == '1' && this.modalIsShowed==false){
           this.modalIsShowed = true;
           this.ui.showModal(
             SoldMessageComponent,
@@ -116,7 +119,9 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     }
   }
 
-
+  async getIndex() {
+    this.checkCodes();
+  }
 
   redirInteraction() {
     window.open("https://www.feriadelmillon.com.co/becks/");
@@ -140,4 +145,5 @@ public closeModal() {
   this.ui.dismissModal();
   this.modalIsShowed = false;
 }
+
 }

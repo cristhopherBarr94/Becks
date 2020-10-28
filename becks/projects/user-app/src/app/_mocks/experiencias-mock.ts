@@ -18,7 +18,7 @@ export const MockExperiencias: Exp[] = [
       "Activando esta experiencia, un artista emergente tocará tu puerta para crear una pieza oroginal sin moverte de casa. Habilitaremos 5 cupos diarios durante 6 días ¡No te quedes sin el tuyo!",
     placeExp: "Tu casa",
     urlExp: "/exp1",
-    status: "2",
+    status: "1",
     type:"2",
     urlRedirect:""
 
@@ -37,7 +37,7 @@ export const MockExperiencias: Exp[] = [
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil aspernatur dicta perspiciatis voluptas quia cum quasi obcaecati enim officiis quisquam, placeat quam iure error? Doloremque perspiciatis accusantium laboriosam ratione impedit?",
     placeExp: "Live instagram Beck’s",
     urlExp: "/exp2",
-    status: "1",
+    status: "2",
     type:"1",
     urlRedirect:""
   },

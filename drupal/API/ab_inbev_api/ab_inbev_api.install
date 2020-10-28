@@ -147,7 +147,6 @@ function ab_inbev_api_schema() {
       'url_terms' => [
         'type' => 'varchar',
         'length' => 255,
-        'not null' => TRUE,
         'description' => 'URL TyC.',
       ],
       'created' => [
@@ -155,10 +154,15 @@ function ab_inbev_api_schema() {
         'not null' => TRUE,
         'description' => 'Experience created timestamp.',
       ],
-      'valid_until' => [
+      'valid_from' => [
         'type' => 'int',
         'not null' => TRUE,
-        'description' => 'Experience valid timestamp.',
+        'description' => 'Experience From timestamp.',
+      ],
+      'valid_to' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Experience To timestamp.',
       ]
     ],
     'primary key' => ['id'],
@@ -413,7 +417,6 @@ function ab_inbev_api_update_8602() {
       'url_terms' => [
         'type' => 'varchar',
         'length' => 255,
-        'not null' => TRUE,
         'description' => 'URL TyC.',
       ],
       'created' => [
@@ -421,11 +424,16 @@ function ab_inbev_api_update_8602() {
         'not null' => TRUE,
         'description' => 'Experience created timestamp.',
       ],
-      'valid_until' => [
+      'valid_from' => [
         'type' => 'int',
         'not null' => TRUE,
-        'description' => 'Experience valid timestamp.',
-      ]
+        'description' => 'Experience From timestamp.',
+      ],
+      'valid_to' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Experience To timestamp.',
+      ],
     ],
     'primary key' => ['id'],
     'indexes' => [

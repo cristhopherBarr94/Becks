@@ -26,6 +26,7 @@ export const environment = {
     patchActivate: "/api/ab-inbev-api-code-app/1",
     getCodes: "/api/ab-inbev-api-code-app/1",
     getExp: "/api/ab-inbev-api-experience/0",
+    getImgExp: "/sites/default/files/images/experience/", // id_desk && id_mob
     postRedemp: "/api/ab-inbev-api-redemption/",
   },
   rest: {

@@ -355,7 +355,7 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
         // $user->set('user_picture', $file);
         // $response_array["photo"] = $user->save();
         try {
-          $images_folder = "public://images/";
+          $images_folder = "public://images/profile/";
           $name = $this->currentUser->getAccount()->uuid();
           $image = base64_decode( $data['photo'] );
           $file = file_save_data($image, $images_folder . $name , FileSystemInterface::EXISTS_REPLACE);
@@ -408,7 +408,7 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
 
     switch ( $id ) {
       case 2: {
-          $images_folder = "public://images/";
+          $images_folder = "public://images/profile/";
           $name = $this->currentUser->getAccount()->uuid();
           $image = base64_decode( '' );
           $file = file_save_data($image, $images_folder . $name , FileSystemInterface::EXISTS_REPLACE);

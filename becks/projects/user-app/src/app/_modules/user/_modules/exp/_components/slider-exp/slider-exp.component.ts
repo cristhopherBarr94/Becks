@@ -61,7 +61,6 @@ export class SliderExpComponent implements OnInit, OnDestroy {
         direction: "vertical",
         speed: 400
       };
-      // this.checkCodes();
     });
 
     this.userCodeSubs = this.userSvc.userCodes$.subscribe( 
@@ -98,12 +97,12 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   activarCuenta( res ) {}
 
 
-  checkCodes() {
+  checkCodes(CurrentSld:any) {
 
     if ( this.codes && this.codes.length > 0 ) { 
-      this.experienciaContent.forEach(exp =>{
-        console.log(exp.status);
-        if(exp.status == '1' && this.modalIsShowed==false){
+      for(let i=0 ; i<this.experienciaContent.length; i++){      
+    
+        if(this.experienciaContent[CurrentSld].status == '2' && this.modalIsShowed==false){
           this.modalIsShowed = true;
           this.ui.showModal(
             SoldMessageComponent,
@@ -115,12 +114,12 @@ export class SliderExpComponent implements OnInit, OnDestroy {
             }
           );
         }
-      });
+      }
     }
   }
 
   async getIndex() {
-    this.checkCodes();
+    this.checkCodes(await this.slides.getActiveIndex());
   }
 
   redirInteraction() {

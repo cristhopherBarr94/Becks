@@ -1,5 +1,4 @@
 .container-edit-profile {
-  min-height: 100%;
   background-color: #171717;
   overflow-y: auto;
   overflow-x: hidden;
@@ -20,6 +19,9 @@
   width: 15%;
   display: flex;
   justify-content: center;
+  @media (min-width: 769px) {
+    width: 7.5%;
+  }
 }
 
 .center-div {
@@ -196,7 +198,7 @@ seccion-tabs {
 :host ::ng-deep .mat-tab-header {
   width: 100%;
   @media (min-width: 768px) {
-    width: 70%;
+    width: 50%;
     margin-right: 0%;
     margin-top: 40px;
   }
@@ -209,4 +211,18 @@ seccion-tabs {
 
 ::ng-deep mat-icon:active {
   font-family: "Material Icons" !important;
+}
+
+.positionAbsolute {
+  position: absolute;
+}
+
+.positionRelative {
+  position: relative;
+}
+
+.container{
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }

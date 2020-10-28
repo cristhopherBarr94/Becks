@@ -1,5 +1,8 @@
 import { Exp } from "../_models/exp";
 
+// type 0 = redirect to url
+// type 1 = exp with questions form
+// type 2 = confirmation message to redemption the exp
 export const MockExperiencias: Exp[] = [
   {
     id: 1,
@@ -15,7 +18,7 @@ export const MockExperiencias: Exp[] = [
       "Activando esta experiencia, un artista emergente tocará tu puerta para crear una pieza oroginal sin moverte de casa. Habilitaremos 5 cupos diarios durante 6 días ¡No te quedes sin el tuyo!",
     placeExp: "Tu casa",
     urlExp: "/exp1",
-    status: "1",
+    status: "2",
     type:"2",
     urlRedirect:""
 

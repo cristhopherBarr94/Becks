@@ -65,4 +65,21 @@
   .text-white {
     color: #ffffff;
   }
+  .cancel-btn {
+    position: absolute;
+    background: transparent;
+    width: 20px;
+    height: 20px;
+    right: 10px;
+    top: 10px;
+    padding-right: 20px !important;
+    img {
+      max-width: none !important;
+      width: 15px;
+      height: 15px;
+    }
+    @media (min-width: 0px) and (max-width: 768px) {
+      padding: 0px !important;
+    }
+  }
 }

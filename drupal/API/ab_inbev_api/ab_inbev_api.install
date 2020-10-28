@@ -25,6 +25,7 @@ function ab_inbev_api_schema_alter(&$schema) {
  */
 function ab_inbev_api_schema() {
 
+  // "ab_inbev_code" TABLE FOR CodeAppResource
   $schema['ab_inbev_code'] = [
     'description' => 'REST API - Activation Codes.',
     'fields' => [
@@ -62,6 +63,7 @@ function ab_inbev_api_schema() {
       ],
       'status' => [
         'type' => 'int',
+        'size' => 'tiny',
         'not null' => TRUE,
         'default' => 0,
         'description' => 'Code status.',
@@ -81,6 +83,155 @@ function ab_inbev_api_schema() {
         'table' => 'users',
         'columns' => [
           'uid' => 'uid',
+        ],
+      ],
+    ],
+    'mysql_character_set' => 'latin1',
+    'collation' => 'latin1_spanish_ci',
+  ];
+
+  // "ab_inbev_exp" TABLE for ExperienceAppResource
+  $schema['ab_inbev_experience'] = [
+    'description' => 'REST API - User Experiences.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key',
+      ],
+      'type' => [
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'description' => 'Experience Type.',
+      ],
+      'status' => [
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'description' => 'Experience Type.',
+      ],
+      'title' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Experience Title.',
+      ],
+      'description' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Experience Description.',
+      ],
+      'inscription_txt' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Experience Inscription Text.',
+      ],
+      'location' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Experience Location.',
+      ],
+      'stock' => [
+        'type' => 'int',
+        'description' => 'Experience Stock.',
+        'size' => 'medium',
+      ],
+      'url_redirect' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'URL Redirect.',
+      ],
+      'url_terms' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'URL TyC.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Experience created timestamp.',
+      ],
+      'valid_until' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Experience valid timestamp.',
+      ]
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'id' => ['id'],
+    ],
+    'unique keys' => [
+      '_id' => ['id'],
+    ],
+    'mysql_character_set' => 'latin1',
+    'collation' => 'latin1_spanish_ci',
+  ];
+
+
+  // "ab_inbev_exp" TABLE for RedemptionAppResource
+  $schema['ab_inbev_redemption'] = [
+    'description' => 'REST API - User Redemptions.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key',
+      ],
+      'uid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'User Key ID.',
+      ],
+      'cid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Code Key ID.',
+      ],
+      'eid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Experiences Key ID.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'description' => 'Created timestamp.',
+      ]
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'id' => ['id'],
+      'cid' => ['cid'],
+      'eid' => ['eid'],
+      'uid' => ['uid'],
+    ],
+    'unique keys' => [
+      '_id' => ['id'],
+      '_cid' => ['cid'],
+      '_eid' => ['eid'],
+      '_uid' => ['uid'],
+    ],
+    'foreign keys' => [
+      'uid' => [
+        'table' => 'users',
+        'columns' => [
+          'uid' => 'uid',
+        ],
+      ],
+      'cid' => [
+        'table' => 'ab_inbev_code',
+        'columns' => [
+          'id' => 'id',
+        ],
+      ],
+      'eid' => [
+        'table' => 'ab_inbev_experience',
+        'columns' => [
+          'id' => 'id',
         ],
       ],
     ],
@@ -123,13 +274,15 @@ function ab_inbev_api_uninstall(){
  * Update the database.
  *
  * Create the "ab_inbev_code" table for Activation Codes Logic.
+ * Create the "ab_inbev_experience" table for Experiences Logic.
+ * Create the "ab_inbev_redemption" table for Redemptions Logic.
  *
  *
  * @ingroup AB-InBev
  */
 function ab_inbev_api_update_8602() {
 
-  $spec = [
+  $spec_code = [
     'description' => 'REST API - Activation Codes.',
     'fields' => [
       'id' => [
@@ -192,7 +345,159 @@ function ab_inbev_api_update_8602() {
     'collation' => 'latin1_spanish_ci',
   ];
 
+
+  // "ab_inbev_exp" TABLE for ExperienceAppResource
+  $spec_exp = [
+    'description' => 'REST API - User Experiences.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key',
+      ],
+      'type' => [
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'description' => 'Experience Type.',
+      ],
+      'status' => [
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'description' => 'Experience Type.',
+      ],
+      'title' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Experience Title.',
+      ],
+      'description' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Experience Description.',
+      ],
+      'inscription_txt' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'Experience Inscription Text.',
+      ],
+      'location' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Experience Location.',
+      ],
+      'stock' => [
+        'type' => 'int',
+        'description' => 'Experience Stock.',
+        'size' => 'medium',
+      ],
+      'url_redirect' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'URL Redirect.',
+      ],
+      'url_terms' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'URL TyC.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Experience created timestamp.',
+      ],
+      'valid_until' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Experience valid timestamp.',
+      ]
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'id' => ['id'],
+    ],
+    'unique keys' => [
+      '_id' => ['id'],
+    ],
+    'mysql_character_set' => 'latin1',
+    'collation' => 'latin1_spanish_ci',
+  ];
+
+
+  // "ab_inbev_exp" TABLE for RedemptionAppResource
+  $spec_redemp = [
+    'description' => 'REST API - User Redemptions.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key',
+      ],
+      'uid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'User Key ID.',
+      ],
+      'cid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Code Key ID.',
+      ],
+      'eid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Experiences Key ID.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'description' => 'Created timestamp.',
+      ]
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'id' => ['id'],
+      'cid' => ['cid'],
+      'eid' => ['eid'],
+      'uid' => ['uid'],
+    ],
+    'unique keys' => [
+      '_id' => ['id'],
+      '_cid' => ['cid'],
+      '_eid' => ['eid'],
+      '_uid' => ['uid'],
+    ],
+    'foreign keys' => [
+      'uid' => [
+        'table' => 'users',
+        'columns' => [
+          'uid' => 'uid',
+        ],
+      ],
+      'cid' => [
+        'table' => 'ab_inbev_code',
+        'columns' => [
+          'id' => 'id',
+        ],
+      ],
+      'eid' => [
+        'table' => 'ab_inbev_experience',
+        'columns' => [
+          'id' => 'id',
+        ],
+      ],
+    ],
+    'mysql_character_set' => 'latin1',
+    'collation' => 'latin1_spanish_ci',
+  ];
+
   $schema = Database::getConnection()->schema();
-  $schema->createTable('ab_inbev_code', $spec);
+  $schema->createTable('ab_inbev_code', $spec_code);
+  $schema->createTable('ab_inbev_experience', $spec_exp);
+  $schema->createTable('ab_inbev_redemption', $spec_redemp);
   return $schema;
 }

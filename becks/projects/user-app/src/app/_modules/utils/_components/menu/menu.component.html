@@ -1,13 +1,14 @@
-<div class="menu-content">
+<div class="menu-content" [ngClass]="{'menu-activo': openMenu}">
   <nav class="menu-mobile">
-    <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
-    <label class="menu-open-button" for="menu-open">
-      <span class="hamburger hamburger-1"></span>
-      <span class="hamburger hamburger-2"></span>
-      <span class="hamburger hamburger-3"></span>
-    </label>
+    <a class="menu-open" name="menu-open" id="menu-open" (click)="abrirMenu()" [ngClass]="{'menu-checked': openMenu}" >
+    <div class="menu-open-button" for="menu-open">
+      <span class="hamburger hamburger-1" [ngClass]="{'close': closeMenu}"></span>
+      <span class="hamburger hamburger-2" [ngClass]="{'close': closeMenu}"></span>
+      <span class="hamburger hamburger-3" [ngClass]="{'close': closeMenu}"></span>
+    </div>
+    </a>
 
-    <a href="#" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/home.svg" alt="Inicio"> <span
+    <a [routerLink]="['/user/exp']" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/home.svg" alt="Inicio"> <span
         class="name-item">Inicio</span> </a>
     <a href="#" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/calendario.svg" alt="Calendario">
       <span class="name-item">Calendario</span> </a>
@@ -15,9 +16,9 @@
         class="name-item">Invita</span> </a>
     <a href="#" class="menu-item"> <img class="icon-item" src="./assets/icon/menu/comprar.svg" alt="Inicio"> <span
         class="name-item">Compra</span> </a>
-    <a href="#" class="menu-item"> <img class="perfil-img" src="./assets/icon/menu/perfil.jpg" alt="Inicio"> <span
+    <a [routerLink]="['/user/profile']" class="menu-item"> <img class="perfil-img" src="./assets/icon/menu/perfil.jpg" alt="Inicio"> <span
         class="name-item">Mi perfil</span> </a>
-    <a href="#" class="sign-out"> <img class="icon-out" src="./assets/icon/menu/sign-out-alt.svg" alt="Sign out"> <span class="label-out">Salir</span>  </a>
+    <a href="#" class="icon-brand"> <img class="icon-out" src="./assets/img/logo_menu.svg" alt="berck"> <span class="label-brand">Inicio</span>  </a>
   </nav>
   <nav class="menu-desktop">
     <div class="container-menu">

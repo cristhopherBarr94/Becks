@@ -25,6 +25,8 @@ export const environment = {
     patchPhoto: "/api/ab-inbev-api-user-app/2",
     patchActivate: "/api/ab-inbev-api-code-app/1",
     getCodes: "/api/ab-inbev-api-code-app/1",
+    getExp: "/api/ab-inbev-api-experience/0",
+    postRedemp: "/api/ab-inbev-api-redemption/",
   },
   rest: {
     client_id: "ed9d6754-a686-487e-ac99-4c1ce919912f",

@@ -390,15 +390,25 @@ function ab_inbev_api_update_8602() {
         'not null' => TRUE,
         'description' => 'Experience Location.',
       ],
-      'stock' => [
+      'stock_initial' => [
         'type' => 'int',
         'description' => 'Experience Stock.',
         'size' => 'medium',
       ],
+      'stock_actual' => [
+        'type' => 'int',
+        'description' => 'Experience Actual Stock.',
+        'size' => 'medium',
+      ],
+      'periodicity' => [
+        'type' => 'int',
+        'description' => 'Experience Periodicity.',
+        'size' => 'tiny',
+      ],
       'url_redirect' => [
         'type' => 'varchar',
         'length' => 255,
-        'description' => 'URL Redirect.',
+        'description' => 'Experience URL Redirect.',
       ],
       'url_terms' => [
         'type' => 'varchar',

@@ -9,7 +9,7 @@
     <user-sold-message *ngIf="exp.cuentaActiva && exp.status == 2" [state]="exp.status"></user-sold-message>
     <img *ngIf="this.size == 'lg' || this.size == 'md'"  [src]="exp.imagesExp" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
       [ngClass]="{'animate__animated animate__bounceInLeft': exp.cuentaActiva}">
-      <img *ngIf="this.size == 'xs'"  [src]="exp.imagesExpMob" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
+      <img *ngIf="this.size == 'xs' || this.size == 'sm'"  [src]="exp.imagesExpMob" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
       [ngClass]="{'animate__animated animate__bounceInLeft': exp.cuentaActiva}">
       <div class="container-exp">
         <div class="content-exp animate__animated animate__bounceInLeft animate__delay-1s">

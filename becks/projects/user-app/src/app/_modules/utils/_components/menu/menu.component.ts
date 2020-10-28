@@ -25,6 +25,8 @@ export class MenuComponent implements OnInit {
   private menuOption : string
   private userSubscription: Subscription;
   private menuSubscription: Subscription;
+  openMenu = false;
+  closeMenu = false;
 
   constructor(private userSvc: UserService,   private authService: AuthService,
     private ui: UiService,
@@ -80,6 +82,7 @@ export class MenuComponent implements OnInit {
         true
       );
   }
+ 
 
   transparentStyle() {
     if(this.transparent){
@@ -92,4 +95,9 @@ export class MenuComponent implements OnInit {
       return "border-green"
     }
   }
+  abrirMenu() {
+    this.openMenu = !this.openMenu;
+    this.closeMenu = !this.closeMenu;
+  }
+
 }

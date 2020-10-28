@@ -25,14 +25,14 @@ use Drupal\ab_inbev_api\Util\Util;
 use Drupal\user\Entity\User;
 
 /**
- * Represents Code App records as resources.
+ * Represents experience records as resources.
  *
  * @RestResource (
- *   id = "ab_inbev_api_code_app",
- *   label = @Translation("Web App - Code"),
+ *   id = "ab_inbev_api_experience",
+ *   label = @Translation("Web App - Experience API"),
  *   uri_paths = {
- *     "canonical" = "/api/ab-inbev-api-code-app/{id}",
- *     "https://www.drupal.org/link-relations/create" = "/api/ab-inbev-api-code-app"
+ *     "canonical" = "/api/ab-inbev-api-experience/{id}",
+ *     "https://www.drupal.org/link-relations/create" = "/api/ab-inbev-api-experience"
  *   }
  * )
  *
@@ -46,7 +46,7 @@ use Drupal\user\Entity\User;
  * For accessing Drupal entities through REST interface use
  * \Drupal\rest\Plugin\rest\resource\EntityResource plugin.
  */
-class CodeAppResource extends ResourceBase implements DependentPluginInterface {
+class ExperienceAppResource extends ResourceBase implements DependentPluginInterface {
 
   /**
    * The database connection.
@@ -136,6 +136,7 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
    * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    */
   public function get($id) {
+    
     $response = new ResourceResponse($this->loadRecords($id));
     $disable_cache = new CacheableMetadata();
     $disable_cache->setCacheContexts(['url.path', 'url.query_args']);
@@ -159,14 +160,13 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
     if ( !in_array("Administrator", $this->currentUser->getRoles()) ) {
       return new ModifiedResourceResponse(['message' => 'No permitido'], 405);
     }
-
     $this->validate($data);
 
-    $id = $this->dbConnection->insert('ab_inbev_api_code_app')
-      ->fields($data)
-      ->execute();
+    $id = $this->dbConnection->insert('ab_inbev_experience')
+          ->fields($data)
+          ->execute();
 
-    $this->logger->notice('New code app record has been created.');
+    $this->logger->notice('New experience record has been created.');
 
     $created_record = $this->loadRecord($id);
 
@@ -186,31 +186,7 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
    *   The HTTP response object.
    */
   public function patch($id, $data) {
-
-    // Validations
-    switch ( $id ) {
-      case 0: 
-        // PATCH DATA [ valid_until , status, owner ]
-        // $this->validate($data); 
-      break;
-      case 1:
-        // PATCH USER
-        if (!isset($data['cid']) || strlen( trim($data['cid'])) < 8 ) {
-          throw new BadRequestHttpException('Codigo no válido');
-        }
-        $record = [
-          "uid"=>$this->currentUser->id(),
-          "used"=> time(),
-          "valid_until"=> time() + (30 * 24 * 60 * 60),
-          "status"=> 1,
-        ];
-        return $this->updateRecord( trim($data['cid']), $record );   
-      break;
-      default:
-        throw new BadRequestHttpException('Servicio no disponible');
-      break;
-    }
-    
+    return new ModifiedResourceResponse([], 200);
   }
 
   /**
@@ -229,11 +205,11 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
     // Make sure the record still exists.
     // $this->loadRecord($id);
 
-    // $this->dbConnection->delete('ab_inbev_api_code_app')
+    // $this->dbConnection->delete('ab_inbev_experience')
     //   ->condition('id', $id)
     //   ->execute();
 
-    // $this->logger->notice('Code App record @id has been deleted.', ['@id' => $id]);
+    // $this->logger->notice('experiences record @id has been deleted.', ['@id' => $id]);
 
     // Deleted responses have an empty body.
     return new ModifiedResourceResponse(NULL, 204);
@@ -321,47 +297,31 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
    *
    * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
    */
-  protected function loadRecord($cid) {
-    return $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE cid = :cid', [':cid' => $cid])->fetchAssoc();
+  protected function loadRecord($id) {
+    $record = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} WHERE id = :id', [':id' => $id])->fetchAssoc();
+    if (!$record) {
+      throw new NotFoundHttpException('The record was not found.');
+    }
+    return $record;
   }
 
   protected function loadRecords($typeQuery) {
     
     switch ($typeQuery) {
       case 0:
-        // All the codes
-        // Only Admin Role
-        // $result = $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} ');
+        // All the experiences
+        $date = new DateTime();
+        $result = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} WHERE 1', []);
         $records = [];
-        // while($record = $result->fetchAssoc()) {
-        //   $records[] = $record;
-        // }
+        while($record = $result->fetchAssoc()) {
+          $records[] = $record;
+        }
         return $records;
       break;
 
       case 1:
-        // All my codes
-        $result = $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE uid = :uid', [':uid' => $this->currentUser->id()]);
-        $records = [];
-        while($record = $result->fetchAssoc()) {
-          $records[] = $record;
-        }
-        return $records;
-      break;
-
-      case 2:
-        // All my active codes
-        $result = $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE status = 1 AND uid = :uid AND valid_until < :time ', [':uid' => $this->currentUser->id(), ':time' => time()]);
-        $records = [];
-        while($record = $result->fetchAssoc()) {
-          $records[] = $record;
-        }
-        return $records;
-      break;
-
-      case 3:
-        // All my inactive codes
-        $result = $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE status = 1 AND uid = :uid', [':uid' => $this->currentUser->id()]);
+        // All the active experiences
+        $result = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} WHERE `valid_until` < :date', [':date' => time()]);
         $records = [];
         while($record = $result->fetchAssoc()) {
           $records[] = $record;
@@ -380,12 +340,13 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
       case 0:
       
       case 1:
-        return $records = $this->dbConnection->query('SELECT * FROM {ab_inbev_code} ')->fetchAssoc();
+        return $records = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} ')->fetchAssoc();
       default:
         # code...
         break;
     }
   }
+
   /**
    * Updates record.
    *
@@ -397,24 +358,23 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
    * @return \Drupal\rest\ModifiedResourceResponse
    *   The HTTP response object.
    */
-  protected function updateRecord($cid, array $record) {
+  protected function updateRecord($id, array $record) {
 
     // Make sure the record already exists.
-    $code = $this->loadRecord($cid);
-    if ( !$code || $code['status'] != 0 ) {
-      throw new NotFoundHttpException('Codigo no válido o en uso');
-    }
+    $this->loadRecord($id);
 
-    //$this->validate($record);
-    if ( $this->dbConnection->update('ab_inbev_code')
-          ->fields($record)
-          ->condition('cid', $cid)
-          ->execute() == 1 ) {
-        $updated_record = $this->loadRecord($cid);
-        return new ModifiedResourceResponse($updated_record, 200);
-      } else {
-        return new ModifiedResourceResponse(["message" => "Internal Error"], 500);
-      }
+    $this->validate($record);
+
+    $this->dbConnection->update('ab_inbev_experience')
+      ->fields($record)
+      ->condition('id', $id)
+      ->execute();
+
+    $this->logger->notice('experiences record @id has been updated.', ['@id' => $id]);
+
+    // Return the updated record in the response body.
+    $updated_record = $this->loadRecord($id);
+    return new ModifiedResourceResponse($updated_record, 200);
   }
 
 }

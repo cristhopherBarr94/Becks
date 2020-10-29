@@ -25,7 +25,7 @@ export class ExperienciasService {
     this.http.get( urlServer + environment.user.getExp + "?time_stamp=" + new Date().getTime() ).subscribe(
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
-          
+          this._exps = [];
           response.body.forEach((element, index) => {
             const elementoResponse: Exp = {
               id: element.id,

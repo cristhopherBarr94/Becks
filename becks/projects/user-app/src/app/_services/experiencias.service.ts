@@ -12,7 +12,12 @@ export class ExperienciasService {
   private _exps: Exp[] = [];
   private _expSbj = new Subject<Exp[]>();
   public exp$ = this._expSbj.asObservable();
-
+  public   options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    weekday: "long",
+  };
   constructor(private http: HttpService) {}
 
   getActualExps() {
@@ -25,7 +30,7 @@ export class ExperienciasService {
     this.http.get( urlServer + environment.user.getExp + "?time_stamp=" + new Date().getTime() ).subscribe(
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
-          
+          console.log(response.body);
           response.body.forEach((element, index) => {
             const elementoResponse: Exp = {
               id: element.id,
@@ -34,7 +39,7 @@ export class ExperienciasService {
               imagesExp: urlServer + environment.user.getImgExp + element.id + "_desk",
               imagesExpMob: urlServer + environment.user.getImgExp + element.id + "_mob",
               titleExp: element.title,
-              fechaExp: (new Date(element.valid_to*1000)).toString(),
+              fechaExp: (new Date(element.valid_from*1000).toLocaleDateString()),
               fechaAlt: element.fechaAlt,
               detailExp: element.description,
               placeExp: element.location,

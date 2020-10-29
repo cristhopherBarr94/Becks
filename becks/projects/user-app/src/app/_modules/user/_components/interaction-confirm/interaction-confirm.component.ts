@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
-import { MockExperiencias } from 'src/app/_mocks/experiencias-mock';
 import { HeaderComponent } from 'src/app/_modules/utils/_components/header/header.component';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
@@ -12,6 +11,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { User } from 'src/app/_models/User';
+import { ExperienciasService } from 'src/app/_services/experiencias.service';
 
 declare global {
   interface Window {
@@ -26,7 +26,7 @@ declare global {
 export class InteractionConfirmComponent implements OnInit, AfterViewInit {
   @ViewChild(HeaderComponent) header: HeaderComponent;
   prevUrl: string = "/user/exp";
-  public experience:any = MockExperiencias;
+  public experience:any = [];
   public userRegisterForm: FormGroup;
   public userRegister: User= new User();
   public httpError: string;
@@ -45,8 +45,8 @@ export class InteractionConfirmComponent implements OnInit, AfterViewInit {
     private router: Router, 
     private platform: Platform,
     private ui: UiService,
-    private formBuilder: FormBuilder,) { 
-
+    private formBuilder: FormBuilder,
+    private expService: ExperienciasService) { 
       platform.ready().then(() => {
         this.platform.resize.subscribe(() => {
           this.size = this.ui.getSizeType(platform.width());
@@ -55,7 +55,8 @@ export class InteractionConfirmComponent implements OnInit, AfterViewInit {
       });
     }
   ngOnInit() {
-    this.id = Number(this.router.url.replace("/user/confirm-interaction/",""))
+    this.id = Number(this.router.url.replace("/user/confirm-interaction/",""));
+    this.experience = this.expService.getActualExps();
     this.experience.forEach(exp => {
       console.log(this.size);
       if(this.id == exp.id){

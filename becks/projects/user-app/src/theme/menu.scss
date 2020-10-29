@@ -13,12 +13,13 @@ $opening-angle: $pi * 2;
   // debug
   //background:rgba(255,0,0,0.2);
 }
+
 %ball {
   background: transparent;
   border-radius: 100%;
   width: 48px;
   height: 48px;
-  //   margin-left:-40px;
+  margin-left: 72px;
   position: absolute;
   color: white;
   text-align: center;
@@ -26,18 +27,21 @@ $opening-angle: $pi * 2;
   transform: translate3d(0, 0, 0);
   transition: transform ease-out 200ms;
 }
+
 .menu-open {
-  display: none;
+  // display:none;
 }
+
 .menu-item {
   @extend %ball;
 }
+
 .hamburger {
   $width: 19px;
   $height: 1px;
   width: $width;
   height: $height;
-  background: #62f8b2;
+  background: #038259;
   display: block;
   position: absolute;
   top: 50%;
@@ -46,23 +50,42 @@ $opening-angle: $pi * 2;
   margin-top: -$height/2;
   transition: transform 200ms;
 }
+
 $hamburger-spacing: 8px;
+
 .hamburger-1 {
   transform: translate3d(0, -$hamburger-spacing, 0);
 }
+
 .hamburger-2 {
   transform: translate3d(0, 0, 0);
 }
+
 .hamburger-3 {
   transform: translate3d(0, $hamburger-spacing, 0);
 }
-.menu-open:checked + .menu-open-button {
+
+.hamburger-1.close {
+  transform: translate3d(0, 0, 0) rotate(45deg);
+}
+
+.hamburger-2.close {
+  transform: translate3d(0, 0, 0) scale(0.1, 1);
+}
+
+.hamburger-3.close {
+  transform: translate3d(0, 0, 0) rotate(-45deg);
+}
+
+.menu-open.menu-checked ~ .menu-open-button {
   .hamburger-1 {
     transform: translate3d(0, 0, 0) rotate(45deg);
   }
+
   .hamburger-2 {
     transform: translate3d(0, 0, 0) scale(0.1, 1);
   }
+
   .hamburger-3 {
     transform: translate3d(0, 0, 0) rotate(-45deg);
   }
@@ -74,16 +97,23 @@ $hamburger-spacing: 8px;
   position: fixed;
   z-index: 10;
   padding: 20px 5px;
+
   @media (min-width: 1024px) {
     padding: 0;
     position: inherit;
   }
 }
 
-.position-menu-absolute {
-  // position: absolute;
-  // @media (min-width: 0px) and (max-width: 796px) {
-  // background-color: transparent !important;}
+.menu-activo {
+  &:before {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.6);
+    content: "";
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+  }
 }
 
 .menu-mobile {
@@ -97,6 +127,7 @@ $hamburger-spacing: 8px;
   box-sizing: border-box;
   font-size: 20px;
   text-align: left;
+
   @media (min-width: 1024px) {
     display: none;
   }
@@ -104,10 +135,15 @@ $hamburger-spacing: 8px;
   .sign-out {
     position: absolute;
     right: 15px;
-    background-color: #000000;
   }
 
-  .menu-open:checked ~ .sign-out {
+  .icon-brand {
+    position: absolute;
+    right: 15px;
+  }
+
+  .menu-open.menu-checked ~ .sign-out,
+  .menu-open.menu-checked ~ .icon-brand {
     display: none;
   }
 }
@@ -115,22 +151,24 @@ $hamburger-spacing: 8px;
 .menu-item {
   opacity: 0;
   background-color: #000000;
+
   .name-item {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     text-align: center;
     font-family: "Helvetica LT Std" !important;
     width: 100%;
     text-transform: uppercase;
   }
+
   .icon-item {
     width: auto;
-    height: 20px;
-    margin-top: 12px;
+    height: 25px;
+    margin-top: 11px;
   }
 
   .perfil-img {
@@ -138,10 +176,12 @@ $hamburger-spacing: 8px;
     height: 100%;
     border-radius: 50%;
   }
+
   &:hover {
     background: white;
     color: $fg;
   }
+
   @for $i from 1 through $menu-items {
     &:nth-child(#{$i + 2}) {
       transition-duration: 180ms;
@@ -151,7 +191,7 @@ $hamburger-spacing: 8px;
 
 .menu-open-button {
   @extend %ball;
-  border: 2px solid #62f8b2;
+  border: 2px solid #038259;
   margin-left: 10px;
   z-index: 2;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -159,25 +199,30 @@ $hamburger-spacing: 8px;
   transform: scale(1.1, 1.1) translate3d(0, 0, 0);
   cursor: pointer;
 }
+
 .menu-open-button:hover {
   transform: scale(1.2, 1.2) translate3d(0, 0, 0);
 }
-.menu-open:checked + .menu-open-button {
+
+.menu-open.menu-checked + .menu-open-button {
   transition-timing-function: linear;
   transition-duration: 200ms;
   transform: scale(0.8, 0.8) translate3d(0, 0, 0);
 }
 
-.menu-open:checked ~ .menu-item {
+.menu-open.menu-checked ~ .menu-item {
   opacity: 1;
   transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+
   @for $i from 1 through $menu-items {
     &:nth-child(#{$i + 2}) {
       transition-duration: 90ms+ (100ms * $i);
       transform: translate3d(60px * $i, 0, 0);
+
       @media (min-width: 414px) {
         transform: translate3d(70px * $i, 0, 0);
       }
+
       @media (min-width: 768px) {
         transform: translate3d(130px * $i, 0, 0);
       }
@@ -217,6 +262,38 @@ $hamburger-spacing: 8px;
   }
 }
 
+.icon-brand {
+  padding-top: 7px;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  text-decoration: none;
+  flex-direction: column;
+
+  @media (min-width: 1024px) {
+    margin-left: 20px;
+  }
+
+  .icon-out {
+    width: 29px;
+    height: auto;
+  }
+
+  .label-brand {
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    font-family: "Helvetica LT Std" !important;
+    width: 100%;
+    text-transform: uppercase;
+  }
+}
+
 .menu-desktop {
   display: none;
   background-color: #171717;
@@ -224,7 +301,7 @@ $hamburger-spacing: 8px;
   z-index: 10;
   padding: 24px 0;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  position: relative;
+
   @media (min-width: 1024px) {
     display: flex;
     justify-content: center;
@@ -237,12 +314,15 @@ $hamburger-spacing: 8px;
     max-width: 1280px;
     display: flex;
     justify-content: space-between;
+
     .content-top-bar {
       display: flex;
       list-style: none;
+
       li {
         margin: 0 5px;
       }
+
       .menu-item-destkop {
         width: 45px;
         height: 45px;
@@ -254,6 +334,7 @@ $hamburger-spacing: 8px;
         text-decoration: none;
         background-color: #000000;
         border-radius: 50%;
+
         .icon-item {
           width: auto;
           height: 20px;
@@ -271,7 +352,6 @@ $hamburger-spacing: 8px;
           width: 100%;
           text-transform: uppercase;
         }
-
         .perfil-img {
           width: 100%;
           height: 100%;

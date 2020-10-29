@@ -161,13 +161,14 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
       "uid" => $this->currentUser->id(),
       "cid" => trim($data['cid']),
       "eid" => trim($data['eid']),
+      "created" => time()
     ];
 
     $id = $this->dbConnection->insert('ab_inbev_redemption')
       ->fields($record)
       ->execute();
 
-    $this->logger->notice('New redemptions record has been created.');
+    // $this->logger->notice('New redemptions record has been created.');
 
     $created_record = $this->loadRecord($id);
 
@@ -266,10 +267,10 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
   protected function validate($record) {
 
     if ( !isset($record['eid']) || !is_int($record['eid']) || empty($record['eid']) ) {
-      throw new BadRequestHttpException('ID de experiencia no válido.');
+      throw new BadRequestHttpException('ID de experiencia no válida.');
     }
     if ( !isset($record['cid']) || !is_int($record['cid']) || empty($record['cid']) ) {
-      throw new BadRequestHttpException('ID de experiencia no válido.');
+      throw new BadRequestHttpException('ID de codigo no válido.');
     }
     // @DCG Add more validation rules here.
   }
@@ -311,10 +312,10 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
 
       case 1:
         // All my active redemptions
-        $result = $this->dbConnection->query('SELECT * FROM {ab_inbev_redemption} WHERE `uid` < :uid', [':uid' => $this->currentUser->id()]);
+        $result = $this->dbConnection->query('SELECT * FROM {ab_inbev_redemption} WHERE `uid` = :uid', [':uid' => $this->currentUser->id()]);
         $records = [];
         while($record = $result->fetchAssoc()) {
-          $records[] = $record;
+          $records[] = intval($record['eid']);
         }
         return $records;
       break;

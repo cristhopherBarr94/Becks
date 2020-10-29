@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MockExperiencias } from 'src/app/_mocks/experiencias-mock';
 import { HeaderComponent } from 'src/app/_modules/utils/_components/header/header.component';
+import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
 
@@ -13,7 +13,7 @@ import { UiService } from 'src/app/_services/ui.service';
 export class InteractionViewComponent implements OnInit , AfterViewInit {
   @ViewChild(HeaderComponent) header: HeaderComponent;
   public prevUrl: string = "/user/exp";
-  public experience:any = MockExperiencias;
+  public experience:any = [];
   public bgExp:string;
   public id: number;
   public titleExpView:string;
@@ -21,10 +21,12 @@ export class InteractionViewComponent implements OnInit , AfterViewInit {
   constructor(
     public httpService: HttpService,
     private router: Router,
+    private expService: ExperienciasService
   ) {}
 
   ngOnInit() {
-    this.id = Number(this.router.url.replace("/user/interaction/",""))
+    this.id = Number(this.router.url.replace("/user/interaction/",""));
+    this.experience = this.expService.getActualExps();
     this.experience.forEach(exp => {
       if(this.id == exp.id){
         this.bgExp = exp.imagesExp;

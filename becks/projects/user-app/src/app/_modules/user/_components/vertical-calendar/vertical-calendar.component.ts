@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
-import { MockExperiencias } from 'src/app/_mocks/experiencias-mock';
+import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { MenuStatusService } from 'src/app/_services/menu-status.service';
 
 @Component({
@@ -9,9 +9,12 @@ import { MenuStatusService } from 'src/app/_services/menu-status.service';
   styleUrls: ["./vertical-calendar.component.scss"],
 })
 export class VerticalCalendarComponent implements OnInit {
-  public amount_exp: any = MockExperiencias;
+  public amount_exp: any = [];
   constructor(private menuS : MenuStatusService,
-              private router: Router) {}
+              private router: Router,
+              private expService: ExperienciasService) {
+    this.amount_exp = this.expService.getActualExps();
+  }
 
   ngOnInit() {
     this.menuS.statusMenu("calendarmob");

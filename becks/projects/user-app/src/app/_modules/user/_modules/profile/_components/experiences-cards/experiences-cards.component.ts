@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/_models/User';
+import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { UserService } from 'src/app/_services/user.service';
-import { MockExperiencias } from "../../../../../../_mocks/experiencias-mock";
 
 @Component({
   selector: "user-experiences-cards",
@@ -19,9 +19,11 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
   acceptCards = new Array();
 
   userCodeSubscription: Subscription;
+  expSubscription: Subscription;
 
   constructor(
     private userSvc: UserService,
+    private expService: ExperienciasService
   ) {}
 
   ngOnInit() {
@@ -31,21 +33,36 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.expSubscription = this.expService.exp$.subscribe( exps => {
+      this.buildCards(exps);
+    });
+
     if (this.vertical) {
       this.direcionCards = "flex-direction-row";
     }
 
-    for (let i = 0; i < MockExperiencias.length; i++) {
-      if (MockExperiencias[i].status == "0") {
-        this.acceptCards.push(MockExperiencias[i]);
-      }
-      if (MockExperiencias[i].status == "1" || MockExperiencias[i].status == "2") {
-        this.pendingCards.push(MockExperiencias[i]);
-      }
+    const exps = this.expService.getActualExps();
+    if ( exps && exps.length > 0 ) {
+      this.buildCards(exps);
+    } else {
+      this.expService.getData();
     }
     this.userSvc.getCodes();
   }
+
   ngOnDestroy(): void {
     this.userCodeSubscription.unsubscribe();
+  }
+
+  buildCards(exps) {
+
+    for (let i = 0; i < exps.length; i++) {
+      if (exps[i].status == "0") {
+        this.acceptCards.push(exps[i]);
+      }
+      if (exps[i].status == "1" || exps[i].status == "2") {
+        this.pendingCards.push(exps[i]);
+      }
+    }
   }
 }

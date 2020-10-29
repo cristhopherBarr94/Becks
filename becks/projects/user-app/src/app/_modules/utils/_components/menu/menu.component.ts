@@ -26,6 +26,9 @@ export class MenuComponent implements OnInit {
   private userSubscription: Subscription;
   private menuSubscription: Subscription;
 
+  openMenu = false;
+  closeMenu = false;
+
   constructor(private userSvc: UserService,   private authService: AuthService,
     private ui: UiService,
     private menuS : MenuStatusService,
@@ -91,5 +94,10 @@ export class MenuComponent implements OnInit {
     if(seccion == this.menuOption){
       return "border-green"
     }
+  }
+  
+  abrirMenu() {
+    this.openMenu = !this.openMenu;
+    this.closeMenu = !this.closeMenu;
   }
 }

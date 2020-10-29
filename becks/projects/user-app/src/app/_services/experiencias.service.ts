@@ -1,36 +1,64 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
-import { MockExperiencias } from "../_mocks/experiencias-mock";
+import { Subject } from "rxjs";
+import { environment } from 'src/environments/environment';
 import { Exp } from "../_models/exp";
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: "root",
 })
 export class ExperienciasService {
-  constructor() {}
+  
+  private _exps: Exp[] = [];
+  private _expSbj = new Subject<Exp[]>();
+  public exp$ = this._expSbj.asObservable();
 
-  getExpContent(): Observable<Exp[]> {
-    const ITEM_FOOTER: Exp[] = [];
-    MockExperiencias.forEach((element) => {
-      const elementoResponse: Exp = {
-        id: element.id,
-        cuentaActiva: element.cuentaActiva,
-        detalleExp: element.detalleExp,
-        imagesExp: element.imagesExp,
-        imagesExpMob: element.imagesExpMob,
-        titleExp: element.titleExp,
-        fechaExp: element.fechaExp,
-        fechaAlt: element.fechaAlt,
-        detailExp: element.detailExp,
-        placeExp: element.placeExp,
-        urlExp: element.urlExp,
-        status: element.status,
-        horaExp: element.horaExp,
-        type:element.type,
-        urlRedirect:element.urlRedirect
-      };
-      ITEM_FOOTER.push(elementoResponse);
-    });
-    return of(ITEM_FOOTER);
+  constructor(private http: HttpService) {}
+
+  getActualExps() {
+    return this._exps;
   }
+
+  getData() {
+    const urlServer = environment.serverUrl;
+
+    this.http.get( urlServer + environment.user.getExp + "?time_stamp=" + new Date().getTime() ).subscribe(
+      (response: any) => {
+        if (response.status >= 200 && response.status < 300) {
+          
+          response.body.forEach((element, index) => {
+            const elementoResponse: Exp = {
+              id: element.id,
+              stock_actual: element.stock_actual,
+              detalleExp: false,
+              imagesExp: urlServer + environment.user.getImgExp + element.id + "_desk",
+              imagesExpMob: urlServer + environment.user.getImgExp + element.id + "_mob",
+              titleExp: element.title,
+              fechaExp: (new Date(element.valid_to*1000)).toString(),
+              fechaAlt: element.fechaAlt,
+              detailExp: element.description,
+              placeExp: element.location,
+              urlExp: element.url_terms,
+              status: element.status,
+              horaExp: element.horaExp,
+              type:element.type,
+              urlRedirect:element.url_redirect
+            };
+            this._exps.push(elementoResponse);
+            if ( response.body.length-1 == index ) {
+              this._expSbj.next(this._exps);
+            }
+          });
+        } else {
+          // TODO :: logic for error
+        }
+      },
+      (error) => {
+        // TODO :: logic for error
+      }
+    );
+   
+  }
+
+
 }

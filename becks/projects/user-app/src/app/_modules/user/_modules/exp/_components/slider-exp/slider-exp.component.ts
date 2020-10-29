@@ -1,6 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import { IonSlides, Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Exp } from 'src/app/_models/exp';
 import { User } from 'src/app/_models/User';
@@ -8,7 +8,6 @@ import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { UiService } from 'src/app/_services/ui.service';
 import { UserService } from 'src/app/_services/user.service';
 import { SoldMessageComponent } from 'src/app/_modules/user/_components/sold-message/sold-message.component';
-
 
 
 @Component({
@@ -22,11 +21,15 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   public slideOpts
   public size: string;
   public isActivate:boolean=false;
+  public detalleExp:boolean = false;
   private modalIsShowed:boolean=false;
   private codes;
   private userCodeSubs: Subscription;
+  private expSubs: Subscription;
 
   experienciaContent: Exp[] = [];
+
+  @ViewChild('slides') slides: IonSlides;
 
   constructor(
     private experienciaService: ExperienciasService,
@@ -53,24 +56,27 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     
     const s = this.router.url;
     this.id = Number(s.substr(s.lastIndexOf('/') + 1));
-    this.experienciaService.getExpContent().subscribe(response => {
+    
+    this.experienciaContent = this.experienciaService.getActualExps();
+    this.expSubs = this.experienciaService.exp$.subscribe(response => {
       this.experienciaContent = response;
       this.slideOpts = {
         initialSlide: this.compareId(this.id == NaN ? 0: this.id),
         direction: "vertical",
         speed: 400
       };
-      this.checkCodes();
     });
+    
+    // if ( !this.experienciaContent || this.experienciaContent.length==0 )
+    this.experienciaService.getData();
 
     this.userCodeSubs = this.userSvc.userCodes$.subscribe( 
       ( codes ) => {
         if(codes && codes.length>0){
           this.isActivate = true;
           this.codes = codes;
-          this.checkCodes();
+          this.getIndex();
         }
-
       }
     );
     
@@ -79,11 +85,12 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.userCodeSubs.unsubscribe();
+    this.expSubs.unsubscribe();
   }
 
   detalleExperiencia(item: any) {
     this.experienciaContent[item].detalleExp = !this.experienciaContent[item].detalleExp;
-    console.log(this.experienciaContent[item].id);
+    console.log("detalle experiencia",this.experienciaContent[item].id);
   }
 
   compareId(idExp:number){   
@@ -97,10 +104,13 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   activarCuenta( res ) {}
 
-  checkCodes() {
-    if ( this.codes && this.codes.length > 0 ) {       
-      this.experienciaContent.forEach(exp =>{
-        if(this.isActivate && exp.status == '2' && this.modalIsShowed==false){
+
+  checkCodes(CurrentSld:any) {
+
+    if ( this.codes && this.codes.length > 0 ) { 
+      for(let i=0 ; i<this.experienciaContent.length; i++){      
+    
+        if(this.experienciaContent[CurrentSld].status == '2' && this.modalIsShowed==false){
           this.modalIsShowed = true;
           this.ui.showModal(
             SoldMessageComponent,
@@ -112,11 +122,15 @@ export class SliderExpComponent implements OnInit, OnDestroy {
             }
           );
         }
-      });
+      }
     }
   }
 
-
+  async getIndex() {
+    if(this.slides) {
+      this.checkCodes(await this.slides.getActiveIndex());
+    }
+  }
 
   redirInteraction() {
     window.open("https://www.feriadelmillon.com.co/becks/");
@@ -140,4 +154,5 @@ public closeModal() {
   this.ui.dismissModal();
   this.modalIsShowed = false;
 }
+
 }

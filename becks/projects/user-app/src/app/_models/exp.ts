@@ -1,6 +1,6 @@
 export class Exp {
   id: number;
-  cuentaActiva: boolean;
+  stock_actual: string;
   detalleExp: boolean;
   imagesExp: string;
   imagesExpMob: string;

@@ -1,3 +1,5 @@
+<div class="container">
+  <user-menu [ngClass]='positionHeader()' *ngIf="size != 'xs'"></user-menu>
 <div class="container-edit-profile flex-direction-column">
   <div id="container" class="header-div">
     <div id="left" class="lateral-div">
@@ -10,6 +12,13 @@
         close
       </mat-icon>
     </div>
+    <div id="left_Desktop" class="lateral-div" *ngIf="size != 'xs'">
+      <button mat-button class="cancel" (click)="closeEdit()">
+        <mat-icon matSuffix>
+          arrow_back_ios
+        </mat-icon>
+      </button>
+    </div>
     <div id="center" class="center-div">
       <span class="title-secondary">EDITAR PERFIL</span>
     </div>
@@ -18,13 +27,7 @@
         check
       </mat-icon>
     </div> -->
-    <div id="right" class="lateral-div" *ngIf="size != 'xs'">
-      <button mat-button  class="cancel" (click)="closeEditDesktop()">
-        <mat-icon matSuffix>
-        close
-      </mat-icon>
-    </button>
-    </div>
+    
   </div>
   <div class="separator-becks"></div>
   <div class="margint-top col-flex-center flex-direction-column">
@@ -68,4 +71,5 @@
           </mat-tab-group>
           </section>
   
+</div>
 </div>

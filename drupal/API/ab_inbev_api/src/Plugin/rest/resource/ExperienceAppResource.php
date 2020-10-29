@@ -310,7 +310,6 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
     switch ($typeQuery) {
       case 0:
         // All the experiences
-        $date = new DateTime();
         $result = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} WHERE 1', []);
         $records = [];
         while($record = $result->fetchAssoc()) {

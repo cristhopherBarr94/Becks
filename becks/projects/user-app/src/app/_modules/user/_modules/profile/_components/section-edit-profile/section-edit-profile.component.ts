@@ -93,4 +93,13 @@ export class SectionEditProfileComponent implements OnInit, OnDestroy {
     this.saveBtn = true;
     setTimeout( ()=>{this.saveBtn = false;} , 1000);
   }
+
+  positionHeader(){
+    if(this.size == 'xs'){
+      return 'positionAbsolute'
+    }
+    else{
+      return 'positionRelative'
+    }
+  }
 }

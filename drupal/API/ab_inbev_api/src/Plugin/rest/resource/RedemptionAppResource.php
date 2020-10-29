@@ -167,7 +167,7 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
       ->fields($record)
       ->execute();
 
-    $this->logger->notice('New redemptions record has been created.');
+    // $this->logger->notice('New redemptions record has been created.');
 
     $created_record = $this->loadRecord($id);
 

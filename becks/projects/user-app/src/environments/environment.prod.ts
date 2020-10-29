@@ -24,6 +24,7 @@ export const environment = {
     getExp: "/api/ab-inbev-api-experience/0",
     getImgExp: "/sites/default/files/images/experience/", // id_desk && id_mob
     postRedemp: "/api/ab-inbev-api-redemption/",
+    getRedemp: "/api/ab-inbev-api-redemption/1",
   },
   rest: {
     client_id: "ed9d6754-a686-487e-ac99-4c1ce919912f",

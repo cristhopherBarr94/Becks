@@ -21,6 +21,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   public slideOpts
   public size: string;
   public isActivate:boolean=false;
+  public detalleExp:boolean = false;
   private modalIsShowed:boolean=false;
   private codes;
   private userCodeSubs: Subscription;
@@ -82,7 +83,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   detalleExperiencia(item: any) {
     this.experienciaContent[item].detalleExp = !this.experienciaContent[item].detalleExp;
-    console.log(this.experienciaContent[item].id);
+    console.log("detalle experiencia",this.experienciaContent[item].id);
   }
 
   compareId(idExp:number){   
@@ -119,7 +120,9 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   }
 
   async getIndex() {
-    this.checkCodes(await this.slides.getActiveIndex());
+    if(this.slides) {
+      this.checkCodes(await this.slides.getActiveIndex());
+    }
   }
 
   redirInteraction() {

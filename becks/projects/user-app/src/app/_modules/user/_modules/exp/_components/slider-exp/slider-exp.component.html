@@ -7,7 +7,7 @@
   <user-announcer-days class="animate__animated animate__bounceInLeft animate__delay-1s"></user-announcer-days>
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !this.isActivate, 'active': this.isActivate}">
-    <user-announcer-amount *ngIf="this.isActivate && (exp.status == 2 || exp.status== 1)" [state]="exp.status"></user-announcer-amount>
+    <user-announcer-amount *ngIf="this.isActivate && (exp.status == 2 || exp.status== 1)" [state]="exp.status" [quantity]="exp.stock_actual"></user-announcer-amount>
     <img *ngIf="this.size == 'lg' || this.size == 'md'"  [src]="exp.imagesExp" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
       [ngClass]="{'animate__animated animate__bounceInLeft': this.isActivate}">
       <img *ngIf="this.size == 'xs' || this.size == 'sm'"  [src]="exp.imagesExpMob" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
@@ -19,7 +19,7 @@
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': this.isActivate}">{{exp.titleExp}}
       </h2>
       <p class="detail-content content-desk detail-place animate__animated animate__bounceInLeft animate__delay-1s" [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': this.isActivate}">
-        <mat-icon matSuffix>calendar_today</mat-icon> {{exp.fechaAlt}}
+        <mat-icon matSuffix>calendar_today</mat-icon> {{exp.fechaExp | date}}
       </p>
       <p class="detail-content content-desk detail-place animate__animated animate__bounceInLeft animate__delay-1s" [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': this.isActivate}">
         <mat-icon matSuffix>room</mat-icon> {{exp.placeExp}}
@@ -65,7 +65,7 @@
         class="title-primary primary max-width-title-primary-age-gate title-detail animate__animated animate__bounceInLeft animate__delay-1s">
         {{exp.titleExp}}</h2>
       <p class="detail-content detail-place animate__animated animate__bounceInLeft animate__delay-1s">
-        <mat-icon matSuffix>calendar_today</mat-icon> {{exp.fechaAlt}}
+        <mat-icon matSuffix>calendar_today</mat-icon> {{exp.fechaExp | date}}
       </p>
       <p class="detail-content detail-place animate__animated animate__bounceInLeft animate__delay-1s">
         <mat-icon matSuffix>room</mat-icon> {{exp.placeExp}}

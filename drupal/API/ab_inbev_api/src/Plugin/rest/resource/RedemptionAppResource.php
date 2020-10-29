@@ -311,7 +311,7 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
 
       case 1:
         // All my active redemptions
-        $result = $this->dbConnection->query('SELECT * FROM {ab_inbev_redemption} WHERE `uid` < :uid', [':uid' => $this->currentUser->id()]);
+        $result = $this->dbConnection->query('SELECT * FROM {ab_inbev_redemption} WHERE `uid` = :uid', [':uid' => $this->currentUser->id()]);
         $records = [];
         while($record = $result->fetchAssoc()) {
           $records[] = $record;

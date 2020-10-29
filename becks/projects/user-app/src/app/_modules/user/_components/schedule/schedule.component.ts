@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatCalendar, MatCalendarCellClassFunction, MatCalendarCellCssClasses } from "@angular/material/datepicker";
 import { Platform } from '@ionic/angular';
-import { MockExperiencias } from 'src/app/_mocks/experiencias-mock';
+import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { MenuStatusService } from 'src/app/_services/menu-status.service';
 import { UiService } from 'src/app/_services/ui.service';
 
@@ -16,7 +16,7 @@ export class ScheduleComponent implements OnInit {
   eventDay = [];
   events = [];
   datesToHighlight = ["2020/10/23","2020/10/18","2020/10/29"];
-  eventList = MockExperiencias;
+  eventList = [];
   options = {
     year: "numeric",
     month: "short",
@@ -40,7 +40,10 @@ export class ScheduleComponent implements OnInit {
   @ViewChild("calendar2", { static: false }) calendar2: MatCalendar<Date>;
 
  
-  constructor(private menuS : MenuStatusService, private platform: Platform, private ui: UiService) {
+  constructor(private menuS : MenuStatusService,
+              private platform: Platform,
+              private ui: UiService,
+              private expService: ExperienciasService) {
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
         this.size = this.ui.getSizeType(platform.width());
@@ -58,7 +61,8 @@ export class ScheduleComponent implements OnInit {
       "2020" + "/" + (new Date().getMonth() + 2) + "/" + "01"
     );
     this.maxDate2 = new Date(new Date().setMonth(new Date().getMonth() + 2));
-    this.currentYear = new Date().getFullYear();    
+    this.currentYear = new Date().getFullYear();
+    this.eventList = this.expService.getActualExps();
     this.eventList.forEach(fecha =>{
       this.events.push(fecha.fechaExp);
     });

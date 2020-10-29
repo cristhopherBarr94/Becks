@@ -43,7 +43,7 @@
         [ngClass]="getClassInput(userEditProfileForm.controls.phone)">
         <mat-label class="color-green">Teléfono</mat-label>
 
-        <input matInput formControlName="phone" type="number" required maxlength="10" data-qadp="phone" />
+        <input matInput formControlName="phone" type="text" required maxlength="10" data-qadp="phone" />
         <mat-error *ngIf="userEditProfileForm.controls.phone.errors">
           {{
             getMessageform(
@@ -142,8 +142,8 @@
             )
           }}</mat-error>
       </mat-form-field>
-      <mat-error *ngIf="httpError">{{httpError}}</mat-error>
-    </div>
+      </div>
+    <mat-error *ngIf="httpError">{{httpError}}</mat-error>
   
     <button *ngIf="size != 'xs'" class="becks-btn-primary margin-top-button button-width margin-bottom"
       (click)="saveChanges()" block="block" color="becks">

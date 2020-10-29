@@ -136,17 +136,17 @@ export class EditFormComponent implements OnInit,OnDestroy {
 
   public saveChanges() {
     const isValidForm = this.userEditProfileForm.valid;
-    
+    console.log(this.userEditProfileForm)
     if ( this.size != "xs" ) {
       //DESKTOP
       if (isValidForm) {
         this.ui.showLoading();
         this.birthDayDate =!!this.userEditProfileForm.controls.day.value.trim() ? 
-                            this.userEditProfileForm.controls.month.value.trim() +
+                            this.userEditProfileForm.controls.month.value.toString().trim() +
                           "/" +
-                          this.userEditProfileForm.controls.day.value.trim() +
+                          this.userEditProfileForm.controls.day.value.toString().trim() +
                           "/" +
-                          this.userEditProfileForm.controls.year.value.trim() : undefined;
+                          this.userEditProfileForm.controls.year.value.toString().trim() : undefined;
 
         this.httpService
           .patch(environment.serverUrl + environment.user.patchData, {
@@ -180,11 +180,11 @@ export class EditFormComponent implements OnInit,OnDestroy {
             !this.userEditProfileForm.controls.year.invalid ) {
         this.ui.showLoading();
         this.birthDayDate =!!this.userEditProfileForm.controls.day.value.trim() ? 
-                            this.userEditProfileForm.controls.month.value.trim() +
+                            this.userEditProfileForm.controls.month.value.toString().trim() +
                           "/" +
-                          this.userEditProfileForm.controls.day.value.trim() +
+                          this.userEditProfileForm.controls.day.value.toString().trim() +
                           "/" +
-                          this.userEditProfileForm.controls.year.value.trim() : undefined;
+                          this.userEditProfileForm.controls.year.value.toString().trim() : undefined;
         this.httpService
           .patch(environment.serverUrl + environment.user.patchData, {
             first_name: this.userEditProfileForm.controls.name.value,

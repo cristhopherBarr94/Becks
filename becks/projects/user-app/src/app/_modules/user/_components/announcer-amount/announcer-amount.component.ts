@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./announcer-amount.component.scss'],
 })
 export class AnnouncerAmountComponent implements OnInit {
-  @Input() state:string;
+  @Input() stock:string;
   @Input() quantity:string;
   constructor() { }
 

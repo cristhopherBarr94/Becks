@@ -30,7 +30,7 @@ export class ExperienciasService {
     this.http.get( urlServer + environment.user.getExp + "?time_stamp=" + new Date().getTime() ).subscribe(
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
-          console.log(response.body);
+          this._exps = [];
           response.body.forEach((element, index) => {
             const elementoResponse: Exp = {
               id: element.id,
@@ -39,7 +39,7 @@ export class ExperienciasService {
               imagesExp: urlServer + environment.user.getImgExp + element.id + "_desk",
               imagesExpMob: urlServer + environment.user.getImgExp + element.id + "_mob",
               titleExp: element.title,
-              fechaExp: (new Date(element.valid_from*1000).toLocaleDateString()),
+              fechaExp: (new Date(element.valid_to*1000)).toLocaleString().split(" ")[0],
               fechaAlt: element.fechaAlt,
               detailExp: element.description,
               placeExp: element.location,

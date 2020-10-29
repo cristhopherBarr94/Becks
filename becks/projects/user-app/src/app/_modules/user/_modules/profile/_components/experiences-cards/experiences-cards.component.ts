@@ -44,9 +44,8 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
     const exps = this.expService.getActualExps();
     if ( exps && exps.length > 0 ) {
       this.buildCards(exps);
-    } else {
-      this.expService.getData();
     }
+    this.expService.getData();
     this.userSvc.getCodes();
   }
 

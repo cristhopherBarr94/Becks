@@ -2,7 +2,6 @@
   background-color: #171717;
   overflow-y: auto;
   overflow-x: hidden;
-  margin-bottom: 25px;
 }
 
 .header-div {
@@ -225,4 +224,6 @@ seccion-tabs {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background-color: #171717;
+  height: 100%;
 }

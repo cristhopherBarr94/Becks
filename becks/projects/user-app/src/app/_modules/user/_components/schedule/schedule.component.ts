@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatCalendar, MatCalendarCellClassFunction, MatCalendarCellCssClasses } from "@angular/material/datepicker";
 import { Platform } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { MenuStatusService } from 'src/app/_services/menu-status.service';
 import { UiService } from 'src/app/_services/ui.service';
@@ -16,7 +17,7 @@ export class ScheduleComponent implements OnInit {
   eventDay = [];
   events = [];
   datesToHighlight = ["2020/10/23","2020/10/18","2020/10/29"];
-  eventList = [];
+  exps = [];
   options = {
     year: "numeric",
     month: "short",
@@ -34,6 +35,7 @@ export class ScheduleComponent implements OnInit {
   public count: number = 0;
   public colorClass: string;
   public size: string;
+  private expSubs: Subscription;
 
   currentYear = new Date().getFullYear();
   @ViewChild("calendar1", { static: false }) calendar1: MatCalendar<Date>;
@@ -54,6 +56,11 @@ export class ScheduleComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.expSubs = this.expService.exp$.subscribe(exps => {
+      this.exps = exps;
+      this.fillCalendarExp();
+    });
+
     this.selectedDate = new Date();
     this.minDate = new Date();
     this.maxDate = new Date(new Date().setMonth(new Date().getMonth()));
@@ -62,23 +69,19 @@ export class ScheduleComponent implements OnInit {
     );
     this.maxDate2 = new Date(new Date().setMonth(new Date().getMonth() + 2));
     this.currentYear = new Date().getFullYear();
-    this.eventList = this.expService.getActualExps();
-    this.eventList.forEach(fecha =>{
-      this.events.push(fecha.fechaExp);
-    });
-    this. toDate() 
+    this.exps = this.expService.getActualExps();
+
+    if ( this.exps && this.exps.length > 0 ) {
+      this.fillCalendarExp();
+    }
+
+    this.expService.getData();
+
     this.onSelect(this.selectedDate);
     this.menuS.statusMenu("calendar")  
   }
  
-  toDate() {
-    this.events.forEach((singleEvent) => {
-      let fecha = new Date(singleEvent)
-        .toLocaleDateString("es-ES", this.options)
-        .split(" ");
-      this.eventDay.push(fecha);
-    });
-  }
+  
   onSelect(event) {
     this.showEvent = false;
     this.auxDate = event.toLocaleDateString();
@@ -139,5 +142,18 @@ export class ScheduleComponent implements OnInit {
     };
   }
  
-  
+  async fillCalendarExp () {
+    console.log("fillCalendarExp", this.exps);
+    
+    for ( const exp of this.exps ) {
+      console.log( "exp.fechaExp", exp);
+      
+      this.events.push(exp.fechaExp);
+      let fecha = new Date(exp.fechaExp)
+        .toLocaleDateString("es-ES", this.options)
+        .split(" ");
+      this.eventDay.push(fecha);
+    }
+    
+  }
 }

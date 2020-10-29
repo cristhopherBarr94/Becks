@@ -25,6 +25,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   private modalIsShowed:boolean=false;
   private codes;
   private userCodeSubs: Subscription;
+  private expSubs: Subscription;
 
   experienciaContent: Exp[] = [];
 
@@ -55,7 +56,9 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     
     const s = this.router.url;
     this.id = Number(s.substr(s.lastIndexOf('/') + 1));
-    this.experienciaService.getExpContent().subscribe(response => {
+    
+    this.experienciaContent = this.experienciaService.getActualExps();
+    this.expSubs = this.experienciaService.exp$.subscribe(response => {
       this.experienciaContent = response;
       this.slideOpts = {
         initialSlide: this.compareId(this.id == NaN ? 0: this.id),
@@ -63,6 +66,9 @@ export class SliderExpComponent implements OnInit, OnDestroy {
         speed: 400
       };
     });
+    
+    // if ( !this.experienciaContent || this.experienciaContent.length==0 )
+    this.experienciaService.getData();
 
     this.userCodeSubs = this.userSvc.userCodes$.subscribe( 
       ( codes ) => {
@@ -79,6 +85,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.userCodeSubs.unsubscribe();
+    this.expSubs.unsubscribe();
   }
 
   detalleExperiencia(item: any) {

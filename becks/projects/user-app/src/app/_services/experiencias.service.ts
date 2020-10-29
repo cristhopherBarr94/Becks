@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { Subject } from "rxjs";
 import { environment } from 'src/environments/environment';
 import { Exp } from "../_models/exp";
 import { HttpService } from './http.service';
@@ -8,20 +8,25 @@ import { HttpService } from './http.service';
   providedIn: "root",
 })
 export class ExperienciasService {
-  constructor(private http: HttpService) {
-    
+  
+  private _exps: Exp[] = [];
+  private _expSbj = new Subject<Exp[]>();
+  public exp$ = this._expSbj.asObservable();
+
+  constructor(private http: HttpService) {}
+
+  getActualExps() {
+    return this._exps;
   }
 
-  getExpContent(): Observable<Exp[]> {
-    const ITEM_FOOTER: Exp[] = [];
+  getData() {
     const urlServer = environment.serverUrl;
 
     this.http.get( urlServer + environment.user.getExp + "?time_stamp=" + new Date().getTime() ).subscribe(
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
-          console.log(response.body);
-          response.body.forEach((element) => {
-
+          
+          response.body.forEach((element, index) => {
             const elementoResponse: Exp = {
               id: element.id,
               stock_actual: element.stock_actual,
@@ -39,18 +44,20 @@ export class ExperienciasService {
               type:element.type,
               urlRedirect:element.url_redirect
             };
-            ITEM_FOOTER.push(elementoResponse);
+            this._exps.push(elementoResponse);
+            if ( response.body.length-1 == index ) {
+              this._expSbj.next(this._exps);
+            }
           });
         } else {
-
+          // TODO :: logic for error
         }
       },
       (error) => {
-        
+        // TODO :: logic for error
       }
     );
    
-    return of(ITEM_FOOTER);
   }
 
 

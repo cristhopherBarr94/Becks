@@ -45,11 +45,6 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     private ui: UiService,
 
   ) {
-    if(this.router.getCurrentNavigation().extras.state?.reload) {
-      // TODO :: FIX THIS ISSUE FROM CSS
-      // AVOID RELOAD - state: {reload: true}
-      location.reload();
-    }
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
         this.size = this.ui.getSizeType(platform.width());

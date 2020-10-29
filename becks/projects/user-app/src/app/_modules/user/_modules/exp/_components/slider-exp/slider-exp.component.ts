@@ -15,6 +15,7 @@ export class SliderExpComponent implements OnInit {
   slideOpts = {
     direction: "vertical",
     speed: 400,
+    scrollbar: true,
     navigation: {
       hideOnClick: true
     }
@@ -40,6 +41,9 @@ export class SliderExpComponent implements OnInit {
 
   detalleExperiencia(item: any) {
     this.experienciaContent[item].detalleExp = !this.experienciaContent[item].detalleExp;
+    this.slideOpts.scrollbar = !this.slideOpts.scrollbar;
+    console.log('este es el estado del scroll ->', this.slideOpts.scrollbar);
+
   }
 
 }

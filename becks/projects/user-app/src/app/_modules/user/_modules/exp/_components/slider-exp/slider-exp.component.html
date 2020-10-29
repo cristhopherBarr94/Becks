@@ -1,5 +1,5 @@
 <h1 class="title-exp">Home</h1>
-<ion-slides loop="false" pager="true" spaceBetween="0" scrollbar="true" [options]="slideOpts" slidesPerView="1" effect="slide"
+<ion-slides loop="false" parallax pager="true" spaceBetween="0" [options]="slideOpts" slidesPerView="1" effect="slide"
    zoom="false" class="exp-slider" #mySwiper>
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !exp.cuentaActiva, 'active': exp.cuentaActiva}">
@@ -38,23 +38,25 @@
         <a (click)="detalleExperiencia(i)">Cerrar<i class="fal fa-times"></i></a>
       </div>
       <h2
-        class="title-primary primary max-width-title-primary-age-gate title-detail animate__animated animate__bounceInLeft animate__delay-1s">
+        class="title-primary primary max-width-title-primary-age-gate title-detail animate__animated animate__backInUpanimate__delay-1s">
         {{exp.titleExp}}</h2>
-      <p class="detail-content detail-place animate__animated animate__bounceInLeft animate__delay-1s">{{exp.fechaExp}}
+        <div class="content-dialog animate__animated animate__backInUp">
+      <p class="detail-content detail-place animate__animated animate__backInUp animate__delay-1s">{{exp.fechaExp}}
       </p>
-      <p class="detail-content detail-place animate__animated animate__bounceInLeft animate__delay-1s">{{exp.placeExp}}
+      <p class="detail-content detail-place animate__animated animate__backInUp animate__delay-1s">{{exp.placeExp}}
       </p>
-      <p class="detail-content animate__animated animate__bounceInLeft animate__delay-1s">{{exp.detailExp}}</p>
+      <p class="detail-content animate__animated animate__backInUp animate__delay-1s">{{exp.detailExp}}</p>
+      </div>
     </div>
-    <button *ngIf="!exp.cuentaActiva" block="block" color="becks" (click)="activarCuenta(i)"
-        class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
-        [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
+      <button *ngIf="!exp.cuentaActiva" block="block" color="becks" (click)="activarCuenta(i)"
+        class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__backInUp animate__delay-1s btn-exp"
+        [ngClass]="{'animate__animated animate__backInUp animate__delay-1s': exp.cuentaActiva}">
         <span>Activar tu cuenta</span>
       </button>
 
       <button *ngIf="exp.cuentaActiva" block="block" color="becks" [routerLink]="['/']"
-        class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
-        [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': exp.cuentaActiva}">
+        class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__backInUp animate__delay-1s btn-exp"
+        [ngClass]="{'animate__animated animate__backInUp animate__delay-1s': exp.cuentaActiva}">
         <span>Participa</span>
       </button>
   </ion-slide>

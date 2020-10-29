@@ -1,9 +1,10 @@
 <h1 class="title-exp">Experiencias</h1>
-<ion-slides loop="false" pager="true" spaceBetween="0" [options]="slideOpts" slidesPerView="1" effect="slide"
-*ngIf="experienciaContent.length>0" 
-  pager="true" zoom="false" class="exp-slider"
-  #slides (ionSlideDidChange)="getIndex()"
-  >
+<ion-slides *ngIf="experienciaContent.length>0"
+          parallax loop="false" pager="true"
+          spaceBetween="0" [options]="slideOpts"
+          slidesPerView="1" effect="slide"
+          zoom="false" class="exp-slider"
+          #slides (ionSlideDidChange)="getIndex()">
   <user-announcer-days class="animate__animated animate__bounceInLeft animate__delay-1s"></user-announcer-days>
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !this.isActivate, 'active': this.isActivate}">
@@ -62,7 +63,7 @@
         </a>
       </div>
       <h2
-        class="title-primary primary max-width-title-primary-age-gate title-detail animate__animated animate__bounceInLeft animate__delay-1s">
+        class="title-primary primary max-width-title-primary-age-gate title-detail animate__animated animate__backInUpanimate__delay-1s">
         {{exp.titleExp}}</h2>
       <p class="detail-content detail-place animate__animated animate__bounceInLeft animate__delay-1s">
         <mat-icon matSuffix>calendar_today</mat-icon> {{exp.fechaExp | date}}
@@ -70,7 +71,8 @@
       <p class="detail-content detail-place animate__animated animate__bounceInLeft animate__delay-1s">
         <mat-icon matSuffix>room</mat-icon> {{exp.placeExp}}
       </p>
-      <p class="detail-content animate__animated animate__bounceInLeft animate__delay-1s">{{exp.detailExp}}</p>
+      <p class="detail-content animate__animated animate__backInUp animate__delay-1s">{{exp.detailExp}}</p>
+      </div>
     </div>
     <button *ngIf="!this.isActivate" block="block" color="becks" [routerLink]="['/user/activation']"
         class="exp-btn-inactive more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"

@@ -18,7 +18,6 @@ import { SoldMessageComponent } from 'src/app/_modules/user/_components/sold-mes
 export class SliderExpComponent implements OnInit, OnDestroy {
   public id: number;
   public initialSlide
-  public slideOpts
   public size: string;
   public isActivate:boolean=false;
   public detalleExp:boolean = false;
@@ -26,9 +25,16 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   private codes;
   private userCodeSubs: Subscription;
   private expSubs: Subscription;
-
   experienciaContent: Exp[] = [];
-
+  public slideOpts;
+  // = {
+  //   direction: "vertical",
+  //   speed: 400,
+  //   scrollbar: true,
+  //   navigation: {
+  //     hideOnClick: true
+  //   }
+  // };
   @ViewChild('slides') slides: IonSlides;
 
   constructor(
@@ -93,7 +99,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     console.log("detalle experiencia",this.experienciaContent[item].id);
   }
 
-  compareId(idExp:number){   
+  compareId(idExp:number){
     for(let i=0 ; i<this.experienciaContent.length; i++){      
       if(this.experienciaContent[i].id == idExp ){
         return i

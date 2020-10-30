@@ -21,6 +21,7 @@
         <ion-row>
           <div>
             <mat-calendar
+            *ngIf="newEvents"
               #calendar1
               class="month1"
               [minDate]="minDate"
@@ -31,6 +32,7 @@
           </div>
           <div>
             <mat-calendar
+            *ngIf="newEvents"
               #calendar2
               class="month2"
               [minDate]="minDate2"

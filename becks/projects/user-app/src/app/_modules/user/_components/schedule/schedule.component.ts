@@ -36,6 +36,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   public colorClass: string;
   public size: string;
   private expSubs: Subscription;
+  public newEvents = true;
 
   currentYear = new Date().getFullYear();
   @ViewChild("calendar1", { static: false }) calendar1: MatCalendar<Date>;
@@ -83,17 +84,21 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   }
 
   async fillCalendarExp () {
-
+    const tmpL = this.events.length;
+    this.events = [];
     for ( const exp of this.exps ) {
       let dateExp =  exp.fechaExp.split("/")[1] +"/"+  exp.fechaExp.split("/")[0] +"/"+ exp.fechaExp.split("/")[2];
       let fecha = new Date(dateExp)
       .toLocaleDateString("es-ES", this.options)
       .split(" ");
 
-    this.events.push(dateExp);
+      this.events.push(dateExp);
       this.eventDay.push(fecha);
       console.log("estos son los eventos: ",this.events);
-
+    }
+    if ( tmpL != this.events.length ) { 
+      this.newEvents = false;
+      setTimeout(() => this.newEvents  = true, 100);
     }
   }
  

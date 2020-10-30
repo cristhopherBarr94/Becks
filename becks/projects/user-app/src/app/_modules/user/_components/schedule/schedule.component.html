@@ -51,7 +51,7 @@
   
           <div
             class="schedule-body"
-            *ngFor="let event of eventList"
+            *ngFor="let event of exps"
           >
             <div
               class="card-schedule"
@@ -60,7 +60,7 @@
             <ion-row>
               <div class="width-box">
                   <div class="title-tertiary title-card"><a [href]="'./user/exp/'+event.id">{{ event.titleExp }}</a></div>
-                <div class="title-tertiary hour-card">{{ event.horaExp }}</div>
+                <div class="title-tertiary hour-card">{{ event.fechaExp }}</div>
                 </div>
                 <div class="circle-icon">
                   <span class="img-exp" [ngStyle]="{'background-image': 'url(' + event.imagesExp + ')'}"> </span>
@@ -79,7 +79,7 @@
     </ion-row>
   </section>
 
-  <user-vertical-calendar *ngIf="this.size == 'xs'"></user-vertical-calendar>
+  <user-vertical-calendar *ngIf="this.size == 'xs' || this.size == 'sm'"></user-vertical-calendar>
   <app-footer></app-footer>
 </ion-content>
 

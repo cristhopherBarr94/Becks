@@ -39,7 +39,7 @@
       <img class="icon-item" src="./assets/icon/menu/sign-out-alt.svg" alt="Salir" />
       <span class="name-item">Salir</span>
     </a>
-    <a [routerLink]="['/user/exp']" class="icon-brand"> <img class="icon-out" src="./assets/img/logo_menu.svg" alt="berck"> <span class="label-brand">Inicio</span>  </a>
+    <a *ngIf="showHomeOut" [routerLink]="['/user/exp']" class="icon-brand"> <img class="icon-out" src="./assets/img/logo_menu.svg" alt="berck"> <span class="label-brand">Inicio</span>  </a>
   </nav>
   <nav class="menu-desktop">
     <div class="container-menu">

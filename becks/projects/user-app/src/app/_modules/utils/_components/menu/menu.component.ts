@@ -26,6 +26,7 @@ export class MenuComponent implements OnInit {
   private menuOption : string
   private userSubscription: Subscription;
   private menuSubscription: Subscription;
+  public showHomeOut = true;
 
   openMenu = false;
   closeMenu = false;
@@ -42,10 +43,12 @@ export class MenuComponent implements OnInit {
       this.router.events.subscribe((val) => {
         // see also 
         if (val instanceof NavigationEnd) {
+          // console.log("NavigationEnd" , val.url);
+          this.showHomeOut = ( val.url.indexOf("/user/exp") == -1 );
           this.openMenu = false;
           this.closeMenu = false;
         }
-    });
+      });
   }
 
   ngOnInit() {
@@ -63,6 +66,8 @@ export class MenuComponent implements OnInit {
     
     this.menuSubscription = this.menuS.menuStatus$.subscribe(
       (result)=>{
+        // console.log("menuSubscription" , result);
+        this.showHomeOut = (result == "exp");
         this.menuOption = result;
       }
     );

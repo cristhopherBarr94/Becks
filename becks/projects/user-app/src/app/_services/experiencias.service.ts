@@ -12,7 +12,12 @@ export class ExperienciasService {
   private _exps: Exp[] = [];
   private _expSbj = new Subject<Exp[]>();
   public exp$ = this._expSbj.asObservable();
-
+  public   options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    weekday: "long",
+  };
   constructor(private http: HttpService) {}
 
   getActualExps() {

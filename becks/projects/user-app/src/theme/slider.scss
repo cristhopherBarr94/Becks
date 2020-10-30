@@ -80,7 +80,7 @@
 
   .btn-exp {
       position: absolute;
-      bottom: 20px;
+      bottom: 80px;
       z-index: 2;
       text-transform: uppercase;
       @media (min-width: 1024px) {
@@ -152,6 +152,7 @@
           align-content: flex-end;
           justify-content: flex-end;
           padding: 20px;
+          margin-bottom: 60px;
           @media (min-width: 1024px) {
             align-items: flex-start;
           }
@@ -172,6 +173,9 @@
         -webkit-backdrop-filter: blur(10px);
         padding: 30px;
         background-color: rgba(0,0,0,0.6);
+        &.add-exp {
+          height: 80%;
+        }
         .detail-close {
             text-align: right;
             padding-bottom: 20px;
@@ -407,8 +411,14 @@
 
 .content-dialog {
   height: 150px;
-  overflow-y: auto;
+  overflow-y: hidden;
+  margin-bottom: 5px;
+  &.add-exp {
+    height: auto !important;
+  }
 }
+
+
 
 .bloquear-slider {
   overflow-y: hidden;
@@ -416,16 +426,44 @@
 
 .btn-prev {
   position: absolute;
-  top: 90px;
+  top: 60px;
   left: 0;
   right: 0;
   z-index: 11;
+  margin: auto;
+  background: transparent;
+  span {
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: bold;
+  }
 }
 
 .btn-next {
   position: absolute;
-  bottom: 90px;
+  bottom: 15px;
   left: 0;
   right: 0;
   z-index: 11;
+  margin: auto;
+  background: transparent;
+  span {
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: bold;
+  }
+}
+
+
+.detail-active {
+  display: none;
+}
+
+.btn-detail-active {
+  bottom: 15px !important;
+}
+
+.more-link {
+  text-decoration: underline;
+  color: #62F8B2 !important;
 }

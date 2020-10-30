@@ -28,11 +28,11 @@ export class SliderExpComponent implements OnInit {
     slidesItems: undefined
   };
 
-  disablePrevBtn = true;
+  disablePrevBtn = false;
   disableNextBtn = false;
   finalSlider: Promise<boolean>;
   itemChange: number;
-
+  aumentarTamano = false;
   truePager = false;
 
   constructor(
@@ -45,8 +45,8 @@ export class SliderExpComponent implements OnInit {
 
   cargarExperiencias() {
     this.experienciaService.getExpContent().subscribe(response => {
-
       this.sliderExp.slidesItems = response;
+
     });
   }
 
@@ -58,10 +58,16 @@ export class SliderExpComponent implements OnInit {
     this.itemChange = item;
     this.sliderExp.slidesItems[item].detalleExp = !this.sliderExp.slidesItems[item].detalleExp;
     this.truePager = !this.truePager;
+    if (this.aumentarTamano) {
+      this.ampliarExp();
+    }
   }
 
 
   changeSlider() {
+    if (this.disablePrevBtn) {
+      this.disablePrevBtn = false;
+    }
     console.log('cambio de slider # si click ->', this.itemChange);
     if (this.itemChange !== undefined) {
       console.log('cambio de slider # con click ->', this.itemChange);
@@ -69,8 +75,16 @@ export class SliderExpComponent implements OnInit {
         this.sliderExp.slidesItems[this.itemChange].detalleExp = !this.sliderExp.slidesItems[this.itemChange].detalleExp;
         this.truePager = !this.truePager;
         this.itemChange = undefined;
+        if (this.aumentarTamano) {
+          this.ampliarExp();
+        }
       }
     }
+  }
+
+
+  ampliarExp() {
+    this.aumentarTamano = !this.aumentarTamano;
   }
 
 
@@ -102,11 +116,13 @@ export class SliderExpComponent implements OnInit {
   checkisBeginning(object, slideView) {
     slideView.isBeginning().then((istrue) => {
       object.isBeginningSlide = istrue;
+      console.log('esto es istrue inicio ->', istrue);
     });
   }
   checkisEnd(object, slideView) {
     slideView.isEnd().then((istrue) => {
       object.isEndSlide = istrue;
+      console.log('esto es istrue fin ->', istrue);
     });
   }
 

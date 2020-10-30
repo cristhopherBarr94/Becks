@@ -51,12 +51,12 @@ export class SliderExpComponent implements OnInit {
   }
 
   activarCuenta(item: any) {
-    this.experienciaContent[item].cuentaActiva = !this.experienciaContent[item].cuentaActiva;
+    this.sliderExp.slidesItems[item].cuentaActiva = !this.sliderExp.slidesItems[item].cuentaActiva;
   }
 
   detalleExperiencia(item: any) {
     this.itemChange = item;
-    this.experienciaContent[item].detalleExp = !this.experienciaContent[item].detalleExp;
+    this.sliderExp.slidesItems[item].detalleExp = !this.sliderExp.slidesItems[item].detalleExp;
     this.truePager = !this.truePager;
   }
 
@@ -65,8 +65,8 @@ export class SliderExpComponent implements OnInit {
     console.log('cambio de slider # si click ->', this.itemChange);
     if (this.itemChange !== undefined) {
       console.log('cambio de slider # con click ->', this.itemChange);
-      if (this.experienciaContent[this.itemChange].detalleExp === true) {
-        this.experienciaContent[this.itemChange].detalleExp = !this.experienciaContent[this.itemChange].detalleExp;
+      if (this.sliderExp.slidesItems[this.itemChange].detalleExp === true) {
+        this.sliderExp.slidesItems[this.itemChange].detalleExp = !this.sliderExp.slidesItems[this.itemChange].detalleExp;
         this.truePager = !this.truePager;
         this.itemChange = undefined;
       }

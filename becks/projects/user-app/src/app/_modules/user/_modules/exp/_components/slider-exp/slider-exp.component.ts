@@ -30,6 +30,15 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   public experienciaContent: Exp[] = [];
   public slideOpts;
   private redemps: number[] = [];
+  sliderExp = {
+    isBeginningSlide: true,
+    isEndSlide: false,
+    slidesItems: undefined
+  };
+
+
+truePager = false;
+ itemChange: number;
   // = {
   //   direction: "vertical",
   //   speed: 400,
@@ -66,10 +75,12 @@ export class SliderExpComponent implements OnInit, OnDestroy {
       try {
         if ( response ) {
           this.experienciaContent = response;
+          this.sliderExp.slidesItems = response;
           this.slideOpts = {
             initialSlide: this.compareId(this.id == NaN ? 0: this.id),
             direction: "vertical",
             speed: 400
+            
           };
         }
         
@@ -108,9 +119,12 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     this.userCodeSubs.unsubscribe();
     this.expSubs.unsubscribe();
   }
+  
 
   detalleExperiencia(item: any) {
+    this.itemChange = item;
     this.experienciaContent[item].detalleExp = !this.experienciaContent[item].detalleExp;
+    this.truePager = !this.truePager;
   }
 
   compareId(idExp:number){
@@ -129,8 +143,8 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
     if ( this.codes && this.codes.length > 0 ) { 
       for(let i=0 ; i<this.experienciaContent.length; i++){      
-    
-        if(this.experienciaContent[CurrentSld].status == '2' && this.modalIsShowed==false){
+        // this.experienciaContent[CurrentSld].status == '2' &&
+        if( this.experienciaContent[CurrentSld].stock_actual == '0' && this.modalIsShowed==false){
           this.modalIsShowed = true;
           this.ui.showModal(
             SoldMessageComponent,
@@ -190,6 +204,56 @@ participateExperience(eid:number) {
 public closeModal() {
   this.ui.dismissModal();
   this.modalIsShowed = false;
+}
+
+
+changeSlider() {
+  console.log('cambio de slider # si click ->', this.itemChange);
+  if (this.itemChange !== undefined) {
+    console.log('cambio de slider # con click ->', this.itemChange);
+    if (this.experienciaContent[this.itemChange].detalleExp === true) {
+      this.experienciaContent[this.itemChange].detalleExp = !this.experienciaContent[this.itemChange].detalleExp;
+      this.truePager = !this.truePager;
+      this.itemChange = undefined;
+    }
+  }
+}
+
+
+// Move to Next slide
+slideNext(object, slideView) {
+  slideView.slideNext(500).then(() => {
+    this.checkIfNavDisabled(object, slideView);
+  });
+}
+
+// Move to previous slide
+slidePrev(object, slideView) {
+  slideView.slidePrev(500).then(() => {
+    this.checkIfNavDisabled(object, slideView);
+  });
+}
+
+// Method called when slide is changed by drag or navigation
+SlideDidChange(object, slideView) {
+  this.checkIfNavDisabled(object, slideView);
+}
+
+// Call methods to check if slide is first or last to enable disbale navigation
+checkIfNavDisabled(object, slideView) {
+  this.checkisBeginning(object, slideView);
+  this.checkisEnd(object, slideView);
+}
+
+checkisBeginning(object, slideView) {
+  slideView.isBeginning().then((istrue) => {
+    object.isBeginningSlide = istrue;
+  });
+}
+checkisEnd(object, slideView) {
+  slideView.isEnd().then((istrue) => {
+    object.isEndSlide = istrue;
+  });
 }
 
 }

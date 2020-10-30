@@ -23,3 +23,28 @@
   text-decoration: underline;
   vertical-align: super !important;
 }
+.btn-prev,
+.btn-next {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: transparent;
+  color: #ffffff;
+  span {
+    font-size: 40px;
+  }
+}
+.btn-prev {
+  top: 10%;
+  @media (min-width: 769px) {
+    top: 25%;
+  }
+}
+.btn-next {
+  top: 94%;
+  @media (min-width: 769px) {
+    top: 105%;
+  }
+}

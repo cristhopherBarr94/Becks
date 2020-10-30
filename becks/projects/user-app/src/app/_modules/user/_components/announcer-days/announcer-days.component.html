@@ -42,6 +42,6 @@
   </div>
 </section>
 </div>
-    <a *ngIf="this.isActive == true" [ngClass]="'activated'" [routerLink]="['user/profile']">cuenta activa</a>
-    <a *ngIf="this.isActive == false" [ngClass]="'inactivated'" [routerLink]="['user/activation']">activar cuenta</a>
+    <a *ngIf="this.isActive == true" [ngClass]="'activated'" [routerLink]="['/user/profile']">cuenta activa</a>
+    <a *ngIf="this.isActive == false" [ngClass]="'inactivated'" [routerLink]="['/user/activation']">activar cuenta</a>
 </section>

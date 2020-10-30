@@ -22,8 +22,7 @@ export class AnnouncerDaysComponent implements OnInit, OnDestroy {
   public progress: any = 0;
   public daysR:any;
   public httpError: string;
-  private subscribe: Subscription;
-  private subscription: Subscription;
+  private userSubscribe: Subscription;
   private subsCodes: Subscription;
   
   constructor(    private platform: Platform, private ui: UiService, private userSvc: UserService) { 
@@ -37,7 +36,7 @@ export class AnnouncerDaysComponent implements OnInit, OnDestroy {
 
  
   ngOnInit(): void {
-    this.subscribe = this.userSvc.user$.subscribe(user =>{
+    this.userSubscribe = this.userSvc.user$.subscribe(user =>{
       this.user = user;
     });
     
@@ -85,8 +84,7 @@ export class AnnouncerDaysComponent implements OnInit, OnDestroy {
   }
   
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-    this.subscribe.unsubscribe();
+    this.userSubscribe.unsubscribe();
     this.subsCodes.unsubscribe();
   }
 }

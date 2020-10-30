@@ -143,11 +143,9 @@ export class ScheduleComponent implements OnInit {
   }
  
   async fillCalendarExp () {
-    console.log("fillCalendarExp", this.exps);
+    this.events = [];
     
     for ( const exp of this.exps ) {
-      console.log( "exp.fechaExp", exp);
-      
       this.events.push(exp.fechaExp);
       let fecha = new Date(exp.fechaExp)
         .toLocaleDateString("es-ES", this.options)

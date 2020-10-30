@@ -1,6 +1,6 @@
 <h1 class="title-exp">Home</h1>
 <button class="btn-prev" *ngIf="!disablePrevBtn" (click)="slidePrev(sliderExp.slidesItems,slides)"><span class="material-icons">keyboard_arrow_up</span></button>
-<ion-slides  pager="true" #slides spaceBetween="0" [options]="slideOpts" slidesPerView="1" effect="slide" [ngClass]="{'active-info': truePager}" zoom="false" class="exp-slider">
+<ion-slides  pager="true" #slides spaceBetween="0" [options]="slideOpts" slidesPerView="1" effect="slide" (ionSlideDidChange)="changeSlider()" [ngClass]="{'active-info': truePager}" zoom="false" class="exp-slider">
   <ion-slide class="item-exp" *ngFor="let exp of sliderExp.slidesItems; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !exp.cuentaActiva, 'active': exp.cuentaActiva}">
     

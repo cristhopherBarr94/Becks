@@ -150,9 +150,15 @@
       @media (min-width: 1024px) {
         align-items: flex-start;
       }
+
       .exp-link-value {
         margin: 10px 0 85px;
         text-transform: uppercase;
+        color: #62f8b2;
+        mat-icon {
+          margin-top: 5px !important;
+          color: #62f8b2;
+        }
       }
     }
 

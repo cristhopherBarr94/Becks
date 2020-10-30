@@ -5,7 +5,7 @@
     <p class="units">Días</p>
   </div>
 
-<div *ngIf="this.size != 'xs'" class="relative">
+<div *ngIf="this.size == 'xs' || this.size != 'sm'" class="relative">
   <circle-progress
   [percent]="progress"
   [radius]="45"

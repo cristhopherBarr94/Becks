@@ -20,7 +20,6 @@ import { ExperiencesCardsComponent } from "./_components/experiences-cards/exper
 import { ExperiencesCardComponent } from "./_components/experiences-card/experiences-card.component";
 import { SalesCardsComponent } from "./_components/sales-cards/sales-cards.component";
 import { SalesCardComponent } from "./_components/sales-card/sales-card.component";
-import { CircleProgressComponent } from "./_components/circle-progress/circle-progress.component";
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { SectionEditProfileComponent } from "./_components/section-edit-profile/section-edit-profile.component";
 import { UpdateFileComponent } from "./_components/update-file/update-file.component";
@@ -41,7 +40,6 @@ import { SectionChangePassComponent } from './_components/section-change-pass/se
     SalesCardsComponent,
     SalesCardComponent,
     SectionChangePassComponent,
-    CircleProgressComponent,
     SectionEditProfileComponent,
     UpdateFileComponent,
     EditFormComponent

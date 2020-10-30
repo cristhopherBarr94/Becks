@@ -110,13 +110,13 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #313132;
+  background: #4a4a4a;
   border-radius: 8px;
   background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c4c4c4;
+  background: #038259;
   border-radius: 8px;
   background-clip: padding-box;
 }
@@ -220,7 +220,7 @@ seccion-tabs {
   position: relative;
 }
 
-.container{
+.container {
   overflow: hidden;
   display: flex;
   flex-direction: column;

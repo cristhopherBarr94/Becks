@@ -21,6 +21,8 @@ import { MenuComponent } from './_components/menu/menu.component';
 import { SplashScreenComponent } from './_components/splash-screen/splash-screen.component';
 import { NameTittleComponent } from '../user/_modules/profile/_components/name-tittle/name-tittle.component';
 import { BasicAlertComponent } from './_components/basic-alert/basic-alert.component';
+import { CircleProgressComponent } from '../user/_modules/profile/_components/circle-progress/circle-progress.component';
+import { NgCircleProgressModule } from "ng-circle-progress";
 
 
 export function playerFactory() {
@@ -38,7 +40,8 @@ export function playerFactory() {
     MenuComponent,
     SplashScreenComponent,
     NameTittleComponent,
-    BasicAlertComponent
+    BasicAlertComponent,
+    CircleProgressComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +55,7 @@ export function playerFactory() {
     FormsModule,
     ReactiveFormsModule,
     LottieModule.forRoot({ player: playerFactory }),
+    NgCircleProgressModule.forRoot({}),
   ],
   exports: [
     FooterComponent,
@@ -63,7 +67,8 @@ export function playerFactory() {
     MenuComponent,
     SplashScreenComponent,
     NameTittleComponent,
-    BasicAlertComponent
+    BasicAlertComponent,
+    CircleProgressComponent,
   ],
 })
 export class UtilsModule {}

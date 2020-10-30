@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MatCalendar, MatCalendarCellClassFunction, MatCalendarCellCssClasses } from "@angular/material/datepicker";
 import { Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { UiService } from 'src/app/_services/ui.service';
   templateUrl: "./schedule.component.html",
   styleUrls: ["./schedule.component.scss"],
 })
-export class ScheduleComponent implements OnInit {
+export class ScheduleComponent implements OnInit, OnDestroy {
   DayAndDate: string;
   eventDay = [];
   events = [];
@@ -79,6 +79,10 @@ export class ScheduleComponent implements OnInit {
 
     this.onSelect(this.selectedDate);
     this.menuS.statusMenu("calendar")  
+  }
+
+  ngOnDestroy(): void {
+    this.expSubs.unsubscribe();
   }
  
   

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/_models/User';
 import { LogOutComponent } from 'src/app/_modules/user/_modules/profile/_components/log-out/log-out.component';
@@ -29,13 +30,21 @@ export class MenuComponent implements OnInit {
   openMenu = false;
   closeMenu = false;
 
-  constructor(private userSvc: UserService,   private authService: AuthService,
+  constructor(private userSvc: UserService,
     private ui: UiService,
     private menuS : MenuStatusService,
-    ) { this.pictureSub = this.userSvc.editing$.subscribe((isEditing) => {
-      this.time = isEditing
-        ? ""
-        : "?time_stamp=" + Math.floor(Date.now() / 1000);
+    private router: Router
+    ) { 
+      this.pictureSub = this.userSvc.editing$.subscribe((isEditing) => {
+        this.time = isEditing ? "" : "?time_stamp=" + Math.floor(Date.now() / 1000);
+      });
+
+      this.router.events.subscribe((val) => {
+        // see also 
+        if (val instanceof NavigationEnd) {
+          this.openMenu = false;
+          this.closeMenu = false;
+        }
     });
   }
 
@@ -70,10 +79,10 @@ export class MenuComponent implements OnInit {
     this.time = "?time_stamp=" + Math.floor(Date.now() / 1000);    
   }
 
-  openClose(){
-    this.menuStatus = !this.menuStatus
-    this.userSvc.dropdownMenu(this.menuStatus)
-  }
+  // openClose(){
+  //   this.menuStatus = !this.menuStatus
+  //   this.userSvc.dropdownMenu(this.menuStatus)
+  // }
 
   logout() {    
       this.ui.showModal(

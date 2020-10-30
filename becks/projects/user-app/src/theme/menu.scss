@@ -231,6 +231,7 @@ $hamburger-spacing: 8px;
 }
 
 .sign-out {
+  padding-top: 7px;
   width: 45px;
   height: 45px;
   display: flex;
@@ -241,13 +242,16 @@ $hamburger-spacing: 8px;
   text-decoration: none;
   flex-direction: column;
   color: #62f8b2;
+
   @media (min-width: 1024px) {
-    margin-top: 0px;
+    margin-left: 20px;
   }
+
   .icon-out {
     width: 37px;
     height: 37px;
   }
+
   .label-out {
     position: absolute;
     top: 100%;
@@ -311,7 +315,7 @@ $hamburger-spacing: 8px;
 
   .container-menu {
     width: 200%;
-    max-width: 1280px;
+    max-width: 1024px;
     display: flex;
     justify-content: space-between;
 

@@ -54,6 +54,8 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
   }
 
   buildCards(exps) {
+    this.acceptCards = [];
+    this.pendingCards = [];
 
     for (let i = 0; i < exps.length; i++) {
       if (exps[i].status == "0") {

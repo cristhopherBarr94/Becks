@@ -62,7 +62,7 @@
         </a>
       </div>
       <h2
-        class="title-primary primary max-width-title-primary-age-gate title-detail animate__animated animate__bounceInLeft animate__delay-1s">
+        class="title-primary primary max-width-title-primary-age-gate title-detail animate__animated animate__backInUpanimate__delay-1s">
         {{exp.titleExp}}</h2>
       <p class="detail-content detail-place animate__animated animate__bounceInLeft animate__delay-1s">
         <mat-icon matSuffix>calendar_today</mat-icon> {{exp.fechaExp}}
@@ -70,8 +70,8 @@
       <p class="detail-content detail-place animate__animated animate__bounceInLeft animate__delay-1s">
         <mat-icon matSuffix>room</mat-icon> {{exp.placeExp}}
       </p>
-      <p class="detail-content animate__animated animate__bounceInLeft animate__delay-1s">{{exp.detailExp}}</p>
-    </div>
+      <p class="detail-content animate__animated animate__backInUp animate__delay-1s">{{exp.detailExp}}</p>
+      </div>
     <button *ngIf="!this.isActivate" block="block" color="becks" [routerLink]="['/user/activation']"
         class="exp-btn-inactive more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
         [ngClass]="{'animate__animated animate__bounceInLeft animate__delay-1s': this.isActivate}">

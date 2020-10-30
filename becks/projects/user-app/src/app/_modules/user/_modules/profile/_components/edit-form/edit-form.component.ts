@@ -136,7 +136,6 @@ export class EditFormComponent implements OnInit,OnDestroy {
 
   public saveChanges() {
     const isValidForm = this.userEditProfileForm.valid;
-    console.log(this.userEditProfileForm)
     if ( this.size != "xs" ) {
       //DESKTOP
       if (isValidForm) {

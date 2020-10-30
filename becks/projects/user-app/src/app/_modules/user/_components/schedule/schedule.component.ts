@@ -36,6 +36,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   public colorClass: string;
   public size: string;
   private expSubs: Subscription;
+  public newEvents = true;
 
   currentYear = new Date().getFullYear();
   @ViewChild("calendar1", { static: false }) calendar1: MatCalendar<Date>;
@@ -51,14 +52,15 @@ export class ScheduleComponent implements OnInit, OnDestroy {
         this.size = this.ui.getSizeType(platform.width());
       });
       this.size = this.ui.getSizeType(platform.width());
-      console.log(this.size);
     });
   }
 
   ngOnInit() {
     this.expSubs = this.expService.exp$.subscribe(exps => {
-      this.exps = exps;
-      this.fillCalendarExp();
+      if ( exps && exps.length > 0 ) {
+        this.exps = exps;
+        this.fillCalendarExp();
+      }
     });
 
     this.selectedDate = new Date();
@@ -69,12 +71,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     );
     this.maxDate2 = new Date(new Date().setMonth(new Date().getMonth() + 2));
     this.currentYear = new Date().getFullYear();
-    this.exps = this.expService.getActualExps();
-
-    if ( this.exps && this.exps.length > 0 ) {
-      this.fillCalendarExp();
-    }
-
+ 
     this.expService.getData();
 
     this.onSelect(this.selectedDate);
@@ -84,14 +81,30 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.expSubs.unsubscribe();
   }
+
+  async fillCalendarExp () {
+    const tmpL = this.events.length;
+    this.events = [];
+    for ( const exp of this.exps ) {
+      let dateExp =  exp.fechaExp.split("/")[1] +"/"+  exp.fechaExp.split("/")[0] +"/"+ exp.fechaExp.split("/")[2];
+      let fecha = new Date(dateExp)
+      .toLocaleDateString("es-ES", this.options)
+      .split(" ");
+
+      this.events.push(dateExp);
+      this.eventDay.push(fecha);
+    }
+    if ( tmpL != this.events.length ) { 
+      this.newEvents = false;
+      setTimeout(() => this.newEvents  = true, 50);
+    }
+  }
  
-  
   onSelect(event) {
     this.showEvent = false;
     this.auxDate = event.toLocaleDateString();
     let stringDate2 = this.auxDate.split("/");
-    this.stringCom = stringDate2[1]+"/"+stringDate2[0]+"/"+stringDate2[2];
-
+    this.stringCom = stringDate2[0]+"/"+stringDate2[1]+"/"+stringDate2[2];
     this.selectedDate = event;
     const dateString = this.selectedDate.toLocaleDateString(
       "es-ES",
@@ -99,7 +112,8 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     );
     const dateValue = dateString.split(" ");
     this.currentYear = new Date().getFullYear();
-    this.DayAndDate = dateValue[0] + " " + dateValue[3] + " " + dateValue[1];
+    this.DayAndDate = dateValue[0] + " " + dateValue[3] + " " + dateValue[1];   
+    
     for (var j = 0; j < this.eventDay.length; j++) {
       if (
         (dateValue[1] == this.eventDay[j][1] &&
@@ -112,7 +126,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     }
   }
   previousDate() {
-    console.log("atras");
     this.calendar1._goToDateInView(
       (this.minDate = new Date(new Date().setMonth(new Date().getMonth()))),
       "month"
@@ -144,18 +157,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
         .some(d => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear());
       return highlightDate ? 'special-date' : '';
     };
-  }
  
-  async fillCalendarExp () {
-    this.events = [];
-    
-    for ( const exp of this.exps ) {
-      this.events.push(exp.fechaExp);
-      let fecha = new Date(exp.fechaExp)
-        .toLocaleDateString("es-ES", this.options)
-        .split(" ");
-      this.eventDay.push(fecha);
-    }
-    
   }
+
 }

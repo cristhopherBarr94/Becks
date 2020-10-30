@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { HeaderComponent } from 'src/app/_modules/utils/_components/header/header.component';
@@ -14,6 +14,7 @@ import { User } from 'src/app/_models/User';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { RedemptionsService } from 'src/app/_services/redemptions.service';
 import { UserService } from 'src/app/_services/user.service';
+import { Subscription } from 'rxjs';
 
 declare global {
   interface Window {
@@ -25,21 +26,20 @@ declare global {
   templateUrl: './interaction-confirm.component.html',
   styleUrls: ['./interaction-confirm.component.scss'],
 })
-export class InteractionConfirmComponent implements OnInit, AfterViewInit {
+export class InteractionConfirmComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(HeaderComponent) header: HeaderComponent;
   prevUrl: string = "/user/exp";
   public experience:any = [];
   public userRegisterForm: FormGroup;
   public userRegister: User= new User();
   public httpError: string;
-  public bgExpDes:string;
-  public bgExpMob:string;
+  public bgExp:string;
   public id: number;
   public expTitleC:string;
   public expLocation:string;
   public expDescRed:string;
   public size: string;
-  public allow:boolean=false;
+  private experienceSubs: Subscription;
 
 
   constructor(   
@@ -57,21 +57,51 @@ export class InteractionConfirmComponent implements OnInit, AfterViewInit {
         });
         this.size = this.ui.getSizeType(platform.width());
       });
-    }
-  ngOnInit() {
-    this.id = Number(this.router.url.replace("/user/confirm-interaction/",""));
-    this.experience = this.expService.getActualExps();
-    this.experience.forEach(exp => {
-      console.log(this.size);
-      if(this.id == exp.id){
-        this.bgExpMob = exp.imagesExpMob;
-        this.bgExpDes = exp.imagesExp;
-        this.expTitleC = exp.titleExp; 
-        this.expLocation = exp.placeExp;
-        this.expDescRed = "Enviaremos a tu correo las instrucciones para vivir esta experiencia.";
-        this.allow=true;
+      this.id = Number(this.router.url.replace("/user/confirm-interaction/",""));
+
+      const exps = this.expService.getActualExps();
+
+      if ( exps && exps.length > 0 ) {
+        this.experience.forEach(exp => {
+          if(this.id == exp.id){
+            this.expTitleC = exp.titleExp; 
+            this.expLocation = exp.placeExp;
+            this.expDescRed = "Enviaremos a tu correo las instrucciones para vivir esta experiencia.";
+            if(this.size == 'sm' || this.size == 'xs'){
+              this.getImgExp("mob");
+            }else {
+              this.getImgExp("desk");
+            }
+          }
+        });
+      } else {
+        this.experienceSubs = this.expService.exp$.subscribe(exps => {
+          if ( exps && exps.length > 0 ) {
+            this.experience = exps;
+            this.experience.forEach(exp => {
+              if(this.id == exp.id){
+                this.expTitleC = exp.titleExp; 
+                this.expLocation = exp.placeExp;
+                this.expDescRed = "Enviaremos a tu correo las instrucciones para vivir esta experiencia.";
+                if(this.size == 'sm' || this.size == 'xs'){
+                  this.getImgExp("mob");
+                }else {
+                  this.getImgExp("desk");
+                }
+              }
+            });
+          }
+        });
+        this.expService.getData();
       }
-    });
+
+  }
+
+  ngOnDestroy(): void {
+    if ( this.experienceSubs ) this.experienceSubs.unsubscribe();
+  }
+
+  ngOnInit() {
     this.initforms();
   }
   
@@ -84,6 +114,7 @@ export class InteractionConfirmComponent implements OnInit, AfterViewInit {
       privacy: new FormControl(null, Validators.required),
     });
   }
+
   redempExp() {
     if ( this.userRegisterForm.invalid) {
       (<any>Object).values(this.userRegisterForm.controls).forEach(control => {
@@ -92,10 +123,31 @@ export class InteractionConfirmComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    const user = this.userSvc.getActualUser();
-    console.log( "user" , user );
-    console.log( "exp id" , this.id );
+    const codes = this.userSvc.getActualUserCodes();
     
-    // this.redempSv.postRedemption( this.userSvc.getActualUser().id , this.id , )
+    this.ui.showLoading();
+    this.redempSv.postRedemption( this.id , parseInt(codes[0].id) ).subscribe( (r) => {
+      this.ui.dismissLoading(0);
+      if ( this.experienceSubs ) this.experienceSubs.unsubscribe();
+      this.expService.getData();
+      this.redempSv.getData();
+      this.router.navigate(['/user/exp/' + this.id ]);
+    });
+  }
+
+  getImgExp(sz:string) {
+    this.experience.forEach(expImg => 
+      { 
+        if(this.id == expImg.id) {
+
+          if(sz=="mob"){
+            this.bgExp = expImg.imagesExpMob;
+
+          }else if(sz=="desk") {
+            this.bgExp = expImg.imagesExp;
+          }
+        }
+      }
+      );
   }
 }

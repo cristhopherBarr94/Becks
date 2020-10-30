@@ -341,7 +341,7 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
 
       case 1:
         // All my codes
-        $result = $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE uid = :uid', [':uid' => $this->currentUser->id()]);
+        $result = $this->dbConnection->query('SELECT "id", "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE uid = :uid', [':uid' => $this->currentUser->id()]);
         $records = [];
         while($record = $result->fetchAssoc()) {
           $records[] = $record;
@@ -351,7 +351,7 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
 
       case 2:
         // All my active codes
-        $result = $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE status = 1 AND uid = :uid AND valid_until < :time ', [':uid' => $this->currentUser->id(), ':time' => time()]);
+        $result = $this->dbConnection->query('SELECT "id", "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE status = 1 AND uid = :uid AND valid_until < :time ', [':uid' => $this->currentUser->id(), ':time' => time()]);
         $records = [];
         while($record = $result->fetchAssoc()) {
           $records[] = $record;
@@ -361,7 +361,7 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
 
       case 3:
         // All my inactive codes
-        $result = $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE status = 1 AND uid = :uid', [':uid' => $this->currentUser->id()]);
+        $result = $this->dbConnection->query('SELECT "id", "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE status = 1 AND uid = :uid', [':uid' => $this->currentUser->id()]);
         $records = [];
         while($record = $result->fetchAssoc()) {
           $records[] = $record;

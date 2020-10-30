@@ -168,22 +168,18 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
     }
 
     try {
-      $this->dbConnection->query('UPDATE {ab_inbev_experience} SET stock_actual = stock_actual - 1 WHERE id = :id', [':id' => trim($data['eid'])]);
-    } catch (\Throwable $th) {
-      throw new BadRequestHttpException('Experiencia no disponible.');
-    }
-
-    try {
       $record = [
         "uid" => $this->currentUser->id(),
         "cid" => trim($data['cid']),
         "eid" => trim($data['eid']),
         "created" => time()
       ];
-  
       $id = $this->dbConnection->insert('ab_inbev_redemption')
         ->fields($record)
         ->execute();
+      if ( is_numeric($id) ) {
+        $this->dbConnection->query('UPDATE {ab_inbev_experience} SET stock_actual = stock_actual - 1 WHERE id = :id', [':id' => trim($data['eid'])]);
+      }
     } catch (\Throwable $th) {
       throw new BadRequestHttpException('Error interno, intenta de nuevo mas tarde.');
     }

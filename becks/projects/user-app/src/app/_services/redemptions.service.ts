@@ -10,11 +10,11 @@ export class RedemptionsService {
   
   private _redemps: [] = [];
   private _redempSbj = new Subject<[]>();
-  public exp$ = this._redempSbj.asObservable();
+  public redemp$ = this._redempSbj.asObservable();
 
   constructor(private http: HttpService) {}
 
-  getActualExps() {
+  getActualRedemps() {
     return this._redemps;
   }
 
@@ -23,6 +23,7 @@ export class RedemptionsService {
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
           this._redemps = response.body;
+          this._redempSbj.next(this._redemps);
         } else {
           // TODO :: logic for error
         }
@@ -33,10 +34,10 @@ export class RedemptionsService {
     );
   }
 
-  postRedemption( uid: number , eid: number , cid: number ) : Observable<Response>{
+  postRedemption( eid: number , cid: number ) : Observable<Response>{
     let ITEM_RESPONSE: Response;
     this.http.post( environment.serverUrl + environment.user.postRedemp , 
-                    { 'uid' : uid, 'eid' : eid, 'cid' : cid, } ).subscribe(
+                    { 'eid' : eid, 'cid' : cid, } ).subscribe(
       (response: any) => {
         ITEM_RESPONSE = response;
       },

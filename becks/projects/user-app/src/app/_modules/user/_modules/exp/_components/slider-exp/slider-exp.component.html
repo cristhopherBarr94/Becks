@@ -1,13 +1,13 @@
 <h1 class="title-exp">Experiencias</h1>
 <ion-slides loop="false" pager="true" spaceBetween="0" [options]="slideOpts" slidesPerView="1" effect="slide"
-*ngIf="size && experienciaContent.length>0" 
+*ngIf="slideOpts && size && experienciaContent.length>0" 
   pager="true" zoom="false" class="exp-slider"
   #slides (ionSlideDidChange)="getIndex()"
   >
   <user-announcer-days class="animate__animated animate__bounceInLeft animate__delay-1s"></user-announcer-days>
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !this.isActivate, 'active': this.isActivate}">
-    <user-announcer-amount *ngIf="this.isActivate && (exp.stock_actual)" [stock]="exp.stock_initial" [quantity]="exp.stock_actual"></user-announcer-amount>
+    <user-announcer-amount *ngIf="this.isActivate && (exp.stock_actual)" [stock]="exp.stock_actual"></user-announcer-amount>
     <img *ngIf="this.size == 'lg' || this.size == 'md'"  [src]="exp.imagesExp" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
       [ngClass]="{'animate__animated animate__bounceInLeft': this.isActivate}">
       <img *ngIf="this.size == 'xs' || this.size == 'sm'"  [src]="exp.imagesExpMob" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
@@ -65,7 +65,7 @@
         class="title-primary primary max-width-title-primary-age-gate title-detail animate__animated animate__backInUpanimate__delay-1s">
         {{exp.titleExp}}</h2>
       <p class="detail-content detail-place animate__animated animate__bounceInLeft animate__delay-1s">
-        <mat-icon matSuffix>calendar_today</mat-icon> {{exp.fechaExp | date}}
+        <mat-icon matSuffix>calendar_today</mat-icon> {{exp.fechaExp}}
       </p>
       <p class="detail-content detail-place animate__animated animate__bounceInLeft animate__delay-1s">
         <mat-icon matSuffix>room</mat-icon> {{exp.placeExp}}

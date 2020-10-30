@@ -215,9 +215,7 @@ function ab_inbev_api_schema() {
     ],
     'unique keys' => [
       '_id' => ['id'],
-      '_cid' => ['cid'],
-      '_eid' => ['eid'],
-      '_uid' => ['uid'],
+      '_rid' => [ 'cid', 'eid', 'uid' ],
     ],
     'foreign keys' => [
       'uid' => [
@@ -485,9 +483,7 @@ function ab_inbev_api_update_8602() {
     ],
     'unique keys' => [
       '_id' => ['id'],
-      '_cid' => ['cid'],
-      '_eid' => ['eid'],
-      '_uid' => ['uid'],
+      '_rid' => [ 'cid', 'eid', 'uid' ],
     ],
     'foreign keys' => [
       'uid' => [

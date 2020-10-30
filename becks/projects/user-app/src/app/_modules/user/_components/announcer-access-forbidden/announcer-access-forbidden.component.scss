@@ -1,6 +1,5 @@
 .interaction-section-confirm {
   color: #ffffff;
-  backdrop-filter: blur(10px);
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat;
@@ -20,6 +19,8 @@
       top: 40px !important;
       left: 0px !important;
       margin-bottom: 50px !important;
+      width: 100px !important;
+      height: 100px !important;
     }
   }
   .main-confirm-title {
@@ -71,31 +72,6 @@
     @media (min-width: 769px) {
       font-size: 24px;
       width: 397px;
-    }
-  }
-  ::ng-deep .mat-checkbox .mat-checkbox-frame {
-    border-color: #ffffff;
-  }
-  .content-check {
-    font-family: "Helvetica LT Std";
-    font-style: normal;
-    font-weight: bold;
-
-    display: flex;
-    @media (min-width: 0px) and (max-width: 768px) {
-      font-size: 11px;
-      line-height: 12px;
-      width: 210px;
-    }
-    @media (min-width: 769px) {
-      font-size: 13.28px;
-      line-height: 16px;
-      width: 290px;
-    }
-
-    .text-checkbox {
-      margin-left: 10px;
-      align-items: left !important;
     }
   }
 }

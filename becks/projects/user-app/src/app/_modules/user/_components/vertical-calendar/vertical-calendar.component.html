@@ -8,7 +8,7 @@
     <div class="card-event" *ngFor="let item of amount_exp">
       <ion-row>
         <div class="lateral-month">
-          <h1 class="title-tertiary">{{ (item.fechaExp) | date:'MMM'}}</h1>
+          <h1 class="title-tertiary">{{ (item.fechaExp.split('/')[1] +"/" +item.fechaExp.split('/')[0] +"/" + item.fechaExp.split('/')[2])  | date:'MMM'}}</h1>
           <h2 class="day-event title-tertiary">{{ item.fechaExp.split('/')[0] }}</h2>
           <div class="vertical_dotted_line"></div>
         </div>
@@ -18,7 +18,15 @@
         >
           <div class="event-description">
             <a (click)="redirectExpId(item.id)"><p class="title-secondary">{{ item.titleExp }}</p>
-            <p class="title-tertiary">{{ item.fechaExp  | date:'EEEE'}} {{item.fechaExp | date:'dd'}} {{item.fechaExp | date:'LLL'}}</p>
+            <p class="title-tertiary">{{ (item.fechaExp.split('/')[1] +"/"
+               +item.fechaExp.split('/')[0] +"/" 
+               + item.fechaExp.split('/')[2])  | date:'EEEE'}} 
+               {{(item.fechaExp.split('/')[1] +"/" 
+               +item.fechaExp.split('/')[0] +"/" 
+               + item.fechaExp.split('/')[2]) | date:'dd'}} 
+               {{(item.fechaExp.split('/')[1] +"/" 
+               +item.fechaExp.split('/')[0] +"/" 
+               + item.fechaExp.split('/')[2]) | date:'LLL'}}</p>
             </a>
           </div>
         </div>

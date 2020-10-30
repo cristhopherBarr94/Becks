@@ -61,7 +61,7 @@
             >
             <ion-row>
               <div class="width-box">
-                  <div class="title-tertiary title-card"><a [href]="'./user/exp/'+event.id">{{ event.titleExp }}</a></div>
+                  <div class="title-tertiary title-card"><a [routerLink]="['/user/exp/'+event.id]">{{ event.titleExp }}</a></div>
                 <div class="title-tertiary hour-card">{{ event.fechaExp }}</div>
                 </div>
                 <div class="circle-icon">

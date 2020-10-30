@@ -98,7 +98,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     }
     if ( tmpL != this.events.length ) { 
       this.newEvents = false;
-      setTimeout(() => this.newEvents  = true, 100);
+      setTimeout(() => this.newEvents  = true, 50);
     }
   }
  

@@ -5,7 +5,7 @@
   pager="true" zoom="false" class="exp-slider"
   #slides (ionSlideDidChange)="getIndex()"
   >
-  <user-announcer-days class="animate__animated animate__bounceInLeft animate__delay-1s"></user-announcer-days>
+  <user-announcer-days></user-announcer-days>
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !this.isActivate, 'active': this.isActivate}">
     <user-announcer-amount *ngIf="this.isActivate && (exp.stock_actual)" [stock]="exp.stock_actual"></user-announcer-amount>

@@ -1,8 +1,8 @@
 <div class="announcer-container">
-<img *ngIf="this.quantity > 0" src="./assets/icon/few-amount-icon.svg" alt="few amounts">
+<img *ngIf="this.stock > 0" src="./assets/icon/few-amount-icon.svg" alt="few amounts">
 <img *ngIf="this.stock == 0" src="./assets/icon/not-amount-icon.svg" alt="few amounts">
-<p *ngIf="this.quantity > 0" class="quantity-text">
-    quedan {{quantity}} cupos
+<p *ngIf="this.stock > 0" class="quantity-text">
+    quedan {{stock}} cupos
 </p>
 <p *ngIf="this.stock == 0" class="quantity-text">
     agotada

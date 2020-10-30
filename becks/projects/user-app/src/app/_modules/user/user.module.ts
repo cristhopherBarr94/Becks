@@ -23,6 +23,7 @@ import { InteractionViewComponent } from './_components/interaction-view/interac
 import { LOCALE_ID } from '@angular/core'; 
 import es from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { AnnouncerAccessForbiddenComponent } from './_components/announcer-access-forbidden/announcer-access-forbidden.component';
 
 registerLocaleData(es);
 @NgModule({
@@ -33,6 +34,7 @@ registerLocaleData(es);
     InteractionViewComponent,
     InteractionConfirmComponent,
     VerticalCalendarComponent,
+    AnnouncerAccessForbiddenComponent
   ],
   imports: [
     CommonModule,

@@ -10,11 +10,11 @@ export class RedemptionsService {
   
   private _redemps: [] = [];
   private _redempSbj = new Subject<[]>();
-  public exp$ = this._redempSbj.asObservable();
+  public redemp$ = this._redempSbj.asObservable();
 
   constructor(private http: HttpService) {}
 
-  getActualExps() {
+  getActualRedemps() {
     return this._redemps;
   }
 

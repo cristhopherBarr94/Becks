@@ -8,6 +8,7 @@ import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { UiService } from 'src/app/_services/ui.service';
 import { UserService } from 'src/app/_services/user.service';
 import { SoldMessageComponent } from 'src/app/_modules/user/_components/sold-message/sold-message.component';
+import { RedemptionsService } from 'src/app/_services/redemptions.service';
 
 
 @Component({
@@ -25,8 +26,10 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   private codes;
   private userCodeSubs: Subscription;
   private expSubs: Subscription;
-  experienciaContent: Exp[] = [];
+  private redempSubs: Subscription;
+  public experienciaContent: Exp[] = [];
   public slideOpts;
+  private redemps: number[] = [];
   // = {
   //   direction: "vertical",
   //   speed: 400,
@@ -43,7 +46,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     private userSvc: UserService,
     private platform: Platform,
     private ui: UiService,
-
+    private redempSvc: RedemptionsService
   ) {
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
@@ -70,6 +73,12 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     
     // if ( !this.experienciaContent || this.experienciaContent.length==0 )
     this.experienciaService.getData();
+
+    this.redempSubs = this.redempSvc.redemp$.subscribe(
+      ( red ) => {
+        this.redemps = red;
+    }); 
+    this.redempSvc.getData();
 
     this.userCodeSubs = this.userSvc.userCodes$.subscribe( 
       ( codes ) => {
@@ -138,16 +147,29 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   }
 
   
-participateExperience(arrayObject:number){
-  console.log(arrayObject);
-  if(this.experienciaContent[arrayObject-1].type == "0"){
-    window.open(this.experienciaContent[arrayObject].urlRedirect);
+participateExperience(eid:number) {
+
+  //check redemptions
+  if ( this.redemps && this.redemps.indexOf(eid)> -1 )  {
+    //pop up message error
+    this.router.navigate([`user/access-forbidden/${eid}`]);
+    return;
   }
-  else if(this.experienciaContent[arrayObject-1].type == "1"){
-    this.router.navigate([`user/interaction/${arrayObject}`]);
+
+  //notificacion message
+  if(this.experienciaContent[eid-1].type == "0"){
+    this.router.navigate([`user/confirm-interaction/${eid}`]);
+
   }
-  else if(this.experienciaContent[arrayObject-1].type == "2"){
-    this.router.navigate([`user/confirm-interaction/${arrayObject}`]);
+  //redirection
+  else if(this.experienciaContent[eid-1].type == "1"){
+    window.open(this.experienciaContent[eid].urlRedirect);
+
+  }
+  //question form
+  else if(this.experienciaContent[eid-1].type == "2"){
+    this.router.navigate([`user/interaction/${eid}`]);
+
   }
 }
 

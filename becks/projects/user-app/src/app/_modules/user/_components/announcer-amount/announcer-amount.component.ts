@@ -7,7 +7,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AnnouncerAmountComponent implements OnInit {
   @Input() stock:string;
-  @Input() quantity:string;
   constructor() { }
 
   ngOnInit() {

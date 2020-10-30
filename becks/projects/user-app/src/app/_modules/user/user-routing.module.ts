@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { AnnouncerAccessForbiddenComponent } from './_components/announcer-access-forbidden/announcer-access-forbidden.component';
 import { InteractionConfirmComponent } from './_components/interaction-confirm/interaction-confirm.component';
 import { InteractionViewComponent } from './_components/interaction-view/interaction-view.component';
 import { ScheduleComponent } from './_components/schedule/schedule.component';
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: "confirm-interaction/:id",
     component: InteractionConfirmComponent
+  },
+  {
+    path: "access-forbidden/:id",
+    component: AnnouncerAccessForbiddenComponent
   },
   {
     path: "interaction/:id",

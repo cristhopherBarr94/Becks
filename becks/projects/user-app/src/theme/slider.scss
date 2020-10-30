@@ -121,21 +121,24 @@
       @media (min-width: 1024px) {
         display: flex;
         position: relative;
-        width: 37%;
-        margin-left: 0px;
-        margin-right: auto;
-        /* max-width: 1024px; // TODO :: content to left to right behavior*/
+        // width: 37%;
+        // margin-left: 0px;
+        // margin-right: auto;
+        // align-items: flex-start;
+        width: 100%;
+        max-width: 1024px;
         align-items: flex-start;
       }
     }
-    &:nth-child(even) {
-      @media (min-width: 1024px) {
-        .container-exp {
-          align-items: flex-end !important;
-          justify-content: flex-end;
-        }
-      }
-    }
+    // TODO :: UNCOMMENT TO LEFT - RIGHT LOGIC INTERSPERSED
+    // &:nth-child(even) {
+    //   @media (min-width: 1024px) {
+    //     .container-exp {
+    //       align-items: flex-end !important;
+    //       justify-content: flex-end;
+    //     }
+    //   }
+    // }
     .content-exp {
       position: relative;
       display: flex;
@@ -147,42 +150,26 @@
       @media (min-width: 1024px) {
         align-items: flex-start;
       }
-
-      .exp-detail {
-        width: 100%;
-        height: 55%;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        overflow: hidden;
-        position: relative;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        padding: 30px;
-        background-color: rgba(0, 0, 0, 0.6);
-        .detail-close {
-          text-align: right;
-          padding-bottom: 20px;
-        }
-        .title-detail {
-          margin-bottom: 15px;
-          text-align: left;
-        }
+      .exp-link-value {
+        margin: 10px 0 85px;
+        text-transform: uppercase;
       }
     }
 
     .exp-detail {
       width: 100%;
-      height: 60%;
-      overflow-y: auto;
-      border-top-left-radius: 50px;
-      border-top-right-radius: 50px;
+      height: 55%;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      overflow: hidden;
       position: relative;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      padding: 20px 30px 30px 30px;
+      padding: 30px;
+      background-color: rgba(0, 0, 0, 0.6);
       .detail-close {
         text-align: right;
-        padding-bottom: 0px;
+        padding-bottom: 20px;
       }
       .title-detail {
         margin-bottom: 15px;
@@ -193,6 +180,7 @@
         margin-top: 20px !important;
         text-align: left;
       }
+
       .detail-content {
         font-family: "Helvetica LT Std";
         font-style: normal;
@@ -302,11 +290,6 @@
     font-weight: normal !important;
   }
 
-  .content-onbording {
-    position: absolute;
-    bottom: 250px;
-  }
-
   .btn-onboarding {
     z-index: 11;
     background-color: transparent;
@@ -314,7 +297,7 @@
     font-family: "Helvetica LT Std";
     font-style: normal;
     font-weight: normal !important;
-    font-size: 24px;
+    font-size: 16px;
   }
 
   .btn-omitir {

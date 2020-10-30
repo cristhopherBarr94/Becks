@@ -34,7 +34,7 @@ registerLocaleData(es);
     InteractionViewComponent,
     InteractionConfirmComponent,
     VerticalCalendarComponent,
-    AnnouncerAccessForbiddenComponent
+    AnnouncerAccessForbiddenComponent,
   ],
   imports: [
     CommonModule,

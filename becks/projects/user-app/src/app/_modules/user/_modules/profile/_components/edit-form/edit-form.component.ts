@@ -140,7 +140,7 @@ export class EditFormComponent implements OnInit,OnDestroy {
       //DESKTOP
       if (isValidForm) {
         this.ui.showLoading();
-        this.birthDayDate =!!this.userEditProfileForm.controls.day.value.trim() ? 
+        this.birthDayDate =!!this.userEditProfileForm.controls.day.value ? 
                             this.userEditProfileForm.controls.month.value.toString().trim() +
                           "/" +
                           this.userEditProfileForm.controls.day.value.toString().trim() +
@@ -149,12 +149,12 @@ export class EditFormComponent implements OnInit,OnDestroy {
 
         this.httpService
           .patch(environment.serverUrl + environment.user.patchData, {
-            first_name: this.userEditProfileForm.controls.name.value,
-            last_name: this.userEditProfileForm.controls.lastName.value,
-            mobile_phone: this.userEditProfileForm.controls.phone.value,
+            first_name: this.userEditProfileForm.controls.name.value.trim(),
+            last_name: this.userEditProfileForm.controls.lastName.value.trim(),
+            mobile_phone: this.userEditProfileForm.controls.phone.value.trim(),
             birthdate: this.birthDayDate,
-            type_id: this.userEditProfileForm.controls.id.value,
-            id_number: this.userEditProfileForm.controls.document.value,
+            type_id: this.userEditProfileForm.controls.id.value.trim(),
+            id_number: this.userEditProfileForm.controls.document.value.trim(),
           })
           .subscribe((response: any) => {         
             if (response.status == 200) {            
@@ -178,7 +178,7 @@ export class EditFormComponent implements OnInit,OnDestroy {
             !this.userEditProfileForm.controls.day.invalid &&
             !this.userEditProfileForm.controls.year.invalid ) {
         this.ui.showLoading();
-        this.birthDayDate =!!this.userEditProfileForm.controls.day.value.trim() ? 
+        this.birthDayDate =!!this.userEditProfileForm.controls.day.value ? 
                             this.userEditProfileForm.controls.month.value.toString().trim() +
                           "/" +
                           this.userEditProfileForm.controls.day.value.toString().trim() +
@@ -186,9 +186,9 @@ export class EditFormComponent implements OnInit,OnDestroy {
                           this.userEditProfileForm.controls.year.value.toString().trim() : undefined;
         this.httpService
           .patch(environment.serverUrl + environment.user.patchData, {
-            first_name: this.userEditProfileForm.controls.name.value,
-            last_name: this.userEditProfileForm.controls.lastName.value,
-            mobile_phone: this.userEditProfileForm.controls.phone.value,
+            first_name: this.userEditProfileForm.controls.name.value.trim(),
+            last_name: this.userEditProfileForm.controls.lastName.value.trim(),
+            mobile_phone: this.userEditProfileForm.controls.phone.value.trim(),
             birthdate: this.birthDayDate
           })
           .subscribe((response: any) => {         

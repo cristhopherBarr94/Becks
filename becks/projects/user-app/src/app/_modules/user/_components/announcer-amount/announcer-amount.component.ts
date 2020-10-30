@@ -9,8 +9,6 @@ export class AnnouncerAmountComponent implements OnInit {
   @Input() stock:string;
   constructor() { }
 
-  ngOnInit() {
-   
-  }
+  ngOnInit() {}
 
 }

@@ -1,139 +1,138 @@
 .container-edit-profile {
-    min-height: 100%;
-    background-color: #171717;
-    overflow: auto;
-    margin-bottom: 25px;
+  min-height: 100%;
+  background-color: #171717;
+  overflow: auto;
+  margin-bottom: 25px;
+}
+
+.header-div {
+  display: flex;
+  align-items: center;
+  margin-top: 63px;
+}
+
+.with {
+  width: 250px;
+}
+
+.lateral-div {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+}
+
+.center-div {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+}
+
+.save {
+  color: #038259;
+}
+
+.cancel {
+  color: white;
+  background-color: transparent;
+}
+
+.margint-top {
+  margin-top: 24px;
+}
+
+.margin-left-tt {
+  margin-left: 20px;
+}
+
+.with-form {
+  width: 100px;
+  margin-right: 7px;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    width: 96px;
+    margin-right: 12px;
   }
-  
-  .header-div {
-    display: flex;
-    align-items: center;
-    margin-top: 63px;
-  }
-  
-  .with {
-    width: 250px;
-  }
-  
-  .lateral-div {
-    width: 15%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .center-div {
-    width: 70%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .save {
-    color: #038259;
-  }
-  
-  .cancel {
-    color: white;
-    background-color: transparent;
-  }
-  
-  .margint-top {
-    margin-top: 24px;
-  }
-  
-  .margin-left-tt {
-    margin-left: 20px;
-  }
-  
-  .with-form {
+  @media (min-width: 1367px) {
     width: 100px;
-    margin-right: 7px;
-    @media (min-width: 769px) and (max-width: 1366px) {
-      width: 96px;
-      margin-right: 12px;
-    }
-    @media (min-width: 1367px) {
-      width: 100px;
-      margin-right: 12px;
-    }
+    margin-right: 12px;
   }
-  
-  .button-open-file {
-    background-color: #038259;
-    width: 260px;
-    height: 20px;
-    margin-top: 10px;
+}
+
+.button-open-file {
+  background-color: #038259;
+  width: 260px;
+  height: 20px;
+  margin-top: 10px;
+}
+
+.fullInput {
+  width: 320px;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    margin-right: 12px;
   }
-  
-  .fullInput {
-    width: 320px;
-    @media (min-width: 769px) and (max-width: 1366px) {
-      margin-right: 12px;
-    }
-    @media (min-width: 1367px) {
-      width: 330px;
-      margin-right: 12px;
-    }
+  @media (min-width: 1367px) {
+    width: 330px;
+    margin-right: 12px;
   }
-  
-  .birthayForm {
-    @media (min-width: 769px) {
-      margin-right: 12px;
-      display: flex;
-      justify-content: center;
-      margin-bottom: 12px;
-    }
+}
+
+.birthayForm {
+  @media (min-width: 769px) {
+    margin-right: 12px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
   }
-  
-  .margin-bottom {
-    margin-bottom: 25px;
+}
+
+.margin-bottom {
+  margin-bottom: 25px;
+}
+
+.margin-left {
+  @media (min-width: 769px) {
+    margin-left: 0px;
   }
-  
-  .margin-left {
-    @media (min-width: 769px) {
-      margin-left: 0px;
-    }
-  }
-  
-  .underline {
-    text-decoration: underline;
-  }
-  
-  .name-box {
-    max-width: 60%;
-  }
-  
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: #c4c4c4;
-    border-radius: 8px;
-    background-clip: padding-box;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #313132;
-    border-radius: 8px;
-    background-clip: padding-box;
-  }
-  
-  .separator-becks {
-    margin-left: auto;
-    margin-right: auto;
-    width: 65px;
-    height: 2px;
-    background: rgb(98, 248, 178);
-    background: linear-gradient(
-      90deg,
-      rgba(98, 248, 178, 1) 0%,
-      rgba(18, 18, 18, 1) 100%
-    );
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.name-box {
+  max-width: 60%;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #4a4a4a;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #038259;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+.separator-becks {
+  margin-left: auto;
+  margin-right: auto;
+  width: 65px;
+  height: 2px;
+  background: rgb(98, 248, 178);
+  background: linear-gradient(
+    90deg,
+    rgba(98, 248, 178, 1) 0%,
+    rgba(18, 18, 18, 1) 100%
+  );
+  position: relative;
+  top: 10px;
+  @media (min-width: 769px) {
     position: relative;
-    top: 10px;
-    @media (min-width: 769px) {
-      position: relative;
-      top: 0px;
-    }
+    top: 0px;
   }
-  
+}

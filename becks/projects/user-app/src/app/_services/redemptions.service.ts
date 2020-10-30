@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpService } from './http.service';
 
@@ -19,9 +19,7 @@ export class RedemptionsService {
   }
 
   getData() {
-    const urlServer = environment.serverUrl;
-
-    this.http.get( urlServer + environment.user.getRedemp + "?time_stamp=" + new Date().getTime() ).subscribe(
+    this.http.get( environment.serverUrl + environment.user.getRedemp + "?time_stamp=" + new Date().getTime() ).subscribe(
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
           this._redemps = response.body;
@@ -33,6 +31,19 @@ export class RedemptionsService {
         // TODO :: logic for error
       }
     );
-   
+  }
+
+  postRedemption( uid: number , eid: number , cid: number ) : Observable<Response>{
+    let ITEM_RESPONSE: Response;
+    this.http.post( environment.serverUrl + environment.user.postRedemp , 
+                    { 'uid' : uid, 'eid' : eid, 'cid' : cid, } ).subscribe(
+      (response: any) => {
+        ITEM_RESPONSE = response;
+      },
+      (error) => {
+        ITEM_RESPONSE = error;
+      }
+    );
+    return of(ITEM_RESPONSE);
   }
 }

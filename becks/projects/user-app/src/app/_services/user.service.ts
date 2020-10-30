@@ -59,6 +59,10 @@ export class UserService {
     );
   }
 
+  public getActualUserCodes(): any[] {
+    return this._userCodes;
+  }
+
   public getCodes( forceUpdate? ) {
     
     if ( this._user != undefined && this._user.email ) {

@@ -12,6 +12,8 @@ import {
 } from "@angular/forms";
 import { User } from 'src/app/_models/User';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
+import { RedemptionsService } from 'src/app/_services/redemptions.service';
+import { UserService } from 'src/app/_services/user.service';
 
 declare global {
   interface Window {
@@ -46,7 +48,9 @@ export class InteractionConfirmComponent implements OnInit, AfterViewInit {
     private platform: Platform,
     private ui: UiService,
     private formBuilder: FormBuilder,
-    private expService: ExperienciasService) { 
+    private expService: ExperienciasService,
+    private userSvc: UserService,
+    private redempSv: RedemptionsService) { 
       platform.ready().then(() => {
         this.platform.resize.subscribe(() => {
           this.size = this.ui.getSizeType(platform.width());
@@ -87,5 +91,11 @@ export class InteractionConfirmComponent implements OnInit, AfterViewInit {
       });
       return;
     }
+
+    const user = this.userSvc.getActualUser();
+    console.log( "user" , user );
+    console.log( "exp id" , this.id );
+    
+    // this.redempSv.postRedemption( this.userSvc.getActualUser().id , this.id , )
   }
 }

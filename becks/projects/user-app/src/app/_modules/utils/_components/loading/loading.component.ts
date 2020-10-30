@@ -8,7 +8,7 @@ import { AnimationOptions } from "ngx-lottie";
 })
 export class LoadingComponent implements OnInit {
   options: AnimationOptions = {
-    path: "../../../../../assets/animations/loading_animation.json",
+    path: "../../../../../assets/animations/logo_script.json",
   };
   constructor() {}
 

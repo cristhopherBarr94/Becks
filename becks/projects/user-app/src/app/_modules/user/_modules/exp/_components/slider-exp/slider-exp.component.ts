@@ -55,20 +55,28 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     
+    this.ui.showLoading();
     const s = this.router.url;
     this.id = Number(s.substr(s.lastIndexOf('/') + 1));
     
     this.experienciaContent = this.experienciaService.getActualExps();
     this.expSubs = this.experienciaService.exp$.subscribe(response => {
-      this.experienciaContent = response;
-      this.slideOpts = {
-        initialSlide: this.compareId(this.id == NaN ? 0: this.id),
-        direction: "vertical",
-        speed: 400
-      };
+      if ( response && response.length != this.experienciaContent.length ) {
+        this.experienciaContent = response;
+        this.slideOpts = {
+          initialSlide: this.compareId(this.id == NaN ? 0: this.id),
+          direction: "vertical",
+          speed: 400
+        };
+      }
+      this.ui.dismissLoading();
+    }, (e) => {
+      this.ui.dismissLoading();
     });
     
-    // if ( !this.experienciaContent || this.experienciaContent.length==0 )
+    if ( !this.experienciaContent || this.experienciaContent.length==0 ) {
+      this.ui.dismissLoading();
+    }
     this.experienciaService.getData();
 
     this.userCodeSubs = this.userSvc.userCodes$.subscribe( 

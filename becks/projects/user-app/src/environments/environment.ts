@@ -27,6 +27,7 @@ export const environment = {
     getCodes: "/api/ab-inbev-api-code-app/1",
     getExp: "/api/ab-inbev-api-experience/0",
     getImgExp: "/sites/default/files/images/experience/", // id_desk && id_mob
+    getPdfExp: "/sites/default/files/pdfs/experience/", // id.pdf
     postRedemp: "/api/ab-inbev-api-redemption/",
     getRedemp: "/api/ab-inbev-api-redemption/1",
   },

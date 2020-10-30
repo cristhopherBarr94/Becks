@@ -16,7 +16,8 @@ export class UiService {
       // this.dismissLoading();
       this.loading = await this.modalCtrl.create({
         component: LoadingComponent,
-        cssClass: "loading-modal",
+        cssClass: "screen-splash-modal",
+        // cssClass: "loading-modal",
         animated: true,
         showBackdrop: true,
         backdropDismiss: false,
@@ -27,7 +28,7 @@ export class UiService {
     }
   }
 
-  dismissLoading(timeOut: number = 1000) {
+  dismissLoading(timeOut: number = 2500) {
     try {
       if (this.loading) {
         this.loading.dismiss("cancel");

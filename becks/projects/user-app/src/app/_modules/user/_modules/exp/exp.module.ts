@@ -10,6 +10,7 @@ import { ScheduleComponent } from "./_components/schedule/schedule.component";
 import { MatCarouselModule } from "@ngmodule/material-carousel";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 @NgModule({
   declarations: [
     SliderExpComponent,
@@ -24,6 +25,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
     MatCarouselModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatSlideToggleModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: "es-ES" }],
 })

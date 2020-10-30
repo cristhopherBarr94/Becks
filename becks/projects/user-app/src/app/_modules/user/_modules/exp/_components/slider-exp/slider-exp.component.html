@@ -1,8 +1,9 @@
 <h1 class="title-exp">Home</h1>
-<ion-slides loop="false" parallax pager="true" spaceBetween="0" [options]="slideOpts" slidesPerView="1" effect="slide"
-   zoom="false" class="exp-slider" #mySwiper>
-  <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
+<button class="btn-prev" *ngIf="sliderExp.isBeginningSlide" (click)="slidePrev(sliderExp.slidesItems,slides)"><span class="material-icons">keyboard_arrow_up</span></button>
+<ion-slides  pager="true" #slides spaceBetween="0" [options]="slideOpts" slidesPerView="1" effect="slide" [ngClass]="{'active-info': truePager}" (ionSlideDidChange)="changeSlider()" zoom="false" class="exp-slider">
+  <ion-slide class="item-exp" *ngFor="let exp of sliderExp.slidesItems; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !exp.cuentaActiva, 'active': exp.cuentaActiva}">
+    
     <img [src]="exp.imagesExp" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
       [ngClass]="{'animate__animated animate__bounceInLeft': exp.cuentaActiva}">
       <div class="container-exp">
@@ -35,7 +36,7 @@
     </div>
     <div class="exp-detail animate__animated animate__backInUp" *ngIf="exp.detalleExp">
       <div class="detail-close">
-        <a (click)="detalleExperiencia(i)">Cerrar<i class="fal fa-times"></i></a>
+        <a (click)="detalleExperiencia(i)" class="pointer-event">Cerrar<i class="fal fa-times"></i></a>
       </div>
       <h2
         class="title-primary primary max-width-title-primary-age-gate title-detail animate__animated animate__backInUpanimate__delay-1s">
@@ -61,3 +62,4 @@
       </button>
   </ion-slide>
 </ion-slides>
+<button class="btn-next" *ngIf="!sliderExp.isEndSlide" (click)="slideNext(sliderExp.slidesItems,slides)"><span class="material-icons">keyboard_arrow_down</span></button>

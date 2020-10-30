@@ -35,6 +35,15 @@
   height: 100%;
   position: relative;
 
+  &.active-info {
+    .swiper-pagination.swiper-pagination-bullets {
+      display: none;
+    }
+    .no-scroll{
+      overflow: hidden;
+    }
+  }
+
   .swiper-pagination.swiper-pagination-bullets {
     right: auto;
     left: 30px;
@@ -403,4 +412,20 @@
 
 .bloquear-slider {
   overflow-y: hidden;
+}
+
+.btn-prev {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  right: 0;
+  z-index: 11;
+}
+
+.btn-next {
+  position: absolute;
+  bottom: 90px;
+  left: 0;
+  right: 0;
+  z-index: 11;
 }

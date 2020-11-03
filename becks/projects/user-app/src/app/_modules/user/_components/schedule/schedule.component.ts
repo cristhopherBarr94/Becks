@@ -67,7 +67,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
     this.selectedDate = new Date();
     this.minDate = new Date();
-    this.minDate2 = new Date(new Date().setMonth(new Date().getMonth()+1));
+    this.minDate2 = new Date("2020" + "/" + (this.countMonth1+1)+ "/" + "01");
     this.currentYear = new Date().getFullYear();
  
     this.expService.getData();

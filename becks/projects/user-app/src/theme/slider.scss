@@ -201,6 +201,13 @@
         font-weight: bold;
         text-align: left;
       }
+
+      @media (max-height: 700px) {
+        height: 75%;
+        &.add-exp {
+          height: 90%;
+        }
+      }
     }
 
     &.inactive {

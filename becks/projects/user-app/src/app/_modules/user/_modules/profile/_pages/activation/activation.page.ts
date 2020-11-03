@@ -95,6 +95,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
             prom_cod:this.prom_cod_modal,
             allow: this.allow,
             Func: this.redirectTo.bind(this),
+            FuncAlt: this.redirectToAlt.bind(this),
           });          
         } else {
           this.verifyCode();
@@ -189,6 +190,13 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
 public redirectTo() {
   this.ui.dismissModal();
   this.router.navigate(["user/exp"], {
+    queryParamsHandling: "preserve",
+    state: {reload: true}
+  });
+}
+public redirectToAlt() {
+  this.ui.dismissModal();
+  this.router.navigate(["user/profile"], {
     queryParamsHandling: "preserve",
     state: {reload: true}
   });

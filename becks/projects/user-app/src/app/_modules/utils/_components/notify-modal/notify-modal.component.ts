@@ -13,15 +13,20 @@ export class NotifyModalComponent implements OnInit {
   @Input() allow:boolean;
   @Input() cod:string;
   Func:any;
+  FuncAlt:any;
   constructor(private modalCtrl: ModalController, private navParams: NavParams) {
     this.Func = this.navParams.get("Func");
+    this.FuncAlt = this.navParams.get("FuncAlt");
    }
   async close () {
     await this.modalCtrl.dismiss();
   }
   activateUserParent() {
     this.Func();
-    this.close();
+    // this.close();
+  }
+  toCloseMod() {
+    this.FuncAlt();
   }
   ngOnInit() {}
 

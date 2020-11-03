@@ -92,6 +92,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     this.redempSubs = this.redempSvc.redemp$.subscribe(
       ( red ) => {
         this.redemps = red;
+        this.ui.dismissLoading();
     }); 
     this.redempSvc.getData();
 
@@ -101,10 +102,10 @@ export class SliderExpComponent implements OnInit, OnDestroy {
           this.isActivate = true;
           this.codes = codes;
           this.getIndex();
+          this.ui.dismissLoading();
         }
       }
     );
-    
     this.userSvc.getCodes();
   }
 
@@ -183,14 +184,24 @@ participateExperience(eid:number) {
       if ( _id == eid ) {
         //pop up message error
         this.router.navigate([`user/access-forbidden/${eid}`]);
+        return;
       }
     }
-    return;
   }
 
+  console.log("participateExperience", this.experienciaContent[eid-1]);
+  
   //notificacion message
+  switch( this.experienciaContent[eid-1].type ) {
+    case "0" : break;
+    case "1" : break;
+    case "2" : break;
+  }
   if(this.experienciaContent[eid-1].type == "0"){
-    this.router.navigate([`user/confirm-interaction/${eid}`]);
+    this.router.navigate([`user/confirm-interaction/`], {
+      queryParamsHandling: "preserve",
+      state: { exp: this.experienciaContent[eid-1] }
+    });
 
   }
   //redirection

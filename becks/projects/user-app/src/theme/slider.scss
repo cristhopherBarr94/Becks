@@ -35,6 +35,15 @@
   height: 100%;
   position: relative;
 
+  &.active-info {
+    .swiper-pagination.swiper-pagination-bullets {
+      display: none;
+    }
+    .no-scroll {
+      overflow: hidden;
+    }
+  }
+
   .swiper-pagination.swiper-pagination-bullets {
     right: auto;
     left: 30px;
@@ -70,7 +79,7 @@
 
   .btn-exp {
     position: absolute;
-    bottom: 40px;
+    bottom: 80px;
     z-index: 2;
     text-transform: uppercase;
     @media (min-width: 1024px) {
@@ -121,16 +130,11 @@
       @media (min-width: 1024px) {
         display: flex;
         position: relative;
-        // width: 37%;
-        // margin-left: 0px;
-        // margin-right: auto;
-        // align-items: flex-start;
         width: 100%;
         // max-width: 1024px;
         align-items: flex-start;
       }
     }
-    // TODO :: UNCOMMENT TO LEFT - RIGHT LOGIC INTERSPERSED
     // &:nth-child(even) {
     //   @media (min-width: 1024px) {
     //     .container-exp {
@@ -147,6 +151,7 @@
       align-content: flex-end;
       justify-content: flex-end;
       padding: 20px;
+      margin-bottom: 60px;
       @media (min-width: 1024px) {
         align-items: flex-start;
       }
@@ -171,11 +176,14 @@
       position: relative;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      padding: 20px 30px;
+      padding: 30px;
       background-color: rgba(0, 0, 0, 0.6);
+      &.add-exp {
+        height: 80%;
+      }
       .detail-close {
         text-align: right;
-        padding-bottom: 0px;
+        padding-bottom: 20px;
       }
       .title-detail {
         margin-bottom: 15px;
@@ -183,7 +191,7 @@
       }
 
       .detail-place {
-        margin-top: 15px !important;
+        margin-top: 20px !important;
         text-align: left;
       }
 
@@ -192,11 +200,6 @@
         font-style: normal;
         font-weight: bold;
         text-align: left;
-      }
-
-      .over-heigth {
-        max-height: 80px;
-        overflow-y: auto;
       }
     }
 
@@ -405,9 +408,56 @@
 
 .content-dialog {
   height: 150px;
-  overflow-y: auto;
+  overflow-y: hidden;
+  margin-bottom: 5px;
+  &.add-exp {
+    height: auto !important;
+  }
 }
 
 .bloquear-slider {
   overflow-y: hidden;
+}
+
+.btn-prev {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  z-index: 11;
+  margin: auto;
+  background: transparent;
+  span {
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: bold;
+  }
+}
+
+.btn-next {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  z-index: 11;
+  margin: auto;
+  background: transparent;
+  span {
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: bold;
+  }
+}
+
+.detail-active {
+  display: none;
+}
+
+.btn-detail-active {
+  bottom: 15px !important;
+}
+
+.more-link {
+  text-decoration: underline;
+  color: #62f8b2 !important;
 }

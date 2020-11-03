@@ -35,18 +35,11 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     isEndSlide: false,
     slidesItems: undefined
   };
-
-
-truePager = false;
- itemChange: number;
-  // = {
-  //   direction: "vertical",
-  //   speed: 400,
-  //   scrollbar: true,
-  //   navigation: {
-  //     hideOnClick: true
-  //   }
-  // };
+  truePager = false;
+  aumentarTamano = false;
+  itemChange: number;
+  disablePrevBtn = false;
+  disableNextBtn = false;
   @ViewChild('slides') slides: IonSlides;
 
   constructor(
@@ -125,6 +118,9 @@ truePager = false;
     this.itemChange = item;
     this.experienciaContent[item].detalleExp = !this.experienciaContent[item].detalleExp;
     this.truePager = !this.truePager;
+    if (this.aumentarTamano) {
+      this.ampliarExp();
+    }
   }
 
   compareId(idExp:number){
@@ -208,17 +204,24 @@ public closeModal() {
 
 
 changeSlider() {
-  console.log('cambio de slider # si click ->', this.itemChange);
+  this.getIndex();
+  // console.log('cambio de slider # si click ->', this.itemChange);
   if (this.itemChange !== undefined) {
-    console.log('cambio de slider # con click ->', this.itemChange);
+    // console.log('cambio de slider # con click ->', this.itemChange);
     if (this.experienciaContent[this.itemChange].detalleExp === true) {
       this.experienciaContent[this.itemChange].detalleExp = !this.experienciaContent[this.itemChange].detalleExp;
       this.truePager = !this.truePager;
       this.itemChange = undefined;
+      if (this.aumentarTamano) {
+        this.ampliarExp();
+      }
     }
   }
 }
 
+ampliarExp() {
+  this.aumentarTamano = !this.aumentarTamano;
+}
 
 // Move to Next slide
 slideNext(object, slideView) {
@@ -248,11 +251,13 @@ checkIfNavDisabled(object, slideView) {
 checkisBeginning(object, slideView) {
   slideView.isBeginning().then((istrue) => {
     object.isBeginningSlide = istrue;
+    this.disablePrevBtn = istrue;
   });
 }
 checkisEnd(object, slideView) {
   slideView.isEnd().then((istrue) => {
     object.isEndSlide = istrue;
+    this.disableNextBtn = istrue;
   });
 }
 

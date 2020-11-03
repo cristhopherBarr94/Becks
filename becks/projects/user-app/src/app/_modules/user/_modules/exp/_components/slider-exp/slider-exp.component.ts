@@ -159,7 +159,10 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   async getIndex() {
     if(this.slides) {
       this.checkCodes(await this.slides.getActiveIndex());
-      if(await this.slides.getActiveIndex() == 0){
+      const leng = await this.slides.getActiveIndex();
+      // console.log("getIndex", this.experienciaContent.length);
+      // this.disableNextBtn = !(this.experienciaContent.length == 1);
+      if( leng == 0){
         this.disablePrevBtn = true;
       }else {
         this.disablePrevBtn = false;
@@ -209,7 +212,6 @@ public closeModal() {
 
 
 changeSlider() {
-  this.getIndex();
   // console.log('cambio de slider # si click ->', this.itemChange);
   if (this.itemChange !== undefined) {
     // console.log('cambio de slider # con click ->', this.itemChange);
@@ -222,6 +224,7 @@ changeSlider() {
       }
     }
   }
+  this.getIndex();
 }
 
 ampliarExp() {
@@ -256,10 +259,11 @@ checkIfNavDisabled(object, slideView) {
 checkisBeginning(object, slideView) {
   slideView.isBeginning().then((istrue) => {
     object.isBeginningSlide = istrue;
-    // this.disablePrevBtn = istrue;
+    this.disablePrevBtn = istrue;
   });
 }
 checkisEnd(object, slideView) {
+  console.log("checkisEnd" , object);
   slideView.isEnd().then((istrue) => {
     object.isEndSlide = istrue;
     this.disableNextBtn = istrue;

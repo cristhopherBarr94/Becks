@@ -76,8 +76,8 @@
         </div>
       <a (click)="ampliarExp()" *ngIf="!aumentarTamano"
         class="exp-link-value more-link more-info title-fourthy animate__animated animate__bounceInLeft animate__delay-1s"
-        [ngClass]="{'animate__animated animate__backInUp animate__delay-1s': exp.cuentaActiva}"><i
-          class="far fa-eye"></i> Más información +</a>
+        [ngClass]="{'animate__animated animate__backInUp animate__delay-1s': exp.cuentaActiva}">
+        + Expandir</a>
       </div>
     <button *ngIf="!this.isActivate" block="block" color="becks" [routerLink]="['/user/activation']"
         class="exp-btn-inactive more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"

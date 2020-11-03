@@ -14,6 +14,7 @@ import { AnnouncerDaysComponent } from '../../_components/announcer-days/announc
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { AnnouncerAmountComponent } from '../../_components/announcer-amount/announcer-amount.component';
 import { SoldMessageComponent } from '../../_components/sold-message/sold-message.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 @NgModule({
   declarations: [
     SliderExpComponent,
@@ -32,6 +33,7 @@ import { SoldMessageComponent } from '../../_components/sold-message/sold-messag
     MatDatepickerModule,
     MatIconModule,
     NgCircleProgressModule.forRoot({}),
+    MatSlideToggleModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: "es-ES" }],
 })

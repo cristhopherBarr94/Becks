@@ -29,9 +29,11 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   public showEvent:boolean;
   public stringCom:string;
   public minDate: Date;
-  public maxDate: Date;
+  public countMonth1: number = new Date().getMonth()+1;
+  public countMonth2: number;
   public minDate2: Date;
-  public maxDate2: Date;
+  public countYear1: number = new Date().getFullYear();
+  public countYear2: number;
   public count: number = 0;
   public colorClass: string;
   public size: string;
@@ -65,17 +67,15 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
     this.selectedDate = new Date();
     this.minDate = new Date();
-    this.maxDate = new Date(new Date().setMonth(new Date().getMonth()));
-    this.minDate2 = new Date(
-      "2020" + "/" + (new Date().getMonth() + 2) + "/" + "01"
-    );
-    this.maxDate2 = new Date(new Date().setMonth(new Date().getMonth() + 2));
+    this.minDate2 = new Date(new Date().setMonth(new Date().getMonth()+1));
     this.currentYear = new Date().getFullYear();
  
     this.expService.getData();
 
     this.onSelect(this.selectedDate);
-    this.menuS.statusMenu("calendar")  
+    this.menuS.statusMenu("calendar") ;
+    console.log(this.countMonth1);
+
   }
 
   ngOnDestroy(): void {
@@ -126,29 +126,52 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     }
   }
   previousDate() {
-    this.calendar1._goToDateInView(
-      (this.minDate = new Date(new Date().setMonth(new Date().getMonth()))),
-      "month"
-    );
-    this.calendar2._goToDateInView(
-      (this.minDate2 = new Date(
-        this.currentYear + "/" + (new Date().getMonth() + 2) + "/" + "01"
-      )),
-      "month"
-    );
+    --this.countMonth1; 
+    this.countMonth2 = (this.countMonth1+1);
+    this.countYear2 = (this.countYear1);
+    if(this.countMonth1 < 1) {
+      --this.countYear1;
+        this.countMonth1 = 12; 
+    }
+    if(this.countMonth2 < 1) {
+      --this.countYear2;
+      this.countMonth2 = 12; 
+  }
+
+    this.setDates();
+
   }
   nextDate() {
-    this.calendar1._goToDateInView(
-      (this.minDate = new Date( this.currentYear + "/" + (new Date().getMonth() + 2) + "/" + "01")),
-      "month"
-    );
-    this.calendar2._goToDateInView(
-      (this.minDate2 = new Date(
-        this.currentYear + "/" + (new Date().getMonth() + 3) + "/" + "01"
-      )),
-      "month"
-    );
+    ++this.countMonth1; 
+    this.countMonth2 = (this.countMonth1+1);
+    this.countYear2 = (this.countYear1);
+    if(this.countMonth2 > 12) {
+      this.countMonth2 = 1; 
+      ++this.countYear2;
   }
+    if(this.countMonth1 > 12) {
+      ++this.countYear1;
+        this.countMonth1 = 1; 
+        this.countMonth2 = 2; 
+
+    }
+    
+    this.setDates();
+
+  }
+
+  setDates(){
+     this.calendar1._goToDateInView(
+      (this.minDate = new Date( this.countYear1 + "/" + (this.countMonth1))),
+      "month"
+    );
+
+      this.calendar2._goToDateInView(
+        (this.minDate2 = new Date( this.countYear2 + "/" + (this.countMonth2))),
+        "month"
+      );
+  }
+  
 
    dateClass() {
     return (date: Date): MatCalendarCellCssClasses => {

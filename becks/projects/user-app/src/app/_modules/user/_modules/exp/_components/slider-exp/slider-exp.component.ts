@@ -159,6 +159,11 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   async getIndex() {
     if(this.slides) {
       this.checkCodes(await this.slides.getActiveIndex());
+      if(await this.slides.getActiveIndex() == 0){
+        this.disablePrevBtn = true;
+      }else {
+        this.disablePrevBtn = false;
+      }
     }
   }
 
@@ -251,7 +256,7 @@ checkIfNavDisabled(object, slideView) {
 checkisBeginning(object, slideView) {
   slideView.isBeginning().then((istrue) => {
     object.isBeginningSlide = istrue;
-    this.disablePrevBtn = istrue;
+    // this.disablePrevBtn = istrue;
   });
 }
 checkisEnd(object, slideView) {

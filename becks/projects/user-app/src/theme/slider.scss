@@ -79,7 +79,7 @@
 
   .btn-exp {
     position: absolute;
-    bottom: 80px;
+    bottom: 45px;
     z-index: 2;
     text-transform: uppercase;
     @media (min-width: 1024px) {
@@ -151,7 +151,7 @@
       align-content: flex-end;
       justify-content: flex-end;
       padding: 20px;
-      margin-bottom: 60px;
+      // margin-bottom: 60px;
       @media (min-width: 1024px) {
         align-items: flex-start;
       }
@@ -178,6 +178,7 @@
       -webkit-backdrop-filter: blur(10px);
       padding: 30px;
       background-color: rgba(0, 0, 0, 0.6);
+      z-index: 2;
       &.add-exp {
         height: 80%;
       }
@@ -203,9 +204,10 @@
       }
 
       @media (max-height: 700px) {
-        height: 75%;
+        height: 68%;
         &.add-exp {
-          height: 90%;
+          height: 85%;
+          z-index: 2;
         }
       }
     }

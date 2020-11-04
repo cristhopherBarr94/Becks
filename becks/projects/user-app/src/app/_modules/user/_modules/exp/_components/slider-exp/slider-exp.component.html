@@ -1,11 +1,11 @@
 <h1 class="title-exp">Experiencias</h1>
 <button class="btn-prev" *ngIf="!disablePrevBtn" (click)="slidePrev(sliderExp.slidesItems,slides)"><span class="material-icons">keyboard_arrow_up</span></button>
-<ion-slides pager="true" spaceBetween="0" [options]="slideOpts"  slidesPerView="1" effect="slide"
-*ngIf="slideOpts && size && experienciaContent.length>0" 
-  pager="true" zoom="false" class="exp-slider"
-  #slides (ionSlideDidChange)="changeSlider()"
-  [ngClass]="{'active-info': truePager}" 
-  >
+<ion-slides *ngIf="slideOpts && size && experienciaContent.length>0" 
+            spaceBetween="0" [options]="slideOpts"  slidesPerView="1" effect="slide"
+            pager="true" zoom="false" class="exp-slider"
+            (ionSlideDidChange)="changeSlider()"
+            [ngClass]="{'active-info': truePager}" #slides>
+  <user-announcer-days></user-announcer-days>
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !this.isActivate, 'active': this.isActivate}">
     <user-announcer-days [hidden]= "!disableCounter"></user-announcer-days>

@@ -1,5 +1,5 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { AfterContentChecked, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { IonSlides, Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Exp } from 'src/app/_models/exp';
@@ -16,7 +16,7 @@ import { RedemptionsService } from 'src/app/_services/redemptions.service';
   templateUrl: './slider-exp.component.html',
   styleUrls: ['./slider-exp.component.scss'],
 })
-export class SliderExpComponent implements OnInit, OnDestroy {
+export class SliderExpComponent implements OnInit, OnDestroy, AfterContentChecked {
   public id: number;
   public initialSlide
   public size: string;
@@ -42,6 +42,8 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   disablePrevBtn = false;
   disableCounter:boolean;
   disableNextBtn = false;
+  wasChecked = false;
+  timerToChecked = 0;
   @ViewChild('slides') slides: IonSlides;
 
   constructor(
@@ -52,13 +54,33 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     private ui: UiService,
     private redempSvc: RedemptionsService
   ) {
-    this.ui.dismissLoading(0);
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
         this.size = this.ui.getSizeType(platform.width());
       });
       this.size = this.ui.getSizeType(platform.width());
     });
+
+    this.router.events.subscribe(
+      (event) => {
+        if (event instanceof NavigationEnd) {
+          this.wasChecked = false;
+        }
+      }
+    );
+  }
+
+  ngAfterContentChecked(): void {
+    if ( !this.wasChecked ) {
+      window.clearTimeout(this.timerToChecked);
+      this.timerToChecked = window.setTimeout(
+        () => {
+          this.wasChecked = true;
+          this.ui.dismissLoading(0);
+          this.getIndex();
+        } , 1000
+      );
+    }
   }
 
   ngOnInit() {
@@ -79,7 +101,6 @@ export class SliderExpComponent implements OnInit, OnDestroy {
             
           };
         }
-        
       } catch (error) {
       }
       this.ui.dismissLoading();
@@ -104,7 +125,6 @@ export class SliderExpComponent implements OnInit, OnDestroy {
         if(codes && codes.length>0){
           this.isActivate = true;
           this.codes = codes;
-          this.getIndex();
           this.ui.dismissLoading();
         }
       }

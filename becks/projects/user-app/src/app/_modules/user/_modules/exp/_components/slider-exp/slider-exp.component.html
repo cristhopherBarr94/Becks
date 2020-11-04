@@ -6,9 +6,9 @@
   #slides (ionSlideDidChange)="changeSlider()"
   [ngClass]="{'active-info': truePager}" 
   >
-  <user-announcer-days></user-announcer-days>
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !this.isActivate, 'active': this.isActivate}">
+    <user-announcer-days [hidden]= "!disableCounter"></user-announcer-days>
     <user-announcer-amount *ngIf="this.isActivate && (exp.stock_actual)" [stock]="exp.stock_actual"></user-announcer-amount>
     <img *ngIf="this.size == 'lg' || this.size == 'md'"  [src]="exp.imagesExp" [alt]="exp.titleExp" class="exp-images animate__animated animate__bounceInLeft"
       [ngClass]="{'animate__animated animate__bounceInLeft': this.isActivate}">

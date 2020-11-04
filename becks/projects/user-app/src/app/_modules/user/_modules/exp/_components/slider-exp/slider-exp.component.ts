@@ -30,6 +30,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   public experienciaContent: Exp[] = [];
   public slideOpts;
   private redemps: number[] = [];
+  public activeIndex:number;
   sliderExp = {
     isBeginningSlide: true,
     isEndSlide: false,
@@ -39,6 +40,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
   aumentarTamano = false;
   itemChange: number;
   disablePrevBtn = false;
+  disableCounter:boolean;
   disableNextBtn = false;
   @ViewChild('slides') slides: IonSlides;
 
@@ -160,13 +162,15 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   async getIndex() {
     if(this.slides) {
-      const active = await this.slides.getActiveIndex();
-      this.checkCodes(active);
-      this.disableNextBtn = ( (this.experienciaContent.length-1) == active );
-      if( active == 0){
+       this.activeIndex = await this.slides.getActiveIndex();
+      this.checkCodes(this.activeIndex);
+      this.disableNextBtn = ( (this.experienciaContent.length-1) == this.activeIndex );
+      if( this.activeIndex == 0){
         this.disablePrevBtn = true;
+        this.disableCounter = true;
       }else {
         this.disablePrevBtn = false;
+        this.disableCounter = false;
       }
     }
   }

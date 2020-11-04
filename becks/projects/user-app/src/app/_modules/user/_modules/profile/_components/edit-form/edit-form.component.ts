@@ -29,7 +29,8 @@ export class EditFormComponent implements OnInit,OnDestroy {
     private cdr: ChangeDetectorRef,
     private ui: UiService,
     private httpService: HttpService,
-    private platform: Platform) { 
+    private platform: Platform,
+    private router: Router) { 
       platform.ready().then(() => {
         this.platform.resize.subscribe(() => {
           this.size = this.ui.getSizeType(platform.width());
@@ -156,13 +157,17 @@ export class EditFormComponent implements OnInit,OnDestroy {
             type_id: this.userEditProfileForm.controls.id.value.trim(),
             id_number: this.userEditProfileForm.controls.document.value.trim(),
           })
-          .subscribe((response: any) => {         
+          .subscribe((response: any) => {  
+            this.ui.dismissLoading();       
             if (response.status == 200) {            
               this.userSvc.getData();
+              this.goToProfile();
+            } else {
+              this.httpError = "Campos del formulario invalidos";
             }
-            this.ui.dismissLoading();
           },
           (e) => {
+            this.httpError = "Campos del formulario invalidos";
             this.ui.dismissLoading();
           });
       } else {
@@ -191,13 +196,14 @@ export class EditFormComponent implements OnInit,OnDestroy {
             mobile_phone: this.userEditProfileForm.controls.phone.value.trim(),
             birthdate: this.birthDayDate
           })
-          .subscribe((response: any) => {         
+          .subscribe((response: any) => {    
+            this.ui.dismissLoading();     
             if (response.status == 200) {            
               this.userSvc.getData();
+              this.goToProfile();
             } else {
               this.httpError = "Campos del formulario invalidos";
             }
-            this.ui.dismissLoading();
           },
           (e) => {
             this.ui.dismissLoading();
@@ -218,5 +224,11 @@ export class EditFormComponent implements OnInit,OnDestroy {
     } else {
       return "flex-direction-column";
     }
+  }
+
+  goToProfile() {
+    this.router.navigate(["user/profile"], {
+      queryParamsHandling: "preserve",
+    });
   }
 }

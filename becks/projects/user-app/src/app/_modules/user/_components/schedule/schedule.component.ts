@@ -74,8 +74,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
     this.onSelect(this.selectedDate);
     this.menuS.statusMenu("calendar") ;
-    console.log(this.countMonth1);
-
   }
 
   ngOnDestroy(): void {

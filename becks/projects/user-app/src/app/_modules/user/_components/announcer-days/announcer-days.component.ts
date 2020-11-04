@@ -31,7 +31,7 @@ export class AnnouncerDaysComponent implements OnInit, OnDestroy {
         this.size = this.ui.getSizeType(platform.width());
       });
       this.size = this.ui.getSizeType(platform.width());
-      console.log(this.size);
+      // console.log(this.size);
     });
   }
 

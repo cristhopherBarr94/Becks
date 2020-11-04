@@ -50,6 +50,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     private ui: UiService,
     private redempSvc: RedemptionsService
   ) {
+    this.ui.dismissLoading(0);
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
         this.size = this.ui.getSizeType(platform.width());
@@ -159,11 +160,10 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   async getIndex() {
     if(this.slides) {
-      this.checkCodes(await this.slides.getActiveIndex());
-      const leng = await this.slides.getActiveIndex();
-      // console.log("getIndex", this.experienciaContent.length);
-      // this.disableNextBtn = !(this.experienciaContent.length == 1);
-      if( leng == 0){
+      const active = await this.slides.getActiveIndex();
+      this.checkCodes(active);
+      this.disableNextBtn = ( (this.experienciaContent.length-1) == active );
+      if( active == 0){
         this.disablePrevBtn = true;
       }else {
         this.disablePrevBtn = false;

@@ -52,9 +52,12 @@ export class InteractionConfirmComponent implements OnInit, OnDestroy, AfterView
         });
         this.size = this.ui.getSizeType(platform.width());
       });
+      try {
+        this.experience = this.router.getCurrentNavigation().extras.state.exp;  
+      } catch (error) {
+        this.router.navigate(['/user/exp/' + this.experience.id ]);
+      }
       
-      this.experience = this.router.getCurrentNavigation().extras.state.exp;
-
   }
 
   ngOnDestroy(): void {
@@ -85,8 +88,9 @@ export class InteractionConfirmComponent implements OnInit, OnDestroy, AfterView
     const codes = this.userSvc.getActualUserCodes();
     
     this.ui.showLoading();
-    this.redempSv.postRedemption( parseInt(this.experience.id+"") , parseInt(codes[0].id) ).subscribe( (res) => {
-      this.ui.dismissLoading(0);
+    this.redempSv.postRedemption( parseInt(this.experience.id+"") , parseInt(codes[0].id) ).subscribe( 
+      (res) => {
+      // this.ui.dismissLoading(0);
       if ( res.status >= 200 && res.status < 300 ) {
         this.expService.getData();
         this.redempSv.getData();

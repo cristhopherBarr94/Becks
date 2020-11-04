@@ -5,7 +5,6 @@
             pager="true" zoom="false" class="exp-slider"
             (ionSlideDidChange)="changeSlider()"
             [ngClass]="{'active-info': truePager}" #slides>
-  <user-announcer-days></user-announcer-days>
   <ion-slide class="item-exp" *ngFor="let exp of experienciaContent; let i = index" [attr.data-index]="i"
     [ngClass]="{'inactive': !this.isActivate, 'active': this.isActivate}">
     <user-announcer-days [hidden]= "!disableCounter"></user-announcer-days>

@@ -1,7 +1,8 @@
 <ion-content>
   <app-header></app-header>
 
-  <section class="fullSection interaction-section-confirm content-flex-all-center" [style.background-image]="'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url('+bgExp+')'">
+  <section  class="fullSection interaction-section-confirm content-flex-all-center"
+            [style.background-image]="'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url('+this.getImgExp()+')'">
 
     <div class="section-redemption-confirm content-flex-all-center flex-direction-column">
       <button class="cancel-btn" [routerLink]="'/home'">
@@ -10,9 +11,9 @@
       <span class="logo-brand-modal"> </span>
       <div class="width-content-exp">
         <h1 class="title-secondary">¡FELICITACIONES!</h1>
-        <p class=" exp-content">Experiencia: {{expTitleC}}</p>
-        <p class=" exp-content">Ubicación: {{expLocation}}</p>
-        <p class=" exp-content">{{expDescRed}}</p>
+        <p class=" exp-content">Experiencia: {{this.experience.titleExp}}</p>
+        <p class=" exp-content">Ubicación: {{this.experience.placeExp}}</p>
+        <p class=" exp-content">Enviaremos a tu correo las instrucciones para vivir esta experiencia.</p>
       </div>
 
       <form [formGroup]="userRegisterForm" autocomplete="off" class="general-row">

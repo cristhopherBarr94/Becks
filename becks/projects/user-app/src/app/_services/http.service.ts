@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { throwError } from "rxjs/internal/observable/throwError";
 import { catchError } from "rxjs/operators";
+import { environment } from 'src/environments/environment';
 import { HttpConstants } from "../_constans/HttpConstants";
 import { BasicAlertComponent } from '../_modules/utils/_components/basic-alert/basic-alert.component';
 import { AuthService } from "./auth.service";
@@ -135,14 +136,16 @@ export class HttpService {
   handleError(error: HttpErrorResponse) {
     
     if (error.status === HttpConstants.UNAUTHORIZED || error.status === HttpConstants.FORBIDDEN ) {
-      if ( ++this.error_counter == 1 ) {
-        this.error_counter = 0;
-        this.authService.setAuthenticated(null);
-        this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
-          title: "Sesión expirada",
-          description: "Cerrando sesión de forma segura",
-        });
-        setTimeout( () => { location.reload(); } , 3000 );
+      if ( error.url.indexOf(environment.login.resource) == -1 ) {
+        if ( ++this.error_counter == 1 ) {
+          this.error_counter = 0;
+          this.authService.setAuthenticated(null);
+          this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
+            title: "Sesión expirada",
+            description: "Cerrando sesión de forma segura",
+          });
+          setTimeout( () => { location.reload(); } , 3000 );
+        }
       }
     } else if (error.status === HttpConstants.CONFLICT) {
       // console.log("mensaje incorrecto");

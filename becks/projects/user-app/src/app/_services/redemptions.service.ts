@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpService } from './http.service';
 
@@ -34,17 +34,9 @@ export class RedemptionsService {
     );
   }
 
-  postRedemption( eid: number , cid: number ) : Observable<Response>{
-    let ITEM_RESPONSE: Response;
-    this.http.post( environment.serverUrl + environment.user.postRedemp , 
-                    { 'eid' : eid, 'cid' : cid, } ).subscribe(
-      (response: any) => {
-        ITEM_RESPONSE = response;
-      },
-      (error) => {
-        ITEM_RESPONSE = error;
-      }
-    );
-    return of(ITEM_RESPONSE);
+  postRedemption( eid: number , cid: number ) : Observable<any>{
+
+    return this.http.post(  environment.serverUrl + environment.user.postRedemp , 
+                            { 'eid' : eid, 'cid' : cid, } );
   }
 }

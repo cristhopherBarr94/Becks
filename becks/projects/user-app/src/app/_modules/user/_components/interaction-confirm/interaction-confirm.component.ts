@@ -15,6 +15,8 @@ import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { RedemptionsService } from 'src/app/_services/redemptions.service';
 import { UserService } from 'src/app/_services/user.service';
 import { Subscription } from 'rxjs';
+import { Exp } from 'src/app/_models/exp';
+import { BasicAlertComponent } from 'src/app/_modules/utils/_components/basic-alert/basic-alert.component';
 
 declare global {
   interface Window {
@@ -29,18 +31,11 @@ declare global {
 export class InteractionConfirmComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(HeaderComponent) header: HeaderComponent;
   prevUrl: string = "/user/exp";
-  public experience:any = [];
+  public experience: Exp;
   public userRegisterForm: FormGroup;
   public userRegister: User= new User();
   public httpError: string;
-  public bgExp:string;
-  public id: number;
-  public expTitleC:string;
-  public expLocation:string;
-  public expDescRed:string;
   public size: string;
-  private experienceSubs: Subscription;
-
 
   constructor(   
     public httpService: HttpService,
@@ -57,48 +52,15 @@ export class InteractionConfirmComponent implements OnInit, OnDestroy, AfterView
         });
         this.size = this.ui.getSizeType(platform.width());
       });
-      this.id = Number(this.router.url.replace("/user/confirm-interaction/",""));
-
-      const exps = this.expService.getActualExps();
-
-      if ( exps && exps.length > 0 ) {
-        this.experience.forEach(exp => {
-          if(this.id == exp.id){
-            this.expTitleC = exp.titleExp; 
-            this.expLocation = exp.placeExp;
-            this.expDescRed = "Enviaremos a tu correo las instrucciones para vivir esta experiencia.";
-            if(this.size == 'sm' || this.size == 'xs'){
-              this.getImgExp("mob");
-            }else {
-              this.getImgExp("desk");
-            }
-          }
-        });
-      } else {
-        this.experienceSubs = this.expService.exp$.subscribe(exps => {
-          if ( exps && exps.length > 0 ) {
-            this.experience = exps;
-            this.experience.forEach(exp => {
-              if(this.id == exp.id){
-                this.expTitleC = exp.titleExp; 
-                this.expLocation = exp.placeExp;
-                this.expDescRed = "Enviaremos a tu correo las instrucciones para vivir esta experiencia.";
-                if(this.size == 'sm' || this.size == 'xs'){
-                  this.getImgExp("mob");
-                }else {
-                  this.getImgExp("desk");
-                }
-              }
-            });
-          }
-        });
-        this.expService.getData();
+      try {
+        this.experience = this.router.getCurrentNavigation().extras.state.exp;  
+      } catch (error) {
+        this.router.navigate(['/user/exp/' + this.experience.id ]);
       }
-
+      
   }
 
   ngOnDestroy(): void {
-    if ( this.experienceSubs ) this.experienceSubs.unsubscribe();
   }
 
   ngOnInit() {
@@ -126,28 +88,30 @@ export class InteractionConfirmComponent implements OnInit, OnDestroy, AfterView
     const codes = this.userSvc.getActualUserCodes();
     
     this.ui.showLoading();
-    this.redempSv.postRedemption( this.id , parseInt(codes[0].id) ).subscribe( (r) => {
-      this.ui.dismissLoading(0);
-      if ( this.experienceSubs ) this.experienceSubs.unsubscribe();
-      this.expService.getData();
-      this.redempSv.getData();
-      this.router.navigate(['/user/exp/' + this.id ]);
+    this.redempSv.postRedemption( parseInt(this.experience.id+"") , parseInt(codes[0].id) ).subscribe( 
+      (res) => {
+      // this.ui.dismissLoading(0);
+      if ( res.status >= 200 && res.status < 300 ) {
+        this.expService.getData();
+        this.redempSv.getData();
+      } else {
+        this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
+          title: "Error interno",
+          description: "Intenta de nuevo mas tarde",
+        });
+        this.ui.dismissModal();
+      }
+      this.router.navigate(['/user/exp/' + this.experience.id ]);
     });
   }
 
-  getImgExp(sz:string) {
-    this.experience.forEach(expImg => 
-      { 
-        if(this.id == expImg.id) {
-
-          if(sz=="mob"){
-            this.bgExp = expImg.imagesExpMob;
-
-          }else if(sz=="desk") {
-            this.bgExp = expImg.imagesExp;
-          }
-        }
-      }
-      );
+  getImgExp() {
+    if(this.size=="mob"){
+      return this.experience.imagesExpMob;
+    } else if(this.size=="desk") {
+      return this.experience.imagesExp;
+    } else {
+      return this.experience.imagesExp;
+    }
   }
 }

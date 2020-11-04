@@ -50,6 +50,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     private ui: UiService,
     private redempSvc: RedemptionsService
   ) {
+    this.ui.dismissLoading(0);
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
         this.size = this.ui.getSizeType(platform.width());
@@ -92,6 +93,7 @@ export class SliderExpComponent implements OnInit, OnDestroy {
     this.redempSubs = this.redempSvc.redemp$.subscribe(
       ( red ) => {
         this.redemps = red;
+        this.ui.dismissLoading();
     }); 
     this.redempSvc.getData();
 
@@ -101,10 +103,10 @@ export class SliderExpComponent implements OnInit, OnDestroy {
           this.isActivate = true;
           this.codes = codes;
           this.getIndex();
+          this.ui.dismissLoading();
         }
       }
     );
-    
     this.userSvc.getCodes();
   }
 
@@ -158,8 +160,10 @@ export class SliderExpComponent implements OnInit, OnDestroy {
 
   async getIndex() {
     if(this.slides) {
-      this.checkCodes(await this.slides.getActiveIndex());
-      if(await this.slides.getActiveIndex() == 0){
+      const active = await this.slides.getActiveIndex();
+      this.checkCodes(active);
+      this.disableNextBtn = ( (this.experienciaContent.length-1) == active );
+      if( active == 0){
         this.disablePrevBtn = true;
       }else {
         this.disablePrevBtn = false;
@@ -180,14 +184,24 @@ participateExperience(eid:number) {
       if ( _id == eid ) {
         //pop up message error
         this.router.navigate([`user/access-forbidden/${eid}`]);
+        return;
       }
     }
-    return;
   }
 
+  console.log("participateExperience", this.experienciaContent[eid-1]);
+  
   //notificacion message
+  switch( this.experienciaContent[eid-1].type ) {
+    case "0" : break;
+    case "1" : break;
+    case "2" : break;
+  }
   if(this.experienciaContent[eid-1].type == "0"){
-    this.router.navigate([`user/confirm-interaction/${eid}`]);
+    this.router.navigate([`user/confirm-interaction/`], {
+      queryParamsHandling: "preserve",
+      state: { exp: this.experienciaContent[eid-1] }
+    });
 
   }
   //redirection
@@ -209,7 +223,6 @@ public closeModal() {
 
 
 changeSlider() {
-  this.getIndex();
   // console.log('cambio de slider # si click ->', this.itemChange);
   if (this.itemChange !== undefined) {
     // console.log('cambio de slider # con click ->', this.itemChange);
@@ -222,6 +235,7 @@ changeSlider() {
       }
     }
   }
+  this.getIndex();
 }
 
 ampliarExp() {
@@ -256,10 +270,11 @@ checkIfNavDisabled(object, slideView) {
 checkisBeginning(object, slideView) {
   slideView.isBeginning().then((istrue) => {
     object.isBeginningSlide = istrue;
-    // this.disablePrevBtn = istrue;
+    this.disablePrevBtn = istrue;
   });
 }
 checkisEnd(object, slideView) {
+  console.log("checkisEnd" , object);
   slideView.isEnd().then((istrue) => {
     object.isEndSlide = istrue;
     this.disableNextBtn = istrue;

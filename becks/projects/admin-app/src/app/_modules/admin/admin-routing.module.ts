@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'activation',
     loadChildren: () => import('./_modules/activation/activation.module').then(m => m.ActivationPageModule),
+  },
+  {
+    path: 'creator',
+    loadChildren: () => import('./_modules/experiences/experiences.module').then(m => m.ExperiencesPageModule),
   }
 ];
 

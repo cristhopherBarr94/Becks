@@ -1,0 +1,269 @@
+.seccion-tabs {
+  min-height: 100%;
+  width: 100%;
+  background-color: #121212;
+  padding: 0 2%;
+}
+
+.internal-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tab-group {
+  justify-content: center;
+  @media (min-width: 768px) {
+    align-items: center;
+    // margin-top: -78px;
+  }
+}
+::ng-deep ion-col {
+  justify-content: center;
+  align-items: center;
+  height: 180px;
+  margin-bottom: 20px;
+  ion-row {
+    height: 180px;
+    // margin-bottom: 20px;
+  }
+  .card {
+    height: 180px;
+    width: auto;
+    background-image: linear-gradient(
+        89.99deg,
+        #121212 -4.97%,
+        rgba(5, 5, 5, 0.293665) 27.28%,
+        rgba(3, 3, 3, 0.188146) 53.38%,
+        rgba(0, 0, 0, 0) 99.92%
+      ),
+      url("./../../../../../../../assets/img/bg_desktop_1366x768_botellaverde.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    vertical-align: middle;
+    mix-blend-mode: normal;
+    border-radius: 4px;
+    .card-info {
+      position: absolute;
+      right: auto;
+      left: 20px;
+      top: auto;
+      bottom: 10px;
+      width: 150px;
+      h4,
+      p {
+        margin-bottom: 5px;
+        height: 15px;
+      }
+    }
+    .btn-card {
+      position: absolute;
+      left: auto;
+      right: 20px;
+      top: auto;
+      bottom: 10px;
+      height: 25px;
+      width: 65px;
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+      box-sizing: border-box;
+      border-radius: 4px;
+    }
+  }
+}
+:host ::ng-deep .mat-tab-list {
+  height: 65px !important;
+}
+:host ::ng-deep .mat-tab-label {
+  font-family: "Eurostile BQ";
+  color: #ffffff !important;
+  font-size: 13px !important;
+  min-width: 0px;
+  border-bottom: 5px solid #c4c4c4;
+  height: 65px !important;
+
+  @media (min-width: 769px) and (max-width: 1366px) {
+    width: 70px;
+    padding: revert;
+    width: revert;
+  }
+  @media (min-width: 1367px) {
+    font-size: 24px;
+    padding: revert;
+    width: revert;
+  }
+}
+
+:host ::ng-deep .mat-tab-label-active {
+  font-family: "Eurostile BQ";
+  color: #ffffff !important;
+  font-size: 18px;
+  min-width: 0px;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    height: 65px;
+    font-size: 22px;
+    width: 70px;
+    margin-bottom: 18px;
+    padding: revert;
+    width: revert;
+  }
+  @media (min-width: 1367px) {
+    height: 65px;
+    font-size: 24px;
+    margin-bottom: 18px;
+    padding: revert;
+    width: revert;
+  }
+}
+
+:host ::ng-deep .mat-ink-bar {
+  background: linear-gradient(100deg, #00d18c 100%, #03b87c 100%, #019874 87%);
+  height: 10px !important;
+}
+
+:host ::ng-deep .mat-tab-header {
+  @media (min-width: 768px) {
+    width: 100%;
+    // margin-right: 10%;
+  }
+}
+
+::ng-deep .mat-tab-body-wrapper {
+  background-color: transparent;
+  min-width: 100%;
+  padding: 20px;
+  @media (min-width: 768px) {
+    background-color: #171717;
+    min-width: 100%;
+  }
+}
+
+::ng-deep .mat-tab-body-content {
+  height: auto !important;
+}
+
+.container-desktop {
+  min-height: 100%;
+  min-width: 100%;
+  background-color: #171717;
+  flex-direction: row;
+  display: flex;
+}
+
+.container-desktop-exp {
+  justify-content: center;
+}
+.card-component-circle {
+  background-color: #1d1d1d;
+  margin-left: 10%;
+  width: 80%;
+  height: 440px;
+  margin-top: 42px;
+  display: flex;
+  justify-content: center;
+  contain: strict;
+  margin-bottom: 20px;
+}
+
+.card-component-experiences {
+  flex-direction: column;
+  background-color: #1d1d1d;
+  display: flex;
+  align-items: center;
+  margin-top: 42px;
+  margin-left: 3%;
+  width: 53%;
+  height: 440px;
+  margin-bottom: 42px;
+  contain: strict;
+  overflow: auto;
+  scrollbar-width: 10px;
+}
+
+.margin-tittle-desktop {
+  margin-top: 32px;
+  width: 94%;
+  flex-direction: row;
+  display: flex;
+}
+
+.text-aling {
+  width: 85%;
+}
+
+.text-aling-end {
+  width: 15%;
+  text-align: end;
+}
+
+.experioencesCard {
+  flex-direction: column;
+  background-color: #1d1d1d;
+  height: 440px;
+  width: 80%;
+  margin-top: 42px;
+  margin-bottom: 42px;
+  align-items: center;
+  contain: strict;
+  overflow: auto;
+  display: flex;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #4a4a4a;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #038259;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+.title-not-activate {
+  font-family: "Eurostile BQ";
+  font-style: normal;
+  justify-content: center;
+  text-transform: uppercase;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 80px;
+
+  .title1 {
+    font-weight: 500;
+
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 13px !important;
+      line-height: 20px;
+    }
+    @media (min-width: 769px) {
+      font-size: 16px !important;
+      line-height: 20px;
+    }
+  }
+  .title2 {
+    font-weight: 500;
+
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 8px !important;
+    }
+    @media (min-width: 769px) {
+      font-size: 13px !important;
+      line-height: 20px;
+    }
+  }
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 252px;
+  }
+}

@@ -8,6 +8,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { SeccionsProfileComponent } from './_components/seccions-profile/seccions-profile.component';
 import { UtilsModule } from 'src/app/_modules/utils/utils.module';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { CardComponent } from './_components/card/card.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +19,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
     UtilsModule,
     MatGridListModule,
   ],
-  declarations: [ExperiencesPage,SeccionsProfileComponent]
+  declarations: [ExperiencesPage,SeccionsProfileComponent,CardComponent]
 })
 export class ExperiencesPageModule {}

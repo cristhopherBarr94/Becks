@@ -1,109 +1,117 @@
-@mixin img-step ($background-image, $width, $height) {
-    background-image: $background-image;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: $width;
-    height: $height;
-    margin-top: 65px;
-    margin-bottom: 53px;
-    @media (min-width: 0px) and (max-width: 720px) {
-        margin-top: 50px;
-        margin-bottom: 20px;
-    }
+@mixin img-step($background-image, $width, $height) {
+  background-image: $background-image;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: $width;
+  height: $height;
+  margin-top: 65px;
+  margin-bottom: 53px;
+  @media (min-width: 0px) and (max-width: 720px) {
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
 }
 
 .separator-min {
-    @include img-step(url('../assets/img/rectangle.svg'), 62px, 2px)
+  @include img-step(url("../assets/img/rectangle.svg"), 62px, 2px);
 }
 
-.register{
-    @include img-step(url('../assets/img/register.svg'), 121px, 73px)
+.register {
+  @include img-step(url("../assets/img/register.svg"), 121px, 73px);
 }
 
-.surface{
-    @include img-step(url('../assets/img/surface.svg'), 121px, 73px)  
+.surface {
+  @include img-step(url("../assets/img/surface.svg"), 121px, 73px);
 }
 
-.customer{
-    @include img-step(url('../assets/img/customer.svg'), 121px, 73px)
+.customer {
+  @include img-step(url("../assets/img/customer.svg"), 121px, 73px);
 }
 
-.logo{
-    width: 140px;
-    height: 65.5px;
-    position: absolute;
+.logo {
+  width: 140px;
+  height: 65.5px;
+  position: absolute;
+  top: 17px;
+  left: 139px;
+  z-index: 99;
+  margin-top: 0px;
+  // @media (min-width: 0px) and (max-width: 360px) {
+  // }
+  @media (min-width: 0px) and (max-width: 768px) {
     top: 17px;
-    left: 139px;
-    z-index: 99;
-    margin-top: 0px;
-    // @media (min-width: 0px) and (max-width: 360px) {
-    // }
-    @media (min-width: 0px) and (max-width: 768px) {
-        top: 17px;
-        left: auto;
-    }
-    @media (min-width: 768px) and (max-width: 1024px) {
-    }
+    left: auto;
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+  }
 }
 
-.logo-2{
-    background-image: url('../assets/img/becks-logoblanco.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: absolute;
-    width: 150px;
-    height: 67px;
+.logo-2 {
+  background-image: url("../assets/img/becks-logoblanco.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  width: 150px;
+  height: 67px;
 }
 
-.logo-login{
-    background-image: url('../assets/img/becks-logoverde.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
-    width: 150px;
-    height: 67px;
+.logo-login {
+  background-image: url("../assets/img/becks-logoverde.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  width: 150px;
+  height: 67px;
 }
 
 .social {
-    background-image: url('../assets/img/Social.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 165px;
-    height: 33px;
+  background-image: url("../assets/img/Social.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 165px;
+  height: 33px;
 }
 
-.img-404{
-    background-image: url('../assets/img/4042.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+.img-404 {
+  background-image: url("../assets/img/4042.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 928px;
+  height: 391px;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 349px;
+    height: 147px;
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    width: 500px;
+    height: 211px;
+  }
+
+  @media (min-width: 1024px) {
     width: 928px;
     height: 391px;
-
-    
-
-    @media (min-width: 0px) and (max-width: 768px) {
-        width: 349px;
-        height: 147px;
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-        width: 500px;
-        height: 211px;
-    }
-
-    @media (min-width: 1024px) {
-        width: 928px;
-        height: 391px;
-    }
+  }
 }
 
-.social-icon{
-    width: 28px;
-    height: 28px;
-    margin: 0px 5px;
+.social-icon {
+  width: 28px;
+  height: 28px;
+  margin: 0px 5px;
+}
+.plus-icon {
+  background-image: url("../assets/icon/plus-circle.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 20px;
+  width: 60px;
+  height: 60px;
 }

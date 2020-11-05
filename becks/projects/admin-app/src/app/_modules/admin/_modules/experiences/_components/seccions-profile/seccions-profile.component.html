@@ -1,41 +1,8 @@
-<section class="seccion-tabs">
-  <mat-tab-group mat-stretch-tabs selectedIndex="0" class="tab-group" *ngIf="true">
-    <mat-tab label="ACTIVAS" id="count">
-     
-     
-  <ion-row>
-    <ion-col size="4">
-      <div class="card">
-      <ion-row>
-        <div class="card-info">
-          <h4>titulo</h4>
-          <p>fecha</p>
-          </div>
-          <button class="btn-card">
-            editar
-          </button>
-      </ion-row>
-      </div>
-    </ion-col>
-  </ion-row>
-
-    </mat-tab>
-    <mat-tab label="INACTIVAS" id="experiencies">
-      <ion-row>
-        <ion-col size="4">
-          <div class="card" [ngClass]="{'inactive': !this.isActivate, 'active': this.isActivate}">
-          <ion-row>
-            <div class="card-info">
-              <h4>titulo</h4>
-              <p>fecha</p>
-              </div>
-              <button class="btn-card">
-                editar
-              </button>
-          </ion-row>
-          </div>
-        </ion-col>
-      </ion-row>
-    </mat-tab>
-  </mat-tab-group>
+<section class="seccion-tabs" *ngIf="!this.create">
+  <exp-card></exp-card>
+  <button class="add-btn" (click)="hideTabs()">
+    <span class="plus-icon"> </span>
+    agregar experiencias
+  </button>
+  
 </section>

@@ -1,8 +1,8 @@
-<section class="seccion-tabs" *ngIf="!this.create">
-  <exp-card></exp-card>
-  <button class="add-btn" (click)="hideTabs()">
+<section class="seccion-tabs">
+  <exp-card *ngIf="!this.create"></exp-card>
+  <button class="add-btn" (click)="hideTabs()"  *ngIf="!this.create">
     <span class="plus-icon"> </span>
     agregar experiencias
   </button>
-  
+  <edit-form  *ngIf="this.create"></edit-form>
 </section>

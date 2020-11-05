@@ -9,6 +9,7 @@ import { SeccionsProfileComponent } from './_components/seccions-profile/seccion
 import { UtilsModule } from 'src/app/_modules/utils/utils.module';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CardComponent } from './_components/card/card.component';
+import { EditFormComponent } from './_components/edit-form/edit-form.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +20,6 @@ import { CardComponent } from './_components/card/card.component';
     UtilsModule,
     MatGridListModule,
   ],
-  declarations: [ExperiencesPage,SeccionsProfileComponent,CardComponent]
+  declarations: [ExperiencesPage,SeccionsProfileComponent,CardComponent,EditFormComponent]
 })
 export class ExperiencesPageModule {}

@@ -11,8 +11,6 @@ import { UiService } from "src/app/_services/ui.service";
 export class SeccionsProfileComponent implements OnInit {
   public size: string;
   @Input() isActive : boolean
-  public experiencesAct: any = [1,2,3];
-  public experiencesInv: any = [1,2,3,4,5,6];
   public  create:boolean =  false;
 
   constructor(

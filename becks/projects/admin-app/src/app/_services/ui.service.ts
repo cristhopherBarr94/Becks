@@ -1,44 +1,101 @@
-import { Injectable } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { LoadingComponent } from '../_modules/utils/_components/loading/loading.component';
+import { Injectable } from "@angular/core";
+import { ModalController } from "@ionic/angular";
+import { LoadingComponent } from "../_modules/utils/_components/loading/loading.component";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UiService {
+  private loading: any;
+  private modal: any;
 
-  loading: any;
+  constructor(public modalCtrl: ModalController) {}
 
-  constructor( public modalCtrl: ModalController ) { }
-
-  async showLoading( text?: string ) {
+  async showLoading() {
     try {
       // this.dismissLoading();
       this.loading = await this.modalCtrl.create({
         component: LoadingComponent,
-        cssClass: 'loading-modal',
+        // cssClass: "screen-splash-modal",
+        cssClass: "loading-modal",
         animated: true,
         showBackdrop: true,
         backdropDismiss: false,
       });
       await this.loading.present();
     } catch (e) {
-      console.error( 'showLoading' , e);
+      console.error("showLoading", e);
     }
   }
 
-  dismissLoading( timeOut: number = 1000 ) {
+  dismissLoading(timeOut: number = 2500) {
     try {
-      if (this.loading) { this.loading.dismiss('cancel'); }
+      if (this.loading) {
+        this.loading.dismiss("cancel");
+      }
     } catch (e) {
-      console.error( 'dismissLoading' , e);
+      console.error("dismissLoading", e);
     }
-    setTimeout( () => {
-      this.modalCtrl.getTop().then( ( topOverlay ) => {
-        if ( topOverlay !== undefined ) {
+    setTimeout(() => {
+      this.modalCtrl.getTop().then((topOverlay) => {
+        if (topOverlay !== undefined) {
+          if(this.loading){
+            this.loading.dismiss();
+          }
+        }
+      });
+    }, timeOut);
+  }
+
+  getSizeType(width: number) {
+    if (width < 768) {
+      return "xs";
+    } else if (width >= 768 && width < 992) {
+      return "sm";
+    } else if (width >= 992 && width < 1200) {
+      return "md";
+    } else {
+      return "lg";
+    }
+  }
+
+  dismissModal(timeOut: number = 1000) {
+    try {
+      if (this.modal) {
+        this.modal.dismiss("cancel");
+      }
+    } catch (e) {
+      console.error("dismissModal", e);
+    }
+    setTimeout(() => {
+      this.modalCtrl.getTop().then((topOverlay) => {
+        if (topOverlay !== undefined) {
           this.modalCtrl.dismiss();
         }
       });
-    } , timeOut );
+    }, timeOut);
+  }
+
+  async showModal(
+    refComponent,
+    refClass?,
+    withBackdrop = true,
+    allowDismiss = false,
+    compProps?
+  ) {
+    try {
+      // this.dismissLoading();
+      this.modal = await this.modalCtrl.create({
+        component: refComponent,
+        cssClass: refClass,
+        componentProps: compProps,
+        animated: true,
+        showBackdrop: withBackdrop,
+        backdropDismiss: allowDismiss,
+      });
+      await this.modal.present();
+    } catch (e) {
+      console.error("showLoading", e);
+    }
   }
 }

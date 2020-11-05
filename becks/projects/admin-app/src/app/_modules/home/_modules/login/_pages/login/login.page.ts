@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
 
   redirect() {
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(["activation"], { queryParamsHandling: "preserve" });
+      this.router.navigate(["admin"], { queryParamsHandling: "preserve" });
     }
   }
 

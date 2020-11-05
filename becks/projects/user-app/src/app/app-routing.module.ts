@@ -38,7 +38,6 @@ const routes: Routes = [
         (m) => m.TermsConditionsPageModule
       ),
   },
- 
   {
     path: "**",
     loadChildren: () =>

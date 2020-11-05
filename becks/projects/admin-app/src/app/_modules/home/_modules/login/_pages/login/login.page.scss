@@ -1,0 +1,76 @@
+.container {
+  min-height: 100%;
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.6) 100%,
+      rgba(0, 0, 0, 0.2) 100%
+    ),
+    url("../../../../../../../assets//img/bg_desktop_1366x768_latareflejo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.margin-top-login-form {
+  margin-top: 20px;
+}
+
+.margin-top-form-login {
+  margin: 20px 0px 0px 0px;
+  line-height: 28px !important;
+  font-weight: normal !important;
+}
+
+.no-padding {
+  padding: 0px;
+  ion-row,
+  ion-col {
+    padding: 0px;
+  }
+}
+
+.margin-top-button {
+  margin-top: 23px;
+  position: relative;
+}
+
+.checks {
+  cursor: default;
+  font-family: "Helvetica Neue";
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: bold;
+
+  .content-check {
+    margin: 22px 0px;
+    display: flex;
+
+    a {
+      cursor: pointer;
+      color: #219653;
+      text-decoration: underline;
+    }
+  }
+
+  .margin-check {
+    margin-right: 11px;
+  }
+
+  ::ng-deep .mat-checkbox-frame {
+    border-color: white;
+  }
+
+  mat-error {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+  }
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+::ng-deep mat-icon:active {
+  font-family: "Material Icons" !important;
+}

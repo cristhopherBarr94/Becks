@@ -6,11 +6,11 @@
       "type": "angular",
       "root": "projects\\waiting-list"
     },
-    "waiting-list-admin": {
-      "name": "waiting-list-admin",
+    "admin-app": {
+      "name": "admin-app",
       "integrations": {},
       "type": "angular",
-      "root": "projects\\waiting-list-admin"
+      "root": "projects\\admin-app"
     },
     "user-app": {
       "name": "user-app",

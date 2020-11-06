@@ -1,16 +1,16 @@
 <section id="formSection" class="fullSection content-flex-all-center">
   <div class="full-height padding-form">
-    <form [formGroup]="userRegisterForm" autocomplete="off" class="general-row">
+    <form [formGroup]="userEditForm" autocomplete="off" class="general-row">
       <ion-row>
         <div class="form-section section1">
           
           <ion-row>
             <mat-form-field
-            style="width:190px"
+            style="width:250px"
             appearance="fill"
             floatLabel="auto"
             class="fullInput"
-            [ngClass]="getClassInput(userRegisterForm.controls.name)"
+            [ngClass]="getClassInput(userEditForm.controls.dateStart)"
             >
             <mat-label>Fecha inicial de la publicación</mat-label>
             <input matInput [ngxMatDatetimePicker]="picker1" 
@@ -23,11 +23,11 @@
            </mat-form-field>
 
            <mat-form-field
-           style="width:190px"
+           style="width:250px"
            appearance="fill"
            floatLabel="auto"
            class="fullInput"
-           [ngClass]="getClassInput(userRegisterForm.controls.name)"
+           [ngClass]="getClassInput(userEditForm.controls.dateEnd)"
            >
            <mat-label>Fecha final de la publicación</mat-label>
            <input matInput [ngxMatDatetimePicker]="picker2" 
@@ -45,20 +45,19 @@
             appearance="fill"
             floatLabel="auto"
             class="fullInput"
-            [ngClass]="getClassInput(userRegisterForm.controls.name)"
+            [ngClass]="getClassInput(userEditForm.controls.location)"
           >
             <mat-label>Agregar Ubicación</mat-label>
             
             <input
               matInput
               (input)="inputValidatorAlphabetical($event)"
-              formControlName="name"
-              placeholder="Nombres"
+              formControlName="location"
               maxlength="20"
-              [(ngModel)]="userRegister.first_name"
-              data-qadp="name"
+              [(ngModel)]="userRegister.location"
+              data-qadp="location"
             />
-            <mat-error *ngIf="userRegisterForm.controls.name.touched &&  userRegisterForm.controls.name.errors">
+            <mat-error *ngIf="userEditForm.controls.location.touched &&  userEditForm.controls.location.errors">
               *Has ingresado un dato inválido
             </mat-error>
           </mat-form-field>
@@ -67,45 +66,139 @@
             appearance="fill"
             floatLabel="auto"
             class="fullInput"
-            [ngClass]="getClassInput(userRegisterForm.controls.surname)"
+            [ngClass]="getClassInput(userEditForm.controls.descrip)"
           >
             <mat-label>Agregar descripción de la experiencia</mat-label>
             <textarea 
             matInput
             (input)="inputValidatorAlphabetical($event)"
-              formControlName="name"
-              placeholder="Nombres"
+              formControlName="descrip"
               maxlength="150"
-              [(ngModel)]="userRegister.first_name"
-              data-qadp="name"
+              [(ngModel)]="userRegister.descrip"
+              data-qadp="descrip"
               ></textarea>
-            <mat-error *ngIf="userRegisterForm.controls.surname.touched &&  userRegisterForm.controls.surname.errors">
+            <mat-error *ngIf="userEditForm.controls.descrip.touched &&  userEditForm.controls.descrip.errors">
               *Has ingresado un dato inválido
             </mat-error>
           </mat-form-field>
           
+          <div>
+            <ion-row>
+              <p>
+                ¿La  experiencia requiere stock  o inventario?
+              </p>
+              <mat-checkbox></mat-checkbox>
+            </ion-row>
+          </div>
+          
           <mat-form-field
+            style="width:208px;"
             appearance="fill"
             floatLabel="auto"
-            [ngClass]="getClassInput(userRegisterForm.controls.name)"
+            [ngClass]="getClassInput(userEditForm.controls.stock)"
           >
-            <mat-label>Selecciona el límite de usuarios</mat-label>
+            <mat-label>Cantidad</mat-label>
             
             <input
               matInput
-              (input)="inputValidatorAlphabetical($event)"
-              formControlName="name"
-              placeholder="Nombres"
-              maxlength="20"
-              [(ngModel)]="userRegister.first_name"
-              data-qadp="name"
+              (input)="inputValidatorNumeric($event)"
+              formControlName="stock"
+              maxlength="6"
+              [(ngModel)]="userRegister.stock"
+              data-qadp="stock"
             />
-            <mat-error *ngIf="userRegisterForm.controls.name.touched &&  userRegisterForm.controls.name.errors">
+            <mat-error *ngIf="userEditForm.controls.stock.touched &&  userEditForm.controls.stock.errors">
               *Has ingresado un dato inválido
             </mat-error>
           </mat-form-field>
+
+          <div>
+            <ion-row>
+              <p>
+                ¿La  experiencia requiere Periodicidad?
+              </p>
+              <mat-checkbox></mat-checkbox>
+            </ion-row>
+          </div>
+
+          <ion-row>
+          <mat-form-field
+          style="width:208px;"
+          appearance="fill"
+          floatLabel="auto"
+          [ngClass]="getClassInput(userEditForm.controls.stock)"
+        >
+          <mat-label>Cantidad</mat-label>
+          
+          <input
+            matInput
+            (input)="inputValidatorNumeric($event)"
+            formControlName="stock"
+            maxlength="6"
+            [(ngModel)]="userRegister.stock"
+            data-qadp="stock"
+          />
+          <mat-error *ngIf="userEditForm.controls.stock.touched &&  userEditForm.controls.stock.errors">
+            *Has ingresado un dato inválido
+          </mat-error>
+        </mat-form-field>
+
+         <mat-form-field
+         style="width:250px"
+         appearance="fill"
+         floatLabel="auto"
+         class="fullInput"
+         [ngClass]="getClassInput(userEditForm.controls.dateEnd)"
+         >
+         <mat-label>Fecha final de la publicación</mat-label>
+         <input matInput [ngxMatDatetimePicker]="picker3" 
+         [min]="minDate" [max]="maxDate" [disabled]="disabled">
+       <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+       <ngx-mat-datetime-picker #picker3 [showSpinners]="true" [showSeconds]="true" 
+         [touchUi]="touchUi" [color]="color"
+         [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
+       </ngx-mat-datetime-picker>
+        </mat-form-field>
+         
+        </ion-row>
+
+        <div>
+          <ion-row>
+            <p>
+              ¿La  experiencia requiere un enlace?
+            </p>
+            <mat-checkbox></mat-checkbox>
+          </ion-row>
         </div>
-        <div class="form-section section2">
+
+        <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userEditForm.controls.location)"
+      >
+        <mat-label>Agregar Ubicación</mat-label>
+        
+        <input
+          matInput
+          (input)="inputValidatorAlphabetical($event)"
+          formControlName="location"
+          maxlength="20"
+          [(ngModel)]="userRegister.location"
+          data-qadp="location"
+        />
+        <mat-error *ngIf="userEditForm.controls.location.touched &&  userEditForm.controls.location.errors">
+          *Has ingresado un dato inválido
+        </mat-error>
+      </mat-form-field>
+
+      <ion-row>
+        <mat-checkbox></mat-checkbox> Contenido embebido dentro de la APP
+        <mat-checkbox></mat-checkbox> Enlace o link externo (dirige a otra página)
+      </ion-row>
+
+      <ion-row>
+        <div>
           <input
           id="selectedFile"
           style="display: none"
@@ -119,6 +212,8 @@
           <button class="btn-upload" (click)="hiddenfileinput1.click()">
             <span class="upload-icon"> </span>
           </button>
+        </div>
+        <div style="margin-left: 30px;">
           <input
           id="selectedFile"
           style="display: none"
@@ -133,6 +228,10 @@
             <span class="upload-icon"> </span>
           </button>
         </div>
+      </ion-row>
+      
+        </div>
+        
 
       </ion-row>
 
@@ -148,7 +247,7 @@
         (click)="saveUser()"
         class="becks-btn-primary button-width"
         [ngClass]="{
-          'button-disabled': userRegisterForm.invalid || !captchaStatus
+          'button-disabled': userEditForm.invalid || !captchaStatus
         }"
         data-qadp="send-button-form"
       >

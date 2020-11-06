@@ -32,7 +32,7 @@ declare global {
 })
 export class EditFormComponent implements OnInit,AfterViewInit {
   @Input() principalContent;
-  public userRegisterForm: FormGroup;
+  public userEditForm: FormGroup;
   public userRegister: User = new User();
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
@@ -68,28 +68,26 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   initforms() {
-    this.userRegisterForm = this.formBuilder.group({
-      name: new FormControl("", [
+    this.userEditForm = this.formBuilder.group({
+      dateStart: new FormControl("", [
         Validators.required,
-        Validators.maxLength(20),
       ]),
-      surname: new FormControl("", [
+      dateEnd: new FormControl("", [
         Validators.required,
-        Validators.maxLength(20),
       ]),
-      idNumber: new FormControl("", [
+      descrip: new FormControl("", [
         Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(11),
+        Validators.minLength(0),
+        Validators.maxLength(150),
       ]),
-      email: new FormControl("", [
+      stock: new FormControl("", [
         Validators.required,
-        Validators.email,
-        Validators.maxLength(40),
+        Validators.minLength(1),
+        Validators.maxLength(6),
       ]),
-      telephone: new FormControl("", [
+      location: new FormControl("", [
         Validators.required,
-        Validators.minLength(7),
+        Validators.minLength(0),
         Validators.maxLength(10),
       ]),
       gender: new FormControl(null, Validators.required),
@@ -106,18 +104,11 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     });
   }
 
-  methodFB(userInfo: any) {
-    this.userRegisterForm.controls.name.patchValue(userInfo.first_name);
-    this.userRegisterForm.controls.surname.patchValue(userInfo.last_name);
-    this.userRegisterForm.controls.email.patchValue(userInfo.email);
-    this.cdr.detectChanges();
-  }
-
   saveUser(): void {
 
-    if ( this.userRegisterForm.invalid || !this.captchaStatus ) {
+    if ( this.userEditForm.invalid || !this.captchaStatus ) {
       this.showError = true;
-      (<any>Object).values(this.userRegisterForm.controls).forEach(control => {
+      (<any>Object).values(this.userEditForm.controls).forEach(control => {
         control.markAsTouched();
       });
       return;
@@ -152,8 +143,8 @@ export class EditFormComponent implements OnInit,AfterViewInit {
                 const formData = new FormData();
                 try {
                   this.restartCaptcha = true;
-                  formData.append("username", this.userRegisterForm.controls.email.value.trim());
-                  formData.append("password", this.userRegisterForm.controls.password.value.trim());
+                  formData.append("username", this.userEditForm.controls.email.value.trim());
+                  formData.append("password", this.userEditForm.controls.password.value.trim());
                   formData.append("grant_type", environment.rest.grant_type);
                   formData.append("client_id", environment.rest.client_id);
                   formData.append("client_secret", environment.rest.client_secret);
@@ -161,7 +152,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
                 } catch (error) {
                   return;
                 }
-                this.userRegisterForm.reset();
+                this.userEditForm.reset();
                 this.httpService
                 .postFormData(
                   environment.serverUrl + environment.login.resource,

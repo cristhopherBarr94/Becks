@@ -28,7 +28,6 @@ export class SeccionsProfileComponent implements OnInit {
   }
 
   ngOnInit() { 
-    // console.log("SeccionsProfileComponent -> isActive", this.isActive)
     this.Func= this.hideTabs.bind(this);
   }
 
@@ -41,6 +40,5 @@ export class SeccionsProfileComponent implements OnInit {
 
   hideTabs() {
     this.create = !this.create;
-    console.log("estoy cerrando desde hijo");
   }
 }

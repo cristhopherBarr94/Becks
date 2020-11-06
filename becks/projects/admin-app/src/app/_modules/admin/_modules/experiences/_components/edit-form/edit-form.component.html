@@ -6,23 +6,24 @@
          
           <ion-row >
             <span class="people-icon" style="margin-right: 30px;"> </span>
+
             <mat-form-field
             appearance="fill"
             floatLabel="auto"
             class="middleInput"
-            [ngClass]="getClassInput(userEditForm.controls.location)"
+            [ngClass]="getClassInput(userEditForm.controls.name)"
           >
             <mat-label>Nombre de la experiencia</mat-label>
             
             <input
               matInput
               (input)="inputValidatorAlphabetical($event)"
-              formControlName="location"
+              formControlName="name"
               maxlength="20"
-              [(ngModel)]="userRegister.location"
-              data-qadp="location"
+              [(ngModel)]="userRegister.name"
+              data-qadp="name"
             />
-            <mat-error *ngIf="userEditForm.controls.location.touched &&  userEditForm.controls.location.errors">
+            <mat-error *ngIf="userEditForm.controls.name.touched &&  userEditForm.controls.name.errors">
               *Has ingresado un dato inválido
             </mat-error>
           </mat-form-field>
@@ -37,13 +38,21 @@
             [ngClass]="getClassInput(userEditForm.controls.dateStart)"
             >
             <mat-label>Fecha inicial de la publicación</mat-label>
-            <input matInput [ngxMatDatetimePicker]="picker1" 
-            [min]="minDate" [max]="maxDate" [disabled]="disabled">
+            <input 
+            matInput 
+            [ngxMatDatetimePicker]="picker1" 
+            [min]="minDate" 
+            [max]="maxDate" 
+            [disabled]="disabled"
+            formControlName="dateStart">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <ngx-mat-datetime-picker #picker1 [showSpinners]="true" [showSeconds]="true"
              [touchUi]="false" [color]="black"
             [enableMeridian]="enableMeridian" [disableMinute]="false" [hideTime]="hideTime">
           </ngx-mat-datetime-picker>
+          <mat-error *ngIf="userEditForm.controls.dateStart.touched &&  userEditForm.controls.dateStart.errors">
+            *Has ingresado un dato inválido
+          </mat-error>
            </mat-form-field>
 
            <mat-form-field
@@ -53,13 +62,20 @@
            [ngClass]="getClassInput(userEditForm.controls.dateEnd)"
            >
            <mat-label>Fecha final de la publicación</mat-label>
-           <input matInput [ngxMatDatetimePicker]="picker2" 
-           [min]="minDate" [max]="maxDate" [disabled]="disabled">
+           <input 
+           matInput 
+           [ngxMatDatetimePicker]="picker2" 
+           [min]="minDate" 
+           [max]="maxDate" 
+           formControlName="dateEnd">
          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
          <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="true" 
            [touchUi]="touchUi" [color]="color"
            [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
          </ngx-mat-datetime-picker>
+         <mat-error *ngIf="userEditForm.controls.dateEnd.touched &&  userEditForm.controls.dateEnd.errors">
+          *Has ingresado un dato inválido
+        </mat-error>
           </mat-form-field>
            
           </ion-row>
@@ -119,9 +135,11 @@
                 <p>
                   ¿La  experiencia requiere stock  o inventario?
                 </p>
-                <mat-slide-toggle></mat-slide-toggle>
+                <mat-slide-toggle [checked]="this.hideStk" name="stk" (change)="hideField($event.source.name,$event.source._checked)" ></mat-slide-toggle>
               </ion-row>
-              <mat-form-field
+
+              <mat-form-field   
+              *ngIf="this.hideStk"
               appearance="fill"
               floatLabel="auto"
               class="smallInput"
@@ -151,44 +169,56 @@
                 <p>
                   ¿La  experiencia requiere Periodicidad?
                 </p>
-                <mat-slide-toggle></mat-slide-toggle>
+                <mat-slide-toggle  [checked]="!this.hideStk" name="period" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
               </ion-row>
               <ion-row>
                 <mat-form-field
+                *ngIf="!this.hideStk"
                 appearance="fill"
                 floatLabel="auto"
                 class="smallInput"
-                [ngClass]="getClassInput(userEditForm.controls.stock)"
+                [ngClass]="getClassInput(userEditForm.controls.period)"
               >
                 <mat-label>Cupos</mat-label>
                 
                 <input
                   matInput
                   (input)="inputValidatorNumeric($event)"
-                  formControlName="stock"
+                  formControlName="period"
                   maxlength="6"
-                  [(ngModel)]="userRegister.stock"
-                  data-qadp="stock"
+                  [(ngModel)]="userRegister.period"
+                  data-qadp="period"
                 />
-                <mat-error *ngIf="userEditForm.controls.stock.touched &&  userEditForm.controls.stock.errors">
+                <mat-error *ngIf="userEditForm.controls.period.touched &&  userEditForm.controls.period.errors">
                   *Has ingresado un dato inválido
                 </mat-error>
               </mat-form-field>
       
                <mat-form-field
+               *ngIf="!this.hideStk"
                appearance="fill"
                floatLabel="auto"
                class="smallInput"
-               [ngClass]="getClassInput(userEditForm.controls.dateEnd)"
+               [ngClass]="getClassInput(userEditForm.controls.dateRelease)"
                >
                <mat-label>Fecha de liberación</mat-label>
-               <input matInput [ngxMatDatetimePicker]="picker3" 
-               [min]="minDate" [max]="maxDate" [disabled]="disabled">
+               <input 
+               matInput 
+               formControlName="dateRelease"
+               [ngxMatDatetimePicker]="picker3" 
+               [min]="minDate" 
+               [max]="maxDate" 
+               [disabled]="disabled"
+               [(ngModel)]="userRegister.dateRelease"
+               >
              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
              <ngx-mat-datetime-picker #picker3 [showSpinners]="true" [showSeconds]="true" 
                [touchUi]="touchUi" [color]="color"
                [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
              </ngx-mat-datetime-picker>
+             <mat-error *ngIf="userEditForm.controls.dateRelease.touched &&  userEditForm.controls.dateRelease.errors">
+              *Has ingresado un dato inválido
+            </mat-error>
               </mat-form-field>
                
               </ion-row>
@@ -202,33 +232,33 @@
                   <p>
                     ¿La  experiencia requiere un enlace?
                   </p>
-                  <mat-slide-toggle></mat-slide-toggle>
+                  <mat-slide-toggle name="path" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
                 </ion-row>
       
       
               <mat-form-field
+              *ngIf="!this.hidepath"
               appearance="fill"
               floatLabel="auto"
               class="fullInput"
-              [ngClass]="getClassInput(userEditForm.controls.location)"
+              [ngClass]="getClassInput(userEditForm.controls.path)"
             >
               <mat-label>URL</mat-label>
               
               <input
                 matInput
-                (input)="inputValidatorAlphabetical($event)"
-                formControlName="location"
-                maxlength="20"
-                [(ngModel)]="userRegister.location"
+                formControlName="path"
+                maxlength="150"
+                [(ngModel)]="userRegister.path"
                 data-qadp="location"
               />
-              <mat-error *ngIf="userEditForm.controls.location.touched &&  userEditForm.controls.location.errors">
+              <mat-error *ngIf="userEditForm.controls.path.touched &&  userEditForm.controls.path.errors">
                 *Has ingresado un dato inválido
               </mat-error>
             </mat-form-field>
-            <ion-row class="space-around">
-              <mat-checkbox></mat-checkbox> <p>Contenido embebido dentro de la APP</p>
-              <mat-checkbox></mat-checkbox> <p>Enlace o link externo (dirige a otra página)</p>
+            <ion-row class="space-around"    *ngIf="!this.hidepath">
+              <mat-checkbox [checked]="!this.checked" (change)="unCheck()"></mat-checkbox> <p>Contenido embebido dentro de la APP</p>
+              <mat-checkbox [checked]="this.checked" (change)="unCheck()"></mat-checkbox> <p>Enlace o link externo (dirige a otra página)</p>
             </ion-row>      
           </div>
           </ion-row>
@@ -281,7 +311,7 @@
       (click)="saveUser()"
       class="becks-btn-primary button-width"
       [ngClass]="{
-        'button-disabled': userEditForm.invalid || !captchaStatus
+        'button-disabled': userEditForm.invalid
       }"
       data-qadp="send-button-form"
     >

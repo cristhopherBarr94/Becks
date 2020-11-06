@@ -18,8 +18,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { User } from 'src/app/_models/User';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
-import { AdminService } from 'src/app/_services/admin.service'
-import { NavParams } from '@ionic/angular';
+import { AdminService } from 'src/app/_services/admin.service';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -38,8 +37,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public restartCaptcha: boolean;
   public httpError: string;
 
-  public hide: boolean;
-  public hideConfirm: boolean;
+  public hideStk: boolean=true;
+  public checked: boolean=false;
+  public hidepath: boolean=true;
   public password: string;
   public showError: boolean;
   public photo: any;
@@ -60,21 +60,15 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    try {
-      document
-        .getElementById("mat-checkbox-promo")
-        .getElementsByTagName("input")[0]
-        .setAttribute("data-qadp", "input-marketing");
-    } catch (error) {}
+
   }
 
   initforms() {
     this.userEditForm = this.formBuilder.group({
-      dateStart: new FormControl("", [
+      name: new FormControl("", [
         Validators.required,
-      ]),
-      dateEnd: new FormControl("", [
-        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(20),
       ]),
       descrip: new FormControl("", [
         Validators.required,
@@ -86,28 +80,30 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         Validators.minLength(1),
         Validators.maxLength(6),
       ]),
+      period: new FormControl("", [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(6),
+      ]),
       location: new FormControl("", [
         Validators.required,
         Validators.minLength(0),
         Validators.maxLength(10),
       ]),
-      gender: new FormControl(null, Validators.required),
-      privacy: new FormControl(null, Validators.required),
-      promo: new FormControl(null),
-      password: new FormControl("", [
+      dateEnd: new FormControl(null, Validators.required),
+      dateStart: new FormControl(null, Validators.required),
+      dateRelease: new FormControl(null, Validators.required),
+      path: new FormControl("", [
         Validators.required,
         Validators.minLength(4),
-      ]),
-      password_confirm: new FormControl("", [
-        Validators.required,
-        Validators.minLength(4),
+        Validators.maxLength(150),
       ]),
     });
   }
 
   saveUser(): void {
 
-    if ( this.userEditForm.invalid || !this.captchaStatus ) {
+    if ( this.userEditForm.invalid) {
       this.showError = true;
       (<any>Object).values(this.userEditForm.controls).forEach(control => {
         control.markAsTouched();
@@ -327,5 +323,18 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
   closeForm() {
     this.parentFunc();
+  }
+
+  hideField(targetHidden,targetStatus){
+    console.log(targetStatus);
+    if(targetHidden == "stk"){
+      this.hideStk = !this.hideStk;
+    }
+    else if (targetHidden  == "path") {
+      this.hidepath = ! this.hidepath;
+    }
+  }
+  unCheck(){
+  this.checked=!this.checked;
   }
 }

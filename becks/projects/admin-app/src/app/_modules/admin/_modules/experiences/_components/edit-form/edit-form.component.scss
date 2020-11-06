@@ -6,12 +6,49 @@
   }
 }
 
-.becks-btn-primary {
+.becks-btn-primary,
+.button-disabled,
+.button-disabled:hover,
+.button-disabled:active {
   margin: auto 20px;
+  padding-left: 35px;
+  width: 379px !important;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    font-size: 11px !important;
+    background-position-x: 10px;
+    &:hover {
+      background-position-x: 7px;
+    }
+  }
+  @media (min-width: 769px) {
+    background-position-x: 20px;
+    &:hover {
+      background-position-x: 17px;
+    }
+  }
+}
+
+.btn-cancel {
+  width: 160px;
+  height: 44px;
+  background: transparent;
+
+  span {
+    font-family: "Eurostile BQ";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: #038259;
+    text-decoration: underline;
+  }
 }
 
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
   border-color: #ffffff;
+  border-radius: 4px;
 }
 ::ng-deep .mat-checkbox {
   margin-right: 15px;
@@ -42,10 +79,13 @@
           width: 630px;
         }
         .middleInput {
-          width: 250px;
+          width: 512px;
         }
         .smallInput {
-          width: 208px;
+          width: 250px;
+        }
+        span {
+          margin: 10px 30px auto auto;
         }
       }
     }
@@ -158,6 +198,7 @@ textarea {
 .space-around {
   width: 630px;
   justify-content: space-around;
+  margin-bottom: 30px;
 }
 ::ng-deep mat-slide-toggle {
   margin-left: 50px;
@@ -213,4 +254,7 @@ textarea {
 }
 ::ng-deep .mat-checkbox-checked .mat-checkbox-frame {
   background-color: #ffffff;
+}
+.margin-left {
+  margin-left: 55px;
 }

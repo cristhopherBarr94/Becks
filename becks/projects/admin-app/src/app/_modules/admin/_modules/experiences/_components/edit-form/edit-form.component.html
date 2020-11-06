@@ -3,12 +3,37 @@
     <form [formGroup]="userEditForm" autocomplete="off" class="general-row">
       <ion-row>
         <div class="form-section section1">
-          
-          <ion-row>
+         
+          <ion-row >
+            <span class="people-icon" style="margin-right: 30px;"> </span>
             <mat-form-field
             appearance="fill"
             floatLabel="auto"
             class="middleInput"
+            [ngClass]="getClassInput(userEditForm.controls.location)"
+          >
+            <mat-label>Nombre de la experiencia</mat-label>
+            
+            <input
+              matInput
+              (input)="inputValidatorAlphabetical($event)"
+              formControlName="location"
+              maxlength="20"
+              [(ngModel)]="userRegister.location"
+              data-qadp="location"
+            />
+            <mat-error *ngIf="userEditForm.controls.location.touched &&  userEditForm.controls.location.errors">
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
+  
+          </ion-row>
+          <ion-row>
+            <span class="schedule-icon"> </span>
+            <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="smallInput"
             [ngClass]="getClassInput(userEditForm.controls.dateStart)"
             >
             <mat-label>Fecha inicial de la publicación</mat-label>
@@ -24,7 +49,7 @@
            <mat-form-field
            appearance="fill"
            floatLabel="auto"
-           class="middleInput"
+           class="smallInput"
            [ngClass]="getClassInput(userEditForm.controls.dateEnd)"
            >
            <mat-label>Fecha final de la publicación</mat-label>
@@ -39,7 +64,9 @@
            
           </ion-row>
 
-          <mat-form-field
+          <ion-row>
+            <span class="location-icon"> </span>
+            <mat-form-field
             appearance="fill"
             floatLabel="auto"
             class="fullInput"
@@ -59,8 +86,11 @@
               *Has ingresado un dato inválido
             </mat-error>
           </mat-form-field>
-
-          <mat-form-field
+          </ion-row>
+        
+          <ion-row>
+            <span class="text-icon"> </span>
+            <mat-form-field
             appearance="fill"
             floatLabel="auto"
             class="fullInput"
@@ -79,122 +109,133 @@
               *Has ingresado un dato inválido
             </mat-error>
           </mat-form-field>
+          </ion-row>
+         
           
-          <div>
-            <ion-row class="space-between">
-              <p>
-                ¿La  experiencia requiere stock  o inventario?
-              </p>
-              <mat-slide-toggle></mat-slide-toggle>
-            </ion-row>
-          </div>
-          
-          <mat-form-field
-            appearance="fill"
-            floatLabel="auto"
-            class="smallInput"
-            [ngClass]="getClassInput(userEditForm.controls.stock)"
-          >
-            <mat-label>Cantidad</mat-label>
-            
-            <input
-              matInput
-              (input)="inputValidatorNumeric($event)"
-              formControlName="stock"
-              maxlength="6"
-              [(ngModel)]="userRegister.stock"
-              data-qadp="stock"
-            />
-            <mat-error *ngIf="userEditForm.controls.stock.touched &&  userEditForm.controls.stock.errors">
-              *Has ingresado un dato inválido
-            </mat-error>
-          </mat-form-field>
-
-          <div>
-            <ion-row class="space-between">
-              <p>
-                ¿La  experiencia requiere Periodicidad?
-              </p>
-              <mat-slide-toggle></mat-slide-toggle>
-            </ion-row>
-          </div>
+          <ion-row>
+            <span class="stock-icon"> </span>
+            <div>
+              <ion-row class="space-between">
+                <p>
+                  ¿La  experiencia requiere stock  o inventario?
+                </p>
+                <mat-slide-toggle></mat-slide-toggle>
+              </ion-row>
+              <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              class="smallInput"
+              [ngClass]="getClassInput(userEditForm.controls.stock)"
+            >
+              <mat-label>Cantidad</mat-label>
+              
+              <input
+                matInput
+                (input)="inputValidatorNumeric($event)"
+                formControlName="stock"
+                maxlength="6"
+                [(ngModel)]="userRegister.stock"
+                data-qadp="stock"
+              />
+              <mat-error *ngIf="userEditForm.controls.stock.touched &&  userEditForm.controls.stock.errors">
+                *Has ingresado un dato inválido
+              </mat-error>
+            </mat-form-field>
+            </div>
+          </ion-row>
+        
+          <ion-row>
+            <span class="time-icon"> </span>
+            <div>
+              <ion-row class="space-between">
+                <p>
+                  ¿La  experiencia requiere Periodicidad?
+                </p>
+                <mat-slide-toggle></mat-slide-toggle>
+              </ion-row>
+              <ion-row>
+                <mat-form-field
+                appearance="fill"
+                floatLabel="auto"
+                class="smallInput"
+                [ngClass]="getClassInput(userEditForm.controls.stock)"
+              >
+                <mat-label>Cupos</mat-label>
+                
+                <input
+                  matInput
+                  (input)="inputValidatorNumeric($event)"
+                  formControlName="stock"
+                  maxlength="6"
+                  [(ngModel)]="userRegister.stock"
+                  data-qadp="stock"
+                />
+                <mat-error *ngIf="userEditForm.controls.stock.touched &&  userEditForm.controls.stock.errors">
+                  *Has ingresado un dato inválido
+                </mat-error>
+              </mat-form-field>
+      
+               <mat-form-field
+               appearance="fill"
+               floatLabel="auto"
+               class="smallInput"
+               [ngClass]="getClassInput(userEditForm.controls.dateEnd)"
+               >
+               <mat-label>Fecha de liberación</mat-label>
+               <input matInput [ngxMatDatetimePicker]="picker3" 
+               [min]="minDate" [max]="maxDate" [disabled]="disabled">
+             <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+             <ngx-mat-datetime-picker #picker3 [showSpinners]="true" [showSeconds]="true" 
+               [touchUi]="touchUi" [color]="color"
+               [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
+             </ngx-mat-datetime-picker>
+              </mat-form-field>
+               
+              </ion-row>
+            </div>
+          </ion-row>
 
           <ion-row>
-          <mat-form-field
-          appearance="fill"
-          floatLabel="auto"
-          class="smallInput"
-          [ngClass]="getClassInput(userEditForm.controls.stock)"
-        >
-          <mat-label>Cantidad</mat-label>
-          
-          <input
-            matInput
-            (input)="inputValidatorNumeric($event)"
-            formControlName="stock"
-            maxlength="6"
-            [(ngModel)]="userRegister.stock"
-            data-qadp="stock"
-          />
-          <mat-error *ngIf="userEditForm.controls.stock.touched &&  userEditForm.controls.stock.errors">
-            *Has ingresado un dato inválido
-          </mat-error>
-        </mat-form-field>
-
-         <mat-form-field
-         appearance="fill"
-         floatLabel="auto"
-         class="middleInput"
-         [ngClass]="getClassInput(userEditForm.controls.dateEnd)"
-         >
-         <mat-label>Fecha final de la publicación</mat-label>
-         <input matInput [ngxMatDatetimePicker]="picker3" 
-         [min]="minDate" [max]="maxDate" [disabled]="disabled">
-       <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-       <ngx-mat-datetime-picker #picker3 [showSpinners]="true" [showSeconds]="true" 
-         [touchUi]="touchUi" [color]="color"
-         [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
-       </ngx-mat-datetime-picker>
-        </mat-form-field>
-         
-        </ion-row>
-
-        <div>
-          <ion-row class="space-between">
-            <p>
-              ¿La  experiencia requiere un enlace?
-            </p>
-            <mat-slide-toggle></mat-slide-toggle>
+            <span class="location-icon"> </span>
+              <div>
+                <ion-row class="space-between">
+                  <p>
+                    ¿La  experiencia requiere un enlace?
+                  </p>
+                  <mat-slide-toggle></mat-slide-toggle>
+                </ion-row>
+      
+      
+              <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              class="fullInput"
+              [ngClass]="getClassInput(userEditForm.controls.location)"
+            >
+              <mat-label>URL</mat-label>
+              
+              <input
+                matInput
+                (input)="inputValidatorAlphabetical($event)"
+                formControlName="location"
+                maxlength="20"
+                [(ngModel)]="userRegister.location"
+                data-qadp="location"
+              />
+              <mat-error *ngIf="userEditForm.controls.location.touched &&  userEditForm.controls.location.errors">
+                *Has ingresado un dato inválido
+              </mat-error>
+            </mat-form-field>
+            <ion-row class="space-around">
+              <mat-checkbox></mat-checkbox> <p>Contenido embebido dentro de la APP</p>
+              <mat-checkbox></mat-checkbox> <p>Enlace o link externo (dirige a otra página)</p>
+            </ion-row>      
+          </div>
           </ion-row>
-        </div>
 
-        <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInput(userEditForm.controls.location)"
-      >
-        <mat-label>Agregar Ubicación</mat-label>
-        
-        <input
-          matInput
-          (input)="inputValidatorAlphabetical($event)"
-          formControlName="location"
-          maxlength="20"
-          [(ngModel)]="userRegister.location"
-          data-qadp="location"
-        />
-        <mat-error *ngIf="userEditForm.controls.location.touched &&  userEditForm.controls.location.errors">
-          *Has ingresado un dato inválido
-        </mat-error>
-      </mat-form-field>
+       
 
-      <ion-row class="space-around">
-        <mat-checkbox></mat-checkbox> <p>Contenido embebido dentro de la APP</p>
-        <mat-checkbox></mat-checkbox> <p>Enlace o link externo (dirige a otra página)</p>
-      </ion-row>
-
-      <ion-row>
+      <ion-row class="margin-left ">
         <div>
           <input
           id="selectedFile"
@@ -232,17 +273,25 @@
     </form>
 
     <br /><mat-error *ngIf="httpError" class="error-http">{{ httpError }}</mat-error>
+  
+    <ion-row class="margin-left ">
       <button
-        block="block"
-        color="becks"
-        (click)="saveUser()"
-        class="becks-btn-primary button-width"
-        [ngClass]="{
-          'button-disabled': userEditForm.invalid || !captchaStatus
-        }"
-        data-qadp="send-button-form"
-      >
-        <span>Guardar</span>
-      </button>
+      block="block"
+      color="becks"
+      (click)="saveUser()"
+      class="becks-btn-primary button-width"
+      [ngClass]="{
+        'button-disabled': userEditForm.invalid || !captchaStatus
+      }"
+      data-qadp="send-button-form"
+    >
+      <span>CREAR EXPERIENCIA</span>
+    </button>
+    <button class="btn-cancel"
+      (click) = "closeForm()"
+    >
+      <span>CANCELAR</span>
+    </button>
+    </ion-row>
   </div>
 </section>

@@ -31,7 +31,7 @@ declare global {
   styleUrls: ['./edit-form.component.scss'],
 })
 export class EditFormComponent implements OnInit,AfterViewInit {
-  @Input() principalContent;
+  @Input() parentFunc;
   public userEditForm: FormGroup;
   public userRegister: User = new User();
   public captchaStatus: boolean;
@@ -197,11 +197,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       );
   }
 
-  public moveSection() {
-    const y = document.getElementById("section-img").offsetTop;
-    this.principalContent.scrollToPoint(0, y);
-  }
-
   public inputValidatorNumeric(event: any) {
     const pattern = /^[0-9]*$/;
     if (!pattern.test(event.target.value)) {
@@ -329,5 +324,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       console.log(image.src);
     });
   }
-
+  closeForm() {
+    // parentFunc
+  }
 }

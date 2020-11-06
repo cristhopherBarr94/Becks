@@ -18,6 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerMod
     MatNativeDateModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
-    NgxMatNativeDateModule, 
+    NgxMatNativeDateModule,
+    MatSlideToggleModule 
   ],
   declarations: [ExperiencesPage,SeccionsProfileComponent,CardComponent,EditFormComponent]
 })

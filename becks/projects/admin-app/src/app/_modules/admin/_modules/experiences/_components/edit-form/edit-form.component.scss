@@ -13,6 +13,9 @@
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
   border-color: #ffffff;
 }
+::ng-deep .mat-checkbox {
+  margin-right: 15px;
+}
 .error-http {
   justify-content: center;
   align-items: center;
@@ -38,26 +41,18 @@
         .fullInput {
           width: 630px;
         }
+        .middleInput {
+          width: 250px;
+        }
+        .smallInput {
+          width: 208px;
+        }
       }
     }
     .section1 {
       margin-top: 35px;
       justify-content: left !important;
       align-items: flex-start;
-    }
-    .section2 {
-      position: absolute;
-      margin: 0px auto auto 450px;
-      align-items: flex-start !important;
-
-      p {
-        font-family: "Helvetica LT Std";
-        font-style: normal;
-        font-weight: bold;
-        font-size: 13.78px;
-        line-height: 128.3%;
-        margin-top: 5px;
-      }
     }
     .button-row {
       justify-content: center;
@@ -81,6 +76,14 @@
   width: 90% !important;
   background: #161616;
   margin-top: 30px;
+  p {
+    font-family: "Helvetica LT Std";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13.78px;
+    line-height: 128.3%;
+    margin-top: 5px;
+  }
 }
 
 ::ng-deep mat-form-field {
@@ -147,4 +150,67 @@ textarea {
   font-family: "Helvetica LT Std";
   width: 630px !important;
   height: 130px;
+}
+.space-between {
+  width: 340px;
+  justify-content: space-between;
+}
+.space-around {
+  width: 630px;
+  justify-content: space-around;
+}
+::ng-deep mat-slide-toggle {
+  margin-left: 50px;
+}
+
+::ng-deep .mat-slide-toggle .mat-slide-toggle-thumb {
+  background: transparent;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 16px;
+  height: 16px;
+  margin-top: 4px;
+  margin-left: 2px;
+}
+::ng-deep .mat-slide-toggle .mat-slide-toggle-bar {
+  background: transparent;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 10px;
+  width: 38px;
+  height: 20px;
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background: rgba(0, 255, 148, 0.87);
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 4px rgba(0, 255, 148, 0.87);
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background: #2e2e2e;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+::ng-deep.mat-checkbox-checked.mat-accent
+  .mat-checkbox-ripple
+  .mat-ripple-element {
+  opacity: 0.03 !important;
+  background-color: transparent !important;
+}
+
+::ng-deep.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #ffffff !important;
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: #ffffff;
+}
+::ng-deep .mat-checkbox-checkmark-path {
+  stroke: #2daf73 !important;
+}
+::ng-deep .mat-checkbox-checked .mat-checkbox-frame {
+  background-color: #ffffff;
 }

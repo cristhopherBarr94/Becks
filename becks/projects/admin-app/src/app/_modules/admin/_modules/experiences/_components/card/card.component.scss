@@ -181,10 +181,27 @@
       top: auto;
       bottom: 10px;
       width: 150px;
+      color: #ffffff;
+
       h4,
       p {
         margin-bottom: 5px;
         height: 15px;
+        text-transform: capitalize;
+      }
+      h4 {
+        font-family: "Eurostile BQ";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        letter-spacing: 0.15px;
+      }
+      p {
+        font-family: "Helvetica LT Std";
+        font-style: normal;
+        font-weight: bold;
+        font-size: 13.78px;
+        line-height: 128.3%;
       }
     }
     .btn-card {
@@ -200,6 +217,16 @@
       border: 1px solid #ffffff;
       box-sizing: border-box;
       border-radius: 4px;
+      span {
+        font-family: "Helvetica LT Std";
+        font-style: normal;
+        font-weight: bold;
+        font-size: 11px;
+        line-height: 0px;
+        font-feature-settings: "ordn" on, "liga" off;
+        text-transform: capitalize;
+        margin-right: 10px;
+      }
     }
   }
 }

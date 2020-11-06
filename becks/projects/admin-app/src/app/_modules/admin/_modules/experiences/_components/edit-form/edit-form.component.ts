@@ -19,6 +19,7 @@ import { User } from 'src/app/_models/User';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
 import { AdminService } from 'src/app/_services/admin.service'
+import { NavParams } from '@ionic/angular';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -31,7 +32,6 @@ declare global {
   styleUrls: ['./edit-form.component.scss'],
 })
 export class EditFormComponent implements OnInit,AfterViewInit {
-  @Input() parentFunc;
   public userEditForm: FormGroup;
   public userRegister: User = new User();
   public captchaStatus: boolean;
@@ -43,6 +43,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public password: string;
   public showError: boolean;
   public photo: any;
+  @Input() parentFunc:any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,8 +52,8 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     private ui: UiService,
     private cdr: ChangeDetectorRef,
     private authService: AuthService,
-    private adminSvc: AdminService
-  ) {}
+    private adminSvc: AdminService,
+  ) { }
 
   ngOnInit(): void {
     this.initforms();
@@ -325,6 +326,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     });
   }
   closeForm() {
-    // parentFunc
+    this.parentFunc();
   }
 }

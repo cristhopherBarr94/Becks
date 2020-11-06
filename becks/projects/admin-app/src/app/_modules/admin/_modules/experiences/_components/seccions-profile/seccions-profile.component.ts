@@ -12,6 +12,7 @@ export class SeccionsProfileComponent implements OnInit {
   public size: string;
   @Input() isActive : boolean
   public  create:boolean =  false;
+  public Func:any;
 
   constructor(
     private platform: Platform,
@@ -28,6 +29,7 @@ export class SeccionsProfileComponent implements OnInit {
 
   ngOnInit() { 
     // console.log("SeccionsProfileComponent -> isActive", this.isActive)
+    this.Func= this.hideTabs.bind(this);
   }
 
   redirectExp() {
@@ -39,5 +41,6 @@ export class SeccionsProfileComponent implements OnInit {
 
   hideTabs() {
     this.create = !this.create;
+    console.log("estoy cerrando desde hijo");
   }
 }

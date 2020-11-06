@@ -1,0 +1,96 @@
+.button-width {
+  border-radius: 16px 0px 16px 0px;
+  @media (min-width: 769px) {
+    width: 276 !important;
+    height: 44px !important;
+  }
+}
+
+.becks-btn-primary {
+  margin: auto 20px;
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: #ffffff;
+}
+.error-http {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 10px 0px;
+}
+
+@media (min-width: 769px) {
+  .content-flex-all-center {
+    height: auto;
+    justify-content: center;
+
+    .general-row {
+      flex-direction: row;
+      width: 800px;
+
+      .form-section {
+        padding: 20px 10px;
+        width: 450px;
+        flex-direction: column;
+        justify-content: left;
+
+        .fullInput {
+          width: 398px;
+        }
+      }
+    }
+    .section1 {
+      margin-top: 35px;
+      justify-content: left !important;
+      align-items: flex-start;
+    }
+    .section2 {
+      position: absolute;
+      margin: 0px auto auto 450px;
+      align-items: flex-start !important;
+    }
+    .checks {
+      padding: 20px;
+      a {
+        cursor: pointer;
+        color: #095228;
+        text-decoration: underline;
+      }
+    }
+    .content-check {
+      margin: 15px;
+      padding-left: 0px;
+      justify-content: space-between !important;
+    }
+    .button-row {
+      justify-content: center;
+
+      .separator-box {
+        margin: 15px !important;
+      }
+    }
+  }
+}
+
+.btn-upload {
+  position: relative;
+  width: 400px;
+  height: 68.13px;
+  background: #222222;
+  border-radius: 4px;
+}
+.padding-form {
+  padding: 20px 40.5px;
+  width: 90% !important;
+  background: #161616;
+  margin-top: 30px;
+}
+
+::ng-deep mat-form-field {
+  margin-right: 15px;
+  margin-bottom: 0px;
+}
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 10px;
+}

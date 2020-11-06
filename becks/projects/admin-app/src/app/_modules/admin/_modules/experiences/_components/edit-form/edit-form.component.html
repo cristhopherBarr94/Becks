@@ -1,0 +1,151 @@
+<section id="formSection" class="fullSection content-flex-all-center">
+  <div class="full-height padding-form">
+    <form [formGroup]="userRegisterForm" autocomplete="off" class="general-row">
+      <ion-row>
+        <div class="form-section section1">
+          
+          <ion-row>
+            <mat-form-field 
+            style="width:190px"
+            appearance="fill" 
+            floatLabel="auto"
+            [ngClass]="getClassInput(userRegisterForm.controls.name)"
+            >
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker1">
+              <mat-datepicker-toggle matSuffix [for]="picker1">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+  
+            <mat-form-field 
+            style="width:190px"
+            appearance="fill" 
+            floatLabel="auto"
+            [ngClass]="getClassInput(userRegisterForm.controls.name)"
+            >
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker2">
+              <mat-datepicker-toggle matSuffix [for]="picker2">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </ion-row>
+
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.name)"
+          >
+            <mat-label>Agregar Ubicación</mat-label>
+            
+            <input
+              matInput
+              (input)="inputValidatorAlphabetical($event)"
+              formControlName="name"
+              placeholder="Nombres"
+              maxlength="20"
+              [(ngModel)]="userRegister.first_name"
+              data-qadp="name"
+            />
+            <mat-error *ngIf="userRegisterForm.controls.name.touched &&  userRegisterForm.controls.name.errors">
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.surname)"
+          >
+            <mat-label>Agregar descripción de la experiencia</mat-label>
+            <textarea 
+            matInput
+            (input)="inputValidatorAlphabetical($event)"
+              formControlName="name"
+              placeholder="Nombres"
+              maxlength="150"
+              [(ngModel)]="userRegister.first_name"
+              data-qadp="name"
+              ></textarea>
+            <mat-error *ngIf="userRegisterForm.controls.surname.touched &&  userRegisterForm.controls.surname.errors">
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            [ngClass]="getClassInput(userRegisterForm.controls.name)"
+          >
+            <mat-label>Selecciona el límite de usuarios</mat-label>
+            
+            <input
+              matInput
+              (input)="inputValidatorAlphabetical($event)"
+              formControlName="name"
+              placeholder="Nombres"
+              maxlength="20"
+              [(ngModel)]="userRegister.first_name"
+              data-qadp="name"
+            />
+            <mat-error *ngIf="userRegisterForm.controls.name.touched &&  userRegisterForm.controls.name.errors">
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-section section2">
+          <input
+          id="selectedFile"
+          style="display: none"
+          type="file"
+          (change)="loadImageFromDevice($event)"
+          id="file-input"
+          accept="image/png, image/jpeg"
+          #hiddenfileinput1
+        />
+          <p>Subir imagen desktop</p>
+          <button class="btn-upload" (click)="hiddenfileinput1.click()">
+            <span class="upload-icon"> </span>
+          </button>
+          <input
+          id="selectedFile"
+          style="display: none"
+          type="file"
+          (change)="loadImageFromDevice($event)"
+          id="file-input"
+          accept="image/png, image/jpeg"
+          #hiddenfileinput2
+        />
+          <p>Subir imagen mobile</p>
+          <button class="btn-upload" (click)="hiddenfileinput2.click()">
+            <span class="upload-icon"> </span>
+          </button>
+        </div>
+
+      </ion-row>
+
+      <ion-row>
+        
+      </ion-row>
+    </form>
+
+    <br /><mat-error *ngIf="httpError" class="error-http">{{ httpError }}</mat-error>
+      <button
+        block="block"
+        color="becks"
+        (click)="saveUser()"
+        class="becks-btn-primary button-width"
+        [ngClass]="{
+          'button-disabled': userRegisterForm.invalid || !captchaStatus
+        }"
+        data-qadp="send-button-form"
+      >
+        <span>Guardar</span>
+      </button>
+  </div>
+</section>

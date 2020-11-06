@@ -271,14 +271,20 @@
           id="selectedFile"
           style="display: none"
           type="file"
-          (change)="loadImageFromDevice($event)"
+          (change)="loadImageFromDesktop($event)"
           id="file-input"
           accept="image/png, image/jpeg"
           #hiddenfileinput1
         />
           <p>Subir imagen desktop</p>
           <button class="btn-upload" (click)="hiddenfileinput1.click()">
-            <span class="upload-icon"> </span>
+            <span class="upload-icon" *ngIf="!this.loadedFileDes.length > 0"> </span>
+            <span *ngIf=" this.loadedFileDes.length > 0">
+              {{ this.loadedFileDes}}
+            <button (click)="clear('D')" class="btn-x">
+              <span class="x-icon"> </span>
+            </button>
+            </span>
           </button>
         </div>
         <div style="margin-left: 30px;">
@@ -286,14 +292,20 @@
           id="selectedFile"
           style="display: none"
           type="file"
-          (change)="loadImageFromDevice($event)"
+          (change)="loadImageFromMobile($event)"
           id="file-input"
           accept="image/png, image/jpeg"
           #hiddenfileinput2
         />
           <p>Subir imagen mobile</p>
           <button class="btn-upload" (click)="hiddenfileinput2.click()">
-            <span class="upload-icon"> </span>
+            <span class="upload-icon" *ngIf="!this.loadedFileMob.length > 0"> </span>
+            <span *ngIf=" this.loadedFileMob.length > 0">
+              {{ this.loadedFileMob}}
+              <button (click)="clear('M')" class="btn-x">
+                <span class="x-icon"> </span>
+              </button>
+            </span>
           </button>
         </div>
       </ion-row>

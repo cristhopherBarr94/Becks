@@ -36,7 +36,8 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
-
+  public loadedFileMob:string = "";
+  public loadedFileDes:string = "";
   public hideStk: boolean=true;
   public checked: boolean=false;
   public hidepath: boolean=true;
@@ -259,11 +260,10 @@ export class EditFormComponent implements OnInit,AfterViewInit {
 
 
   
-  loadImageFromDevice(event) {
+  loadImageFromDesktop(event) {
     var files = event.target.files;
     var img = new Image();
     img = files[0];
-    console.log(img);
     this.resizeImage(files[0], 720, 480).then((blob) => {
       if (files && blob) {
         var reader = new FileReader();
@@ -272,23 +272,38 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       }
     });
     this.ui.dismissModal()
+    this.loadedFileDes =img.name;
   }
-
   
-  _handleReaderLoaded(readerEvt) {
-    var binaryString = readerEvt.target.result;
-    this.photo = btoa(binaryString);
-    this.ui.showLoading();
-    this.httpService
-      .patch(environment.serverUrl + environment, {
-        photo: this.photo,
-      })
-      .subscribe((response: any) => {
-        this.adminSvc.getData();
-        this.adminSvc.editing();
-        this.ui.dismissLoading();
-      });
+  loadImageFromMobile(event) {
+    var files = event.target.files;
+    var img = new Image();
+    img = files[0];
+    this.resizeImage(files[0], 720, 480).then((blob) => {
+      if (files && blob) {
+        var reader = new FileReader();
+        // reader.onload = this._handleReaderLoaded.bind(this);
+        reader.readAsBinaryString(blob);
+      }
+    });
+    this.ui.dismissModal()
+    this.loadedFileMob =img.name;
   }
+  
+  // _handleReaderLoaded(readerEvt) {
+  //   var binaryString = readerEvt.target.result;
+  //   this.photo = btoa(binaryString);
+  //   this.ui.showLoading();
+  //   this.httpService
+  //     .patch(environment.serverUrl + environment, {
+  //       photo: this.photo,
+  //     })
+  //     .subscribe((response: any) => {
+  //       this.adminSvc.getData();
+  //       this.adminSvc.editing();
+  //       this.ui.dismissLoading();
+  //     });
+  // }
 
 
   resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
@@ -318,9 +333,11 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         canvas.toBlob(resolve, file.type);
       };
       image.onerror = reject;
-      console.log(image.src);
+      
     });
   }
+
+  
   closeForm() {
     this.parentFunc();
   }
@@ -336,5 +353,13 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
   unCheck(){
   this.checked=!this.checked;
+  }
+
+  clear(tg) {
+    if(tg=="D") {
+      this.loadedFileDes="";
+    }if(tg=="M") {
+      this.loadedFileMob="";
+    }
   }
 }

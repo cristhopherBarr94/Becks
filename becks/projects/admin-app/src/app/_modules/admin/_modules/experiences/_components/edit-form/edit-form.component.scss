@@ -110,6 +110,15 @@
   height: 68.13px;
   background: #222222;
   border-radius: 4px;
+  font-family: "Helvetica LT St" d;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  text-transform: uppercase;
+
+  color: #038259;
 }
 .padding-form {
   padding: 20px 40.5px;
@@ -257,4 +266,15 @@ textarea {
 }
 .margin-left {
   margin-left: 55px;
+}
+.btn-x {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  background: transparent;
+  span {
+    margin: 0px !important;
+    top: 2px;
+    left: 2px;
+  }
 }

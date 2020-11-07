@@ -45,7 +45,9 @@
             [max]="maxDate" 
             [disabled]="disabled"
             formControlName="dateStart">
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]="picker1">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
           <ngx-mat-datetime-picker #picker1 [showSpinners]="true" [showSeconds]="true"
              [touchUi]="false" [color]="black"
             [enableMeridian]="enableMeridian" [disableMinute]="false" [hideTime]="hideTime">
@@ -68,7 +70,9 @@
            [min]="minDate" 
            [max]="maxDate" 
            formControlName="dateEnd">
-         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+         <mat-datepicker-toggle matSuffix [for]="picker2">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+         </mat-datepicker-toggle>
          <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="true" 
            [touchUi]="touchUi" [color]="color"
            [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
@@ -117,7 +121,7 @@
             matInput
             (input)="inputValidatorAlphabetical($event)"
               formControlName="descrip"
-              maxlength="150"
+              maxlength="500"
               [(ngModel)]="userRegister.descrip"
               data-qadp="descrip"
               ></textarea>
@@ -211,7 +215,9 @@
                [disabled]="disabled"
                [(ngModel)]="userRegister.dateRelease"
                >
-             <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+             <mat-datepicker-toggle matSuffix [for]="picker3">
+              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+             </mat-datepicker-toggle>
              <ngx-mat-datetime-picker #picker3 [showSpinners]="true" [showSeconds]="true" 
                [touchUi]="touchUi" [color]="color"
                [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">

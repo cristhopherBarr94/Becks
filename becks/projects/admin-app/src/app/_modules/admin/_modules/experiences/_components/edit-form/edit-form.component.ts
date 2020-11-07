@@ -74,7 +74,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       descrip: new FormControl("", [
         Validators.required,
         Validators.minLength(0),
-        Validators.maxLength(150),
+        Validators.maxLength(500),
       ]),
       stock: new FormControl("", [
         Validators.required,

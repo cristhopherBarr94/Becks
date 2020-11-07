@@ -19,6 +19,8 @@ import { User } from 'src/app/_models/User';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
 import { AdminService } from 'src/app/_services/admin.service';
+import { NotifyModalComponent } from 'src/app/_modules/utils/_components/notify-modal/notify-modal.component';
+import { PopUpComponent } from 'src/app/_modules/admin/_components/pop-up/pop-up.component';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -44,6 +46,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public password: string;
   public showError: boolean;
   public photo: any;
+  public title_modal:string ="RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
+  public sub_title_modal:string ="¿DESEAS CANCELAR?";
+  public title_button_modal:string ="CANCELAR";
   @Input() parentFunc:any;
 
   constructor(
@@ -340,6 +345,10 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   
   closeForm() {
     this.parentFunc();
+    this.ui.dismissModal();
+  }
+  closeModal() {
+    this.ui.dismissModal();
   }
 
   hideField(targetHidden,targetStatus){
@@ -361,5 +370,15 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     }if(tg=="M") {
       this.loadedFileMob="";
     }
+  }
+
+  openModal() {
+    this.ui.showModal( PopUpComponent, "modalMessage", true, false, {
+      title: this.title_modal,
+      sub_title: this.sub_title_modal,
+      title_button: this.title_button_modal,
+      Func: this.closeForm.bind(this),
+      FuncAlt: this.closeModal.bind(this),
+    });  
   }
 }

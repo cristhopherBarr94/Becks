@@ -344,7 +344,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
 
   hideField(targetHidden,targetStatus){
     console.log(targetStatus);
-    if(targetHidden == "stk"){
+    if(targetHidden == "stk" || targetHidden == "period"){
       this.hideStk = !this.hideStk;
     }
     else if (targetHidden  == "path") {

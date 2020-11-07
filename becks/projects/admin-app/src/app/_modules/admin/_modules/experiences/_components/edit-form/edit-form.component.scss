@@ -117,8 +117,19 @@
   line-height: 24px;
   letter-spacing: 0.15px;
   text-transform: uppercase;
-
   color: #038259;
+
+  span {
+    margin: 0px !important;
+  }
+  .btn-text {
+    width: 250px;
+    height: auto;
+    max-height: 44px;
+    overflow-y: hidden;
+    overflow-wrap: break-word;
+    padding: 0 30px;
+  }
 }
 .padding-form {
   padding: 20px 40.5px;
@@ -272,6 +283,8 @@ textarea {
   width: 15px;
   height: 15px;
   background: transparent;
+  margin-top: auto;
+  margin-bottom: auto;
   span {
     margin: 0px !important;
     top: 2px;

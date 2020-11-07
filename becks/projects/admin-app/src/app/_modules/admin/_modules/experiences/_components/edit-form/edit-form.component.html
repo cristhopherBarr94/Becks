@@ -279,12 +279,14 @@
           <p>Subir imagen desktop</p>
           <button class="btn-upload" (click)="hiddenfileinput1.click()">
             <span class="upload-icon" *ngIf="!this.loadedFileDes.length > 0"> </span>
-            <span *ngIf=" this.loadedFileDes.length > 0">
-              {{ this.loadedFileDes}}
-            <button (click)="clear('D')" class="btn-x">
-              <span class="x-icon"> </span>
-            </button>
-            </span>
+            <ion-row *ngIf="this.loadedFileDes.length > 0">
+              <span class="btn-text">
+                <span>{{ this.loadedFileDes}}</span>
+              </span>
+              <button (click)="clear('D')" class="btn-x">
+                <span class="x-icon"> </span>
+              </button>
+            </ion-row>
           </button>
         </div>
         <div style="margin-left: 30px;">
@@ -300,12 +302,14 @@
           <p>Subir imagen mobile</p>
           <button class="btn-upload" (click)="hiddenfileinput2.click()">
             <span class="upload-icon" *ngIf="!this.loadedFileMob.length > 0"> </span>
-            <span *ngIf=" this.loadedFileMob.length > 0">
-              {{ this.loadedFileMob}}
+            <ion-row *ngIf=" this.loadedFileMob.length > 0">
+              <span class="btn-text">
+                <span>{{ this.loadedFileMob}}</span>
+              </span>
               <button (click)="clear('M')" class="btn-x">
                 <span class="x-icon"> </span>
               </button>
-            </span>
+            </ion-row>
           </button>
         </div>
       </ion-row>

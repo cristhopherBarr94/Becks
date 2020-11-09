@@ -22,6 +22,7 @@
               maxlength="20"
               [(ngModel)]="userRegister.name"
               data-qadp="name"
+              required
             />
             <mat-error *ngIf="userEditForm.controls.name.touched &&  userEditForm.controls.name.errors">
               *Has ingresado un dato inválido
@@ -37,14 +38,16 @@
             class="smallInput"
             [ngClass]="getClassInput(userEditForm.controls.dateStart)"
             >
-            <mat-label>Fecha inicial de la publicación</mat-label>
+            <mat-label>Fecha y hora inicial de la publicación</mat-label>
             <input 
             matInput 
             [ngxMatDatetimePicker]="picker1" 
             [min]="minDate" 
             [max]="maxDate" 
             [disabled]="disabled"
-            formControlName="dateStart">
+            formControlName="dateStart"
+            required
+            >
           <mat-datepicker-toggle matSuffix [for]="picker1">
           <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
           </mat-datepicker-toggle>
@@ -63,13 +66,15 @@
            class="smallInput"
            [ngClass]="getClassInput(userEditForm.controls.dateEnd)"
            >
-           <mat-label>Fecha final de la publicación</mat-label>
+           <mat-label>Fecha y hora final de la publicación</mat-label>
            <input 
            matInput 
            [ngxMatDatetimePicker]="picker2" 
            [min]="minDate" 
            [max]="maxDate" 
-           formControlName="dateEnd">
+           formControlName="dateEnd"
+           required
+           >
          <mat-datepicker-toggle matSuffix [for]="picker2">
           <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
          </mat-datepicker-toggle>
@@ -92,15 +97,16 @@
             class="fullInput"
             [ngClass]="getClassInput(userEditForm.controls.location)"
           >
-            <mat-label>Agregar Ubicación</mat-label>
+            <mat-label>Ubicación</mat-label>
             
             <input
               matInput
               (input)="inputValidatorAlphabetical($event)"
               formControlName="location"
-              maxlength="20"
+              maxlength="100"
               [(ngModel)]="userRegister.location"
               data-qadp="location"
+              required
             />
             <mat-error *ngIf="userEditForm.controls.location.touched &&  userEditForm.controls.location.errors">
               *Has ingresado un dato inválido
@@ -124,6 +130,7 @@
               maxlength="500"
               [(ngModel)]="userRegister.descrip"
               data-qadp="descrip"
+              required
               ></textarea>
             <mat-error *ngIf="userEditForm.controls.descrip.touched &&  userEditForm.controls.descrip.errors">
               *Has ingresado un dato inválido
@@ -131,49 +138,14 @@
           </mat-form-field>
           </ion-row>
          
-          
-          <ion-row>
-            <span class="stock-icon"> </span>
-            <div>
-              <ion-row class="space-between">
-                <p>
-                  ¿La  experiencia requiere stock  o inventario?
-                </p>
-                <mat-slide-toggle [checked]="this.hideStk" name="stk" (change)="hideField($event.source.name,$event.source._checked)" ></mat-slide-toggle>
-              </ion-row>
-
-              <mat-form-field   
-              *ngIf="this.hideStk"
-              appearance="fill"
-              floatLabel="auto"
-              class="smallInput"
-              [ngClass]="getClassInput(userEditForm.controls.stock)"
-            >
-              <mat-label>Cantidad</mat-label>
-              
-              <input
-                matInput
-                (input)="inputValidatorNumeric($event)"
-                formControlName="stock"
-                maxlength="6"
-                [(ngModel)]="userRegister.stock"
-                data-qadp="stock"
-              />
-              <mat-error *ngIf="userEditForm.controls.stock.touched &&  userEditForm.controls.stock.errors">
-                *Has ingresado un dato inválido
-              </mat-error>
-            </mat-form-field>
-            </div>
-          </ion-row>
-        
           <ion-row>
             <span class="time-icon"> </span>
             <div>
               <ion-row class="space-between">
                 <p>
-                  ¿La  experiencia requiere Periodicidad?
+                  ¿La  experiencia requiere stock  o inventario?
                 </p>
-                <mat-slide-toggle  [checked]="!this.hideStk" name="period" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
+                <mat-slide-toggle  [checked]="!this.hideStk" name="stk" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
               </ion-row>
               <ion-row>
                 <mat-form-field
@@ -181,19 +153,19 @@
                 appearance="fill"
                 floatLabel="auto"
                 class="smallInput"
-                [ngClass]="getClassInput(userEditForm.controls.period)"
+                [ngClass]="getClassInputSelect(userEditForm.controls.stock)"
               >
                 <mat-label>Cupos</mat-label>
                 
                 <input
                   matInput
                   (input)="inputValidatorNumeric($event)"
-                  formControlName="period"
+                  formControlName="stock"
                   maxlength="6"
-                  [(ngModel)]="userRegister.period"
-                  data-qadp="period"
+                  [(ngModel)]="userRegister.stock"
+                  data-qadp="stock"
                 />
-                <mat-error *ngIf="userEditForm.controls.period.touched &&  userEditForm.controls.period.errors">
+                <mat-error *ngIf="userEditForm.controls.stock.touched &&  userEditForm.controls.stock.errors">
                   *Has ingresado un dato inválido
                 </mat-error>
               </mat-form-field>
@@ -203,7 +175,7 @@
                appearance="fill"
                floatLabel="auto"
                class="smallInput"
-               [ngClass]="getClassInput(userEditForm.controls.dateRelease)"
+               [ngClass]="getClassInputSelect(userEditForm.controls.dateRelease)"
                >
                <mat-label>Fecha de liberación</mat-label>
                <input 
@@ -232,7 +204,7 @@
           </ion-row>
 
           <ion-row>
-            <span class="location-icon"> </span>
+            <span class="path-icon"> </span>
               <div>
                 <ion-row class="space-between">
                   <p>
@@ -247,7 +219,7 @@
               appearance="fill"
               floatLabel="auto"
               class="fullInput"
-              [ngClass]="getClassInput(userEditForm.controls.path)"
+              [ngClass]="getClassInputSelect(userEditForm.controls.path)"
             >
               <mat-label>URL</mat-label>
               
@@ -262,10 +234,27 @@
                 *Has ingresado un dato inválido
               </mat-error>
             </mat-form-field>
+
             <ion-row class="space-around"    *ngIf="!this.hidepath">
-              <mat-checkbox [checked]="!this.checked" (change)="unCheck()"></mat-checkbox> <p>Contenido embebido dentro de la APP</p>
-              <mat-checkbox [checked]="this.checked" (change)="unCheck()"></mat-checkbox> <p>Enlace o link externo (dirige a otra página)</p>
-            </ion-row>      
+              <mat-checkbox 
+              id="mat-checkbox-inside"
+              [checked]="!this.checked" 
+              (change)="unCheck($event.checked)"
+
+              >
+            </mat-checkbox>
+              
+             <p>Contenido embebido dentro de la APP</p>
+              <mat-checkbox 
+              id="mat-checkbox-outside"
+              [checked]="this.checked" 
+              (change)="unCheck($event.checked)"
+              
+              >
+            </mat-checkbox> 
+            <p>Enlace o link externo (dirige a otra página)</p>
+   
+            </ion-row>   
           </div>
           </ion-row>
 
@@ -277,12 +266,12 @@
           id="selectedFile"
           style="display: none"
           type="file"
-          (change)="loadImageFromDesktop($event)"
+          (change)="loadImage($event,'des')"
           id="file-input"
           accept="image/png, image/jpeg"
           #hiddenfileinput1
         />
-          <p>Subir imagen desktop</p>
+          <p>Subir imagen desktop*</p>
           <button class="btn-upload" (click)="hiddenfileinput1.click()">
             <span class="upload-icon" *ngIf="!this.loadedFileDes.length > 0"> </span>
             <ion-row *ngIf="this.loadedFileDes.length > 0">
@@ -300,12 +289,12 @@
           id="selectedFile"
           style="display: none"
           type="file"
-          (change)="loadImageFromMobile($event)"
+          (change)="loadImage($event,'mob')"
           id="file-input"
           accept="image/png, image/jpeg"
           #hiddenfileinput2
         />
-          <p>Subir imagen mobile</p>
+          <p>Subir imagen mobile*</p>
           <button class="btn-upload" (click)="hiddenfileinput2.click()">
             <span class="upload-icon" *ngIf="!this.loadedFileMob.length > 0"> </span>
             <ion-row *ngIf=" this.loadedFileMob.length > 0">
@@ -322,6 +311,9 @@
       
         </div>
       </ion-row>
+      <mat-error style="margin-left: 50px;"  *ngIf=" showError && loadedFileMob.length == 0 || showError && loadedFileDes.length == 0">
+        *Debes subir una imágen válida
+      </mat-error>
     </form>
 
     <br /><mat-error *ngIf="httpError" class="error-http">{{ httpError }}</mat-error>
@@ -333,7 +325,9 @@
       (click)="saveUser()"
       class="becks-btn-primary button-width"
       [ngClass]="{
-        'button-disabled': userEditForm.invalid
+        'button-disabled': userEditForm.invalid || 
+        this.loadedFileDes.length == 0  || 
+        this.loadedFileMob.length == 0
       }"
       data-qadp="send-button-form"
     >

@@ -19,7 +19,6 @@ import { User } from 'src/app/_models/User';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
 import { AdminService } from 'src/app/_services/admin.service';
-import { NotifyModalComponent } from 'src/app/_modules/utils/_components/notify-modal/notify-modal.component';
 import { PopUpComponent } from 'src/app/_modules/admin/_components/pop-up/pop-up.component';
 declare global {
   interface Window {
@@ -40,11 +39,11 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public httpError: string;
   public loadedFileMob:string = "";
   public loadedFileDes:string = "";
-  public hideStk: boolean=true;
-  public checked: boolean=false;
-  public hidepath: boolean=true;
+  public hideStk: boolean = true;
+  public checked: boolean = false;
+  public hidepath: boolean = true;
   public password: string;
-  public showError: boolean;
+  public showError: boolean = false;
   public photo: any;
   public title_modal:string ="RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
   public sub_title_modal:string ="¿DESEAS CANCELAR?";
@@ -63,11 +62,12 @@ export class EditFormComponent implements OnInit,AfterViewInit {
 
   ngOnInit(): void {
     this.initforms();
+    console.log(this.userEditForm.controls.stock.errors);
+    console.log(this.userEditForm.controls.path.errors);
+    console.log(this.userEditForm.controls.dateRelease.errors);
   }
 
-  ngAfterViewInit(): void {
-
-  }
+  ngAfterViewInit(): void { }
 
   initforms() {
     this.userEditForm = this.formBuilder.group({
@@ -81,35 +81,30 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         Validators.minLength(0),
         Validators.maxLength(500),
       ]),
-      stock: new FormControl("", [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(6),
-      ]),
-      period: new FormControl("", [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(6),
-      ]),
       location: new FormControl("", [
         Validators.required,
         Validators.minLength(0),
-        Validators.maxLength(10),
+        Validators.maxLength(100),
       ]),
-      dateEnd: new FormControl(null, Validators.required),
-      dateStart: new FormControl(null, Validators.required),
-      dateRelease: new FormControl(null, Validators.required),
+      stock: new FormControl("", [
+        Validators.minLength(1),
+        Validators.maxLength(60),
+      ]),
       path: new FormControl("", [
-        Validators.required,
         Validators.minLength(4),
         Validators.maxLength(150),
       ]),
+      dateEnd: new FormControl(null, Validators.required),
+      dateStart: new FormControl(null, Validators.required),
+      dateRelease: new FormControl(null,null),
+      insideCheck: new FormControl(null, null),
+      outsideCheck: new FormControl(null, null),
     });
   }
 
   saveUser(): void {
 
-    if ( this.userEditForm.invalid) {
+    if ( this.userEditForm.invalid || this.loadedFileDes.length == 0 || this.loadedFileMob.length == 0  ) {
       this.showError = true;
       (<any>Object).values(this.userEditForm.controls).forEach(control => {
         control.markAsTouched();
@@ -118,10 +113,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     }
 
     this.ui.showLoading();
-    this.restartCaptcha = true;
-    this.showError = false;
-    const email256 = SHA256(this.userRegister.email).toString();
-    this.userRegister.type_id = "CC";
     this.httpService
       .post(
         environment.serverUrl + environment,
@@ -131,12 +122,12 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         (res: any) => {
           try {
             if ( res.status >= 200 && res.status < 300 ) {
-                window.dataLayer.push({
-                  event: "trackEvent",
-                  eventCategory: "fase 3",
-                  eventAction: "finalizar fase 3",
-                  eventLabel: email256,
-                });
+                // window.dataLayer.push({
+                //   event: "trackEvent",
+                //   eventCategory: "fase 3",
+                //   eventAction: "finalizar fase 3",
+                //   eventLabel: email256,
+                // });
                 // window.location.reload();
                 // this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
                 //   title: "Bienvenido a Beck's",
@@ -191,7 +182,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         },
         (err) => {
           this.showError = true;
-          this.restartCaptcha = false;
           if (err.error) {
             this.httpError = err.error.message;
           }
@@ -208,9 +198,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   public inputValidatorAlphabetical(event: any) {
-    const pattern = /^[a-zA-ZnÑ ]*$/;
+    const pattern = /^[a-zA-ZnÑ,.!: ]*$/;
     if (!pattern.test(event.target.value)) {
-      event.target.value = event.target.value.replace(/[^a-zA-ZnÑ ]/g, "");
+      event.target.value = event.target.value.replace(/[^a-zA-ZnÑ,.!: ]/g, "");
     }
   }
 
@@ -233,7 +223,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
 
   public getClassInputSelect(item: any): string {
     let classreturn = "select-becks";
-    if (item.valid) {
+    if (item.valid && item.value > 0) {
       classreturn = "select-becks-ok";
     } else if (item.touched) {
       classreturn = "select-becks-error";
@@ -253,63 +243,37 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       return "Máximo " + max;
     } else if (item.hasError("minlength")) {
       return "Mínimo " + min;
-    } else if (
-      item.hasError("email") ||
-      (item.hasError("pattern") && name === "email")
-    ) {
-      return "Ingrese una dirección de correo electrónico válida";
-    } else if (item.hasError("pattern")) {
-      return "Ingrese solo letras";
+    } 
+  }
+
+
+  
+  loadImage(event,myPlatform) {
+    var files = event.target.files;
+    var img = new Image();
+    img = files[0];
+    if(myPlatform == "des"){
+      this.resizeImage(files[0], 1280, 720).then((blob) => {
+        if (files && blob) {
+          var reader = new FileReader();
+          // reader.onload = this._handleReaderLoaded.bind(this);
+          reader.readAsBinaryString(blob);
+        }
+      });
+      this.loadedFileDes =img.name;
+    }else if(myPlatform == "mob") {
+      this.resizeImage(files[0], 720, 480).then((blob) => {
+        if (files && blob) {
+          var reader = new FileReader();
+          // reader.onload = this._handleReaderLoaded.bind(this);
+          reader.readAsBinaryString(blob);
+        }
+      });
+      this.loadedFileMob =img.name;
     }
-  }
-
-
-  
-  loadImageFromDesktop(event) {
-    var files = event.target.files;
-    var img = new Image();
-    img = files[0];
-    this.resizeImage(files[0], 720, 480).then((blob) => {
-      if (files && blob) {
-        var reader = new FileReader();
-        // reader.onload = this._handleReaderLoaded.bind(this);
-        reader.readAsBinaryString(blob);
-      }
-    });
     this.ui.dismissModal()
-    this.loadedFileDes =img.name;
+ 
   }
-  
-  loadImageFromMobile(event) {
-    var files = event.target.files;
-    var img = new Image();
-    img = files[0];
-    this.resizeImage(files[0], 720, 480).then((blob) => {
-      if (files && blob) {
-        var reader = new FileReader();
-        // reader.onload = this._handleReaderLoaded.bind(this);
-        reader.readAsBinaryString(blob);
-      }
-    });
-    this.ui.dismissModal()
-    this.loadedFileMob =img.name;
-  }
-  
-  // _handleReaderLoaded(readerEvt) {
-  //   var binaryString = readerEvt.target.result;
-  //   this.photo = btoa(binaryString);
-  //   this.ui.showLoading();
-  //   this.httpService
-  //     .patch(environment.serverUrl + environment, {
-  //       photo: this.photo,
-  //     })
-  //     .subscribe((response: any) => {
-  //       this.adminSvc.getData();
-  //       this.adminSvc.editing();
-  //       this.ui.dismissLoading();
-  //     });
-  // }
-
 
   resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
     return new Promise((resolve, reject) => {
@@ -337,8 +301,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         context.drawImage(image, 0, 0, newWidth, newHeight);
         canvas.toBlob(resolve, file.type);
       };
-      image.onerror = reject;
-      
+      image.onerror = reject;    
     });
   }
 
@@ -352,15 +315,16 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   hideField(targetHidden,targetStatus){
-    console.log(targetStatus);
-    if(targetHidden == "stk" || targetHidden == "period"){
+    console.log(targetHidden,targetStatus);
+
+    if(targetHidden == "stk"){
       this.hideStk = !this.hideStk;
     }
     else if (targetHidden  == "path") {
       this.hidepath = ! this.hidepath;
     }
   }
-  unCheck(){
+  unCheck(chk){
   this.checked=!this.checked;
   }
 

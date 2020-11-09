@@ -1,30 +1,33 @@
-@media (min-width: 769px) {
-  .content-flex-all-center {
-    height: auto;
-    justify-content: center;
+.content-flex-all-center {
+  height: auto;
+  justify-content: center;
 
-    .general-row {
-      flex-direction: row;
+  .general-row {
+    flex-direction: row;
+    width: 800px;
+
+    .form-section {
+      padding: 5px 10px 20px 10px;
       width: 800px;
+      flex-direction: column;
+      justify-content: left;
 
-      .form-section {
-        padding: 20px 10px;
-        width: 800px;
-        flex-direction: column;
-        justify-content: left;
-
-        .fullInput {
-          width: 630px;
-        }
-        .middleInput {
-          width: 512px;
-        }
-        .smallInput {
-          width: 250px;
-        }
-        span {
-          margin: 10px 30px auto auto;
-        }
+      .fullInput {
+        width: 630px;
+      }
+      .middleInput {
+        width: 512px;
+      }
+      .smallInput {
+        width: 250px;
+      }
+      span {
+        margin: 0px 30px auto auto;
+      }
+    }
+    .input-becks-ok {
+      ::ng-deep mat-label {
+        color: #62f8b2 !important;
       }
     }
     .section1 {
@@ -70,7 +73,7 @@
   }
 }
 .padding-form {
-  padding: 40.5px 20px 160px 20px;
+  padding: 10px 20px 160px 20px;
   width: 90% !important;
   background: #161616;
   margin-top: 30px;
@@ -91,9 +94,9 @@
 ::ng-deep .mat-form-field-wrapper {
   padding-bottom: 10px;
 }
-::ng-deep mat-label {
-  color: #6f6f6f;
-}
+// ::ng-deep mat-label {
+//   color: #6f6f6f;
+// }
 ::ng-deep.mat-calendar-body-label {
   display: none;
 }
@@ -156,7 +159,7 @@ textarea {
 .space-around {
   width: 630px;
   justify-content: space-around;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 ::ng-deep mat-slide-toggle {
   margin-left: 50px;

@@ -353,4 +353,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       FuncAlt: this.closeModal.bind(this),
     });  
   }
+
+  
 }

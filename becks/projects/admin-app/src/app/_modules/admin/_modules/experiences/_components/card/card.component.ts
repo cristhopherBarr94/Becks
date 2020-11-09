@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -11,6 +11,9 @@ export class CardComponent implements OnInit {
   public experiencesAct: any = [1,2,3];
   public experiencesInv: any = [1,2,3,4,5,6];
   private expSubs: Subscription;
+
+  @Input() editFunc:any;
+  
   constructor(private router: Router,
     ) { 
      
@@ -24,4 +27,8 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit() {}
+   
+  openEdit() {
+    this.editFunc();
+  }
 }

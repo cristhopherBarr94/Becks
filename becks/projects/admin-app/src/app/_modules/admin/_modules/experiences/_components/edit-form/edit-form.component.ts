@@ -49,6 +49,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public sub_title_modal:string ="¿DESEAS CANCELAR?";
   public title_button_modal:string ="CANCELAR";
   @Input() parentFunc:any;
+  @Input() preload:any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,9 +63,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
 
   ngOnInit(): void {
     this.initforms();
-    console.log(this.userEditForm.controls.stock.errors);
-    console.log(this.userEditForm.controls.path.errors);
-    console.log(this.userEditForm.controls.dateRelease.errors);
   }
 
   ngAfterViewInit(): void { }
@@ -88,7 +86,11 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       ]),
       stock: new FormControl("", [
         Validators.minLength(1),
-        Validators.maxLength(60),
+        Validators.maxLength(10),
+      ]), 
+      period: new FormControl("", [
+        Validators.minLength(1),
+        Validators.maxLength(10),
       ]),
       path: new FormControl("", [
         Validators.minLength(4),
@@ -137,11 +139,11 @@ export class EditFormComponent implements OnInit,AfterViewInit {
                 const formData = new FormData();
                 try {
                   this.restartCaptcha = true;
-                  formData.append("username", this.userEditForm.controls.email.value.trim());
-                  formData.append("password", this.userEditForm.controls.password.value.trim());
-                  formData.append("grant_type", environment.rest.grant_type);
-                  formData.append("client_id", environment.rest.client_id);
-                  formData.append("client_secret", environment.rest.client_secret);
+                  formData.append("name", this.userEditForm.controls.email.value.trim());
+                  formData.append("date_1", this.userEditForm.controls.password.value.trim());
+                  formData.append("date_2", environment.rest.grant_type);
+                  formData.append("location", environment.rest.client_id);
+                  formData.append("description", environment.rest.client_secret);
                   formData.append("scope", environment.rest.scope);
                 } catch (error) {
                   return;
@@ -198,9 +200,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   public inputValidatorAlphabetical(event: any) {
-    const pattern = /^[a-zA-ZnÑ,.!: ]*$/;
+    const pattern = /^[a-zA-ZnÑ,.!:á ]*$/;
     if (!pattern.test(event.target.value)) {
-      event.target.value = event.target.value.replace(/[^a-zA-ZnÑ,.!: ]/g, "");
+      event.target.value = event.target.value.replace(/[^a-zA-ZnÑ,.!:á ]/g, "");
     }
   }
 
@@ -221,7 +223,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     return classreturn;
   }
 
-  public getClassInputSelect(item: any): string {
+  public getClassInputNotReq(item: any): string {
     let classreturn = "select-becks";
     if (item.valid && item.value > 0) {
       classreturn = "select-becks-ok";
@@ -243,7 +245,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       return "Máximo " + max;
     } else if (item.hasError("minlength")) {
       return "Mínimo " + min;
-    } 
+    } else {
+      return "Ingrese un valor";
+    }
   }
 
 
@@ -258,18 +262,22 @@ export class EditFormComponent implements OnInit,AfterViewInit {
           var reader = new FileReader();
           // reader.onload = this._handleReaderLoaded.bind(this);
           reader.readAsBinaryString(blob);
+          this.loadedFileDes =img.name;
+        }else  {
+          console.log("error de subida de imagen");
         }
       });
-      this.loadedFileDes =img.name;
     }else if(myPlatform == "mob") {
       this.resizeImage(files[0], 720, 480).then((blob) => {
         if (files && blob) {
           var reader = new FileReader();
           // reader.onload = this._handleReaderLoaded.bind(this);
           reader.readAsBinaryString(blob);
+          this.loadedFileMob =img.name; 
+        }else  {
+          console.log("error de subida de imagen");
         }
       });
-      this.loadedFileMob =img.name;
     }
     this.ui.dismissModal()
  
@@ -308,7 +316,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   
   closeForm() {
     this.parentFunc();
-    this.ui.dismissModal();
+    this.closeModal();
   }
   closeModal() {
     this.ui.dismissModal();

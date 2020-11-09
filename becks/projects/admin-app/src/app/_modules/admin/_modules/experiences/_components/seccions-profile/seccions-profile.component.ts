@@ -12,7 +12,9 @@ export class SeccionsProfileComponent implements OnInit {
   public size: string;
   @Input() isActive : boolean
   public  create:boolean =  false;
+  public  onEdit:boolean =  false;
   public Func:any;
+  public Edit:any;
 
   constructor(
     private platform: Platform,
@@ -28,7 +30,8 @@ export class SeccionsProfileComponent implements OnInit {
   }
 
   ngOnInit() { 
-    this.Func= this.hideTabs.bind(this);
+    this.Func = this.hideTabs.bind(this);
+    this.Edit = this.editExp.bind(this);
   }
 
   redirectExp() {
@@ -40,5 +43,8 @@ export class SeccionsProfileComponent implements OnInit {
 
   hideTabs() {
     this.create = !this.create;
+  }
+  editExp() {
+    this.onEdit = !this.onEdit;
   }
 }

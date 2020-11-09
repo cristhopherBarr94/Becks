@@ -1,7 +1,6 @@
 <section id="formSection" class="fullSection content-flex-all-center">
   <div class="full-height padding-form">
     <form [formGroup]="userEditForm" autocomplete="off" class="general-row">
-      <ion-row>
         <div class="form-section section1">
          
           <ion-row >
@@ -139,11 +138,47 @@
           </ion-row>
          
           <ion-row>
-            <span class="time-icon"> </span>
+            <span class="stock-icon"> </span>
             <div>
               <ion-row class="space-between">
                 <p>
                   ¿La  experiencia requiere stock  o inventario?
+                </p>
+                <mat-slide-toggle  [checked]="this.hideStk" name="stk" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
+              </ion-row>
+              <ion-row>
+                <mat-form-field
+                *ngIf="this.hideStk"
+                appearance="fill"
+                floatLabel="auto"
+                class="smallInput"
+                [ngClass]="getClassInputNotReq(userEditForm.controls.stock)"
+              >
+                <mat-label>Cupos</mat-label>
+                
+                <input
+                  matInput
+                  (input)="inputValidatorNumeric($event)"
+                  formControlName="stock"
+                  maxlength="60"
+                  [(ngModel)]="userRegister.stock"
+                  data-qadp="stock"
+                />
+                <mat-error *ngIf="userEditForm.controls.stock.touched">
+                  *Has ingresado un dato inválido
+                </mat-error>
+              </mat-form-field>
+              </ion-row>
+            </div>
+          </ion-row>
+
+
+          <ion-row>
+            <span class="time-icon"> </span>
+            <div>
+              <ion-row class="space-between">
+                <p>
+                  ¿La experiencia requiere periodicidad?
                 </p>
                 <mat-slide-toggle  [checked]="!this.hideStk" name="stk" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
               </ion-row>
@@ -153,19 +188,20 @@
                 appearance="fill"
                 floatLabel="auto"
                 class="smallInput"
-                [ngClass]="getClassInputSelect(userEditForm.controls.stock)"
+                [ngClass]="getClassInputNotReq(userEditForm.controls.period)"
               >
                 <mat-label>Cupos</mat-label>
                 
                 <input
                   matInput
                   (input)="inputValidatorNumeric($event)"
-                  formControlName="stock"
-                  maxlength="6"
-                  [(ngModel)]="userRegister.stock"
-                  data-qadp="stock"
+                  formControlName="period"
+                  maxlength="60"
+                  minlength="1"
+                  [(ngModel)]="userRegister.period"
+                  data-qadp="period"
                 />
-                <mat-error *ngIf="userEditForm.controls.stock.touched &&  userEditForm.controls.stock.errors">
+                <mat-error *ngIf="userEditForm.controls.period.touched &&  userEditForm.controls.period.errors">
                   *Has ingresado un dato inválido
                 </mat-error>
               </mat-form-field>
@@ -175,7 +211,7 @@
                appearance="fill"
                floatLabel="auto"
                class="smallInput"
-               [ngClass]="getClassInputSelect(userEditForm.controls.dateRelease)"
+               [ngClass]="getClassInputNotReq(userEditForm.controls.dateRelease)"
                >
                <mat-label>Fecha de liberación</mat-label>
                <input 
@@ -194,7 +230,7 @@
                [touchUi]="touchUi" [color]="color"
                [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
              </ngx-mat-datetime-picker>
-             <mat-error *ngIf="userEditForm.controls.dateRelease.touched &&  userEditForm.controls.dateRelease.errors">
+             <mat-error *ngIf="userEditForm.controls.dateRelease.touched">
               *Has ingresado un dato inválido
             </mat-error>
               </mat-form-field>
@@ -219,7 +255,7 @@
               appearance="fill"
               floatLabel="auto"
               class="fullInput"
-              [ngClass]="getClassInputSelect(userEditForm.controls.path)"
+              [ngClass]="getClassInputNotReq(userEditForm.controls.path)"
             >
               <mat-label>URL</mat-label>
               
@@ -258,62 +294,66 @@
           </div>
           </ion-row>
 
-       
+          <ion-row>
+            <span class="img-icon"> </span>
+            <p>
+              Cargar imagen de la experiencia
+            </p>
+            <ion-row class="margin-left">
+              <div>
+              <input
+              id="selectedFile"
+              style="display: none"
+              type="file"
+              (change)="loadImage($event,'des')"
+              id="file-input"
+              accept="image/png, image/jpeg"
+              #hiddenfileinput1
+            />
+              <p>Subir imagen desktop*</p>
+              <button class="btn-upload" (click)="hiddenfileinput1.click()">
+                <span class="upload-icon" *ngIf="!this.loadedFileDes.length > 0"> </span>
+                <ion-row *ngIf="this.loadedFileDes.length > 0">
+                  <span class="btn-text">
+                    <span>{{ this.loadedFileDes}}</span>
+                  </span>
+                  <button (click)="clear('D')" class="btn-x">
+                    <span class="x-icon"> </span>
+                  </button>
+                </ion-row>
+              </button>
+             </div>
+            <div style="margin-left: 30px;">
+              <input
+              id="selectedFile"
+              style="display: none"
+              type="file"
+              (change)="loadImage($event,'mob')"
+              id="file-input"
+              accept="image/png, image/jpeg"
+              #hiddenfileinput2
+            />
+              <p>Subir imagen mobile*</p>
+              <button class="btn-upload" (click)="hiddenfileinput2.click()">
+                <span class="time-icon" *ngIf="this.loadedFileMob.length == null"> </span>
+                <span class="upload-icon" *ngIf="!this.loadedFileMob.length > 0"> </span>
+                <ion-row *ngIf=" this.loadedFileMob.length > 0">
+                  <span class="btn-text">
+                    <span>{{ this.loadedFileMob}}</span>
+                  </span>
+                  <button (click)="clear('M')" class="btn-x">
+                    <span class="x-icon"> </span>
+                  </button>
+                </ion-row>
+              </button>
+            </div>
+            </ion-row>
+          </ion-row>
+          <mat-error style="margin-left: 50px;"  *ngIf=" showError && loadedFileMob.length == 0 || showError && loadedFileDes.length == 0">
+            *Debes subir una imágen válida
+          </mat-error>
+        </div>
 
-      <ion-row class="margin-left ">
-        <div>
-          <input
-          id="selectedFile"
-          style="display: none"
-          type="file"
-          (change)="loadImage($event,'des')"
-          id="file-input"
-          accept="image/png, image/jpeg"
-          #hiddenfileinput1
-        />
-          <p>Subir imagen desktop*</p>
-          <button class="btn-upload" (click)="hiddenfileinput1.click()">
-            <span class="upload-icon" *ngIf="!this.loadedFileDes.length > 0"> </span>
-            <ion-row *ngIf="this.loadedFileDes.length > 0">
-              <span class="btn-text">
-                <span>{{ this.loadedFileDes}}</span>
-              </span>
-              <button (click)="clear('D')" class="btn-x">
-                <span class="x-icon"> </span>
-              </button>
-            </ion-row>
-          </button>
-        </div>
-        <div style="margin-left: 30px;">
-          <input
-          id="selectedFile"
-          style="display: none"
-          type="file"
-          (change)="loadImage($event,'mob')"
-          id="file-input"
-          accept="image/png, image/jpeg"
-          #hiddenfileinput2
-        />
-          <p>Subir imagen mobile*</p>
-          <button class="btn-upload" (click)="hiddenfileinput2.click()">
-            <span class="upload-icon" *ngIf="!this.loadedFileMob.length > 0"> </span>
-            <ion-row *ngIf=" this.loadedFileMob.length > 0">
-              <span class="btn-text">
-                <span>{{ this.loadedFileMob}}</span>
-              </span>
-              <button (click)="clear('M')" class="btn-x">
-                <span class="x-icon"> </span>
-              </button>
-            </ion-row>
-          </button>
-        </div>
-      </ion-row>
-      
-        </div>
-      </ion-row>
-      <mat-error style="margin-left: 50px;"  *ngIf=" showError && loadedFileMob.length == 0 || showError && loadedFileDes.length == 0">
-        *Debes subir una imágen válida
-      </mat-error>
     </form>
 
     <br /><mat-error *ngIf="httpError" class="error-http">{{ httpError }}</mat-error>

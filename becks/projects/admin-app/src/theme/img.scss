@@ -237,3 +237,18 @@
     height: 43px !important;
   }
 }
+.trash-icon {
+  background-image: url("../assets/icon/trash-alt.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 13px !important;
+    height: 20px !important;
+  }
+  @media (min-width: 769px) {
+    width: 18px;
+    height: 22px;
+  }
+}

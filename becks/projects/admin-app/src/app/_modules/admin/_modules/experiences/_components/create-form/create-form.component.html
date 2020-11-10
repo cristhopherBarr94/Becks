@@ -193,22 +193,24 @@
                 appearance="fill"
                 floatLabel="auto"
                 class="smallInput"
+                [ngClass]="getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.period)"
               >
                 <mat-label>Cupos</mat-label>
                 
                 <input
+                  id="period{{i}}"
                   matInput
                   (input)="inputValidatorNumeric($event)"
                   formControlName="period"
                   maxlength="60"
                   minlength="1"
-                  [(ngModel)]="userRegister.period"
+        
                   data-qadp="period"
                   required
                 />
-                <!-- <mat-error *ngIf="userEditForm.controls.period.touched &&  userEditForm.controls.period.errors">
+                <mat-error *ngIf="userEditForm.controls.itemRows.controls[i].controls.period.touched &&  userEditForm.controls.itemRows.controls[i].controls.period.errors">
                   *Has ingresado un dato inválido
-                </mat-error> -->
+                </mat-error>
               </mat-form-field>
       
                <mat-form-field
@@ -216,16 +218,18 @@
                appearance="fill"
                floatLabel="auto"
                class="smallInput"
+               [ngClass]=" getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.dateRelease)"
                >
                <mat-label>Fecha de liberación</mat-label>
                <input 
+               id="dateRelease{{i}}"
                matInput 
                formControlName="dateRelease"
                [ngxMatDatetimePicker]="picker3" 
                [min]="minDate" 
                [max]="maxDate" 
                [disabled]="disabled"
-               [(ngModel)]="userRegister.dateRelease"
+              
                required
                >
              <mat-datepicker-toggle matSuffix [for]="picker3">
@@ -235,12 +239,13 @@
                [touchUi]="touchUi" [color]="color"
                [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
              </ngx-mat-datetime-picker>
-             <!-- <mat-error *ngIf="userEditForm.controls.dateRelease.touched">
+            <mat-error *ngIf="userEditForm.controls.itemRows.controls[i].controls.dateRelease.touched &&  userEditForm.controls.itemRows.controls[i].controls.dateRelease.errors">
               *Has ingresado un dato inválido
-            </mat-error> -->
+            </mat-error>
               </mat-form-field>
                <button
-               *ngIf="userEditForm.controls.itemRows.controls.length > 1"
+               *ngIf="!this.hidePed && userEditForm.controls.itemRows.controls.length > 1"
+               class="btn-delete"
                 (click)="deleteField(i)"
                >
                  <span class="trash-icon"> </span>

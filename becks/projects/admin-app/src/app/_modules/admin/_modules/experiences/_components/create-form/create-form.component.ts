@@ -348,6 +348,7 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
   closeForm() {
     this.parentFunc();
     this.closeModal();
+    location.reload();
   }
   closeModal() {
     this.ui.dismissModal();

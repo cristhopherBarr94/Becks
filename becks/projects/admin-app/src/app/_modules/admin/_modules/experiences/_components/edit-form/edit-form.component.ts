@@ -21,6 +21,7 @@ import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
 import { AdminService } from 'src/app/_services/admin.service';
 import { PopUpComponent } from 'src/app/_modules/admin/_components/pop-up/pop-up.component';
+import { Exp } from 'src/app/_models/exp';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -34,7 +35,7 @@ declare global {
 })
 export class EditFormComponent implements OnInit,AfterViewInit {
   public userEditForm: FormGroup;
-  public userRegister: User = new User();
+  public expEditable: Exp = new Exp();
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
@@ -56,6 +57,8 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public sub_title_modal:string;
   public title_button_modal:string;
   public arrPeriod = [];
+  public nameExp:string;
+  public minDate:any;
   @Input() parentFunc:any;
   @Input() preload:any;
 
@@ -70,7 +73,32 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    this.initforms();
+    this.minDate= new Date();
+    this.initforms();    
+    this.expEditable.titleExp = "hola desde experiencia";
+    this.expEditable.dateStart = new Date("11/11/2020,18:00:00");
+    this.expEditable.dateEnd = new Date("11/18/2020,18:00:00");
+    this.expEditable.descrip = "jkllkdsklsdkllkjdjsdjklsdfkljfsdkljlksdfjkldsjflkjsdf";
+    this.expEditable.location = "jkllkdsklsdkllkjdjsdjklsdfkljfsdkljlksdfjkldsjflkjsdf";
+    this.expEditable.stock = "1";
+    this.expEditable.path = "";
+    this.expEditable.period =[null];
+    this.expEditable.checkIn=true;
+    this.loadMob = this.expEditable.imagesExpMob; 
+    this.loadDes = this.expEditable.imagesExp;
+    this.loadedFileMob = this.loadMob;
+    this.loadedFileDes = this.loadDes;
+    if(this.expEditable.stock.length > 0) {
+      this.hideStk = !this.hideStk;
+    }else  if(this.expEditable.path.length > 0) {
+      this.hidepath = !this.hidepath;
+      if(!this.expEditable.checkIn) {
+        this.checked = !this.checked;
+      }
+    }else  if(this.expEditable.period.length > 1) {
+      this.hidePed = false;
+    }
+  
   }
 
   ngAfterViewInit(): void { }
@@ -80,7 +108,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       name: new FormControl("", [
         Validators.required,
         Validators.minLength(4),
-        Validators.maxLength(20),
+        Validators.maxLength(100),
       ]),
       descrip: new FormControl("", [
         Validators.required,
@@ -146,7 +174,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     this.httpService
       .post(
         environment.serverUrl + environment,
-        this.userRegister.toJSON()
+        this.expEditable.toJSON()
       )
       .subscribe(
         (res: any) => {
@@ -348,6 +376,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   closeForm() {
     this.parentFunc();
     this.closeModal();
+    location.reload();
   }
   closeModal() {
     this.ui.dismissModal();

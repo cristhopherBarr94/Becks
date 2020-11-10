@@ -155,6 +155,7 @@
               floatLabel="auto"
               class="smallInput"
               [ngClass]="getClassInputNotReq(userEditForm.controls.stock)"
+              hideRequiredMarker
             >
               <mat-label>Cupos</mat-label>
               
@@ -194,6 +195,7 @@
                 floatLabel="auto"
                 class="smallInput"
                 [ngClass]="getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.period)"
+                hideRequiredMarker
               >
                 <mat-label>Cupos</mat-label>
                 
@@ -219,6 +221,7 @@
                floatLabel="auto"
                class="smallInput"
                [ngClass]=" getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.dateRelease)"
+               hideRequiredMarker
                >
                <mat-label>Fecha de liberación</mat-label>
                <input 
@@ -229,7 +232,7 @@
                [min]="minDate" 
                [max]="maxDate" 
                [disabled]="disabled"
-              
+      
                required
                >
              <mat-datepicker-toggle matSuffix [for]="picker3">
@@ -273,34 +276,14 @@
                   </p>
                   <mat-slide-toggle name="path" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
                 </ion-row>
-<!-- 
-            <mat-form-field
-            *ngIf="!this.hidepath"
-            appearance="fill"
-            floatLabel="auto"
-            class="fullInput"
-            [ngClass]="getClassInputNotReq(userEditForm.controls.path)"
-          >
-            <mat-label>URL</mat-label>
-            
-            <input
-              matInput
-              (input)="inputValidatorAlphaNumeric($event)"
-              formControlName="path"
-              maxlength="150"
-              [(ngModel)]="userRegister.path"
-              data-qadp="path"
-            />
-            <mat-error *ngIf="userEditForm.controls.path.touched &&  userEditForm.controls.path.errors">
-              *Has ingresado un dato inválido
-            </mat-error>
-          </mat-form-field> -->
+
           <mat-form-field
           *ngIf="!this.hidepath"
           appearance="fill"
           floatLabel="auto"
           class="fullInput"
           [ngClass]="getClassInput(userEditForm.controls.path)"
+          hideRequiredMarker
         >
           <mat-label>URL</mat-label>
           

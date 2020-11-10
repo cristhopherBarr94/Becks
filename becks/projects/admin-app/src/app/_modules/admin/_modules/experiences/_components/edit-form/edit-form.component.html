@@ -18,8 +18,8 @@
               matInput
               (input)="inputValidatorAlphabetical($event)"
               formControlName="name"
-              maxlength="20"
-              [(ngModel)]="userRegister.name"
+              maxlength="100"
+              [(ngModel)]="expEditable.titleExp"
               data-qadp="name"
               required
             />
@@ -43,9 +43,9 @@
             matInput 
             [ngxMatDatetimePicker]="picker1" 
             [min]="minDate" 
-            [max]="maxDate" 
-            [disabled]="disabled"
+            [max]="maxDate"
             formControlName="dateStart"
+            [(ngModel)]="expEditable.dateStart" 
             required
             >
           <mat-datepicker-toggle matSuffix [for]="picker1">
@@ -73,6 +73,7 @@
            [min]="minDate" 
            [max]="maxDate" 
            formControlName="dateEnd"
+           [(ngModel)]="expEditable.dateEnd" 
            required
            >
          <mat-datepicker-toggle matSuffix [for]="picker2">
@@ -104,7 +105,7 @@
               (input)="inputValidatorAlphabetical($event)"
               formControlName="location"
               maxlength="100"
-              [(ngModel)]="userRegister.location"
+              [(ngModel)]="expEditable.location"
               data-qadp="location"
               required
             />
@@ -128,7 +129,7 @@
             (input)="inputValidatorAlphabetical($event)"
               formControlName="descrip"
               maxlength="500"
-              [(ngModel)]="userRegister.descrip"
+              [(ngModel)]="expEditable.descrip"
               data-qadp="descrip"
               required
               ></textarea>
@@ -155,6 +156,7 @@
               floatLabel="auto"
               class="smallInput"
               [ngClass]="getClassInputNotReq(userEditForm.controls.stock)"
+              hideRequiredMarker
             >
               <mat-label>Cupos</mat-label>
               
@@ -163,7 +165,7 @@
                 (input)="inputValidatorNumeric($event)"
                 formControlName="stock"
                 maxlength="60"
-                [(ngModel)]="userRegister.stock"
+                [(ngModel)]="expEditable.stock"
                 data-qadp="stock"
                 required
               />
@@ -194,7 +196,8 @@
                 floatLabel="auto"
                 class="smallInput"
                 [ngClass]="getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.period)"
-              >
+                hideRequiredMarker
+                >
                 <mat-label>Cupos</mat-label>
                 
                 <input
@@ -204,7 +207,7 @@
                   formControlName="period"
                   maxlength="60"
                   minlength="1"
-        
+                  [(ngModel)]="expEditable.period" 
                   data-qadp="period"
                   required
                 />
@@ -219,6 +222,7 @@
                floatLabel="auto"
                class="smallInput"
                [ngClass]=" getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.dateRelease)"
+               hideRequiredMarker
                >
                <mat-label>Fecha de liberación</mat-label>
                <input 
@@ -229,7 +233,7 @@
                [min]="minDate" 
                [max]="maxDate" 
                [disabled]="disabled"
-              
+               [(ngModel)]="expEditable.dateRelease[i]" 
                required
                >
              <mat-datepicker-toggle matSuffix [for]="picker3">
@@ -271,36 +275,16 @@
                   <p>
                     ¿La  experiencia requiere un enlace?
                   </p>
-                  <mat-slide-toggle name="path" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
+                  <mat-slide-toggle name="path" [checked]="!this.hidepath" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
                 </ion-row>
-<!-- 
-            <mat-form-field
-            *ngIf="!this.hidepath"
-            appearance="fill"
-            floatLabel="auto"
-            class="fullInput"
-            [ngClass]="getClassInputNotReq(userEditForm.controls.path)"
-          >
-            <mat-label>URL</mat-label>
-            
-            <input
-              matInput
-              (input)="inputValidatorAlphaNumeric($event)"
-              formControlName="path"
-              maxlength="150"
-              [(ngModel)]="userRegister.path"
-              data-qadp="path"
-            />
-            <mat-error *ngIf="userEditForm.controls.path.touched &&  userEditForm.controls.path.errors">
-              *Has ingresado un dato inválido
-            </mat-error>
-          </mat-form-field> -->
+
           <mat-form-field
           *ngIf="!this.hidepath"
           appearance="fill"
           floatLabel="auto"
           class="fullInput"
           [ngClass]="getClassInput(userEditForm.controls.path)"
+          hideRequiredMarker
         >
           <mat-label>URL</mat-label>
           
@@ -309,7 +293,7 @@
             (input)="inputValidatorAlphaNumeric($event)"
             formControlName="path"
             maxlength="100"
-            [(ngModel)]="userRegister.path"
+            [(ngModel)]="expEditable.path"
             data-qadp="path"
             required
           />
@@ -356,6 +340,7 @@
               (change)="loadImage($event,'des')"
               id="file-input"
               accept="image/png, image/jpeg"
+              value="expEditable.imagesExp" 
               #hiddenfileinput1
             />
               <p>Subir imagen desktop*</p>
@@ -380,6 +365,7 @@
               (change)="loadImage($event,'mob')"
               id="file-input"
               accept="image/png, image/jpeg"
+              value="expEditable.imagesExpMob" 
               #hiddenfileinput2
             />
               <p>Subir imagen mobile*</p>

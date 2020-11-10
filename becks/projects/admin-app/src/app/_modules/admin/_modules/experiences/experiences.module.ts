@@ -9,7 +9,6 @@ import { SeccionsProfileComponent } from './_components/seccions-profile/seccion
 import { UtilsModule } from 'src/app/_modules/utils/utils.module';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CardComponent } from './_components/card/card.component';
-import { EditFormComponent } from './_components/edit-form/edit-form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -19,6 +18,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { CreateFormComponent } from './_components/create-form/create-form.component';
+import { EditFormComponent } from './_components/edit-form/edit-form.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     NgxMatNativeDateModule,
     MatSlideToggleModule 
   ],
-  declarations: [ExperiencesPage,SeccionsProfileComponent,CardComponent,EditFormComponent]
+  declarations: [ExperiencesPage,SeccionsProfileComponent,CardComponent,EditFormComponent,CreateFormComponent]
 })
 export class ExperiencesPageModule {}

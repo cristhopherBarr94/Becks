@@ -22,6 +22,6 @@
     agregar experiencias
   </button>
 </div>
-  <edit-form  *ngIf="this.create" [parentFunc]="this.Func"></edit-form>
-  <edit-form  *ngIf="this.onEdit" [parentFunc]="this.Func" [preload]="true"></edit-form>
+  <create-form  *ngIf="this.create" [parentFunc]="this.Func1"></create-form>
+  <edit-form  *ngIf="this.onEdit" [parentFunc]="this.Func2" [preload]="true"></edit-form>
 </section>

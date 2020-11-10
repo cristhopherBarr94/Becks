@@ -52,9 +52,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public photo: any;
   public checkIn:boolean =  !this.checked;
   public checkOut:boolean = this.checked;
-  public title_modal:string ="RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
-  public sub_title_modal:string ="¿DESEAS CANCELAR?";
-  public title_button_modal:string ="CANCELAR";
+  public title_modal:string;
+  public sub_title_modal:string;
+  public title_button_modal:string;
   @Input() parentFunc:any;
   @Input() preload:any;
 
@@ -124,7 +124,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       });
       return;
     }
-
+    this.title_modal ="SE HAN GUARDADO LOS CAMBIOS CON ÉXITO";
+    this.sub_title_modal =" ";
+    this.title_button_modal ="ACEPTAR";
     // console.log(this.userEditForm.controls.name.value);
     // console.log(this.userEditForm.controls.dateStart.value);
     // console.log(this.userEditForm.controls.dateEnd.value);
@@ -148,18 +150,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         (res: any) => {
           try {
             if ( res.status >= 200 && res.status < 300 ) {
-                // window.dataLayer.push({
-                //   event: "trackEvent",
-                //   eventCategory: "fase 3",
-                //   eventAction: "finalizar fase 3",
-                //   eventLabel: email256,
-                // });
-                // window.location.reload();
-                // this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
-                //   title: "Bienvenido a Beck's",
-                //   description: "Ingresando de forma segura",
-                // });
-               
                 const formData = new FormData();
                 try {
                   formData.append("name", this.userEditForm.controls.name.value);
@@ -191,10 +181,10 @@ export class EditFormComponent implements OnInit,AfterViewInit {
                     if ( response.status >= 200 && response.status < 300 ) {
                       this.ui.dismissModal(2500);
                       this.ui.dismissLoading(2500);
-                      this.authService.setAuthenticated(
-                        "Bearer " + response.body.access_token
-                      );
-                      this.router.navigate(["user/exp"], {
+                      // this.authService.setAuthenticated(
+                      //   "Bearer " + response.body.access_token
+                      // );
+                      this.router.navigate(["admin/experiences"], {
                         queryParamsHandling: "preserve",
                       });
                     } else {
@@ -419,6 +409,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   openModal() {
+     this.title_modal ="RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
+     this.sub_title_modal ="¿DESEAS CANCELAR?";
+     this.title_button_modal ="CANCELAR";
     this.ui.showModal( PopUpComponent, "modalMessage", true, false, {
       title: this.title_modal,
       sub_title: this.sub_title_modal,

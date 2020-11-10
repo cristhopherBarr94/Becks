@@ -178,20 +178,21 @@
           <!-- periodicity -->
           <ion-row>
             <span class="time-icon"> </span>
-            <div>
+            <div formArrayName="itemRows">
               <ion-row class="space-between">
                 <p>
                   ¿La experiencia requiere periodicidad?
                 </p>
                 <mat-slide-toggle  [checked]="!this.hidePed" name="ped" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
               </ion-row>
-              <ion-row>
+              <ion-row 
+              *ngFor="let itemrow of userEditForm.controls.itemRows['controls']; let i=index"
+              [formGroupName] = "i">
                 <mat-form-field
                 *ngIf="!this.hidePed"
                 appearance="fill"
                 floatLabel="auto"
                 class="smallInput"
-                [ngClass]="getClassInputNotReq(userEditForm.controls.period)"
               >
                 <mat-label>Cupos</mat-label>
                 
@@ -205,9 +206,9 @@
                   data-qadp="period"
                   required
                 />
-                <mat-error *ngIf="userEditForm.controls.period.touched &&  userEditForm.controls.period.errors">
+                <!-- <mat-error *ngIf="userEditForm.controls.period.touched &&  userEditForm.controls.period.errors">
                   *Has ingresado un dato inválido
-                </mat-error>
+                </mat-error> -->
               </mat-form-field>
       
                <mat-form-field
@@ -215,7 +216,6 @@
                appearance="fill"
                floatLabel="auto"
                class="smallInput"
-               [ngClass]="getClassInputNotReq(userEditForm.controls.dateRelease)"
                >
                <mat-label>Fecha de liberación</mat-label>
                <input 
@@ -235,11 +235,16 @@
                [touchUi]="touchUi" [color]="color"
                [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
              </ngx-mat-datetime-picker>
-             <mat-error *ngIf="userEditForm.controls.dateRelease.touched">
+             <!-- <mat-error *ngIf="userEditForm.controls.dateRelease.touched">
               *Has ingresado un dato inválido
-            </mat-error>
+            </mat-error> -->
               </mat-form-field>
-               
+               <button
+               *ngIf="userEditForm.controls.itemRows.controls.length > 1"
+                (click)="deleteField(i)"
+               >
+                 <span class="trash-icon"> </span>
+               </button>
               </ion-row>
               <ion-row>
                 <button 

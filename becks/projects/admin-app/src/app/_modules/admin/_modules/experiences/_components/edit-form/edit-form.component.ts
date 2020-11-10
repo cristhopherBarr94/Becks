@@ -54,6 +54,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public title_modal:string ="RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
   public sub_title_modal:string ="¿DESEAS CANCELAR?";
   public title_button_modal:string ="CANCELAR";
+  public nameExp;
   @Input() parentFunc:any;
   @Input() preload:any;
 

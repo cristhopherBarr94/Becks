@@ -10,6 +10,7 @@ import {
   FormGroup,
   FormControl,
   Validators,
+  FormArray,
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
@@ -94,19 +95,24 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
         Validators.minLength(1),
         Validators.maxLength(10),
       ]), 
-      period: new FormControl("", [
-        Validators.minLength(1),
-        Validators.maxLength(10),
-      ]),
+      itemRows: this.formBuilder.array([this.initItemRows()]),
       path: new FormControl("", [
         Validators.minLength(4),
         Validators.maxLength(150),
       ]),
       dateEnd: new FormControl(null, Validators.required),
       dateStart: new FormControl(null, Validators.required),
-      dateRelease: new FormControl(null,null),
       insideCheck: new FormControl(null, null),
       outsideCheck: new FormControl(null, null),
+    });
+  }
+  initItemRows (){
+    return this.formBuilder.group ({
+      period: new FormControl("", [
+        Validators.minLength(1),
+        Validators.maxLength(10),
+      ]),
+      dateRelease: new FormControl(null,null),
     });
   }
   saveUser(): void {
@@ -423,9 +429,14 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
     });  
   }
 
-  addField() {
-    console.log(this.userEditForm.controls.stock.touched);
+  get formArr() {
+    return this.userEditForm.get('itemRows') as FormArray;
   }
-
+  addField() {
+    this.formArr.push(this.initItemRows());
+  }
+  deleteField(index:number) {
+    this.formArr.removeAt(index);
+  }
   
 }

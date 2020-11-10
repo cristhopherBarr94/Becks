@@ -22,6 +22,7 @@
               [(ngModel)]="userRegister.name"
               data-qadp="name"
               required
+              value = "this.nameExp"
             />
             <mat-error *ngIf="userEditForm.controls.name.touched &&  userEditForm.controls.name.errors">
               *Has ingresado un dato inválido
@@ -413,7 +414,7 @@
       }"
       data-qadp="send-button-form"
     >
-      <span>CREAR EXPERIENCIA</span>
+      <span>guardar</span>
     </button>
     <button class="btn-cancel"
       (click) = "openModal()"

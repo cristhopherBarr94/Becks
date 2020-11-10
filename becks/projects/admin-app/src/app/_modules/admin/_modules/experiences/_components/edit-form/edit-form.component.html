@@ -22,7 +22,6 @@
               [(ngModel)]="userRegister.name"
               data-qadp="name"
               required
-              value = "this.nameExp"
             />
             <mat-error *ngIf="userEditForm.controls.name.touched &&  userEditForm.controls.name.errors">
               *Has ingresado un dato inválido
@@ -179,34 +178,37 @@
           <!-- periodicity -->
           <ion-row>
             <span class="time-icon"> </span>
-            <div>
+            <div formArrayName="itemRows">
               <ion-row class="space-between">
                 <p>
                   ¿La experiencia requiere periodicidad?
                 </p>
                 <mat-slide-toggle  [checked]="!this.hidePed" name="ped" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
               </ion-row>
-              <ion-row>
+              <ion-row 
+              *ngFor="let itemrow of userEditForm.controls.itemRows['controls']; let i=index"
+              [formGroupName] = "i">
                 <mat-form-field
                 *ngIf="!this.hidePed"
                 appearance="fill"
                 floatLabel="auto"
                 class="smallInput"
-                [ngClass]="getClassInputNotReq(userEditForm.controls.period)"
+                [ngClass]="getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.period)"
               >
                 <mat-label>Cupos</mat-label>
                 
                 <input
+                  id="period{{i}}"
                   matInput
                   (input)="inputValidatorNumeric($event)"
                   formControlName="period"
                   maxlength="60"
                   minlength="1"
-                  [(ngModel)]="userRegister.period"
+        
                   data-qadp="period"
                   required
                 />
-                <mat-error *ngIf="userEditForm.controls.period.touched &&  userEditForm.controls.period.errors">
+                <mat-error *ngIf="userEditForm.controls.itemRows.controls[i].controls.period.touched &&  userEditForm.controls.itemRows.controls[i].controls.period.errors">
                   *Has ingresado un dato inválido
                 </mat-error>
               </mat-form-field>
@@ -216,17 +218,18 @@
                appearance="fill"
                floatLabel="auto"
                class="smallInput"
-               [ngClass]="getClassInputNotReq(userEditForm.controls.dateRelease)"
+               [ngClass]=" getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.dateRelease)"
                >
                <mat-label>Fecha de liberación</mat-label>
                <input 
+               id="dateRelease{{i}}"
                matInput 
                formControlName="dateRelease"
                [ngxMatDatetimePicker]="picker3" 
                [min]="minDate" 
                [max]="maxDate" 
                [disabled]="disabled"
-               [(ngModel)]="userRegister.dateRelease"
+              
                required
                >
              <mat-datepicker-toggle matSuffix [for]="picker3">
@@ -236,11 +239,17 @@
                [touchUi]="touchUi" [color]="color"
                [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
              </ngx-mat-datetime-picker>
-             <mat-error *ngIf="userEditForm.controls.dateRelease.touched">
+            <mat-error *ngIf="userEditForm.controls.itemRows.controls[i].controls.dateRelease.touched &&  userEditForm.controls.itemRows.controls[i].controls.dateRelease.errors">
               *Has ingresado un dato inválido
             </mat-error>
               </mat-form-field>
-               
+               <button
+               *ngIf="!this.hidePed && userEditForm.controls.itemRows.controls.length > 1"
+               class="btn-delete"
+                (click)="deleteField(i)"
+               >
+                 <span class="trash-icon"> </span>
+               </button>
               </ion-row>
               <ion-row>
                 <button 

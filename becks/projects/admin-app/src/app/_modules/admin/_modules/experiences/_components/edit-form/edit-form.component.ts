@@ -10,6 +10,7 @@ import {
   FormGroup,
   FormControl,
   Validators,
+  FormArray,
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
@@ -54,7 +55,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public title_modal:string ="RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
   public sub_title_modal:string ="¿DESEAS CANCELAR?";
   public title_button_modal:string ="CANCELAR";
-  public nameExp;
   @Input() parentFunc:any;
   @Input() preload:any;
 
@@ -95,19 +95,24 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         Validators.minLength(1),
         Validators.maxLength(10),
       ]), 
-      period: new FormControl("", [
-        Validators.minLength(1),
-        Validators.maxLength(10),
-      ]),
+      itemRows: this.formBuilder.array([this.initItemRows()]),
       path: new FormControl("", [
         Validators.minLength(4),
         Validators.maxLength(150),
       ]),
       dateEnd: new FormControl(null, Validators.required),
       dateStart: new FormControl(null, Validators.required),
-      dateRelease: new FormControl(null,null),
       insideCheck: new FormControl(null, null),
       outsideCheck: new FormControl(null, null),
+    });
+  }
+  initItemRows (){
+    return this.formBuilder.group ({
+      period: new FormControl("", [
+        Validators.minLength(1),
+        Validators.maxLength(10),
+      ]),
+      dateRelease: new FormControl(null,null),
     });
   }
   saveUser(): void {
@@ -360,12 +365,12 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   hideField(targetHidden,targetStatus){
-    console.log(targetHidden,targetStatus);
+    // console.log(targetHidden,targetStatus);
     if(targetHidden == "stk"){
       this.hideStk = !this.hideStk;
       if(targetStatus==true){
-        this.userEditForm.controls.period.reset();
-        this.userEditForm.controls.dateRelease.reset();
+        this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
+        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
       }else{
       this.userEditForm.controls.stock.reset();
       }
@@ -377,16 +382,16 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       if(targetStatus==true){
         this.userEditForm.controls.stock.reset();
       }else{
-        this.userEditForm.controls.period.reset();
-        this.userEditForm.controls.dateRelease.reset();
+        this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
+        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
       }
 
     }
     else if (targetHidden  == "path") {
       this.hidepath = ! this.hidepath;
       if(targetStatus==true){
-        this.userEditForm.controls.period.reset();
-        this.userEditForm.controls.dateRelease.reset();
+        this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
+        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
         this.userEditForm.controls.stock.reset();
       }else{
       this.userEditForm.controls.path.reset();
@@ -395,7 +400,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
   unCheck(chk){
   this.checked=!this.checked;
-  console.log(chk.source.id,chk.checked);
   if(chk.source.id=="mat-checkbox-inside"){
     this.checkIn = chk.checked;
     this.checkOut = !chk.checked;
@@ -424,9 +428,14 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     });  
   }
 
-  addField() {
-    console.log(this.userEditForm.controls.stock.touched);
+  get formArr() {
+    return this.userEditForm.get('itemRows') as FormArray;
   }
-
+  addField() {
+    this.formArr.push(this.initItemRows());
+  }
+  deleteField(index:number) {
+    this.formArr.removeAt(index);
+  }
   
 }

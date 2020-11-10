@@ -27,7 +27,7 @@
     }
     .input-becks-ok {
       ::ng-deep mat-label {
-        color: #62f8b2 !important;
+        color: #219653 !important;
       }
     }
     .section1 {
@@ -58,7 +58,7 @@
   line-height: 24px;
   letter-spacing: 0.15px;
   text-transform: uppercase;
-  color: #038259;
+  color: #828282;
 
   span {
     margin: 0px !important;
@@ -295,4 +295,33 @@ textarea {
   align-items: center;
   text-align: center;
   margin: 10px 5px;
+}
+.btn-add {
+  position: relative;
+  width: 59px;
+  height: 74px;
+  background: #111111;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  margin-bottom: 20px;
+  color: #23925f;
+  .plus-icon {
+    width: 35px;
+    height: 35px;
+    top: 10px;
+    bottom: auto;
+    left: 12px;
+    right: auto;
+  }
+  .text-add {
+    font-family: "Helvetica LT Std";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    position: absolute;
+    top: 50px;
+    left: 12px;
+  }
 }

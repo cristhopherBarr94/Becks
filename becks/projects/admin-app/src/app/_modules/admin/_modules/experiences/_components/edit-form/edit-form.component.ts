@@ -42,8 +42,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public loadMob:string; 
   public loadDes:string; 
   public hideStk: boolean = true;
-  public checked: boolean = false;
+  public hidePed: boolean = true;
   public hidepath: boolean = true;
+  public checked: boolean = false;
   public password: string;
   public showError: boolean = false;
   public typeError:boolean = false;
@@ -74,30 +75,30 @@ export class EditFormComponent implements OnInit,AfterViewInit {
 
   initforms() {
     this.userEditForm = this.formBuilder.group({
-      name: new FormControl(" ", [
+      name: new FormControl("", [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(20),
       ]),
-      descrip: new FormControl(" ", [
+      descrip: new FormControl("", [
         Validators.required,
         Validators.minLength(0),
         Validators.maxLength(500),
       ]),
-      location: new FormControl(" ", [
+      location: new FormControl("", [
         Validators.required,
         Validators.minLength(0),
         Validators.maxLength(100),
       ]),
-      stock: new FormControl(" ", [
+      stock: new FormControl("", [
         Validators.minLength(1),
         Validators.maxLength(10),
       ]), 
-      period: new FormControl(" ", [
+      period: new FormControl("", [
         Validators.minLength(1),
         Validators.maxLength(10),
       ]),
-      path: new FormControl(" ", [
+      path: new FormControl("", [
         Validators.minLength(4),
         Validators.maxLength(150),
       ]),
@@ -117,23 +118,20 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       });
       return;
     }
-    // console.log("fecha de inicio",this.userEditForm.controls.dateStart.value);
-    // console.log("fecha de fin",this.userEditForm.controls.dateEnd.value);
-    // console.log(this.loadedFileMob);
-    // console.log(this.loadedFileDes);
-    console.log(this.userEditForm.controls.name.value);
-    console.log(this.userEditForm.controls.dateStart.value);
-    console.log(this.userEditForm.controls.dateEnd.value);
-    console.log(this.userEditForm.controls.location.value);
-    console.log(this.userEditForm.controls.descrip.value);
-    console.log(this.userEditForm.controls.stock.value);
-    console.log(this.userEditForm.controls.period.value);
-    console.log(this.userEditForm.controls.dateRelease.value);
-    console.log(this.userEditForm.controls.path.value);
-    console.log(this.checkIn);
-    console.log(this.checkOut);
-    console.log(this.loadDes);
-    console.log(this.loadMob);
+
+    // console.log(this.userEditForm.controls.name.value);
+    // console.log(this.userEditForm.controls.dateStart.value);
+    // console.log(this.userEditForm.controls.dateEnd.value);
+    // console.log(this.userEditForm.controls.location.value);
+    // console.log(this.userEditForm.controls.descrip.value);
+    // console.log(this.userEditForm.controls.stock.value);
+    // console.log(this.userEditForm.controls.period.value);
+    // console.log(this.userEditForm.controls.dateRelease.value);
+    // console.log(this.userEditForm.controls.path.value);
+    // console.log(this.checkIn);
+    // console.log(this.checkOut);
+    // console.log(this.loadDes);
+    // console.log(this.loadMob);
     this.ui.showLoading();
     this.httpService
       .post(
@@ -185,7 +183,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
                   (response: any) => {
                     this.ui.dismissLoading();
                     if ( response.status >= 200 && response.status < 300 ) {
-                      this.restartCaptcha = false;
                       this.ui.dismissModal(2500);
                       this.ui.dismissLoading(2500);
                       this.authService.setAuthenticated(
@@ -234,9 +231,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   public inputValidatorAlphaNumeric(event: any) {
-    const pattern = /^[a-zA-ZnÑ0-9,.!:á ]*$/;
+    const pattern = /^[a-zA-ZnÑ0-9,.!:á/ ]*$/;
     if (!pattern.test(event.target.value)) {
-      event.target.value = event.target.value.replace(/[^a-zA-ZnÑ0-9,.!:á ]/g, "");
+      event.target.value = event.target.value.replace(/[^a-zA-ZnÑ0-9,.!:á/ ]/g, "");
     }
   }
 
@@ -362,11 +359,37 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   hideField(targetHidden,targetStatus){
+    console.log(targetHidden,targetStatus);
     if(targetHidden == "stk"){
       this.hideStk = !this.hideStk;
+      if(targetStatus==true){
+        this.userEditForm.controls.period.reset();
+        this.userEditForm.controls.dateRelease.reset();
+      }else{
+      this.userEditForm.controls.stock.reset();
+      }
+    }else if(targetHidden == "ped") {
+      this.hidePed = !this.hidePed;
+      if(this.hideStk == false){
+        this.hideStk = true;
+      }
+      if(targetStatus==true){
+        this.userEditForm.controls.stock.reset();
+      }else{
+        this.userEditForm.controls.period.reset();
+        this.userEditForm.controls.dateRelease.reset();
+      }
+
     }
     else if (targetHidden  == "path") {
       this.hidepath = ! this.hidepath;
+      if(targetStatus==true){
+        this.userEditForm.controls.period.reset();
+        this.userEditForm.controls.dateRelease.reset();
+        this.userEditForm.controls.stock.reset();
+      }else{
+      this.userEditForm.controls.path.reset();
+      }
     }
   }
   unCheck(chk){

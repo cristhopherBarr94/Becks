@@ -145,10 +145,10 @@
                 <p>
                   ¿La  experiencia requiere stock  o inventario?
                 </p>
-                <mat-slide-toggle  [checked]="this.hideStk" name="stk" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
+                <mat-slide-toggle  [checked]="!this.hideStk" name="stk" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
               </ion-row>
               <ion-row 
-              *ngIf="this.hideStk"
+              *ngIf="!this.hideStk"
               >
               <mat-form-field
               appearance="fill"
@@ -165,6 +165,7 @@
                 maxlength="60"
                 [(ngModel)]="userRegister.stock"
                 data-qadp="stock"
+                required
               />
               <mat-error *ngIf="userEditForm.controls.stock.touched &&  userEditForm.controls.stock.errors">
                 *Has ingresado un dato inválido
@@ -182,11 +183,11 @@
                 <p>
                   ¿La experiencia requiere periodicidad?
                 </p>
-                <mat-slide-toggle  [checked]="!this.hideStk" name="stk" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
+                <mat-slide-toggle  [checked]="!this.hidePed" name="ped" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
               </ion-row>
               <ion-row>
                 <mat-form-field
-                *ngIf="!this.hideStk"
+                *ngIf="!this.hidePed"
                 appearance="fill"
                 floatLabel="auto"
                 class="smallInput"
@@ -202,6 +203,7 @@
                   minlength="1"
                   [(ngModel)]="userRegister.period"
                   data-qadp="period"
+                  required
                 />
                 <mat-error *ngIf="userEditForm.controls.period.touched &&  userEditForm.controls.period.errors">
                   *Has ingresado un dato inválido
@@ -209,7 +211,7 @@
               </mat-form-field>
       
                <mat-form-field
-               *ngIf="!this.hideStk"
+               *ngIf="!this.hidePed"
                appearance="fill"
                floatLabel="auto"
                class="smallInput"
@@ -224,6 +226,7 @@
                [max]="maxDate" 
                [disabled]="disabled"
                [(ngModel)]="userRegister.dateRelease"
+               required
                >
              <mat-datepicker-toggle matSuffix [for]="picker3">
               <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
@@ -240,11 +243,12 @@
               </ion-row>
               <ion-row>
                 <button 
-                *ngIf="!this.hideStk"
+                *ngIf="!this.hidePed"
                 (click)="addField()"
+                class="btn-add"
                 >
                   <span class="plus-icon"></span>
-                  <span>Añadir</span>
+                  <span class="text-add">Añadir</span>
                 </button>
               </ion-row>
             </div>
@@ -259,7 +263,7 @@
                   </p>
                   <mat-slide-toggle name="path" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
                 </ion-row>
-
+<!-- 
             <mat-form-field
             *ngIf="!this.hidepath"
             appearance="fill"
@@ -280,7 +284,31 @@
             <mat-error *ngIf="userEditForm.controls.path.touched &&  userEditForm.controls.path.errors">
               *Has ingresado un dato inválido
             </mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
+          <mat-form-field
+          *ngIf="!this.hidepath"
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userEditForm.controls.path)"
+        >
+          <mat-label>URL</mat-label>
+          
+          <input
+            matInput
+            (input)="inputValidatorAlphaNumeric($event)"
+            formControlName="path"
+            maxlength="100"
+            [(ngModel)]="userRegister.path"
+            data-qadp="path"
+            required
+          />
+          <mat-error *ngIf="userEditForm.controls.path.touched &&  userEditForm.controls.path.errors">
+            *Has ingresado un dato inválido
+          </mat-error> 
+        </mat-form-field>
+
+
             <ion-row class="space-around"    *ngIf="!this.hidepath">
               <mat-checkbox 
               id="mat-checkbox-inside"

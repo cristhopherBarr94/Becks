@@ -115,7 +115,8 @@
   width: 60px;
   height: 60px;
 }
-.upload-icon {
+.upload-icon,
+.upload-icon-error {
   background-image: url("../assets/icon/upload-icon.svg");
   background-size: contain;
   background-repeat: no-repeat;
@@ -124,6 +125,9 @@
   top: 20px;
   width: 20px;
   height: 22px;
+}
+.upload-icon-error {
+  background-image: url("../assets/icon/upload-icon-error.svg") !important;
 }
 .pen-icon {
   background-image: url("../assets/icon/pen-icon.svg");

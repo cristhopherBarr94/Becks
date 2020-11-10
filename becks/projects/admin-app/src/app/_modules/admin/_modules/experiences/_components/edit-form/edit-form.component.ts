@@ -44,6 +44,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public hidepath: boolean = true;
   public password: string;
   public showError: boolean = false;
+  public typeError:boolean = false;
   public photo: any;
   public title_modal:string ="RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
   public sub_title_modal:string ="¿DESEAS CANCELAR?";
@@ -224,11 +225,11 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   public getClassInputNotReq(item: any): string {
-    let classreturn = "select-becks";
+    let classreturn = "input-becks";
     if (item.valid && item.value > 0) {
-      classreturn = "select-becks-ok";
+      classreturn = "input-becks-ok";
     } else if (item.touched) {
-      classreturn = "select-becks-error";
+      classreturn = "input-becks-error";
     }
     return classreturn;
   }
@@ -254,33 +255,43 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   
   loadImage(event,myPlatform) {
     var files = event.target.files;
-    var img = new Image();
-    img = files[0];
-    if(myPlatform == "des"){
-      this.resizeImage(files[0], 1280, 720).then((blob) => {
-        if (files && blob) {
-          var reader = new FileReader();
-          // reader.onload = this._handleReaderLoaded.bind(this);
-          reader.readAsBinaryString(blob);
-          this.loadedFileDes =img.name;
-        }else  {
-          console.log("error de subida de imagen");
-        }
-      });
-    }else if(myPlatform == "mob") {
-      this.resizeImage(files[0], 720, 480).then((blob) => {
-        if (files && blob) {
-          var reader = new FileReader();
-          // reader.onload = this._handleReaderLoaded.bind(this);
-          reader.readAsBinaryString(blob);
-          this.loadedFileMob =img.name; 
-        }else  {
-          console.log("error de subida de imagen");
-        }
-      });
+    var imgn = new Image();
+    imgn = files[0];
+
+    if(imgn.type == "image/jpeg" || imgn.type == "image/png") {
+      this.typeError = false;
+      if(myPlatform == "des"){
+        this.resizeImage(files[0], 1280, 720).then((blob) => {
+          if (files && blob) {
+            var reader = new FileReader();
+            // reader.onload = this._handleReaderLoaded.bind(this);
+            reader.readAsBinaryString(blob);
+            this.loadedFileDes =imgn.name;
+          }else  {
+            console.log("error de subida de imagen");
+          }
+          
+        });
+      }else if(myPlatform == "mob") {
+        this.resizeImage(files[0], 720, 480).then((blob) => {
+          if (files && blob) {
+            var reader = new FileReader();
+            // reader.onload = this._handleReaderLoaded.bind(this);
+            reader.readAsBinaryString(blob);
+            this.loadedFileMob =imgn.name; 
+          }else  {
+            console.log("error de subida de imagen");
+          }
+        });
+      }
+      this.ui.dismissModal()
+
+    }else{
+      console.log("error en tipo de archivo",imgn.type.split("/")[1])
+      this.typeError = true;
+
     }
-    this.ui.dismissModal()
- 
+  
   }
 
   resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
@@ -352,6 +363,10 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       Func: this.closeForm.bind(this),
       FuncAlt: this.closeModal.bind(this),
     });  
+  }
+
+  addField() {
+    console.log(this.userEditForm.controls.stock.touched);
   }
 
   

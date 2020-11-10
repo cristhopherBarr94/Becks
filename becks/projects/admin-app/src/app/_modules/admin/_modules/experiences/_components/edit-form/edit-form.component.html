@@ -147,30 +147,32 @@
                 </p>
                 <mat-slide-toggle  [checked]="this.hideStk" name="stk" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
               </ion-row>
-              <ion-row>
-                <mat-form-field
-                *ngIf="this.hideStk"
-                appearance="fill"
-                floatLabel="auto"
-                class="smallInput"
-                [ngClass]="getClassInputNotReq(userEditForm.controls.stock)"
+              <ion-row 
+              *ngIf="this.hideStk"
               >
-                <mat-label>Cupos</mat-label>
-                
-                <input
-                  matInput
-                  (input)="inputValidatorNumeric($event)"
-                  formControlName="stock"
-                  maxlength="60"
-                  [(ngModel)]="userRegister.stock"
-                  data-qadp="stock"
-                />
-                <mat-error *ngIf="userEditForm.controls.stock.touched">
-                  *Has ingresado un dato inválido
-                </mat-error>
-              </mat-form-field>
+              <mat-form-field
+              appearance="fill"
+              floatLabel="auto"
+              class="smallInput"
+              [ngClass]="getClassInputNotReq(userEditForm.controls.stock)"
+            >
+              <mat-label>Cupos</mat-label>
+              
+              <input
+                matInput
+                (input)="inputValidatorNumeric($event)"
+                formControlName="stock"
+                maxlength="60"
+                [(ngModel)]="userRegister.stock"
+                data-qadp="stock"
+              />
+              <mat-error *ngIf="userEditForm.controls.stock.touched &&  userEditForm.controls.stock.errors">
+                *Has ingresado un dato inválido
+            </mat-error>
+            </mat-form-field>
               </ion-row>
             </div>
+           
           </ion-row>
           <!-- periodicity -->
           <ion-row>
@@ -235,6 +237,15 @@
             </mat-error>
               </mat-form-field>
                
+              </ion-row>
+              <ion-row>
+                <button 
+                *ngIf="!this.hideStk"
+                (click)="addField()"
+                >
+                  <span class="plus-icon"></span>
+                  <span>Añadir</span>
+                </button>
               </ion-row>
             </div>
           </ion-row>
@@ -312,7 +323,8 @@
             />
               <p>Subir imagen desktop*</p>
               <button class="btn-upload" (click)="hiddenfileinput1.click()">
-                <span class="upload-icon" *ngIf="!this.loadedFileDes.length > 0"> </span>
+                <span class="upload-icon" *ngIf="!this.loadedFileDes.length > 0 && !typeError"> </span>
+                <span class="upload-icon-error" *ngIf="typeError && !this.loadedFileDes"> </span>
                 <ion-row *ngIf="this.loadedFileDes.length > 0">
                   <span class="btn-text">
                     <span>{{ this.loadedFileDes}}</span>
@@ -335,8 +347,8 @@
             />
               <p>Subir imagen mobile*</p>
               <button class="btn-upload" (click)="hiddenfileinput2.click()">
-                <span class="time-icon" *ngIf="this.loadedFileMob.length == null"> </span>
-                <span class="upload-icon" *ngIf="!this.loadedFileMob.length > 0"> </span>
+                <span class="upload-icon" *ngIf="!this.loadedFileMob.length > 0 && !typeError"> </span>
+                <span class="upload-icon-error" *ngIf="typeError && !this.loadedFileMob"> </span>
                 <ion-row *ngIf=" this.loadedFileMob.length > 0">
                   <span class="btn-text">
                     <span>{{ this.loadedFileMob}}</span>
@@ -351,6 +363,9 @@
           </ion-row>
           <mat-error style="margin-left: 50px;"  *ngIf=" showError && loadedFileMob.length == 0 || showError && loadedFileDes.length == 0">
             *Debes subir una imágen válida
+          </mat-error>
+          <mat-error style="margin-left: 50px;"  *ngIf=" typeError">
+            *El archivo no es válido
           </mat-error>
         </div>
 

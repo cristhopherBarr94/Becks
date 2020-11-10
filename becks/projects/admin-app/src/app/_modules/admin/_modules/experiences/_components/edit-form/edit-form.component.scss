@@ -157,7 +157,7 @@ textarea {
   justify-content: space-between;
 }
 .space-around {
-  width: 630px;
+  width: 550px;
   justify-content: space-around;
   margin-bottom: 20px;
 }
@@ -287,8 +287,8 @@ textarea {
   border-color: #ffffff;
   border-radius: 4px;
 }
-::ng-deep .mat-checkbox {
-  margin-right: 15px;
+::ng-deep #mat-checkbox-outside {
+  margin-left: 15px;
 }
 .error-http {
   justify-content: center;

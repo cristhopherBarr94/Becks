@@ -39,6 +39,8 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public httpError: string;
   public loadedFileMob:string = "";
   public loadedFileDes:string = "";
+  public loadMob:string; 
+  public loadDes:string; 
   public hideStk: boolean = true;
   public checked: boolean = false;
   public hidepath: boolean = true;
@@ -46,6 +48,8 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public showError: boolean = false;
   public typeError:boolean = false;
   public photo: any;
+  public checkIn:boolean =  !this.checked;
+  public checkOut:boolean = this.checked;
   public title_modal:string ="RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
   public sub_title_modal:string ="¿DESEAS CANCELAR?";
   public title_button_modal:string ="CANCELAR";
@@ -70,30 +74,30 @@ export class EditFormComponent implements OnInit,AfterViewInit {
 
   initforms() {
     this.userEditForm = this.formBuilder.group({
-      name: new FormControl("", [
+      name: new FormControl(" ", [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(20),
       ]),
-      descrip: new FormControl("", [
+      descrip: new FormControl(" ", [
         Validators.required,
         Validators.minLength(0),
         Validators.maxLength(500),
       ]),
-      location: new FormControl("", [
+      location: new FormControl(" ", [
         Validators.required,
         Validators.minLength(0),
         Validators.maxLength(100),
       ]),
-      stock: new FormControl("", [
+      stock: new FormControl(" ", [
         Validators.minLength(1),
         Validators.maxLength(10),
       ]), 
-      period: new FormControl("", [
+      period: new FormControl(" ", [
         Validators.minLength(1),
         Validators.maxLength(10),
       ]),
-      path: new FormControl("", [
+      path: new FormControl(" ", [
         Validators.minLength(4),
         Validators.maxLength(150),
       ]),
@@ -104,7 +108,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       outsideCheck: new FormControl(null, null),
     });
   }
-
   saveUser(): void {
 
     if ( this.userEditForm.invalid || this.loadedFileDes.length == 0 || this.loadedFileMob.length == 0  ) {
@@ -114,7 +117,23 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       });
       return;
     }
-
+    // console.log("fecha de inicio",this.userEditForm.controls.dateStart.value);
+    // console.log("fecha de fin",this.userEditForm.controls.dateEnd.value);
+    // console.log(this.loadedFileMob);
+    // console.log(this.loadedFileDes);
+    console.log(this.userEditForm.controls.name.value);
+    console.log(this.userEditForm.controls.dateStart.value);
+    console.log(this.userEditForm.controls.dateEnd.value);
+    console.log(this.userEditForm.controls.location.value);
+    console.log(this.userEditForm.controls.descrip.value);
+    console.log(this.userEditForm.controls.stock.value);
+    console.log(this.userEditForm.controls.period.value);
+    console.log(this.userEditForm.controls.dateRelease.value);
+    console.log(this.userEditForm.controls.path.value);
+    console.log(this.checkIn);
+    console.log(this.checkOut);
+    console.log(this.loadDes);
+    console.log(this.loadMob);
     this.ui.showLoading();
     this.httpService
       .post(
@@ -136,16 +155,23 @@ export class EditFormComponent implements OnInit,AfterViewInit {
                 //   title: "Bienvenido a Beck's",
                 //   description: "Ingresando de forma segura",
                 // });
-
+               
                 const formData = new FormData();
                 try {
-                  this.restartCaptcha = true;
-                  formData.append("name", this.userEditForm.controls.email.value.trim());
-                  formData.append("date_1", this.userEditForm.controls.password.value.trim());
-                  formData.append("date_2", environment.rest.grant_type);
-                  formData.append("location", environment.rest.client_id);
-                  formData.append("description", environment.rest.client_secret);
-                  formData.append("scope", environment.rest.scope);
+                  formData.append("name", this.userEditForm.controls.name.value);
+                  formData.append("date_1", this.userEditForm.controls.dateStart.value);
+                  formData.append("date_2", this.userEditForm.controls.dateEnd.value);
+                  formData.append("location", this.userEditForm.controls.location.value);
+                  formData.append("description", this.userEditForm.controls.descrip.value);
+                  formData.append("stock", this.userEditForm.controls.stock.value);
+                  formData.append("periodicity", this.userEditForm.controls.period.value);
+                  formData.append("date_3", this.userEditForm.controls.dateRelease.value);
+                  formData.append("path", this.userEditForm.controls.path.value);
+                  formData.append("check_inside", this.checkIn.toString());
+                  formData.append("check_outside", this.checkOut.toString());
+                  formData.append("img_des", this.loadedFileDes);
+                  formData.append("img_mob", this.loadedFileMob);
+                
                 } catch (error) {
                   return;
                 }
@@ -208,9 +234,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   public inputValidatorAlphaNumeric(event: any) {
-    const pattern = /^[a-zA-ZnÑ0-9 ]*$/;
+    const pattern = /^[a-zA-ZnÑ0-9,.!:á ]*$/;
     if (!pattern.test(event.target.value)) {
-      event.target.value = event.target.value.replace(/[^a-zA-ZnÑ0-9 ]/g, "");
+      event.target.value = event.target.value.replace(/[^a-zA-ZnÑ0-9,.!:á ]/g, "");
     }
   }
 
@@ -258,7 +284,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     var imgn = new Image();
     imgn = files[0];
 
-    if(imgn.type == "image/jpeg" || imgn.type == "image/png") {
+    if(files[0].type == "image/jpeg" || files[0].type == "image/png") {
       this.typeError = false;
       if(myPlatform == "des"){
         this.resizeImage(files[0], 1280, 720).then((blob) => {
@@ -267,8 +293,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
             // reader.onload = this._handleReaderLoaded.bind(this);
             reader.readAsBinaryString(blob);
             this.loadedFileDes =imgn.name;
-          }else  {
-            console.log("error de subida de imagen");
+
           }
           
         });
@@ -279,17 +304,14 @@ export class EditFormComponent implements OnInit,AfterViewInit {
             // reader.onload = this._handleReaderLoaded.bind(this);
             reader.readAsBinaryString(blob);
             this.loadedFileMob =imgn.name; 
-          }else  {
-            console.log("error de subida de imagen");
+
           }
         });
       }
       this.ui.dismissModal()
 
     }else{
-      console.log("error en tipo de archivo",imgn.type.split("/")[1])
       this.typeError = true;
-
     }
   
   }
@@ -298,6 +320,12 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     return new Promise((resolve, reject) => {
       let image = new Image();
       image.src = URL.createObjectURL(file);
+      if(maxWidth == 720) {
+        this.loadMob =image.src; 
+      }else  if(maxWidth == 1280) {
+        this.loadDes =image.src; 
+      }
+  
       image.onload = () => {
         let width = image.width;
         let height = image.height;
@@ -334,8 +362,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   hideField(targetHidden,targetStatus){
-    console.log(targetHidden,targetStatus);
-
     if(targetHidden == "stk"){
       this.hideStk = !this.hideStk;
     }
@@ -345,6 +371,15 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
   unCheck(chk){
   this.checked=!this.checked;
+  console.log(chk.source.id,chk.checked);
+  if(chk.source.id=="mat-checkbox-inside"){
+    this.checkIn = chk.checked;
+    this.checkOut = !chk.checked;
+  
+  }else if (chk.source.id=="mat-checkbox-outside") {
+    this.checkIn = !chk.checked;
+    this.checkOut = chk.checked;
+  }
   }
 
   clear(tg) {

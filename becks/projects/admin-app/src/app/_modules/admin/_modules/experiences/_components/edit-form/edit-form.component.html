@@ -259,34 +259,33 @@
                   </p>
                   <mat-slide-toggle name="path" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
                 </ion-row>
-      
-      
-              <mat-form-field
-              *ngIf="!this.hidepath"
-              appearance="fill"
-              floatLabel="auto"
-              class="fullInput"
-              [ngClass]="getClassInputNotReq(userEditForm.controls.path)"
-            >
-              <mat-label>URL</mat-label>
-              
-              <input
-                matInput
-                formControlName="path"
-                maxlength="150"
-                [(ngModel)]="userRegister.path"
-                data-qadp="location"
-              />
-              <mat-error *ngIf="userEditForm.controls.path.touched &&  userEditForm.controls.path.errors">
-                *Has ingresado un dato inválido
-              </mat-error>
-            </mat-form-field>
 
+            <mat-form-field
+            *ngIf="!this.hidepath"
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInputNotReq(userEditForm.controls.path)"
+          >
+            <mat-label>URL</mat-label>
+            
+            <input
+              matInput
+              (input)="inputValidatorAlphaNumeric($event)"
+              formControlName="path"
+              maxlength="150"
+              [(ngModel)]="userRegister.path"
+              data-qadp="path"
+            />
+            <mat-error *ngIf="userEditForm.controls.path.touched &&  userEditForm.controls.path.errors">
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
             <ion-row class="space-around"    *ngIf="!this.hidepath">
               <mat-checkbox 
               id="mat-checkbox-inside"
               [checked]="!this.checked" 
-              (change)="unCheck($event.checked)"
+              (change)="unCheck($event)"
 
               >
             </mat-checkbox>
@@ -295,7 +294,7 @@
               <mat-checkbox 
               id="mat-checkbox-outside"
               [checked]="this.checked" 
-              (change)="unCheck($event.checked)"
+              (change)="unCheck($event)"
               
               >
             </mat-checkbox> 

@@ -55,6 +55,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public title_modal:string;
   public sub_title_modal:string;
   public title_button_modal:string;
+  public arrPeriod = [];
   @Input() parentFunc:any;
   @Input() preload:any;
 
@@ -100,10 +101,10 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         Validators.minLength(4),
         Validators.maxLength(150),
       ]),
-      dateEnd: new FormControl(null, Validators.required),
-      dateStart: new FormControl(null, Validators.required),
-      insideCheck: new FormControl(null, null),
-      outsideCheck: new FormControl(null, null),
+      dateEnd: new FormControl("", Validators.required),
+      dateStart: new FormControl("", Validators.required),
+      insideCheck: new FormControl("", null),
+      outsideCheck: new FormControl("", null),
     });
   }
   initItemRows (){
@@ -112,7 +113,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         Validators.minLength(1),
         Validators.maxLength(10),
       ]),
-      dateRelease: new FormControl(null,null),
+      dateRelease: new FormControl("",null),
     });
   }
   saveUser(): void {
@@ -127,19 +128,20 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     this.title_modal ="SE HAN GUARDADO LOS CAMBIOS CON ÉXITO";
     this.sub_title_modal =" ";
     this.title_button_modal ="ACEPTAR";
-    // console.log(this.userEditForm.controls.name.value);
-    // console.log(this.userEditForm.controls.dateStart.value);
-    // console.log(this.userEditForm.controls.dateEnd.value);
-    // console.log(this.userEditForm.controls.location.value);
-    // console.log(this.userEditForm.controls.descrip.value);
-    // console.log(this.userEditForm.controls.stock.value);
+    console.log(this.userEditForm.controls.name.value);
+    console.log(this.userEditForm.controls.dateStart.value);
+    console.log(this.userEditForm.controls.dateEnd.value);
+    console.log(this.userEditForm.controls.location.value);
+    console.log(this.userEditForm.controls.descrip.value);
+    console.log(this.userEditForm.controls.stock.value);
     // console.log(this.userEditForm.controls.period.value);
     // console.log(this.userEditForm.controls.dateRelease.value);
-    // console.log(this.userEditForm.controls.path.value);
-    // console.log(this.checkIn);
-    // console.log(this.checkOut);
-    // console.log(this.loadDes);
-    // console.log(this.loadMob);
+    console.log(this.formArr.value);
+    console.log(this.userEditForm.controls.path.value);
+    console.log(this.checkIn);
+    console.log(this.checkOut);
+    console.log(this.loadDes);
+    console.log(this.loadMob);
     this.ui.showLoading();
     this.httpService
       .post(
@@ -181,9 +183,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
                     if ( response.status >= 200 && response.status < 300 ) {
                       this.ui.dismissModal(2500);
                       this.ui.dismissLoading(2500);
-                      // this.authService.setAuthenticated(
-                      //   "Bearer " + response.body.access_token
-                      // );
                       this.router.navigate(["admin/experiences"], {
                         queryParamsHandling: "preserve",
                       });

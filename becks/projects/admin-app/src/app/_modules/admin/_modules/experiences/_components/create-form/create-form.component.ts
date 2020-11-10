@@ -52,9 +52,10 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
   public photo: any;
   public checkIn:boolean =  !this.checked;
   public checkOut:boolean = this.checked;
-  public title_modal:string ="RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
-  public sub_title_modal:string ="¿DESEAS CANCELAR?";
-  public title_button_modal:string ="CANCELAR";
+  public title_modal:string;
+  public sub_title_modal:string;
+  public title_button_modal:string;
+  public arrPeriod = [];
   @Input() parentFunc:any;
   @Input() preload:any;
 
@@ -100,10 +101,10 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
         Validators.minLength(4),
         Validators.maxLength(150),
       ]),
-      dateEnd: new FormControl(null, Validators.required),
-      dateStart: new FormControl(null, Validators.required),
-      insideCheck: new FormControl(null, null),
-      outsideCheck: new FormControl(null, null),
+      dateEnd: new FormControl("", Validators.required),
+      dateStart: new FormControl("", Validators.required),
+      insideCheck: new FormControl("", null),
+      outsideCheck: new FormControl("", null),
     });
   }
   initItemRows (){
@@ -112,7 +113,7 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
         Validators.minLength(1),
         Validators.maxLength(10),
       ]),
-      dateRelease: new FormControl(null,null),
+      dateRelease: new FormControl("",null),
     });
   }
   saveUser(): void {
@@ -124,20 +125,23 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
       });
       return;
     }
-
-    // console.log(this.userEditForm.controls.name.value);
-    // console.log(this.userEditForm.controls.dateStart.value);
-    // console.log(this.userEditForm.controls.dateEnd.value);
-    // console.log(this.userEditForm.controls.location.value);
-    // console.log(this.userEditForm.controls.descrip.value);
-    // console.log(this.userEditForm.controls.stock.value);
+    this.title_modal ="SE HAN GUARDADO LOS CAMBIOS CON ÉXITO";
+    this.sub_title_modal =" ";
+    this.title_button_modal ="ACEPTAR";
+    console.log(this.userEditForm.controls.name.value);
+    console.log(this.userEditForm.controls.dateStart.value);
+    console.log(this.userEditForm.controls.dateEnd.value);
+    console.log(this.userEditForm.controls.location.value);
+    console.log(this.userEditForm.controls.descrip.value);
+    console.log(this.userEditForm.controls.stock.value);
     // console.log(this.userEditForm.controls.period.value);
     // console.log(this.userEditForm.controls.dateRelease.value);
-    // console.log(this.userEditForm.controls.path.value);
-    // console.log(this.checkIn);
-    // console.log(this.checkOut);
-    // console.log(this.loadDes);
-    // console.log(this.loadMob);
+    console.log(this.formArr.value);
+    console.log(this.userEditForm.controls.path.value);
+    console.log(this.checkIn);
+    console.log(this.checkOut);
+    console.log(this.loadDes);
+    console.log(this.loadMob);
     this.ui.showLoading();
     this.httpService
       .post(
@@ -148,18 +152,6 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
         (res: any) => {
           try {
             if ( res.status >= 200 && res.status < 300 ) {
-                // window.dataLayer.push({
-                //   event: "trackEvent",
-                //   eventCategory: "fase 3",
-                //   eventAction: "finalizar fase 3",
-                //   eventLabel: email256,
-                // });
-                // window.location.reload();
-                // this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
-                //   title: "Bienvenido a Beck's",
-                //   description: "Ingresando de forma segura",
-                // });
-               
                 const formData = new FormData();
                 try {
                   formData.append("name", this.userEditForm.controls.name.value);
@@ -191,10 +183,7 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
                     if ( response.status >= 200 && response.status < 300 ) {
                       this.ui.dismissModal(2500);
                       this.ui.dismissLoading(2500);
-                      this.authService.setAuthenticated(
-                        "Bearer " + response.body.access_token
-                      );
-                      this.router.navigate(["user/exp"], {
+                      this.router.navigate(["admin/experiences"], {
                         queryParamsHandling: "preserve",
                       });
                     } else {
@@ -419,6 +408,9 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
   }
 
   openModal() {
+     this.title_modal ="RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
+     this.sub_title_modal ="¿DESEAS CANCELAR?";
+     this.title_button_modal ="CANCELAR";
     this.ui.showModal( PopUpComponent, "modalMessage", true, false, {
       title: this.title_modal,
       sub_title: this.sub_title_modal,

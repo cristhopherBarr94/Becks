@@ -70,9 +70,6 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
 
   ngOnInit(): void {
     this.initforms();
-    console.log(this.userEditForm.controls.itemRows.controls[0].controls.period);
-    // console.log(this.userEditForm.controls.itemRows.controls[0].controls.dateRelease);
-
   }
 
   ngAfterViewInit(): void { }
@@ -368,7 +365,7 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
   }
 
   hideField(targetHidden,targetStatus){
-    console.log(targetHidden,targetStatus);
+    // console.log(targetHidden,targetStatus);
     if(targetHidden == "stk"){
       this.hideStk = !this.hideStk;
       if(targetStatus==true){
@@ -403,7 +400,6 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
   }
   unCheck(chk){
   this.checked=!this.checked;
-  console.log(chk.source.id,chk.checked);
   if(chk.source.id=="mat-checkbox-inside"){
     this.checkIn = chk.checked;
     this.checkOut = !chk.checked;

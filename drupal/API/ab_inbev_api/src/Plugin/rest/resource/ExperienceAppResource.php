@@ -157,21 +157,96 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
   public function post($data) {
 
     // ADMIN
-    if ( !in_array("Administrator", $this->currentUser->getRoles()) ) {
+    if ( !in_array("administrator", $this->currentUser->getRoles()) ) {
       return new ModifiedResourceResponse(['message' => 'No permitido'], 405);
     }
-    $this->validate($data);
+
+    $this->validate_post($data);
+
+    // SET EXP DATA
+    $date = time();
+    $exp_data = [
+      'type' => '0',
+      'status' => '0',
+      'title' => $data['title'],
+      'description' => $data['description'],
+      'location' => $data['location'],
+      'url_redirect' => $data['url_redirect'],
+      'url_terms' => $data['url_terms'],
+      'created' => $date,
+      'valid_from' => $data['valid_from'],
+      'valid_to' => $data['valid_to']
+   ];
 
     $id = $this->dbConnection->insert('ab_inbev_experience')
-          ->fields($data)
+          ->fields($exp_data)
           ->execute();
 
-    $this->logger->notice('New experience record has been created.');
+    if ( !$id ) {
+      throw new BadRequestHttpException('Error interno, intenta de nuevo mas tarde.');
+    }
 
-    $created_record = $this->loadRecord($id);
+    // SET EXP IMAGES
+    try {
+      $images_folder = "public://images/experience/";
+      $image = base64_decode( $data['img_desk'] );
+      $file = file_save_data($image, $images_folder . $id."_desk" , FileSystemInterface::EXISTS_REPLACE);
+      if ( !$file->save() ) {
+        throw new BadRequestHttpException('Error guardando imagen desktop, intenta de nuevo mas tarde.');
+      }
+      $image = base64_decode( $data['img_mob'] );
+      $file = file_save_data($image, $images_folder . $id."_mob" , FileSystemInterface::EXISTS_REPLACE);
+      if ( !$file->save() ) {
+        throw new BadRequestHttpException('Error guardando imagen mobile, intenta de nuevo mas tarde.');
+      }
+      $image = null;
+    } catch (\Throwable $th) {
+      throw new BadRequestHttpException('Error guardando imagen, intenta de nuevo mas tarde.');
+    }
+
+    // SET EXP STOCK DATA
+    try {
+      if ( is_array($data['stock']) ) {
+        //PERIODICY
+        foreach ($data['stock'] as &$stock) {
+          $exp_stock = [
+            "eid" => $id,
+            "stock_initial" => $stock['stock'],
+            "stock_actual" => $stock['stock'],
+            "release" => $stock['date'],
+            "created" => $date
+          ];
+          if ( !$this->dbConnection->insert('ab_inbev_exp_stock')
+                                  ->fields($exp_stock)
+                                  ->execute() ) {
+            throw new BadRequestHttpException('Error generando el Stock, intenta de nuevo mas tarde.');
+          }
+        }
+      } elseif ( is_numeric($data['stock']) ) {
+        //UNIC STOCK
+        $exp_stock = [
+          "eid" => $id,
+          "stock_initial" => $data['stock'],
+          "stock_actual" => $data['stock'],
+          "release" => $date,
+          "created" => $date
+        ];
+        if ( !$this->dbConnection->insert('ab_inbev_exp_stock')
+                                ->fields($exp_stock)
+                                ->execute() ) {
+          throw new BadRequestHttpException('Error generando el Stock, intenta de nuevo mas tarde.');
+        }
+      }
+    } catch (\Throwable $th) {
+      dump($th);
+      throw new BadRequestHttpException('Error interno con Stock, intenta de nuevo mas tarde.');
+    }
+
+    // $this->logger->notice('New experience record has been created.');
+    // $created_record = $this->loadRecord($id);
 
     // Return the newly created record in the response body.
-    return new ModifiedResourceResponse($created_record, 201);
+    return new ModifiedResourceResponse($exp_data, 201);
   }
 
   /**
@@ -186,7 +261,78 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
    *   The HTTP response object.
    */
   public function patch($id, $data) {
-    return new ModifiedResourceResponse([], 200);
+    // ADMIN
+    if ( !in_array("administrator", $this->currentUser->getRoles()) ) {
+      return new ModifiedResourceResponse(['message' => 'No permitido'], 405);
+    }
+
+    $this->validate_patch($data);
+
+    if ( !$this->loadRecord($data['id']) ) {
+      throw new NotFoundHttpException('Experiencia no encontrada.');
+    }
+
+    // SET EXP IMAGES
+    try {
+      $images_folder = "public://images/experience/";
+      if ( !empty($data['img_desk']) ) {
+        $image = base64_decode( $data['img_desk'] );
+        $file = file_save_data($image, $images_folder . $data['id']."_desk" , FileSystemInterface::EXISTS_REPLACE);
+        if ( !$file->save() ) {
+          throw new BadRequestHttpException('Error guardando imagen desktop, intenta de nuevo mas tarde.');
+        }
+      }
+      if ( !empty($data['img_mob']) ) {
+        $image = base64_decode( $data['img_mob'] );
+        $file = file_save_data($image, $images_folder . $data['id']."_mob" , FileSystemInterface::EXISTS_REPLACE);
+        if ( !$file->save() ) {
+          throw new BadRequestHttpException('Error guardando imagen mobile, intenta de nuevo mas tarde.');
+        }
+      }
+      $image = null;
+    } catch (\Throwable $th) {
+      dump( $th );
+      throw new BadRequestHttpException('Error guardando imagen, intenta de nuevo mas tarde.');
+    }
+    
+    // SET EXP DATA
+    $date = time();
+    $exp_data = [
+      'title' => $data['title'],
+      'description' => $data['description'],
+      'location' => $data['location'],
+      'url_redirect' => $data['url_redirect'],
+      'url_terms' => $data['url_terms'],
+      'valid_from' => $data['valid_from'],
+      'valid_to' => $data['valid_to']
+   ];
+
+   try {
+    $this->dbConnection->update('ab_inbev_experience')
+          ->fields($exp_data)
+          ->condition('id', $data['id'], '=')
+          ->execute();
+   } catch (\Throwable $th) {
+      throw new BadRequestHttpException('Error interno, No se pudieron actualizar los datos, intenta de nuevo mas tarde.');
+   }
+    
+    //SET STOCK DATA
+    foreach ($data['stock'] as &$stock) {
+      $exp_stock = [
+        "stock_actual" => $stock['stock'],
+        "release" => $stock['date'],
+      ];
+      try {
+        $this->dbConnection->update('ab_inbev_exp_stock')
+                          ->fields($exp_stock)
+                          ->condition('id', $stock['id'], '=')
+                          ->execute();
+      } catch (\Throwable $th) {
+        throw new BadRequestHttpException( $stock['id'] . ' :: Error actualizando Stock, intenta de nuevo mas tarde.');
+      }
+    }
+
+    return new ModifiedResourceResponse($exp_data, 200);
   }
 
   /**
@@ -262,30 +408,116 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
    *
    * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
    */
-  protected function validate($record) {
+  protected function validate_post($record) {
     if (!is_array($record) || count($record) == 0) {
       throw new BadRequestHttpException('No record content received.');
     }
 
-    $allowed_fields = [
-      'title',
-      'description',
-      'price',
-    ];
-
-    if (count(array_diff(array_keys($record), $allowed_fields)) > 0) {
-      throw new BadRequestHttpException('Record structure is not correct.');
-    }
-
     if (empty($record['title'])) {
-      throw new BadRequestHttpException('Title is required.');
+      throw new BadRequestHttpException('Titulo es requerido.');
     }
     elseif (isset($record['title']) && strlen($record['title']) > 255) {
-      throw new BadRequestHttpException('Title is too big.');
+      throw new BadRequestHttpException('Titulo demasiado largo.');
+    }
+
+    if (empty($record['description'])) {
+      throw new BadRequestHttpException('Descripción es requerido.');
+    }
+    elseif (isset($record['description']) && strlen($record['description']) > 255) {
+      throw new BadRequestHttpException('Descripción demasiado larga.');
+    }
+
+    if (empty($record['location'])) {
+      throw new BadRequestHttpException('Ubicación es requerida.');
+    }
+    elseif (isset($record['location']) && strlen($record['location']) > 255) {
+      throw new BadRequestHttpException('Ubicación demasiado larga.');
+    }
+
+    if (empty($record['valid_from'])) {
+      throw new BadRequestHttpException('Fecha "Valido Desde" es requerida.');
+    }
+    elseif (isset($record['valid_from']) && strlen($record['valid_from']) > 255) {
+      throw new BadRequestHttpException('Fecha "Valido Desde" demasiado larga.');
+    }
+
+    if (empty($record['valid_to'])) {
+      throw new BadRequestHttpException('Fecha "Valido Hasta" es requerida.');
+    }
+    elseif (isset($record['valid_to']) && strlen($record['valid_to']) > 255) {
+      throw new BadRequestHttpException('Fecha "Valido Hasta" demasiado larga.');
+    }
+
+    if (empty($record['img_desk'])) {
+      throw new BadRequestHttpException('La imagen desktop es requerida.');
+    }
+
+    if (empty($record['img_mob'])) {
+      throw new BadRequestHttpException('La imagen mobile es requerida.');
+    }
+
+    if ( !empty($record['stock']) ) {
+      // STOCK Logic
+      if ( !is_array($record['stock']) && !is_numeric($record['stock']) ) {
+        throw new BadRequestHttpException('Stock debe ser un numero o array.');
+      }
     }
     // @DCG Add more validation rules here.
   }
 
+  
+  protected function validate_patch($record) {
+    if (!is_array($record) || count($record) == 0) {
+      throw new BadRequestHttpException('No record content received.');
+    }
+
+    if (empty($record['id'])) {
+      throw new BadRequestHttpException('ID requerido.');
+    }
+
+    if (empty($record['title'])) {
+      throw new BadRequestHttpException('Titulo es requerido.');
+    }
+    elseif (isset($record['title']) && strlen($record['title']) > 255) {
+      throw new BadRequestHttpException('Titulo demasiado largo.');
+    }
+
+    if (empty($record['description'])) {
+      throw new BadRequestHttpException('Descripción es requerido.');
+    }
+    elseif (isset($record['description']) && strlen($record['description']) > 255) {
+      throw new BadRequestHttpException('Descripción demasiado larga.');
+    }
+
+    if (empty($record['location'])) {
+      throw new BadRequestHttpException('Ubicación es requerida.');
+    }
+    elseif (isset($record['location']) && strlen($record['location']) > 255) {
+      throw new BadRequestHttpException('Ubicación demasiado larga.');
+    }
+
+    if (empty($record['valid_from'])) {
+      throw new BadRequestHttpException('Fecha "Valido Desde" es requerida.');
+    }
+    elseif (isset($record['valid_from']) && strlen($record['valid_from']) > 255) {
+      throw new BadRequestHttpException('Fecha "Valido Desde" demasiado larga.');
+    }
+
+    if (empty($record['valid_to'])) {
+      throw new BadRequestHttpException('Fecha "Valido Hasta" es requerida.');
+    }
+    elseif (isset($record['valid_to']) && strlen($record['valid_to']) > 255) {
+      throw new BadRequestHttpException('Fecha "Valido Hasta" demasiado larga.');
+    }
+
+    if ( !empty($record['stock']) ) {
+      // STOCK Logic
+      if ( !is_array($record['stock']) ) {
+        throw new BadRequestHttpException('Stock debe ser un array.');
+      }
+    }
+    // @DCG Add more validation rules here.
+  }
   /**
    * Loads record from database.
    *
@@ -300,7 +532,7 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
   protected function loadRecord($id) {
     $record = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} WHERE id = :id', [':id' => $id])->fetchAssoc();
     if (!$record) {
-      throw new NotFoundHttpException('The record was not found.');
+      throw new NotFoundHttpException('Experiencia no encontrada.');
     }
     return $record;
   }
@@ -309,8 +541,18 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
     
     switch ($typeQuery) {
       case 0:
-        // All the experiences
-        $result = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} WHERE 1', []);
+        // All the active experiences
+        // $result = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} WHERE 1', []);
+        $result = $this->dbConnection->query('SELECT  exp.*,
+                                                      sum(stock.stock_initial) as stock_initial, 
+                                                      sum(stock.stock_actual) as stock_actual 
+                                              FROM {ab_inbev_experience} exp 
+                                              INNER JOIN {ab_inbev_exp_stock} stock 
+                                                    ON exp.id = stock.eid 
+                                                    AND exp.valid_from <= :date 
+                                                    AND exp.valid_to >= :date 
+                                                    AND stock.release <= :date 
+                                              GROUP BY exp.id, exp.type, exp.status, exp.title, exp.description, exp.inscription_txt, exp.location, exp.url_redirect, exp.url_terms, exp.created, exp.valid_from, exp.valid_to', [':date' => time()]);
         $records = [];
         while($record = $result->fetchAssoc()) {
           $records[] = $record;
@@ -319,10 +561,16 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
       break;
 
       case 1:
-        // All the active experiences
-        $result = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} WHERE `valid_until` < :date', [':date' => time()]);
+        // All the active experiences - DETAIL - for ADMIN
+        $exp_result = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience}', []);
         $records = [];
-        while($record = $result->fetchAssoc()) {
+        while($record = $exp_result->fetchAssoc()) {
+          $stock_result = $this->dbConnection->query('SELECT `id`, `stock_initial`, `stock_actual`, `release` FROM {ab_inbev_exp_stock} WHERE eid = :eid ', [':eid' => $record['id']]);
+          $stock_records = [];
+          while($stock = $stock_result->fetchAssoc()) {
+            $stock_records[] = $stock;
+          }
+          $record['stock'] = $stock_records;
           $records[] = $record;
         }
         return $records;

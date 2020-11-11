@@ -18,7 +18,7 @@
               matInput
               (input)="inputValidatorAlphabetical($event)"
               formControlName="name"
-              maxlength="20"
+              maxlength="100"
               [(ngModel)]="userRegister.name"
               data-qadp="name"
               required
@@ -194,23 +194,23 @@
                 appearance="fill"
                 floatLabel="auto"
                 class="smallInput"
-                [ngClass]="getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.period)"
+                [ngClass]="getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.stock)"
                 hideRequiredMarker
               >
                 <mat-label>Cupos</mat-label>
                 
                 <input
-                  id="period{{i}}"
+                  id="stock{{i}}"
                   matInput
                   (input)="inputValidatorNumeric($event)"
-                  formControlName="period"
+                  formControlName="stock"
                   maxlength="60"
                   minlength="1"
         
-                  data-qadp="period"
+                  data-qadp="stock"
                   required
                 />
-                <mat-error *ngIf="userEditForm.controls.itemRows.controls[i].controls.period.touched &&  userEditForm.controls.itemRows.controls[i].controls.period.errors">
+                <mat-error *ngIf="userEditForm.controls.itemRows.controls[i].controls.stock.touched &&  userEditForm.controls.itemRows.controls[i].controls.stock.errors">
                   *Has ingresado un dato inválido
                 </mat-error>
               </mat-form-field>
@@ -220,14 +220,14 @@
                appearance="fill"
                floatLabel="auto"
                class="smallInput"
-               [ngClass]=" getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.dateRelease)"
+               [ngClass]=" getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.date)"
                hideRequiredMarker
                >
                <mat-label>Fecha de liberación</mat-label>
                <input 
-               id="dateRelease{{i}}"
+               id="date{{i}}"
                matInput 
-               formControlName="dateRelease"
+               formControlName="date"
                [ngxMatDatetimePicker]="picker3" 
                [min]="minDate" 
                [max]="maxDate" 
@@ -242,7 +242,7 @@
                [touchUi]="touchUi" [color]="color"
                [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
              </ngx-mat-datetime-picker>
-            <mat-error *ngIf="userEditForm.controls.itemRows.controls[i].controls.dateRelease.touched &&  userEditForm.controls.itemRows.controls[i].controls.dateRelease.errors">
+            <mat-error *ngIf="userEditForm.controls.itemRows.controls[i].controls.date.touched &&  userEditForm.controls.itemRows.controls[i].controls.date.errors">
               *Has ingresado un dato inválido
             </mat-error>
               </mat-form-field>

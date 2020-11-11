@@ -80,7 +80,7 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
       name: new FormControl("", [
         Validators.required,
         Validators.minLength(4),
-        Validators.maxLength(20),
+        Validators.maxLength(100),
       ]),
       descrip: new FormControl("", [
         Validators.required,
@@ -109,11 +109,11 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
   }
   initItemRows (){
     return this.formBuilder.group ({
-      period: new FormControl("", [
+      stock: new FormControl("", [
         Validators.minLength(1),
         Validators.maxLength(10),
       ]),
-      dateRelease: new FormControl("",null),
+      date: new FormControl("",null),
     });
   }
   saveUser(): void {
@@ -129,14 +129,15 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
     this.sub_title_modal =" ";
     this.title_button_modal ="ACEPTAR";
     console.log(this.userEditForm.controls.name.value);
-    console.log(this.userEditForm.controls.dateStart.value);
-    console.log(this.userEditForm.controls.dateEnd.value);
+    console.log(new Date(this.userEditForm.controls.dateStart.value).getTime()/1000);
+    console.log(new Date(this.userEditForm.controls.dateEnd.value).getTime()/1000);
     console.log(this.userEditForm.controls.location.value);
     console.log(this.userEditForm.controls.descrip.value);
     console.log(this.userEditForm.controls.stock.value);
-    // console.log(this.userEditForm.controls.period.value);
-    // console.log(this.userEditForm.controls.dateRelease.value);
-    console.log(this.formArr.value);
+    this.formArr.value.forEach(element => {
+      this.arrPeriod.push({"stock":element.stock,"date":(element.date).getTime()/1000});
+      });
+      console.log(this.arrPeriod)
     console.log(this.userEditForm.controls.path.value);
     console.log(this.checkIn);
     console.log(this.checkOut);

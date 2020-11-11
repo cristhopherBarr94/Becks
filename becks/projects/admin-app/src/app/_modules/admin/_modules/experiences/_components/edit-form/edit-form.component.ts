@@ -75,29 +75,32 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
     this.minDate= new Date();
     this.initforms();    
+
     this.expEditable.titleExp = "hola desde experiencia";
     this.expEditable.dateStart = new Date("11/11/2020,18:00:00");
     this.expEditable.dateEnd = new Date("11/18/2020,18:00:00");
     this.expEditable.descrip = "jkllkdsklsdkllkjdjsdjklsdfkljfsdkljlksdfjkldsjflkjsdf";
     this.expEditable.location = "jkllkdsklsdkllkjdjsdjklsdfkljfsdkljlksdfjkldsjflkjsdf";
-    this.expEditable.stock = "1";
+    this.expEditable.stock = [{stock: "5", date: new Date("11/11/2020,18:00:00")}];
     this.expEditable.path = "";
-    this.expEditable.period =[null];
-    this.expEditable.checkIn=true;
+    this.expEditable.checkIn=false;
     this.loadMob = this.expEditable.imagesExpMob; 
     this.loadDes = this.expEditable.imagesExp;
     this.loadedFileMob = this.loadMob;
     this.loadedFileDes = this.loadDes;
-    if(this.expEditable.stock.length > 0) {
+
+    if(this.expEditable.stock.length == 1) {
       this.hideStk = !this.hideStk;
-    }else  if(this.expEditable.path.length > 0) {
+    }else  if(this.expEditable.stock.length > 1) {
+      this.hidePed = false;
+    }
+   if(this.expEditable.path.length > 0) {
       this.hidepath = !this.hidepath;
       if(!this.expEditable.checkIn) {
         this.checked = !this.checked;
       }
-    }else  if(this.expEditable.period.length > 1) {
-      this.hidePed = false;
     }
+    this.editExp();
   
   }
 
@@ -164,7 +167,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     console.log(this.userEditForm.controls.stock.value);
     // console.log(this.userEditForm.controls.period.value);
     // console.log(this.userEditForm.controls.dateRelease.value);
-    console.log(this.formArr.value);
+    // console.log(this.formArr.value);
     console.log(this.userEditForm.controls.path.value);
     console.log(this.checkIn);
     console.log(this.checkOut);
@@ -173,8 +176,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     this.ui.showLoading();
     this.httpService
       .post(
-        environment.serverUrl + environment,
-        this.expEditable.toJSON()
+        environment.serverUrl + environment
       )
       .subscribe(
         (res: any) => {
@@ -280,25 +282,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     return classreturn;
   }
 
-  public getMessageform(
-    item: any,
-    name: string,
-    min?: number,
-    max?: number
-  ): string {
-    if (item.hasError("required")) {
-      return "Este campo es obligatorio";
-    } else if (item.hasError("maxlength")) {
-      return "Máximo " + max;
-    } else if (item.hasError("minlength")) {
-      return "Mínimo " + min;
-    } else {
-      return "Ingrese un valor";
-    }
-  }
-
-
-  
   loadImage(event,myPlatform) {
     var files = event.target.files;
     var imgn = new Image();
@@ -371,7 +354,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       image.onerror = reject;    
     });
   }
-
   
   closeForm() {
     this.parentFunc();
@@ -388,9 +370,12 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       this.hideStk = !this.hideStk;
       if(targetStatus==true){
         this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
+        this.userEditForm.controls.itemRows.controls[0].controls.period.removeAttr("required");
         this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
+        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.removeAttr("required");
       }else{
       this.userEditForm.controls.stock.reset();
+      this.userEditForm.controls.stock.setValue(" ");
       }
     }else if(targetHidden == "ped") {
       this.hidePed = !this.hidePed;
@@ -399,9 +384,12 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       }
       if(targetStatus==true){
         this.userEditForm.controls.stock.reset();
+        this.userEditForm.controls.stock.setValue(" ");
       }else{
         this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
+        this.userEditForm.controls.itemRows.controls[0].controls.period.setValue(" ");
         this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
+        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.setValue("");
       }
 
     }
@@ -409,13 +397,20 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       this.hidepath = ! this.hidepath;
       if(targetStatus==true){
         this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
+        this.userEditForm.controls.itemRows.controls[0].controls.period.setValue(" ");
         this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
+        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.setValue(" ");
         this.userEditForm.controls.stock.reset();
+        this.userEditForm.controls.stock.setValue(" ");
+
       }else{
       this.userEditForm.controls.path.reset();
+      this.userEditForm.controls.path.setValue(" ");
+
       }
     }
   }
+
   unCheck(chk){
   this.checked=!this.checked;
   if(chk.source.id=="mat-checkbox-inside"){
@@ -449,14 +444,38 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     });  
   }
 
-  get formArr() {
-    return this.userEditForm.get('itemRows') as FormArray;
+  editExp() {
+    this.userEditForm.patchValue({
+      name: this.expEditable.titleExp,
+      descrip: this.expEditable.descrip,
+      location: this.expEditable.location,
+      stock: this.expEditable.stock[0].stock, 
+      path:this.expEditable.path,
+      dateEnd: this.expEditable.dateEnd,
+      dateStart: this.expEditable.dateStart,
+
+    });
+
+    this.userEditForm.setControl('itemRows',this.setExistingPeriodicity());
   }
-  addField() {
-    this.formArr.push(this.initItemRows());
-  }
-  deleteField(index:number) {
-    this.formArr.removeAt(index);
+  setExistingPeriodicity():FormArray{
+    const formArray = new FormArray([]);
+    console.log(this.expEditable.stock);
+    this.expEditable.stock.forEach(e=>{
+      formArray.push(this.formBuilder.group({
+        period: e.stock,
+        dateRelease: new Date (e.date),
+      }));
+
+    })
+    return formArray;
   }
   
+
+  addField() {
+    (<FormArray>this.userEditForm.get('itemRows')).push(this.initItemRows());
+  }
+  deleteField(index:number) {
+    (<FormArray>this.userEditForm.get('itemRows')).removeAt(index);
+  }
 }

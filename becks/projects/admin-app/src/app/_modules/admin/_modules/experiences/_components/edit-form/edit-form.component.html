@@ -19,7 +19,7 @@
               (input)="inputValidatorAlphabetical($event)"
               formControlName="name"
               maxlength="100"
-              [(ngModel)]="expEditable.titleExp"
+           
               data-qadp="name"
               required
             />
@@ -45,7 +45,6 @@
             [min]="minDate" 
             [max]="maxDate"
             formControlName="dateStart"
-            [(ngModel)]="expEditable.dateStart" 
             required
             >
           <mat-datepicker-toggle matSuffix [for]="picker1">
@@ -73,7 +72,6 @@
            [min]="minDate" 
            [max]="maxDate" 
            formControlName="dateEnd"
-           [(ngModel)]="expEditable.dateEnd" 
            required
            >
          <mat-datepicker-toggle matSuffix [for]="picker2">
@@ -105,7 +103,6 @@
               (input)="inputValidatorAlphabetical($event)"
               formControlName="location"
               maxlength="100"
-              [(ngModel)]="expEditable.location"
               data-qadp="location"
               required
             />
@@ -129,7 +126,6 @@
             (input)="inputValidatorAlphabetical($event)"
               formControlName="descrip"
               maxlength="500"
-              [(ngModel)]="expEditable.descrip"
               data-qadp="descrip"
               required
               ></textarea>
@@ -165,7 +161,6 @@
                 (input)="inputValidatorNumeric($event)"
                 formControlName="stock"
                 maxlength="60"
-                [(ngModel)]="expEditable.stock"
                 data-qadp="stock"
                 required
               />
@@ -188,7 +183,7 @@
                 <mat-slide-toggle  [checked]="!this.hidePed" name="ped" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
               </ion-row>
               <ion-row 
-              *ngFor="let itemrow of userEditForm.controls.itemRows['controls']; let i=index"
+              *ngFor="let itemrow of userEditForm.get('itemRows').controls; let i=index"
               [formGroupName] = "i">
                 <mat-form-field
                 *ngIf="!this.hidePed"
@@ -207,7 +202,6 @@
                   formControlName="period"
                   maxlength="60"
                   minlength="1"
-                  [(ngModel)]="expEditable.period" 
                   data-qadp="period"
                   required
                 />
@@ -233,7 +227,6 @@
                [min]="minDate" 
                [max]="maxDate" 
                [disabled]="disabled"
-               [(ngModel)]="expEditable.dateRelease[i]" 
                required
                >
              <mat-datepicker-toggle matSuffix [for]="picker3">
@@ -293,7 +286,6 @@
             (input)="inputValidatorAlphaNumeric($event)"
             formControlName="path"
             maxlength="100"
-            [(ngModel)]="expEditable.path"
             data-qadp="path"
             required
           />
@@ -403,7 +395,11 @@
       (click)="saveUser()"
       class="becks-btn-primary button-width"
       [ngClass]="{
-        'button-disabled': userEditForm.invalid || 
+        'button-disabled': userEditForm.controls.name.invalid ||
+        userEditForm.controls.dateStart.invalid || 
+        userEditForm.controls.dateEnd.invalid ||
+        userEditForm.controls.location.invalid ||
+        userEditForm.controls.descrip.invalid ||
         this.loadedFileDes.length == 0  || 
         this.loadedFileMob.length == 0
       }"

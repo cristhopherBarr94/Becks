@@ -10,8 +10,7 @@ export class Exp {
   dateStart: Date;
   dateEnd: Date;
   dateRelease: Date;
-  stock: string;
-  period: [string];
+  stock: any[];
   horaExp: string;
   location: string;
   descrip: string;

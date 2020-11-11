@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ExperienciasService } from 'src/app/_services/experiencias.service';
 
 @Component({
   selector: 'exp-card',
@@ -8,22 +9,29 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-  public experiencesAct: any = [1,2,3];
-  public experiencesInv: any = [1,2,3,4,5,6];
+  public experiencesAct: any = [];
+  public experiencesInv: any = [];
   private expSubs: Subscription;
-
+  public contentExperiences= [];
+  public curDate = new Date();
   @Input() editFunc:any;
   
-  constructor(private router: Router,
+  constructor(private router: Router, private expService: ExperienciasService
     ) { 
      
-    // this.experiences = this.expService.getActualExps();
-    // this.expSubs = this.expService.exp$.subscribe(exps => {
-    //   if ( exps && exps.length > 0 ) {
-    //     this.experiences = exps;
-    //   }
-    // });
-    // this.expService.getData();
+    this.expSubs = this.expService.exp$.subscribe(exps => {
+      if ( exps && exps.length > 0 ) {
+          this.contentExperiences = exps;
+           this.contentExperiences.forEach(content => {
+             if (this.curDate > (new Date(content.dateEnd*1000))) {
+               this.experiencesInv.push(content);
+             }else {
+               this.experiencesAct.push(content);
+             }
+           });
+      }
+    });
+    this.expService.getData();
   }
 
   ngOnInit() {}

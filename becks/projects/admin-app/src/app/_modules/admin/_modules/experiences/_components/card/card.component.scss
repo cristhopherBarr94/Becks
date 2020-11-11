@@ -160,14 +160,6 @@
   .card {
     height: 180px;
     width: auto;
-    background-image: linear-gradient(
-        89.99deg,
-        #121212 -4.97%,
-        rgba(5, 5, 5, 0.293665) 27.28%,
-        rgba(3, 3, 3, 0.188146) 53.38%,
-        rgba(0, 0, 0, 0) 99.92%
-      ),
-      url("./../../../../../../../assets/img/bg_desktop_1366x768_botellaverde.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -180,13 +172,14 @@
       left: 20px;
       top: auto;
       bottom: 10px;
-      width: 150px;
+      width: 200px;
       color: #ffffff;
 
       h4,
       p {
         margin-bottom: 5px;
-        height: 15px;
+        height: auto;
+        min-height: 15px;
         text-transform: capitalize;
       }
       h4 {

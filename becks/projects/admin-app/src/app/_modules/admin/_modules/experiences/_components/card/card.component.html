@@ -2,11 +2,13 @@
     <mat-tab label="ACTIVAS" id="active">
       <ion-row>
         <ion-col size="4" *ngFor="let item of experiencesAct">
-          <div class="card">
+          <div class="card"
+          [style.background-image]="'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url('+ item.imagesExp +')'"
+          >
           <ion-row>
             <div class="card-info">
-              <h4>titulo</h4>
-              <p>fecha</p>
+              <h4>{{item.titleExp}}</h4>
+              <p>{{item.dateEnd*1000 | date}} </p>
               </div>
               <button class="btn-card" (click)="openEdit()">
                 <span>editar</span>
@@ -20,11 +22,13 @@
     <mat-tab label="INACTIVAS" id="inactive">
       <ion-row>
         <ion-col size="4" *ngFor="let item of experiencesInv">
-          <div class="card">
+          <div class="card"
+          [style.background-image]="'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url('+ item.imagesExp +')'"
+          >
           <ion-row>
             <div class="card-info">
-              <h4>titulo</h4>
-              <p>fecha</p>
+              <h4>{{item.titleExp}}</h4>
+              <p>{{item.dateEnd*1000 | date}} </p>
               </div>
               <button class="btn-card" (click)="openEdit()">
                 <span>editar</span>

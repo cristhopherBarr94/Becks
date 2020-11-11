@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Platform } from "@ionic/angular";
+import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from "src/app/_services/ui.service";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: "user-seccions-profile",
@@ -16,11 +18,12 @@ export class SeccionsProfileComponent implements OnInit {
   public Func1:any;
   public Func2:any;
   public Edit:any;
-
+  public contentExperiences=[];
   constructor(
     private platform: Platform,
     private ui: UiService,
-    private router: Router
+    private router: Router,
+    private http: HttpService
   ) {
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
@@ -34,8 +37,25 @@ export class SeccionsProfileComponent implements OnInit {
     this.Func1 = this.hideTabs.bind(this);
     this.Func2 = this.hideEdit.bind(this);
     this.Edit = this.editExp.bind(this);
+    this.getExperiences();
   }
+  getExperiences( ) {
+    this.http.get( environment.serverUrl + environment.admin.getExp + "?time_stamp=" + new Date().getTime() ).subscribe(
+      (response: any) => {
+        if (response.status >= 200 && response.status < 300) {
+         this.contentExperiences = response.body;
+          // console.log( this.contentExperiences)
+        } else {
+       //TO DO message error
+       console.log("error obteniendo experiencias")
+        }
+      },
+      (error) => {
+              //TO DO message error
 
+      }
+    );
+  }
   redirectExp() {
     this.router.navigate(["user/exp"], {
       queryParamsHandling: "preserve",

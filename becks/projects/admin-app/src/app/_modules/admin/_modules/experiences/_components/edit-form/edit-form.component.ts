@@ -77,11 +77,13 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     this.initforms();    
 
     this.expEditable.titleExp = "hola desde experiencia";
-    this.expEditable.dateStart = new Date("11/11/2020,18:00:00");
-    this.expEditable.dateEnd = new Date("11/18/2020,18:00:00");
+    this.expEditable.dateStart = new Date(1605135600*1000);
+    this.expEditable.dateEnd = new Date(1605135600*1000);
     this.expEditable.descrip = "jkllkdsklsdkllkjdjsdjklsdfkljfsdkljlksdfjkldsjflkjsdf";
     this.expEditable.location = "jkllkdsklsdkllkjdjsdjklsdfkljfsdkljlksdfjkldsjflkjsdf";
-    this.expEditable.stock = [{stock: "5", date: new Date("11/11/2020,18:00:00")}];
+    this.expEditable.stock = [{stock: "5", date: new Date(1605135600*1000)},
+    {stock: "6", date: new Date(1605135600*1000)},
+    {stock: "7", date: new Date(1605135600*1000)}];
     this.expEditable.path = "";
     this.expEditable.checkIn=false;
     this.loadMob = this.expEditable.imagesExpMob; 
@@ -164,10 +166,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     console.log(this.userEditForm.controls.dateEnd.value);
     console.log(this.userEditForm.controls.location.value);
     console.log(this.userEditForm.controls.descrip.value);
-    console.log(this.userEditForm.controls.stock.value);
-    // console.log(this.userEditForm.controls.period.value);
-    // console.log(this.userEditForm.controls.dateRelease.value);
-    // console.log(this.formArr.value);
+    console.log(this.arrPeriod)
     console.log(this.userEditForm.controls.path.value);
     console.log(this.checkIn);
     console.log(this.checkOut);
@@ -459,15 +458,18 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     this.userEditForm.setControl('itemRows',this.setExistingPeriodicity());
   }
   setExistingPeriodicity():FormArray{
-    const formArray = new FormArray([]);
-    console.log(this.expEditable.stock);
+    let formArray = new FormArray([]);
     this.expEditable.stock.forEach(e=>{
       formArray.push(this.formBuilder.group({
         period: e.stock,
         dateRelease: new Date (e.date),
       }));
 
-    })
+    });
+    
+    formArray.value.forEach(element => {
+      this.arrPeriod.push({"stock":element.period,"date":(element.dateRelease).getTime()/1000});
+      });
     return formArray;
   }
   

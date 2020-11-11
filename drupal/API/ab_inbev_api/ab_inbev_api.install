@@ -134,15 +134,10 @@ function ab_inbev_api_schema() {
         'not null' => TRUE,
         'description' => 'Experience Location.',
       ],
-      'stock' => [
-        'type' => 'int',
-        'description' => 'Experience Stock.',
-        'size' => 'medium',
-      ],
       'url_redirect' => [
         'type' => 'varchar',
         'length' => 255,
-        'description' => 'URL Redirect.',
+        'description' => 'Experience URL Redirect.',
       ],
       'url_terms' => [
         'type' => 'varchar',
@@ -163,7 +158,7 @@ function ab_inbev_api_schema() {
         'type' => 'int',
         'not null' => TRUE,
         'description' => 'Experience To timestamp.',
-      ]
+      ],
     ],
     'primary key' => ['id'],
     'indexes' => [
@@ -176,6 +171,58 @@ function ab_inbev_api_schema() {
     'collation' => 'latin1_spanish_ci',
   ];
 
+  
+  // "ab_inbev_exp_stock" TABLE for ExperienceAppResource - Stock Logic
+  $schema['ab_inbev_exp_stock'] = [
+    'description' => 'REST API - User Experiences - STOCK.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key',
+      ],
+      'eid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Experience Key ID.',
+      ],
+      'stock_initial' => [
+        'type' => 'int',
+        'description' => 'Experience Stock.',
+        'size' => 'medium',
+      ],
+      'stock_actual' => [
+        'type' => 'int',
+        'description' => 'Experience Actual Stock.',
+        'size' => 'medium',
+      ],
+      'created' => [
+        'type' => 'int',
+        'description' => 'Created timestamp.',
+      ],
+      'release' => [
+        'type' => 'int',
+        'description' => 'Released timestamp.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'id' => ['id'],
+    ],
+    'unique keys' => [
+      '_id' => ['id'],
+    ],
+    'foreign keys' => [
+      'eid' => [
+        'table' => 'ab_inbev_experience',
+        'columns' => [
+          'id' => 'id',
+        ],
+      ],
+    ],
+    'mysql_character_set' => 'latin1',
+    'collation' => 'latin1_spanish_ci',
+  ];
 
   // "ab_inbev_exp" TABLE for RedemptionAppResource
   $schema['ab_inbev_redemption'] = [
@@ -199,7 +246,7 @@ function ab_inbev_api_schema() {
       'eid' => [
         'type' => 'int',
         'not null' => TRUE,
-        'description' => 'Experiences Key ID.',
+        'description' => 'Experience Key ID.',
       ],
       'created' => [
         'type' => 'int',
@@ -284,6 +331,7 @@ function ab_inbev_api_uninstall(){
  */
 function ab_inbev_api_update_8602() {
 
+  // "ab_inbev_code" TABLE for CodeAppResource
   $spec_code = [
     'description' => 'REST API - Activation Codes.',
     'fields' => [
@@ -347,7 +395,6 @@ function ab_inbev_api_update_8602() {
     'collation' => 'latin1_spanish_ci',
   ];
 
-
   // "ab_inbev_exp" TABLE for ExperienceAppResource
   $spec_exp = [
     'description' => 'REST API - User Experiences.',
@@ -392,21 +439,6 @@ function ab_inbev_api_update_8602() {
         'not null' => TRUE,
         'description' => 'Experience Location.',
       ],
-      'stock_initial' => [
-        'type' => 'int',
-        'description' => 'Experience Stock.',
-        'size' => 'medium',
-      ],
-      'stock_actual' => [
-        'type' => 'int',
-        'description' => 'Experience Actual Stock.',
-        'size' => 'medium',
-      ],
-      'periodicity' => [
-        'type' => 'int',
-        'description' => 'Experience Periodicity.',
-        'size' => 'tiny',
-      ],
       'url_redirect' => [
         'type' => 'varchar',
         'length' => 255,
@@ -444,8 +476,59 @@ function ab_inbev_api_update_8602() {
     'collation' => 'latin1_spanish_ci',
   ];
 
+  // "ab_inbev_exp_stock" TABLE for ExperienceAppResource - Stock Logic
+  $spec_exp_stock = [
+    'description' => 'REST API - User Experiences - STOCK.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key',
+      ],
+      'eid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Experience Key ID.',
+      ],
+      'stock_initial' => [
+        'type' => 'int',
+        'description' => 'Experience Stock.',
+        'size' => 'medium',
+      ],
+      'stock_actual' => [
+        'type' => 'int',
+        'description' => 'Experience Actual Stock.',
+        'size' => 'medium',
+      ],
+      'created' => [
+        'type' => 'int',
+        'description' => 'Created timestamp.',
+      ],
+      'release' => [
+        'type' => 'int',
+        'description' => 'Released timestamp.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'id' => ['id'],
+    ],
+    'unique keys' => [
+      '_id' => ['id'],
+    ],
+    'foreign keys' => [
+      'eid' => [
+        'table' => 'ab_inbev_experience',
+        'columns' => [
+          'id' => 'id',
+        ],
+      ],
+    ],
+    'mysql_character_set' => 'latin1',
+    'collation' => 'latin1_spanish_ci',
+  ];
 
-  // "ab_inbev_exp" TABLE for RedemptionAppResource
+  // "ab_inbev_redemption" TABLE for RedemptionAppResource
   $spec_redemp = [
     'description' => 'REST API - User Redemptions.',
     'fields' => [
@@ -467,7 +550,7 @@ function ab_inbev_api_update_8602() {
       'eid' => [
         'type' => 'int',
         'not null' => TRUE,
-        'description' => 'Experiences Key ID.',
+        'description' => 'Experience Key ID.',
       ],
       'created' => [
         'type' => 'int',
@@ -512,6 +595,7 @@ function ab_inbev_api_update_8602() {
   $schema = Database::getConnection()->schema();
   $schema->createTable('ab_inbev_code', $spec_code);
   $schema->createTable('ab_inbev_experience', $spec_exp);
+  $schema->createTable('ab_inbev_exp_stock', $spec_exp_stock);
   $schema->createTable('ab_inbev_redemption', $spec_redemp);
   return $schema;
 }

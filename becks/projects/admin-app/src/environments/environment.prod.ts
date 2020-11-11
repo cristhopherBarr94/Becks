@@ -17,7 +17,9 @@ export const environment = {
     patchPhoto: "/api/ab-inbev-api-user-app/2",
     patchActivate: "/api/ab-inbev-api-code-app/1",
     getCodes: "/api/ab-inbev-api-code-app/1",
-    getExp: "/api/ab-inbev-api-experience/0",
+    getExp: "/api/ab-inbev-api-experience/1",
+    postExp: "/api/ab-inbev-api-experience/",
+    patchExp: "/api/ab-inbev-api-experience/0",
     getImgExp: "/sites/default/files/images/experience/", // id_desk && id_mob
     getPdfExp: "/sites/default/files/pdfs/experience/", // id.pdf
     postRedemp: "/api/ab-inbev-api-redemption/",

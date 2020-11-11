@@ -157,17 +157,27 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
 
     $this->validate($data);
     
-    $exp = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} WHERE id = :id', [':id' => trim($data['eid'])])->fetchAssoc();
+    $stock_result = $this->dbConnection->query('SELECT * FROM {ab_inbev_exp_stock} WHERE eid = :id', [':id' => trim($data['eid'])]);
 
-    if ( !$exp ) {
+    if ( !$stock_result ) {
       throw new BadRequestHttpException('ID de experiencia no existe.');
     }
     
-    if ( $exp['stock_actual'] <= 0 ) {
+    $isEmpty = true;
+    $stock = null;
+    while($stock = $stock_result->fetchAssoc()) {
+      if ( $stock['stock_actual'] > 0 ) {
+        $isEmpty = false;
+        break;
+      }
+    }
+
+    if ( $isEmpty || $stock == null ) {
       throw new BadRequestHttpException('Experiencia sin stock.');
     }
 
     try {
+
       $record = [
         "uid" => $this->currentUser->id(),
         "cid" => trim($data['cid']),
@@ -175,21 +185,23 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
         "created" => time()
       ];
       $id = $this->dbConnection->insert('ab_inbev_redemption')
-        ->fields($record)
-        ->execute();
+            ->fields($record)
+            ->execute();
       if ( is_numeric($id) ) {
-        $this->dbConnection->query('UPDATE {ab_inbev_experience} SET stock_actual = stock_actual - 1 WHERE id = :id', [':id' => trim($data['eid'])]);
+        $this->dbConnection->query('UPDATE {ab_inbev_exp_stock} SET stock_actual = stock_actual - 1 WHERE id = :id', [':id' => trim($stock['id'])]);
       }
+
+      $created_record = $this->loadRecord($id);
+
+      // Return the newly created record in the response body.
+      return new ModifiedResourceResponse($created_record, 201);
     } catch (\Throwable $th) {
-      throw new BadRequestHttpException('Error interno, intenta de nuevo mas tarde.');
+      if ( strrpos( $th->getMessage() , '1062 Duplicate entry' ) !== false ) {
+        throw new BadRequestHttpException('No se puede redimir mas de una vez la experiencia.');
+      }
     }
 
-    // $this->logger->notice('New redemptions record has been created.');
-
-    $created_record = $this->loadRecord($id);
-
-    // Return the newly created record in the response body.
-    return new ModifiedResourceResponse($created_record, 201);
+    throw new BadRequestHttpException('Error interno, intenta de nuevo mas tarde.');
   }
 
   /**

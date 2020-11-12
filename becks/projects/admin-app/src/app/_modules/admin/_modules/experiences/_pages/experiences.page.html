@@ -1,5 +1,11 @@
 <ion-content>
   <app-toolbar></app-toolbar>
-  <user-seccions-profile></user-seccions-profile>
+  <div style="width:20%">
+    <app-sidebar [hgtSide]="heigthTosidebar"></app-sidebar>
+  </div>
+  
+  <div style="margin-left:20%">
+    <user-seccions-profile (hidetoSide)=setHgt($event)></user-seccions-profile>
+  </div>
   <app-footer></app-footer>
 </ion-content>

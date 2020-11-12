@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,8 +8,26 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  @Input() hgtSide:number;
 
-  ngOnInit() {}
+  constructor( private router: Router ) { }
+
+  ngOnInit() {
+    console.log(this.hgtSide);
+  }
   
+  redirectTo(target) {
+    if(target == "act"){
+      this.router.navigate([`admin/activation`], {
+        queryParamsHandling: "preserve",
+        state: { reload: 'true' }
+      });
+    }
+    if(target == "exp"){
+      this.router.navigate([`admin/exp`], {
+        queryParamsHandling: "preserve",
+        state: { reload: 'true' }
+      });
+    }
+  }
 }

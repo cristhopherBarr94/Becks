@@ -4,6 +4,7 @@ import {
   Input,
   AfterViewInit,
   ChangeDetectorRef,
+  ViewChild,
 } from "@angular/core";
 import {
   FormBuilder,
@@ -20,6 +21,8 @@ import { PopUpComponent } from 'src/app/_modules/admin/_components/pop-up/pop-up
 import { Exp } from 'src/app/_models/exp';
 import { Subscription } from 'rxjs';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
+import { SidebarComponent } from 'src/app/_modules/utils/_components/sidebar/sidebar.component';
+import { ExperiencesPage } from '../../_pages/experiences.page';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -61,6 +64,7 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
   public minDate:any;
   public id:number;
   public stoks=[];
+
   @Input() parentFunc:any;
   @Input() preload:any;
 
@@ -78,8 +82,6 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
       this.initforms();    
   }
-
-  ngAfterViewInit(): void { }
 
   initforms() {
     this.userEditForm = this.formBuilder.group({

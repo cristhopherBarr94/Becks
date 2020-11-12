@@ -4,6 +4,7 @@ import {
   Input,
   AfterViewInit,
   ChangeDetectorRef,
+  ViewChild,
 } from "@angular/core";
 import {
   FormBuilder,
@@ -20,6 +21,7 @@ import { PopUpComponent } from 'src/app/_modules/admin/_components/pop-up/pop-up
 import { Exp } from 'src/app/_models/exp';
 import { Subscription } from 'rxjs';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
+import { SidebarComponent } from 'src/app/_modules/utils/_components/sidebar/sidebar.component';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -61,7 +63,10 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public minDate:any;
   public id:number;
   public stoks=[];
- 
+
+
+  @ViewChild(SidebarComponent) sidebar: SidebarComponent;
+  public hgtSide=1330;
   @Input() parentFunc:any;
   @Input() preload:any;
 
@@ -112,7 +117,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
  
   }
 
-  ngAfterViewInit(): void { }
+  ngAfterViewInit(): void {
+    this.sidebar.hgtSide = this.hgtSide;
+  }
 
   initforms() {
     this.userEditForm = this.formBuilder.group({

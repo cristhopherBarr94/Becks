@@ -48,7 +48,8 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public password: string;
   public showError: boolean = false;
   public typeError:boolean = false;
-  public photo: any;
+  public photoDes: any;
+  public photoMob: any;
   public checkIn:boolean =  !this.checked;
   public checkOut:boolean = this.checked;
   public title_modal:string = "RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
@@ -60,6 +61,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public minDate:any;
   public id:number;
   public stoks=[];
+ 
   @Input() parentFunc:any;
   @Input() preload:any;
 
@@ -168,7 +170,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       dateRelease: new FormControl("",null),
     });
   }
-  saveUser(): void {
+  saveExp(): void {
 
     if ( this.userEditForm.invalid || this.loadedFileDes.length == 0 || this.loadedFileMob.length == 0  ) {
       this.showError = true;
@@ -177,18 +179,10 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       });
       return;
     }
-    // console.log(this.userEditForm.controls.name.value);
-    // console.log((this.userEditForm.controls.dateStart.value).getTime()/1000);
-    // console.log((this.userEditForm.controls.dateEnd.value).getTime()/1000);
-    // console.log(this.userEditForm.controls.location.value);
-    // console.log(this.userEditForm.controls.descrip.value);
     this.userEditForm.get('itemRows').value.forEach(element => {
         this.arrPeriod.push({"stock":element.period,"date":(element.dateRelease).getTime()/1000});
         });
-    // console.log(this.arrPeriod)
-    // console.log(this.userEditForm.controls.path.value);
-    // console.log(this.loadDes);
-    // console.log(this.loadMob);
+
     this.ui.showLoading();
     this.httpService.patch(environment.serverUrl + environment.admin.patchExp,
       {
@@ -199,8 +193,8 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         "valid_from":(this.userEditForm.controls.dateStart.value).getTime()/1000,
         "valid_to": (this.userEditForm.controls.dateEnd.value).getTime()/1000,
         "stock": this.arrPeriod,
-        "img_desk": this.loadDes,    
-        "img_mob": this.loadMob,                    
+        "img_desk": this.photoDes,    
+        "img_mob": this.photoMob,                  
       }
       ).subscribe(
         (response: any) => {
@@ -279,10 +273,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         this.resizeImage(files[0], 1280, 720).then((blob) => {
           if (files && blob) {
             var reader = new FileReader();
-            // reader.onload = this._handleReaderLoaded.bind(this);
             reader.readAsBinaryString(blob);
             this.loadedFileDes =imgn.name;
-
+            this.toBase64(blob,myPlatform);
           }
           
         });
@@ -290,10 +283,9 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         this.resizeImage(files[0], 720, 480).then((blob) => {
           if (files && blob) {
             var reader = new FileReader();
-            // reader.onload = this._handleReaderLoaded.bind(this);
             reader.readAsBinaryString(blob);
             this.loadedFileMob =imgn.name; 
-
+            this.toBase64(blob,myPlatform);
           }
         });
       }
@@ -304,6 +296,20 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     }
   
   }
+
+ toBase64(blob,type){
+  var reader2 = new FileReader();
+  reader2.readAsDataURL(blob); 
+  if(type == "des") {
+    reader2.onloadend = () => {
+      this.photoDes = reader2.result;
+  }
+  }else if(type == "mob") {
+    reader2.onloadend = () => {
+      this.photoMob = reader2.result;
+  }
+  }
+ }
 
   resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
     return new Promise((resolve, reject) => {

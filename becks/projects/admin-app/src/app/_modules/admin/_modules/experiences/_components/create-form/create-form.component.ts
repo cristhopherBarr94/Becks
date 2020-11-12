@@ -48,7 +48,8 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
   public password: string;
   public showError: boolean = false;
   public typeError:boolean = false;
-  public photo: any;
+  public photoDes: any;
+  public photoMob: any;
   public checkIn:boolean =  !this.checked;
   public checkOut:boolean = this.checked;
   public title_modal:string = "RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
@@ -148,8 +149,8 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
         "valid_from":(this.userEditForm.controls.dateStart.value).getTime()/1000,
         "valid_to": (this.userEditForm.controls.dateEnd.value).getTime()/1000,
         "stock": this.arrPeriod,
-        "img_desk": this.loadDes,    
-        "img_mob": this.loadMob,                    
+        "img_desk": this.photoDes,    
+        "img_mob": this.photoMob,                    
       }
       ).subscribe(
         (response: any) => {
@@ -228,9 +229,9 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
         this.resizeImage(files[0], 1280, 720).then((blob) => {
           if (files && blob) {
             var reader = new FileReader();
-            // reader.onload = this._handleReaderLoaded.bind(this);
             reader.readAsBinaryString(blob);
             this.loadedFileDes =imgn.name;
+            this.toBase64(blob,myPlatform);
 
           }
           
@@ -239,9 +240,9 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
         this.resizeImage(files[0], 720, 480).then((blob) => {
           if (files && blob) {
             var reader = new FileReader();
-            // reader.onload = this._handleReaderLoaded.bind(this);
             reader.readAsBinaryString(blob);
             this.loadedFileMob =imgn.name; 
+            this.toBase64(blob,myPlatform);
 
           }
         });
@@ -253,7 +254,23 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
     }
   
   }
-
+  toBase64(blob,type){
+    var reader2 = new FileReader();
+    reader2.readAsDataURL(blob); 
+    if(type == "des") {
+      reader2.onloadend = () => {
+        this.photoDes = reader2.result;
+        console.log(this.photoDes);
+    }
+    }else if(type == "mob") {
+      reader2.onloadend = () => {
+        this.photoMob = reader2.result;
+        console.log(this.photoMob);
+  
+    }
+    }
+   }
+  
   resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
     return new Promise((resolve, reject) => {
       let image = new Image();
@@ -292,10 +309,7 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
   
   closeForm() {
     this.closeModal();
-    this.router.navigate([`admin/exp`], {
-      queryParamsHandling: "preserve",
-      state: { reload: 'true' }
-    });
+    location.reload();
   }
   closeModal() {
     this.ui.dismissModal();

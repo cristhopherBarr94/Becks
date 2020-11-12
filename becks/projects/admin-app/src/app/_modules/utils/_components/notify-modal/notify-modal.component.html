@@ -5,26 +5,24 @@
     >X</button>
     </span>
     <span class="modal-body">
-      <div>
-        <h1>!</h1>
-      </div>
+      <span class="logo-brand-modal"> </span>
     <div>
-      <h3 [hidden]="allow==true">VAS A DARLE ACCESO A {{amount}} USUARIOS</h3>
-      <h3 [hidden]="allow==false">VAS A ELIMINAR A ESTE USUARIO</h3>
+      <h1 [hidden]="allow==true">VAS A DARLE ACCESO A {{amount}} USUARIOS</h1>
+      <h1 [hidden]="allow==false">VAS A ELIMINAR A ESTE USUARIO</h1>
     </div>
     <div>
-      <p>¿DESEAS CONTINUAR?</p>
+      <h3>¿DESEAS CONTINUAR?</h3>
     </div>
     </span>
     <span>
       <button
       [hidden]="allow==true"
-      class="modal-btn"
+      class="becks-btn-primary button-width"
       (click)="activateUserParent()"
       >CONTINUAR</button>
       <button
       [hidden]="allow==false"
-      class="modal-btn"
+      class="becks-btn-primary button-width"
       (click)="deleteUserParent()"
       >ELIMINAR</button>
     </span>

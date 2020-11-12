@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
@@ -8,7 +8,7 @@ import { ExperienciasService } from 'src/app/_services/experiencias.service';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnInit, OnDestroy {
   public experiencesAct: any = [];
   public experiencesInv: any = [];
   private expSubs: Subscription;
@@ -21,6 +21,8 @@ export class CardComponent implements OnInit {
      
     this.expSubs = this.expService.exp$.subscribe(exps => {
       if ( exps && exps.length > 0 ) {
+          this.experiencesInv = [];
+          this.experiencesAct = [];
           this.contentExperiences = exps;
            this.contentExperiences.forEach(content => {
              if (this.curDate > (new Date(content.dateEnd))) {
@@ -35,6 +37,10 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  ngOnDestroy() {
+    this.expSubs.unsubscribe();
+  }
    
 
     redirectExpId(id) {

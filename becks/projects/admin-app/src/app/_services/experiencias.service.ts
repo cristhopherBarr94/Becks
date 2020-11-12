@@ -32,22 +32,21 @@ export class ExperienciasService {
         if (response.status >= 200 && response.status < 300) {
           this._exps = [];
           response.body.forEach((element, index) => {
-            const elementoResponse: Exp = {
-              id: element.id,
-              imagesExp: urlServer + environment.admin.getImgExp + element.id + "_desk",
-              imagesExpMob: urlServer + environment.admin.getImgExp + element.id + "_mob",
-              titleExp: element.title,
-              dateStart: element.valid_from*1000,
-              dateEnd: element.valid_to*1000,
-              dateRelease: element.stock.release*1000,
-              stock: element.stock,
-              location: element.location,
-              descrip: element.description,
-              path: element.url_redirect,
-              status: element.status,
-              type: element.type,
-              urlTerms: element.url_terms,
-            };
+            const elementoResponse: Exp = new Exp();
+              elementoResponse.id = element.id;
+              elementoResponse.imagesExp = urlServer + environment.admin.getImgExp + element.id + "_desk";
+              elementoResponse.imagesExpMob = urlServer + environment.admin.getImgExp + element.id + "_mob";
+              elementoResponse.titleExp = element.title;
+              elementoResponse.dateStart = element.valid_from ;
+              elementoResponse.dateEnd = element.valid_to;
+              elementoResponse.dateRelease = element.stock.release;
+              elementoResponse.stock = element.stock.stock_actual;
+              elementoResponse.location = element.location;
+              elementoResponse.descrip = element.description;
+              elementoResponse.path = element.url_redirect;
+              elementoResponse.status = element.status;
+              elementoResponse.type = element.type;
+              elementoResponse.urlTerms = element.url_terms;
             this._exps.push(elementoResponse);
             if ( response.body.length-1 == index ) {
               this._expSbj.next(this._exps);

@@ -543,6 +543,7 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
       case 0:
         // All the active experiences
         // $result = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} WHERE 1', []);
+        $date = time();
         $result = $this->dbConnection->query('SELECT  exp.*,
                                                       sum(stock.stock_initial) as stock_initial, 
                                                       sum(stock.stock_actual) as stock_actual 
@@ -552,11 +553,26 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
                                                     AND exp.valid_from <= :date 
                                                     AND exp.valid_to >= :date 
                                                     AND stock.release <= :date 
-                                              GROUP BY exp.id, exp.type, exp.status, exp.title, exp.description, exp.inscription_txt, exp.location, exp.url_redirect, exp.url_terms, exp.created, exp.valid_from, exp.valid_to', [':date' => time()]);
+                                              GROUP BY exp.id, exp.type, exp.status, exp.title, exp.description, exp.inscription_txt, exp.location, exp.url_redirect, exp.url_terms, exp.created, exp.valid_from, exp.valid_to', [':date' => $date]);
         $records = [];
+        $ids = [];
         while($record = $result->fetchAssoc()) {
           $records[] = $record;
+          $ids[] = $record['id'];
         }
+        $resultII = $this->dbConnection->query('SELECT exp.* FROM {ab_inbev_experience} exp 
+                                              WHERE exp.valid_from <= :date 
+                                              AND exp.valid_to >= :date 
+                                              AND exp.id NOT IN ( :ids ) ', [':date' => $date, ':ids' => implode(" , ", $ids)]);
+        while($record = $resultII->fetchAssoc()) {
+          if ( in_array($record['id'] , $ids) ) {
+            continue;
+          }
+          $record['stock_initial'] = $record['stock_initial'] ?? "0";
+          $record['stock_actual'] = $record['stock_actual'] ?? "0";
+          $records[] = $record;
+        }
+
         return $records;
       break;
 

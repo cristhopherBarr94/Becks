@@ -201,7 +201,6 @@ export class SliderExpComponent implements OnInit, OnDestroy, AfterContentChecke
 
   
 participateExperience(eid:number) {
-
   //check redemptions
   if ( this.redemps )  {
     for ( let _id of this.redemps ) {
@@ -213,28 +212,33 @@ participateExperience(eid:number) {
     }
   }
 
-  console.log("participateExperience", this.experienciaContent[eid-1]);
-  
-  //notificacion message
-  switch( this.experienciaContent[eid-1].type ) {
-    case "0" : break;
-    case "1" : break;
-    case "2" : break;
+  let exp = null;
+  for ( exp of this.experienciaContent ) {
+    if ( exp.id == eid ) {
+      break;
+    }
   }
-  if(this.experienciaContent[eid-1].type == "0"){
+
+  //notificacion message
+  // switch( this.experienciaContent[eid-1].type ) {
+  //   case "0" : break;
+  //   case "1" : break;
+  //   case "2" : break;
+  // }
+  if(exp.type == "0"){
     this.router.navigate([`user/confirm-interaction/`], {
       queryParamsHandling: "preserve",
-      state: { exp: this.experienciaContent[eid-1] }
+      state: { exp: exp }
     });
 
   }
   //redirection
-  else if(this.experienciaContent[eid-1].type == "1"){
-    window.open(this.experienciaContent[eid].urlRedirect);
+  else if(exp.type == "1"){
+    window.open(exp.urlRedirect);
 
   }
   //question form
-  else if(this.experienciaContent[eid-1].type == "2"){
+  else if(exp.type == "2"){
     this.router.navigate([`user/interaction/${eid}`]);
 
   }

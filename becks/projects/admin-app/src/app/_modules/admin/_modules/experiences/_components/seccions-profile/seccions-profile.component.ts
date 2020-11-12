@@ -1,16 +1,19 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { Platform } from "@ionic/angular";
+import { Subscription } from 'rxjs';
+import { ExperienciasService } from 'src/app/_services/experiencias.service';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from "src/app/_services/ui.service";
 import { environment } from 'src/environments/environment';
+import { ExperiencesPage } from '../../_modules/_pages/experiences.page';
 
 @Component({
   selector: "user-seccions-profile",
   templateUrl: "./seccions-profile.component.html",
   styleUrls: ["./seccions-profile.component.scss"],
 })
-export class SeccionsProfileComponent implements OnInit {
+export class SeccionsProfileComponent implements OnInit, OnDestroy {
   public size: string;
   @Input() isActive : boolean
   public  create:boolean =  false;
@@ -18,12 +21,13 @@ export class SeccionsProfileComponent implements OnInit {
   public Func1:any;
   public Func2:any;
   public Edit:any;
-  public contentExperiences=[];
+  // public contentExperiences=[];
+  // private expSubs: Subscription;
+
   constructor(
     private platform: Platform,
     private ui: UiService,
-    private router: Router,
-    private http: HttpService
+    private router: Router
   ) {
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
@@ -37,25 +41,23 @@ export class SeccionsProfileComponent implements OnInit {
     this.Func1 = this.hideTabs.bind(this);
     this.Func2 = this.hideEdit.bind(this);
     this.Edit = this.editExp.bind(this);
-    this.getExperiences();
+    // this.getExperiences();
   }
-  getExperiences( ) {
-    this.http.get( environment.serverUrl + environment.admin.getExp + "?time_stamp=" + new Date().getTime() ).subscribe(
-      (response: any) => {
-        if (response.status >= 200 && response.status < 300) {
-         this.contentExperiences = response.body;
-          // console.log( this.contentExperiences)
-        } else {
-       //TO DO message error
-       console.log("error obteniendo experiencias")
-        }
-      },
-      (error) => {
-              //TO DO message error
 
-      }
-    );
+  ngOnDestroy() {
+    // this.expSubs.unsubscribe();
   }
+
+  // getExperiences( ) {
+  //   this.expSubs = this.expService.exp$.subscribe(
+  //     exps => {
+  //       if ( exps && exps.length > 0 ) {
+  //         this.contentExperiences = exps;
+  //       }
+  //     }
+  //   );
+  // }
+
   redirectExp() {
     this.router.navigate(["user/exp"], {
       queryParamsHandling: "preserve",

@@ -25,7 +25,7 @@ export class CardComponent implements OnInit, OnDestroy {
           this.experiencesAct = [];
           this.contentExperiences = exps;
            this.contentExperiences.forEach(content => {
-             if (this.curDate > (new Date(content.dateEnd*1000))) {
+             if (this.curDate > (new Date(content.dateEnd))) {
                this.experiencesInv.push(content);
              }else {
                this.experiencesAct.push(content);
@@ -42,7 +42,12 @@ export class CardComponent implements OnInit, OnDestroy {
     this.expSubs.unsubscribe();
   }
    
-  openEdit() {
-    this.editFunc();
-  }
+
+    redirectExpId(id) {
+      this.router.navigate([`admin/edit/${id}`], {
+        queryParamsHandling: "preserve",
+        state: { reload: 'true' }
+      });
+    }
+  
 }

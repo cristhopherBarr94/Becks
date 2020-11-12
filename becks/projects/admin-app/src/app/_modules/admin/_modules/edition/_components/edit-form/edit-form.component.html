@@ -387,11 +387,12 @@
     </form>
 
     <br /><mat-error *ngIf="httpError" class="error-http">{{ httpError }}</mat-error>
+  
     <ion-row class="margin-left ">
       <button
       block="block"
       color="becks"
-      (click)="saveExp()"
+      (click)="saveUser()"
       class="becks-btn-primary button-width"
       [ngClass]="{
         'button-disabled': userEditForm.controls.name.invalid ||
@@ -404,7 +405,7 @@
       }"
       data-qadp="send-button-form"
     >
-      <span>CREAR EXPERIENCIA</span>
+      <span>guardar</span>
     </button>
     <button class="btn-cancel"
       (click) = "openModal()"

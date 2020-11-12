@@ -14,13 +14,12 @@ import {
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
-import { SHA256 } from "crypto-js";
-import { AuthService } from 'src/app/_services/auth.service';
-import { User } from 'src/app/_models/User';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
-import { AdminService } from 'src/app/_services/admin.service';
 import { PopUpComponent } from 'src/app/_modules/admin/_components/pop-up/pop-up.component';
+import { Exp } from 'src/app/_models/exp';
+import { Subscription } from 'rxjs';
+import { ExperienciasService } from 'src/app/_services/experiencias.service';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -34,7 +33,7 @@ declare global {
 })
 export class CreateFormComponent implements OnInit,AfterViewInit {
   public userEditForm: FormGroup;
-  public userRegister: User = new User();
+  public expEditable: Exp = new Exp();
   public captchaStatus: boolean;
   public restartCaptcha: boolean;
   public httpError: string;
@@ -52,25 +51,31 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
   public photo: any;
   public checkIn:boolean =  !this.checked;
   public checkOut:boolean = this.checked;
-  public title_modal:string;
-  public sub_title_modal:string;
-  public title_button_modal:string;
+  public title_modal:string = "RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
+  public sub_title_modal:string = "¿DESEAS CANCELAR?";
+  public title_button_modal:string = "CANCELAR";
   public arrPeriod = [];
+  public experiencienContent = [];
+  public nameExp:string;
+  public minDate:any;
+  public id:number;
+  public stoks=[];
   @Input() parentFunc:any;
   @Input() preload:any;
+
+  experienceSubs:Subscription;
+  editSubs:Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
     public httpService: HttpService,
     private router: Router,
     private ui: UiService,
-    private cdr: ChangeDetectorRef,
-    private authService: AuthService,
-    private adminSvc: AdminService,
-  ) { }
+    private expService: ExperienciasService,
+  ) {}
 
   ngOnInit(): void {
-    this.initforms();
+      this.initforms();    
   }
 
   ngAfterViewInit(): void { }
@@ -109,14 +114,14 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
   }
   initItemRows (){
     return this.formBuilder.group ({
-      stock: new FormControl("", [
+      period: new FormControl("", [
         Validators.minLength(1),
         Validators.maxLength(10),
       ]),
-      date: new FormControl("",null),
+      dateRelease: new FormControl("",null),
     });
   }
-  saveUser(): void {
+  saveExp(): void {
 
     if ( this.userEditForm.invalid || this.loadedFileDes.length == 0 || this.loadedFileMob.length == 0  ) {
       this.showError = true;
@@ -125,91 +130,50 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
       });
       return;
     }
-    this.title_modal ="SE HAN GUARDADO LOS CAMBIOS CON ÉXITO";
-    this.sub_title_modal =" ";
-    this.title_button_modal ="ACEPTAR";
-    console.log(this.userEditForm.controls.name.value);
-    console.log(new Date(this.userEditForm.controls.dateStart.value).getTime()/1000);
-    console.log(new Date(this.userEditForm.controls.dateEnd.value).getTime()/1000);
-    console.log(this.userEditForm.controls.location.value);
-    console.log(this.userEditForm.controls.descrip.value);
-    console.log(this.userEditForm.controls.stock.value);
-    this.formArr.value.forEach(element => {
-      this.arrPeriod.push({"stock":element.stock,"date":(element.date).getTime()/1000});
-      });
-      console.log(this.arrPeriod)
-    console.log(this.userEditForm.controls.path.value);
-    console.log(this.checkIn);
-    console.log(this.checkOut);
-    console.log(this.loadDes);
-    console.log(this.loadMob);
+ 
+    this.userEditForm.get('itemRows').value.forEach(element => {
+      if((element.period== null && element.dateRelease== null)  || (element.period== "" && element.dateRelease== "") ){
+        this.arrPeriod.push({"stock":this.userEditForm.controls.stock.value,"date":(new Date()).getTime()/1000});
+      }else {
+        this.arrPeriod.push({"stock":element.period,"date":(element.dateRelease).getTime()/1000});
+      }
+        });
+ 
     this.ui.showLoading();
-    this.httpService
-      .post(
-        environment.serverUrl + environment,
-        this.userRegister.toJSON()
-      )
-      .subscribe(
-        (res: any) => {
-          try {
-            if ( res.status >= 200 && res.status < 300 ) {
-                const formData = new FormData();
-                try {
-                  formData.append("name", this.userEditForm.controls.name.value);
-                  formData.append("date_1", this.userEditForm.controls.dateStart.value);
-                  formData.append("date_2", this.userEditForm.controls.dateEnd.value);
-                  formData.append("location", this.userEditForm.controls.location.value);
-                  formData.append("description", this.userEditForm.controls.descrip.value);
-                  formData.append("stock", this.userEditForm.controls.stock.value);
-                  formData.append("periodicity", this.userEditForm.controls.period.value);
-                  formData.append("date_3", this.userEditForm.controls.dateRelease.value);
-                  formData.append("path", this.userEditForm.controls.path.value);
-                  formData.append("check_inside", this.checkIn.toString());
-                  formData.append("check_outside", this.checkOut.toString());
-                  formData.append("img_des", this.loadedFileDes);
-                  formData.append("img_mob", this.loadedFileMob);
-                
-                } catch (error) {
-                  return;
-                }
-                this.userEditForm.reset();
-                this.httpService
-                .postFormData(
-                  environment.serverUrl + environment.login.resource,
-                  formData
-                )
-                .subscribe(
-                  (response: any) => {
-                    this.ui.dismissLoading();
-                    if ( response.status >= 200 && response.status < 300 ) {
-                      this.ui.dismissModal(2500);
-                      this.ui.dismissLoading(2500);
-                      this.router.navigate(["admin/experiences"], {
-                        queryParamsHandling: "preserve",
-                      });
-                    } else {
-                      location.reload();  
-                    }
-                  }, (e) => {
-                    location.reload();
-                  });
-                  
-            } else {
-              this.showError = true;
-            }
-            
-          } catch (e) {
-            this.showError = true;
+    this.httpService.post(environment.serverUrl + environment.admin.postExp,
+      {
+        "title": this.userEditForm.controls.name.value,
+        "description": this.userEditForm.controls.descrip.value,
+        "location": this.userEditForm.controls.location.value,
+        "valid_from":(this.userEditForm.controls.dateStart.value).getTime()/1000,
+        "valid_to": (this.userEditForm.controls.dateEnd.value).getTime()/1000,
+        "stock": this.arrPeriod,
+        "img_desk": this.loadDes,    
+        "img_mob": this.loadMob,                    
+      }
+      ).subscribe(
+        (response: any) => {
+          this.ui.dismissLoading();
+          if (response.status >= 200 && response.status < 300) {
+            this.title_modal ="SE HAN GUARDADO LOS CAMBIOS CON ÉXITO";
+            this.sub_title_modal =" ";
+            this.title_button_modal ="ACEPTAR";
+            this.ui.showModal( PopUpComponent, "modalMessage", true, false, {
+              title: this.title_modal,
+              sub_title: this.sub_title_modal,
+              title_button: this.title_button_modal,
+              Func: this.reload.bind(this),
+              FuncAlt: this.closeModal.bind(this),
+            });  
+          } else {
+            // TODO :: logic for error
           }
         },
-        (err) => {
-          this.showError = true;
-          if (err.error) {
-            this.httpError = err.error.message;
-          }
-          this.ui.dismissLoading();
+        (error) => {
+          // TODO :: logic for error
+          console.log("error enviando datos");
         }
-      );
+    );
   }
 
   public inputValidatorNumeric(event: any) {
@@ -253,25 +217,6 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
     return classreturn;
   }
 
-  public getMessageform(
-    item: any,
-    name: string,
-    min?: number,
-    max?: number
-  ): string {
-    if (item.hasError("required")) {
-      return "Este campo es obligatorio";
-    } else if (item.hasError("maxlength")) {
-      return "Máximo " + max;
-    } else if (item.hasError("minlength")) {
-      return "Mínimo " + min;
-    } else {
-      return "Ingrese un valor";
-    }
-  }
-
-
-  
   loadImage(event,myPlatform) {
     var files = event.target.files;
     var imgn = new Image();
@@ -344,12 +289,13 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
       image.onerror = reject;    
     });
   }
-
   
   closeForm() {
-    this.parentFunc();
     this.closeModal();
-    location.reload();
+    this.router.navigate([`admin/exp`], {
+      queryParamsHandling: "preserve",
+      state: { reload: 'true' }
+    });
   }
   closeModal() {
     this.ui.dismissModal();
@@ -360,10 +306,16 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
     if(targetHidden == "stk"){
       this.hideStk = !this.hideStk;
       if(targetStatus==true){
-        this.userEditForm.controls.itemRows['controls'][0].controls.period.reset();
-        this.userEditForm.controls.itemRows['controls'][0].controls.dateRelease.reset();
+        this.hidePed = true;
+        this.userEditForm.controls.itemRows['controls'].forEach(field => {
+          field.controls.period.reset();
+          field.controls.period.setValue("");
+          field.controls.dateRelease.reset();
+          field.controls.dateRelease.setValue("");
+        });
       }else{
       this.userEditForm.controls.stock.reset();
+      this.userEditForm.controls.stock.setValue("");
       }
     }else if(targetHidden == "ped") {
       this.hidePed = !this.hidePed;
@@ -372,23 +324,28 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
       }
       if(targetStatus==true){
         this.userEditForm.controls.stock.reset();
+        this.userEditForm.controls.stock.setValue("");
       }else{
-        this.userEditForm.controls.itemRows['controls'][0].controls.period.reset();
-        this.userEditForm.controls.itemRows['controls'][0].controls.dateRelease.reset();
+        this.userEditForm.controls.itemRows['controls'].forEach(field => {
+          field.controls.period.reset();
+          field.controls.period.setValue(" ");
+          field.controls.dateRelease.reset();
+          field.controls.dateRelease.setValue(" ");
+        });
       }
 
     }
     else if (targetHidden  == "path") {
       this.hidepath = ! this.hidepath;
       if(targetStatus==true){
-        this.userEditForm.controls.itemRows['controls'][0].controls.period.reset();
-        this.userEditForm.controls.itemRows['controls'][0].controls.dateRelease.reset();
-        this.userEditForm.controls.stock.reset();
       }else{
       this.userEditForm.controls.path.reset();
+      this.userEditForm.controls.path.setValue(" ");
+
       }
     }
   }
+
   unCheck(chk){
   this.checked=!this.checked;
   if(chk.source.id=="mat-checkbox-inside"){
@@ -410,9 +367,6 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
   }
 
   openModal() {
-     this.title_modal ="RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
-     this.sub_title_modal ="¿DESEAS CANCELAR?";
-     this.title_button_modal ="CANCELAR";
     this.ui.showModal( PopUpComponent, "modalMessage", true, false, {
       title: this.title_modal,
       sub_title: this.sub_title_modal,
@@ -422,14 +376,13 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
     });  
   }
 
-  get formArr() {
-    return this.userEditForm.get('itemRows') as FormArray;
-  }
   addField() {
-    this.formArr.push(this.initItemRows());
+    (<FormArray>this.userEditForm.get('itemRows')).push(this.initItemRows());
   }
   deleteField(index:number) {
-    this.formArr.removeAt(index);
+    (<FormArray>this.userEditForm.get('itemRows')).removeAt(index);
   }
-  
+  reload() {
+     location.reload();
+  }
 }

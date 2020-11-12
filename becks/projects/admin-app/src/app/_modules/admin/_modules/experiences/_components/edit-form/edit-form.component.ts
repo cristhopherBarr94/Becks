@@ -65,7 +65,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
 
 
   @ViewChild(SidebarComponent) sidebar: SidebarComponent;
-  public hgtSide=1330;
+  public hgtSide=800;
   @Input() parentFunc:any;
   @Input() preload:any;
 

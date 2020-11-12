@@ -54,7 +54,7 @@ export class SeccionsProfileComponent implements OnInit, OnDestroy {
 
   hideTabs() {
     this.create = !this.create;
-    this.hidetoSide.emit(1083);
+    this.hidetoSide.emit(800);
   } 
   hideEdit() {
     this.onEdit = !this.onEdit;

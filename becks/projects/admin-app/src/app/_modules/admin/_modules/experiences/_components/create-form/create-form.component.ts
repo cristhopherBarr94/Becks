@@ -2,9 +2,6 @@ import {
   Component,
   OnInit,
   Input,
-  AfterViewInit,
-  ChangeDetectorRef,
-  ViewChild,
 } from "@angular/core";
 import {
   FormBuilder,
@@ -21,8 +18,6 @@ import { PopUpComponent } from 'src/app/_modules/admin/_components/pop-up/pop-up
 import { Exp } from 'src/app/_models/exp';
 import { Subscription } from 'rxjs';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
-import { SidebarComponent } from 'src/app/_modules/utils/_components/sidebar/sidebar.component';
-import { ExperiencesPage } from '../../_pages/experiences.page';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -66,7 +61,6 @@ export class CreateFormComponent implements OnInit {
   public stoks=[];
 
   @Input() parentFunc:any;
-  @Input() preload:any;
 
   experienceSubs:Subscription;
   editSubs:Subscription;
@@ -74,9 +68,7 @@ export class CreateFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public httpService: HttpService,
-    private router: Router,
     private ui: UiService,
-    private expService: ExperienciasService,
   ) {}
 
   ngOnInit(): void {
@@ -174,7 +166,6 @@ export class CreateFormComponent implements OnInit {
         },
         (error) => {
           // TODO :: logic for error
-          console.log("error enviando datos");
         }
     );
   }
@@ -262,12 +253,10 @@ export class CreateFormComponent implements OnInit {
     if(type == "des") {
       reader2.onloadend = () => {
         this.photoDes = reader2.result;
-        console.log(this.photoDes);
     }
     }else if(type == "mob") {
       reader2.onloadend = () => {
         this.photoMob = reader2.result;
-        console.log(this.photoMob);
   
     }
     }
@@ -318,7 +307,6 @@ export class CreateFormComponent implements OnInit {
   }
 
   hideField(targetHidden,targetStatus){
-    // console.log(targetHidden,targetStatus);
     if(targetHidden == "stk"){
       this.hideStk = !this.hideStk;
       if(targetStatus==true){

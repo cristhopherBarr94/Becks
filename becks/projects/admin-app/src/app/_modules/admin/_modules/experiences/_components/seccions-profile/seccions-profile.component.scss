@@ -58,5 +58,11 @@
   height: 2px;
   background: rgb(98, 248, 178);
   position: absolute;
-  top: 170px;
+  top: 100px;
+}
+.fullSection {
+  position: relative;
+  height: 800px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

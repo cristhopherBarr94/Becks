@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  serverUrl: 'https://waitinglist.becksociety.com.co',
+  // serverUrl: 'https://waitinglist.becksociety.com.co',
+  serverUrl: 'https://becks.flexitco.co/becks-back',
   validation: {
     resource: '/api/ab-inbev-api-web-app-user-list-api/'
   },

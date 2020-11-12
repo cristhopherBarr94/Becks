@@ -109,51 +109,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         // }
       }
       this.editExp();
-
-    // this.experienceSubs = this.expService.exp$.subscribe(exps => {
-    //   if ( exps && exps.length > 0 ) {
-    //        exps.forEach(content => {
-    //           if(content.id == this.id) {
-    //           this.expEditable.id = content.id;
-    //           this.expEditable.titleExp = content.titleExp;
-    //           this.expEditable.dateStart = new Date((content.dateStart));
-    //           this.expEditable.dateEnd = new Date((content.dateEnd));
-    //           this.expEditable.descrip = content.descrip;
-    //           this.expEditable.location = content.location;
-    //           this.expEditable.path = content.path;
-    //           this.loadMob = content.imagesExpMob; 
-    //           this.loadDes = content.imagesExp;
-    //           this.loadedFileMob = this.loadMob;
-    //           this.loadedFileDes = this.loadDes;
-    //           // console.log((content.path));
-    //           content.stock.forEach(stk => {
-    //             this.stoks.push({
-    //               "id": stk.id,
-    //               "stock": stk.stock_actual,
-    //               "date": new Date((stk.release)*1000),
-    //             });
-    //           });
-    //           this.expEditable.stock = this.stoks;
-    //           if(this.expEditable.stock.length == 1) {
-    //             this.hideStk = !this.hideStk;
-    //           }else  if(this.expEditable.stock.length > 1) {
-    //             this.hidePed = false;
-    //           }
-    //         if(this.expEditable.path != null) {
-    //             this.hidepath = !this.hidepath;
-    //             // if(!this.expEditable.checkIn) {
-    //             //   this.checked = !this.checked;
-    //             // }
-    //           }
-    //           this.editExp();
-
-    //           }
-    //        });
-    //   }
-    // });
-    // this.expService.getData();
-    
-  
+ 
   }
 
   ngAfterViewInit(): void { }
@@ -222,8 +178,8 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         "valid_from":(this.userEditForm.controls.dateStart.value).getTime()/1000,
         "valid_to": (this.userEditForm.controls.dateEnd.value).getTime()/1000,
         "stock": this.arrPeriod,
-        "img_desk": this.photoDes,    
-        "img_mob": this.photoMob,                  
+        "img_desk": this.photoDes.split(",")[1],    
+        "img_mob": this.photoMob.split(",")[1],                  
       }
       ).subscribe(
         (response: any) => {

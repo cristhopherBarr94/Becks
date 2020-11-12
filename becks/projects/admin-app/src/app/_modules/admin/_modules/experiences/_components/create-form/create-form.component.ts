@@ -149,8 +149,8 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
         "valid_from":(this.userEditForm.controls.dateStart.value).getTime()/1000,
         "valid_to": (this.userEditForm.controls.dateEnd.value).getTime()/1000,
         "stock": this.arrPeriod,
-        "img_desk": this.photoDes,    
-        "img_mob": this.photoMob,                    
+        "img_desk": this.photoDes.split(",")[1],    
+        "img_mob": this.photoMob.split(",")[1],                    
       }
       ).subscribe(
         (response: any) => {

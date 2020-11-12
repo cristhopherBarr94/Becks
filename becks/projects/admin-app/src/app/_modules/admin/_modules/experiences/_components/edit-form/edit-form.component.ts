@@ -65,7 +65,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   @Input() parentFunc:any;
   @Input() preload:any;
 
-  experienceSubs:Subscription;
+  // experienceSubs:Subscription;
   editSubs:Subscription;
 
   constructor(
@@ -73,57 +73,86 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     public httpService: HttpService,
     private router: Router,
     private ui: UiService,
-    private expService: ExperienciasService,
-  ) {}
+  ) {
+    try{
+    this.expEditable = this.router.getCurrentNavigation().extras.state.exp;
+    console.log(this.expEditable);
+    } catch (error) {
+      this.router.navigate(['/admin/exp/']);
+    }
+  }
 
   ngOnInit(): void {
-  
-    const s = this.router.url;
-    this.id = Number(s.substr(s.lastIndexOf('/') + 1));
+    this.initforms();
 
-    this.experienceSubs = this.expService.exp$.subscribe(exps => {
-      if ( exps && exps.length > 0 ) {
-           exps.forEach(content => {
-              if(content.id == this.id) {
-              this.expEditable.id = content.id;
-              this.expEditable.titleExp = content.titleExp;
-              this.expEditable.dateStart = new Date((content.dateStart));
-              this.expEditable.dateEnd = new Date((content.dateEnd));
-              this.expEditable.descrip = content.descrip;
-              this.expEditable.location = content.location;
-              this.expEditable.path = content.path;
-              this.loadMob = content.imagesExpMob; 
-              this.loadDes = content.imagesExp;
-              this.loadedFileMob = this.loadMob;
-              this.loadedFileDes = this.loadDes;
-              // console.log((content.path));
-              content.stock.forEach(stk => {
-                this.stoks.push({
-                  "id": stk.id,
-                  "stock": stk.stock_actual,
-                  "date": new Date((stk.release)*1000),
-                });
-              });
-              this.expEditable.stock = this.stoks;
-              if(this.expEditable.stock.length == 1) {
-                this.hideStk = !this.hideStk;
-              }else  if(this.expEditable.stock.length > 1) {
-                this.hidePed = false;
-              }
-            if(this.expEditable.path != null) {
-                this.hidepath = !this.hidepath;
-                // if(!this.expEditable.checkIn) {
-                //   this.checked = !this.checked;
-                // }
-              }
-              this.editExp();
-
-              }
-           });
+      this.loadMob = this.expEditable.imagesExpMob; 
+      this.loadDes = this.expEditable.imagesExp;
+      this.loadedFileMob = this.loadMob;
+      this.loadedFileDes = this.loadDes;
+      this.expEditable.stock.forEach(stk => {
+        this.stoks.push({
+          "id": stk.id,
+          "stock": stk.stock_actual,
+          "date": new Date((stk.release)*1000),
+        });
+      });
+      this.expEditable.stock = this.stoks;
+      if(this.expEditable.stock.length == 1 && (this.expEditable.stock[0].date == this.expEditable.created)  ) {
+        this.hideStk = !this.hideStk;
+      }else  if(this.expEditable.stock.length >= 1 && (this.expEditable.stock[0].date != this.expEditable.created)) {
+        this.hidePed = false;
       }
-    });
-    this.expService.getData();
-    this.initforms();    
+    if(this.expEditable.path != null) {
+        this.hidepath = !this.hidepath;
+        // if(!this.expEditable.checkIn) {
+        //   this.checked = !this.checked;
+        // }
+      }
+      this.editExp();
+
+    // this.experienceSubs = this.expService.exp$.subscribe(exps => {
+    //   if ( exps && exps.length > 0 ) {
+    //        exps.forEach(content => {
+    //           if(content.id == this.id) {
+    //           this.expEditable.id = content.id;
+    //           this.expEditable.titleExp = content.titleExp;
+    //           this.expEditable.dateStart = new Date((content.dateStart));
+    //           this.expEditable.dateEnd = new Date((content.dateEnd));
+    //           this.expEditable.descrip = content.descrip;
+    //           this.expEditable.location = content.location;
+    //           this.expEditable.path = content.path;
+    //           this.loadMob = content.imagesExpMob; 
+    //           this.loadDes = content.imagesExp;
+    //           this.loadedFileMob = this.loadMob;
+    //           this.loadedFileDes = this.loadDes;
+    //           // console.log((content.path));
+    //           content.stock.forEach(stk => {
+    //             this.stoks.push({
+    //               "id": stk.id,
+    //               "stock": stk.stock_actual,
+    //               "date": new Date((stk.release)*1000),
+    //             });
+    //           });
+    //           this.expEditable.stock = this.stoks;
+    //           if(this.expEditable.stock.length == 1) {
+    //             this.hideStk = !this.hideStk;
+    //           }else  if(this.expEditable.stock.length > 1) {
+    //             this.hidePed = false;
+    //           }
+    //         if(this.expEditable.path != null) {
+    //             this.hidepath = !this.hidepath;
+    //             // if(!this.expEditable.checkIn) {
+    //             //   this.checked = !this.checked;
+    //             // }
+    //           }
+    //           this.editExp();
+
+    //           }
+    //        });
+    //   }
+    // });
+    // this.expService.getData();
+    
   
   }
 

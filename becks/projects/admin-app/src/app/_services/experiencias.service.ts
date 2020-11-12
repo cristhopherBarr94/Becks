@@ -37,10 +37,11 @@ export class ExperienciasService {
               elementoResponse.imagesExp = urlServer + environment.admin.getImgExp + element.id + "_desk";
               elementoResponse.imagesExpMob = urlServer + environment.admin.getImgExp + element.id + "_mob";
               elementoResponse.titleExp = element.title;
-              elementoResponse.dateStart = element.valid_from ;
-              elementoResponse.dateEnd = element.valid_to;
+              elementoResponse.dateStart = element.valid_from*1000;
+              elementoResponse.dateEnd = element.valid_to*1000;
               elementoResponse.dateRelease = element.stock.release;
-              elementoResponse.stock = element.stock.stock_actual;
+              elementoResponse.created = element.created;
+              elementoResponse.stock = element.stock;
               elementoResponse.location = element.location;
               elementoResponse.descrip = element.description;
               elementoResponse.path = element.url_redirect;
@@ -61,26 +62,6 @@ export class ExperienciasService {
       }
     );
    
-  }
-
-  patchExp(obj:object) {
-    const urlServer = environment.serverUrl;
-    this.http.patch( urlServer + environment.admin.patchExp + "?time_stamp=" + new Date().getTime(),
-    obj
-    ).subscribe(
-      (response: any) => {
-        if (response.status >= 200 && response.status < 300) {
-          console.log("datos enviados correctamente");
-        } else {
-          // TODO :: logic for error
-        }
-      },
-      (error) => {
-        // TODO :: logic for error
-        console.log("error enviando datos");
-
-      }
-    );
   }
 
 }

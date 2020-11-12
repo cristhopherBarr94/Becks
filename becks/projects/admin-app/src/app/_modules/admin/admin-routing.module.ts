@@ -15,12 +15,7 @@ const routes: Routes = [
     path: 'exp',
     loadChildren: () => import('./_modules/experiences/experiences.module').then(m => m.ExperiencesPageModule),
   },
-  // {
-  //   path: 'edit/:id',
-  //   loadChildren: () => import('./_modules/edition/edition.module').then( m => m.EditionPageModule)
-  // },
-
-
+  
 ];
 
 @NgModule({

@@ -2,9 +2,9 @@ export class Exp {
   id: number;
   name: string;
   titleExp: string;
-  dateStart: Date;
-  dateEnd: Date;
-  dateRelease: Date;
+  dateStart: any;
+  dateEnd: any;
+  dateRelease: any;
   imagesExp: string;
   imagesExpMob: string;
   location: string;
@@ -13,7 +13,7 @@ export class Exp {
   status: string;
   type: string;
   urlTerms:string;
-
+  created: any;
   stock: any;
   checkIn?: boolean = false;
   

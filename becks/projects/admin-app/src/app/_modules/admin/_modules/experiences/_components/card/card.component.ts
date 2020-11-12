@@ -43,10 +43,10 @@ export class CardComponent implements OnInit, OnDestroy {
   }
    
 
-    redirectExpId(id) {
-      this.router.navigate([`admin/edit/${id}`], {
+    redirectExp(experience) {
+      this.router.navigate([`admin/exp/edit`], {
         queryParamsHandling: "preserve",
-        state: { reload: 'true' }
+        state: { exp: experience }
       });
     }
   

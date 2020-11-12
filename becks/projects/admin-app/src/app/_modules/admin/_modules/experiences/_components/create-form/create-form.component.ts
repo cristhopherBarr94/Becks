@@ -34,7 +34,7 @@ declare global {
   templateUrl: './create-form.component.html',
   styleUrls: ['./create-form.component.scss'],
 })
-export class CreateFormComponent implements OnInit,AfterViewInit {
+export class CreateFormComponent implements OnInit {
   public userEditForm: FormGroup;
   public expEditable: Exp = new Exp();
   public captchaStatus: boolean;

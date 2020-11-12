@@ -3,7 +3,6 @@ import {
   OnInit,
   Input,
   AfterViewInit,
-  ChangeDetectorRef,
 } from "@angular/core";
 import {
   FormBuilder,
@@ -12,7 +11,7 @@ import {
   Validators,
   FormArray,
 } from "@angular/forms";
-import { Router } from "@angular/router";
+import { NavigationEnd, Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
@@ -75,44 +74,61 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     private ui: UiService,
   ) {
     try{
-    this.expEditable = this.router.getCurrentNavigation().extras.state.exp;
-    console.log(this.expEditable);
+      this.expEditable = this.router.getCurrentNavigation().extras.state.exp;
+      router.events.subscribe((val) => {
+          if ( val['url'] == "/admin/exp/edit" ) {
+            this.checkExp();
+          }
+      });
     } catch (error) {
       this.router.navigate(['/admin/exp/']);
     }
   }
 
+  checkExp() {
+    if ( this.expEditable == undefined || isNaN(this.expEditable.id) ) {
+      try {
+        this.expEditable = this.router.getCurrentNavigation().extras.state.exp;  
+      } catch (error) {
+        location.reload();
+      }
+    }
+  }
+
   ngOnInit(): void {
     this.initforms();
+    this.checkExp();
 
-      this.loadMob = this.expEditable.imagesExpMob; 
-      this.loadDes = this.expEditable.imagesExp;
-      this.loadedFileMob = this.loadMob;
-      this.loadedFileDes = this.loadDes;
-      this.expEditable.stock.forEach(stk => {
-        this.stoks.push({
-          "id": stk.id,
-          "stock": stk.stock_actual,
-          "date": new Date((stk.release)*1000),
-        });
+    this.loadMob = this.expEditable.imagesExpMob; 
+    this.loadDes = this.expEditable.imagesExp;
+    this.loadedFileMob = this.loadMob == undefined ? "" : this.loadMob;
+    this.loadedFileDes = this.loadDes == undefined ? "" : this.loadDes;
+    for ( let stk of this.expEditable.stock ) {
+      this.stoks.push({
+        "id": stk.id,
+        "stock": stk.stock_actual,
+        "date": new Date((stk.release)*1000),
       });
-      this.expEditable.stock = this.stoks;
-      if(this.expEditable.stock.length == 1 && (this.expEditable.stock[0].date == this.expEditable.created)  ) {
-        this.hideStk = !this.hideStk;
-      }else  if(this.expEditable.stock.length >= 1 && (this.expEditable.stock[0].date != this.expEditable.created)) {
-        this.hidePed = false;
-      }
+    }
+    this.expEditable.stock = this.stoks;
+    if(this.expEditable.stock.length == 1 && (this.expEditable.stock[0].date == this.expEditable.created)  ) {
+      this.hideStk = !this.hideStk;
+    }else  if(this.expEditable.stock.length >= 1 && (this.expEditable.stock[0].date != this.expEditable.created)) {
+      this.hidePed = false;
+    }
     if(this.expEditable.path != null) {
         this.hidepath = !this.hidepath;
         // if(!this.expEditable.checkIn) {
         //   this.checked = !this.checked;
         // }
-      }
-      this.editExp();
- 
+    }
+
+    this.editExp();
   }
 
-  ngAfterViewInit(): void { }
+  ngAfterViewInit(): void {
+    this.checkExp();
+  }
 
   initforms() {
     this.userEditForm = this.formBuilder.group({
@@ -169,6 +185,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         });
 
     this.ui.showLoading();
+    
     this.httpService.patch(environment.serverUrl + environment.admin.patchExp,
       {
         "id": this.expEditable.id,
@@ -178,8 +195,8 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         "valid_from":(this.userEditForm.controls.dateStart.value).getTime()/1000,
         "valid_to": (this.userEditForm.controls.dateEnd.value).getTime()/1000,
         "stock": this.arrPeriod,
-        "img_desk": this.photoDes.split(",")[1],    
-        "img_mob": this.photoMob.split(",")[1],                  
+        "img_desk": this.photoDes == undefined ? null : this.photoDes.split(",")[1],    
+        "img_mob": this.photoMob == undefined ? null : this.photoMob.split(",")[1],                  
       }
       ).subscribe(
         (response: any) => {
@@ -259,7 +276,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
           if (files && blob) {
             var reader = new FileReader();
             reader.readAsBinaryString(blob);
-            this.loadedFileDes =imgn.name;
+            this.loadedFileDes = imgn.name == undefined ? "" : imgn.name;
             this.toBase64(blob,myPlatform);
           }
           
@@ -269,7 +286,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
           if (files && blob) {
             var reader = new FileReader();
             reader.readAsBinaryString(blob);
-            this.loadedFileMob =imgn.name; 
+            this.loadedFileMob = imgn.name == undefined ? "" : imgn.name;
             this.toBase64(blob,myPlatform);
           }
         });
@@ -288,11 +305,12 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   if(type == "des") {
     reader2.onloadend = () => {
       this.photoDes = reader2.result;
-  }
+      
+    };
   }else if(type == "mob") {
     reader2.onloadend = () => {
       this.photoMob = reader2.result;
-  }
+    };
   }
  }
 
@@ -419,7 +437,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   editExp() {
-    console.log(this.expEditable.titleExp)
+    // console.log(this.expEditable.titleExp)
     this.userEditForm.patchValue({
       name: this.expEditable.titleExp,
       descrip: this.expEditable.descrip,

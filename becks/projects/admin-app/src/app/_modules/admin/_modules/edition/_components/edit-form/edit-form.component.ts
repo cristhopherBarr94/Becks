@@ -364,7 +364,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       this.hideStk = !this.hideStk;
       if(targetStatus==true){
         this.hidePed = true;
-        this.userEditForm.controls.itemRows.controls.forEach(field => {
+        this.userEditForm.controls.itemRows['controls'].forEach(field => {
           field.controls.period.reset();
           field.controls.period.setValue("");
           field.controls.dateRelease.reset();
@@ -383,7 +383,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         this.userEditForm.controls.stock.reset();
         this.userEditForm.controls.stock.setValue("");
       }else{
-        this.userEditForm.controls.itemRows.controls.forEach(field => {
+        this.userEditForm.controls.itemRows['controls'].forEach(field => {
           field.controls.period.reset();
           field.controls.period.setValue(" ");
           field.controls.dateRelease.reset();

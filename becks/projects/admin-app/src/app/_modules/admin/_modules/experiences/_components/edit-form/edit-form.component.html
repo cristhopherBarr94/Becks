@@ -295,7 +295,7 @@
         </mat-form-field>
 
 
-            <ion-row class="space-around"    *ngIf="!this.hidepath">
+            <!-- <ion-row class="space-around"    *ngIf="!this.hidepath">
               <mat-checkbox 
               id="mat-checkbox-inside"
               [checked]="!this.checked" 
@@ -314,7 +314,7 @@
             </mat-checkbox> 
             <p>Enlace o link externo (dirige a otra página)</p>
    
-            </ion-row>   
+            </ion-row>    -->
           </div>
           </ion-row>
           <!-- loaded img -->
@@ -392,7 +392,7 @@
       <button
       block="block"
       color="becks"
-      (click)="saveUser()"
+      (click)="saveExp()"
       class="becks-btn-primary button-width"
       [ngClass]="{
         'button-disabled': userEditForm.controls.name.invalid ||

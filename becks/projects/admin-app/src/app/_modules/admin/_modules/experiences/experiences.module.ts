@@ -19,7 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { CreateFormComponent } from './_components/create-form/create-form.component';
-import { EditFormComponent } from '../edition/_components/edit-form/edit-form.component';
+import { EditFormComponent } from './_components/edit-form/edit-form.component';
 
 @NgModule({
   imports: [

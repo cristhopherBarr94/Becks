@@ -111,13 +111,16 @@
             </ion-row>
           </div>
    
-          <ion-button 
+          <button 
           block="block"
           color="becks"
           class="becks-btn-primary margin-button-top becks-button"
           [disabled]="this.authorizated_users.length == 0"
+          [ngClass]="{
+            'button-disabled': this.authorizated_users.length == 0
+          }"
           (click)="showModal()"
-          >dar acceso</ion-button>
+          >dar acceso</button>
         </ion-row>
       </div>
     </div>

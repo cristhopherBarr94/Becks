@@ -10,7 +10,12 @@ const routes: Routes = [
   {
     path: 'activation',
     loadChildren: () => import('./_modules/activation/activation.module').then(m => m.ActivationPageModule),
-  }
+  },
+  {
+    path: 'experiences',
+    loadChildren: () => import('./_modules/experiences/experiences.module').then(m => m.ExperiencesPageModule),
+  },
+
 ];
 
 @NgModule({

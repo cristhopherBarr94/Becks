@@ -36,7 +36,8 @@ const routes: Routes = [
       import("./_modules/not-found/not-found.module").then(
         (m) => m.NotFoundPageModule
       ),
-  }
+  },
+
 ];
 
 const routerOptions: ExtraOptions = {

@@ -3,40 +3,48 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { throwError } from "rxjs/internal/observable/throwError";
 import { catchError } from "rxjs/operators";
+import { environment } from 'src/environments/environment';
 import { HttpConstants } from "../_constans/HttpConstants";
-import { AuthService } from './auth.service';
+import { BasicAlertComponent } from '../_modules/utils/_components/basic-alert/basic-alert.component';
+import { AuthService } from "./auth.service";
+import { UiService } from './ui.service';
 
 @Injectable({
   providedIn: "root",
 })
 export class HttpService {
+
+  private error_counter = 0;
   constructor(private http: HttpClient,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private ui: UiService) {}
 
   getHeaders() {
-    let token = '';
-    if ( typeof(this.authService.getToken()) == 'string' ) {
+    let token = "";
+    if (typeof this.authService.getToken() == "string") {
       token = this.authService.getToken();
     }
     return {
       "Content-Type": "application/json; charset=UTF-8",
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
       "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
-      "Authorization" : token
+      Authorization: token,
     };
   }
 
   getHeadersFormData() {
-    let token = '';
-    if ( typeof(this.authService.getToken()) == 'string' ) {
+    let token = "";
+    if (typeof this.authService.getToken() == "string") {
       token = this.authService.getToken();
     }
     return {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
       "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
-      "Authorization" : token
+      Authorization: token,
     };
   }
 
@@ -44,8 +52,18 @@ export class HttpService {
     if (headersIn == null) {
       headersIn = this.getHeaders();
     }
+    if (url.indexOf("?") > -1) {
+      if (url.indexOf("time_stamp") == -1) {
+        url = url + "&time_stamp=" + Math.floor(Date.now() / 1000);
+      }
+    } else {
+      url = url + "?time_stamp=" + Math.floor(Date.now() / 1000);
+    }
     return this.http
-      .get(url, { headers: headersIn, observe: "response" })
+      .get(url, {
+        headers: headersIn,
+        observe: "response",
+      })
       .pipe(catchError((error) => this.handleError(error)));
   }
 
@@ -54,7 +72,10 @@ export class HttpService {
       headersIn = this.getHeaders();
     }
     return this.http
-      .post(url, body, { headers: headersIn, observe: "response" })
+      .post(url, body, {
+        headers: headersIn,
+        observe: "response",
+      })
       .pipe(catchError((error) => this.handleError(error)));
   }
 
@@ -67,9 +88,12 @@ export class HttpService {
       headersIn = this.getHeadersFormData();
     }
     // console.log(url);
-    
+
     return this.http
-      .post(url, body, { headers: headersIn, observe: "response" })
+      .post(url, body, {
+        headers: headersIn,
+        observe: "response",
+      })
       .pipe(catchError((error) => this.handleError(error)));
   }
 
@@ -78,7 +102,10 @@ export class HttpService {
       headersIn = this.getHeaders();
     }
     return this.http
-      .put(url, body, { headers: headersIn, observe: "response" })
+      .put(url, body, {
+        headers: headersIn,
+        observe: "response",
+      })
       .pipe(catchError((error) => this.handleError(error)));
   }
 
@@ -87,7 +114,10 @@ export class HttpService {
       headersIn = this.getHeaders();
     }
     return this.http
-      .patch(url, body, { headers: headersIn, observe: "response" })
+      .patch(url, body, {
+        headers: headersIn,
+        observe: "response",
+      })
       .pipe(catchError((error) => this.handleError(error)));
   }
 
@@ -96,14 +126,27 @@ export class HttpService {
       headersIn = this.getHeaders();
     }
     return this.http
-      .delete(url, { headers: headersIn, observe: "response" })
+      .delete(url, {
+        headers: headersIn,
+        observe: "response",
+      })
       .pipe(catchError((error) => this.handleError(error)));
   }
 
   handleError(error: HttpErrorResponse) {
-    if (error.status === HttpConstants.UNAUTHORIZED) {
-      this.authService.setAuthenticated( null );
-      location.reload();
+    
+    if (error.status === HttpConstants.UNAUTHORIZED || error.status === HttpConstants.FORBIDDEN ) {
+      if ( error.url.indexOf(environment.login.resource) == -1 ) {
+        if ( ++this.error_counter == 1 ) {
+          this.error_counter = 0;
+          this.authService.setAuthenticated(null);
+          this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
+            title: "Sesión expirada",
+            description: "Cerrando sesión de forma segura",
+          });
+          setTimeout( () => { location.reload(); } , 3000 );
+        }
+      }
     } else if (error.status === HttpConstants.CONFLICT) {
       // console.log("mensaje incorrecto");
     } else if (

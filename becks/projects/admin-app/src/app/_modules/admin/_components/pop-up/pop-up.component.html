@@ -1,0 +1,27 @@
+<div class="modal">
+  <span class="modal-hader">
+  <button class="btn-cancel"
+  (click)="toCloseMod()"
+  >X</button>
+  </span>
+  <span class="logo-brand-modal"> </span>
+
+  <span class="modal-body">
+    <div>
+      <h1 class="title">{{title}}</h1>
+    </div>
+  <div>
+    <h3 [hidden]="allow==true" class="sub_title">{{sub_title}}</h3>
+  </div>
+  <div>
+    <p [hidden]="true">{{cod}}</p>
+  </div>
+  </span>
+  <span>
+    <button
+    [hidden]="allow==true"
+    class="becks-btn-primary button-width"
+    (click)="activateUserParent()"
+    >{{title_button}}</button>
+  </span>
+</div>

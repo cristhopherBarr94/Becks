@@ -426,8 +426,8 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       location: this.expEditable.location,
       stock: 5, 
       path:this.expEditable.path,
-      dateEnd: this.expEditable.dateEnd,
-      dateStart: this.expEditable.dateStart,
+      dateEnd: new Date(this.expEditable.dateEnd),
+      dateStart: new Date(this.expEditable.dateStart),
 
     });
 

@@ -48,7 +48,6 @@ export class ExperienciasService {
               type: element.type,
               urlTerms: element.url_terms,
             };
-          console.log(elementoResponse)
             this._exps.push(elementoResponse);
             if ( response.body.length-1 == index ) {
               this._expSbj.next(this._exps);

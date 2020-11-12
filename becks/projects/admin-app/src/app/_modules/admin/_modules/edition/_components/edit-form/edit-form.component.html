@@ -295,7 +295,7 @@
         </mat-form-field>
 
 
-            <ion-row class="space-around"    *ngIf="!this.hidepath">
+            <!-- <ion-row class="space-around"    *ngIf="!this.hidepath">
               <mat-checkbox 
               id="mat-checkbox-inside"
               [checked]="!this.checked" 
@@ -314,11 +314,11 @@
             </mat-checkbox> 
             <p>Enlace o link externo (dirige a otra página)</p>
    
-            </ion-row>   
+            </ion-row>    -->
           </div>
           </ion-row>
           <!-- loaded img -->
-          <!-- <ion-row>
+          <ion-row>
             <span class="img-icon"> </span>
             <p>
               Cargar imagen de la experiencia
@@ -375,7 +375,7 @@
               </button>
             </div>
             </ion-row>
-          </ion-row> -->
+          </ion-row>
           <mat-error style="margin-left: 50px;"  *ngIf=" showError && loadedFileMob.length == 0 || showError && loadedFileDes.length == 0">
             *Debes subir una imágen válida
           </mat-error>

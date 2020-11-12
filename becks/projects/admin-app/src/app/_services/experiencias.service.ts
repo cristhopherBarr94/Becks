@@ -30,7 +30,6 @@ export class ExperienciasService {
     this.http.get( urlServer + environment.admin.getExp + "?time_stamp=" + new Date().getTime() ).subscribe(
       (response: any) => {
         if (response.status >= 200 && response.status < 300) {
-          console.log(response.body)
           this._exps = [];
           response.body.forEach((element, index) => {
             const elementoResponse: Exp = {
@@ -49,6 +48,7 @@ export class ExperienciasService {
               type: element.type,
               urlTerms: element.url_terms,
             };
+          console.log(elementoResponse)
             this._exps.push(elementoResponse);
             if ( response.body.length-1 == index ) {
               this._expSbj.next(this._exps);
@@ -65,5 +65,24 @@ export class ExperienciasService {
    
   }
 
+  patchExp(obj:object) {
+    const urlServer = environment.serverUrl;
+    this.http.patch( urlServer + environment.admin.patchExp + "?time_stamp=" + new Date().getTime(),
+    obj
+    ).subscribe(
+      (response: any) => {
+        if (response.status >= 200 && response.status < 300) {
+          console.log("datos enviados correctamente");
+        } else {
+          // TODO :: logic for error
+        }
+      },
+      (error) => {
+        // TODO :: logic for error
+        console.log("error enviando datos");
+
+      }
+    );
+  }
 
 }

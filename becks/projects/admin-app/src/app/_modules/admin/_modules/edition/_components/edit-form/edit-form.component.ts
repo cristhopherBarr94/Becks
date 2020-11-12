@@ -14,14 +14,12 @@ import {
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
-import { AuthService } from 'src/app/_services/auth.service';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
 import { PopUpComponent } from 'src/app/_modules/admin/_components/pop-up/pop-up.component';
 import { Exp } from 'src/app/_models/exp';
 import { Subscription } from 'rxjs';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
-import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -53,18 +51,20 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public photo: any;
   public checkIn:boolean =  !this.checked;
   public checkOut:boolean = this.checked;
-  public title_modal:string;
-  public sub_title_modal:string;
-  public title_button_modal:string;
+  public title_modal:string = "RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
+  public sub_title_modal:string = "¿DESEAS CANCELAR?";
+  public title_button_modal:string = "CANCELAR";
   public arrPeriod = [];
   public experiencienContent = [];
   public nameExp:string;
   public minDate:any;
   public id:number;
+  public stoks=[];
   @Input() parentFunc:any;
   @Input() preload:any;
 
   experienceSubs:Subscription;
+  editSubs:Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -75,9 +75,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.expEditable.stock = [{stock: "5", date: new Date(1605135600*1000)},
-    {stock: "6", date: new Date(1605135600*1000)},
-    {stock: "7", date: new Date(1605135600*1000)}];
+  
     const s = this.router.url;
     this.id = Number(s.substr(s.lastIndexOf('/') + 1));
 
@@ -85,10 +83,10 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       if ( exps && exps.length > 0 ) {
            exps.forEach(content => {
               if(content.id == this.id) {
-
-             this.expEditable.titleExp = content.titleExp;
+              this.expEditable.id = content.id;
+              this.expEditable.titleExp = content.titleExp;
               this.expEditable.dateStart = new Date((content.dateStart));
-              this.expEditable.dateEnd = new Date((content.dateStart));
+              this.expEditable.dateEnd = new Date((content.dateEnd));
               this.expEditable.descrip = content.descrip;
               this.expEditable.location = content.location;
               this.expEditable.path = content.path;
@@ -96,18 +94,26 @@ export class EditFormComponent implements OnInit,AfterViewInit {
               this.loadDes = content.imagesExp;
               this.loadedFileMob = this.loadMob;
               this.loadedFileDes = this.loadDes;
-              console.log((content.dateStart));
+              // console.log((content.path));
+              content.stock.forEach(stk => {
+                this.stoks.push({
+                  "id": stk.id,
+                  "stock": stk.stock_actual,
+                  "date": new Date((stk.release)*1000),
+                });
+              });
+              this.expEditable.stock = this.stoks;
               if(this.expEditable.stock.length == 1) {
                 this.hideStk = !this.hideStk;
               }else  if(this.expEditable.stock.length > 1) {
                 this.hidePed = false;
               }
-            // if(this.expEditable.path.length == null) {
-            //     this.hidepath = !this.hidepath;
-            //     // if(!this.expEditable.checkIn) {
-            //     //   this.checked = !this.checked;
-            //     // }
-            //   }
+            if(this.expEditable.path != null) {
+                this.hidepath = !this.hidepath;
+                // if(!this.expEditable.checkIn) {
+                //   this.checked = !this.checked;
+                // }
+              }
               this.editExp();
 
               }
@@ -171,86 +177,54 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       });
       return;
     }
-    this.title_modal ="SE HAN GUARDADO LOS CAMBIOS CON ÉXITO";
-    this.sub_title_modal =" ";
-    this.title_button_modal ="ACEPTAR";
-    console.log(this.userEditForm.controls.name.value);
-    console.log(this.userEditForm.controls.dateStart.value);
-    console.log(this.userEditForm.controls.dateEnd.value);
-    console.log(this.userEditForm.controls.location.value);
-    console.log(this.userEditForm.controls.descrip.value);
-    console.log(this.arrPeriod)
-    console.log(this.userEditForm.controls.path.value);
-    console.log(this.checkIn);
-    console.log(this.checkOut);
-    console.log(this.loadDes);
-    console.log(this.loadMob);
+    // console.log(this.userEditForm.controls.name.value);
+    // console.log((this.userEditForm.controls.dateStart.value).getTime()/1000);
+    // console.log((this.userEditForm.controls.dateEnd.value).getTime()/1000);
+    // console.log(this.userEditForm.controls.location.value);
+    // console.log(this.userEditForm.controls.descrip.value);
+    this.userEditForm.get('itemRows').value.forEach(element => {
+        this.arrPeriod.push({"stock":element.period,"date":(element.dateRelease).getTime()/1000});
+        });
+    // console.log(this.arrPeriod)
+    // console.log(this.userEditForm.controls.path.value);
+    // console.log(this.loadDes);
+    // console.log(this.loadMob);
     this.ui.showLoading();
-    this.httpService
-      .post(
-        environment.serverUrl + environment
-      )
-      .subscribe(
-        (res: any) => {
-          try {
-            if ( res.status >= 200 && res.status < 300 ) {
-                const formData = new FormData();
-                try {
-                  formData.append("name", this.userEditForm.controls.name.value);
-                  formData.append("date_1", this.userEditForm.controls.dateStart.value);
-                  formData.append("date_2", this.userEditForm.controls.dateEnd.value);
-                  formData.append("location", this.userEditForm.controls.location.value);
-                  formData.append("description", this.userEditForm.controls.descrip.value);
-                  formData.append("stock", this.userEditForm.controls.stock.value);
-                  formData.append("periodicity", this.userEditForm.controls.period.value);
-                  formData.append("date_3", this.userEditForm.controls.dateRelease.value);
-                  formData.append("path", this.userEditForm.controls.path.value);
-                  formData.append("check_inside", this.checkIn.toString());
-                  formData.append("check_outside", this.checkOut.toString());
-                  formData.append("img_des", this.loadedFileDes);
-                  formData.append("img_mob", this.loadedFileMob);
-                
-                } catch (error) {
-                  return;
-                }
-                this.userEditForm.reset();
-                this.httpService
-                .postFormData(
-                  environment.serverUrl + environment.login.resource,
-                  formData
-                )
-                .subscribe(
-                  (response: any) => {
-                    this.ui.dismissLoading();
-                    if ( response.status >= 200 && response.status < 300 ) {
-                      this.ui.dismissModal(2500);
-                      this.ui.dismissLoading(2500);
-                      this.router.navigate(["admin/experiences"], {
-                        queryParamsHandling: "preserve",
-                      });
-                    } else {
-                      location.reload();  
-                    }
-                  }, (e) => {
-                    location.reload();
-                  });
-                  
-            } else {
-              this.showError = true;
-            }
-            
-          } catch (e) {
-            this.showError = true;
+    this.httpService.patch(environment.serverUrl + environment.admin.patchExp,
+      {
+        "id": this.expEditable.id,
+        "title": this.userEditForm.controls.name.value,
+        "description": this.userEditForm.controls.descrip.value,
+        "location": this.userEditForm.controls.location.value,
+        "valid_from":(this.userEditForm.controls.dateStart.value).getTime()/1000,
+        "valid_to": (this.userEditForm.controls.dateEnd.value).getTime()/1000,
+        "stock": this.arrPeriod,
+        "img_desk": this.loadDes,    
+        "img_mob": this.loadMob,                    
+      }
+      ).subscribe(
+        (response: any) => {
+          this.ui.dismissLoading();
+          if (response.status >= 200 && response.status < 300) {
+            this.title_modal ="SE HAN GUARDADO LOS CAMBIOS CON ÉXITO";
+            this.sub_title_modal =" ";
+            this.title_button_modal ="ACEPTAR";
+            this.ui.showModal( PopUpComponent, "modalMessage", true, false, {
+              title: this.title_modal,
+              sub_title: this.sub_title_modal,
+              title_button: this.title_button_modal,
+              Func: this.closeForm.bind(this),
+              FuncAlt: this.closeModal.bind(this),
+            });  
+          } else {
+            // TODO :: logic for error
           }
         },
-        (err) => {
-          this.showError = true;
-          if (err.error) {
-            this.httpError = err.error.message;
-          }
-          this.ui.dismissLoading();
+        (error) => {
+          // TODO :: logic for error
+          console.log("error enviando datos");
         }
-      );
+    );
   }
 
   public inputValidatorNumeric(event: any) {
@@ -383,13 +357,16 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     if(targetHidden == "stk"){
       this.hideStk = !this.hideStk;
       if(targetStatus==true){
-        this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.period.removeAttr("required");
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.removeAttr("required");
+        this.hidePed = true;
+        this.userEditForm.controls.itemRows.controls.forEach(field => {
+          field.controls.period.reset();
+          field.controls.period.setValue("");
+          field.controls.dateRelease.reset();
+          field.controls.dateRelease.setValue("");
+        });
       }else{
       this.userEditForm.controls.stock.reset();
-      this.userEditForm.controls.stock.setValue(" ");
+      this.userEditForm.controls.stock.setValue("");
       }
     }else if(targetHidden == "ped") {
       this.hidePed = !this.hidePed;
@@ -398,25 +375,20 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       }
       if(targetStatus==true){
         this.userEditForm.controls.stock.reset();
-        this.userEditForm.controls.stock.setValue(" ");
+        this.userEditForm.controls.stock.setValue("");
       }else{
-        this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.period.setValue(" ");
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.setValue("");
+        this.userEditForm.controls.itemRows.controls.forEach(field => {
+          field.controls.period.reset();
+          field.controls.period.setValue(" ");
+          field.controls.dateRelease.reset();
+          field.controls.dateRelease.setValue(" ");
+        });
       }
 
     }
     else if (targetHidden  == "path") {
       this.hidepath = ! this.hidepath;
       if(targetStatus==true){
-        this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.period.setValue(" ");
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.setValue(" ");
-        this.userEditForm.controls.stock.reset();
-        this.userEditForm.controls.stock.setValue(" ");
-
       }else{
       this.userEditForm.controls.path.reset();
       this.userEditForm.controls.path.setValue(" ");
@@ -446,9 +418,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   openModal() {
-     this.title_modal ="RECUERDA QUE SI CANCELAS NO SE GUARDARÁN LOS CAMBIOS";
-     this.sub_title_modal ="¿DESEAS CANCELAR?";
-     this.title_button_modal ="CANCELAR";
     this.ui.showModal( PopUpComponent, "modalMessage", true, false, {
       title: this.title_modal,
       sub_title: this.sub_title_modal,
@@ -480,12 +449,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         period: e.stock,
         dateRelease: new Date (e.date),
       }));
-
     });
-    
-    formArray.value.forEach(element => {
-      this.arrPeriod.push({"stock":element.period,"date":(element.dateRelease).getTime()/1000});
-      });
     return formArray;
   }
   

@@ -1,0 +1,28 @@
+.background-black {
+  background-color: #121212;
+  width: 100%;
+  padding: 20px 7%;
+}
+.title-creator {
+  font-family: "Eurostile BQ";
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.15px;
+}
+.desc-creator {
+  font-family: "Helvetica LT Std";
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+}
+.separator-becks {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65px;
+  height: 2px;
+  background: rgb(98, 248, 178);
+  position: absolute;
+  top: 170px;
+}

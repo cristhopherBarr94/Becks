@@ -1,12 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { Platform } from "@ionic/angular";
-import { Subscription } from 'rxjs';
-import { ExperienciasService } from 'src/app/_services/experiencias.service';
-import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from "src/app/_services/ui.service";
-import { environment } from 'src/environments/environment';
-import { ExperiencesPage } from '../../_modules/_pages/experiences.page';
 
 @Component({
   selector: "user-seccions-profile",

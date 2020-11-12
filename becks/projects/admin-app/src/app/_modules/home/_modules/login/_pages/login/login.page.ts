@@ -24,6 +24,7 @@ export class LoginPage implements OnInit {
   public restartCaptcha: boolean;
   public httpError: string;
   public hide: boolean;
+  public password: string;
 
   constructor(
     private formBuilder: FormBuilder,

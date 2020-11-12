@@ -48,9 +48,7 @@
             <mat-label>Fecha y hora inicial de la publicación</mat-label>
             <input 
             matInput 
-            [ngxMatDatetimePicker]="picker1" 
-            [min]="minDate" 
-            [max]="maxDate"
+            [ngxMatDatetimePicker]="picker1"
             formControlName="dateStart"
             required
             >
@@ -58,8 +56,8 @@
           <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
           </mat-datepicker-toggle>
           <ngx-mat-datetime-picker #picker1 [showSpinners]="true" [showSeconds]="true"
-             [touchUi]="false" [color]="black"
-            [enableMeridian]="enableMeridian" [disableMinute]="false" [hideTime]="hideTime">
+             [touchUi]="false"
+            [enableMeridian]="true" [disableMinute]="false">
           </ngx-mat-datetime-picker>
           <mat-error *ngIf="userEditForm.controls.dateStart.touched &&  userEditForm.controls.dateStart.errors">
             *Has ingresado un dato inválido
@@ -75,9 +73,7 @@
            <mat-label>Fecha y hora final de la publicación</mat-label>
            <input 
            matInput 
-           [ngxMatDatetimePicker]="picker2" 
-           [min]="minDate" 
-           [max]="maxDate" 
+           [ngxMatDatetimePicker]="picker2"
            formControlName="dateEnd"
            required
            >
@@ -85,8 +81,8 @@
           <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
          </mat-datepicker-toggle>
          <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="true" 
-           [touchUi]="touchUi" [color]="color"
-           [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
+           [touchUi]="false"
+           [enableMeridian]="true" [disableMinute]="false">
          </ngx-mat-datetime-picker>
          <mat-error *ngIf="userEditForm.controls.dateEnd.touched &&  userEditForm.controls.dateEnd.errors">
           *Has ingresado un dato inválido
@@ -190,14 +186,14 @@
                 <mat-slide-toggle  [checked]="!this.hidePed" name="ped" (change)="hideField($event.source.name,$event.source._checked)"></mat-slide-toggle>
               </ion-row>
               <ion-row 
-              *ngFor="let itemrow of userEditForm.get('itemRows').controls; let i=index"
+              *ngFor="let itemrow of userEditForm.get('itemRows')['controls']; let i=index"
               [formGroupName] = "i">
                 <mat-form-field
                 *ngIf="!this.hidePed"
                 appearance="fill"
                 floatLabel="auto"
                 class="smallInput"
-                [ngClass]="getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.period)"
+                [ngClass]="getClassInputNotReq( this.userEditForm.controls.itemRows['controls'][i].controls.period)"
                 hideRequiredMarker
                 >
                 <mat-label>Cupos</mat-label>
@@ -212,7 +208,7 @@
                   data-qadp="period"
                   required
                 />
-                <mat-error *ngIf="userEditForm.controls.itemRows.controls[i].controls.period.touched &&  userEditForm.controls.itemRows.controls[i].controls.period.errors">
+                <mat-error *ngIf="userEditForm.controls.itemRows['controls'][i].controls.period.touched &&  userEditForm.controls.itemRows['controls'][i].controls.period.errors">
                   *Has ingresado un dato inválido
                 </mat-error>
               </mat-form-field>
@@ -222,7 +218,7 @@
                appearance="fill"
                floatLabel="auto"
                class="smallInput"
-               [ngClass]=" getClassInputNotReq( this.userEditForm.controls.itemRows.controls[i].controls.dateRelease)"
+               [ngClass]=" getClassInputNotReq( this.userEditForm.controls.itemRows['controls'][i].controls.dateRelease)"
                hideRequiredMarker
                >
                <mat-label>Fecha de liberación</mat-label>
@@ -230,25 +226,22 @@
                id="dateRelease{{i}}"
                matInput 
                formControlName="dateRelease"
-               [ngxMatDatetimePicker]="picker3" 
-               [min]="minDate" 
-               [max]="maxDate" 
-               [disabled]="disabled"
+               [ngxMatDatetimePicker]="picker3"
                required
                >
              <mat-datepicker-toggle matSuffix [for]="picker3">
               <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
              </mat-datepicker-toggle>
              <ngx-mat-datetime-picker #picker3 [showSpinners]="true" [showSeconds]="true" 
-               [touchUi]="touchUi" [color]="color"
-               [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
+               [touchUi]="false"
+               [enableMeridian]="true" [disableMinute]="false">
              </ngx-mat-datetime-picker>
-            <mat-error *ngIf="userEditForm.controls.itemRows.controls[i].controls.dateRelease.touched &&  userEditForm.controls.itemRows.controls[i].controls.dateRelease.errors">
+            <mat-error *ngIf="userEditForm.controls.itemRows['controls'][i].controls.dateRelease.touched &&  userEditForm.controls.itemRows['controls'][i].controls.dateRelease.errors">
               *Has ingresado un dato inválido
             </mat-error>
               </mat-form-field>
                <button
-               *ngIf="!this.hidePed && userEditForm.controls.itemRows.controls.length > 1"
+               *ngIf="!this.hidePed && userEditForm.controls.itemRows['controls'].length > 1"
                class="btn-delete"
                 (click)="deleteField(i)"
                >
@@ -344,7 +337,7 @@
             />
               <p>Subir imagen desktop*</p>
               <button class="btn-upload" (click)="hiddenfileinput1.click()">
-                <span class="upload-icon" *ngIf="!this.loadedFileDes.length > 0 && !typeError"> </span>
+                <span class="upload-icon" *ngIf="!(this.loadedFileDes.length > 0) && !typeError"> </span>
                 <span class="upload-icon-error" *ngIf="typeError && !this.loadedFileDes"> </span>
                 <ion-row *ngIf="this.loadedFileDes.length > 0">
                   <span class="btn-text">
@@ -369,7 +362,7 @@
             />
               <p>Subir imagen mobile*</p>
               <button class="btn-upload" (click)="hiddenfileinput2.click()">
-                <span class="upload-icon" *ngIf="!this.loadedFileMob.length > 0 && !typeError"> </span>
+                <span class="upload-icon" *ngIf="!(this.loadedFileMob.length > 0) && !typeError"> </span>
                 <span class="upload-icon-error" *ngIf="typeError && !this.loadedFileMob"> </span>
                 <ion-row *ngIf=" this.loadedFileMob.length > 0">
                   <span class="btn-text">

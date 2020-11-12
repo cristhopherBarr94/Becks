@@ -14,14 +14,14 @@ import {
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
-import { SHA256 } from "crypto-js";
 import { AuthService } from 'src/app/_services/auth.service';
-import { User } from 'src/app/_models/User';
 import { HttpService } from 'src/app/_services/http.service';
 import { UiService } from 'src/app/_services/ui.service';
-import { AdminService } from 'src/app/_services/admin.service';
 import { PopUpComponent } from 'src/app/_modules/admin/_components/pop-up/pop-up.component';
 import { Exp } from 'src/app/_models/exp';
+import { Subscription } from 'rxjs';
+import { ExperienciasService } from 'src/app/_services/experiencias.service';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -57,52 +57,65 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public sub_title_modal:string;
   public title_button_modal:string;
   public arrPeriod = [];
+  public experiencienContent = [];
   public nameExp:string;
   public minDate:any;
+  public id:number;
   @Input() parentFunc:any;
   @Input() preload:any;
+
+  experienceSubs:Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
     public httpService: HttpService,
     private router: Router,
     private ui: UiService,
-    private cdr: ChangeDetectorRef,
-    private authService: AuthService,
-    private adminSvc: AdminService,
-  ) { }
+    private expService: ExperienciasService,
+  ) {}
 
   ngOnInit(): void {
-    this.minDate= new Date();
-    this.initforms();    
-
-    this.expEditable.titleExp = "hola desde experiencia";
-    this.expEditable.dateStart = new Date(1605135600*1000);
-    this.expEditable.dateEnd = new Date(1605135600*1000);
-    this.expEditable.descrip = "jkllkdsklsdkllkjdjsdjklsdfkljfsdkljlksdfjkldsjflkjsdf";
-    this.expEditable.location = "jkllkdsklsdkllkjdjsdjklsdfkljfsdkljlksdfjkldsjflkjsdf";
     this.expEditable.stock = [{stock: "5", date: new Date(1605135600*1000)},
     {stock: "6", date: new Date(1605135600*1000)},
     {stock: "7", date: new Date(1605135600*1000)}];
-    this.expEditable.path = "";
-    // this.expEditable.checkIn=false;
-    this.loadMob = this.expEditable.imagesExpMob; 
-    this.loadDes = this.expEditable.imagesExp;
-    this.loadedFileMob = this.loadMob;
-    this.loadedFileDes = this.loadDes;
+    const s = this.router.url;
+    this.id = Number(s.substr(s.lastIndexOf('/') + 1));
 
-    if(this.expEditable.stock.length == 1) {
-      this.hideStk = !this.hideStk;
-    }else  if(this.expEditable.stock.length > 1) {
-      this.hidePed = false;
-    }
-   if(this.expEditable.path.length > 0) {
-      this.hidepath = !this.hidepath;
-    //   if(!this.expEditable.checkIn) {
-    //     this.checked = !this.checked;
-    //   }
-    }
-    this.editExp();
+    this.experienceSubs = this.expService.exp$.subscribe(exps => {
+      if ( exps && exps.length > 0 ) {
+           exps.forEach(content => {
+              if(content.id == this.id) {
+
+             this.expEditable.titleExp = content.titleExp;
+              this.expEditable.dateStart = new Date((content.dateStart));
+              this.expEditable.dateEnd = new Date((content.dateStart));
+              this.expEditable.descrip = content.descrip;
+              this.expEditable.location = content.location;
+              this.expEditable.path = content.path;
+              this.loadMob = content.imagesExpMob; 
+              this.loadDes = content.imagesExp;
+              this.loadedFileMob = this.loadMob;
+              this.loadedFileDes = this.loadDes;
+              console.log((content.dateStart));
+              if(this.expEditable.stock.length == 1) {
+                this.hideStk = !this.hideStk;
+              }else  if(this.expEditable.stock.length > 1) {
+                this.hidePed = false;
+              }
+            // if(this.expEditable.path.length == null) {
+            //     this.hidepath = !this.hidepath;
+            //     // if(!this.expEditable.checkIn) {
+            //     //   this.checked = !this.checked;
+            //     // }
+            //   }
+              this.editExp();
+
+              }
+           });
+      }
+    });
+    this.expService.getData();
+    this.initforms();    
   
   }
 
@@ -355,9 +368,11 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
   
   closeForm() {
-    this.parentFunc();
     this.closeModal();
-    location.reload();
+    this.router.navigate([`admin/exp`], {
+      queryParamsHandling: "preserve",
+      state: { reload: 'true' }
+    });
   }
   closeModal() {
     this.ui.dismissModal();
@@ -444,11 +459,12 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   editExp() {
+    console.log(this.expEditable.titleExp)
     this.userEditForm.patchValue({
       name: this.expEditable.titleExp,
       descrip: this.expEditable.descrip,
       location: this.expEditable.location,
-      stock: this.expEditable.stock[0].stock, 
+      stock: 5, 
       path:this.expEditable.path,
       dateEnd: this.expEditable.dateEnd,
       dateStart: this.expEditable.dateStart,

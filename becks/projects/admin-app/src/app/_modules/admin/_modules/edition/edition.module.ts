@@ -1,32 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { ExperiencesPageRoutingModule } from './experiences-routing.module';
-import { ExperiencesPage } from './_modules/_pages/experiences.page';
-import { MatTabsModule } from "@angular/material/tabs";
-import { SeccionsProfileComponent } from './_components/seccions-profile/seccions-profile.component';
+
+import { EditionPageRoutingModule } from './edition-routing.module';
+
+import { EditionPage } from './_modules/_pages/edition.page';
 import { UtilsModule } from 'src/app/_modules/utils/utils.module';
-import {MatGridListModule} from '@angular/material/grid-list';
-import { CardComponent } from './_components/card/card.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { CreateFormComponent } from './_components/create-form/create-form.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { EditFormComponent } from '../edition/_components/edit-form/edit-form.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ExperiencesPageRoutingModule,
-    MatTabsModule,
+    EditionPageRoutingModule,
     UtilsModule,
     MatGridListModule,
     ReactiveFormsModule,
@@ -40,8 +39,8 @@ import { CreateFormComponent } from './_components/create-form/create-form.compo
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
-    MatSlideToggleModule 
+    MatSlideToggleModule
   ],
-  declarations: [ExperiencesPage,SeccionsProfileComponent,CardComponent,CreateFormComponent]
+  declarations: [EditionPage,EditFormComponent]
 })
-export class ExperiencesPageModule {}
+export class EditionPageModule {}

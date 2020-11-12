@@ -8,9 +8,9 @@
           <ion-row>
             <div class="card-info">
               <h4>{{item.titleExp}}</h4>
-              <p>{{item.dateEnd*1000 | date}} </p>
+              <p>{{item.dateEnd | date}} </p>
               </div>
-              <button class="btn-card" (click)="openEdit()">
+              <button class="btn-card" (click)="redirectExpId(item.id)">
                 <span>editar</span>
                 <span class="pen-icon"> </span>
               </button>
@@ -28,9 +28,9 @@
           <ion-row>
             <div class="card-info">
               <h4>{{item.titleExp}}</h4>
-              <p>{{item.dateEnd*1000 | date}} </p>
+              <p>{{item.dateEnd | date}} </p>
               </div>
-              <button class="btn-card" (click)="openEdit()">
+              <button class="btn-card" (click)="redirectExpId(item.id)">
                 <span>editar</span>
                 <span class="pen-icon"> </span>
               </button>

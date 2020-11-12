@@ -3,9 +3,9 @@ export class Exp {
   imagesExp: string;
   imagesExpMob: string;
   titleExp: string;
-  dateStart: Date;
-  dateEnd: Date;
-  dateRelease: Date;
+  dateStart: any;
+  dateEnd: any;
+  dateRelease: any;
   stock: any[];
   location: string;
   descrip: string;

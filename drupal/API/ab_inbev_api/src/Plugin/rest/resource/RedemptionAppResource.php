@@ -188,13 +188,12 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
             ->fields($record)
             ->execute();
       if ( is_numeric($id) ) {
-        $this->dbConnection->query('UPDATE {ab_inbev_exp_stock} SET stock_actual = stock_actual - 1 WHERE id = :id', [':id' => trim($stock['id'])]);
+        $this->dbConnection->query('UPDATE {ab_inbev_exp_stock} SET stock_actual = stock_actual - 1 WHERE id = :id', [':id' => $stock['id']]);
       }
 
-      $created_record = $this->loadRecord($id);
-
+      // $created_record = $this->loadRecord($id);
       // Return the newly created record in the response body.
-      return new ModifiedResourceResponse($created_record, 201);
+      return new ModifiedResourceResponse($record, 201);
     } catch (\Throwable $th) {
       if ( strrpos( $th->getMessage() , '1062 Duplicate entry' ) !== false ) {
         throw new BadRequestHttpException('No se puede redimir mas de una vez la experiencia.');

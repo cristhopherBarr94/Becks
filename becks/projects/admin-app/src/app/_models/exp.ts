@@ -13,4 +13,6 @@ export class Exp {
   status: string;
   type: string;
   urlTerms:string;
+
+  checkIn?: boolean = false;
 }

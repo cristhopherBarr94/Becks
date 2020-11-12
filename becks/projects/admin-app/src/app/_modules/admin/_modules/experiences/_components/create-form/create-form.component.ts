@@ -360,8 +360,8 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
     if(targetHidden == "stk"){
       this.hideStk = !this.hideStk;
       if(targetStatus==true){
-        this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
+        this.userEditForm.controls.itemRows['controls'][0].controls.period.reset();
+        this.userEditForm.controls.itemRows['controls'][0].controls.dateRelease.reset();
       }else{
       this.userEditForm.controls.stock.reset();
       }
@@ -373,16 +373,16 @@ export class CreateFormComponent implements OnInit,AfterViewInit {
       if(targetStatus==true){
         this.userEditForm.controls.stock.reset();
       }else{
-        this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
+        this.userEditForm.controls.itemRows['controls'][0].controls.period.reset();
+        this.userEditForm.controls.itemRows['controls'][0].controls.dateRelease.reset();
       }
 
     }
     else if (targetHidden  == "path") {
       this.hidepath = ! this.hidepath;
       if(targetStatus==true){
-        this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
+        this.userEditForm.controls.itemRows['controls'][0].controls.period.reset();
+        this.userEditForm.controls.itemRows['controls'][0].controls.dateRelease.reset();
         this.userEditForm.controls.stock.reset();
       }else{
       this.userEditForm.controls.path.reset();

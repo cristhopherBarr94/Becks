@@ -337,9 +337,9 @@
             />
               <p>Subir imagen desktop*</p>
               <button class="btn-upload" (click)="hiddenfileinput1.click()">
-                <span class="upload-icon" *ngIf="!this.loadedFileDes.length > 0 && !typeError"> </span>
+                <span class="upload-icon" *ngIf="this.loadedFileDes && !this.loadedFileDes.length > 0 && !typeError"> </span>
                 <span class="upload-icon-error" *ngIf="typeError && !this.loadedFileDes"> </span>
-                <ion-row *ngIf="this.loadedFileDes.length > 0">
+                <ion-row *ngIf="this.loadedFileDes && this.loadedFileDes.length > 0">
                   <span class="btn-text">
                     <span>{{ this.loadedFileDes}}</span>
                   </span>
@@ -362,9 +362,9 @@
             />
               <p>Subir imagen mobile*</p>
               <button class="btn-upload" (click)="hiddenfileinput2.click()">
-                <span class="upload-icon" *ngIf="!this.loadedFileMob.length > 0 && !typeError"> </span>
+                <span class="upload-icon" *ngIf="this.loadedFileMob && !this.loadedFileMob.length > 0 && !typeError"> </span>
                 <span class="upload-icon-error" *ngIf="typeError && !this.loadedFileMob"> </span>
-                <ion-row *ngIf=" this.loadedFileMob.length > 0">
+                <ion-row *ngIf="this.loadedFileMob && this.loadedFileMob.length > 0">
                   <span class="btn-text">
                     <span>{{ this.loadedFileMob}}</span>
                   </span>
@@ -400,8 +400,8 @@
         userEditForm.controls.dateEnd.invalid ||
         userEditForm.controls.location.invalid ||
         userEditForm.controls.descrip.invalid ||
-        this.loadedFileDes.length == 0  || 
-        this.loadedFileMob.length == 0
+        (this.loadedFileDes && this.loadedFileDes.length == 0)  || 
+        (this.loadedFileMob && this.loadedFileMob.length == 0)
       }"
       data-qadp="send-button-form"
     >

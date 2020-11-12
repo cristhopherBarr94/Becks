@@ -294,7 +294,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
             var reader = new FileReader();
             // reader.onload = this._handleReaderLoaded.bind(this);
             reader.readAsBinaryString(blob);
-            this.loadedFileDes =imgn.name;
+            this.loadedFileDes = imgn.name;
 
           }
           
@@ -368,10 +368,10 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     if(targetHidden == "stk"){
       this.hideStk = !this.hideStk;
       if(targetStatus==true){
-        this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.period.removeAttr("required");
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.removeAttr("required");
+        this.userEditForm.controls.itemRows['controls'][0].controls.period.reset();
+        this.userEditForm.controls.itemRows['controls'][0].controls.period.removeAttr("required");
+        this.userEditForm.controls.itemRows['controls'][0].controls.dateRelease.reset();
+        this.userEditForm.controls.itemRows['controls'][0].controls.dateRelease.removeAttr("required");
       }else{
       this.userEditForm.controls.stock.reset();
       this.userEditForm.controls.stock.setValue(" ");
@@ -385,20 +385,20 @@ export class EditFormComponent implements OnInit,AfterViewInit {
         this.userEditForm.controls.stock.reset();
         this.userEditForm.controls.stock.setValue(" ");
       }else{
-        this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.period.setValue(" ");
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.setValue("");
+        this.userEditForm.controls.itemRows['controls'][0].controls.period.reset();
+        this.userEditForm.controls.itemRows['controls'][0].controls.period.setValue(" ");
+        this.userEditForm.controls.itemRows['controls'][0].controls.dateRelease.reset();
+        this.userEditForm.controls.itemRows['controls'][0].controls.dateRelease.setValue("");
       }
 
     }
     else if (targetHidden  == "path") {
       this.hidepath = ! this.hidepath;
       if(targetStatus==true){
-        this.userEditForm.controls.itemRows.controls[0].controls.period.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.period.setValue(" ");
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.reset();
-        this.userEditForm.controls.itemRows.controls[0].controls.dateRelease.setValue(" ");
+        this.userEditForm.controls.itemRows['controls'][0].controls.period.reset();
+        this.userEditForm.controls.itemRows['controls'][0].controls.period.setValue(" ");
+        this.userEditForm.controls.itemRows['controls'][0].controls.dateRelease.reset();
+        this.userEditForm.controls.itemRows['controls'][0].controls.dateRelease.setValue(" ");
         this.userEditForm.controls.stock.reset();
         this.userEditForm.controls.stock.setValue(" ");
 

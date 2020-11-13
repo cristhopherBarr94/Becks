@@ -7,19 +7,9 @@ import { SidebarComponent } from 'src/app/_modules/utils/_components/sidebar/sid
   styleUrls: ['./experiences.page.scss'],
 })
 export class ExperiencesPage implements OnInit {
-  @ViewChild(SidebarComponent) sidebar: SidebarComponent;
-  public heigthTosidebar:number;
   constructor() { }
 
   ngOnInit() {
-  }
-  setHgt(val) {
-    console.log(val);
-    this.heigthTosidebar = val;
-  }
-  ngAfterViewInit(): void {
-    this.sidebar.hgtSide = this.heigthTosidebar;
-    
   }
 
 }

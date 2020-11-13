@@ -8,13 +8,9 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
 
-  @Input() hgtSide:number;
-
   constructor( private router: Router ) { }
 
-  ngOnInit() {
-    console.log(this.hgtSide);
-  }
+  ngOnInit() { }
   
   redirectTo(target) {
     if(target == "act"){

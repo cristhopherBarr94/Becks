@@ -63,11 +63,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   public id:number;
   public stoks=[];
 
-
-  @ViewChild(SidebarComponent) sidebar: SidebarComponent;
-  public hgtSide=800;
   @Input() parentFunc:any;
-  @Input() preload:any;
 
   // experienceSubs:Subscription;
   editSubs:Subscription;
@@ -131,10 +127,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     this.editExp();
   }
 
-  ngAfterViewInit(): void {
-    this.sidebar.hgtSide = this.hgtSide;
-    this.checkExp();
-  }
+  ngAfterViewInit(): void { }
 
   initforms() {
     this.userEditForm = this.formBuilder.group({

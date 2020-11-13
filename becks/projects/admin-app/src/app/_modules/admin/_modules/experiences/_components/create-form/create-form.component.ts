@@ -17,7 +17,6 @@ import { UiService } from 'src/app/_services/ui.service';
 import { PopUpComponent } from 'src/app/_modules/admin/_components/pop-up/pop-up.component';
 import { Exp } from 'src/app/_models/exp';
 import { Subscription } from 'rxjs';
-import { ExperienciasService } from 'src/app/_services/experiencias.service';
 declare global {
   interface Window {
     dataLayer: any[];

@@ -62,7 +62,7 @@
                 </mat-datepicker-toggle>
                 <ngx-mat-datetime-picker #picker1 [showSpinners]="true" [showSeconds]="true"
                    [touchUi]="false"
-                  [enableMeridian]="true" [disableMinute]="false">
+                  [enableMeridian]="false" [disableMinute]="false">
                 </ngx-mat-datetime-picker>
                 <mat-error *ngIf="userEditForm.controls.dateStart.touched &&  userEditForm.controls.dateStart.errors">
                   *Has ingresado un dato inválido
@@ -87,7 +87,7 @@
                </mat-datepicker-toggle>
                <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="true" 
                  [touchUi]="false"
-                 [enableMeridian]="true" [disableMinute]="false">
+                 [enableMeridian]="false" [disableMinute]="false">
                </ngx-mat-datetime-picker>
                <mat-error *ngIf="userEditForm.controls.dateEnd.touched &&  userEditForm.controls.dateEnd.errors">
                 *Has ingresado un dato inválido
@@ -239,7 +239,7 @@
                    </mat-datepicker-toggle>
                    <ngx-mat-datetime-picker #picker3 [showSpinners]="true" [showSeconds]="true" 
                      [touchUi]="false"
-                     [enableMeridian]="true" [disableMinute]="false">
+                     [enableMeridian]="false" [disableMinute]="false">
                    </ngx-mat-datetime-picker>
                   <mat-error *ngIf="userEditForm.controls.itemRows['controls'][i].controls.dateRelease.touched &&  userEditForm.controls.itemRows['controls'][i].controls.dateRelease.errors">
                     *Has ingresado un dato inválido

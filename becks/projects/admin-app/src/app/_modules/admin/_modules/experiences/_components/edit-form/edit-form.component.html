@@ -194,7 +194,7 @@
                     *ngFor="let itemrow of userEditForm.get('itemRows')['controls']; let i=index"
                     [formGroupName] = "i">
                       <mat-form-field
-                      *ngIf="!this.hidePed"
+                      *ngIf="!this.hidePed && (this.userEditForm.controls.itemRows['controls'][i].controls.deleted.value == false) "
                       appearance="fill"
                       floatLabel="auto"
                       class="smallInput"
@@ -219,7 +219,7 @@
                     </mat-form-field>
             
                      <mat-form-field
-                     *ngIf="!this.hidePed"
+                     *ngIf="!this.hidePed && (this.userEditForm.controls.itemRows['controls'][i].controls.deleted.value == false) "
                      appearance="fill"
                      floatLabel="auto"
                      class="smallInput"
@@ -246,7 +246,7 @@
                   </mat-error>
                     </mat-form-field>
                      <button
-                     *ngIf="!this.hidePed && userEditForm.controls.itemRows['controls'].length > 1"
+                     *ngIf="(!this.hidePed && userEditForm.controls.itemRows['controls'].length > 1) && (this.userEditForm.controls.itemRows['controls'][i].controls.deleted.value == false)"
                      class="btn-delete"
                       (click)="deleteField(i)"
                      >

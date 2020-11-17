@@ -44,14 +44,6 @@ export class SeccionsProfileComponent implements OnInit, OnDestroy {
     // this.expSubs.unsubscribe();
   }
 
-
-  redirectExp() {
-    this.router.navigate(["user/exp"], {
-      queryParamsHandling: "preserve",
-      state: { reload: 'true' }
-    });
-  }
-
   hideTabs() {
     this.create = !this.create;
     this.hidetoSide.emit(800);

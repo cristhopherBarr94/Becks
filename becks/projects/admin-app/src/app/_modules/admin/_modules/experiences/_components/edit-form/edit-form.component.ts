@@ -3,7 +3,6 @@ import {
   OnInit,
   Input,
   AfterViewInit,
-  ViewChild,
 } from "@angular/core";
 import {
   FormBuilder,
@@ -19,8 +18,6 @@ import { UiService } from 'src/app/_services/ui.service';
 import { PopUpComponent } from 'src/app/_modules/admin/_components/pop-up/pop-up.component';
 import { Exp } from 'src/app/_models/exp';
 import { Subscription } from 'rxjs';
-import { ExperienciasService } from 'src/app/_services/experiencias.service';
-import { SidebarComponent } from 'src/app/_modules/utils/_components/sidebar/sidebar.component';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -65,9 +62,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
 
   @Input() parentFunc:any;
 
-  // experienceSubs:Subscription;
-  editSubs:Subscription;
-
   constructor(
     private formBuilder: FormBuilder,
     public httpService: HttpService,
@@ -82,7 +76,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
           }
       });
     } catch (error) {
-      this.router.navigate(['/admin/exp/']);
+      this.closeForm();
     }
   }
 
@@ -127,7 +121,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
     this.editExp();
   }
 
-  ngAfterViewInit(): void { }
+  ngAfterViewInit(): void {}
 
   initforms() {
     this.userEditForm = this.formBuilder.group({
@@ -161,13 +155,16 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       outsideCheck: new FormControl("", null),
     });
   }
-  initItemRows (){
+  initItemRows (dlt?, added?){
     return this.formBuilder.group ({
+      id: new FormControl("", null),
       period: new FormControl("", [
         Validators.minLength(1),
         Validators.maxLength(10),
       ]),
       dateRelease: new FormControl("",null),
+      deleted: dlt,
+      added: added,
     });
   }
   saveExp(): void {
@@ -180,9 +177,14 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       return;
     }
     this.userEditForm.get('itemRows').value.forEach(element => {
-        this.arrPeriod.push({"stock":element.period,"date":(element.dateRelease).getTime()/1000});
+        this.arrPeriod.push({
+          "id": element.id,
+          "stock":element.period,
+          "delete": element.deleted,
+          "add": element.added,
+          "date":(element.dateRelease).getTime()/1000},
+          );
         });
-
     this.ui.showLoading();
     
     this.httpService.patch(environment.serverUrl + environment.admin.patchExp,
@@ -298,7 +300,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   
   }
 
- toBase64(blob,type){
+  toBase64(blob,type){
   var reader2 = new FileReader();
   reader2.readAsDataURL(blob); 
   if(type == "des") {
@@ -361,7 +363,6 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   hideField(targetHidden,targetStatus){
-    // console.log(targetHidden,targetStatus);
     if(targetHidden == "stk"){
       this.hideStk = !this.hideStk;
       if(targetStatus==true){
@@ -441,7 +442,7 @@ export class EditFormComponent implements OnInit,AfterViewInit {
       name: this.expEditable.titleExp,
       descrip: this.expEditable.descrip,
       location: this.expEditable.location,
-      stock: 5, 
+      stock:  this.expEditable.stock[0].stock, 
       path:this.expEditable.path,
       dateEnd: new Date(this.expEditable.dateEnd),
       dateStart: new Date(this.expEditable.dateStart),
@@ -450,22 +451,27 @@ export class EditFormComponent implements OnInit,AfterViewInit {
 
     this.userEditForm.setControl('itemRows',this.setExistingPeriodicity());
   }
+
   setExistingPeriodicity():FormArray{
     let formArray = new FormArray([]);
     this.expEditable.stock.forEach(e=>{
       formArray.push(this.formBuilder.group({
+        id:e.id,
         period: e.stock,
         dateRelease: new Date (e.date),
+        deleted:false,
+        added:false,
       }));
     });
     return formArray;
   }
   
-
   addField() {
-    (<FormArray>this.userEditForm.get('itemRows')).push(this.initItemRows());
+    (<FormArray>this.userEditForm.get('itemRows')).push(this.initItemRows(false,true));
   }
+
   deleteField(index:number) {
-    (<FormArray>this.userEditForm.get('itemRows')).removeAt(index);
+    // (<FormArray>this.userEditForm.get('itemRows')).removeAt(index);
+    (<FormArray>this.userEditForm.get('itemRows')).at(index)['controls'].deleted.setValue(true);
   }
 }

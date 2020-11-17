@@ -437,12 +437,19 @@ export class EditFormComponent implements OnInit,AfterViewInit {
   }
 
   editExp() {
-    // console.log(this.expEditable.titleExp)
+    if(this.expEditable.stock.length > 0){
+      this.userEditForm.patchValue({
+      stock:  this.expEditable.stock[0].stock,
+      });
+    }else {
+      this.userEditForm.patchValue({
+        stock:  "",
+        });
+    }
     this.userEditForm.patchValue({
       name: this.expEditable.titleExp,
       descrip: this.expEditable.descrip,
       location: this.expEditable.location,
-      stock:  this.expEditable.stock[0].stock, 
       path:this.expEditable.path,
       dateEnd: new Date(this.expEditable.dateEnd),
       dateStart: new Date(this.expEditable.dateStart),

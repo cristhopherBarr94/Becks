@@ -48,6 +48,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
   private subscribe: Subscription;
   private subsCodes: Subscription;
   private modal: any;
+  private modalIsShowed:boolean=false;
   public size: string;
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
@@ -88,6 +89,8 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
           }
           this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ (this.days_ramaining)+ " DÍAS";
           this.bgActive();
+          if( this.modalIsShowed==false){
+            this.modalIsShowed = true;
           this.ui.showModal( NotifyModalComponent, "modalMessage", true, false, {
             title: this.title_modal,
             sub_title: this.sub_title_modal,
@@ -96,7 +99,8 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
             allow: this.allow,
             Func: this.redirectTo.bind(this),
             FuncAlt: this.redirectToAlt.bind(this),
-          });          
+          });      
+        }
         } else {
           this.verifyCode();
         }
@@ -164,7 +168,8 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
 
         },
         (e) => {
-          this.httpError = "código inválido o en uso";
+          this.httpError = e.error.message;
+          console.log(e.error)
           this.ui.dismissLoading();
           this.activate=false; 
           this.userActivationForm.reset();

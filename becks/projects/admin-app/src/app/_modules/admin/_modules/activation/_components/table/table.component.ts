@@ -7,8 +7,8 @@ import { ModalController } from "@ionic/angular";
 import { HttpService } from "src/app/_services/http.service";
 import { UiService } from "src/app/_services/ui.service";
 import { environment } from "src/environments/environment";
-import { User } from 'src/app/_models/User';
-import { NotifyModalComponent } from 'src/app/_modules/utils/_components/notify-modal/notify-modal.component';
+import { User } from "src/app/_models/User";
+import { NotifyModalComponent } from "src/app/_modules/utils/_components/notify-modal/notify-modal.component";
 
 @Component({
   selector: "waiting-table",

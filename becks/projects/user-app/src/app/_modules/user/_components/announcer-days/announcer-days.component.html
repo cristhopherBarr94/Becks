@@ -5,43 +5,46 @@
     <p class="units">Días</p>
   </div>
 
-<div *ngIf="this.size != 'xs'" class="relative">
-  <circle-progress
-  [percent]="progress"
-  [radius]="45"
-  [outerStrokeWidth]="22"
-  [showInnerStroke]="true"
-  [space]="-25"
-  [innerStrokeColor]="'#121212'"
-  [outerStrokeColor]="colorProgress"
-  [animation]="false"
-  [showUnits]="false"
-  [maxPercent]="30"
-  [outerStrokeGradient]="false"
-  [outerStrokeGradientStopColor]="colorProgress"
-  [clockwise]="false"
-  [showTitle]="false"
-  [showBackground]="true"
-  [backgroundGradient]="false"
-  [backgroundColor]="'#121212'"
-  [subtitleColor]="'#FFFFFF'"
-  [subtitle]="remaining_days"
-  [subtitleFontSize]="20"
-  [backgroundPadding]="-20"
-  [renderOnClick]="false"
-></circle-progress>
-<section class="content-flex-all-center">
-  <div class="subtitle-days">
-    <p class="title_1">Tienes</p>
-    <p>Días</p>
+  <div *ngIf="this.size != 'xs'" class="relative">
+    <circle-progress
+    [percent]="progress"
+    [radius]="45"
+    [outerStrokeWidth]="22"
+    [showInnerStroke]="true"
+    [space]="-25"
+    [innerStrokeColor]="'#121212'"
+    [outerStrokeColor]="colorProgress"
+    [animation]="false"
+    [showUnits]="false"
+    [maxPercent]="30"
+    [outerStrokeGradient]="false"
+    [outerStrokeGradientStopColor]="colorProgress"
+    [clockwise]="false"
+    [showTitle]="false"
+    [showBackground]="true"
+    [backgroundGradient]="false"
+    [backgroundColor]="'#121212'"
+    [subtitleColor]="'#FFFFFF'"
+    [subtitle]="remaining_days"
+    [subtitleFontSize]="20"
+    [backgroundPadding]="-20"
+    [renderOnClick]="false"
+    ></circle-progress>
+    <section class="content-flex-all-center">
+      <div class="subtitle-days">
+        <p class="title_1">Tienes</p>
+        <p>Días</p>
+      </div>
+    </section>
+    <section class="content-flex-all-center">
+      <div class="supp-circle" style="transform: rotate(-{{ progress * 3.6 }}deg)">
+        <div class="clock"></div>
+      </div>
+    </section>
+
+    <section class="content-flex-all-center anouncer-link">
+      <a *ngIf="this.isActive == true" [ngClass]="'activated'" [routerLink]="['/user/profile']">cuenta activa</a>
+      <a *ngIf="this.isActive == false" [ngClass]="'inactivated'" [routerLink]="['/user/activation']">activar cuenta</a>
+    </section>
   </div>
-</section>
-<section class="content-flex-all-center">
-  <div class="supp-circle" style="transform: rotate(-{{ progress * 3.6 }}deg)">
-    <div class="clock"></div>
-  </div>
-</section>
-</div>
-    <a *ngIf="this.isActive == true" [ngClass]="'activated'" [routerLink]="['/user/profile']">cuenta activa</a>
-    <a *ngIf="this.isActive == false" [ngClass]="'inactivated'" [routerLink]="['/user/activation']">activar cuenta</a>
 </section>

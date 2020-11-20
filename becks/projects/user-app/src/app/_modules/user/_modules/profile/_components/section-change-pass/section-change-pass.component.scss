@@ -22,7 +22,7 @@
     font-size: 13px !important;
     line-height: 50px !important;
     @media (min-width: 0px) and (max-width: 768px) {
-      display: none;
+      // display: none;
     }
   }
 
@@ -119,6 +119,6 @@
 .margin-bottom {
   margin-bottom: 26px;
 }
- .backgrounColor{
-   background-color: #171717;
- }
+.backgrounColor {
+  background-color: #171717;
+}

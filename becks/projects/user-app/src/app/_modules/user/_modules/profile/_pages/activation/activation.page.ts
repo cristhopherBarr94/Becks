@@ -10,7 +10,6 @@ import { Router } from "@angular/router";
 import { User } from "../../../../../../_models/User";
 import { UiService } from "../../../../../../_services/ui.service";
 import { HeaderComponent } from "src/app/_modules/utils/_components/header/header.component";
-import { ModalController, Platform } from '@ionic/angular';
 import { NotifyModalComponent } from 'src/app/_modules/utils/_components/notify-modal/notify-modal.component';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
@@ -18,6 +17,7 @@ import { SHA256 } from 'crypto-js';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/_services/user.service';
 import { MenuStatusService } from 'src/app/_services/menu-status.service';
+import { Platform } from '@ionic/angular';
 declare global {
   interface Window {
     dataLayer: any[];
@@ -59,7 +59,6 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
     public httpService: HttpService,
     private router: Router,
     private ui: UiService,
-    private modalCtrl: ModalController,
     private userSvc: UserService,
     private menuS : MenuStatusService,
     private platform: Platform ) { 
@@ -79,24 +78,14 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
     this.subsCodes = this.userSvc.userCodes$.subscribe(
       ( codes ) => {
         if ( codes && codes.length>0 ) {
-          this.activate = true;
           this.date_til = moment(new Date(codes[0].valid_until * 1000));
           let cur_date = moment(new Date);
           this.days_ramaining =  (this.date_til.diff(cur_date, 'days')+1);
           if(this.days_ramaining>30){
             this.days_ramaining=30;
           }
-          this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ (this.days_ramaining)+ " DÍAS";
           this.bgActive();
-          this.ui.showModal( NotifyModalComponent, "modalMessage", true, false, {
-            title: this.title_modal,
-            sub_title: this.sub_title_modal,
-            title_button: this.title_button_modal,
-            prom_cod:this.prom_cod_modal,
-            allow: this.allow,
-            Func: this.redirectTo.bind(this),
-            FuncAlt: this.redirectToAlt.bind(this),
-          });          
+          this.showAccountReady();
         } else {
           this.verifyCode();
         }
@@ -149,7 +138,12 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
         cid: cid
       }).subscribe(
         (response: any) => {
-          if (response.status == 200 && response.body.length >0) {
+          this.ui.dismissLoading();
+          if ( response.status == 200 ) {
+            this.activate=false;
+            this.days_ramaining=30;
+            this.showAccountReady();
+            this.userSvc.getCodes(true);
             this.httpError = "";
             this.userActivationForm.reset();
             window.dataLayer.push({
@@ -158,17 +152,15 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
               'eventAction': 'continuar codigo de compra',
               'eventLabel': code256,
             });
+          } else {
+            this.httpError = "código inválido o en uso";
           }
-          this.ui.dismissLoading();
-          window.location.reload();
-
         },
         (e) => {
           this.httpError = "código inválido o en uso";
           this.ui.dismissLoading();
           this.activate=false; 
           this.userActivationForm.reset();
-
         }
       );
     }
@@ -187,33 +179,52 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy{
       return "Ingrese solo letras y números";
     }
   }
-public redirectTo() {
-  this.ui.dismissModal();
-  this.router.navigate(["user/exp"], {
-    queryParamsHandling: "preserve",
-    state: {reload: true}
-  });
-}
-public redirectToAlt() {
-  this.ui.dismissModal();
-  this.router.navigate(["user/profile"], {
-    queryParamsHandling: "preserve",
-    state: {reload: true}
-  });
-}
-public bgActive(){
-  if (this.activate==true) {
-    this.colorBg = "bg-color";
-  } else if (this.activate == false) {
-    this.colorBg =  "bg-grey";
-  }
-}
 
-closeActivation(){
-  this.router.navigate(["user/exp"], {
-    queryParamsHandling: "preserve",
-    state: {reload: true}
-  });
-}
+  public redirectTo() {
+    this.ui.dismissModal();
+    this.router.navigate(["user/exp"], {
+      queryParamsHandling: "preserve",
+      state: {reload: true}
+    });
+  }
+
+  public redirectToAlt() {
+    this.ui.dismissModal();
+    this.router.navigate(["user/profile"], {
+      queryParamsHandling: "preserve",
+      state: {reload: true}
+    });
+  }
+
+  public bgActive(){
+    if (this.activate==true) {
+      this.colorBg = "bg-color";
+    } else if (this.activate == false) {
+      this.colorBg =  "bg-grey";
+    }
+  }
+
+  closeActivation(){
+    this.router.navigate(["user/exp"], {
+      queryParamsHandling: "preserve",
+      state: {reload: true}
+    });
+  }
+
+  showAccountReady() {
+    if ( !this.activate ) {
+      this.activate = true;
+      this.title_modal = "TIENES TU CUENTA ACTIVA POR "+ (this.days_ramaining)+ " DÍAS";
+      this.ui.showModal( NotifyModalComponent, "modalMessage", true, false, {
+        title: this.title_modal,
+        sub_title: this.sub_title_modal,
+        title_button: this.title_button_modal,
+        prom_cod:this.prom_cod_modal,
+        allow: this.allow,
+        Func: this.redirectTo.bind(this),
+        FuncAlt: this.redirectToAlt.bind(this),
+      });
+    }
+  }
 
 }

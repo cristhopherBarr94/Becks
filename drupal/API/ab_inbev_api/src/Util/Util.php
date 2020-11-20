@@ -64,17 +64,138 @@ final class Util
     /*
     * Email
     */
-    public static function sendWelcomeEmail ( $email , $pass ) {
-        $mailManager = \Drupal::service('plugin.manager.mail');
-        $module = 'ab_inbev_api';
-        $key = 'default';
-        $to = $email;
-        $params['from'] = "contact@becks.com";
-        $params['subject'] = "Bienvenido a Beck's";
-        $params['message'] = "Usuario: ". $to ." <br/> Contraseña: " . $pass ;
-        $langcode = 'es';
-        $send = TRUE;
-        $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+    public static function sendEmail ( $type, $email , $extra ) {
+
+        // START :: GET - TOKEN
+        $curl = curl_init();
+        $form_data = array(
+            "clientId" => "0llu839c27lmftigqw74ot5q",
+            "clientSecret" => "BfZ4cQ18LnfGiERBqvpgbvw="
+        );
+        $curl_opts = array(
+            CURLOPT_URL => "https://auth.exacttargetapis.com/v1/requestToken",
+            CURLOPT_POST => true,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+            ),
+            CURLOPT_POSTFIELDS => json_encode($form_data)
+        );
+        curl_setopt_array($curl, $curl_opts);
+        $response = json_decode(@curl_exec($curl) , true);
+        $response_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        curl_close($curl);
+        // END :: GET - TOKEN
+
+        $token = $response['accessToken'];
+        switch ($type) {
+            case 0:
+                //WELCOME EMAIL
+                $curl = curl_init();
+                $form_data = array(
+                    "To" => array(
+                        "Address" => $email,
+                        "SubscriberKey" => $email,
+                        "ContactAttributes" => array(
+                            "SubscriberAttributes" => array (
+                                "EmailAdress" => $email,
+                                "abi_name" => $extra
+                            )
+                        )
+                    )
+                );
+                $curl_opts = array(
+                    CURLOPT_URL => "https://www.exacttargetapis.com/messaging/v1/messageDefinitionSends/37f72e1e-0925-eb11-b819-48df37d68329/send",
+                    CURLOPT_POST => true,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json',
+                        'Authorization: Bearer ' . $token,
+                    ),
+                    CURLOPT_POSTFIELDS => json_encode($form_data)
+                );
+                curl_setopt_array($curl, $curl_opts);
+                $response = @curl_exec($curl);
+                $response_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+                curl_close($curl);
+            break;
+            
+            case 1:
+                //PASSWORD EMAIL
+                $curl = curl_init();
+                $form_data = array(
+                    "To" => array(
+                        "Address" => $email,
+                        "SubscriberKey" => $email,
+                        "ContactAttributes" => array(
+                            "SubscriberAttributes" => array (
+                                "EmailAdress" => $email,
+                                "abi_password" => $extra
+                            )
+                        )
+                    )
+                );
+                $curl_opts = array(
+                    CURLOPT_URL => "https://www.exacttargetapis.com/messaging/v1/messageDefinitionSends/a408b37c-0d25-eb11-b819-48df37d68329/send",
+                    CURLOPT_POST => true,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json',
+                        'Authorization: Bearer ' . $token,
+                    ),
+                    CURLOPT_POSTFIELDS => json_encode($form_data)
+                );
+                curl_setopt_array($curl, $curl_opts);
+                $response = @curl_exec($curl);
+                $response_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+                curl_close($curl);
+            break;
+            
+            case 2:
+                //EXP EMAIL
+                $curl = curl_init();
+                $form_data = array(
+                    "To" => array(
+                        "Address" => $email,
+                        "SubscriberKey" => $email,
+                        "ContactAttributes" => array(
+                            "SubscriberAttributes" => array (
+                                "EmailAdress" => $email,
+                                "abi_name" => $extra
+                            )
+                        )
+                    )
+                );
+                $curl_opts = array(
+                    CURLOPT_URL => "https://www.exacttargetapis.com/messaging/v1/messageDefinitionSends/40b2f38b-750d-eb11-a2f1-1402ec938a05/send",
+                    CURLOPT_POST => true,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json',
+                        'Authorization: Bearer ' . $token,
+                    ),
+                    CURLOPT_POSTFIELDS => json_encode($form_data)
+                );
+                curl_setopt_array($curl, $curl_opts);
+                $response = @curl_exec($curl);
+                $response_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+                curl_close($curl);
+                break;
+
+            default:
+                // $mailManager = \Drupal::service('plugin.manager.mail');
+                // $module = 'ab_inbev_api';
+                // $key = 'default';
+                // $to = $email;
+                // $params['from'] = "contact@becks.com";
+                // $params['subject'] = "Bienvenido a Beck's";
+                // $params['message'] = "Usuario: ". $to ." <br/> Contraseña: " . $pass ;
+                // $langcode = 'es';
+                // $send = TRUE;
+                // $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+            break;
+        }
+        
     }
         
 }

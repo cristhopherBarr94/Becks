@@ -296,7 +296,6 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
     }
     
     // SET EXP DATA
-    $date = time();
     $exp_data = [
       'title' => $data['title'],
       'description' => $data['description'],
@@ -316,20 +315,56 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
       throw new BadRequestHttpException('Error interno, No se pudieron actualizar los datos, intenta de nuevo mas tarde.');
    }
     
+    $actual_date = time();
     //SET STOCK DATA
     foreach ($data['stock'] as &$stock) {
-      $exp_stock = [
-        "stock_actual" => $stock['stock'],
-        "release" => $stock['date'],
-      ];
-      try {
-        $this->dbConnection->update('ab_inbev_exp_stock')
-                          ->fields($exp_stock)
-                          ->condition('id', $stock['id'], '=')
-                          ->execute();
-      } catch (\Throwable $th) {
-        throw new BadRequestHttpException( $stock['id'] . ' :: Error actualizando Stock, intenta de nuevo mas tarde.');
+      if ( $stock['delete'] == true  && $stock['add'] == true ) {
+        // UNSENSE QUERY CONDITION
+        continue; 
       }
+      
+      if ( ( !isset($stock['delete']) && !isset($stock['add']) ) || 
+            ( !$stock['delete'] && !$stock['add'] ) ) {
+        try {
+          // UPDATE QUERY CONDITION
+          $exp_stock = [
+            "stock_actual" => $stock['stock'],
+            "release" => $stock['date'],
+          ];
+          $this->dbConnection->update('ab_inbev_exp_stock')
+                            ->fields($exp_stock)
+                            ->condition('id', $stock['id'], '=')
+                            ->execute();
+        } catch (\Throwable $th) {
+          throw new BadRequestHttpException( $stock['id'] . ' :: Error actualizando Stock, intenta de nuevo mas tarde.');
+        }
+      } else if ( $stock['add'] == true ) {
+        try {
+          // ADD QUERY CONDITION
+          $exp_stock = [
+            "eid" => $data['id'],
+            "stock_initial" => $stock['stock'],
+            "stock_actual" => $stock['stock'],
+            "release" => $stock['date'],
+            "created" => $actual_date
+          ];
+          $this->dbConnection->insert('ab_inbev_exp_stock')
+                            ->fields($exp_stock)
+                            ->execute();
+        } catch (\Throwable $th) {
+          throw new BadRequestHttpException( 'Error insertando Stock, intenta de nuevo mas tarde.');
+        }
+      } else if ( $stock['delete'] == true ) {
+        try {
+          // DELETE QUERY CONDITION
+          $this->dbConnection->delete('ab_inbev_exp_stock')
+                            ->condition('id', $stock['id'], '=')
+                            ->execute();
+        } catch (\Throwable $th) {
+          throw new BadRequestHttpException( $stock['id'] . ' :: Error eliminando Stock, intenta de nuevo mas tarde.');
+        }
+      }
+
     }
 
     return new ModifiedResourceResponse($exp_data, 200);

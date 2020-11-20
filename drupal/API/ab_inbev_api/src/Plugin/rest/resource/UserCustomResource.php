@@ -177,7 +177,10 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
         // User from User-APP
         $user->set("field_status_waiting_list", 0);
         $user->set("field_status", 0); // 0 = normal, 1 = require password change
-        // Util::sendWelcomeEmail( $user->getEmail() , $pass ); // TODO :: add logic to send email
+        Util::sendEmail( 0, 
+                        $user->getEmail() , 
+                        $user->get('field_first_name')->value . ' ' . $user->get('field_last_name')->value 
+                      );
       } else {
         // User come from Waiting-List
         $user->set("field_status_waiting_list", 1 );
@@ -260,7 +263,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->save();
 
       //Send New Password
-      Util::sendWelcomeEmail( $data['email'] , $pass );
+      Util::sendEmail( 1, $data['email'] , $pass );
     }
 
     return new ModifiedResourceResponse( $data['email'] , 202);
@@ -277,8 +280,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
    *
    * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    */
-  public function delete($id) {
-
+  public function delete($id) {   
     // // Make sure the record still exists.
     // $this->loadRecord($id);
 

@@ -16,10 +16,10 @@ import { Router } from "@angular/router";
 import { User } from "../../../../_models/User";
 import { UiService } from "../../../../_services/ui.service";
 import { UtilService } from "src/app/_services/util.service";
-import { environment } from 'src/environments/environment';
+import { environment } from "src/environments/environment";
 import { SHA256 } from "crypto-js";
-import { BasicAlertComponent } from 'src/app/_modules/utils/_components/basic-alert/basic-alert.component';
-import { AuthService } from 'src/app/_services/auth.service';
+import { BasicAlertComponent } from "src/app/_modules/utils/_components/basic-alert/basic-alert.component";
+import { AuthService } from "src/app/_services/auth.service";
 
 declare global {
   interface Window {
@@ -93,7 +93,7 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
         Validators.minLength(7),
         Validators.maxLength(10),
       ]),
-      gender: new FormControl(null, Validators.required),
+      city: new FormControl(null, Validators.required),
       privacy: new FormControl(null, Validators.required),
       promo: new FormControl(null),
       password: new FormControl("", [
@@ -115,12 +115,13 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
   }
 
   saveUser(): void {
-
-    if ( this.userRegisterForm.invalid || !this.captchaStatus ) {
+    if (this.userRegisterForm.invalid || !this.captchaStatus) {
       this.showError = true;
-      (<any>Object).values(this.userRegisterForm.controls).forEach(control => {
-        control.markAsTouched();
-      });
+      (<any>Object)
+        .values(this.userRegisterForm.controls)
+        .forEach((control) => {
+          control.markAsTouched();
+        });
       return;
     }
 
@@ -144,34 +145,43 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
       .subscribe(
         (res: any) => {
           try {
-            if ( res.status >= 200 && res.status < 300 ) {
-                window.dataLayer.push({
-                  event: "trackEvent",
-                  eventCategory: "fase 3",
-                  eventAction: "finalizar fase 3",
-                  eventLabel: email256,
-                });
-                // window.location.reload();
-                // this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
-                //   title: "Bienvenido a Beck's",
-                //   description: "Ingresando de forma segura",
-                // });
+            if (res.status >= 200 && res.status < 300) {
+              window.dataLayer.push({
+                event: "trackEvent",
+                eventCategory: "fase 3",
+                eventAction: "finalizar fase 3",
+                eventLabel: email256,
+              });
+              // window.location.reload();
+              // this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
+              //   title: "Bienvenido a Beck's",
+              //   description: "Ingresando de forma segura",
+              // });
 
-                const formData = new FormData();
-                try {
-                  this.restartCaptcha = true;
-                  this.setCaptchaStatus(!this.restartCaptcha);
-                  formData.append("username", this.userRegisterForm.controls.email.value.trim());
-                  formData.append("password", this.userRegisterForm.controls.password.value.trim());
-                  formData.append("grant_type", environment.rest.grant_type);
-                  formData.append("client_id", environment.rest.client_id);
-                  formData.append("client_secret", environment.rest.client_secret);
-                  formData.append("scope", environment.rest.scope);
-                } catch (error) {
-                  return;
-                }
-                this.userRegisterForm.reset();
-                this.httpService
+              const formData = new FormData();
+              try {
+                this.restartCaptcha = true;
+                this.setCaptchaStatus(!this.restartCaptcha);
+                formData.append(
+                  "username",
+                  this.userRegisterForm.controls.email.value.trim()
+                );
+                formData.append(
+                  "password",
+                  this.userRegisterForm.controls.password.value.trim()
+                );
+                formData.append("grant_type", environment.rest.grant_type);
+                formData.append("client_id", environment.rest.client_id);
+                formData.append(
+                  "client_secret",
+                  environment.rest.client_secret
+                );
+                formData.append("scope", environment.rest.scope);
+              } catch (error) {
+                return;
+              }
+              this.userRegisterForm.reset();
+              this.httpService
                 .postFormData(
                   environment.serverUrl + environment.login.resource,
                   formData
@@ -179,7 +189,7 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
                 .subscribe(
                   (response: any) => {
                     this.ui.dismissLoading();
-                    if ( response.status >= 200 && response.status < 300 ) {
+                    if (response.status >= 200 && response.status < 300) {
                       this.restartCaptcha = false;
                       this.ui.dismissModal(2500);
                       this.ui.dismissLoading(2500);
@@ -190,16 +200,16 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
                         queryParamsHandling: "preserve",
                       });
                     } else {
-                      location.reload();  
+                      location.reload();
                     }
-                  }, (e) => {
+                  },
+                  (e) => {
                     location.reload();
-                  });
-                  
+                  }
+                );
             } else {
               this.showError = true;
             }
-            
           } catch (e) {
             this.showError = true;
           }

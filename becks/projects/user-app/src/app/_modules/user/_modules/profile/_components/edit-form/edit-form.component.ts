@@ -106,7 +106,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
       ),
       id: new FormControl(this.user.type_id, [Validators.required]),
       document: new FormControl(this.user.id_number, [Validators.required]),
-      city: new FormControl(this.user.city, Validators.required),
+      // city: new FormControl(this.user.city, Validators.required),
     });
   }
 
@@ -181,7 +181,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
               birthdate: this.birthDayDate,
               type_id: this.userEditProfileForm.controls.id.value.trim(),
               id_number: this.userEditProfileForm.controls.document.value.trim(),
-              city: this.userEditProfileForm.controls.city.value.trim(),
+              // city: this.userEditProfileForm.controls.city.value.trim(),
             })
             .subscribe(
               (response: any) => {
@@ -208,7 +208,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
           !this.userEditProfileForm.controls.name.invalid &&
           !this.userEditProfileForm.controls.lastName.invalid &&
           !this.userEditProfileForm.controls.phone.invalid &&
-          !this.userEditProfileForm.controls.city.invalid &&
+          // !this.userEditProfileForm.controls.city.invalid &&
           !this.userEditProfileForm.controls.month.invalid &&
           !this.userEditProfileForm.controls.day.invalid &&
           !this.userEditProfileForm.controls.year.invalid

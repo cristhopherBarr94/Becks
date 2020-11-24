@@ -170,6 +170,8 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->set("field_type_id", $data['type_id'] ?? "" );
       $user->set("field_id_number", $data['id_number'] ?? "" );
       $user->set("field_photo_uri",  $data['photo'] ?? "" );
+      $user->set("field_city",  $data['city'] ?? "" );
+
       $user->activate();
       
       // "type_id" field only come from User-App Form
@@ -423,6 +425,13 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
         }
       } catch ( Exception $ex ) {
         throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+      }
+    }
+    
+    // "city" field from User-App Form
+    if ( isset($record['city']) ) {
+      if ( empty($record['city']) || strlen($record['city']) > 250) {
+        throw new BadRequestHttpException('La "Ciudad" sobrepasa los caracteres permitidos');
       }
     }
     

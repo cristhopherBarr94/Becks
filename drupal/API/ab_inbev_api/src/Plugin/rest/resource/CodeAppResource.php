@@ -297,16 +297,58 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
    */
   public function delete($id) {
 
-    // Make sure the record still exists.
-    // $this->loadRecord($id);
+    
+    // SELECT `cid` FROM `ab_inbev_code` WHERE 1 ORDER BY `id`
+    // INTO OUTFILE '/tmp/codes.csv'
+    // FIELDS TERMINATED BY ','
+    // ENCLOSED BY '"'
+    // LINES TERMINATED BY '\n';
 
-    // $this->dbConnection->delete('ab_inbev_code')
-    //   ->condition('id', $id)
-    //   ->execute();
+    // $actual_date = time();
+    // $codes = str_split( md5( time() * rand ( 100 , 999 ) ) , 8);
+    // $codes_counter = 0;
+    // $counter = 1;
 
-    // $this->logger->notice('Code App record @id has been deleted.', ['@id' => $id]);
+    // while ( $counter <= 100 ) {
+    //   $code = $codes[ $codes_counter ];
+    //   if ( !isset($code) || strlen($code) != 8 ) {
+    //     $codes = str_split( md5( time() * rand ( 100 , 999 ) ) , 8);
+    //     $codes_counter = 0;
+    //     continue;
+    //   }
+    //   $data = [
+    //     "id" => $counter,
+    //     "cid" => $code,
+    //     "uid" => NULL,
+    //     "created" => $actual_date,
+    //     "valid_until" => NULL,
+    //     "owner" => "MERQUEO",
+    //     "owner_from" => NULL,
+    //     "owner_to" => NULL,
+    //     "status" => 0
+    //   ];
+    //   try {
+    //     $id = $this->dbConnection->insert('ab_inbev_code')
+    //             ->fields($data)
+    //             ->execute();
+    //     if ( $id ) {
+    //       $counter++;
+    //     } else {
+    //        echo("\r\n");
+    //        echo( "Error Code : " . $code );
+    //     }
+    //   } catch (\Throwable $th) {
+    //      echo("\r\n");
+    //     echo( "Error Code : " . $code );
+    //     echo( $th->getMessage() );
+    //   }
 
-    // Deleted responses have an empty body.
+    //   $codes_counter++;
+    //   if ( $codes_counter >= sizeof($codes) ) {
+    //     $codes = str_split( md5( time() * rand ( 100 , 999 ) ) , 8);
+    //     $codes_counter = 0;
+    //   }
+    // }
     return new ModifiedResourceResponse(NULL, 204);
   }
 

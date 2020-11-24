@@ -232,4 +232,8 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy {
       state: { reload: true },
     });
   }
+
+  goToBuy(urlToGo) {
+    window.open(urlToGo);
+  }
 }

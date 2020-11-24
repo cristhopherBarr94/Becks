@@ -22,16 +22,45 @@
       <!-- <span class="activation-icon"> </span> -->
       <h2 class="title-secondary">INGRESA EL CÓDIGO DE COMPRA</h2>
       <p class="title-tertiary">
-        Por la compra de un six pack en el ÉXITO, podrás activar tu cuenta por
-        un mes y ser parte de este exclusivo club.
+        Compra de un six pack en MERQUEO, recibe tu código, con él podrás
+        activar tu cuenta por un mes y ser parte de la BECK’S SOCIETY:
       </p>
-      <p class="title-tertiary-link">
+      <!-- <p class="title-tertiary-link">
         <a
           target="_blank"
           href="https://www.exito.com/sixpack-cerveza-pilsener-alema-138193/p"
           >COMPRA EN EL EXITO.COM</a
         >
-      </p>
+      </p> -->
+      <ion-row>
+        <div class="section-merqueo">
+          <button
+            class="btn-merqueo"
+            (click)="goToBuy('https://merqueo.onelink.me/XbOm/beckslatax6')"
+          >
+            <span class="merqueo-icon"> </span>
+          </button>
+          <p class="city">Bogotá</p>
+        </div>
+        <div class="section-merqueo">
+          <button
+            class="btn-merqueo"
+            (click)="goToBuy('https://merqueo.onelink.me/XbOm/beckslatax6med')"
+          >
+            <span class="merqueo-icon"> </span>
+          </button>
+          <p class="city">Medellín</p>
+        </div>
+        <div class="section-merqueo">
+          <button
+            class="btn-merqueo"
+            (click)="goToBuy('https://merqueo.onelink.me/XbOm/beckslatax6cali')"
+          >
+            <span class="merqueo-icon"> </span>
+          </button>
+          <p class="city">Cali</p>
+        </div>
+      </ion-row>
       <form
         [formGroup]="userActivationForm"
         class="form-section"
@@ -59,7 +88,7 @@
           <mat-icon matSuffix
             ><span
               class="help-icon"
-              matTooltip="Compra un SIX pack de BECKS en el EXITO, recibe tu código y escríbelo para activar tu cuenta en la BECK’S SOCIETY"
+              matTooltip="Compra un SIX pack de BECKS en MERQUEO, recibe tu código y escríbelo para activar tu cuenta en la BECK’S SOCIETY"
               matTooltipClass="tooltip-becks title-tertiary"
               matTooltipPosition="below"
             ></span

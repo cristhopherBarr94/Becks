@@ -96,86 +96,6 @@
           }}</mat-error
         >
       </mat-form-field>
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInputSelect(userEditProfileForm.controls.city)"
-      >
-        <mat-label>Ciudad</mat-label>
-        <mat-select
-          panelClass="backgroud-panel"
-          formControlName="city"
-          required
-          data-qadp="city"
-        >
-          <mat-option value="BOGOTA"> Bogotá</mat-option>
-          <mat-option value="MEDELLIN"> MedellÍn</mat-option>
-          <mat-option value="CALI"> Cali</mat-option>
-          <mat-option value="Otra"> Otra</mat-option>
-        </mat-select>
-        <mat-error
-          *ngIf="
-            userEditProfileForm.controls.city.touched &&
-            userEditProfileForm.controls.city.hasError('required')
-          "
-          >Debes seleccionar un campo</mat-error
-        >
-      </mat-form-field>
-    </div>
-
-    <div [ngClass]="screnSize(size, false)" *ngIf="size != 'xs'">
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInputSelect(userEditProfileForm.controls.id)"
-      >
-        <mat-label>Tipo de documento</mat-label>
-        <mat-select
-          panelClass="backgroud-panel"
-          formControlName="id"
-          data-qadp="id"
-        >
-          <mat-option value="CC"> Cédula de ciudadanía</mat-option>
-          <mat-option value="CE"> Cédula de extranjería</mat-option>
-          <mat-option value="PA"> Pasaporte</mat-option>
-        </mat-select>
-        <mat-error *ngIf="userEditProfileForm.controls.id.hasError('required')"
-          >Debes seleccionar un campo</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInput(userEditProfileForm.controls.document)"
-      >
-        <mat-label class="color-green">Documento</mat-label>
-
-        <input
-          matInput
-          formControlName="document"
-          type="text"
-          maxlength="30"
-          data-qadp="document"
-        />
-        <mat-error *ngIf="userEditProfileForm.controls.document.errors">
-          {{
-            getMessageform(
-              userEditProfileForm.controls.document,
-              "documento",
-              3,
-              10,
-              0,
-              1
-            )
-          }}</mat-error
-        >
-      </mat-form-field>
-    </div>
-
-    <div [ngClass]="screnSize(size, false)" class="row-form">
       <div class="flex-direction-column birthayForm">
         <span class="color-green font-link-small margin-left"
           >Fecha de nacimiento</span
@@ -270,7 +190,181 @@
           </mat-form-field>
         </div>
       </div>
+      <!-- <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInputSelect(userEditProfileForm.controls.city)"
+      >
+        <mat-label>Ciudad</mat-label>
+        <mat-select
+          panelClass="backgroud-panel"
+          formControlName="city"
+          required
+          data-qadp="city"
+        >
+          <mat-option value="BOGOTA"> Bogotá</mat-option>
+          <mat-option value="MEDELLIN"> MedellÍn</mat-option>
+          <mat-option value="CALI"> Cali</mat-option>
+          <mat-option value="Otra"> Otra</mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+            userEditProfileForm.controls.city.touched &&
+            userEditProfileForm.controls.city.hasError('required')
+          "
+          >Debes seleccionar un campo</mat-error
+        >
+      </mat-form-field> -->
     </div>
+
+    <div [ngClass]="screnSize(size, false)" *ngIf="size != 'xs'">
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInputSelect(userEditProfileForm.controls.id)"
+      >
+        <mat-label>Tipo de documento</mat-label>
+        <mat-select
+          panelClass="backgroud-panel"
+          formControlName="id"
+          data-qadp="id"
+        >
+          <mat-option value="CC"> Cédula de ciudadanía</mat-option>
+          <mat-option value="CE"> Cédula de extranjería</mat-option>
+          <mat-option value="PA"> Pasaporte</mat-option>
+        </mat-select>
+        <mat-error *ngIf="userEditProfileForm.controls.id.hasError('required')"
+          >Debes seleccionar un campo</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userEditProfileForm.controls.document)"
+      >
+        <mat-label class="color-green">Documento</mat-label>
+
+        <input
+          matInput
+          formControlName="document"
+          type="text"
+          maxlength="30"
+          data-qadp="document"
+        />
+        <mat-error *ngIf="userEditProfileForm.controls.document.errors">
+          {{
+            getMessageform(
+              userEditProfileForm.controls.document,
+              "documento",
+              3,
+              10,
+              0,
+              1
+            )
+          }}</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <!-- <div [ngClass]="screnSize(size, false)" class="row-form">
+      <div class="flex-direction-column birthayForm">
+        <span class="color-green font-link-small margin-left"
+          >Fecha de nacimiento</span
+        >
+        <div class="flex-direction-row content-flex-all-center">
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="with-form"
+            [ngClass]="getClassInput(userEditProfileForm.controls.day)"
+          >
+            <mat-label class="color-green">Dia</mat-label>
+
+            <input
+              matInput
+              formControlName="day"
+              type="number"
+              required
+              maxlength="2"
+              data-qadp="day"
+            />
+            <mat-error *ngIf="userEditProfileForm.controls.day.errors">
+              {{
+                getMessageform(
+                  userEditProfileForm.controls.day,
+                  "dia",
+                  10,
+                  10,
+                  1,
+                  31
+                )
+              }}</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="with-form"
+            [ngClass]="getClassInput(userEditProfileForm.controls.month)"
+          >
+            <mat-label class="color-green">Mes</mat-label>
+
+            <input
+              matInput
+              formControlName="month"
+              type="number"
+              required
+              maxlength="2"
+              data-qadp="month"
+            />
+            <mat-error *ngIf="userEditProfileForm.controls.month.errors">
+              {{
+                getMessageform(
+                  userEditProfileForm.controls.month,
+                  "mes",
+                  10,
+                  10,
+                  1,
+                  12
+                )
+              }}</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            style="width: 100px"
+            [ngClass]="getClassInput(userEditProfileForm.controls.year)"
+          >
+            <mat-label class="color-green">Año</mat-label>
+
+            <input
+              matInput
+              formControlName="year"
+              type="number"
+              required
+              maxlength="4"
+              data-qadp="year"
+            />
+            <mat-error *ngIf="userEditProfileForm.controls.year.errors">
+              {{
+                getMessageform(
+                  userEditProfileForm.controls.year,
+                  "año",
+                  10,
+                  10,
+                  1920,
+                  2002
+                )
+              }}</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </div>
+    </div> -->
     <mat-error *ngIf="httpError">{{ httpError }}</mat-error>
 
     <button

@@ -103,6 +103,25 @@
     letter-spacing: normal;
   }
 }
+.section-merqueo {
+  margin: 20px 15px 0px 15px;
+  text-align: center;
+  .city {
+    text-transform: uppercase;
+    font-family: "Helvetica LT Std";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 110%;
+  }
+  .btn-merqueo {
+    width: 98px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    position: relative;
+  }
+}
 
 .form-section {
   @media (min-width: 0px) and (max-width: 768px) {

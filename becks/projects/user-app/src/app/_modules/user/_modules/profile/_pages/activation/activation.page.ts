@@ -57,6 +57,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy {
   private modal: any;
   private modalIsShowed: boolean = false;
   public size: string;
+  public options = { year: "numeric", month: "long", day: "numeric" };
 
   @ViewChild(HeaderComponent) header: HeaderComponent;
   title: string = "activa tu cuenta";
@@ -98,7 +99,9 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy {
           "TIENES TU CUENTA ACTIVA POR " +
           this.days_ramaining +
           " DÍAS HASTA " +
-          new Date(this.date_til).toLocaleDateString();
+          new Date(this.date_til)
+            .toLocaleDateString("es-ES", this.options)
+            .toUpperCase();
 
         this.bgActive();
 

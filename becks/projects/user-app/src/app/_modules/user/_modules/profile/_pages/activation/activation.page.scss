@@ -113,38 +113,118 @@
     letter-spacing: normal;
   }
 }
-.section-merqueo {
-  margin: 20px 5px 0px 5px;
-  text-align: center;
-  width: 90px;
+// .section-merqueo {
+//   margin: 20px 5px 0px 5px;
+//   text-align: center;
+//   width: 90px;
+//   .city {
+//     text-transform: uppercase;
+//     font-family: "Helvetica LT Std";
+//     font-style: normal;
+//     font-weight: bold;
+//     font-size: 14px;
+//     line-height: 100%;
+//     @media (min-width: 769px) {
+//       font-size: 18px;
+//       line-height: 110%;
+//     }
+//   }
+//   .btn-merqueo {
+//     border: none;
+//     background: transparent;
+//     position: relative;
+//     width: 98px;
+//     height: 44px;
+//     @media (min-width: 769px) {
+//       width: 90px;
+//       height: 44px;
+//     }
+//   }
+//   @media (min-width: 769px) {
+//     margin: 20px 15px 0px 15px;
+//   }
+// }
+
+.section-buy {
+  margin: 30px 0px;
+  transition: 0.5;
+  :hover {
+    transform: scale(1.1);
+    z-index: 10;
+  }
+  .card {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 25px;
+    margin: 2px;
+    object-fit: cover;
+    &__1 {
+      background: url("./../../../../../../../assets/img/bg_Sixpack_mobile.jpg");
+      background-size: contain;
+      background-position: center;
+    }
+    &__2 {
+      background: url("./../../../../../../../assets/img/bg_SixpackMerqueo_mobile.jpg");
+      background-size: contain;
+      background-position: center;
+    }
+    &__3 {
+      background: url("./../../../../../../../assets/img/bg_merqueo1_app.jpg");
+      background-size: contain;
+      background-position: center;
+    }
+    @media (min-width: 0px) and (max-width: 768px) {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+    }
+    :hover {
+      transform: none;
+    }
+  }
+
+  .merqueo-icon {
+    width: 54px;
+    height: 26px;
+    top: 11px;
+    left: 15px;
+    @media (min-width: 0px) and (max-width: 768px) {
+      width: 40px;
+      height: 20px;
+      top: 5px;
+      left: 5px;
+    }
+    :hover {
+      transform: none;
+    }
+  }
   .city {
+    width: 90%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    height: 35px;
     text-transform: uppercase;
     font-family: "Helvetica LT Std";
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
     line-height: 100%;
+    padding: 5px 10px;
+    border-top: 1px solid white;
+    color: #ffffff;
     @media (min-width: 769px) {
       font-size: 18px;
       line-height: 110%;
     }
   }
-  .btn-merqueo {
-    border: none;
-    background: transparent;
-    position: relative;
-    width: 98px;
-    height: 44px;
-    @media (min-width: 769px) {
-      width: 90px;
-      height: 44px;
-    }
-  }
-  @media (min-width: 769px) {
-    margin: 20px 15px 0px 15px;
-  }
 }
-
+.soon-foot {
+  font-family: "Helvetica LT Std";
+}
 .form-section {
   @media (min-width: 0px) and (max-width: 768px) {
     margin-top: 30px;

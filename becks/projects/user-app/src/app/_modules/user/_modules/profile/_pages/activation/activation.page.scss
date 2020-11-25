@@ -17,12 +17,22 @@
     rgba(18, 18, 18, 1) 100%
   );
   position: absolute;
-  top: -50px;
-  @media (min-width: 769px) {
-    position: relative;
-    top: 0px;
+
+  &__1 {
+    top: 60px;
+    @media (min-width: 769px) {
+      display: none;
+    }
+  }
+
+  &__2 {
+    top: 85px;
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 }
+
 .cancel-btn {
   position: absolute;
   background: transparent;
@@ -104,22 +114,34 @@
   }
 }
 .section-merqueo {
-  margin: 20px 15px 0px 15px;
+  margin: 20px 5px 0px 5px;
   text-align: center;
+  width: 90px;
   .city {
     text-transform: uppercase;
     font-family: "Helvetica LT Std";
     font-style: normal;
     font-weight: bold;
-    font-size: 18px;
-    line-height: 110%;
+    font-size: 14px;
+    line-height: 100%;
+    @media (min-width: 769px) {
+      font-size: 18px;
+      line-height: 110%;
+    }
   }
   .btn-merqueo {
-    width: 98px;
-    height: 44px;
     border: none;
     background: transparent;
     position: relative;
+    width: 98px;
+    height: 44px;
+    @media (min-width: 769px) {
+      width: 90px;
+      height: 44px;
+    }
+  }
+  @media (min-width: 769px) {
+    margin: 20px 15px 0px 15px;
   }
 }
 

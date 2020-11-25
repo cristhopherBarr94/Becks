@@ -92,21 +92,21 @@ export class EditFormComponent implements OnInit, OnDestroy {
         Validators.minLength(6),
         Validators.maxLength(10),
       ]),
-      day: new FormControl(
-        !!this.user.birthdate && moment(this.user.birthdate).format("DD"),
-        [Validators.required, Validators.min(1), Validators.max(31)]
-      ),
-      month: new FormControl(
-        !!this.user.birthdate && moment(this.user.birthdate).format("MM"),
-        [Validators.required, Validators.min(1), Validators.max(12)]
-      ),
-      year: new FormControl(
-        !!this.user.birthdate && moment(this.user.birthdate).format("YYYY"),
-        [Validators.required, Validators.min(1920), Validators.max(2002)]
-      ),
+      // day: new FormControl(
+      //   !!this.user.birthdate && moment(this.user.birthdate).format("DD"),
+      //   [Validators.required, Validators.min(1), Validators.max(31)]
+      // ),
+      // month: new FormControl(
+      //   !!this.user.birthdate && moment(this.user.birthdate).format("MM"),
+      //   [Validators.required, Validators.min(1), Validators.max(12)]
+      // ),
+      // year: new FormControl(
+      //   !!this.user.birthdate && moment(this.user.birthdate).format("YYYY"),
+      //   [Validators.required, Validators.min(1920), Validators.max(2002)]
+      // ),
       id: new FormControl(this.user.type_id, [Validators.required]),
       document: new FormControl(this.user.id_number, [Validators.required]),
-      // city: new FormControl(this.user.city, Validators.required),
+      city: new FormControl(this.user.city, Validators.required),
     });
   }
 
@@ -165,23 +165,23 @@ export class EditFormComponent implements OnInit, OnDestroy {
         //DESKTOP
         if (isValidForm) {
           this.ui.showLoading();
-          this.birthDayDate = !!this.userEditProfileForm.controls.day.value
-            ? this.userEditProfileForm.controls.month.value.toString().trim() +
-              "/" +
-              this.userEditProfileForm.controls.day.value.toString().trim() +
-              "/" +
-              this.userEditProfileForm.controls.year.value.toString().trim()
-            : undefined;
+          // this.birthDayDate = !!this.userEditProfileForm.controls.day.value
+          //   ? this.userEditProfileForm.controls.month.value.toString().trim() +
+          //     "/" +
+          //     this.userEditProfileForm.controls.day.value.toString().trim() +
+          //     "/" +
+          //     this.userEditProfileForm.controls.year.value.toString().trim()
+          //   : undefined;
 
           this.httpService
             .patch(environment.serverUrl + environment.user.patchData, {
               first_name: this.userEditProfileForm.controls.name.value.trim(),
               last_name: this.userEditProfileForm.controls.lastName.value.trim(),
               mobile_phone: this.userEditProfileForm.controls.phone.value.trim(),
-              birthdate: this.birthDayDate,
+              // birthdate: this.birthDayDate,
               type_id: this.userEditProfileForm.controls.id.value.trim(),
               id_number: this.userEditProfileForm.controls.document.value.trim(),
-              // city: this.userEditProfileForm.controls.city.value.trim(),
+              city: this.userEditProfileForm.controls.city.value.trim(),
             })
             .subscribe(
               (response: any) => {
@@ -208,25 +208,26 @@ export class EditFormComponent implements OnInit, OnDestroy {
           !this.userEditProfileForm.controls.name.invalid &&
           !this.userEditProfileForm.controls.lastName.invalid &&
           !this.userEditProfileForm.controls.phone.invalid &&
-          // !this.userEditProfileForm.controls.city.invalid &&
-          !this.userEditProfileForm.controls.month.invalid &&
-          !this.userEditProfileForm.controls.day.invalid &&
-          !this.userEditProfileForm.controls.year.invalid
+          !this.userEditProfileForm.controls.city.invalid
+          // !this.userEditProfileForm.controls.month.invalid &&
+          // !this.userEditProfileForm.controls.day.invalid &&
+          // !this.userEditProfileForm.controls.year.invalid
         ) {
           this.ui.showLoading();
-          this.birthDayDate = !!this.userEditProfileForm.controls.day.value
-            ? this.userEditProfileForm.controls.month.value.toString().trim() +
-              "/" +
-              this.userEditProfileForm.controls.day.value.toString().trim() +
-              "/" +
-              this.userEditProfileForm.controls.year.value.toString().trim()
-            : undefined;
+          // this.birthDayDate = !!this.userEditProfileForm.controls.day.value
+          //   ? this.userEditProfileForm.controls.month.value.toString().trim() +
+          //     "/" +
+          //     this.userEditProfileForm.controls.day.value.toString().trim() +
+          //     "/" +
+          //     this.userEditProfileForm.controls.year.value.toString().trim()
+          //   : undefined;
           this.httpService
             .patch(environment.serverUrl + environment.user.patchData, {
               first_name: this.userEditProfileForm.controls.name.value.trim(),
               last_name: this.userEditProfileForm.controls.lastName.value.trim(),
               mobile_phone: this.userEditProfileForm.controls.phone.value.trim(),
-              birthdate: this.birthDayDate,
+              city: this.userEditProfileForm.controls.city.value.trim(),
+              // birthdate: this.birthDayDate,
             })
             .subscribe(
               (response: any) => {

@@ -4,6 +4,7 @@
     class="fullSection from-section content-flex-all-center"
     [ngClass]="colorBg"
   >
+    <div class="separator-becks separator-becks__1"></div>
     <div
       id="formActivationSection"
       class="content-flex-all-center full-height flex-direction-column padding-form"
@@ -18,19 +19,19 @@
         <img src="./assets/icon/cancel-icon.svg" alt="cancel" />
       </button>
       <h2 class="title-desktop">{{title}}</h2>
-      <div class="separator-becks"></div>
+      <div class="separator-becks separator-becks__2"></div>
       <!-- <span class="activation-icon"> </span> -->
       <h2 class="title-secondary">INGRESA EL CÓDIGO DE COMPRA</h2>
       <p class="title-tertiary">
         Compra de un six pack en MERQUEO, recibe tu código, con él podrás
         activar tu cuenta por un mes y ser parte de la BECK’S SOCIETY:
       </p>
-      <p class="title-tertiary-link">
+      <!-- <p class="title-tertiary-link">
         <a target="_blank" href="https://merqueo.onelink.me/XbOm/beckslatax6"
           >COMPRA EN MERQUEO.COM</a
         >
-      </p>
-      <!-- <ion-row>
+      </p> -->
+      <ion-row>
         <div class="section-merqueo">
           <button
             class="btn-merqueo"
@@ -58,7 +59,7 @@
           </button>
           <p class="city">Cali</p>
         </div>
-      </ion-row> -->
+      </ion-row>
       <form
         [formGroup]="userActivationForm"
         class="form-section"

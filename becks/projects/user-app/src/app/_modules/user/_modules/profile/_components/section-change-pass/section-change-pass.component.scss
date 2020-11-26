@@ -62,9 +62,6 @@
     bottom: 20px;
     text-align: center;
   }
-  mat-icon {
-    cursor: pointer;
-  }
 
   ::ng-deep mat-icon:active {
     font-family: "Material Icons" !important;
@@ -119,6 +116,11 @@
 .margin-bottom {
   margin-bottom: 26px;
 }
- .backgrounColor{
-   background-color: #171717;
- }
+.backgrounColor {
+  background-color: #171717;
+}
+
+mat-icon {
+  cursor: pointer;
+  color: #ffffff !important;
+}

@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { Platform } from "@ionic/angular";
 import { Subscription } from 'rxjs';
+import { User } from 'src/app/_models/User';
 import { AuthService } from "src/app/_services/auth.service";
 import { HttpService } from "src/app/_services/http.service";
 import { UiService } from "src/app/_services/ui.service";
@@ -13,11 +14,13 @@ import { environment } from "src/environments/environment";
   templateUrl: "./name-tittle.component.html",
   styleUrls: ["./name-tittle.component.scss"],
 })
-export class NameTittleComponent implements OnInit {
+export class NameTittleComponent implements OnInit, OnDestroy {
   @Input() first_name: string;
   public size: string;
   public nameResponsive: any
   public visibleNAme : boolean
+  private userSub: Subscription;
+  public user: User;
 
   constructor(
     private authService: AuthService,
@@ -39,7 +42,15 @@ export class NameTittleComponent implements OnInit {
     // console.log("NameTittleComponent -> this.nameResponsive", this.nameResponsive)
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userSub = this.userSvc.user$.subscribe( (user) => {
+      this.user = user;
+    });
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+  }
 
   logout() {
     this.uiService.showLoading();

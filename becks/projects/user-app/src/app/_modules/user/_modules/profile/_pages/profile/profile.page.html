@@ -1,6 +1,6 @@
 <ion-content>
   <div class="container-profile flex-direction-column">
-    <user-name-tittle [first_name]="user.first_name" *ngIf="this.size == 'xs'"></user-name-tittle>
+    <user-name-tittle *ngIf="this.size == 'xs'"></user-name-tittle>
     <user-menu [ngClass]='positionHeader()' ></user-menu>
     <user-profile-picture
       [profile_view]="true"

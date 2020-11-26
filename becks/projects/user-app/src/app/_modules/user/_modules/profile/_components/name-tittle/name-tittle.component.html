@@ -13,8 +13,8 @@
     ></div>
     <span
       class="title-profile margin-tittle"
-      *ngIf="this.size == 'xs' && !visibleNAme"
-      >!Hola, {{ first_name }}!</span
+      *ngIf="user && this.size == 'xs' && !visibleNAme"
+      >!Hola, {{ user.first_name }}!</span
     >
   </div>
   <div class="lateral-div">

@@ -154,7 +154,6 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
    *   The HTTP response object.
    */
   public function post($data) {
-
     $this->validate($data);
     
     $exp_result = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} WHERE id = :id LIMIT 1', [':id' => trim($data['eid'])])->fetchAssoc();
@@ -196,6 +195,8 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
             ->execute();
       if ( is_numeric($id) ) {
         $this->dbConnection->query('UPDATE {ab_inbev_exp_stock} SET stock_actual = stock_actual - 1 WHERE id = :id', [':id' => $stock['id']]);
+        $storage = $this->entityTypeManager->getStorage('user');
+        $user = $storage->load( $this->currentUser->id() );
         Util::sendEmail(  2, 
                           $user->getEmail() , 
                           $user->get('field_first_name')->value . ' ' . $user->get('field_last_name')->value

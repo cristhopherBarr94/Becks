@@ -130,10 +130,14 @@
               [formControl]="userRegisterForm.controls.city"
               [matAutocomplete]="auto"
               data-qadp="city"
-              required>
+              required
+            />
             <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let option of filteredCityOptions | async" [value]="option">
-                {{option}}
+              <mat-option
+                *ngFor="let option of filteredCityOptions | async"
+                [value]="option"
+              >
+                {{ option }}
               </mat-option>
             </mat-autocomplete>
             <mat-error
@@ -271,7 +275,11 @@
             </mat-checkbox>
             <i class="title-fourthy">
               He leído, entendido y aceptado los
-              <a target="_blank" href="./terms-conditions" data-qadp="link-pp"
+              <a
+                target="_blank"
+                href="assets/files/TERMINOSYCONDICIONESGENERALES.pdf"
+                rel="noopener noreferrer"
+                data-qadp="link-pp"
                 >Terminos y condiciones
               </a>
               y la

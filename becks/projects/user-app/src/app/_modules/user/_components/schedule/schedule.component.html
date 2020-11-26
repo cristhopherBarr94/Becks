@@ -21,7 +21,7 @@
         <ion-row>
           <div>
             <mat-calendar
-            *ngIf="newEvents"
+              *ngIf="newEvents"
               #calendar1
               class="month1"
               [minDate]="minDate"
@@ -32,7 +32,7 @@
           </div>
           <div>
             <mat-calendar
-            *ngIf="newEvents"
+              *ngIf="newEvents"
               #calendar2
               class="month2"
               [minDate]="minDate2"
@@ -50,38 +50,45 @@
         </div>
         <div class="schedule-over">
           <p [hidden]="showEvent">Ningún evento disponible.</p>
-  
-          <div
-            class="schedule-body"
-            *ngFor="let event of exps"
-          >
-            <div
-              class="card-schedule"
-              [hidden] = "stringCom != event.fechaExp"
-            >
-            <ion-row>
-              <div class="width-box">
-                  <div class="title-tertiary title-card"><a [routerLink]="['/user/exp/'+event.id]">{{ event.titleExp }}</a></div>
-                <div class="title-tertiary hour-card">{{ event.fechaExp }}</div>
-                </div>
-                <div class="circle-icon">
-                  <span class="img-exp" [ngStyle]="{'background-image': 'url(' + event.imagesExp + ')'}"> </span>
-                </div>
-              </ion-row>
-              <!-- <ion-row>
+
+          <div class="schedule-body" *ngFor="let event of exps">
+            <a [routerLink]="['/user/exp/' + event.id]">
+              <div class="card-schedule" [hidden]="stringCom != event.fechaExp">
+                <ion-row>
+                  <div class="width-box">
+                    <div class="title-tertiary title-card">
+                      {{ event.titleExp }}
+                    </div>
+                    <div class="title-tertiary hour-card">
+                      {{ event.fechaExp }}
+                    </div>
+                  </div>
+                  <div class="circle-icon">
+                    <span
+                      class="img-exp"
+                      [ngStyle]="{
+                        'background-image': 'url(' + event.imagesExp + ')'
+                      }"
+                    >
+                    </span>
+                  </div>
+                </ion-row>
+                <!-- <ion-row>
                 <div class="guest-card" title="@usuario"></div>
                 <div class="guest-card" title="@usuario"></div>
                 <div class="guest-card" title="@usuario"></div>
                 <div class="guest-card" title="@usuario"></div>
               </ion-row> -->
-            </div>
+              </div>
+            </a>
           </div>
         </div>
       </div>
     </ion-row>
   </section>
 
-  <user-vertical-calendar *ngIf="this.size == 'xs' || this.size == 'sm'"></user-vertical-calendar>
+  <user-vertical-calendar
+    *ngIf="this.size == 'xs' || this.size == 'sm'"
+  ></user-vertical-calendar>
   <app-footer></app-footer>
 </ion-content>
-

@@ -196,12 +196,12 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
         $result = $this->__sendTD( 
           $data['first_name'],
           $data['last_name'],
-          $data['gender'] == 'M' ? 'masculino' : 'femenino',
+          $data['city'],
           intval($data['mobile_phone']),
           $data['email'],
           $data['privacy'],
           $data['promo'],
-          $data['cookie_td']
+          $data['id_number']
        );
       } else {
         $code = '502';
@@ -431,7 +431,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     // "city" field from User-App Form
     if ( isset($record['city']) ) {
       if ( empty($record['city']) || strlen($record['city']) > 250) {
-        throw new BadRequestHttpException('La "Ciudad" sobrepasa los caracteres permitidos');
+        throw new BadRequestHttpException('La "Ciudad" esta vacia o sobrepasa los caracteres permitidos');
       }
     }
     
@@ -495,7 +495,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
    * Private Function
    *  Analytics
    */
-  private function __sendTD($name , $lastname , $gender , $phone , $email , $privacy , $promo, $_td ) {
+  private function __sendTD($name , $lastname , $city , $phone , $email , $privacy , $promo, $id_number ) {
     
     // define variable that will be used to tell the __sendTD method if it should send to the production database
     $is_production = false;
@@ -508,21 +508,21 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     // here it's possible to add additional purposes to the purpose array
     // runs the __sendTD method with parameters got from the request, it should be changed based on your form fields, country, brand, campaign, form, and whether if it's running in the production environment or not
     $data = array(
-      "abi_name" => $name,
+      "abi_firstname" => $name,
       "abi_lastname" => $lastname,
-      "abi_gender" => $gender,
+      "abi_city" => $city,
       "abi_phone" => $phone,
       "abi_email" => $email,
-      "purpose_name" => $purposes,
-      "td_client_id" => $_td
+      "abi_cpf" => $id_number, // TODO :: PREGUNTAR
+      "purpose_name" => $purposes
     );
 
     $tdstatus = Util::sendTD(
         $data,              // form data & purposes
         "col",              // country
         "Becks",            // brand
-        "BECKS_EXPERIENCIAS",   // campaign
-        "BECKS_EXPERIENCIAS",   // form
+        "BECKS_WEBAPP_1120",   // campaign
+        "BECKS_WEBAPP_1120",   // form
         true,   // unify
         $is_production  // production flag
     );

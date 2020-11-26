@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-confirm-register",
@@ -6,17 +7,19 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./confirm-register.page.scss"],
 })
 export class ConfirmRegisterPage implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
-  goToFeria() {
+  goToHome() {
     window.dataLayer.push({
       event: "trackEvent",
       eventCategory: "becks society",
       eventAction: "thank you",
-      eventLabel: "feria del millon",
+      eventLabel: "home",
     });
-    window.open("https://www.feriadelmillon.com.co/becks/");
+    this.router.navigate(["principal"], {
+      queryParamsHandling: "preserve",
+    });
   }
 }

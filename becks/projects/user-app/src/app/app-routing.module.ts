@@ -44,11 +44,6 @@ const routes: Routes = [
       import("./_modules/not-found/not-found.module").then(
         (m) => m.NotFoundPageModule
       ),
-  },
-  {
-    path: "",
-    redirectTo: "age-gate",
-    pathMatch: "full",
   }
 
 ];

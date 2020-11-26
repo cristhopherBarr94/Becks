@@ -32,7 +32,7 @@ export class AppComponent {
       if ( location.pathname == '' || location.pathname == 'app' || 
             location.pathname == '/app' || location.pathname == '/app/' ||
             location.pathname == '/' || location.pathname == '\\' ) {
-        this.router.navigate(['age-gate']);
+        this.router.navigate(['age-gate'], { queryParamsHandling: "preserve" });
       }
     }, 2500);
   }

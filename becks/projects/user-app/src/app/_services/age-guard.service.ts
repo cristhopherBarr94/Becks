@@ -8,12 +8,12 @@ export class AgeGuardService implements CanActivate {
               private auth: AuthService) {}
   canActivate(): boolean {
     if ( this.auth.isAuthenticated() ) {
-      this.router.navigate(["user/exp"]);
+      this.router.navigate(["user/exp"], { queryParamsHandling: "preserve" });
       return false;
     }
     if ( !localStorage.getItem('"user-age-gate-local') &&
         !sessionStorage.getItem("user-age-gate-session") ) {
-      this.router.navigate(["age-gate"]);
+      this.router.navigate(["age-gate"], { queryParamsHandling: "preserve" });
       return false;
     }
     return true;

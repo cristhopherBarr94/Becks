@@ -1,37 +1,66 @@
 <ion-content>
   <section
-  class="content-flex-all-center full-height flex-direction-column calendar-slider-background"
->
-<h1 class="calendar-title title-secondary">Experiencias</h1>
-<span class="calendar-span"> </span>
-  <section class="margin-top-section">
-    <div class="card-event" *ngFor="let item of amount_exp">
-      <ion-row>
-        <div class="lateral-month">
-          <h1 class="title-tertiary">{{ (item.fechaExp.split('/')[1] +"/" +item.fechaExp.split('/')[0] +"/" + item.fechaExp.split('/')[2])  | date:'MMM'}}</h1>
-          <h2 class="day-event title-tertiary">{{ item.fechaExp.split('/')[0] }}</h2>
-          <div class="vertical_dotted_line"></div>
-        </div>
-        <div
-          class="img-event"
-          [style.background-image]="'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url('+ item.imagesExp +')'"
-        >
-          <div class="event-description">
-            <a (click)="redirectExpId(item.id)"><p class="title-secondary">{{ item.titleExp }}</p>
-            <p class="title-tertiary">{{ (item.fechaExp.split('/')[1] +"/"
-               +item.fechaExp.split('/')[0] +"/" 
-               + item.fechaExp.split('/')[2])  | date:'EEEE'}} 
-               {{(item.fechaExp.split('/')[1] +"/" 
-               +item.fechaExp.split('/')[0] +"/" 
-               + item.fechaExp.split('/')[2]) | date:'dd'}} 
-               {{(item.fechaExp.split('/')[1] +"/" 
-               +item.fechaExp.split('/')[0] +"/" 
-               + item.fechaExp.split('/')[2]) | date:'LLL'}}</p>
-            </a>
-          </div>
-        </div>
-      </ion-row>
-    </div>
+    class="content-flex-all-center full-height flex-direction-column calendar-slider-background"
+  >
+    <h1 class="calendar-title title-secondary">Experiencias</h1>
+    <span class="calendar-span"> </span>
+    <section class="margin-top-section">
+      <div class="card-event" *ngFor="let item of amount_exp">
+        <a (click)="redirectExpId(item.id)">
+          <ion-row>
+            <div class="lateral-month">
+              <h1 class="title-tertiary">
+                {{
+                  item.fechaExp.split("/")[1] +
+                    "/" +
+                    item.fechaExp.split("/")[0] +
+                    "/" +
+                    item.fechaExp.split("/")[2] | date: "MMM"
+                }}
+              </h1>
+              <h2 class="day-event title-tertiary">
+                {{ item.fechaExp.split("/")[0] }}
+              </h2>
+              <div class="vertical_dotted_line"></div>
+            </div>
+            <div
+              class="img-event"
+              [style.background-image]="
+                'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url(' +
+                item.imagesExp +
+                ')'
+              "
+            >
+              <div class="event-description">
+                <p class="title-secondary">{{ item.titleExp }}</p>
+                <p class="title-tertiary">
+                  {{
+                    item.fechaExp.split("/")[1] +
+                      "/" +
+                      item.fechaExp.split("/")[0] +
+                      "/" +
+                      item.fechaExp.split("/")[2] | date: "EEEE"
+                  }}
+                  {{
+                    item.fechaExp.split("/")[1] +
+                      "/" +
+                      item.fechaExp.split("/")[0] +
+                      "/" +
+                      item.fechaExp.split("/")[2] | date: "dd"
+                  }}
+                  {{
+                    item.fechaExp.split("/")[1] +
+                      "/" +
+                      item.fechaExp.split("/")[0] +
+                      "/" +
+                      item.fechaExp.split("/")[2] | date: "LLL"
+                  }}
+                </p>
+              </div>
+            </div>
+          </ion-row>
+        </a>
+      </div>
+    </section>
   </section>
-</section>
 </ion-content>

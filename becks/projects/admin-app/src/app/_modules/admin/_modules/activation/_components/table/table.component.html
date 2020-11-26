@@ -1,162 +1,117 @@
-<div class="content-table-module">
-  <div class="info full-height">
-    <div class="description">
-      <h3 class="title-primary">DAR ACCESO A BECK'S SOCIETY</h3>
-      <p class="title-fourthy">
-        SELECCIONA LOS USUARIOS QUE VAS A ADMITIR EN LA APP
-      </p>
-    </div>
-    <div class="separator-min">&nbsp;</div>
-    <div class="mat-elevation-z8">
-      <br />
-      <ion-row>
-        <div class="pageSize title-fourthy">
-          <ion-row>
-            <p>MOSTRAR</p>
-            <select (change)="changePage($event.target.value)">
-              <option [value]="10">10</option>
-              <option [value]="20">20</option>
-              <option [value]="30">30</option>
-            </select>
-            <p>ENTRADAS</p>
-          </ion-row>
-        </div>
-
-        <input
-          class="input-search"
-          (keyup.enter)="applyFilter($event.target.value)"
-          placeholder="Buscar"
-        />
-      </ion-row>
-
-      <table mat-table matSort [dataSource]="dataSource" class="font-table">
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox
-              color="success"
-              (change)="$event ? masterToggle() : null"
-              [checked]="selection.hasValue() && isAllSelected()"
-              [indeterminate]="selection.hasValue() && !isAllSelected()"
-            >
-            </mat-checkbox>
-          </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-checkbox
-              color="success"
-              (click)="$event.stopPropagation()"
-              (change)="$event ? selection.toggle(row) : null"
-              [checked]="selection.isSelected(row)"
-              (change)="$event ? singleToggle() : null"
-            >
-            </mat-checkbox>
-          </td>
-        </ng-container>
-        <!-- Name Column -->
-        <ng-container matColumnDef="first_name">
-          <th mat-header-cell *matHeaderCellDef>
+  <div class="content-table-module">
+    <div class="info full-height">
+      <div class="description">
+        <h3 class="title-primary">DAR ACCESO A BECK'S SOCIETY</h3>
+        <p class="title-fourthy">SELECCIONA LOS USUARIOS QUE VAS A ADMITIR EN LA APP</p>
+      </div>
+      <div class="separator-min">&nbsp;</div>
+      <div class="mat-elevation-z8">
+        <br>
+        <ion-row>
+          <div class="pageSize title-fourthy">
             <ion-row>
-              NOMBRE
-              <div>
-                <button
-                  class="btn-order btn-up"
-                  (click)="sortTable(0, false)"
-                ></button>
-                <button
-                  class="btn-order btn-down"
-                  (click)="sortTable(0, true)"
-                ></button>
+              <p>MOSTRAR </p>
+                <select (change)="changePage($event.target.value)">
+                  <option [value]="10">10</option>
+                  <option [value]="20">20</option>
+                  <option [value]="30">30</option>
+                </select>
+              <p> ENTRADAS</p>
+            </ion-row>
+          </div>
+        
+       <input class="input-search" (keyup.enter)="applyFilter($event.target.value)" placeholder="Buscar" >
+            
+        </ion-row>
+
+        <table mat-table matSort [dataSource]="dataSource" class="font-table">
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox  color="success" (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox color="success"  (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" (change)="$event ? singleToggle() : null">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+          <!-- Name Column -->
+          <ng-container matColumnDef="first_name">
+            <th mat-header-cell *matHeaderCellDef  > 
+              <ion-row>
+                NOMBRE 
+                <div>
+                  <button class="btn-order btn-up" (click)="sortTable(0,false)"></button>
+                  <button class="btn-order btn-down" (click)="sortTable(0,true)"></button>
+                </div>
+              </ion-row>
+            </th>
+            <td mat-cell *matCellDef="let element" > {{element.first_name | titlecase }}</td>
+          </ng-container>
+          <!-- Last name Column -->
+          <ng-container matColumnDef="last_name">
+            <th mat-header-cell *matHeaderCellDef >
+              <ion-row>
+                APELLIDO 
+                <div>
+                 <button class="btn-order btn-up" (click)="sortTable(1,false)"></button>
+                 <button class="btn-order btn-down" (click)="sortTable(1,true)"></button>
+               </div>
+              </ion-row>
+              </th>
+            <td mat-cell *matCellDef="let element" >{{element.last_name | titlecase }} </td>
+          </ng-container>
+          <!-- email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> 
+              <ion-row>
+                EMAIL 
+                <div>
+                 <button class="btn-order btn-up" (click)="sortTable(2,false)"></button>
+                 <button class="btn-order btn-down" (click)="sortTable(2,true)"></button>
+               </div>
+              </ion-row>
+               </th>
+            <td mat-cell *matCellDef="let element" > {{element.email}} </td>
+          </ng-container>
+          <!-- cel number Column -->
+          <ng-container matColumnDef="mobile_phone">
+            <th mat-header-cell *matHeaderCellDef > CELULAR </th>
+            <td mat-cell *matCellDef="let element" >{{element.mobile_phone | titlecase }} </td>
+          </ng-container>
+          <!-- delete element function -->
+          <ng-container matColumnDef="trash">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell *matCellDef="let element">
+              <button class="btn-delete"
+               [id]="element.id"
+               (click)="delete($event.target.id)"
+               >
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+        </table>
+        <ion-row>
+          <div class="paginator">
+            <ion-row>
+              <div class="label">
+                <p>
+                  {{currentPg+1}} DE {{numPage}}
+                </p>
+              </div>
+              <div class="controls">
+                <button class="btn-control ctrl-left" (click)="controlPage('prev')" [disabled]="this.currentPg <= 0"></button>
+                <button class="btn-control ctrl-right" (click)="controlPage('next')" [disabled]="this.currentPg+1 == this.numPage"></button>
               </div>
             </ion-row>
-          </th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.first_name | titlecase }}
-          </td>
-        </ng-container>
-        <!-- Last name Column -->
-        <ng-container matColumnDef="last_name">
-          <th mat-header-cell *matHeaderCellDef>
-            <ion-row>
-              APELLIDO
-              <div>
-                <button
-                  class="btn-order btn-up"
-                  (click)="sortTable(1, false)"
-                ></button>
-                <button
-                  class="btn-order btn-down"
-                  (click)="sortTable(1, true)"
-                ></button>
-              </div>
-            </ion-row>
-          </th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.last_name | titlecase }}
-          </td>
-        </ng-container>
-        <!-- email Column -->
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef>
-            <ion-row>
-              EMAIL
-              <div>
-                <button
-                  class="btn-order btn-up"
-                  (click)="sortTable(2, false)"
-                ></button>
-                <button
-                  class="btn-order btn-down"
-                  (click)="sortTable(2, true)"
-                ></button>
-              </div>
-            </ion-row>
-          </th>
-          <td mat-cell *matCellDef="let element">{{ element.email }}</td>
-        </ng-container>
-        <!-- cel number Column -->
-        <ng-container matColumnDef="mobile_phone">
-          <th mat-header-cell *matHeaderCellDef>CELULAR</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.mobile_phone | titlecase }}
-          </td>
-        </ng-container>
-        <!-- delete element function -->
-        <ng-container matColumnDef="trash">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-          <td mat-cell *matCellDef="let element">
-            <button
-              class="btn-delete"
-              [id]="element.id"
-              (click)="delete($event.target.id)"
-            ></button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-      <ion-row>
-        <div class="paginator">
-          <ion-row>
-            <div class="label">
-              <p>{{ currentPg + 1 }} DE {{ numPage }}</p>
-            </div>
-            <div class="controls">
-              <button
-                class="btn-control ctrl-left"
-                (click)="controlPage('prev')"
-                [disabled]="this.currentPg <= 0"
-              ></button>
-              <button
-                class="btn-control ctrl-right"
-                (click)="controlPage('next')"
-                [disabled]="this.currentPg + 1 == this.numPage"
-              ></button>
-            </div>
-          </ion-row>
-        </div>
-
-        <button
+          </div>
+   
+          <button 
           block="block"
           color="becks"
           class="becks-btn-primary margin-button-top becks-button"
@@ -165,10 +120,8 @@
             'button-disabled': this.authorizated_users.length == 0
           }"
           (click)="showModal()"
-        >
-          dar acceso
-        </button>
-      </ion-row>
+          >dar acceso</button>
+        </ion-row>
+      </div>
     </div>
   </div>
-</div>

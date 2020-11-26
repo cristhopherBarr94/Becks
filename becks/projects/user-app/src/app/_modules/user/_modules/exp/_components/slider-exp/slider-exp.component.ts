@@ -283,9 +283,14 @@ export class SliderExpComponent
 
   // Move to Next slide
   slideNext(object, slideView) {
-    slideView.slideNext(500).then(() => {
-      this.checkIfNavDisabled(object, slideView);
-    });
+    if ( this.disableNextBtn ) {
+      var elmnt = document.getElementById("footer");
+      elmnt.scrollIntoView();
+    } else {
+      slideView.slideNext(500).then(() => {
+        this.checkIfNavDisabled(object, slideView);
+      });
+    }
   }
 
   // Move to previous slide

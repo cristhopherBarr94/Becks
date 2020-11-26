@@ -154,25 +154,31 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
    *   The HTTP response object.
    */
   public function post($data) {
-
     $this->validate($data);
     
+    $exp_result = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} WHERE id = :id LIMIT 1', [':id' => trim($data['eid'])])->fetchAssoc();
+
+    if ( !$exp_result ) {
+      throw new BadRequestHttpException('Experiencia no encontrada.');
+    }
+
+    if ( time() > intval($exp_result["valid_to"]) ) {
+      throw new BadRequestHttpException('Experiencia ya finalizada.');
+    }
+
     $stock_result = $this->dbConnection->query('SELECT * FROM {ab_inbev_exp_stock} WHERE eid = :id', [':id' => trim($data['eid'])]);
 
-    if ( !$stock_result ) {
-      throw new BadRequestHttpException('ID de experiencia no existe.');
-    }
-    
-    $isEmpty = true;
+    $isEmpty = false;
     $stock = null;
     while($stock = $stock_result->fetchAssoc()) {
       if ( $stock['stock_actual'] > 0 ) {
         $isEmpty = false;
         break;
       }
+      $isEmpty = true;
     }
 
-    if ( $isEmpty || $stock == null ) {
+    if ( $isEmpty ) {
       throw new BadRequestHttpException('Experiencia sin stock.');
     }
 
@@ -189,6 +195,12 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
             ->execute();
       if ( is_numeric($id) ) {
         $this->dbConnection->query('UPDATE {ab_inbev_exp_stock} SET stock_actual = stock_actual - 1 WHERE id = :id', [':id' => $stock['id']]);
+        $storage = $this->entityTypeManager->getStorage('user');
+        $user = $storage->load( $this->currentUser->id() );
+        Util::sendEmail(  2, 
+                          $user->getEmail() , 
+                          $user->get('field_first_name')->value . ' ' . $user->get('field_last_name')->value
+                        );
       }
 
       // $created_record = $this->loadRecord($id);

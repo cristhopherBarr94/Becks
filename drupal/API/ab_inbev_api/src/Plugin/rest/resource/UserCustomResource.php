@@ -170,6 +170,8 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->set("field_type_id", $data['type_id'] ?? "" );
       $user->set("field_id_number", $data['id_number'] ?? "" );
       $user->set("field_photo_uri",  $data['photo'] ?? "" );
+      $user->set("field_city",  $data['city'] ?? "" );
+
       $user->activate();
       
       // "type_id" field only come from User-App Form
@@ -177,7 +179,10 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
         // User from User-APP
         $user->set("field_status_waiting_list", 0);
         $user->set("field_status", 0); // 0 = normal, 1 = require password change
-        // Util::sendWelcomeEmail( $user->getEmail() , $pass ); // TODO :: add logic to send email
+        Util::sendEmail( 0, 
+                        $user->getEmail() , 
+                        $user->get('field_first_name')->value . ' ' . $user->get('field_last_name')->value 
+                      );
       } else {
         // User come from Waiting-List
         $user->set("field_status_waiting_list", 1 );
@@ -191,12 +196,12 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
         $result = $this->__sendTD( 
           $data['first_name'],
           $data['last_name'],
-          $data['gender'] == 'M' ? 'masculino' : 'femenino',
+          $data['city'],
           intval($data['mobile_phone']),
           $data['email'],
           $data['privacy'],
           $data['promo'],
-          $data['cookie_td']
+          $data['id_number']
        );
       } else {
         $code = '502';
@@ -260,7 +265,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->save();
 
       //Send New Password
-      Util::sendWelcomeEmail( $data['email'] , $pass );
+      Util::sendEmail( 1, $data['email'] , $pass );
     }
 
     return new ModifiedResourceResponse( $data['email'] , 202);
@@ -277,8 +282,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
    *
    * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    */
-  public function delete($id) {
-
+  public function delete($id) {   
     // // Make sure the record still exists.
     // $this->loadRecord($id);
 
@@ -424,6 +428,13 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       }
     }
     
+    // "city" field from User-App Form
+    if ( isset($record['city']) ) {
+      if ( empty($record['city']) || strlen($record['city']) > 250) {
+        throw new BadRequestHttpException('La "Ciudad" esta vacia o sobrepasa los caracteres permitidos');
+      }
+    }
+    
     if ( $record['password'] ) {
       if ( strlen(trim($record['password'])) < 4 ) {
         throw new BadRequestHttpException('Contraseña muy corta');
@@ -484,7 +495,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
    * Private Function
    *  Analytics
    */
-  private function __sendTD($name , $lastname , $gender , $phone , $email , $privacy , $promo, $_td ) {
+  private function __sendTD($name , $lastname , $city , $phone , $email , $privacy , $promo, $id_number ) {
     
     // define variable that will be used to tell the __sendTD method if it should send to the production database
     $is_production = false;
@@ -497,21 +508,21 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     // here it's possible to add additional purposes to the purpose array
     // runs the __sendTD method with parameters got from the request, it should be changed based on your form fields, country, brand, campaign, form, and whether if it's running in the production environment or not
     $data = array(
-      "abi_name" => $name,
+      "abi_firstname" => $name,
       "abi_lastname" => $lastname,
-      "abi_gender" => $gender,
+      "abi_city" => $city,
       "abi_phone" => $phone,
       "abi_email" => $email,
-      "purpose_name" => $purposes,
-      "td_client_id" => $_td
+      "abi_cpf" => $id_number, // TODO :: PREGUNTAR
+      "purpose_name" => $purposes
     );
 
     $tdstatus = Util::sendTD(
         $data,              // form data & purposes
         "col",              // country
         "Becks",            // brand
-        "BECKS_EXPERIENCIAS",   // campaign
-        "BECKS_EXPERIENCIAS",   // form
+        "BECKS_WEBAPP_1120",   // campaign
+        "BECKS_WEBAPP_1120",   // form
         true,   // unify
         $is_production  // production flag
     );

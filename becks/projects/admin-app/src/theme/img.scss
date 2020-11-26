@@ -252,34 +252,3 @@
     height: 22px;
   }
 }
-
-.list-icon {
-  background-image: url("../assets/icon/list.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-right: 10px;
-  @media (min-width: 0px) and (max-width: 768px) {
-    width: 13px !important;
-    height: 20px !important;
-  }
-  @media (min-width: 769px) {
-    width: 18px;
-    height: 22px;
-  }
-}
-.user--plus-icon {
-  background-image: url("../assets/icon/user-plus.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-right: 10px;
-  @media (min-width: 0px) and (max-width: 768px) {
-    width: 13px !important;
-    height: 20px !important;
-  }
-  @media (min-width: 769px) {
-    width: 18px;
-    height: 22px;
-  }
-}

@@ -12,4 +12,5 @@ export class ActivationPage implements OnInit {
   ngOnInit() {
 
   }
+
 }

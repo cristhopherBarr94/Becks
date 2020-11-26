@@ -303,6 +303,28 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
             }
           } catch (\Throwable $th) {}
         }
+
+        
+        $response_array["city"] = false;
+        if ( isset($data['city']) ) {
+          try {
+            $response_array["city"] = $this->dbConnection->update('user__field_city')
+                      ->fields(['field_city_value' => $data['city']])
+                      ->condition('entity_id', $this->currentUser->id() )
+                      ->execute()  == 1;
+            if( !$response_array["city"] ) {
+              $response_array["city"] = $this->dbConnection->insert('user__field_city')
+                                          ->fields([
+                                                'bundle ' => 'user' ,
+                                                'entity_id' => $this->currentUser->id() ,
+                                                'revision_id ' => $this->currentUser->id() ,
+                                                'langcode ' => $this->currentUser->getPreferredLangcode() ,
+                                                'delta ' => 0 ,
+                                                'field_city_value' =>$data['city']
+                                          ])->execute() >= 0;
+            }
+          } catch (\Throwable $th) {}
+        }
         
         $response_array["type_id"] = false;
         if ( isset($data['type_id']) ) {
@@ -512,6 +534,12 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
         throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
       }
     }
+    
+    if ( isset($record['city']) ) {
+      if ( empty($record['city']) || strlen($record['city']) > 250) {
+        throw new BadRequestHttpException('La "Ciudad" sobrepasa los caracteres permitidos');
+      }
+    }
 
     if (!isset($record['first_name']) || empty($record['first_name'])) {
       throw new BadRequestHttpException('El usuario no puede ser editado porque hacen falta los "Nombres"');
@@ -577,6 +605,7 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
       "photo" => $user->get('field_photo_uri')->value,
       "mobile_phone" => $user->get('field_mobile_phone')->value,
       "birthdate" => $user->get('field_birthdate')->value,
+      "city" => $user->get('field_city')->value,
       "gender" => $user->get('field_gender')->value,
       "type_id" => $user->get('field_type_id')->value,
       "id_number" => $user->get('field_id_number')->value,

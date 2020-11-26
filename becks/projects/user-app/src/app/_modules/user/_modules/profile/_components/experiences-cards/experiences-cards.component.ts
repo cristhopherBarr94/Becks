@@ -1,7 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from 'rxjs';
+import { Exp } from 'src/app/_models/exp';
 import { User } from 'src/app/_models/User';
 import { ExperienciasService } from 'src/app/_services/experiencias.service';
+import { RedemptionsService } from 'src/app/_services/redemptions.service';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
@@ -20,10 +22,15 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
 
   userCodeSubscription: Subscription;
   expSubscription: Subscription;
+  redempSubs: Subscription;
+
+  experiences: Exp[];
+  redemptions: Number[];
 
   constructor(
     private userSvc: UserService,
-    private expService: ExperienciasService
+    private expService: ExperienciasService,
+    private redempSvc: RedemptionsService
   ) {}
 
   ngOnInit() {
@@ -34,16 +41,23 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
     });
 
     this.expSubscription = this.expService.exp$.subscribe( exps => {
-      this.buildCards(exps);
+      this.experiences = exps;
+      this.buildCards();
     });
+    
+    this.redempSubs = this.redempSvc.redemp$.subscribe((red) => {
+      this.redemptions = red;
+      this.buildCards();
+    });
+    this.redempSvc.getData();
 
     if (this.vertical) {
       this.direcionCards = "flex-direction-row";
     }
 
-    const exps = this.expService.getActualExps();
-    if ( exps && exps.length > 0 ) {
-      this.buildCards(exps);
+    this.experiences = this.expService.getActualExps();
+    if ( this.experiences && this.experiences.length > 0 ) {
+      this.buildCards();
     }
     this.expService.getData();
     this.userSvc.getCodes();
@@ -53,16 +67,23 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
     this.userCodeSubscription.unsubscribe();
   }
 
-  buildCards(exps) {
-    this.acceptCards = [];
-    this.pendingCards = [];
+  buildCards() {
+    // console.log( "this.experiences" , this.experiences );
+    // console.log( "this.redemptions" , this.redemptions );
+    if ( this.experiences && this.redemptions ) {
+      
+      this.acceptCards = [];
+      this.pendingCards = [];
 
-    for (let i = 0; i < exps.length; i++) {
-      if (exps[i].status == "0") {
-        this.acceptCards.push(exps[i]);
-      }
-      if (exps[i].status == "1" || exps[i].status == "2") {
-        this.pendingCards.push(exps[i]);
+      for (let i = 0; i < this.experiences.length; i++) {
+        // if ( this.redemptions.indexOf( this.experiences[i].id ) ) {
+          if (this.experiences[i].status == "0") {
+            this.acceptCards.push(this.experiences[i]);
+          }
+          if (this.experiences[i].status == "1" || this.experiences[i].status == "2") {
+            this.pendingCards.push(this.experiences[i]);
+          }
+        // }
       }
     }
   }

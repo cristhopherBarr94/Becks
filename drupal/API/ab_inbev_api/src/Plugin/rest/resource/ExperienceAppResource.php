@@ -627,6 +627,22 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
         return $records;
       break;
 
+      case 2:
+        // All the active experiences - DETAIL - for User
+        $exp_result = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience}', []);
+        $records = [];
+        while($record = $exp_result->fetchAssoc()) {
+          $stock_result = $this->dbConnection->query('SELECT `id`, `type`, `status`, `title`, `description` FROM {ab_inbev_experience} WHERE eid = :eid ', [':eid' => $record['id']]);
+          $stock_records = [];
+          while($stock = $stock_result->fetchAssoc()) {
+            $stock_records[] = $stock;
+          }
+          $record['stock'] = $stock_records;
+          $records[] = $record;
+        }
+        return $records;
+      break;
+
       default:
         throw new NotFoundHttpException('Petición no valida');
       break;

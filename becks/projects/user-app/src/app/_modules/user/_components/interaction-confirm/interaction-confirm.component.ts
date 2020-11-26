@@ -90,7 +90,7 @@ export class InteractionConfirmComponent implements OnInit, OnDestroy, AfterView
     this.ui.showLoading();
     this.redempSv.postRedemption( parseInt(this.experience.id+"") , parseInt(codes[0].id) ).subscribe( 
       (res) => {
-      // this.ui.dismissLoading(0);
+      this.ui.dismissLoading(0);
       if ( res.status >= 200 && res.status < 300 ) {
         this.expService.getData();
         this.redempSv.getData();
@@ -101,6 +101,10 @@ export class InteractionConfirmComponent implements OnInit, OnDestroy, AfterView
         });
         this.ui.dismissModal();
       }
+      this.router.navigate(['/user/exp/' + this.experience.id ]);
+    },
+    (e) => {
+      this.ui.dismissLoading(0);
       this.router.navigate(['/user/exp/' + this.experience.id ]);
     });
   }

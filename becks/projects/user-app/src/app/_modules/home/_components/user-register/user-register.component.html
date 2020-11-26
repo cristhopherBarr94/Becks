@@ -121,17 +121,21 @@
             [ngClass]="getClassInputSelect(userRegisterForm.controls.city)"
           >
             <mat-label>Ciudad</mat-label>
-            <mat-select
-              panelClass="backgroud-panel"
-              formControlName="city"
-              required
+            <input
+              matInput
+              type="text"
+              placeholder="Ciudad"
+              aria-label="Number"
               [(ngModel)]="userRegister.city"
+              [formControl]="userRegisterForm.controls.city"
+              [matAutocomplete]="auto"
               data-qadp="city"
-            >
-              <mat-option value="BOGOTA"> Bogotá</mat-option>
-              <mat-option value="MEDELLIN"> MedellÍn</mat-option>
-              <mat-option value="CALI"> Cali</mat-option>
-            </mat-select>
+              required>
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredCityOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
             <mat-error
               *ngIf="
                 userRegisterForm.controls.city.touched &&

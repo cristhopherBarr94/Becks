@@ -3,7 +3,6 @@
     <user-name-tittle [first_name]="user.first_name" *ngIf="this.size == 'xs'"></user-name-tittle>
     <user-menu [ngClass]='positionHeader()' ></user-menu>
     <user-profile-picture
-      [profile_name]=" user.first_name + ' ' + user.last_name "
       [profile_view]="true"
     ></user-profile-picture>
     <span

@@ -18,7 +18,6 @@ import { UpdateFileComponent } from "../update-file/update-file.component";
 })
 export class ProfilePictureComponent
   implements OnInit, AfterViewInit, OnDestroy {
-  @Input() profile_name: string;
   @Input() profile_view: boolean;
   public time;
   public url: string = environment.serverUrl;

@@ -201,7 +201,8 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
           $data['email'],
           $data['privacy'],
           $data['promo'],
-          $data['id_number']
+          $data['id_number'],
+          $data['cookie_td']
        );
       } else {
         $code = '502';
@@ -495,7 +496,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
    * Private Function
    *  Analytics
    */
-  private function __sendTD($name , $lastname , $city , $phone , $email , $privacy , $promo, $id_number ) {
+  private function __sendTD($name , $lastname , $city , $phone , $email , $privacy , $promo, $id_number, $td_client ) {
     
     // define variable that will be used to tell the __sendTD method if it should send to the production database
     $is_production = false;
@@ -513,8 +514,9 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       "abi_city" => $city,
       "abi_phone" => $phone,
       "abi_email" => $email,
-      "abi_cpf" => $id_number, // TODO :: PREGUNTAR
-      "purpose_name" => $purposes
+      "abi_cpf" => $id_number,
+      "td_client_id" => $td_client,
+      "purpose_name" => $purposes,
     );
 
     $tdstatus = Util::sendTD(

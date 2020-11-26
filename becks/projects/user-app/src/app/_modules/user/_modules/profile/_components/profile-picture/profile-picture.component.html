@@ -15,7 +15,8 @@
     *ngIf="profile_view"
     (click)="editPhot()"
   ></button>
-  <span class="font-profile margin-tittle margin-top-letter">{{
-    profile_name
+  <span *ngIf="profile_view"
+        class="font-profile margin-tittle margin-top-letter">{{
+    user.first_name + ' ' + user.last_name
   }}</span>
 </div>

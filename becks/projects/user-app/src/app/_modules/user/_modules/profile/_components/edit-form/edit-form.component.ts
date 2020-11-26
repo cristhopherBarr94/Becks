@@ -18,8 +18,11 @@ import { User } from "src/app/_models/User";
 import { HttpService } from "src/app/_services/http.service";
 import { UiService } from "src/app/_services/ui.service";
 import { UserService } from "src/app/_services/user.service";
-import * as moment from "moment";
+// import * as moment from "moment";
 import { environment } from "src/environments/environment";
+import { Observable } from "rxjs";
+import { map, startWith } from "rxjs/operators";
+import { MockCiudades } from "../../../../../../_mocks/ciudades-mock";
 
 @Component({
   selector: "user-edit-form",
@@ -38,6 +41,8 @@ export class EditFormComponent implements OnInit, OnDestroy {
   public size: string;
   public httpError: string;
   userSubscription: Subscription;
+  options: string[] = MockCiudades;
+  filteredCityOptions: Observable<string[]>;
 
   constructor(
     private userSvc: UserService,
@@ -69,6 +74,18 @@ export class EditFormComponent implements OnInit, OnDestroy {
     }
     this.initforms();
     this.cdr.detectChanges();
+    this.filteredCityOptions = this.userEditProfileForm.controls.city.valueChanges.pipe(
+      startWith(""),
+      map((value) => this._filter(value))
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
   }
 
   ngOnDestroy(): void {

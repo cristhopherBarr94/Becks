@@ -11,6 +11,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { TabsComponent } from "./_components/tabs/tabs.component";
 
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -43,6 +44,7 @@ import { SectionForgetPassComponent } from './_components/section-forget-pass/se
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
+    MatAutocompleteModule,
     MatInputModule,
     MatSelectModule,
     MatCheckboxModule,

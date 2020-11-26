@@ -58,8 +58,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy {
   private modalIsShowed: boolean = false;
   public size: string;
   public options = { year: "numeric", month: "long", day: "numeric" };
-  public show = true;
-
+  public show: boolean = true;
   @ViewChild(HeaderComponent) header: HeaderComponent;
   title: string = "activa tu cuenta";
   prevUrl: string = "/user/exp";

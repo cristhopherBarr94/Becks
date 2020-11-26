@@ -4,17 +4,12 @@
     class="fullSection from-section content-flex-all-center"
     [ngClass]="colorBg"
   >
-    <div class="separator-becks separator-becks__1"></div>
+    <div *ngIf="show" class="separator-becks separator-becks__1"></div>
     <div
       id="formActivationSection"
       class="content-flex-all-center full-height flex-direction-column padding-form"
       [hidden]="activate"
     >
-      <!-- <div id="left" class="lateral-div" *ngIf="size != 'xs'">
-      <mat-icon matSuffix class="cancel" (click)="closeActivation()">
-        close
-      </mat-icon>
-    </div> -->
       <button class="cancel-btn" [routerLink]="'/user/exp'">
         <img src="./assets/icon/cancel-icon.svg" alt="cancel" />
       </button>
@@ -26,40 +21,6 @@
         Compra tu six pack en MERQUEO, recibe tu código y activa tu cuenta para
         empezar a vivir experiencias únicas
       </p>
-      <!-- <p class="title-tertiary-link">
-        <a target="_blank" href="https://merqueo.onelink.me/XbOm/beckslatax6"
-          >COMPRA EN MERQUEO.COM</a
-        >
-      </p> -->
-      <!-- <ion-row>
-        <div class="section-merqueo">
-          <button
-            class="btn-merqueo"
-            (click)="goToBuy('https://merqueo.onelink.me/XbOm/beckslatax6')"
-          >
-            <span class="merqueo-icon"> </span>
-          </button>
-          <p class="city">Bogotá</p>
-        </div>
-        <div class="section-merqueo">
-          <button
-            class="btn-merqueo"
-            (click)="goToBuy('https://merqueo.onelink.me/XbOm/beckslatax6med')"
-          >
-            <span class="merqueo-icon"> </span>
-          </button>
-          <p class="city">Medellín</p>
-        </div>
-        <div class="section-merqueo">
-          <button
-            class="btn-merqueo"
-            (click)="goToBuy('https://merqueo.onelink.me/XbOm/beckslatax6cali')"
-          >
-            <span class="merqueo-icon"> </span>
-          </button>
-          <p class="city">Cali</p>
-        </div>
-      </ion-row> -->
       <div class="section-buy">
         <p>Elige tu ciudad:</p>
         <ion-row>

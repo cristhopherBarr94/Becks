@@ -61,6 +61,16 @@ function ab_inbev_api_schema() {
         'length' => 255,
         'description' => 'Code owner.',
       ],
+      'owner_from' => [
+        'type' => 'varchar',
+        'type' => 'int',
+        'description' => 'Code owner from timestamp.',
+      ],
+      'owner_to' => [
+        'type' => 'varchar',
+        'type' => 'int',
+        'description' => 'Code owner to timestamp.',
+      ],
       'status' => [
         'type' => 'int',
         'size' => 'tiny',
@@ -366,6 +376,16 @@ function ab_inbev_api_update_8602() {
         'type' => 'varchar',
         'length' => 255,
         'description' => 'Code owner.',
+      ],
+      'owner_from' => [
+        'type' => 'varchar',
+        'type' => 'int',
+        'description' => 'Code owner from timestamp.',
+      ],
+      'owner_to' => [
+        'type' => 'varchar',
+        'type' => 'int',
+        'description' => 'Code owner to timestamp.',
       ],
       'status' => [
         'type' => 'int',

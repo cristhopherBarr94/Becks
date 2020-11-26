@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,22 +8,8 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor( private router: Router ) { }
+  constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {}
   
-  redirectTo(target) {
-    if(target == "act"){
-      this.router.navigate([`admin/activation`], {
-        queryParamsHandling: "preserve",
-        state: { reload: 'true' }
-      });
-    }
-    if(target == "exp"){
-      this.router.navigate([`admin/exp`], {
-        queryParamsHandling: "preserve",
-        state: { reload: 'true' }
-      });
-    }
-  }
 }

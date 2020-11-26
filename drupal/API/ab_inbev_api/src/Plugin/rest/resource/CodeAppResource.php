@@ -162,16 +162,67 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
 
     $this->validate($data);
 
-    $id = $this->dbConnection->insert('ab_inbev_api_code_app')
+    $id = $this->dbConnection->insert('ab_inbev_code')
       ->fields($data)
       ->execute();
 
-    $this->logger->notice('New code app record has been created.');
-
     $created_record = $this->loadRecord($id);
+    unset($created_record['owner_to']);
 
     // Return the newly created record in the response body.
     return new ModifiedResourceResponse($created_record, 201);
+
+    // SELECT `cid` FROM `ab_inbev_code` WHERE 1 ORDER BY `id`
+    // INTO OUTFILE '/tmp/codes.csv'
+    // FIELDS TERMINATED BY ','
+    // ENCLOSED BY '"'
+    // LINES TERMINATED BY '\n';
+
+    // $actual_date = time();
+    // $codes = str_split( md5( time() ) , 8);
+    // $codes_counter = 0;
+    // $counter = 1;
+
+    // while ( $counter <= 20000 ) {
+    //   $code = $codes[ $codes_counter ];
+    //   if ( !isset($code) || strlen($code) != 8 ) {
+    //     $codes = str_split( md5( time() ) , 8);
+    //     $codes_counter = 0;
+    //     continue;
+    //   }
+    //   $data = [
+    //     "id" => $counter,
+    //     "cid" => str_shuffle( $code ),
+    //     "uid" => NULL,
+    //     "created" => $actual_date,
+    //     "valid_until" => NULL,
+    //     "owner" => "MERQUEO",
+    //     "owner_from" => NULL,
+    //     "owner_to" => NULL,
+    //     "status" => 0
+    //   ];
+    //   try {
+    //     $id = $this->dbConnection->insert('ab_inbev_code')
+    //             ->fields($data)
+    //             ->execute();
+    //     if ( $id ) {
+    //       $counter++;
+    //     } else {
+    //        echo("\r\n");
+    //        echo( "Error Code : " . $code );
+    //     }
+    //   } catch (\Throwable $th) {
+    //      echo("\r\n");
+    //     echo( "Error Code : " . $code );
+    //     echo( $th->getMessage() );
+    //   }
+
+    //   $codes_counter++;
+    //   if ( $codes_counter >= sizeof($codes) ) {
+    //     $codes = str_split( md5( time() ) , 8);
+    //     $codes_counter = 0;
+    //   }
+    // }
   }
 
   /**
@@ -189,19 +240,39 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
 
     // Validations
     switch ( $id ) {
-      case 0: 
-        // PATCH DATA [ valid_until , status, owner ]
-        // $this->validate($data); 
+      case 0:
+        // PATCH OWNER
+        if ( !is_array ( $data ) ) {
+          throw new BadRequestHttpException('Se espera un objeto tipo [1,2,3,4...]');
+        }
+        if ( !in_array("administrator", $this->currentUser->getRoles()) ) {
+          return new ModifiedResourceResponse(['message' => 'Rol no permitido'], 405);
+        }
+        $codes = [];
+        $actual_date = time();
+        foreach ($data as &$code) {
+          try {
+            $record = [
+              "owner_from"=> $actual_date,
+              "owner_to"=> $actual_date + (30 * 24 * 60 * 60),
+            ];
+            if ( $this->setOwnerDateRecord( $code, $record ) ) {
+              array_push( $codes , $code );
+            }
+          } catch (\Throwable $th) {}
+        }
+        return new ModifiedResourceResponse($codes, 200);
       break;
       case 1:
         // PATCH USER
         if (!isset($data['cid']) || strlen( trim($data['cid'])) < 8 ) {
           throw new BadRequestHttpException('Codigo no válido');
         }
+        $actual_date = time();
         $record = [
           "uid"=>$this->currentUser->id(),
-          "used"=> time(),
-          "valid_until"=> time() + (30 * 24 * 60 * 60),
+          "used"=> $actual_date,
+          "valid_until"=> $actual_date + (30 * 24 * 60 * 60),
           "status"=> 1,
         ];
         return $this->updateRecord( trim($data['cid']), $record );   
@@ -226,16 +297,58 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
    */
   public function delete($id) {
 
-    // Make sure the record still exists.
-    // $this->loadRecord($id);
+    
+    // SELECT `cid` FROM `ab_inbev_code` WHERE 1 ORDER BY `id`
+    // INTO OUTFILE '/tmp/codes.csv'
+    // FIELDS TERMINATED BY ','
+    // ENCLOSED BY '"'
+    // LINES TERMINATED BY '\n';
 
-    // $this->dbConnection->delete('ab_inbev_api_code_app')
-    //   ->condition('id', $id)
-    //   ->execute();
+    // $actual_date = time();
+    // $codes = str_split( md5( time() * rand ( 100 , 999 ) ) , 8);
+    // $codes_counter = 0;
+    // $counter = 1;
 
-    // $this->logger->notice('Code App record @id has been deleted.', ['@id' => $id]);
+    // while ( $counter <= 100 ) {
+    //   $code = $codes[ $codes_counter ];
+    //   if ( !isset($code) || strlen($code) != 8 ) {
+    //     $codes = str_split( md5( time() * rand ( 100 , 999 ) ) , 8);
+    //     $codes_counter = 0;
+    //     continue;
+    //   }
+    //   $data = [
+    //     "id" => $counter,
+    //     "cid" => $code,
+    //     "uid" => NULL,
+    //     "created" => $actual_date,
+    //     "valid_until" => NULL,
+    //     "owner" => "MERQUEO",
+    //     "owner_from" => NULL,
+    //     "owner_to" => NULL,
+    //     "status" => 0
+    //   ];
+    //   try {
+    //     $id = $this->dbConnection->insert('ab_inbev_code')
+    //             ->fields($data)
+    //             ->execute();
+    //     if ( $id ) {
+    //       $counter++;
+    //     } else {
+    //        echo("\r\n");
+    //        echo( "Error Code : " . $code );
+    //     }
+    //   } catch (\Throwable $th) {
+    //      echo("\r\n");
+    //     echo( "Error Code : " . $code );
+    //     echo( $th->getMessage() );
+    //   }
 
-    // Deleted responses have an empty body.
+    //   $codes_counter++;
+    //   if ( $codes_counter >= sizeof($codes) ) {
+    //     $codes = str_split( md5( time() * rand ( 100 , 999 ) ) , 8);
+    //     $codes_counter = 0;
+    //   }
+    // }
     return new ModifiedResourceResponse(NULL, 204);
   }
 
@@ -291,21 +404,11 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
       throw new BadRequestHttpException('No record content received.');
     }
 
-    $allowed_fields = [
-      'title',
-      'description',
-      'price',
-    ];
-
-    if (count(array_diff(array_keys($record), $allowed_fields)) > 0) {
-      throw new BadRequestHttpException('Record structure is not correct.');
+    if (empty($record['cid'])) {
+      throw new BadRequestHttpException('cid is required.');
     }
-
-    if (empty($record['title'])) {
-      throw new BadRequestHttpException('Title is required.');
-    }
-    elseif (isset($record['title']) && strlen($record['title']) > 255) {
-      throw new BadRequestHttpException('Title is too big.');
+    elseif (isset($record['cid']) && strlen($record['cid']) > 255) {
+      throw new BadRequestHttpException('cid is too big.');
     }
     // @DCG Add more validation rules here.
   }
@@ -322,7 +425,7 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
    * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
    */
   protected function loadRecord($cid) {
-    return $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" FROM {ab_inbev_code} WHERE cid = :cid', [':cid' => $cid])->fetchAssoc();
+    return $this->dbConnection->query('SELECT "cid", "used", "valid_until", "status" , "owner_to" FROM {ab_inbev_code} WHERE cid = :cid', [':cid' => $cid])->fetchAssoc();
   }
 
   protected function loadRecords($typeQuery) {
@@ -397,12 +500,23 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
    * @return \Drupal\rest\ModifiedResourceResponse
    *   The HTTP response object.
    */
-  protected function updateRecord($cid, array $record) {
+  protected function updateRecord($cid, array $record, $load_new = true) {
 
     // Make sure the record already exists.
     $code = $this->loadRecord($cid);
-    if ( !$code || $code['status'] != 0 ) {
-      throw new NotFoundHttpException('Codigo no válido o en uso');
+
+    if ( !$code ) {
+      throw new NotFoundHttpException('Codigo no válido');
+    }
+    
+    if ( isset($code['owner_to']) && time() > intval($code['owner_to']) ) {
+      throw new NotFoundHttpException('Codigo vencido');
+    }
+
+    unset($code['owner_to']);
+
+    if ( $code['status'] != 0 ) {
+      throw new NotFoundHttpException('Codigo en uso');
     }
 
     //$this->validate($record);
@@ -410,11 +524,38 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
           ->fields($record)
           ->condition('cid', $cid)
           ->execute() == 1 ) {
-        $updated_record = $this->loadRecord($cid);
-        return new ModifiedResourceResponse($updated_record, 200);
+          if ( $load_new ) {
+            $updated_record = $this->loadRecord($cid);
+            unset($updated_record['owner_to']);
+            return new ModifiedResourceResponse($updated_record, 200);
+          }
+          return true;
       } else {
         return new ModifiedResourceResponse(["message" => "Internal Error"], 500);
       }
+  }
+  
+  protected function setOwnerDateRecord( $cid, array $record ) {
+
+    // Make sure the record already exists.
+    $code = $this->loadRecord($cid);
+
+    if ( !$code ) {
+      throw new NotFoundHttpException('Codigo no válido');
+    }
+    
+    if ( isset($code['owner_to']) ) {
+      throw new NotFoundHttpException('Codigo con fecha ya estimada');
+    }
+
+    if ( $code['status'] != 0 ) {
+      throw new NotFoundHttpException('Codigo en uso');
+    }
+
+    return ( $this->dbConnection->update('ab_inbev_code')
+                  ->fields($record)
+                  ->condition('cid', $cid)
+                  ->execute() == 1 );
   }
 
 }

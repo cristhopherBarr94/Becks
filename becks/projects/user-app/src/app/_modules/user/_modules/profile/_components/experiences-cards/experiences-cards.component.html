@@ -1,4 +1,8 @@
 <section class="container-exp" *ngIf="isActive">
+  <p class="title1" 
+    *ngIf="(pendingCards == undefined || pendingCards.length == 0) && (acceptCards == undefined || acceptCards.length == 0) && (cancelCards == undefined || cancelCards.length == 0)">
+    Aún no cuentas con ninguna experiencia       
+  </p>
   <div class="margin-top">
     <span class="title-profile orange-color" *ngIf="pendingCards.length > 0">PENDIENTES</span>
     <div [ngClass]="direcionCards">

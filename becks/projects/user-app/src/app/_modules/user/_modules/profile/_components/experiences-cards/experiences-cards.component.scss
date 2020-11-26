@@ -21,7 +21,29 @@
   margin-top: 24px;
 }
 
-.separator-exp{
-  border-bottom: 1px solid #DADADA;
+.separator-exp {
+  border-bottom: 1px solid #dadada;
   height: 1px;
+}
+
+.title1 {
+  font-family: "Eurostile BQ";
+  font-style: normal;
+  justify-content: center;
+  text-transform: uppercase;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 80px;
+  font-weight: 500;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    font-size: 13px !important;
+    line-height: 20px;
+  }
+  @media (min-width: 769px) {
+    font-size: 16px !important;
+    line-height: 20px;
+  }
 }

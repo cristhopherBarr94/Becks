@@ -8,6 +8,7 @@ import { LoadingComponent } from "../_modules/utils/_components/loading/loading.
 export class UiService {
   private loading: any;
   private modal: any;
+  private forceDismissTimer;
 
   constructor(public modalCtrl: ModalController) {}
 
@@ -23,12 +24,19 @@ export class UiService {
         backdropDismiss: false,
       });
       await this.loading.present();
+      clearTimeout(this.forceDismissTimer);
+      this.forceDismissTimer = setTimeout(
+        () => {
+          this.dismissLoading(0);
+        } , 15000
+      );
     } catch (e) {
       console.error("showLoading", e);
     }
   }
 
   dismissLoading(timeOut: number = 2500) {
+    clearTimeout(this.forceDismissTimer);
     try {
       if (this.loading) {
         this.loading.dismiss("cancel");

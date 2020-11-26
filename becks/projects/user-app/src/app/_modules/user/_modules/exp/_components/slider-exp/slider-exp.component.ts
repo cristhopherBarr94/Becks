@@ -120,17 +120,23 @@ export class SliderExpComponent
     this.experienciaService.getData();
 
     this.redempSubs = this.redempSvc.redemp$.subscribe((red) => {
+      this.ui.dismissLoading();
       this.redemps = red;
+    },
+    (e) => {
       this.ui.dismissLoading();
     });
     this.redempSvc.getData();
 
     this.userCodeSubs = this.userSvc.userCodes$.subscribe((codes) => {
+      this.ui.dismissLoading();
       if (codes && codes.length > 0) {
         this.isActivate = true;
         this.codes = codes;
-        this.ui.dismissLoading();
       }
+    },
+    (e) => {
+      this.ui.dismissLoading();
     });
     this.userSvc.getCodes();
   }
@@ -318,10 +324,21 @@ export class SliderExpComponent
     });
   }
   checkisEnd(object, slideView) {
-    console.log("checkisEnd", object);
+    // console.log("checkisEnd", object);
     slideView.isEnd().then((istrue) => {
       object.isEndSlide = istrue;
       this.disableNextBtn = istrue;
     });
+  }
+
+  showNextBtn() {
+    // console.log("this.disableNextBtn" , this.disableNextBtn);
+    // console.log("this.size" , this.size);
+    if ( this.disableNextBtn ) {
+      if (this.size == 'lg' || this.size == 'md') {
+        return false;
+      }
+    }
+    return true;
   }
 }

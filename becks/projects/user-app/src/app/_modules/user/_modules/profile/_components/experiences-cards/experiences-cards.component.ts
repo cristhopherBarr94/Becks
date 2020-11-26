@@ -68,22 +68,22 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
   }
 
   buildCards() {
-    // console.log( "this.experiences" , this.experiences );
-    // console.log( "this.redemptions" , this.redemptions );
+    console.log( "this.experiences" , this.experiences );
+    console.log( "this.redemptions" , this.redemptions );
     if ( this.experiences && this.redemptions ) {
       
       this.acceptCards = [];
       this.pendingCards = [];
 
       for (let i = 0; i < this.experiences.length; i++) {
-        // if ( this.redemptions.indexOf( this.experiences[i].id ) ) {
+        if ( this.redemptions.indexOf( parseInt(this.experiences[i].id+"") ) > -1 ) {
           if (this.experiences[i].status == "0") {
             this.acceptCards.push(this.experiences[i]);
           }
           if (this.experiences[i].status == "1" || this.experiences[i].status == "2") {
             this.pendingCards.push(this.experiences[i]);
           }
-        // }
+        }
       }
     }
   }

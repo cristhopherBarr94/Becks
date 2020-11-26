@@ -232,7 +232,7 @@
 </ion-slides>
 <button
   class="btn-next"
-  *ngIf="!this.disableNextBtn"
+  *ngIf="showNextBtn()"
   [ngClass]="{ 'detail-active': truePager }"
   (click)="slideNext(sliderExp.slidesItems, slides)"
 >

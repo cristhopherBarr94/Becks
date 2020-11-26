@@ -45,16 +45,18 @@
       </div>
     </section>
   </div>
-  <a
-    *ngIf="this.isActive == true"
-    [ngClass]="'activated'"
-    [routerLink]="['/user/profile']"
-    >tu cuenta está activa</a
-  >
-  <a
-    *ngIf="this.isActive == false"
-    [ngClass]="'inactivated'"
-    [routerLink]="['/user/activation']"
-    >tu cuenta está inactiva</a
-  >
+  <div class="temp-relative">
+    <a
+      *ngIf="this.isActive == true"
+      [ngClass]="'activated'"
+      [routerLink]="['/user/profile']"
+      >tu cuenta está activa</a
+    >
+    <a
+      *ngIf="this.isActive == false"
+      [ngClass]="'inactivated'"
+      [routerLink]="['/user/activation']"
+      >tu cuenta está inactiva</a
+    >
+  </div>
 </section>

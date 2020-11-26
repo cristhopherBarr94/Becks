@@ -129,3 +129,8 @@
     color: #ff0c3e;
   }
 }
+.temp-relative {
+  @media (min-width: 769px) {
+    position: relative;
+  }
+}

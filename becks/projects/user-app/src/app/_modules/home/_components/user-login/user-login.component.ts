@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -11,13 +11,16 @@ import { environment } from "src/environments/environment";
 import { HttpService } from "src/app/_services/http.service";
 import { AuthService } from "src/app/_services/auth.service";
 import { UserService } from "src/app/_services/user.service";
+import { Subscription } from "rxjs";
+import { User } from "src/app/_models/User";
+import { SectionChangePassComponent } from "src/app/_modules/user/_modules/profile/_components/section-change-pass/section-change-pass.component";
 
 @Component({
   selector: "user-user-login",
   templateUrl: "./user-login.component.html",
   styleUrls: ["./user-login.component.scss"],
 })
-export class UserLoginComponent implements OnInit {
+export class UserLoginComponent implements OnInit, OnDestroy {
   public userLoginForm: FormGroup;
   public httpError: string;
   public captchaStatus: boolean;
@@ -26,6 +29,9 @@ export class UserLoginComponent implements OnInit {
   public hide: boolean;
   public password: string;
   public showError: boolean;
+  private statusFlag: boolean;
+  userSubscription: Subscription;
+  public user = new User();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +48,22 @@ export class UserLoginComponent implements OnInit {
     this.ui.dismissLoading();
   }
 
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
+  }
+
   redirect() {
+    this.userSubscription = this.userSvc.user$.subscribe(
+      (user: User) => {
+        if (user !== undefined) {
+          if (!this.statusFlag && user.status == 1) {
+            this.statusFlag = true;
+            this.editPassword();
+          }
+        }
+      },
+      (error: any) => {}
+    );
     if (this.authService.isAuthenticated()) {
       this.router.navigate(["user/exp"], {
         queryParamsHandling: "preserve",
@@ -71,8 +92,14 @@ export class UserLoginComponent implements OnInit {
       try {
         this.restartCaptcha = true;
         this.setCaptchaStatus(!this.restartCaptcha);
-        formData.append("username", this.userLoginForm.controls.email.value.trim());
-        formData.append("password", this.userLoginForm.controls.password.value.trim());
+        formData.append(
+          "username",
+          this.userLoginForm.controls.email.value.trim()
+        );
+        formData.append(
+          "password",
+          this.userLoginForm.controls.password.value.trim()
+        );
         formData.append("grant_type", environment.rest.grant_type);
         formData.append("client_id", environment.rest.client_id);
         formData.append("client_secret", environment.rest.client_secret);
@@ -106,7 +133,7 @@ export class UserLoginComponent implements OnInit {
         );
     } else {
       this.showError = true;
-      (<any>Object).values(this.userLoginForm.controls).forEach(control => {
+      (<any>Object).values(this.userLoginForm.controls).forEach((control) => {
         control.markAsTouched();
       });
     }
@@ -122,18 +149,24 @@ export class UserLoginComponent implements OnInit {
     return classreturn;
   }
 
-  public getMessageform(
-    item: any,
-    name: string,
-  ): string {
+  public getMessageform(item: any, name: string): string {
     if (item.hasError("email")) {
       return "Ingrese una dirección de correo electrónico válida";
     }
   }
   public setCaptchaStatus(status) {
-    setTimeout( ()=>{
+    setTimeout(() => {
       this.captchaStatus = status;
       this.restartCaptcha = false;
     }, 500);
+  }
+
+  editPassword() {
+    this.ui.showModal(
+      SectionChangePassComponent,
+      "modal-edit-password",
+      true,
+      true
+    );
   }
 }

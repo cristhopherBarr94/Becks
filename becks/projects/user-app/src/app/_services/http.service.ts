@@ -136,7 +136,7 @@ export class HttpService {
   handleError(error: HttpErrorResponse) {
     
     if (error.status === HttpConstants.UNAUTHORIZED || error.status === HttpConstants.FORBIDDEN ) {
-      if ( error.url.indexOf(environment.login.resource) == -1 && error.url.indexOf(environment.guest.postForm) == -1 ) {
+      if ( error.url.indexOf(environment.login.resource) == -1 ) {
         if ( ++this.error_counter == 1 ) {
           this.error_counter = 0;
           this.authService.setAuthenticated(null);

@@ -354,3 +354,21 @@
   width: 25px;
   height: 29px;
 }
+
+.merqueo-icon {
+  background-image: url("../assets/icon/merqueo-icon.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 44px;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 90px;
+  }
+  @media (min-width: 769px) {
+    width: 98px;
+  }
+}

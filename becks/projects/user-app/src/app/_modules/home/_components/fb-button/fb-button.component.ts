@@ -49,7 +49,7 @@ export class FbButtonComponent implements OnInit {
           window["FB"].api(
             "/me",
             {
-              fields: "last_name, first_name, email, birthday, gender",
+              fields: "last_name, first_name, email, birthday, city",
             },
             (userInfo) => {
               // console.log("user information");

@@ -83,7 +83,12 @@
     margin-bottom: 12px;
   }
 }
-
+.row-form {
+  @media (min-width: 769px) and (max-width: 1366px) {
+    width: 644px !important;
+    transform: translateX(-10px);
+  }
+}
 .margin-bottom {
   margin-bottom: 25px;
 }

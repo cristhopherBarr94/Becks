@@ -49,9 +49,7 @@ export class ProfilePage implements OnInit, OnDestroy {
         if (user !== undefined) {
           if (!this.statusFlag && user.status == 1) {
             this.statusFlag = true;
-            setTimeout( ()=>{
-              this.editPassword();
-            } , 1500 )
+            this.editPassword();
           }
           this.user = user;
           this.user.activate = this.isActivate;
@@ -72,7 +70,7 @@ export class ProfilePage implements OnInit, OnDestroy {
     this.userSvc.getCodes();
     
     this.ui.dismissLoading();
-    this.ui.dismissModal();
+    this.ui.dismissModal(2500);
     this.menuS.statusMenu("profile")   
   }
 
@@ -91,8 +89,8 @@ export class ProfilePage implements OnInit, OnDestroy {
     this.ui.showModal(
       SectionChangePassComponent,
       "modal-edit-password",
-      false,
-      false
+      true,
+      true
     );
   }
 

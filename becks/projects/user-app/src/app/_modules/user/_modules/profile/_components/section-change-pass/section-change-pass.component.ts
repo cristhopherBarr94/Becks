@@ -11,9 +11,9 @@ import { Router } from "@angular/router";
 import { HeaderComponent } from "src/app/_modules/utils/_components/header/header.component";
 import { environment } from "src/environments/environment";
 import { User } from "src/app/_models/User";
-import { UserService } from 'src/app/_services/user.service';
-import { AuthService } from 'src/app/_services/auth.service';
-import { BasicAlertComponent } from 'src/app/_modules/utils/_components/basic-alert/basic-alert.component';
+import { UserService } from "src/app/_services/user.service";
+import { AuthService } from "src/app/_services/auth.service";
+import { BasicAlertComponent } from "src/app/_modules/utils/_components/basic-alert/basic-alert.component";
 import { Platform } from "@ionic/angular";
 
 @Component({
@@ -45,7 +45,7 @@ export class SectionChangePassComponent implements OnInit {
     private router: Router,
     private userSvc: UserService,
     private auth: AuthService,
-    private platform: Platform,
+    private platform: Platform
   ) {
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
@@ -58,9 +58,6 @@ export class SectionChangePassComponent implements OnInit {
   ngOnInit() {
     this.initforms();
   }
-  // ngAfterViewInit(): void {
-  //   this.header.urlComponent = this.prevUrl;
-  // }
 
   initforms() {
     this.userChangeForm = this.formBuilder.group({
@@ -85,7 +82,7 @@ export class SectionChangePassComponent implements OnInit {
       this.userChange.password = this.userChangeForm.controls.password.value.trim();
       this.userChange.passwordPrev = this.userChangeForm.controls.passwordPrev.value.trim();
 
-      if ( this.userChange.password == this.userChange.passwordPrev ) {
+      if (this.userChange.password == this.userChange.passwordPrev) {
         this.ui.dismissLoading();
         this.httpError = "La nueva contraseña debe ser diferente a la anterior";
         return;
@@ -93,27 +90,36 @@ export class SectionChangePassComponent implements OnInit {
 
       this.httpService
         .patch(environment.serverUrl + environment.user.patchPassword, {
-          password: this.userChange.password, passwordPrev: this.userChange.passwordPrev,
+          password: this.userChange.password,
+          passwordPrev: this.userChange.passwordPrev,
         })
         .subscribe(
           (response: any) => {
             if (response.status == 200) {
-              if ( response.body.password ) {
+              if (response.body.password) {
                 this.userChangeForm.reset();
                 this.userSvc.logout();
                 this.auth.setAuthenticated(null);
-                this.ui.showModal( BasicAlertComponent, "modalMessage", false, false, {
-                  title: "Contraseña Actualizada",
-                  description: "Cerrando sesión de forma segura",
-                });
-                this.ui.dismissModal();
-                setTimeout( () => {
+                this.ui.showModal(
+                  BasicAlertComponent,
+                  "modalMessage",
+                  false,
+                  false,
+                  {
+                    title: "Contraseña Actualizada",
+                    description: "Cerrando sesión de forma segura",
+                  }
+                );
+                this.ui.dismissModal(2000);
+                setTimeout(() => {
                   this.ui.dismissLoading();
                   this.router.navigate(["home"]);
-                } , 3000 );
+                }, 4000);
               } else {
                 this.ui.dismissLoading();
-                this.httpError = response.body.message ? response.body.message : "Contraseña actual no valida";
+                this.httpError = response.body.message
+                  ? response.body.message
+                  : "Contraseña actual no valida";
               }
             } else {
               this.httpError = response.body;

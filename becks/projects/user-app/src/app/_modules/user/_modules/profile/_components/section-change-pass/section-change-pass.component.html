@@ -14,7 +14,6 @@
       </span>
       <span class="lock-icon"> </span>
       <h1 class="title-secondary">CAMBIAR CONTRASEÑA</h1>
-      <p class="confirm-pass-text ">Es necesario cambiar tu contraseña para continuar</p>
       <div class="content-flex-all-center margin-bottom ">
       <form
         [formGroup]="userChangeForm"
@@ -51,7 +50,7 @@
           class="fullInput"
           [ngClass]="getClassInput(userChangeForm.controls.password)"
         >
-          <mat-label>Nueva Contraseña</mat-label>
+          <mat-label>Contraseña</mat-label>
           <input
             matInput
             id="password"
@@ -76,7 +75,7 @@
           class="fullInput"
           [ngClass]="getClassInput(userChangeForm.controls.passwordVerify)"
         >
-          <mat-label>Nueva Contraseña</mat-label>
+          <mat-label>Contraseña</mat-label>
           <input
             matInput
             id="passwordVerify"
@@ -121,8 +120,6 @@
   </section>
 <div class="content-flex-all-center margin-bottom " *ngIf=" this.size != 'xs' ">
   <form [formGroup]="userChangeForm" class="form-section" autocomplete="off">
-    <h1 class="title-secondary">CAMBIAR CONTRASEÑA</h1>
-    <p class="confirm-pass-text ">Es necesario cambiar tu contraseña para continuar</p>
     <mat-form-field appearance="fill" floatLabel="auto" class="fullInput"
       [ngClass]="getClassInput(userChangeForm.controls.passwordPrev)">
       <mat-label>Contraseña anterior</mat-label>
@@ -135,7 +132,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill" floatLabel="auto" class="fullInput"
       [ngClass]="getClassInput(userChangeForm.controls.password)">
-      <mat-label>Nueva Contraseña</mat-label>
+      <mat-label>Contraseña</mat-label>
       <input matInput id="password" formControlName="password" [type]="!hide ? 'password' : 'text'" required
         maxlength="30" data-qadp="password" [(ngModel)]="password" />
       <mat-icon matSuffix (click)="hide = !hide">{{
@@ -146,7 +143,7 @@
     <p class="confirm-pass-text ">*Repetir contraseña </p>
     <mat-form-field appearance="fill" floatLabel="auto" class="fullInput"
       [ngClass]="getClassInput(userChangeForm.controls.passwordVerify)">
-      <mat-label>Nueva Contraseña</mat-label>
+      <mat-label>Contraseña</mat-label>
       <input matInput id="passwordVerify" formControlName="passwordVerify" [type]="!hide2 ? 'password' : 'text'"
         required maxlength="30" data-qadp="passwordVerify" [(ngModel)]="passwordVerify" />
       <mat-icon matSuffix (click)="hide2 = !hide2">{{

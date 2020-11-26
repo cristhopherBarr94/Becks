@@ -23,10 +23,10 @@ import { SalesCardComponent } from "./_components/sales-card/sales-card.componen
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { SectionEditProfileComponent } from "./_components/section-edit-profile/section-edit-profile.component";
 import { UpdateFileComponent } from "./_components/update-file/update-file.component";
-import { IonicModule } from '@ionic/angular';
-import { LogOutComponent } from './_components/log-out/log-out.component';
-import { EditFormComponent } from './_components/edit-form/edit-form.component';
-import { SectionChangePassComponent } from './_components/section-change-pass/section-change-pass.component';
+import { IonicModule } from "@ionic/angular";
+import { LogOutComponent } from "./_components/log-out/log-out.component";
+import { EditFormComponent } from "./_components/edit-form/edit-form.component";
+import { SectionChangePassComponent } from "./_components/section-change-pass/section-change-pass.component";
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { SectionChangePassComponent } from './_components/section-change-pass/se
     SectionChangePassComponent,
     SectionEditProfileComponent,
     UpdateFileComponent,
-    EditFormComponent
+    EditFormComponent,
   ],
   imports: [
     CommonModule,

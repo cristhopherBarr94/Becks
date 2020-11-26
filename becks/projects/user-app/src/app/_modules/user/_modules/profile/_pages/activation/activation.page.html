@@ -1,31 +1,57 @@
 <ion-content>
   <app-header [hidden]="activate"></app-header>
-  <section class="fullSection from-section content-flex-all-center"
-  [ngClass]="colorBg"
+  <section
+    class="fullSection from-section content-flex-all-center"
+    [ngClass]="colorBg"
   >
+    <div *ngIf="show"
+          class="separator-becks separator-becks__1"></div>
     <div
       id="formActivationSection"
       class="content-flex-all-center full-height flex-direction-column padding-form"
       [hidden]="activate"
     >
-    <!-- <div id="left" class="lateral-div" *ngIf="size != 'xs'">
-      <mat-icon matSuffix class="cancel" (click)="closeActivation()">
-        close
-      </mat-icon>
-    </div> -->
-    <button class="cancel-btn" [routerLink]="'/user/exp'">
-      <img src="./assets/icon/cancel-icon.svg" alt="cancel" />
-    </button>
-      <h2 class=" title-desktop">{{title}}</h2>
-      <div class="separator-becks"></div>
-      <span class="activation-icon"> </span>
-      <h2 class="title-secondary">INGRESA EL CÓDIGO DE COMPRA</h2>
+      <button class="cancel-btn" [routerLink]="'/user/exp'">
+        <img src="./assets/icon/cancel-icon.svg" alt="cancel" />
+      </button>
+      <h2 class="title-desktop">{{title}}</h2>
+      <div class="separator-becks separator-becks__2"></div>
+      <!-- <span class="activation-icon"> </span> -->
+      <h2 class="title-secondary">INGRESA TU CÓDIGO</h2>
       <p class="title-tertiary">
-        Por la compra de un six pack en el ÉXITO, podrás activar tu cuenta por un mes y ser parte de este exclusivo club.
+        Compra tu six pack en MERQUEO, recibe tu código y activa tu cuenta para
+        empezar a vivir experiencias únicas
       </p>
-      <p class="title-tertiary-link">
-        <a target="_blank" href="https://www.exito.com/sixpack-cerveza-pilsener-alema-138193/p">COMPRA EN EL EXITO.COM</a>
-      </p>
+      <div class="section-buy">
+        <p>Elige tu ciudad:</p>
+        <ion-row>
+          <a target="_blank" href="https://merqueo.onelink.me/XbOm/beckslatax6">
+            <div class="card card__1">
+              <div class="city">Bogotá</div>
+            </div>
+          </a>
+          <a
+            target="_blank"
+            href="https://merqueo.onelink.me/XbOm/beckslatax6med"
+          >
+            <div class="card card__2">
+              <div class="city">Medellín</div>
+            </div>
+          </a>
+          <a
+            target="_blank"
+            href="'https://merqueo.onelink.me/XbOm/beckslatax6cali"
+          >
+            <div class="card card__3">
+              <div class="city">Cali</div>
+            </div>
+          </a>
+        </ion-row>
+        <div class="soon-foot">
+          <p>*Proximamente en más ciudades de Colombia</p>
+        </div>
+      </div>
+
       <form
         [formGroup]="userActivationForm"
         class="form-section"
@@ -53,7 +79,7 @@
           <mat-icon matSuffix
             ><span
               class="help-icon"
-              matTooltip="Compra un SIX pack de BECKS en el EXITO, recibe tu código y escríbelo para activar tu cuenta en la BECK’S SOCIETY"
+              matTooltip="Compra un SIX pack de BECK'S en MERQUEO, recibe tu código y escríbelo para activar tu cuenta en la BECK’S SOCIETY"
               matTooltipClass="tooltip-becks title-tertiary"
               matTooltipPosition="below"
             ></span

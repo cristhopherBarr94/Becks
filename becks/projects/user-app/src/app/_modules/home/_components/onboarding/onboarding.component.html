@@ -39,21 +39,21 @@
       </p>
     </div>
     <button class="btn-onboarding btn-omitir" (click)="joinredirection()">
-      Omitir
+      <span>Omitir</span>
     </button>
     <button
       class="btn-onboarding btn-action"
       (click)="swipeNext()"
       *ngIf="!disableNextBtn"
     >
-      Siguiente
+      <span>Siguiente</span>
     </button>
     <button
       class="btn-onboarding btn-action"
       *ngIf="finalSlider"
       (click)="joinredirection()"
     >
-      Unirse
+      <span>Unirse</span>
     </button>
   </ion-slide>
   <ion-slide>
@@ -86,17 +86,17 @@
       </p>
     </div>
     <button class="btn-onboarding btn-omitir" (click)="joinredirection()">
-      Omitir
+      <span>Omitir</span>
     </button>
     <button
       class="btn-onboarding btn-action"
       (click)="swipeNext()"
       *ngIf="!disableNextBtn"
     >
-      Siguiente
+      <span>Siguiente</span>
     </button>
     <button class="btn-onboarding btn-action" *ngIf="finalSlider">
-      Unirse
+      <span>Unirse</span>
     </button>
   </ion-slide>
   <br />
@@ -134,14 +134,14 @@
       (click)="swipeNext()"
       *ngIf="!disableNextBtn"
     >
-      Siguiente
+      <span>Siguiente</span>
     </button>
     <button
       class="btn-onboarding btn-action"
       *ngIf="disableNextBtn"
       (click)="joinredirection()"
     >
-      Unirse
+      <span>Unirse</span>
     </button>
   </ion-slide>
 </ion-slides>

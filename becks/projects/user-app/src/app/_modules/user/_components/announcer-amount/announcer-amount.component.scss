@@ -33,6 +33,8 @@
       width: 150px;
       height: 150px;
       font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     @media (min-width: 768px) {
       top: 30px !important;

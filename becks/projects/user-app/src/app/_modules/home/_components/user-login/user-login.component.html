@@ -17,14 +17,12 @@
           type="email"
           required
           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
-          maxlength="40"
+          maxlength="250"
           data-qadp="email"
         />
         <mat-icon matSuffix>mail_outline</mat-icon>
         <mat-error *ngIf="userLoginForm.controls.email.errors">
-          {{
-            getMessageform(userLoginForm.controls.email, "email")
-          }}</mat-error
+          {{ getMessageform(userLoginForm.controls.email, "email") }}</mat-error
         >
       </mat-form-field>
 
@@ -74,7 +72,7 @@
           'button-disabled': userLoginForm.invalid || !captchaStatus
         }"
       >
-          <span>ENTRAR</span>
+        <span>ENTRAR</span>
       </button>
     </form>
 

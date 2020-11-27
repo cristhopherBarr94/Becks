@@ -1,75 +1,93 @@
 <div class="container">
-  <user-menu [ngClass]='positionHeader()' *ngIf="size != 'xs'"></user-menu>
-<div class="container-edit-profile flex-direction-column">
-  <div id="container" class="header-div">
-    <div id="left" class="lateral-div">
-      <mat-icon
-        matSuffix
-        class="cancel"
-        (click)="closeEdit()"
-        *ngIf="size == 'xs'"
-      >
-        close
-      </mat-icon>
-    </div>
-    <div id="left_Desktop" class="lateral-div" *ngIf="size != 'xs'">
-      <button mat-button class="cancel" (click)="closeEdit()">
-        <mat-icon matSuffix>
-          arrow_back_ios
+  <user-menu [ngClass]="positionHeader()" *ngIf="size != 'xs'"></user-menu>
+  <div class="container-edit-profile flex-direction-column">
+    <div id="container" class="header-div">
+      <div id="left" class="lateral-div">
+        <mat-icon
+          matSuffix
+          class="cancel"
+          (click)="closeEdit()"
+          *ngIf="size == 'xs'"
+        >
+          close
         </mat-icon>
-      </button>
-    </div>
-    <div id="center" class="center-div">
-      <span class="title-secondary">EDITAR PERFIL</span>
-    </div>
-    <!-- <div id="right" class="lateral-div" *ngIf="size == 'xs'">
+      </div>
+      <div id="left_Desktop" class="lateral-div" *ngIf="size != 'xs'">
+        <button mat-button class="cancel" (click)="closeEdit()">
+          <mat-icon matSuffix> arrow_back_ios </mat-icon>
+        </button>
+      </div>
+      <div id="center" class="center-div">
+        <span class="title-secondary">EDITAR PERFIL</span>
+      </div>
+      <!-- <div id="right" class="lateral-div" *ngIf="size == 'xs'">
       <mat-icon matSuffix class="save" (click)="saveChanges()">
         check
       </mat-icon>
     </div> -->
-    
-  </div>
-  <div class="separator-becks"></div>
-  <div class="margint-top col-flex-center flex-direction-column">
-    <user-profile-picture></user-profile-picture>
-    <button class="link-age-gate link-terms trasparent-button with underline" (click)="changePhoto()"
-      >Cambiar foto de perfil</button
-    >
-    <!-- <user-update-file *ngIf="chargePhoto" (chargePhoto)="chargeImage($event)">
+    </div>
+    <div class="separator-becks"></div>
+    <div class="margint-top col-flex-center flex-direction-column">
+      <user-profile-picture></user-profile-picture>
+      <button
+        class="link-age-gate link-terms trasparent-button with underline"
+        (click)="changePhoto()"
+      >
+        Cambiar foto de perfil
+      </button>
+      <!-- <user-update-file *ngIf="chargePhoto" (chargePhoto)="chargeImage($event)">
     </user-update-file> -->
-    <span *ngIf="size != 'xs'"
-      class=" margint-top font-profile margin-tittle flex-direction-row name-box">{{user.first_name}}
-      {{user.last_name}} <div class="editLogo margin-left-tt"></div></span>
-  </div>
-  <section class="seccion-tabs" *ngIf="size != 'xs'">
-    <mat-tab-group class="content-flex-all-center" [selectedIndex]="0" (selectedTabChange)="selectedTab($event)">
-      <mat-tab label="Editar Perfil" id="edit">
-        <user-edit-form></user-edit-form>
-      </mat-tab>
-      <mat-tab label="Cambiar Contraseña" id="pass">
-        <user-section-change-pass></user-section-change-pass>
-      </mat-tab>
+      <span
+        *ngIf="size != 'xs'"
+        class="margint-top font-profile margin-tittle flex-direction-row name-box"
+        >{{ user.first_name }} {{ user.last_name }}
+        <div class="editLogo margin-left-tt"></div
+      ></span>
+    </div>
+    <section class="seccion-tabs" *ngIf="size != 'xs'">
+      <mat-tab-group
+        class="content-flex-all-center"
+        [selectedIndex]="0"
+        (selectedTabChange)="selectedTab($event)"
+      >
+        <mat-tab label="Editar Perfil" id="edit">
+          <user-edit-form></user-edit-form>
+        </mat-tab>
+        <mat-tab label="Cambiar Contraseña" id="pass">
+          <user-section-change-pass></user-section-change-pass>
+        </mat-tab>
       </mat-tab-group>
-      </section>
+    </section>
 
-
-      <section class="seccion-tabs-mobile" *ngIf="size == 'xs'">
-        <mat-tab-group class="content-flex-all-center" [selectedIndex]="0" (selectedTabChange)="selectedTab($event)">
-          <mat-tab label="Datos" id="edit">
-            <user-edit-form *ngIf="size == 'xs'" [save]="saveBtn"></user-edit-form>        
-            <div class="content-flex-all-center">
-              <button class="becks-btn-primary margin-top-button button-width margin-bottom" (click)="saveChanges()" color="becks">
-                <span>ACTUALIZAR</span>
-              </button></div>
-          </mat-tab>
-          <mat-tab id="pass">
-            <ng-template mat-tab-label>
-              <div>Cambiar<br>Contraseña</div>
-            </ng-template>
-            <user-section-change-pass></user-section-change-pass>
-          </mat-tab>
-          </mat-tab-group>
-          </section>
-  
-</div>
+    <section class="seccion-tabs-mobile" *ngIf="size == 'xs'">
+      <mat-tab-group
+        class="content-flex-all-center"
+        [selectedIndex]="0"
+        (selectedTabChange)="selectedTab($event)"
+      >
+        <mat-tab label="Datos" id="edit">
+          <user-edit-form
+            *ngIf="size == 'xs'"
+            [save]="saveBtn"
+          ></user-edit-form>
+          <div class="content-flex-all-center">
+            <button
+              class="becks-btn-primary margin-top-button button-width margin-bottom"
+              (click)="saveChanges()"
+              color="becks"
+            >
+              <span>ACTUALIZAR</span>
+            </button>
+          </div>
+        </mat-tab>
+        <mat-tab id="pass">
+          <ng-template mat-tab-label>
+            <div>Cambiar<br />Contraseña</div>
+          </ng-template>
+          <user-section-change-pass></user-section-change-pass>
+        </mat-tab>
+      </mat-tab-group>
+    </section>
+    <app-footer></app-footer>
+  </div>
 </div>

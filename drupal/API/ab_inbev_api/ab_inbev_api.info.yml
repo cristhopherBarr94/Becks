@@ -1,6 +1,6 @@
 name: AB-InBev API
 type: module
-description: 'AB-InBev API REST - Beck's.'
+description: "AB-InBev API REST Becks."
 package: AB-InBev
 core: 8.x
 core_version_requirement: ^8 || ^9

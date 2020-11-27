@@ -28,8 +28,9 @@
   >
     <!-- <user-announcer-days [hidden]= "!disableCounter"></user-announcer-days> -->
     <user-announcer-amount
-      *ngIf="this.isActivate && exp.stock_actual"
+      *ngIf="(this.isActivate && exp.stock_actual) || exp.status == 2"
       [stock]="exp.stock_actual"
+      [status]="exp.status"
     ></user-announcer-amount>
     <img
       *ngIf="this.size == 'lg' || this.size == 'md'"
@@ -99,7 +100,7 @@
           <span>Conoce más</span>
         </a>
         <button
-          *ngIf="!this.isActivate"
+          *ngIf="!this.isActivate && exp.status == '0'"
           block="block"
           color="becks"
           (click)="redirectToAct(exp.titleExp)"
@@ -114,7 +115,7 @@
 
         <!-- [routerLink]="['/user/interaction/', exp.id]" -->
         <button
-          *ngIf="this.isActivate && exp.stock_actual > 0"
+          *ngIf="this.isActivate && exp.stock_actual > 0 && exp.status != '2'"
           block="block"
           color="becks"
           (click)="participateExperience(exp.id)"
@@ -127,7 +128,10 @@
           <span>Participar</span>
         </button>
         <button
-          *ngIf="this.isActivate && exp.stock_actual == 0"
+          *ngIf="
+            (exp.stock_actual == 0 && exp.status == 2) ||
+            (exp.stock_actual == 0 && this.isActivate)
+          "
           block="block"
           color="becks"
           class="becks-btn-soon margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"

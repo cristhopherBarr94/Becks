@@ -53,6 +53,8 @@ export class SliderExpComponent
   disableNextBtn = false;
   wasChecked = false;
   timerToChecked = 0;
+  // status = 0;
+
   @ViewChild("slides") slides: IonSlides;
 
   constructor(
@@ -119,25 +121,29 @@ export class SliderExpComponent
     }
     this.experienciaService.getData();
 
-    this.redempSubs = this.redempSvc.redemp$.subscribe((red) => {
-      this.ui.dismissLoading();
-      this.redemps = red;
-    },
-    (e) => {
-      this.ui.dismissLoading();
-    });
+    this.redempSubs = this.redempSvc.redemp$.subscribe(
+      (red) => {
+        this.ui.dismissLoading();
+        this.redemps = red;
+      },
+      (e) => {
+        this.ui.dismissLoading();
+      }
+    );
     this.redempSvc.getData();
 
-    this.userCodeSubs = this.userSvc.userCodes$.subscribe((codes) => {
-      this.ui.dismissLoading();
-      if (codes && codes.length > 0) {
-        this.isActivate = true;
-        this.codes = codes;
+    this.userCodeSubs = this.userSvc.userCodes$.subscribe(
+      (codes) => {
+        this.ui.dismissLoading();
+        if (codes && codes.length > 0) {
+          this.isActivate = true;
+          this.codes = codes;
+        }
+      },
+      (e) => {
+        this.ui.dismissLoading();
       }
-    },
-    (e) => {
-      this.ui.dismissLoading();
-    });
+    );
     this.userSvc.getCodes();
   }
 
@@ -183,7 +189,8 @@ export class SliderExpComponent
         // this.experienciaContent[CurrentSld].status == '2' &&
         if (
           this.experienciaContent[CurrentSld].stock_actual == "0" &&
-          this.modalIsShowed == false
+          this.modalIsShowed == false &&
+          this.experienciaContent[CurrentSld].status != "2"
         ) {
           this.modalIsShowed = true;
           this.ui.showModal(
@@ -289,7 +296,7 @@ export class SliderExpComponent
 
   // Move to Next slide
   slideNext(object, slideView) {
-    if ( this.disableNextBtn ) {
+    if (this.disableNextBtn) {
       var elmnt = document.getElementById("footer");
       elmnt.scrollIntoView();
     } else {
@@ -334,8 +341,8 @@ export class SliderExpComponent
   showNextBtn() {
     // console.log("this.disableNextBtn" , this.disableNextBtn);
     // console.log("this.size" , this.size);
-    if ( this.disableNextBtn ) {
-      if (this.size == 'lg' || this.size == 'md') {
+    if (this.disableNextBtn) {
+      if (this.size == "lg" || this.size == "md") {
         return false;
       }
     }

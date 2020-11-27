@@ -162,23 +162,26 @@
     margin: 2px;
     margin-top: 10px;
     object-fit: cover;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
     &__1 {
-      background: url("./../../../../../../../assets/img/six-pack-f.png");
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
+      background: url("./../../../../../../../assets/img/cerveza_merqueo_sm.png");
+      @media (min-width: 769px) {
+        background: url("./../../../../../../../assets/img/cerveza_merqueo_medium.png");
+      }
     }
     &__2 {
-      background: url("./../../../../../../../assets/img/six-pack-f.png");
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
+      background: url("./../../../../../../../assets/img/cerveza_merqueo_sm.png");
+      @media (min-width: 769px) {
+        background: url("./../../../../../../../assets/img/cerveza_merqueo_medium.png");
+      }
     }
     &__3 {
-      background: url("./../../../../../../../assets/img/six-pack-f.png");
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
+      background: url("./../../../../../../../assets/img/cerveza_merqueo_sm.png");
+      @media (min-width: 769px) {
+        background: url("./../../../../../../../assets/img/cerveza_merqueo_medium.png");
+      }
     }
     @media (min-width: 0px) and (max-width: 768px) {
       width: 100px;

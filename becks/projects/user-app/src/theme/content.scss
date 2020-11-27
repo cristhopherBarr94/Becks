@@ -727,6 +727,7 @@
   }
 }
 .modal-edit-password {
+  z-index: 99999 !important;
   align-items: center;
   backdrop-filter: blur(10px);
   .modal-wrapper {

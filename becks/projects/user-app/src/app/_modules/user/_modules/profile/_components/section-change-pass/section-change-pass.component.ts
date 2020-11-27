@@ -78,16 +78,15 @@ export class SectionChangePassComponent implements OnInit {
 
   changePass(): void {
     if (this.userChangeForm.valid) {
-      this.ui.showLoading();
       this.userChange.password = this.userChangeForm.controls.password.value.trim();
       this.userChange.passwordPrev = this.userChangeForm.controls.passwordPrev.value.trim();
 
       if (this.userChange.password == this.userChange.passwordPrev) {
-        this.ui.dismissLoading();
         this.httpError = "La nueva contraseña debe ser diferente a la anterior";
         return;
       }
 
+      this.ui.showLoading();
       this.httpService
         .patch(environment.serverUrl + environment.user.patchPassword, {
           password: this.userChange.password,
@@ -95,28 +94,37 @@ export class SectionChangePassComponent implements OnInit {
         })
         .subscribe(
           (response: any) => {
+            this.ui.dismissLoading(0);
             if (response.status == 200) {
               if (response.body.password) {
-                this.userChangeForm.reset();
-                this.userSvc.logout();
-                this.auth.setAuthenticated(null);
-                this.ui.showModal(
-                  BasicAlertComponent,
-                  "modalMessage",
-                  false,
-                  false,
-                  {
-                    title: "Contraseña Actualizada",
-                    description: "Cerrando sesión de forma segura",
-                  }
-                );
-                this.ui.dismissModal(2000);
-                setTimeout(() => {
-                  this.ui.dismissLoading();
-                  this.router.navigate(["home"]);
-                }, 4000);
+                this.ui.dismissModal();
+                setTimeout(
+                  () => {
+                    this.ui.dismissModal(0);
+                    setTimeout(
+                      () => {
+                        this.ui.showLoading();
+                        this.ui.showModal(
+                          BasicAlertComponent,
+                          "modalMessage",
+                          false,
+                          false,
+                          {
+                            title: "Contraseña Actualizada",
+                            description: "Cerrando sesión de forma segura",
+                          }
+                        );
+                        this.userChangeForm.reset();
+                        this.userSvc.logout();
+                        this.auth.setAuthenticated(null);
+                        setTimeout(() => {
+                          this.router.navigate(["home"]);
+                          this.ui.dismissLoading();
+                          this.ui.dismissModal();
+                        }, 4000); /*Final Timer*/
+                      } , 500 ); /*2nd Timer*/
+                  } , 1100 ); /*1st Timer*/
               } else {
-                this.ui.dismissLoading();
                 this.httpError = response.body.message
                   ? response.body.message
                   : "Contraseña actual no valida";

@@ -28,7 +28,11 @@ export class OnboardingComponent implements OnInit, AfterViewInit {
     this.ui.dismissLoading(2500);
   }
   swipeNext(){
-    this.ionSlides.slideNext();
+    if ( this.disableNextBtn ) {
+      this.joinredirection();
+    } else {
+      this.ionSlides.slideNext();
+    }
   }
 
   doCheck() {

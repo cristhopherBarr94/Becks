@@ -498,6 +498,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
    */
   private function __sendTD($name , $lastname , $city , $phone , $email , $privacy , $promo, $id_number, $td_client ) {
     
+    $country = "col";
     // define variable that will be used to tell the __sendTD method if it should send to the production database
     $is_production = false;
     // define the purpose variable as an empty array
@@ -512,6 +513,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       "abi_firstname" => $name,
       "abi_lastname" => $lastname,
       "abi_city" => $city,
+      "abi_country" => $country,
       "abi_phone" => $phone,
       "abi_email" => $email,
       "abi_cpf" => $id_number,
@@ -521,7 +523,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
 
     $tdstatus = Util::sendTD(
         $data,              // form data & purposes
-        "col",              // country
+        $country,           // country
         "Becks",            // brand
         "BECKS_WEBAPP_1120",   // campaign
         "BECKS_WEBAPP_1120",   // form

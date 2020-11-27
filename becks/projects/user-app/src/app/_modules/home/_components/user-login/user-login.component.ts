@@ -76,7 +76,7 @@ export class UserLoginComponent implements OnInit, OnDestroy {
       email: new FormControl("", [
         Validators.required,
         Validators.email,
-        Validators.maxLength(40),
+        Validators.maxLength(250),
       ]),
       password: new FormControl("", [
         Validators.required,

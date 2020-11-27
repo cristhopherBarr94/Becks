@@ -22,9 +22,7 @@
         />
         <mat-icon matSuffix>mail_outline</mat-icon>
         <mat-error *ngIf="userLoginForm.controls.email.errors">
-          {{
-            getMessageform(userLoginForm.controls.email, "email")
-          }}</mat-error
+          {{ getMessageform(userLoginForm.controls.email, "email") }}</mat-error
         >
       </mat-form-field>
 
@@ -74,7 +72,7 @@
           'button-disabled': userLoginForm.invalid || !captchaStatus
         }"
       >
-          <span>ENTRAR</span>
+        <span>ENTRAR</span>
       </button>
     </form>
 

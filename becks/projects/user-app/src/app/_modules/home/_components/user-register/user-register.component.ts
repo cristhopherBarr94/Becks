@@ -21,9 +21,9 @@ import { SHA256 } from "crypto-js";
 import { BasicAlertComponent } from "src/app/_modules/utils/_components/basic-alert/basic-alert.component";
 import { AuthService } from "src/app/_services/auth.service";
 
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import { MockCiudades } from '../../../../_mocks/ciudades-mock';
+import { Observable } from "rxjs";
+import { map, startWith } from "rxjs/operators";
+import { MockCiudades } from "../../../../_mocks/ciudades-mock";
 
 declare global {
   interface Window {
@@ -64,17 +64,18 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.initforms();
-    this.filteredCityOptions = this.userRegisterForm.controls.city.valueChanges
-    .pipe(
-      startWith(''),
-      map(value => this._filter(value))
+    this.filteredCityOptions = this.userRegisterForm.controls.city.valueChanges.pipe(
+      startWith(""),
+      map((value) => this._filter(value))
     );
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.options.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
   }
 
   ngAfterViewInit(): void {
@@ -104,7 +105,7 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
       email: new FormControl("", [
         Validators.required,
         Validators.email,
-        Validators.maxLength(40),
+        Validators.maxLength(250),
       ]),
       telephone: new FormControl("", [
         Validators.required,

@@ -20,31 +20,42 @@ export class HttpService {
               private ui: UiService) {}
 
   getHeaders() {
-    let token = "";
-    if (typeof this.authService.getToken() == "string") {
-      token = this.authService.getToken();
+    if ( this.authService.isAuthenticated() ) {
+      return {
+        "Content-Type": "application/json; charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
+        Authorization: this.authService.getToken(),
+      };
     }
+    
     return {
       "Content-Type": "application/json; charset=UTF-8",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers":
-        "Origin, X-Requested-With, Content-Type, Accept",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
-      Authorization: token,
+      "Origin, X-Requested-With, Content-Type, Accept",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE"
     };
   }
 
   getHeadersFormData() {
-    let token = "";
-    if (typeof this.authService.getToken() == "string") {
-      token = this.authService.getToken();
+    if ( this.authService.isAuthenticated() ) {
+      return {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
+        Authorization: this.authService.getToken(),
+      };
     }
+    
     return {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers":
-        "Origin, X-Requested-With, Content-Type, Accept",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
-      Authorization: token,
+      "Origin, X-Requested-With, Content-Type, Accept",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE"
     };
   }
 
@@ -136,7 +147,7 @@ export class HttpService {
   handleError(error: HttpErrorResponse) {
     
     if (error.status === HttpConstants.UNAUTHORIZED || error.status === HttpConstants.FORBIDDEN ) {
-      if ( error.url.indexOf(environment.login.resource) == -1 ) {
+      if ( error.url.indexOf(environment.login.resource) == -1 && error.url.indexOf(environment.guest.postForm) == -1 ) {
         if ( ++this.error_counter == 1 ) {
           this.error_counter = 0;
           this.authService.setAuthenticated(null);

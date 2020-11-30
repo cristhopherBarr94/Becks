@@ -14,10 +14,10 @@ export class AuthService {
   }
 
   public setAuthenticated( token: string ) {
-    localStorage.setItem("token", token);
+    localStorage.setItem("token_admin", token);
   }
 
   public getToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem('token_admin');
   }
 }

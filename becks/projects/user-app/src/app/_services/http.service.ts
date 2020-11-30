@@ -20,7 +20,7 @@ export class HttpService {
               private ui: UiService) {}
 
   getHeaders() {
-    if (typeof this.authService.getToken() == "string") {
+    if ( this.authService.isAuthenticated() ) {
       return {
         "Content-Type": "application/json; charset=UTF-8",
         "Access-Control-Allow-Origin": "*",
@@ -41,7 +41,7 @@ export class HttpService {
   }
 
   getHeadersFormData() {
-    if (typeof this.authService.getToken() == "string") {
+    if ( this.authService.isAuthenticated() ) {
       return {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers":

@@ -12,7 +12,7 @@
   [options]="slideOpts"
   slidesPerView="1"
   effect="slide"
-  pager="true"
+  pager="false"
   zoom="false"
   class="exp-slider"
   (ionSlideDidChange)="changeSlider()"
@@ -239,7 +239,7 @@
 </ion-slides>
 <button
   class="btn-next"
-  *ngIf="showNextBtn()"
+  *ngIf="!this.disableNextBtn"
   [ngClass]="{ 'detail-active': truePager }"
   (click)="slideNext(sliderExp.slidesItems, slides)"
 >

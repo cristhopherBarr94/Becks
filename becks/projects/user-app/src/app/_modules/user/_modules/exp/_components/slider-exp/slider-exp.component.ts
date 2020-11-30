@@ -1,5 +1,6 @@
 import {
   AfterContentChecked,
+  AfterViewInit,
   Component,
   Input,
   OnChanges,
@@ -25,7 +26,7 @@ import { RedemptionsService } from "src/app/_services/redemptions.service";
   styleUrls: ["./slider-exp.component.scss"],
 })
 export class SliderExpComponent
-  implements OnInit, OnDestroy, AfterContentChecked {
+  implements OnInit, OnDestroy, AfterContentChecked, AfterViewInit {
   public id: number;
   public initialSlide;
   public size: string;
@@ -38,6 +39,7 @@ export class SliderExpComponent
   private redempSubs: Subscription;
   public experienciaContent: Exp[] = [];
   public slideOpts;
+  public slideOptions;
   private redemps: number[] = [];
   public activeIndex: number;
   sliderExp = {
@@ -90,6 +92,9 @@ export class SliderExpComponent
     }
   }
 
+  ngAfterViewInit() {
+  }
+
   ngOnInit() {
     this.ui.showLoading();
     const s = this.router.url;
@@ -106,6 +111,7 @@ export class SliderExpComponent
               initialSlide: this.compareId(this.id == NaN ? 0 : this.id),
               direction: "vertical",
               speed: 400,
+              allowTouchMove: false
             };
           }
         } catch (error) {}
@@ -157,9 +163,10 @@ export class SliderExpComponent
     this.experienciaContent[item].detalleExp = !this.experienciaContent[item]
       .detalleExp;
     this.truePager = !this.truePager;
-    if (this.aumentarTamano) {
-      this.ampliarExp();
-    }
+    this.aumentarTamano = true;
+    // if (this.aumentarTamano) {
+      // this.ampliarExp();
+    // }
   }
 
   compareId(idExp: number) {
@@ -282,9 +289,10 @@ export class SliderExpComponent
           .experienciaContent[this.itemChange].detalleExp;
         this.truePager = !this.truePager;
         this.itemChange = undefined;
-        if (this.aumentarTamano) {
-          this.ampliarExp();
-        }
+        this.aumentarTamano = true;
+        // if (this.aumentarTamano) {
+          // this.ampliarExp();
+        // }
       }
     }
     this.getIndex();
@@ -336,16 +344,5 @@ export class SliderExpComponent
       object.isEndSlide = istrue;
       this.disableNextBtn = istrue;
     });
-  }
-
-  showNextBtn() {
-    // console.log("this.disableNextBtn" , this.disableNextBtn);
-    // console.log("this.size" , this.size);
-    if (this.disableNextBtn) {
-      if (this.size == "lg" || this.size == "md") {
-        return false;
-      }
-    }
-    return true;
   }
 }

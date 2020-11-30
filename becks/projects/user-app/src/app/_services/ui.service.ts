@@ -14,7 +14,7 @@ export class UiService {
 
   async showLoading() {
     try {
-      // this.dismissLoading();
+      // this.dismissLoading(0);
       this.loading = await this.modalCtrl.create({
         component: LoadingComponent,
         cssClass: "screen-splash-modal",
@@ -25,11 +25,9 @@ export class UiService {
       });
       await this.loading.present();
       clearTimeout(this.forceDismissTimer);
-      this.forceDismissTimer = setTimeout(
-        () => {
-          this.dismissLoading(0);
-        } , 15000
-      );
+      this.forceDismissTimer = setTimeout(() => {
+        this.dismissLoading(0);
+      }, 10000);
     } catch (e) {
       console.error("showLoading", e);
     }
@@ -47,7 +45,7 @@ export class UiService {
     setTimeout(() => {
       this.modalCtrl.getTop().then((topOverlay) => {
         if (topOverlay !== undefined) {
-          if(this.loading){
+          if (this.loading) {
             this.loading.dismiss();
           }
         }

@@ -62,3 +62,19 @@
     }
   }
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #4a4a4a;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #038259;
+  border-radius: 8px;
+  background-clip: padding-box;
+}

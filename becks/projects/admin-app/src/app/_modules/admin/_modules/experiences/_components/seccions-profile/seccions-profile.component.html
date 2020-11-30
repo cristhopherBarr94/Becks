@@ -1,21 +1,29 @@
-<div class="main-container">
-<div *ngIf="!this.create && this.onEdit == false">
-  <h1 class="title-creator">ADMINISTRAR EXPERIENCIAS</h1>
-  <p class="desc-creator">Crea y edita experiencias en la app</p>
+<div>
+  <app-sidebar></app-sidebar>
 </div>
-<div  *ngIf="this.create && this.onEdit == false">
-  <h1 class="title-creator" >NUEVA EXPERIENCIA</h1>
-  <p class="desc-creator">Ingresa los datos correspondientes a cada una de las características de la Experiencia Beck´s</p>
+<div style="margin-left: 243px">
+  <div class="main-container">
+    <div *ngIf="!this.create && this.onEdit == false">
+      <h1 class="title-creator">ADMINISTRAR EXPERIENCIAS</h1>
+      <p class="desc-creator">Crea y edita experiencias en la app</p>
+    </div>
+    <div *ngIf="this.create && this.onEdit == false">
+      <h1 class="title-creator">NUEVA EXPERIENCIA</h1>
+      <p class="desc-creator">
+        Ingresa los datos correspondientes a cada una de las características de
+        la Experiencia Beck´s
+      </p>
+    </div>
+    <span class="separator-becks"> </span>
+  </div>
+  <section class="seccion-tabs">
+    <div *ngIf="!this.create && this.onEdit == false">
+      <exp-card [editFunc]="this.Edit"></exp-card>
+      <button class="add-btn" (click)="hideTabs()">
+        <span class="plus-icon"> </span>
+        agregar experiencias
+      </button>
+    </div>
+    <create-form *ngIf="this.create" [parentFunc]="this.Func1"></create-form>
+  </section>
 </div>
-<span class="separator-becks"> </span>
-</div>
-<section class="seccion-tabs">
-<div *ngIf="!this.create && this.onEdit == false">
-  <exp-card [editFunc]="this.Edit"></exp-card>
-  <button class="add-btn" (click)="hideTabs()">
-    <span class="plus-icon"> </span>
-    agregar experiencias
-  </button>
-</div>
-  <create-form  *ngIf="this.create" [parentFunc]="this.Func1"></create-form>
-</section>

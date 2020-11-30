@@ -2,6 +2,9 @@
   background-color: #121212;
   padding: 20px 7%;
   width: 100%;
+  height: 800px;
+  overflow-y: auto;
+  position: relative;
 }
 .title-creator {
   font-family: "Eurostile BQ";
@@ -24,7 +27,7 @@
   height: 2px;
   background: rgb(98, 248, 178);
   position: absolute;
-  top: 170px;
+  top: 100px;
 }
 
 .content-flex-all-center {

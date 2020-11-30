@@ -1,11 +1,25 @@
 <div class="my-custom-menu background-black flex-column">
-    <ion-button class="btn admin-btn-sidebar" color="becks"><img src="../../../assets/icon/home.svg" alt=""> Home</ion-button>
-    <ion-button class="btn admin-btn-sidebar" color="becks"><img src="../../../assets/icon/list.svg" alt="">Activación de usuarios</ion-button>
-    <ion-button class="btn admin-btn-sidebar" color="becks"><img src="../../../assets/icon/user-plus.svg" alt="">Experiencias</ion-button>
-    <ion-button class="btn admin-btn-sidebar" color="becks"><img src="../../../assets/icon/calendar-alt.svg" alt=""> Eventos</ion-button>
+  <!-- <ion-button class="btn admin-btn-sidebar" color="becks"><img src="../../../assets/icon/home.svg" alt=""> Home</ion-button> -->
+  <ion-button
+    class="btn admin-btn-sidebar"
+    color="becks"
+    (click)="redirect('activation')"
+    ><img src="../../../assets/icon/list.svg" alt="" />Activación de
+    usuarios</ion-button
+  >
+  <ion-button
+    class="btn admin-btn-sidebar"
+    color="becks"
+    (click)="redirect('exp')"
+    ><img
+      src="../../../assets/icon/user-plus.svg"
+      alt=""
+    />Experiencias</ion-button
+  >
+  <!-- <ion-button class="btn admin-btn-sidebar" color="becks"><img src="../../../assets/icon/calendar-alt.svg" alt=""> Eventos</ion-button>
     <ion-button class="btn admin-btn-sidebar" color="becks"><img src="../../../assets/icon/map-marker-alt.svg" alt=""> Georeferenciación para eventos</ion-button>
     <ion-button class="btn admin-btn-sidebar" color="becks"><img src="../../../assets/icon/Vector.svg" alt=""> Carga códigos rappi</ion-button>
     <ion-button class="btn admin-btn-sidebar" color="becks"><img src="../../../assets/icon/qrcode.svg" alt=""> Generación de códigos y/o carga</ion-button>
     <ion-button class="btn admin-btn-sidebar" color="becks"><img src="../../../assets/icon/bell.svg" alt=""> Notificaciones push</ion-button>
-    <ion-button class="btn admin-btn-sidebar" color="becks"><img src="../../../assets/icon/bullhorn.svg" alt=""> Noticias y contenido streaming</ion-button>
+    <ion-button class="btn admin-btn-sidebar" color="becks"><img src="../../../assets/icon/bullhorn.svg" alt=""> Noticias y contenido streaming</ion-button> -->
 </div>

@@ -78,10 +78,11 @@
           font-weight: normal !important;
           text-transform: capitalize !important;
           font-size: 11px !important;
-          line-height: 50px !important;
+          line-height: 20px !important;
           letter-spacing: 0.15px !important;
           margin: 0 !important;
-          height: 35px;
+          height: auto;
+          max-height: 50px;
           overflow: hidden;
           text-overflow: ellipsis;
           width: 90%;

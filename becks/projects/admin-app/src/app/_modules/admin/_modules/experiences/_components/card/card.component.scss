@@ -148,7 +148,7 @@
   padding-top: 80px;
   margin: 5px;
 }
-::ng-deep ion-col {
+:host::ng-deep ion-col {
   justify-content: center;
   align-items: center;
   height: 180px;

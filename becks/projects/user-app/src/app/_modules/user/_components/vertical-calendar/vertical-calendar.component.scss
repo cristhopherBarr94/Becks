@@ -66,9 +66,13 @@
       background-position: center;
       background-size: cover;
       mix-blend-mode: normal;
+      position: relative;
       .event-description {
         width: 200px;
-        margin-top: 110px;
+        position: absolute;
+        bottom: 15px;
+        left: 14px;
+        margin: auto;
         .title-secondary {
           font-style: normal !important;
           font-weight: normal !important;
@@ -78,6 +82,9 @@
           letter-spacing: 0.15px !important;
           margin: 0 !important;
           height: 35px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 90%;
         }
         .title-tertiary {
           font-style: normal !important;

@@ -249,7 +249,10 @@
                     [formGroupName]="i"
                   >
                     <mat-form-field
-                      *ngIf="!this.hidePed"
+                      *ngIf="
+                        !this.hidePed &&
+                        !this.userEditForm.get('itemRows').value[i].deleted
+                      "
                       appearance="fill"
                       floatLabel="auto"
                       class="smallInput"
@@ -261,7 +264,7 @@
                       "
                       hideRequiredMarker
                     >
-                      <mat-label>Cupos</mat-label>
+                      <mat-label>Cupos </mat-label>
 
                       <input
                         id="period{{ i }}"
@@ -286,7 +289,10 @@
                     </mat-form-field>
 
                     <mat-form-field
-                      *ngIf="!this.hidePed"
+                      *ngIf="
+                        !this.hidePed &&
+                        !this.userEditForm.get('itemRows').value[i].deleted
+                      "
                       appearance="fill"
                       floatLabel="auto"
                       class="smallInput"
@@ -334,7 +340,8 @@
                     <button
                       *ngIf="
                         !this.hidePed &&
-                        userEditForm.controls.itemRows['controls'].length > 1
+                        userEditForm.controls.itemRows['controls'].length > 1 &&
+                        !this.userEditForm.get('itemRows').value[i].deleted
                       "
                       class="btn-delete"
                       (click)="deleteField(i)"

@@ -126,7 +126,6 @@ export class EditFormComponent implements OnInit, AfterViewInit {
       // }
     }
     this.editExp();
-    console.log(this.expEditable);
   }
 
   ngAfterViewInit(): void {
@@ -377,7 +376,6 @@ export class EditFormComponent implements OnInit, AfterViewInit {
   }
 
   hideField(targetHidden, targetStatus) {
-    // console.log(targetHidden,targetStatus);
     if (targetHidden == "stk") {
       this.hideStk = !this.hideStk;
       if (targetStatus == true) {
@@ -449,7 +447,6 @@ export class EditFormComponent implements OnInit, AfterViewInit {
   }
 
   editExp() {
-    // console.log(this.expEditable.titleExp)
     this.userEditForm.patchValue({
       name: this.expEditable.titleExp,
       descrip: this.expEditable.descrip,
@@ -486,6 +483,5 @@ export class EditFormComponent implements OnInit, AfterViewInit {
   deleteField(index: number) {
     // (<FormArray>this.userEditForm.get("itemRows")).removeAt(index);
     this.userEditForm.get("itemRows").value[index].deleted = true;
-    // console.log(<FormArray>this.userEditForm.get("itemRows"));
   }
 }

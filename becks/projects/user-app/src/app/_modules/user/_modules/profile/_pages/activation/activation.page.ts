@@ -87,6 +87,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.subsCodes = this.userSvc.userCodes$.subscribe((codes) => {
+      this.ui.dismissLoading();
       if (codes && codes.length > 0) {
         this.activate = true;
         this.date_til = moment(new Date(codes[0].valid_until * 1000));
@@ -181,8 +182,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy {
                 eventLabel: code256,
               });
             }
-            this.ui.dismissLoading();
-            window.location.reload();
+            this.userSvc.getCodes(true);
           },
           (e) => {
             this.httpError = e.error.message;

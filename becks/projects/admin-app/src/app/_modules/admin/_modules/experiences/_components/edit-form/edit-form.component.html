@@ -449,12 +449,14 @@
                     >
                       <span
                         class="upload-icon"
-                        *ngIf="!(this.loadedFileDes.length > 0) && !typeError"
+                        *ngIf="
+                          !(this.loadedFileDes.length > 0) && !typeErrorDes
+                        "
                       >
                       </span>
                       <span
                         class="upload-icon-error"
-                        *ngIf="typeError && !this.loadedFileDes"
+                        *ngIf="typeErrorDes && !this.loadedFileDes"
                       >
                       </span>
                       <ion-row *ngIf="this.loadedFileDes.length > 0">
@@ -485,12 +487,14 @@
                     >
                       <span
                         class="upload-icon"
-                        *ngIf="!(this.loadedFileMob.length > 0) && !typeError"
+                        *ngIf="
+                          !(this.loadedFileMob.length > 0) && !typeErrorMob
+                        "
                       >
                       </span>
                       <span
                         class="upload-icon-error"
-                        *ngIf="typeError && !this.loadedFileMob"
+                        *ngIf="typeErrorMob && !this.loadedFileMob"
                       >
                       </span>
                       <ion-row *ngIf="this.loadedFileMob.length > 0">
@@ -514,8 +518,11 @@
               >
                 *Debes subir una imágen válida
               </mat-error>
-              <mat-error style="margin-left: 50px" *ngIf="typeError">
-                *El archivo no es válido
+              <mat-error style="margin-left: 50px" *ngIf="typeErrorDes">
+                *El archivo no es válido máx 1MB
+              </mat-error>
+              <mat-error style="margin-left: 390px" *ngIf="typeErrorMob">
+                *El archivo no es válido máx 500KB
               </mat-error>
             </div>
           </form>

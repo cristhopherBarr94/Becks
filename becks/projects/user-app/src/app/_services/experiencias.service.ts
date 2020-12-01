@@ -1,18 +1,17 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
-import { environment } from 'src/environments/environment';
+import { environment } from "src/environments/environment";
 import { Exp } from "../_models/exp";
-import { HttpService } from './http.service';
+import { HttpService } from "./http.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class ExperienciasService {
-  
   private _exps: Exp[] = [];
   private _expSbj = new Subject<Exp[]>();
   public exp$ = this._expSbj.asObservable();
-  public   options = {
+  public options = {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -57,13 +56,6 @@ export class ExperienciasService {
         } else {
           // TODO :: logic for error
         }
-      },
-      (error) => {
-        // TODO :: logic for error
-      }
-    );
-   
+      );
   }
-
-
 }

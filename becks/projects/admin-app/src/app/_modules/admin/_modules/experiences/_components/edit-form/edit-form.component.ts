@@ -41,7 +41,8 @@ export class EditFormComponent implements OnInit, AfterViewInit {
   public checked: boolean = false;
   public password: string;
   public showError: boolean = false;
-  public typeError: boolean = false;
+  public typeErrorDes: boolean = false;
+  public typeErrorMob: boolean = false;
   public photoDes: any;
   public photoMob: any;
   public checkIn: boolean = !this.checked;
@@ -286,32 +287,40 @@ export class EditFormComponent implements OnInit, AfterViewInit {
     var files = event.target.files;
     var imgn = new Image();
     imgn = files[0];
-
+    console.log(files[0].size);
     if (files[0].type == "image/jpeg" || files[0].type == "image/png") {
-      this.typeError = false;
+      this.typeErrorDes = false;
+      this.typeErrorMob = false;
+
       if (myPlatform == "des") {
-        this.resizeImage(files[0], 1280, 720).then((blob) => {
-          if (files && blob) {
-            var reader = new FileReader();
-            reader.readAsBinaryString(blob);
-            this.loadedFileDes = imgn.name == undefined ? "" : imgn.name;
-            this.toBase64(blob, myPlatform);
-          }
-        });
+        if (files[0].size <= 1000000) {
+          this.resizeImage(files[0], 1280, 720).then((blob) => {
+            if (files && blob) {
+              var reader = new FileReader();
+              reader.readAsBinaryString(blob);
+              this.loadedFileDes = imgn.name;
+              this.toBase64(blob, myPlatform);
+            }
+          });
+        } else {
+          this.typeErrorDes = true;
+        }
       } else if (myPlatform == "mob") {
-        this.resizeImage(files[0], 720, 480).then((blob) => {
-          if (files && blob) {
-            var reader = new FileReader();
-            reader.readAsBinaryString(blob);
-            this.loadedFileMob = imgn.name == undefined ? "" : imgn.name;
-            this.toBase64(blob, myPlatform);
-          }
-        });
+        if (files[0].size <= 500000) {
+          this.resizeImage(files[0], 720, 480).then((blob) => {
+            if (files && blob) {
+              var reader = new FileReader();
+              reader.readAsBinaryString(blob);
+              this.loadedFileMob = imgn.name;
+              this.toBase64(blob, myPlatform);
+            }
+          });
+        } else {
+          this.typeErrorMob = true;
+        }
       }
-      this.ui.dismissModal();
-    } else {
-      this.typeError = true;
     }
+    this.ui.dismissModal();
   }
 
   toBase64(blob, type) {

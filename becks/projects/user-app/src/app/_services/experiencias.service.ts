@@ -40,7 +40,7 @@ export class ExperienciasService {
               imagesExpMob: urlServer + environment.user.getImgExp + element.id + "_mob",
               titleExp: element.title,
               fechaExp: (new Date(element.valid_to*1000)).toLocaleString().split(" ")[0],
-              fechaAlt: element.fechaAlt,
+              fechaAlt: (new Date(element.valid_from*1000)).toLocaleString().split(" ")[0],
               detailExp: element.description,
               placeExp: element.location,
               urlExp: element.url_terms,

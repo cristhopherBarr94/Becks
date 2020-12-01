@@ -57,10 +57,12 @@ export class ExperienciasService {
                   "?time_stamp=" +
                   new Date().getTime(),
                 titleExp: element.title,
+                fechaAlt: new Date(element.valid_from * 1000)
+                  .toLocaleString()
+                  .split(" ")[0],
                 fechaExp: new Date(element.valid_to * 1000)
                   .toLocaleString()
                   .split(" ")[0],
-                fechaAlt: element.fechaAlt,
                 detailExp: element.description,
                 placeExp: element.location,
                 urlExp: element.url_terms,

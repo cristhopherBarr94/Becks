@@ -500,7 +500,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     
     $country = "col";
     // define variable that will be used to tell the __sendTD method if it should send to the production database
-    $is_production = false;
+    $is_production = preg_match("@live-cobackendbecks.pantheonsite.io@", $_SERVER['SERVER_NAME']);
     // define the purpose variable as an empty array
     $purposes = array();
     // check whether the TC-PP checkbox is checked, and if it is, then adds it to the purpose array - informed

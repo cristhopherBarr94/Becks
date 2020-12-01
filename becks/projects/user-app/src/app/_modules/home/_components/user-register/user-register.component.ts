@@ -22,7 +22,7 @@ import { BasicAlertComponent } from "src/app/_modules/utils/_components/basic-al
 import { AuthService } from "src/app/_services/auth.service";
 
 import { Observable } from "rxjs";
-import { map, startWith } from "rxjs/operators";
+import { isEmpty, map, startWith } from "rxjs/operators";
 import { MockCiudades } from "../../../../_mocks/ciudades-mock";
 
 declare global {
@@ -71,6 +71,7 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
   }
 
   private _filter(value: string): string[] {
+    if ( value == undefined || value == null ) { return; }
     const filterValue = value.toLowerCase();
 
     return this.options.filter((option) =>

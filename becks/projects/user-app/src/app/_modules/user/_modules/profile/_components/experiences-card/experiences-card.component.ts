@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
 
 @Component({
   selector: "user-experiences-card",
@@ -26,7 +26,7 @@ export class ExperiencesCardComponent implements OnInit {
       this.typeExp = "Pendiente";
       this.colorClass = "orange-color";
     } else {
-      this.typeExp = "Completa";
+      this.typeExp = "Reservada";
       this.colorClass = "green-color";
     }
   }
@@ -34,8 +34,7 @@ export class ExperiencesCardComponent implements OnInit {
   redirectExpId() {
     this.router.navigate([`user/exp/${this.id}`], {
       queryParamsHandling: "preserve",
-      state: { reload: 'true' }
+      state: { reload: "true" },
     });
   }
-
 }

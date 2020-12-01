@@ -12,7 +12,7 @@
   [options]="slideOpts"
   slidesPerView="1"
   effect="slide"
-  pager="false"
+  pager="true"
   zoom="false"
   class="exp-slider"
   (ionSlideDidChange)="changeSlider()"
@@ -67,7 +67,7 @@
               .isActivate
           }"
         >
-          <mat-icon matSuffix>calendar_today</mat-icon> {{ exp.fechaExp }}
+          <mat-icon matSuffix>calendar_today</mat-icon> {{ exp.fechaAlt + ' - ' + exp.fechaExp }}
         </p>
         <p
           class="detail-content content-desk detail-place animate__animated animate__bounceInLeft animate__delay-1s"
@@ -168,7 +168,7 @@
         <p
           class="detail-content detail-place animate__animated animate__backInUp animate__delay-1s"
         >
-          {{ exp.fechaExp }}
+        {{ exp.fechaAlt + ' - ' + exp.fechaExp }}
         </p>
         <p
           class="detail-content detail-place animate__animated animate__backInUp animate__delay-1s"

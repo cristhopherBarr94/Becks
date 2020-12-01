@@ -80,7 +80,7 @@ export class ExperienciasService {
         },
         (error) => {
           // TODO :: logic for error
-        }}
+        }
       );
   }
 }

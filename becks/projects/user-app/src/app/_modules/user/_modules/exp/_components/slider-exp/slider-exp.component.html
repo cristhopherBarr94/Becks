@@ -203,7 +203,7 @@
       >
     </div>
     <button
-      *ngIf="!this.isActivate && exp.status == '0'"
+      *ngIf="!this.isActivate"
       block="block"
       color="becks"
       (click)="redirectToAct(exp.titleExp)"
@@ -230,7 +230,7 @@
     </button>
     <button
       *ngIf="
-        (exp.stock_actual == 0 && exp.status == 2) ||
+        (this.isActivate && exp.status == 2) ||
         (exp.stock_actual == 0 && this.isActivate)
       "
       block="block"

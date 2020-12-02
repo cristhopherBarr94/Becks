@@ -172,12 +172,12 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
       ) {
         this.arrPeriod.push({
           stock: this.userEditForm.controls.stock.value,
-          date: new Date().getTime() / 1000,
+          date: Math.floor(new Date().getTime() / 1000),
         });
       } else {
         this.arrPeriod.push({
           stock: element.period,
-          date: element.dateRelease.getTime() / 1000,
+          date: Math.floor(new Date().getTime() / 1000),
         });
       }
     });
@@ -187,8 +187,12 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
         title: this.userEditForm.controls.name.value,
         description: this.userEditForm.controls.descrip.value,
         location: this.userEditForm.controls.location.value,
-        valid_from: this.userEditForm.controls.dateStart.value.getTime() / 1000,
-        valid_to: this.userEditForm.controls.dateEnd.value.getTime() / 1000,
+        valid_from: Math.floor(
+          this.userEditForm.controls.dateStart.value.getTime() / 1000
+        ),
+        valid_to: Math.floor(
+          this.userEditForm.controls.dateEnd.value.getTime() / 1000
+        ),
         stock: this.arrPeriod,
         img_desk: this.photoDes.split(",")[1],
         img_mob: this.photoMob.split(",")[1],
@@ -226,14 +230,14 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
   }
 
   public inputValidatorAlphabetical(event: any) {
-    const pattern = /^[a-zA-ZnÑ,.!:á ]*$/;
+    const pattern = /^[a-zA-ZnÑ,.!:áÁéÉíÍóÓúÚ?¿"; ]*$/;
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(/[^a-zA-ZnÑ,.!:á ]/g, "");
     }
   }
 
   public inputValidatorAlphaNumeric(event: any) {
-    const pattern = /^[a-zA-ZnÑ0-9,.!:á/ ]*$/;
+    const pattern = /^[a-zA-ZnÑ0-9,.!áÁéÉíÍóÓúÚ/¡?¿"; ]*$/;
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(
         /[^a-zA-ZnÑ0-9,.!:á/ ]/g,

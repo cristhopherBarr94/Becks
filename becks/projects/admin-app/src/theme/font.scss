@@ -221,3 +221,17 @@ p {
   font-family: "Helvetica LT Std";
   font-style: normal;
 }
+.content-expend {
+  .title-footer {
+    font-family: "Helvetica LT Std";
+    font-style: normal;
+    font-size: 19px;
+    line-height: 23px;
+    color: #ffffff;
+    margin: 0px;
+    text-align: center;
+    @media (min-width: 769px) {
+      text-align: start;
+    }
+  }
+}

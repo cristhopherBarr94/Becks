@@ -108,7 +108,41 @@
         <!-- location  -->
         <ion-row>
           <span class="location-icon"> </span>
+
           <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInputSelect(userEditForm.controls.location)"
+          >
+            <mat-label>Ubicación</mat-label>
+            <input
+              matInput
+              type="text"
+              aria-label="Number"
+              [formControl]="userEditForm.controls.location"
+              [matAutocomplete]="auto"
+              data-qadp="location"
+              required
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let option of filteredCityOptions | async"
+                [value]="option"
+              >
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error
+              *ngIf="
+                userEditForm.controls.location.touched &&
+                userEditForm.controls.location.hasError('required')
+              "
+              >Debes seleccionar un campo</mat-error
+            >
+          </mat-form-field>
+
+          <!-- <mat-form-field
             appearance="fill"
             floatLabel="auto"
             class="fullInput"
@@ -132,7 +166,7 @@
             >
               *Has ingresado un dato inválido
             </mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
         </ion-row>
         <!-- description  -->
         <ion-row>

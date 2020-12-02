@@ -14,6 +14,10 @@ import { PopUpComponent } from "src/app/_modules/admin/_components/pop-up/pop-up
 import { Exp } from "src/app/_models/exp";
 import { Subscription } from "rxjs";
 import { ExperienciasService } from "src/app/_services/experiencias.service";
+import { Observable } from "rxjs";
+import { isEmpty, map, startWith } from "rxjs/operators";
+import { MockCiudades } from "../../../../../../_mocks/ciudades-mock";
+
 declare global {
   interface Window {
     dataLayer: any[];
@@ -58,7 +62,8 @@ export class EditFormComponent implements OnInit, AfterViewInit {
   public id: number;
   public stoks = [];
   public newArr = [];
-
+  options: string[] = MockCiudades;
+  filteredCityOptions: Observable<string[]>;
   @Input() parentFunc: any;
   @Input() preload: any;
 
@@ -127,6 +132,18 @@ export class EditFormComponent implements OnInit, AfterViewInit {
       // }
     }
     this.editExp();
+    this.filteredCityOptions = this.userEditForm.controls.location.valueChanges.pipe(
+      startWith(""),
+      map((value) => this._filter(value))
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
   }
 
   ngAfterViewInit(): void {
@@ -279,6 +296,16 @@ export class EditFormComponent implements OnInit, AfterViewInit {
       classreturn = "input-becks-ok";
     } else if (item.touched) {
       classreturn = "input-becks-error";
+    }
+    return classreturn;
+  }
+
+  public getClassInputSelect(item: any): string {
+    let classreturn = "select-becks";
+    if (item.valid) {
+      classreturn = "select-becks-ok";
+    } else if (item.touched) {
+      classreturn = "select-becks-error";
     }
     return classreturn;
   }

@@ -62,6 +62,15 @@ export class EditFormComponent implements OnInit, AfterViewInit {
   public id: number;
   public stoks = [];
   public newArr = [];
+  public minDate1 = new Date();
+  public minDate2 = new Date(
+    this.minDate1.getMonth() +
+      1 +
+      "/" +
+      this.minDate1.getDay() +
+      "/" +
+      this.minDate1.getFullYear()
+  );
   options: string[] = MockCiudades;
   filteredCityOptions: Observable<string[]>;
   @Input() parentFunc: any;

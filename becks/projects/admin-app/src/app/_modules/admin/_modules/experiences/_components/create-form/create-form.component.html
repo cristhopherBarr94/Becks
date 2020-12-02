@@ -45,6 +45,7 @@
             <input
               matInput
               [ngxMatDatetimePicker]="picker1"
+              [min]="minDate1"
               formControlName="dateStart"
               required
             />
@@ -80,6 +81,7 @@
             <input
               matInput
               [ngxMatDatetimePicker]="picker2"
+              [min]="minDate2"
               formControlName="dateEnd"
               required
             />

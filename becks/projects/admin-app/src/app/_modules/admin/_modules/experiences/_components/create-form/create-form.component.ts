@@ -60,6 +60,15 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
   public minDate: any;
   public id: number;
   public stoks = [];
+  public minDate1 = new Date();
+  public minDate2 = new Date(
+    this.minDate1.getMonth() +
+      1 +
+      "/" +
+      this.minDate1.getDay() +
+      "/" +
+      this.minDate1.getFullYear()
+  );
   @Input() parentFunc: any;
   @Input() preload: any;
 
@@ -82,6 +91,7 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
       startWith(""),
       map((value) => this._filter(value))
     );
+    console.log(this.minDate1, this.minDate2);
   }
 
   private _filter(value: string): string[] {

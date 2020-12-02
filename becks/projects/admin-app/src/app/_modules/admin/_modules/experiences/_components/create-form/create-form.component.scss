@@ -140,6 +140,11 @@
   filter: drop-shadow(0px 0px 3.5px rgba(98, 248, 178, 0.87));
   background: transparent;
 }
+::ng-deep .mat-calendar-body-disabled > .mat-calendar-body-selected {
+  background-color: transparent !important;
+  border: 2px solid #f32a3a;
+  filter: none !important;
+}
 ::ng-deep .mat-stroked-button {
   border-color: #62f8b2 !important;
 }

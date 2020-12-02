@@ -181,6 +181,9 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
         });
       }
     });
+    if (this.hidePed == true && this.hideStk == true) {
+      this.arrPeriod = [];
+    }
     this.ui.showLoading();
     this.httpService
       .post(environment.serverUrl + environment.admin.postExp, {
@@ -217,6 +220,7 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
         },
         (error) => {
           // TODO :: logic for error
+          this.ui.dismissLoading();
           console.log("error enviando datos");
         }
       );

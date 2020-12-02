@@ -9,7 +9,9 @@
     src="./assets/icon/not-amount-icon.svg"
     alt="few amounts"
   />
-  <p *ngIf="this.stock > 0" class="quantity-text">quedan {{ stock }} cupos</p>
+  <p *ngIf="this.stock > 0 && this.status != '2'" class="quantity-text">
+    quedan {{ stock }} cupos
+  </p>
 
   <p *ngIf="this.stock == 0 && this.status != '2'" class="quantity-text">
     agotada

@@ -59,10 +59,10 @@ export class ExperienciasService {
                 titleExp: element.title,
                 fechaAlt: new Date(element.valid_from * 1000)
                   .toLocaleString()
-                  .split(" ")[0],
+                  .split(" ")[0].replace(',',''),
                 fechaExp: new Date(element.valid_to * 1000)
                   .toLocaleString()
-                  .split(" ")[0],
+                  .split(" ")[0].replace(',',''),
                 detailExp: element.description,
                 placeExp: element.location,
                 urlExp: element.url_terms,

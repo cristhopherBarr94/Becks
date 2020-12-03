@@ -49,11 +49,14 @@
           <h4 class="title-tertiary">{{ DayAndDate }}</h4>
         </div>
         <div class="schedule-over">
-          <p [hidden]="showEvent">Ningún evento disponible.</p>
+          <p *ngIf="!showEvent">Ningún evento disponible.</p>
 
           <div class="schedule-body" *ngFor="let event of exps">
             <a [routerLink]="['/user/exp/' + event.id]">
-              <div class="card-schedule" [hidden]="stringCom != event.fechaExp">
+              <div
+                class="card-schedule"
+                *ngIf="showDate(event.fechaAlt, event.fechaExp)"
+              >
                 <ion-row>
                   <div class="width-box">
                     <div class="title-tertiary title-card">
@@ -67,7 +70,7 @@
                     <span
                       class="img-exp"
                       [ngStyle]="{
-                        'background-image': 'url(' + event.imagesExp + ')'
+                        'background-image': 'url(' + event.imagesExpMob + ')'
                       }"
                     >
                     </span>

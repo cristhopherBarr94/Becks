@@ -7,6 +7,12 @@
   <span class="material-icons">keyboard_arrow_up</span>
 </button>
 <ion-slides
+  class="full-height default-slide"
+  *ngIf="experienciaContent.length == 0"
+>
+  <ion-slide> </ion-slide>
+</ion-slides>
+<ion-slides
   *ngIf="slideOpts && size && experienciaContent.length > 0"
   spaceBetween="0"
   [options]="slideOpts"
@@ -37,14 +43,18 @@
       [src]="exp.imagesExp"
       [alt]="exp.titleExp"
       class="exp-images animate__animated animate__bounceInLeft"
-      [ngClass]="{ 'animate__animated animate__bounceInLeft': this.isActivate }"
+      [ngClass]="{
+        'animate__animated animate__bounceInLeft': this.isActivate
+      }"
     />
     <img
       *ngIf="this.size == 'xs' || this.size == 'sm'"
       [src]="exp.imagesExpMob"
       [alt]="exp.titleExp"
       class="exp-images animate__animated animate__bounceInLeft"
-      [ngClass]="{ 'animate__animated animate__bounceInLeft': this.isActivate }"
+      [ngClass]="{
+        'animate__animated animate__bounceInLeft': this.isActivate
+      }"
     />
     <div class="container-exp">
       <div

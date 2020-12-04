@@ -134,10 +134,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   onSelect(event) {
     this.showEvent = false;
-    this.auxDate = event.toLocaleDateString();
-    let stringDate2 = this.auxDate.split("/");
-    this.stringCom =
-      stringDate2[0] + "/" + stringDate2[1] + "/" + stringDate2[2];
+    this.stringCom = event;
     this.selectedDate = event;
     const dateString = this.selectedDate.toLocaleDateString(
       "es-ES",
@@ -146,14 +143,25 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     const dateValue = dateString.split(" ");
     this.currentYear = new Date().getFullYear();
     this.DayAndDate = dateValue[0] + " " + dateValue[3] + " " + dateValue[1];
-    for (var j = 0; j < this.eventDay.length; j++) {
+
+    for (const exp of this.exps) {
       if (
-        parseInt(dateValue[1]) >= parseInt(this.eventDay[j].start[1]) &&
-        dateValue[3] == this.eventDay[j].start[3] &&
-        parseInt(dateValue[5]) == parseInt(this.eventDay[j].start[5]) &&
-        parseInt(dateValue[1]) <= parseInt(this.eventDay[j].end[1]) &&
-        dateValue[3] == this.eventDay[j].end[3] &&
-        parseInt(dateValue[5]) == parseInt(this.eventDay[j].end[5])
+        event.getTime() <=
+          new Date(
+            exp.fechaExp.split("/")[1] +
+              "/" +
+              exp.fechaExp.split("/")[0] +
+              "/" +
+              exp.fechaExp.split("/")[2]
+          ).getTime() &&
+        event.getTime() >=
+          new Date(
+            exp.fechaAlt.split("/")[1] +
+              "/" +
+              exp.fechaAlt.split("/")[0] +
+              "/" +
+              exp.fechaAlt.split("/")[2]
+          ).getTime()
       ) {
         this.showEvent = true;
       }
@@ -206,42 +214,35 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   dateClass() {
     return (date: Date): MatCalendarCellCssClasses => {
       const highlightDate1 = this.events
-        .map((strDate, endDate) => new Date(strDate.start))
-        .some(
-          (d1) =>
-            d1.getDate() <= date.getDate() &&
-            d1.getMonth() == date.getMonth() &&
-            d1.getFullYear() == date.getFullYear()
-        );
+        .map((strDate) => new Date(strDate.start))
+        .some((d1) => d1.getTime() <= date.getTime());
       const highlightDate2 = this.events
         .map((endDate) => new Date(endDate.end))
-        .some(
-          (d2) =>
-            d2.getDate() >= date.getDate() &&
-            d2.getMonth() == date.getMonth() &&
-            d2.getFullYear() == date.getFullYear()
-        );
+        .some((d2) => d2.getTime() >= date.getTime());
       return highlightDate1 && highlightDate2 ? "special-date" : "";
     };
   }
 
-  showDate(dateS, dateE) {
-    let daySel = this.stringCom.toString().split("/")[0];
-    let monthSel = this.stringCom.toString().split("/")[1];
-    let yearSel = this.stringCom.toString().split("/")[2];
-    let dayS = dateS.split("/")[0];
-    let monthS = dateS.split("/")[1];
-    let yearS = dateS.split("/")[2];
-    let dayE = dateE.split("/")[0];
-    let monthE = dateE.split("/")[1];
-    let yearE = dateE.split("/")[2];
+  showDate(dateS?, dateE?) {
+    let dateSel = new Date(this.stringCom);
+    let dateSs = new Date(
+      dateS.split("/")[1] +
+        "/" +
+        dateS.split("/")[0] +
+        "/" +
+        dateS.split("/")[2]
+    );
+    let dateEs = new Date(
+      dateE.split("/")[1] +
+        "/" +
+        dateE.split("/")[0] +
+        "/" +
+        dateE.split("/")[2]
+    );
+
     if (
-      parseInt(daySel) >= parseInt(dayS) &&
-      parseInt(monthSel) == parseInt(monthS) &&
-      parseInt(yearSel) == parseInt(yearS) &&
-      parseInt(daySel) <= parseInt(dayE) &&
-      parseInt(monthSel) == parseInt(monthE) &&
-      parseInt(yearSel) == parseInt(yearE)
+      dateSel.getTime() / 1000 >= new Date(dateSs).getTime() / 1000 &&
+      dateSel.getTime() / 1000 <= new Date(dateEs).getTime() / 1000
     ) {
       return true;
     } else {

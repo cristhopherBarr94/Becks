@@ -42,6 +42,7 @@ export class SliderExpComponent
   public slideOptions;
   private redemps: number[] = [];
   public activeIndex: number;
+  public DefaultSlide: boolean = false;
   sliderExp = {
     isBeginningSlide: true,
     isEndSlide: false,
@@ -92,8 +93,7 @@ export class SliderExpComponent
     }
   }
 
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
 
   ngOnInit() {
     this.ui.showLoading();
@@ -101,6 +101,7 @@ export class SliderExpComponent
     this.id = Number(s.substr(s.lastIndexOf("/") + 1));
 
     this.experienciaContent = this.experienciaService.getActualExps();
+    this.isEmpty();
     this.expSubs = this.experienciaService.exp$.subscribe(
       (response) => {
         try {
@@ -111,7 +112,7 @@ export class SliderExpComponent
               initialSlide: this.compareId(this.id == NaN ? 0 : this.id),
               direction: "vertical",
               speed: 400,
-              allowTouchMove: false
+              allowTouchMove: false,
             };
           }
         } catch (error) {}
@@ -165,7 +166,7 @@ export class SliderExpComponent
     this.truePager = !this.truePager;
     this.aumentarTamano = true;
     // if (this.aumentarTamano) {
-      // this.ampliarExp();
+    // this.ampliarExp();
     // }
   }
 
@@ -291,7 +292,7 @@ export class SliderExpComponent
         this.itemChange = undefined;
         this.aumentarTamano = true;
         // if (this.aumentarTamano) {
-          // this.ampliarExp();
+        // this.ampliarExp();
         // }
       }
     }
@@ -344,5 +345,15 @@ export class SliderExpComponent
       object.isEndSlide = istrue;
       this.disableNextBtn = istrue;
     });
+  }
+
+  isEmpty() {
+    let classreturn = "";
+    console.log(this.experienciaContent.length);
+    // if (this.experienciaContent.length == null) {
+    //   classreturn = "full-height";
+    //   return classreturn;
+    // }
+    return classreturn;
   }
 }

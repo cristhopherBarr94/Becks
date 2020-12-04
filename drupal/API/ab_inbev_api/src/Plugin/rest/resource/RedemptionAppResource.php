@@ -166,6 +166,10 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
       throw new BadRequestHttpException('Experiencia ya finalizada.');
     }
 
+    if ( intval($exp_result["status"]) == 2 ) {
+      throw new BadRequestHttpException('Próximamente.');
+    }
+
     $stock_result = $this->dbConnection->query('SELECT * FROM {ab_inbev_exp_stock} WHERE eid = :id', [':id' => trim($data['eid'])]);
 
     $isEmpty = false;

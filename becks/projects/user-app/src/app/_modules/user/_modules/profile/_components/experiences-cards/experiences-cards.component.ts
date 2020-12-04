@@ -68,8 +68,8 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
   }
 
   buildCards() {
-    console.log( "this.experiences" , this.experiences );
-    console.log( "this.redemptions" , this.redemptions );
+    // console.log( "this.experiences" , this.experiences );
+    // console.log( "this.redemptions" , this.redemptions );
     if ( this.experiences && this.redemptions ) {
       
       this.acceptCards = [];

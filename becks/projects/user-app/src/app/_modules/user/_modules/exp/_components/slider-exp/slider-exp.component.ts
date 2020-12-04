@@ -101,7 +101,6 @@ export class SliderExpComponent
     this.id = Number(s.substr(s.lastIndexOf("/") + 1));
 
     this.experienciaContent = this.experienciaService.getActualExps();
-    this.isEmpty();
     this.expSubs = this.experienciaService.exp$.subscribe(
       (response) => {
         try {
@@ -345,15 +344,5 @@ export class SliderExpComponent
       object.isEndSlide = istrue;
       this.disableNextBtn = istrue;
     });
-  }
-
-  isEmpty() {
-    let classreturn = "";
-    console.log(this.experienciaContent.length);
-    // if (this.experienciaContent.length == null) {
-    //   classreturn = "full-height";
-    //   return classreturn;
-    // }
-    return classreturn;
   }
 }

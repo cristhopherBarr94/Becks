@@ -6,7 +6,7 @@ import {
   Validators,
   FormArray,
 } from "@angular/forms";
-import { NavigationEnd, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { environment } from "src/environments/environment";
 import { HttpService } from "src/app/_services/http.service";
 import { UiService } from "src/app/_services/ui.service";
@@ -47,6 +47,7 @@ export class EditFormComponent implements OnInit, AfterViewInit {
   public showError: boolean = false;
   public typeErrorDes: boolean = false;
   public typeErrorMob: boolean = false;
+  public typeErrorTerms: boolean = false;
   public photoDes: any;
   public photoMob: any;
   public checkIn: boolean = !this.checked;
@@ -71,6 +72,9 @@ export class EditFormComponent implements OnInit, AfterViewInit {
       "/" +
       this.minDate1.getFullYear()
   );
+  public termsExp: any;
+  public termsExpText: string = "";
+
   options: string[] = MockCiudades;
   filteredCityOptions: Observable<string[]>;
   @Input() parentFunc: any;
@@ -532,5 +536,15 @@ export class EditFormComponent implements OnInit, AfterViewInit {
   deleteField(index: number) {
     // (<FormArray>this.userEditForm.get("itemRows")).removeAt(index);
     this.userEditForm.get("itemRows").value[index].deleted = true;
+  }
+
+  loadTerms(eventfile) {
+    if (eventfile.item(0).size > 500000) {
+      this.typeErrorTerms = true;
+    } else {
+      this.termsExp = eventfile.item(0);
+      this.termsExpText = eventfile.item(0).name;
+      this.typeErrorTerms = false;
+    }
   }
 }

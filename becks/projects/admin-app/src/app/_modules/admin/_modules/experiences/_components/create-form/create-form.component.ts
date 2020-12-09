@@ -15,7 +15,7 @@ import { Exp } from "src/app/_models/exp";
 import { Subscription } from "rxjs";
 import { ExperienciasService } from "src/app/_services/experiencias.service";
 import { Observable } from "rxjs";
-import { isEmpty, map, startWith } from "rxjs/operators";
+import { map, startWith } from "rxjs/operators";
 import { MockCiudades } from "../../../../../../_mocks/ciudades-mock";
 declare global {
   interface Window {
@@ -46,6 +46,7 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
   public showError: boolean = false;
   public typeErrorDes: boolean = false;
   public typeErrorMob: boolean = false;
+  public typeErrorTerms: boolean = false;
   public photoDes: any;
   public photoMob: any;
   public checkIn: boolean = !this.checked;
@@ -69,6 +70,8 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
       "/" +
       this.minDate1.getFullYear()
   );
+  public termsExp: any;
+  public termsExpText: string = "";
   @Input() parentFunc: any;
   @Input() preload: any;
 
@@ -456,5 +459,15 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
   }
   reload() {
     location.reload();
+  }
+
+  loadTerms(eventfile) {
+    if (eventfile.item(0).size > 500000) {
+      this.typeErrorTerms = true;
+    } else {
+      this.termsExp = eventfile.item(0);
+      this.termsExpText = eventfile.item(0).name;
+      this.typeErrorTerms = false;
+    }
   }
 }

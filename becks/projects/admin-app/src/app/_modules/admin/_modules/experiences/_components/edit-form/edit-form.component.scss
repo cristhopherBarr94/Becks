@@ -391,3 +391,16 @@ textarea {
   border-radius: 8px;
   background-clip: padding-box;
 }
+
+.terms-and-cond {
+  position: relative;
+  margin-top: 20px;
+  height: 150px;
+  &__inputF {
+    position: absolute;
+    display: inline;
+    top: 30px;
+    left: 55px;
+    margin: auto;
+  }
+}

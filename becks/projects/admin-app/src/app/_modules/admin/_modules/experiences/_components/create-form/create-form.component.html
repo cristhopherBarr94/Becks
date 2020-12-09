@@ -490,6 +490,44 @@
         <mat-error style="margin-left: 390px" *ngIf="typeErrorMob">
           *El archivo no es válido máx 500KB
         </mat-error>
+
+        <!-- terms & cond -->
+        <ion-row class="terms-and-cond">
+          <ion-row>
+            <span class="img-icon"> </span>
+            <p>Cargar términos y condiciones de la experiencia</p>
+          </ion-row>
+          <div class="terms-and-cond terms-and-cond__inputF">
+            <input
+              style="display: none"
+              type="file"
+              (change)="loadTerms($event.target.files)"
+              accept="image/png, image/jpeg, application/pdf"
+              value="expEditable.urlTerms"
+              #hiddenfileinput3
+            />
+            <p>Subir archivo (Max 500 KB)*</p>
+            <button class="btn-upload" (click)="hiddenfileinput3.click()">
+              <span
+                class="upload-icon"
+                *ngIf="!typeErrorTerms && this.termsExpText == ''"
+              >
+              </span>
+              <span class="upload-icon-error" *ngIf="typeErrorTerms"> </span>
+              <ion-row *ngIf="this.termsExpText != '' && !typeErrorTerms">
+                <span class="btn-text">
+                  <span>{{ this.termsExpText }}</span>
+                </span>
+                <button (click)="clear('M')" class="btn-x">
+                  <span class="x-icon"> </span>
+                </button>
+              </ion-row>
+            </button>
+          </div>
+        </ion-row>
+        <mat-error style="margin-left: 30px" *ngIf="typeErrorTerms">
+          *El archivo no es válido máx 500KB
+        </mat-error>
       </div>
     </form>
 

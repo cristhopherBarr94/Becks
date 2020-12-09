@@ -343,3 +343,15 @@ textarea {
     left: 3px;
   }
 }
+.terms-and-cond {
+  position: relative;
+  margin-top: 20px;
+  height: 150px;
+  &__inputF {
+    position: absolute;
+    display: inline;
+    top: 30px;
+    left: 55px;
+    margin: auto;
+  }
+}

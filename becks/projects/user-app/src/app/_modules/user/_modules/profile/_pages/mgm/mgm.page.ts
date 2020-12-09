@@ -9,10 +9,10 @@ import { HttpService } from "../../../../../../_services/http.service";
 import { Router } from "@angular/router";
 import { User } from "../../../../../../_models/User";
 import { UiService } from "../../../../../../_services/ui.service";
-import { HeaderComponent } from "src/app/_modules/utils/_components/header/header.component";
 import { environment } from "src/environments/environment";
 import { UtilService } from "src/app/_services/util.service";
-import { MenuStatusService } from 'src/app/_services/menu-status.service';
+import { MenuStatusService } from "src/app/_services/menu-status.service";
+import { Platform } from "@ionic/angular";
 
 declare global {
   interface Window {
@@ -32,6 +32,9 @@ export class MGMPage implements OnInit {
   public httpError: string;
   public guest_users: any = [];
   public hide: boolean;
+  public redemp: boolean = false;
+  public isRedempted: boolean = false;
+  public size: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,12 +42,20 @@ export class MGMPage implements OnInit {
     private router: Router,
     private ui: UiService,
     private utils: UtilService,
-    private menuS : MenuStatusService,
-  ) {}
+    private menuS: MenuStatusService,
+    private platform: Platform
+  ) {
+    platform.ready().then(() => {
+      this.platform.resize.subscribe(() => {
+        this.size = this.ui.getSizeType(platform.width());
+      });
+      this.size = this.ui.getSizeType(platform.width());
+    });
+  }
 
   ngOnInit(): void {
     this.initforms();
-    this.menuS.statusMenu("mgm") 
+    this.menuS.statusMenu("mgm");
   }
 
   initforms() {
@@ -52,7 +63,7 @@ export class MGMPage implements OnInit {
       email: new FormControl("", [
         Validators.required,
         Validators.minLength(4),
-        Validators.maxLength(30),
+        Validators.maxLength(200),
       ]),
     });
   }
@@ -69,8 +80,12 @@ export class MGMPage implements OnInit {
   inviteFriend(): void {
     if (this.userMGMForm.valid) {
       // this.ui.showLoading();
+      if (this.guest_users.length < 6) {
+        this.guest_users.push(this.userMGM.email);
+        // this.userMGMForm.controls.email.reset();
+        this.userMGMForm.controls.email.markAsUntouched();
+      }
       const email256 = this.utils.getSHA256(this.userMGM.email);
-      this.guest_users.push(this.userMGM.email);
       // console.log(this.guest_users);
       // this.httpService
       //   .patch(environment.serverUrl + environment.guest.patchPassword, {
@@ -119,5 +134,16 @@ export class MGMPage implements OnInit {
     } else if (item.hasError("pattern")) {
       return "Ingrese solo letras y números";
     }
+  }
+  curRedemp() {
+    if (this.isRedempted) {
+      return "redempted-code";
+    } else {
+      return "redemp-code";
+    }
+  }
+
+  deleteReq(id: number) {
+    this.guest_users.splice(id, 1);
   }
 }

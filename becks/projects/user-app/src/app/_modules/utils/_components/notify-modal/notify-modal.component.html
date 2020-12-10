@@ -1,27 +1,32 @@
 <div class="modal">
-    <span class="modal-hader">
-    <button class="btn-cancel"
-    (click)="toCloseMod()"
-    >X</button>
-    </span>
-    <span class="logo-brand-modal"> </span>
+  <span class="modal-hader">
+    <button class="btn-cancel" (click)="toCloseMod()">X</button>
+  </span>
+  <span class="logo-brand-modal"> </span>
 
-    <span class="modal-body">
-      <div>
-        <h1 class="title">{{title}}</h1>
-      </div>
+  <span class="modal-body">
     <div>
-      <h3 [hidden]="allow==true" class="sub_title">{{sub_title}}</h3>
+      <h1 class="title">{{ title }}</h1>
     </div>
     <div>
-      <p [hidden]="true">{{cod}}</p>
+      <h3 *ngIf="allow == false" class="sub_title">{{ sub_title }}</h3>
     </div>
-    </span>
-    <span>
-      <button
-      [hidden]="allow==true"
+    <div>
+      <h3 *ngIf="allow == true" class="sub_title subtitle__green">
+        {{ sub_title_green }}
+      </h3>
+    </div>
+    <div>
+      <p *ngIf="allow == true">{{ prom_cod }}</p>
+    </div>
+  </span>
+  <span>
+    <button
+      *ngIf="allow == false"
       class="modal-btn becks-btn-primary"
       (click)="activateUserParent()"
-      >{{title_button}}</button>
-    </span>
+    >
+      {{ title_button }}
+    </button>
+  </span>
 </div>

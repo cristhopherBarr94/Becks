@@ -21,3 +21,11 @@
     }
   }
 }
+
+.subtitle__green {
+  color: #038259;
+  @media (min-width: 769px) {
+    font-size: 24px !important;
+    width: 298px !important;
+  }
+}

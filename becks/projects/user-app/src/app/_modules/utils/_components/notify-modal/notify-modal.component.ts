@@ -1,24 +1,28 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { Component, OnInit, Input } from "@angular/core";
+import { ModalController, NavParams } from "@ionic/angular";
 
 @Component({
-  selector: 'notify-modal',
-  templateUrl: './notify-modal.component.html',
-  styleUrls: ['./notify-modal.component.scss'],
+  selector: "notify-modal",
+  templateUrl: "./notify-modal.component.html",
+  styleUrls: ["./notify-modal.component.scss"],
 })
 export class NotifyModalComponent implements OnInit {
-  @Input() title:string;
-  @Input() sub_title:string;
-  @Input() title_button:string;
-  @Input() allow:boolean;
-  @Input() cod:string;
-  Func:any;
-  FuncAlt:any;
-  constructor(private modalCtrl: ModalController, private navParams: NavParams) {
+  @Input() title: string;
+  @Input() sub_title: string;
+  @Input() sub_title_green: string;
+  @Input() title_button: string;
+  @Input() allow: boolean;
+  @Input() prom_cod: string;
+  Func: any;
+  FuncAlt: any;
+  constructor(
+    private modalCtrl: ModalController,
+    private navParams: NavParams
+  ) {
     this.Func = this.navParams.get("Func");
     this.FuncAlt = this.navParams.get("FuncAlt");
-   }
-  async close () {
+  }
+  async close() {
     await this.modalCtrl.dismiss();
   }
   activateUserParent() {
@@ -29,5 +33,4 @@ export class NotifyModalComponent implements OnInit {
     this.FuncAlt();
   }
   ngOnInit() {}
-
 }

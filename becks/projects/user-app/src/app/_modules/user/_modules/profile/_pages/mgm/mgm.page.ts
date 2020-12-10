@@ -13,6 +13,7 @@ import { environment } from "src/environments/environment";
 import { UtilService } from "src/app/_services/util.service";
 import { MenuStatusService } from "src/app/_services/menu-status.service";
 import { Platform } from "@ionic/angular";
+import { NotifyModalComponent } from "src/app/_modules/utils/_components/notify-modal/notify-modal.component";
 
 declare global {
   interface Window {
@@ -82,8 +83,22 @@ export class MGMPage implements OnInit {
       // this.ui.showLoading();
       if (this.guest_users.length < 6) {
         this.guest_users.push(this.userMGM.email);
-        // this.userMGMForm.controls.email.reset();
-        this.userMGMForm.controls.email.markAsUntouched();
+        if (this.guest_users.length == 6) {
+          let title_modal = "TUS AMIGOS SE UNIERON A LA BECK’S SOCIETY";
+          let sub_title_modal =
+            "Este es tu código para reclamar tu six pack en MERQUEO";
+          let prom_cod_modal = "HJASDYASU5145";
+          let allowed = true;
+          this.ui.showModal(NotifyModalComponent, "modalMessage", true, false, {
+            title: title_modal,
+            sub_title_green: sub_title_modal,
+            prom_cod: prom_cod_modal,
+            allow: allowed,
+            FuncAlt: this.redirectToAlt.bind(this),
+          });
+        }
+        this.userMGMForm.controls.email.reset();
+        // this.userMGMForm.controls.email.markAsUntouched();
       }
       const email256 = this.utils.getSHA256(this.userMGM.email);
       // console.log(this.guest_users);
@@ -145,5 +160,13 @@ export class MGMPage implements OnInit {
 
   deleteReq(id: number) {
     this.guest_users.splice(id, 1);
+  }
+
+  public redirectToAlt() {
+    this.ui.dismissModal();
+    this.router.navigate(["user/profile"], {
+      queryParamsHandling: "preserve",
+      state: { reload: true },
+    });
   }
 }

@@ -104,6 +104,18 @@
         </div>
       </div>
     </section>
+    <section
+      class="friends-column"
+      *ngIf="this.size != 'xs' && this.size != 'sm' "
+    >
+      <h3 class="title-fourthy">
+        Tus amigos que se han unido a la beck’s society
+      </h3>
+      <ion-row *ngFor="let guest of guest_users">
+        <div class="guest-card" title="@usuario"></div>
+        <h3>{{guest}}</h3>
+      </ion-row>
+    </section>
   </section>
   <app-footer></app-footer>
 </ion-content>

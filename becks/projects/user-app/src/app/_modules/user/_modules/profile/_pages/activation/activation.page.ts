@@ -45,7 +45,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy {
     "Mira las nuevas experiencias que tenemos para ti";
   public title_button_modal: string = "ir a  experiencias";
   public prom_cod_modal: string = "HJASDYASU5145";
-  public allow: boolean;
+  public allow: boolean = false;
   public colorBg: string;
   public activate: boolean = false;
   public date_til: any;

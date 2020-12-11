@@ -73,6 +73,16 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.redempSubs = this.redempSvc.redemp$.subscribe(
+      (red) => {
+        this.ui.dismissLoading();
+        this.redemps = red;
+      },
+      (e) => {
+        this.ui.dismissLoading();
+      }
+    );
+
     this.selectedDate = new Date();
     this.currentYear = this.selectedDate.getFullYear();
     this.minDate = this.selectedDate;
@@ -85,24 +95,14 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     }
 
     this.expService.getData();
-
     this.onSelect(this.selectedDate);
     this.menuS.statusMenu("calendar");
-
-    this.redempSubs = this.redempSvc.redemp$.subscribe(
-      (red) => {
-        this.ui.dismissLoading();
-        this.redemps = red;
-      },
-      (e) => {
-        this.ui.dismissLoading();
-      }
-    );
     this.redempSvc.getData();
   }
 
   ngOnDestroy(): void {
     this.expSubs.unsubscribe();
+    this.redempSubs.unsubscribe();
   }
 
   async fillCalendarExp() {
@@ -265,20 +265,21 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     }
   }
 
-  showDataExperience(eid: number, stk: number, sts: number) {
-    let classreturn = "normal-exp";
+  showDataExperience(eid: number, stk: any, sts: number) {
+    let classreturn = "";
+    if (stk == "0" && sts == 0) {
+      classreturn = "empty-exp";
+    } else if (sts == 0 && stk > 0) {
+      classreturn = "normal-exp";
+    } else if (sts == 2) {
+      classreturn = "soon-exp";
+    }
     if (this.redemps) {
       for (let _id of this.redemps) {
         if (_id == eid) {
           classreturn = "reserve-exp";
         }
       }
-    } else if (stk == 0) {
-      classreturn = "empty-exp";
-    } else if (sts == 0) {
-      classreturn = "normal-exp";
-    } else if (sts == 2) {
-      classreturn = "soon-exp";
     }
     return classreturn;
   }

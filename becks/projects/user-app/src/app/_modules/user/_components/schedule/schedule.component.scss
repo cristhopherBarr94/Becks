@@ -168,6 +168,9 @@
 
         .title-card {
           color: #ffffff !important;
+          max-height: 60px;
+          text-overflow: ellipsis;
+          overflow-y: hidden;
         }
         .hour-card {
           font-size: 16px !important;
@@ -207,6 +210,21 @@
         }
       }
     }
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #4a4a4a;
+      border-radius: 8px;
+      background-clip: padding-box;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #038259;
+      border-radius: 8px;
+      background-clip: padding-box;
+    }
   }
 }
 
@@ -219,7 +237,7 @@
   content: "AGOTADA";
 }
 .normal-exp:after {
-  color: green !important;
+  color: #038259 !important;
   content: "ACTIVA";
 }
 .soon-exp:after {

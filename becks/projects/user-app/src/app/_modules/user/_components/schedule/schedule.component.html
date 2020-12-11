@@ -65,6 +65,16 @@
                     <div class="title-tertiary hour-card">
                       {{ event.fechaExp }}
                     </div>
+                    <div
+                      class="title-tertiary"
+                      [ngClass]="
+                        showDataExperience(
+                          event.id,
+                          event.stock_actual,
+                          event.status
+                        )
+                      "
+                    ></div>
                   </div>
                   <div class="circle-icon">
                     <span

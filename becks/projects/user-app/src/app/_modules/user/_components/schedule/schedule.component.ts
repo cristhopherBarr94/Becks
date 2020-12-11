@@ -8,6 +8,7 @@ import { Platform } from "@ionic/angular";
 import { Subscription } from "rxjs";
 import { ExperienciasService } from "src/app/_services/experiencias.service";
 import { MenuStatusService } from "src/app/_services/menu-status.service";
+import { RedemptionsService } from "src/app/_services/redemptions.service";
 import { UiService } from "src/app/_services/ui.service";
 
 @Component({
@@ -42,6 +43,8 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   public size: string;
   private expSubs: Subscription;
   public newEvents = true;
+  private redemps: number[] = [];
+  private redempSubs: Subscription;
 
   currentYear = new Date().getFullYear();
   @ViewChild("calendar1", { static: false }) calendar1: MatCalendar<Date>;
@@ -51,7 +54,8 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     private menuS: MenuStatusService,
     private platform: Platform,
     private ui: UiService,
-    private expService: ExperienciasService
+    private expService: ExperienciasService,
+    private redempSvc: RedemptionsService
   ) {
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
@@ -84,6 +88,17 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
     this.onSelect(this.selectedDate);
     this.menuS.statusMenu("calendar");
+
+    this.redempSubs = this.redempSvc.redemp$.subscribe(
+      (red) => {
+        this.ui.dismissLoading();
+        this.redemps = red;
+      },
+      (e) => {
+        this.ui.dismissLoading();
+      }
+    );
+    this.redempSvc.getData();
   }
 
   ngOnDestroy(): void {
@@ -248,5 +263,23 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     } else {
       return false;
     }
+  }
+
+  showDataExperience(eid: number, stk: number, sts: number) {
+    let classreturn = "normal-exp";
+    if (this.redemps) {
+      for (let _id of this.redemps) {
+        if (_id == eid) {
+          classreturn = "reserve-exp";
+        }
+      }
+    } else if (stk == 0) {
+      classreturn = "empty-exp";
+    } else if (sts == 0) {
+      classreturn = "normal-exp";
+    } else if (sts == 2) {
+      classreturn = "soon-exp";
+    }
+    return classreturn;
   }
 }

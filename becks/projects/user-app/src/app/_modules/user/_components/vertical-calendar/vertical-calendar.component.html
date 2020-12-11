@@ -56,6 +56,12 @@
                       item.fechaExp.split("/")[2] | date: "LLL"
                   }}
                 </p>
+                <div
+                  class="title-tertiary"
+                  [ngClass]="
+                    showDataExperience(item.id, item.stock_actual, item.status)
+                  "
+                ></div>
               </div>
             </div>
           </ion-row>

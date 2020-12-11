@@ -114,3 +114,20 @@
 .full-height {
   overflow-y: auto;
 }
+
+.reserve-exp:after {
+  color: grey !important;
+  content: "RESERVADA";
+}
+.empty-exp:after {
+  color: red !important;
+  content: "AGOTADA";
+}
+.normal-exp:after {
+  color: #038259 !important;
+  content: "ACTIVA";
+}
+.soon-exp:after {
+  color: yellow !important;
+  content: "PRÓXIMAMENTE";
+}

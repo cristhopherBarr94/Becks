@@ -97,8 +97,8 @@ export class MGMPage implements OnInit {
             FuncAlt: this.redirectToAlt.bind(this),
           });
         }
-        this.userMGMForm.controls.email.reset();
-        // this.userMGMForm.controls.email.markAsUntouched();
+        // this.userMGMForm.controls.email.reset();
+        this.userMGMForm.controls.email.markAsUntouched();
       }
       const email256 = this.utils.getSHA256(this.userMGM.email);
       // console.log(this.guest_users);

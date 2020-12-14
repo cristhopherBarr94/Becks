@@ -292,8 +292,10 @@
   h2 {
     text-transform: uppercase;
   }
-  h3 {
+  h3,
+  a {
     color: #038259;
+    text-decoration: none;
   }
   ol ul {
     margin: 0px;

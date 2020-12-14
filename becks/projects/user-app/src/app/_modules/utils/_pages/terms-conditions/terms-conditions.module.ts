@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { TermsConditionsPageRoutingModule } from './terms-conditions-routing.module';
-import { TermsConditionsPage } from './terms-conditions.page';
-import { UtilsModule } from '../../utils.module';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { IonicModule } from "@ionic/angular";
+import { TermsConditionsPageRoutingModule } from "./terms-conditions-routing.module";
+import { TermsConditionsPage } from "./terms-conditions.page";
+import { UtilsModule } from "../../utils.module";
 
 @NgModule({
   imports: [
@@ -12,8 +12,8 @@ import { UtilsModule } from '../../utils.module';
     FormsModule,
     IonicModule,
     TermsConditionsPageRoutingModule,
-    UtilsModule
+    UtilsModule,
   ],
-  declarations: [TermsConditionsPage]
+  declarations: [TermsConditionsPage],
 })
 export class TermsConditionsPageModule {}

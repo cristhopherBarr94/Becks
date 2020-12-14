@@ -22,8 +22,10 @@ h3 {
 
 .logo {
   width: 125px;
-  top: 17px !important;
-  left: 0;
-  right: 0;
-  margin: auto;
+  @media (min-width: 0px) and (max-width: 768px) {
+    top: 17px !important;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
 }

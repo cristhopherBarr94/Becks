@@ -29,6 +29,10 @@ declare global {
   styleUrls: ["./create-form.component.scss"],
 })
 export class CreateFormComponent implements OnInit, AfterViewInit {
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
   public userEditForm: FormGroup;
   public expEditable: Exp = new Exp();
   public captchaStatus: boolean;
@@ -63,13 +67,15 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
   public stoks = [];
   public minDate1 = new Date();
   public minDate2 = new Date(
-    this.minDate1.getMonth() +
+      this.minDate1.getMonth() +
       1 +
       "/" +
       this.minDate1.getDay() +
       "/" +
       this.minDate1.getFullYear()
   );
+  public minDate3: Date;
+  public maxDate3: Date;
   public termsExp: any;
   public termsExpText: string = "";
   @Input() parentFunc: any;
@@ -79,14 +85,19 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
   editSubs: Subscription;
   options: string[] = MockCiudades;
   filteredCityOptions: Observable<string[]>;
+  private hidedateAc: boolean;
+  private dateVal: any;
+  private statusOne: string;
 
   constructor(
     private formBuilder: FormBuilder,
     public httpService: HttpService,
     private router: Router,
     private ui: UiService,
-    private expService: ExperienciasService
-  ) {}
+    private expService: ExperienciasService,
+
+  ) {
+  }
 
   ngOnInit(): void {
     this.initforms();
@@ -95,6 +106,12 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
       map((value) => this._filter(value))
     );
     console.log(this.minDate1, this.minDate2);
+    if (this.expEditable.dateActiv != null) {
+      this.hidedateAc = !this.hidedateAc;
+       if(!this.expEditable.checkIn) {
+         this.checked = !this.checked;
+      }
+    }
   }
 
   private _filter(value: string): string[] {
@@ -138,6 +155,7 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
       ]),
       dateEnd: new FormControl("", Validators.required),
       dateStart: new FormControl("", Validators.required),
+      dateActiv: new FormControl(""),
       insideCheck: new FormControl("", null),
       outsideCheck: new FormControl("", null),
     });
@@ -188,6 +206,13 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
       this.arrPeriod = [];
     }
     this.ui.showLoading();
+    if(this.userEditForm.controls.dateActiv.value!==null){
+      this.statusOne = '2';
+      this.dateVal= this.userEditForm.controls.dateActiv.value.getTime() / 1000
+    }else{
+      this.statusOne = '0';
+      this.dateVal= null;
+    }
     this.httpService
       .post(environment.serverUrl + environment.admin.postExp, {
         title: this.userEditForm.controls.name.value,
@@ -199,6 +224,8 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
         valid_to: Math.floor(
           this.userEditForm.controls.dateEnd.value.getTime() / 1000
         ),
+        activate_from: this.dateVal,
+        status: this.statusOne,
         stock: this.arrPeriod,
         img_desk: this.photoDes.split(",")[1],
         img_mob: this.photoMob.split(",")[1],
@@ -417,6 +444,14 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
       } else {
         this.userEditForm.controls.path.reset();
         this.userEditForm.controls.path.setValue(" ");
+      }
+    }
+    else if (targetHidden == "dateActiv") {
+      this.hidedateAc = !this.hidedateAc;
+      if (targetStatus == true) {
+      } else {
+        this.userEditForm.controls.dateActiv.reset();
+        this.userEditForm.controls.dateActiv.setValue(" ");
       }
     }
   }

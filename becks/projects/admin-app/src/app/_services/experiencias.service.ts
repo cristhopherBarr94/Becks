@@ -57,6 +57,7 @@ export class ExperienciasService {
               elementoResponse.titleExp = element.title;
               elementoResponse.dateStart = element.valid_from * 1000;
               elementoResponse.dateEnd = element.valid_to * 1000;
+              elementoResponse.dateActiv = element.activate_from * 1000;
               elementoResponse.dateRelease = element.stock.release;
               elementoResponse.created = element.created;
               elementoResponse.stock = element.stock;

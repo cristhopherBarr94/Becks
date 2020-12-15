@@ -108,6 +108,66 @@
           </mat-form-field>
         </ion-row>
         <!-- location  -->
+        <!--fecha activacion-->
+   <ion-row>
+           <span class="time-icon"> </span>
+           <ion-row class="ion-margin-bottom">
+             <p>¿La experiencia requiere un fecha de activación?</p>
+             <mat-slide-toggle
+               name="dateActiv"
+               [checked]="this.hidedateAc"
+               (change)="
+                   hideField($event.source.name, $event.source._checked)
+                 "
+             ></mat-slide-toggle>
+           </ion-row>
+
+         </ion-row>
+        <ion-row>
+          <span class="schedule-icon"> </span>
+
+          <mat-form-field
+            *ngIf="this.hidedateAc"
+            appearance="fill"
+            floatLabel="auto"
+            class="smallInput"
+            [ngClass]="getClassInput(userEditForm.controls.dateActiv)"
+            hideRequiredMarker
+          >
+            <mat-label>Fecha Activación</mat-label>
+            <input
+              matInput
+              [ngxMatDatetimePicker]="picker4"
+              [min]="picker1"
+              [max]="picker2"
+
+              formControlName="dateActiv"
+            />
+            <mat-datepicker-toggle matSuffix [for]="picker4">
+              <mat-icon matDatepickerToggleIcon
+              >keyboard_arrow_down</mat-icon
+              >
+            </mat-datepicker-toggle>
+            <ngx-mat-datetime-picker
+              #picker4
+              [showSpinners]="true"
+              [showSeconds]="true"
+              [touchUi]="false"
+              [enableMeridian]="true"
+              [disableMinute]="false"
+            >
+            </ngx-mat-datetime-picker>
+            <mat-error
+              *ngIf="
+                      userEditForm.controls.dateActiv.touched &&
+                      userEditForm.controls.dateActiv.errors
+                    "
+            >
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
+        </ion-row>
+        <!--fecha activacion-->
         <ion-row>
           <span class="location-icon"> </span>
 
@@ -381,24 +441,24 @@
             </mat-form-field>
 
             <!-- <ion-row class="space-around"    *ngIf="!this.hidepath">
-              <mat-checkbox 
+              <mat-checkbox
               id="mat-checkbox-inside"
-              [checked]="!this.checked" 
+              [checked]="!this.checked"
               (change)="unCheck($event)"
 
               >
             </mat-checkbox>
-              
+
              <p>Contenido embebido dentro de la APP</p>
-              <mat-checkbox 
+              <mat-checkbox
               id="mat-checkbox-outside"
-              [checked]="this.checked" 
+              [checked]="this.checked"
               (change)="unCheck($event)"
-              
+
               >
-            </mat-checkbox> 
+            </mat-checkbox>
             <p>Enlace o link externo (dirige a otra página)</p>
-   
+
             </ion-row>    -->
           </div>
         </ion-row>

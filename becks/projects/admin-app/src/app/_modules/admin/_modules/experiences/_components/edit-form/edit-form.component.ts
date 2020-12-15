@@ -82,6 +82,13 @@ export class EditFormComponent implements OnInit, AfterViewInit {
 
   // experienceSubs:Subscription;
   editSubs: Subscription;
+  private hidedateAc: boolean;
+  private statusOne: string;
+  private dateVal: number;
+  private dateStatus: string;
+  private opcion2: boolean;
+
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -97,7 +104,7 @@ export class EditFormComponent implements OnInit, AfterViewInit {
         }
       });
     } catch (error) {
-      this.router.navigate(["/admin/exp/"]);
+     // this.router.navigate(["/admin/exp/"]);
     }
   }
 
@@ -138,6 +145,12 @@ export class EditFormComponent implements OnInit, AfterViewInit {
     ) {
       this.hidePed = false;
     }
+    if (this.expEditable.dateActiv != null) {
+      this.hidedateAc = !this.hidedateAc;
+       if(!this.expEditable.checkIn) {
+         this.checked = !this.checked;
+       }
+    }
     if (this.expEditable.path != null) {
       this.hidepath = !this.hidepath;
       // if(!this.expEditable.checkIn) {
@@ -149,6 +162,12 @@ export class EditFormComponent implements OnInit, AfterViewInit {
       startWith(""),
       map((value) => this._filter(value))
     );
+    this.dateStatus=this.expEditable.status;
+    if( this.dateStatus === '0' ){
+      this.hidedateAc = true;
+    }else{
+      this.hidedateAc = false;
+    }
   }
 
   private _filter(value: string): string[] {
@@ -191,6 +210,7 @@ export class EditFormComponent implements OnInit, AfterViewInit {
       ]),
       dateEnd: new FormControl("", Validators.required),
       dateStart: new FormControl("", Validators.required),
+      dateActiv: new FormControl(""),
       insideCheck: new FormControl("", null),
       outsideCheck: new FormControl("", null),
     });
@@ -207,7 +227,8 @@ export class EditFormComponent implements OnInit, AfterViewInit {
       id: "",
     });
   }
-  saveExp(): void {
+  saveExp() {
+    alert('hola')
     if (
       this.userEditForm.invalid ||
       this.loadedFileDes.length == 0 ||
@@ -229,7 +250,13 @@ export class EditFormComponent implements OnInit, AfterViewInit {
       });
     });
     this.ui.showLoading();
-
+    if(this.userEditForm.controls.dateActiv.value!==null){
+      this.statusOne = '2';
+      this.dateVal= this.userEditForm.controls.dateActiv.value.getTime() / 1000
+    }else{
+      this.statusOne = '0';
+      this.dateVal= null;
+    }
     this.httpService
       .patch(environment.serverUrl + environment.admin.patchExp, {
         id: this.expEditable.id,
@@ -242,6 +269,8 @@ export class EditFormComponent implements OnInit, AfterViewInit {
         valid_to: Math.floor(
           this.userEditForm.controls.dateEnd.value.getTime() / 1000
         ),
+        activate_from: this.dateVal,
+        status: this.statusOne,
         stock: this.arrPeriod,
         img_desk:
           this.photoDes == undefined ? null : this.photoDes.split(",")[1],
@@ -262,6 +291,7 @@ export class EditFormComponent implements OnInit, AfterViewInit {
               Func: this.closeForm.bind(this),
               FuncAlt: this.closeModal.bind(this),
             });
+         //   location.reload();
           } else {
             // TODO :: logic for error
           }
@@ -423,6 +453,7 @@ export class EditFormComponent implements OnInit, AfterViewInit {
       queryParamsHandling: "preserve",
       state: { reload: "true" },
     });
+    location.reload()
   }
   closeModal() {
     this.ui.dismissModal();
@@ -467,6 +498,14 @@ export class EditFormComponent implements OnInit, AfterViewInit {
         this.userEditForm.controls.path.setValue(" ");
       }
     }
+    else if (targetHidden == "dateActiv") {
+      this.hidedateAc = !this.hidedateAc;
+      if (targetStatus == true) {
+      } else {
+       this.userEditForm.controls.dateActiv.reset();
+        this.userEditForm.controls.dateActiv.setValue(" ");
+      }
+    }
   }
 
   unCheck(chk) {
@@ -504,12 +543,13 @@ export class EditFormComponent implements OnInit, AfterViewInit {
       name: this.expEditable.titleExp,
       descrip: this.expEditable.descrip,
       location: this.expEditable.location,
-      stock: 5,
+      stock: this.expEditable.stock,
       path: this.expEditable.path,
       dateEnd: new Date(this.expEditable.dateEnd),
       dateStart: new Date(this.expEditable.dateStart),
-    });
+      dateActiv: new Date(this.expEditable.dateActiv),
 
+    });
     this.userEditForm.setControl("itemRows", this.setExistingPeriodicity());
   }
   setExistingPeriodicity(): FormArray {
@@ -527,6 +567,7 @@ export class EditFormComponent implements OnInit, AfterViewInit {
     });
     return formArray;
   }
+  //commit
 
   addField() {
     (<FormArray>this.userEditForm.get("itemRows")).push(

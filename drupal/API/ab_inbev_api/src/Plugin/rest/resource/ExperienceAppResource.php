@@ -303,7 +303,8 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
       'url_redirect' => $data['url_redirect'],
       'url_terms' => $data['url_terms'],
       'valid_from' => $data['valid_from'],
-      'valid_to' => $data['valid_to']
+      'valid_to' => $data['valid_to'],
+      'activate_from' => $data['activate_from'],
    ];
 
    try {
@@ -588,7 +589,7 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
                                                     AND exp.valid_from <= :date 
                                                     AND exp.valid_to >= :date 
                                                     AND stock.release <= :date 
-                                              GROUP BY exp.id, exp.type, exp.status, exp.title, exp.description, exp.inscription_txt, exp.location, exp.url_redirect, exp.url_terms, exp.created, exp.valid_from, exp.valid_to', [':date' => $date]);
+                                              GROUP BY exp.id, exp.type, exp.status, exp.title, exp.description, exp.inscription_txt, exp.location, exp.url_redirect, exp.url_terms, exp.created, exp.valid_from, exp.valid_to, exp.activate_from, exp.status', [':date' => $date]);
         $records = [];
         $ids = [];
         while($record = $result->fetchAssoc()) {

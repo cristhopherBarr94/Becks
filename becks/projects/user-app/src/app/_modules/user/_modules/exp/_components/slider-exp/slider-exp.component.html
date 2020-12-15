@@ -1,7 +1,7 @@
 <h1 class="title-exp">Experiencias</h1>
 <button
   class="btn-prev"
-  *ngIf="!disablePrevBtn"
+  *ngIf="!disablePrevBtn && experienciaContent.length > 0"
   (click)="slidePrev(sliderExp.slidesItems, slides)"
 >
   <span class="material-icons">keyboard_arrow_up</span>
@@ -258,7 +258,7 @@
 </ion-slides>
 <button
   class="btn-next"
-  *ngIf="!this.disableNextBtn"
+  *ngIf="!this.disableNextBtn && experienciaContent.length > 0"
   [ngClass]="{ 'detail-active': truePager }"
   (click)="slideNext(sliderExp.slidesItems, slides)"
 >

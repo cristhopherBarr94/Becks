@@ -1,0 +1,20 @@
+<div class="announcer-container">
+  <img
+    *ngIf="this.stock > 0 || this.status == '2'"
+    src="./assets/icon/few-amount-icon.svg"
+    alt="few amounts"
+  />
+  <img
+    *ngIf="this.stock == 0 && this.status != '2'"
+    src="./assets/icon/not-amount-icon.svg"
+    alt="few amounts"
+  />
+  <p *ngIf="this.stock > 0 && this.status != '2'" class="quantity-text">
+    quedan {{ stock }} cupos
+  </p>
+
+  <p *ngIf="this.stock == 0 && this.status != '2'" class="quantity-text">
+    agotada
+  </p>
+  <p *ngIf="this.status == '2'" class="soon-text">PRÓXIMAMENTE</p>
+</div>

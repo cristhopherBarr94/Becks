@@ -7,9 +7,9 @@
       "projectType": "application",
       "root": "projects\\waiting-list"
     },
-    "waiting-list-admin": {
+    "admin-app": {
       "projectType": "application",
-      "root": "projects\\waiting-list-admin"
+      "root": "projects\\admin-app"
     },
     "user-app": {
       "projectType": "application",

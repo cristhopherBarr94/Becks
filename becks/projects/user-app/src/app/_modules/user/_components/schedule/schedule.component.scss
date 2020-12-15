@@ -1,0 +1,211 @@
+.container-schedule-component {
+  background: #121212;
+  width: 100%;
+  min-height: 674px;
+
+  .title-primary {
+    font-size: 24px !important;
+    line-height: 50px !important;
+    margin-bottom: 0;
+    top: 0px;
+  }
+  .separator-white {
+    width: 80px;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 2px;
+  }
+  .calendar {
+    width: 800px;
+    height: 460px;
+    background: #171717;
+    margin-top: 80px;
+    padding: 30px 0;
+
+    .title-secondary {
+      font-weight: 500 !important;
+      font-size: 40px !important;
+      line-height: 50px !important;
+    }
+
+    .btn {
+      width: 20px;
+      height: 20px;
+      background: transparent;
+      position: absolute;
+      margin-top: 150px;
+      span {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    .btn-right {
+      margin-left: 760px;
+      transform: rotate(180deg);
+    }
+    .btn-left {
+      margin-left: 20px;
+    }
+    .left-arrow-icon {
+      top: 0 !important;
+      left: 0 !important;
+    }
+    mat-calendar {
+      width: 320px;
+      height: 300px !important;
+
+      ::ng-deep .mat-calendar-previous-button {
+        visibility: hidden;
+      }
+      ::ng-deep .mat-calendar-next-button {
+        visibility: hidden;
+      }
+    }
+    .month1 {
+      margin-left: 50px !important;
+      margin-right: 50px !important;
+    }
+    ::ng-deep .mat-calendar-body-cell-content.mat-focus-indicator {
+      color: #a9d3ab;
+      font-family: "Helvetica LT Std" !important;
+      font-style: normal !important;
+      font-weight: bold !important;
+      font-size: 14px !important;
+      line-height: 22px !important;
+    }
+
+    ::ng-deep
+      .mat-calendar-body-disabled
+      > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+      color: #3c3844 !important;
+    }
+    ::ng-deep .mat-calendar-table-header {
+      color: #ffffff;
+      font-family: "Helvetica LT Std" !important;
+      font-style: normal !important;
+      font-weight: bold !important;
+      font-size: 14px !important;
+      line-height: 22px !important;
+    }
+    ::ng-deep .mat-calendar-body-selected {
+      border: 2px solid #62f8b2;
+      box-sizing: border-box;
+      filter: drop-shadow(0px 0px 3.5px rgba(98, 248, 178, 0.87));
+      background: transparent;
+    }
+    ::ng-deep.special-date {
+      background: url("../../../../../assets/icon/highlight-icon.svg");
+      background-position: top;
+      background-size: 5px;
+      background-repeat: no-repeat;
+      background-position-y: 7px;
+    }
+    ::ng-deep.mat-calendar-body-label {
+      visibility: hidden !important;
+    }
+    ::ng-deep.mat-calendar-body-label[colspan="7"] {
+      display: none;
+    }
+    ::ng-deep.mat-calendar-arrow {
+      display: none;
+    }
+    ::ng-deep .mat-calendar-period-button {
+      font-family: "Eurostile BQ";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      margin-left: 25% !important;
+      color: #ffffff;
+      cursor: initial;
+    }
+  }
+
+  .schedule {
+    background: transparent;
+    width: 362px;
+    height: 550px;
+    margin-left: 16px;
+    padding: 16px;
+    .title-secondary {
+      font-style: normal !important;
+      font-weight: 500 !important;
+      font-size: 16px !important;
+      line-height: 36px !important;
+      margin: 0px !important;
+      text-align: left !important;
+      justify-content: left !important;
+    }
+    .title-tertiary {
+      font-style: normal !important;
+      font-weight: bold !important;
+      font-size: 20px !important;
+      line-height: 32px !important;
+      margin: 0px !important;
+      text-transform: capitalize;
+      color: #9590a0;
+      text-align: left !important;
+      justify-content: left !important;
+    }
+    .schedule-over {
+      width: 362px;
+      height: 455px;
+      overflow-y: auto;
+    }
+    .schedule-body {
+      a {
+        text-decoration: none;
+      }
+      .card-schedule {
+        width: 310px;
+        height: 144px;
+        background: #171717;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+        padding: 24px 20px;
+        margin-top: 16px;
+        border-left: 8px solid #038259;
+
+        .title-card {
+          color: #ffffff !important;
+        }
+        .hour-card {
+          font-size: 16px !important;
+          line-height: 24px !important;
+        }
+        .width-box {
+          width: 200px !important;
+        }
+        .circle-icon {
+          width: 48px;
+          height: 48px;
+          border-radius: 100%;
+          position: relative;
+          left: 30px;
+          top: 30px;
+        }
+
+        .img-exp {
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          position: absolute;
+          width: 40px;
+          height: 40px;
+          border-radius: 100%;
+          border: 1px outset rgba(98, 248, 178, 0.87);
+          box-sizing: border-box;
+        }
+
+        .guest-card {
+          width: 32px;
+          height: 32px;
+          border-radius: 100%;
+          margin-top: 20px;
+          margin-right: 8px;
+          background: #ffffff;
+        }
+      }
+    }
+  }
+}

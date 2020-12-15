@@ -1,0 +1,26 @@
+.color-footer {
+  background-color: #377f5e;
+  min-height: 169px;
+}
+
+.padding-footer {
+  padding: 50px 30px;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+.padding-age-gate {
+  padding: 23px 37px;
+}
+a {
+  text-align: center;
+}
+.col-logo-2 {
+  .logo-2 {
+    @media (min-width: 769px) {
+      width: 95px;
+      height: 40px;
+    }
+  }
+}

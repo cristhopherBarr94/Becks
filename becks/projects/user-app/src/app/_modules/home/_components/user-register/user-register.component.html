@@ -1,0 +1,342 @@
+<section id="formSection" class="fullSection content-flex-all-center">
+  <div class="full-height padding-form">
+    <form [formGroup]="userRegisterForm" autocomplete="off" class="general-row">
+      <ion-row>
+        <div class="form-section section1">
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.name)"
+          >
+            <mat-label>Nombres</mat-label>
+            <input
+              matInput
+              (input)="inputValidatorAlphabetical($event)"
+              formControlName="name"
+              placeholder="Nombres"
+              maxlength="20"
+              [(ngModel)]="userRegister.first_name"
+              data-qadp="name"
+              required
+            />
+            <mat-error
+              *ngIf="
+                userRegisterForm.controls.name.touched &&
+                userRegisterForm.controls.name.errors
+              "
+            >
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.surname)"
+          >
+            <mat-label>Apellidos</mat-label>
+            <input
+              matInput
+              (input)="inputValidatorAlphabetical($event)"
+              formControlName="surname"
+              placeholder="Apellidos"
+              maxlength="20"
+              [(ngModel)]="userRegister.last_name"
+              data-qadp="lastName"
+              required
+            />
+            <mat-error
+              *ngIf="
+                userRegisterForm.controls.surname.touched &&
+                userRegisterForm.controls.surname.errors
+              "
+            >
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.email)"
+          >
+            <mat-label>Correo electrónico</mat-label>
+            <input
+              matInput
+              formControlName="email"
+              placeholder="example@example.com"
+              type="email"
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
+              maxlength="250"
+              [(ngModel)]="userRegister.email"
+              data-qadp="email"
+              required
+            />
+            <mat-error
+              *ngIf="
+                userRegisterForm.controls.email.touched &&
+                userRegisterForm.controls.email.errors
+              "
+            >
+              *Has ingresado un dato inválido
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.telephone)"
+          >
+            <mat-label>Número de teléfono</mat-label>
+            <input
+              matInput
+              (input)="inputValidatorNumeric($event)"
+              formControlName="telephone"
+              placeholder="Número de teléfono"
+              minlength="7"
+              maxlength="10"
+              [(ngModel)]="userRegister.mobile_phone"
+              data-qadp="phone"
+              required
+            />
+            <mat-error
+              *ngIf="
+                userRegisterForm.controls.telephone.touched &&
+                userRegisterForm.controls.telephone.errors
+              "
+            >
+              *Has ingresado un número inválido
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-section section2">
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInputSelect(userRegisterForm.controls.city)"
+          >
+            <mat-label>Ciudad</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="Ciudad"
+              aria-label="Number"
+              [(ngModel)]="userRegister.city"
+              [formControl]="userRegisterForm.controls.city"
+              [matAutocomplete]="auto"
+              data-qadp="city"
+              required
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let option of filteredCityOptions | async"
+                [value]="option"
+              >
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error
+              *ngIf="
+                userRegisterForm.controls.city.touched &&
+                userRegisterForm.controls.city.hasError('required')
+              "
+              >Debes seleccionar un campo</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.idNumber)"
+          >
+            <mat-label>Número de identificación</mat-label>
+            <input
+              matInput
+              formControlName="idNumber"
+              placeholder="Número de id"
+              minlength="4"
+              maxlength="11"
+              (input)="inputValidatorNumeric($event)"
+              [(ngModel)]="userRegister.id_number"
+              required
+              data-qadp="numId"
+            />
+            <mat-error
+              *ngIf="
+                userRegisterForm.controls.idNumber.touched &&
+                userRegisterForm.controls.idNumber.errors
+              "
+              >*Este campo es obligatorio</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.password)"
+          >
+            <mat-label>Contraseña</mat-label>
+            <input
+              matInput
+              id="password"
+              formControlName="password"
+              [type]="!hide ? 'password' : 'text'"
+              required
+              minlength="4"
+              maxlength="30"
+              data-qadp="password"
+              [(ngModel)]="userRegister.password"
+            />
+            <mat-icon matSuffix (click)="hide = !hide">{{
+              !hide ? "visibility_off" : "visibility"
+            }}</mat-icon>
+            <mat-error
+              *ngIf="
+                userRegisterForm.controls.password.touched &&
+                userRegisterForm.controls.password.invalid
+              "
+              >*Este campo es obligatorio, mínimo 4 caracteres</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            [ngClass]="getClassInput(userRegisterForm.controls.password)"
+          >
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input
+              matInput
+              id="password_confirm"
+              formControlName="password_confirm"
+              [type]="!hideConfirm ? 'password' : 'text'"
+              required
+              minlength="4"
+              maxlength="30"
+              data-qadp="password_confirm"
+            />
+            <mat-icon matSuffix (click)="hideConfirm = !hideConfirm">{{
+              !hideConfirm ? "visibility_off" : "visibility"
+            }}</mat-icon>
+            <mat-error
+              *ngIf="
+                userRegisterForm.controls.password_confirm.touched &&
+                userRegisterForm.controls.password_confirm.invalid
+              "
+            >
+              *Este campo es obligatorio, mínimo 4 caracteres
+            </mat-error>
+          </mat-form-field>
+
+          <mat-error
+            *ngIf="
+              userRegisterForm.controls.password.touched &&
+              userRegisterForm.controls.password.value &&
+              userRegisterForm.controls.password.value !=
+                userRegisterForm.controls.password_confirm.value
+            "
+          >
+            *Las contraseñas no coinciden
+          </mat-error>
+        </div>
+
+        <div class="checks">
+          <div class="content-check">
+            <mat-checkbox
+              id="mat-checkbox-promo"
+              formControlName="promo"
+              [(ngModel)]="userRegister.promo"
+              color="success"
+              class="margin-check"
+            >
+            </mat-checkbox>
+            <i class="title-fourthy">
+              Deseo recibir información de eventos y promociones de Beck's.
+            </i>
+          </div>
+
+          <div class="content-check">
+            <mat-checkbox
+              id="mat-checkbox-privacy"
+              formControlName="privacy"
+              [(ngModel)]="userRegister.privacy"
+              color="success"
+              class="margin-check"
+              required
+            >
+            </mat-checkbox>
+            <i class="title-fourthy">
+              He leído, entendido y aceptado los
+              <a
+                target="_blank"
+                href="assets/files/TERMINOSYCONDICIONESGENERALES.pdf"
+                rel="noopener noreferrer"
+                data-qadp="link-pp"
+                >Terminos y condiciones
+              </a>
+              y la
+              <a target="_blank" href="./privacy-policy" data-qadp="link-tc">
+                política de protección de datos personales</a
+              >
+              , en particular el procesamiento de mi información personal por
+              parte de Bavaria & Cía S.C.A. con las finalidades y usos
+              requeridos por ésta descritos en la mencionada política.
+            </i>
+          </div>
+          <div>
+            <mat-error
+              *ngIf="
+                userRegisterForm.controls.privacy.touched &&
+                userRegisterForm.controls.privacy.invalid
+              "
+              >Por favor lea y acepte las políticas y los términos</mat-error
+            >
+          </div>
+        </div>
+      </ion-row>
+
+      <ion-row> </ion-row>
+    </form>
+
+    <div class="content-flex-all-center">
+      <app-captcha
+        [showError]="showError"
+        [restart]="restartCaptcha"
+        (status)="setCaptchaStatus($event)"
+      >
+      </app-captcha>
+    </div>
+
+    <br /><mat-error *ngIf="httpError" class="error-http">{{
+      httpError
+    }}</mat-error>
+    <ion-row class="button-row">
+      <button
+        block="block"
+        color="becks"
+        (click)="saveUser()"
+        class="becks-btn-primary button-width"
+        [ngClass]="{
+          'button-disabled': userRegisterForm.invalid || !captchaStatus
+        }"
+        data-qadp="send-button-form"
+      >
+        <span>registrarse</span>
+      </button>
+      <!-- <div class="separator-box">
+        <span class="separator-login margin-top-button"></span>
+        <span class="separator-o">O</span><span class="separator-login"></span>
+      </div>
+
+      <user-fb-button></user-fb-button> -->
+    </ion-row>
+  </div>
+</section>

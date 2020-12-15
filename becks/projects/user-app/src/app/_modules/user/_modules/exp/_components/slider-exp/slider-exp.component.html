@@ -1,0 +1,266 @@
+<h1 class="title-exp">Experiencias</h1>
+<button
+  class="btn-prev"
+  *ngIf="!disablePrevBtn"
+  (click)="slidePrev(sliderExp.slidesItems, slides)"
+>
+  <span class="material-icons">keyboard_arrow_up</span>
+</button>
+<ion-slides
+  class="full-height default-slide"
+  *ngIf="experienciaContent.length == 0"
+>
+  <ion-slide> </ion-slide>
+</ion-slides>
+<ion-slides
+  *ngIf="slideOpts && size && experienciaContent.length > 0"
+  spaceBetween="0"
+  [options]="slideOpts"
+  slidesPerView="1"
+  effect="slide"
+  pager="true"
+  zoom="false"
+  class="exp-slider"
+  (ionSlideDidChange)="changeSlider()"
+  [ngClass]="{ 'active-info': truePager }"
+  #slides
+>
+  <user-announcer-days [hidden]="truePager"></user-announcer-days>
+  <ion-slide
+    class="item-exp"
+    *ngFor="let exp of experienciaContent; let i = index"
+    [attr.data-index]="i"
+    [ngClass]="{ inactive: !this.isActivate, active: this.isActivate }"
+  >
+    <!-- <user-announcer-days [hidden]= "!disableCounter"></user-announcer-days> -->
+    <user-announcer-amount
+      *ngIf="(this.isActivate && exp.stock_actual) || exp.status == 2"
+      [stock]="exp.stock_actual"
+      [status]="exp.status"
+    ></user-announcer-amount>
+    <img
+      *ngIf="this.size == 'lg' || this.size == 'md'"
+      [src]="exp.imagesExp"
+      [alt]="exp.titleExp"
+      class="exp-images animate__animated animate__bounceInLeft"
+      [ngClass]="{
+        'animate__animated animate__bounceInLeft': this.isActivate
+      }"
+    />
+    <img
+      *ngIf="this.size == 'xs' || this.size == 'sm'"
+      [src]="exp.imagesExpMob"
+      [alt]="exp.titleExp"
+      class="exp-images animate__animated animate__bounceInLeft"
+      [ngClass]="{
+        'animate__animated animate__bounceInLeft': this.isActivate
+      }"
+    />
+    <div class="container-exp">
+      <div
+        class="content-exp animate__animated animate__bounceInLeft animate__delay-1s"
+      >
+        <h2
+          *ngIf="!exp.detalleExp"
+          class="title-primary primary max-width-title-primary-age-gate animate__animated animate__bounceInLeft animate__delay-1s"
+          [ngClass]="{
+            'animate__animated animate__bounceInLeft animate__delay-1s': this
+              .isActivate
+          }"
+        >
+          {{ exp.titleExp }}
+        </h2>
+        <p
+          class="detail-content content-desk detail-place animate__animated animate__bounceInLeft animate__delay-1s"
+          [ngClass]="{
+            'animate__animated animate__bounceInLeft animate__delay-1s': this
+              .isActivate
+          }"
+        >
+          <mat-icon matSuffix>calendar_today</mat-icon>
+          {{
+            exp.fechaAlt == exp.fechaExp
+              ? exp.fechaExp
+              : exp.fechaAlt + " - " + exp.fechaExp
+          }}
+        </p>
+        <p
+          class="detail-content content-desk detail-place animate__animated animate__bounceInLeft animate__delay-1s"
+          [ngClass]="{
+            'animate__animated animate__bounceInLeft animate__delay-1s': this
+              .isActivate
+          }"
+        >
+          <mat-icon matSuffix>room</mat-icon> {{ exp.placeExp }}
+        </p>
+        <p
+          class="detail-content content-desk paf-desk animate__animated animate__bounceInLeft animate__delay-1s"
+          [ngClass]="{
+            'animate__animated animate__bounceInLeft animate__delay-1s': this
+              .isActivate
+          }"
+        >
+          {{ exp.detailExp }}
+        </p>
+        <a
+          (click)="detalleExperiencia(i)"
+          *ngIf="!exp.detalleExp"
+          class="exp-link-value more-info title-fourthy animate__animated animate__bounceInLeft animate__delay-1s"
+          [ngClass]="{
+            'animate__animated animate__bounceInLeft animate__delay-1s': this
+              .isActivate
+          }"
+        >
+          <mat-icon matSuffix>visibility</mat-icon>
+          <span>Conoce más</span>
+        </a>
+        <button
+          *ngIf="!this.isActivate"
+          block="block"
+          color="becks"
+          (click)="redirectToAct(exp.titleExp)"
+          class="exp-btn-inactive margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+          [ngClass]="{
+            'animate__animated animate__bounceInLeft animate__delay-1s': this
+              .isActivate
+          }"
+        >
+          <span>Activa tu cuenta</span>
+        </button>
+
+        <!-- [routerLink]="['/user/interaction/', exp.id]" -->
+        <button
+          *ngIf="this.isActivate && exp.stock_actual > 0 && exp.status != '2'"
+          block="block"
+          color="becks"
+          (click)="participateExperience(exp.id)"
+          class="becks-btn-primary margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+          [ngClass]="{
+            'animate__animated animate__bounceInLeft animate__delay-1s': this
+              .isActivate
+          }"
+        >
+          <span>Participar</span>
+        </button>
+        <button
+          *ngIf="
+            (this.isActivate && exp.status == 2) ||
+            (exp.stock_actual == 0 && this.isActivate)
+          "
+          block="block"
+          color="becks"
+          class="becks-btn-soon margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+          [ngClass]="{
+            'animate__animated animate__bounceInLeft animate__delay-1s':
+              exp.proxExp
+          }"
+          [disabled]="true"
+        >
+          <span>PRÓXIMAMENTE</span>
+        </button>
+      </div>
+    </div>
+    <div
+      class="exp-detail animate__animated animate__backInUp"
+      [ngClass]="{ 'add-exp': aumentarTamano }"
+      *ngIf="exp.detalleExp"
+    >
+      <div class="detail-close">
+        <a (click)="detalleExperiencia(i)">
+          <mat-icon matSuffix style="color: #ffffff">close</mat-icon>
+        </a>
+      </div>
+      <h2
+        class="title-primary primary max-width-title-primary-age-gate title-detail animate__animated animate__backInUpanimate__delay-1s"
+      >
+        {{ exp.titleExp }}
+      </h2>
+
+      <div
+        class="content-dialog animate__animated animate__backInUp"
+        [ngClass]="{ 'add-exp': aumentarTamano }"
+      >
+        <p
+          class="detail-content detail-place animate__animated animate__backInUp animate__delay-1s"
+        >
+          {{
+            exp.fechaAlt == exp.fechaExp
+              ? exp.fechaExp
+              : exp.fechaAlt + " - " + exp.fechaExp
+          }}
+        </p>
+        <p
+          class="detail-content detail-place animate__animated animate__backInUp animate__delay-1s"
+        >
+          {{ exp.placeExp }}
+        </p>
+        <p
+          class="detail-content animate__animated animate__backInUp animate__delay-1s"
+        >
+          {{ exp.detailExp }}
+        </p>
+      </div>
+      <a
+        (click)="ampliarExp()"
+        *ngIf="!aumentarTamano"
+        class="exp-link-value more-link more-info title-fourthy animate__animated animate__bounceInLeft animate__delay-1s"
+        [ngClass]="{
+          'animate__animated animate__backInUp animate__delay-1s':
+            exp.cuentaActiva
+        }"
+      >
+        + Expandir</a
+      >
+    </div>
+    <button
+      *ngIf="!this.isActivate"
+      block="block"
+      color="becks"
+      (click)="redirectToAct(exp.titleExp)"
+      class="exp-btn-inactive more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+      [ngClass]="{
+        'animate__animated animate__bounceInLeft animate__delay-1s': this
+          .isActivate
+      }"
+    >
+      <span>Activa tu cuenta</span>
+    </button>
+    <button
+      *ngIf="this.isActivate && exp.stock_actual > 0 && exp.status != '2'"
+      block="block"
+      color="becks"
+      (click)="participateExperience(exp.id)"
+      class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+      [ngClass]="{
+        'animate__animated animate__bounceInLeft animate__delay-1s': this
+          .isActivate
+      }"
+    >
+      <span>Participar</span>
+    </button>
+    <button
+      *ngIf="
+        (this.isActivate && exp.status == 2) ||
+        (exp.stock_actual == 0 && this.isActivate)
+      "
+      block="block"
+      color="becks"
+      class="becks-btn-soon more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+      [ngClass]="{
+        'animate__animated animate__bounceInLeft animate__delay-1s': this
+          .isActivate
+      }"
+      [disabled]="true"
+    >
+      <span>PRÓXIMAMENTE</span>
+    </button>
+  </ion-slide>
+</ion-slides>
+<button
+  class="btn-next"
+  *ngIf="!this.disableNextBtn"
+  [ngClass]="{ 'detail-active': truePager }"
+  (click)="slideNext(sliderExp.slidesItems, slides)"
+>
+  <span class="material-icons">keyboard_arrow_down</span>
+</button>

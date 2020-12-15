@@ -1,0 +1,98 @@
+.circle-progress-tool {
+  margin-bottom: 0px !important;
+  position: relative !important;
+  height: 170px;
+  width: 170px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+circle-progress {
+  font-family: "Eurostile BQ";
+  font-style: normal !important;
+  line-height: 50px !important;
+  letter-spacing: 0.15px !important;
+  height: 170px;
+  width: 195px;
+  margin: 0 !important;
+}
+
+.text-notify {
+  font-style: normal !important;
+  font-size: 13.78px !important;
+  line-height: 17px !important;
+  text-transform: none !important;
+}
+.bar,
+.text-notify {
+  margin-top: 30px;
+}
+ion-progress-bar {
+  height: 7px;
+  width: 301px;
+  --background: #1e1e1e;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.5);
+}
+
+.supp-circle {
+  position: absolute !important;
+  border-radius: 100%;
+  width: 170px;
+  height: 170px;
+  top: 14px;
+  left: 0px;
+  .clock {
+    position: absolute !important;
+    width: 27px;
+    height: 27px;
+    background: url(./../../../../../../../assets/icon/clock-icon.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: black;
+    border-radius: 100%;
+    left: 72px;
+    top: 0px;
+  }
+}
+.subtitle-days {
+  position: absolute !important;
+  height: 170px;
+  width: 170px;
+  font-family: "Helvetica LT Std" !important;
+  font-style: normal !important;
+  font-weight: bold !important;
+  font-size: 13.28px !important;
+  line-height: 16px !important;
+  text-align: center !important;
+  top: 15px;
+  left: 0px;
+
+  .title_1 {
+    margin-top: 45px;
+    margin-bottom: 40px;
+  }
+}
+
+.becks-btn-primary,
+.button-disabled,
+.button-disabled:hover,
+.button-disabled:active {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  padding-left: 35px;
+  width: 316px !important;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    font-size: 11px !important;
+    background-position-x: 10px;
+    &:hover {
+      background-position-x: 7px;
+    }
+  }
+  @media (min-width: 769px) {
+    background-position-x: 10px;
+    &:hover {
+      background-position-x: 7px;
+    }
+  }
+}

@@ -1,0 +1,121 @@
+<ion-content>
+  <user-menu></user-menu>
+  <section class="background-black content-flex-all-center">
+    <h1 class="title-primary">invita amigos</h1>
+    <section class="MGM">
+      <div class="content-flex-all-center flex-direction-column padding-form">
+        <h1 class="title-secondary temporaly">Invita amigos</h1>
+        <div class="separator-becks"></div>
+        <span class="mgm-icon"> </span>
+        <h2 class="title-secondary" *ngIf="!redemp">
+          INVITA 6 AMIGOS Y GANA UN SIX PACK DE BECK’S
+        </h2>
+        <h2 class="title-secondary" *ngIf="redemp">
+          SE HAN UNIDO 6 AMIGOS A LA BECK´S SOCIETY, ESTE ES TU CÓDIGO PARA TU
+          SIX PACK EN MERQUEO:
+        </h2>
+        <div [ngClass]="curRedemp()" *ngIf="redemp">
+          <h2 class="title-secondary">HJASDYASU5145</h2>
+        </div>
+        <p *ngIf="isRedempted">ya has redimido este código</p>
+        <form
+          [formGroup]="userMGMForm"
+          class="form-section"
+          autocomplete="off"
+          *ngIf="!redemp"
+        >
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput"
+            style="padding-right: 7rem"
+            [ngClass]="getClassInput(userMGMForm.controls.email)"
+          >
+            <mat-label>Email de tu amigo </mat-label>
+            <ion-row class="aling-left">
+              <input
+                matInput
+                formControlName="email"
+                placeholder="example@example.com"
+                type="email"
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
+                maxlength="200"
+                [(ngModel)]="userMGM.email"
+                data-qadp="email"
+              />
+              <button
+                class="becks-btn-inner"
+                (click)="inviteFriend()"
+                [ngClass]="{
+                 'button-disabled': userMGMForm.invalid
+                  }"
+                [disabled]="userMGMForm.invalid"
+                data-qadp="send-button-form"
+              >
+                AÑADIR
+              </button>
+            </ion-row>
+
+            <mat-error *ngIf="userMGMForm.controls.email.errors"
+              >*Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+        </form>
+        <h3 class="title-fourthy" [hidden]="guest_users.length ==0">
+          Has invitado a:
+        </h3>
+        <form class="form-section guest_list" autocomplete="off">
+          <mat-form-field
+            appearance="fill"
+            floatLabel="auto"
+            class="fullInput input-becks"
+            *ngFor="let item of guest_users, let id=index"
+          >
+            <input matInput disabled [value]="item" />
+            <span matPrefix><mat-icon class="email-icon"></mat-icon></span>
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="deleteReq(id)"
+              class="btn-trash"
+            >
+              <mat-icon class="trash-icon"></mat-icon>
+            </button>
+          </mat-form-field>
+        </form>
+
+        <div *ngIf="this.size == 'xs' || this.size == 'sm' ">
+          <div
+            class="separator-friends"
+            *ngIf="!guest_users.length ==0 || redemp"
+          ></div>
+          <div class="friend-list" *ngIf="!guest_users.length ==0 || redemp">
+            <h3 class="title-fourthy">
+              Tus amigos que se han unido a la beck’s society
+            </h3>
+            <ion-row class="lateral-padding">
+              <div
+                class="guest-card"
+                title="@usuario"
+                *ngFor="let guest of guest_users"
+              ></div>
+            </ion-row>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="friends-column"
+      *ngIf="this.size != 'xs' && this.size != 'sm' "
+    >
+      <h3 class="title-fourthy">
+        Tus amigos que se han unido a la beck’s society
+      </h3>
+      <ion-row *ngFor="let guest of guest_users">
+        <div class="guest-card" title="@usuario"></div>
+        <h3>{{guest}}</h3>
+      </ion-row>
+    </section>
+  </section>
+  <app-footer></app-footer>
+</ion-content>

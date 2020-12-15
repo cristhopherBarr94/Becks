@@ -1,0 +1,27 @@
+/* Loading * /
+.loading {
+  min-width: 100% !important;
+  min-height: 100% !important;
+  background: #000;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.animation-div {
+  height: 50% !important;
+}
+
+/* Loading */
+.loading {
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.1);
+
+  ion-spinner {
+    left: 50%;
+    top: 50%;
+    transform: scale(2);
+  }
+}

@@ -1,0 +1,126 @@
+.from-section {
+  background: (#121212);
+  color: #ffffff;
+  min-height: 100%;
+  height: auto;
+  @media (min-width: 769px) {
+    // background-image: url(./../../../../../../../assets/img/background-blur.png);
+    // background-size: cover;
+    height: 550px !important;
+    overflow: hidden;
+  }
+  @media (min-width: 0px) and (max-width: 768px) {
+    padding-top: 50px !important;
+  }
+  .content-flex-all-center .form-section {
+    margin-top: 0px;
+  }
+
+  .title-secondary {
+    font-weight: 500 !important;
+    font-style: normal !important;
+    font-size: 13px !important;
+    line-height: 50px !important;
+    @media (min-width: 0px) and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .lock-icon {
+    position: relative !important;
+    @media (min-width: 769px) {
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+    @media (min-width: 0px) and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .no-padding {
+    padding: 0px;
+    ion-row,
+    ion-col {
+      padding: 0px;
+    }
+  }
+  .confirm-pass-text {
+    font-family: "Helvetica LT Std";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 10px;
+    letter-spacing: 0.15px;
+    width: 100%;
+  }
+  mat-error {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    position: relative;
+    width: auto;
+    bottom: 20px;
+    text-align: center;
+  }
+
+  ::ng-deep mat-icon:active {
+    font-family: "Material Icons" !important;
+  }
+  .margin-top-button {
+    margin: 10px;
+    @media (min-width: 769px) {
+      margin-top: 0px !important;
+    }
+  }
+}
+.logo-2 {
+  @media (min-width: 0px) and (max-width: 768px) {
+    display: none;
+  }
+}
+@media (min-width: 769px) {
+  #formchangeSection {
+    background: #121212;
+    border-radius: 8px;
+    // width: 507px;
+    height: auto;
+    padding: 20px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    backdrop-filter: blur(20px) !important;
+  }
+  ::ng-deep .button-width {
+    width: 360px !important;
+  }
+}
+.modal-hader {
+  display: block;
+  margin-right: auto;
+  @media (min-width: 0px) and (max-width: 768px) {
+    display: none;
+  }
+  @media (min-width: 769px) {
+    position: absolute;
+    left: 95%;
+    top: 30px;
+  }
+  .btn-cancel {
+    background-color: transparent !important;
+    color: #ffffff;
+    font-family: "Eurostile BQ";
+    height: 40px !important;
+    width: 40px !important;
+  }
+}
+
+.margin-bottom {
+  margin-bottom: 26px;
+}
+.backgrounColor {
+  background: #121212;
+}
+
+mat-icon {
+  cursor: pointer;
+  color: #ffffff !important;
+}

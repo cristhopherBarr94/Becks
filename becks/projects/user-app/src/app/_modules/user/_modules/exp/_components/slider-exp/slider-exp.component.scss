@@ -1,0 +1,57 @@
+.exp-slider .item-exp .content-exp {
+  margin-left: 50px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    margin-left: 0px;
+  }
+}
+
+.becks-btn-primary,
+.button-disabled,
+.button-disabled:hover,
+.button-disabled:active {
+  background-position-x: 40px;
+  &:hover {
+    background-position-x: 37px;
+  }
+  @media (min-width: 0px) and (max-width: 768px) {
+    font-size: 11px !important;
+  }
+}
+
+.exp-link-value span {
+  padding: 10px;
+  text-decoration: underline;
+  vertical-align: super !important;
+}
+.btn-prev,
+.btn-next {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: transparent;
+  color: #ffffff;
+  height: 44px;
+  span {
+    font-size: 40px;
+  }
+}
+.btn-prev {
+  top: 10%;
+  @media (min-width: 769px) {
+    top: 25%;
+  }
+}
+.btn-next {
+  top: 95%;
+  @media (min-width: 1024px) {
+    top: 90%;
+  }
+  @media (min-width: 769px) {
+    top: 96%;
+  }
+}
+.default-slide {
+  background-color: #252525;
+}

@@ -1,0 +1,104 @@
+.url-hyper {
+  text-decoration: underline #ffffff;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.margin-top {
+  margin-top: 8px;
+}
+
+.mat-icon {
+  font-size: 16px;
+}
+
+.margin-top-section {
+  padding-top: 18px;
+}
+
+.separator-line-row {
+  margin-left: 10%;
+  height: 1px;
+  width: 80%;
+  border-top: 0.25px solid #dadada;
+  justify-content: center;
+  display: flex;
+}
+
+.separator-line-column {
+  height: 81px;
+  width: 1px;
+  border-left: 0.25px solid #dadada;
+  justify-content: center;
+  display: flex;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    height: 60px;
+  }
+}
+
+.background-color {
+  background-color: #1d1d1d;
+}
+
+.seccion-staticstics {
+  width: 35%;
+  margin-left: 15%;
+  margin-bottom: 18px;
+}
+
+.conte-second {
+  @media (min-width: 769px) and (max-width: 1366px) {
+    height: 70px;
+  }
+  height: 90px;
+}
+
+.buttons-edition {
+  width: 100%;
+  display: inline-flex;
+  margin-left: 10%;
+  justify-content: center;
+
+  @media (max-width: 900px) {
+    margin-left: 5%;
+  }
+}
+
+.edit-button {
+  background-color: #121212;
+  justify-content: center;
+  font-family: "Helvetica LT Std";
+  color: #ffffff !important;
+  border-radius: 16px 0px 16px 0px ;
+  border:1px solid  #ffffff;
+  width: 45%;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    font-size: 18px;
+    height: 45px;
+  }
+  @media (min-width: 1367px) {
+    font-size: 24px;    
+    height: 51px;
+  }
+}
+
+.button-edit{
+  width: 35%;
+  margin-left: 5%;
+}
+
+.margin-left-tt {
+  margin-left: 20px;
+}
+
+.sin-stadisticas {
+  margin-right: 50%;
+}
+
+.positionAbsolute {
+  position: absolute;
+}
+
+.positionRelative {
+  position: relative;
+}

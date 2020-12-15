@@ -1,0 +1,229 @@
+.seccion-tabs {
+  min-height: 100%;
+  width: 100%;
+}
+
+.internal-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tab-group {
+  justify-content: center;
+  @media (min-width: 768px) {
+    align-items: flex-end;
+    margin-top: -78px;
+  }
+}
+
+:host ::ng-deep .mat-tab-label {
+  font-family: "Helvetica LT Std";
+  color: #ffffff !important;
+  font-size: 18px;
+  min-width: 0px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    border-bottom: 3px solid #c4c4c4;
+  }
+  @media (min-width: 769px) and (max-width: 1366px) {
+    height: 65px;
+    font-size: 22px;
+    width: 70px;
+    border-bottom: 0px solid #c4c4c4;
+    padding: revert;
+    width: revert;
+  }
+  @media (min-width: 1367px) {
+    height: 65px;
+    font-size: 24px;
+    border-bottom: 0px solid #c4c4c4;
+    padding: revert;
+    width: revert;
+  }
+}
+
+:host ::ng-deep .mat-tab-label-active {
+  font-family: "Helvetica LT Std";
+  color: #ffffff !important;
+  font-size: 18px;
+  min-width: 0px;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    height: 65px;
+    font-size: 22px;
+    width: 70px;
+    margin-bottom: 18px;
+    padding: revert;
+    width: revert;
+  }
+  @media (min-width: 1367px) {
+    height: 65px;
+    font-size: 24px;
+    margin-bottom: 18px;
+    padding: revert;
+    width: revert;
+  }
+}
+
+:host ::ng-deep .mat-ink-bar {
+  background: linear-gradient(100deg, #00d18c 100%, #03b87c 100%, #019874 87%);
+  height: 10px !important;
+}
+
+:host ::ng-deep .mat-tab-header {
+  @media (min-width: 768px) {
+    width: 35%;
+    margin-right: 15%;
+  }
+}
+
+::ng-deep .mat-tab-body-wrapper {
+  background-color: transparent;
+  min-width: 100%;
+  @media (min-width: 768px) {
+    background-color: #171717;
+    min-width: 100%;
+  }
+}
+
+::ng-deep .mat-tab-body-content {
+  height: auto !important;
+}
+
+.container-desktop {
+  min-height: 100%;
+  min-width: 100%;
+  background-color: #171717;
+  flex-direction: row;
+  display: flex;
+}
+
+.container-desktop-exp {
+  justify-content: center;
+}
+.card-component-circle {
+  background-color: #1d1d1d;
+  margin-left: 10%;
+  width: 80%;
+  height: 440px;
+  margin-top: 42px;
+  display: flex;
+  justify-content: center;
+  contain: strict;
+  margin-bottom: 20px;
+}
+
+.card-component-experiences {
+  flex-direction: column;
+  background-color: #1d1d1d;
+  display: flex;
+  align-items: center;
+  margin-top: 42px;
+  margin-left: 3%;
+  width: 53%;
+  height: 440px;
+  margin-bottom: 42px;
+  contain: strict;
+  overflow: auto;
+  scrollbar-width: 10px;
+}
+
+.margin-tittle-desktop {
+  margin-top: 32px;
+  width: 94%;
+  flex-direction: row;
+  display: flex;
+}
+
+.text-aling {
+  width: 85%;
+}
+
+.text-aling-end {
+  width: 15%;
+  text-align: end;
+}
+
+.experioencesCard {
+  flex-direction: column;
+  background-color: #1d1d1d;
+  height: 440px;
+  width: 80%;
+  margin-top: 42px;
+  margin-bottom: 42px;
+  align-items: center;
+  contain: strict;
+  overflow: auto;
+  display: flex;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #4a4a4a;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #038259;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+.title-not-activate {
+  font-family: "Eurostile BQ";
+  font-style: normal;
+  justify-content: center;
+  text-transform: uppercase;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 80px;
+
+  .title1 {
+    font-weight: 500;
+
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 13px !important;
+      line-height: 20px;
+    }
+    @media (min-width: 769px) {
+      font-size: 16px !important;
+      line-height: 20px;
+    }
+  }
+  .title2 {
+    font-weight: 500;
+
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 8px !important;
+    }
+    @media (min-width: 769px) {
+      font-size: 13px !important;
+      line-height: 20px;
+    }
+  }
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 252px;
+  }
+}
+.separator-becks {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65px;
+  height: 2px;
+  background: rgb(98, 248, 178);
+  background: linear-gradient(
+    90deg,
+    rgba(98, 248, 178, 1) 0%,
+    rgba(18, 18, 18, 1) 100%
+  );
+  position: absolute;
+  top: 80px;
+}

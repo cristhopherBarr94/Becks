@@ -117,7 +117,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     // } else {
     //   return new ResourceResponse($this->loadRecord($text));
     // }
-    return new ResourceResponse($this->loadRecord($text));
+    return new ModifiedResourceResponse(NULL, 204);
   }
 
   /**
@@ -145,7 +145,12 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
 
       $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
       $user = $this->entityTypeManager->getStorage('user')->create();
-      $pass = Util::getRandomUserPass();
+
+      if ( isset($data['password']) ) {
+        $pass =  trim( trim($data['password']) );
+      } else {
+        $pass = Util::getRandomUserPass();
+      }
 
       $user->setUsername($data['email']);
       $user->setPassword($pass);
@@ -156,11 +161,33 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->set("langcode", $lang);
       $user->set("preferred_langcode", $lang);
       $user->set("preferred_admin_langcode", $lang);
-      $user->set("field_status_waiting_list", 1);
       $user->set("field_first_name", $data['first_name'] );
       $user->set("field_last_name", $data['last_name'] );
       $user->set("field_mobile_phone", $data['mobile_phone'] );
       $user->set("field_gender",  $data['gender'] );
+      // FASE II - FIELDS
+      $user->set("field_birthdate",  $data['birthdate'] ?? "" );
+      $user->set("field_type_id", $data['type_id'] ?? "" );
+      $user->set("field_id_number", $data['id_number'] ?? "" );
+      $user->set("field_photo_uri",  $data['photo'] ?? "" );
+      $user->set("field_city",  $data['city'] ?? "" );
+
+      $user->activate();
+      
+      // "type_id" field only come from User-App Form
+      if ( isset($data['type_id']) ) {
+        // User from User-APP
+        $user->set("field_status_waiting_list", 0);
+        $user->set("field_status", 0); // 0 = normal, 1 = require password change
+        Util::sendEmail( 0, 
+                        $user->getEmail() , 
+                        $user->get('field_first_name')->value . ' ' . $user->get('field_last_name')->value 
+                      );
+      } else {
+        // User come from Waiting-List
+        $user->set("field_status_waiting_list", 1 );
+      }
+
       $user->addRole('web_app');
 
       $user->save();
@@ -169,11 +196,13 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
         $result = $this->__sendTD( 
           $data['first_name'],
           $data['last_name'],
-          $data['gender'] == 'M' ? 'masculino' : 'femenino',
+          $data['city'],
           intval($data['mobile_phone']),
           $data['email'],
           $data['privacy'],
-          $data['promo']
+          $data['promo'],
+          $data['id_number'],
+          $data['cookie_td']
        );
       } else {
         $code = '502';
@@ -198,8 +227,49 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
    *   The HTTP response object.
    */
   public function patch($id, $data) {
-    $this->validate($data);
-    return $this->updateRecord($id, $data);
+    // $this->validate($data);
+
+    if ( $id == 0 ) {
+      // RECOVERY PASSWORD
+      if (!isset($data['email']) || empty($data['email']) ) {
+        throw new BadRequestHttpException('Hace falta el "Email"');
+      }
+      if ( strlen($data['email']) > 254) {
+        throw new BadRequestHttpException('El "Email" sobrepasa los caracteres permitidos');
+      }
+      if ( !filter_var($data['email'], FILTER_VALIDATE_EMAIL) ) {
+        throw new BadRequestHttpException('El "Email" no es válido');
+      }
+
+      // Validate Captcha
+      if ( !isset($data['captcha']) || empty($data['captcha']) ||
+            !isset($data['captcha_key']) || empty($data['captcha_key']) || 
+              $data['captcha_key'] > 999999999999 ) {
+        throw new BadRequestHttpException('Captcha no válido');
+      }
+      $hashed = Util::getCaptchaHash( $data['email'] . '-' . $data['captcha_key'] );
+      if ( $data['captcha'] != $hashed ) {
+        throw new BadRequestHttpException('Captcha no válido');
+      }
+
+      // Validate email for user
+      $user = user_load_by_mail( $data['email'] );
+      if ( !$user ) {
+        throw new BadRequestHttpException('El usuario con correo "'.$data['email'].'" no existe');
+      }
+      $pass = Util::getRandomUserPass();
+
+      //Change Password
+      $user->setPassword($pass);
+      $user->set("field_status", 1);
+      $user->activate();
+      $user->save();
+
+      //Send New Password
+      Util::sendEmail( 1, $data['email'] , $pass );
+    }
+
+    return new ModifiedResourceResponse( $data['email'] , 202);
   }
 
   /**
@@ -213,8 +283,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
    *
    * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    */
-  public function delete($id) {
-
+  public function delete($id) {   
     // // Make sure the record still exists.
     // $this->loadRecord($id);
 
@@ -225,7 +294,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     // $this->logger->notice('UserCustom record @id has been deleted.', ['@id' => $id]);
 
     // // Deleted responses have an empty body.
-    // return new ModifiedResourceResponse(NULL, 204);
+    return new ModifiedResourceResponse(NULL, 204);
   }
 
   /**
@@ -279,23 +348,6 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     if (!is_array($record) || count($record) == 0) {
       throw new BadRequestHttpException('Petición no valida.');
     }
-    
-    $allowed_fields = [
-      'email',
-      'first_name',
-      'last_name',
-      'mobile_phone',
-      'gender',
-      'email',
-      'captcha',
-      'captcha_key',
-      'privacy',
-      'promo'
-    ];
-
-    // if (count(array_diff(array_keys($record), $allowed_fields)) > 0) {
-    //   throw new BadRequestHttpException('Petición no valida.');
-    // }
 
     if (!isset($record['email']) || empty($record['email']) ) {
       throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Email"');
@@ -304,7 +356,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       throw new BadRequestHttpException('El "Email" sobrepasa los caracteres permitidos');
     }
     if ( !filter_var($record['email'], FILTER_VALIDATE_EMAIL) ) {
-      throw new BadRequestHttpException('El "Email" no es valido');
+      throw new BadRequestHttpException('El "Email" no es válido');
     }
 
     if (!isset($record['first_name']) || empty($record['first_name'])) {
@@ -322,40 +374,83 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     }
 
     if (!isset($record['mobile_phone']) || empty($record['mobile_phone'])) {
-      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Numero de celular"');
+      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Número de celular"');
     }
     // if ( $record['mobile_phone'][0] != '+' || 
     //       !preg_match( "/^[1-9][0-9]*$/", str_replace(" ","",substr($record['mobile_phone'], 1)) ) || 
     //         strlen($record['mobile_phone']) < 10 ) {
-    //   throw new BadRequestHttpException('Formato invalido para el "Numero de celular" debe ser tipo "+XX XXXXXXX" ');
+    //   throw new BadRequestHttpException('Formato inválido para el "Número de celular" debe ser tipo "+XX XXXXXXX" ');
     // }
     if ( !is_numeric($record['mobile_phone']) ) {
-      throw new BadRequestHttpException('Formato invalido para el "Numero de celular" debe ser un numero tipo "XXXXXXXXXX" ');
+      throw new BadRequestHttpException('Formato inválido para el "Número de celular" debe ser un Número tipo "XXXXXXXXXX" ');
     }
     if ( strlen($record['mobile_phone']) > 60) {
-      throw new BadRequestHttpException('El "Numero de celular" sobrepasa los caracteres permitidos');
+      throw new BadRequestHttpException('El "Número de celular" sobrepasa los caracteres permitidos');
     }
 
     if (!isset($record['gender']) || empty($record['gender'])) {
-      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Genero"');
+      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Género"');
     }
     if ( strlen($record['gender']) > 1 || ( $record['gender'] != 'M' && $record['gender'] != 'F') ) {
-      throw new BadRequestHttpException('El "Genero" debe ser "M" (Masculino) o "F" (Femenino) ');
+      throw new BadRequestHttpException('El "Género" debe ser "M" (Masculino) o "F" (Femenino) ');
     } 
     
     if ( !isset($record['privacy']) || !is_bool($record['privacy']) || $record['privacy'] != true ) {
-      throw new BadRequestHttpException('El usuario no puede ser registrado porque hacen falta aceptar la Política y Términos del sitio');
+      throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta aceptar la Política y Términos del sitio');
+    }
+    
+    // "type_id" field from User-App Form
+    if ( isset($record['type_id']) ) {
+      if ( $record['type_id'] != 'CC' && $record['type_id'] != 'CE' && $record['type_id'] != 'PA' ) {
+        throw new BadRequestHttpException('El "Tipo de Documento" debe ser "CC" (Cédula de ciudadania), "CE" (Cédula de extranjeria) o "PA" (Pasaporte) ');
+      }
+      
+      if (!isset($record['id_number']) || empty($record['id_number']) || strlen($record['id_number']) > 20 ) {
+        throw new BadRequestHttpException('El usuario no puede ser registrado porque hace falta el "Número de documento"');
+      }
+    }
+
+    if ( isset($record['birthdate']) ) {
+      try {
+        $curYear = date('Y');
+        $date = explode("/", $record['birthdate']);
+        
+        if ( intval($date[0]) < 1 || intval($date[0]) > 12 ) {
+          throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+        }
+        if ( intval($date[1]) < 1 || intval($date[1]) > 31 ) {
+          throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+        }
+        if ( intval($date[2]) < 1920 || ($curYear - intval($date[2])) < 18 ) {
+          throw new BadRequestHttpException('"Fecha de Nacimiento" no valida, Debe ser mayor de edad');
+        }
+      } catch ( Exception $ex ) {
+        throw new BadRequestHttpException('La "Fecha de Nacimiento" debe ser del tipo MM/DD/YYYY');
+      }
+    }
+    
+    // "city" field from User-App Form
+    if ( isset($record['city']) ) {
+      if ( empty($record['city']) || strlen($record['city']) > 250) {
+        throw new BadRequestHttpException('La "Ciudad" esta vacia o sobrepasa los caracteres permitidos');
+      }
+    }
+    
+    if ( $record['password'] ) {
+      if ( strlen(trim($record['password'])) < 4 ) {
+        throw new BadRequestHttpException('Contraseña muy corta');
+      }
     }
 
     // Validate Captcha
     if ( !isset($record['captcha']) || empty($record['captcha']) ||
           !isset($record['captcha_key']) || empty($record['captcha_key']) || 
             $record['captcha_key'] > 999999999999 ) {
-      throw new BadRequestHttpException('Captcha no valido');
+      throw new BadRequestHttpException('Captcha no válido');
     }
     $hashed = Util::getCaptchaHash( $record['email'] . '-' . $record['captcha_key'] );
     if ( $record['captcha'] != $hashed ) {
-      throw new BadRequestHttpException('Captcha no valido');
+      throw new BadRequestHttpException('Captcha no válido');
     }
 
     // Validate email for user
@@ -380,7 +475,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
   protected function loadRecord($id) {
     $user = $this->entityTypeManager->getStorage('user')->load($id);
     if (!$user) {
-      throw new NotFoundHttpException('The user was not found.');
+      throw new NotFoundHttpException('Usuario no encontrado');
     }
     $retUser = new UserPublicDTO(  $user );
     return $retUser->get();
@@ -391,43 +486,21 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     $user = $this->entityTypeManager
             ->getStorage('user')
             ->loadByProperties( ['mail' => $email ] );
+    if (!$user) {
+      throw new NotFoundHttpException('Email no encontrado');
+    }
     return $user;
   }
 
   /**
-   * Updates record.
-   *
-   * @param int $id
-   *   The ID of the record.
-   * @param array $record
-   *   The record to validate.
-   *
-   * @return \Drupal\rest\ModifiedResourceResponse
-   *   The HTTP response object.
+   * Private Function
+   *  Analytics
    */
-  protected function updateRecord($id, array $record) {
-
-    // // Make sure the record already exists.
-    // $this->loadRecord($id);
-
-    // $this->validate($record);
-
-    // $this->dbConnection->update('ab_inbev_api_usercustom')
-    //   ->fields($record)
-    //   ->condition('id', $id)
-    //   ->execute();
-
-    // $this->logger->notice('UserCustom record @id has been updated.', ['@id' => $id]);
-
-    // // Return the updated record in the response body.
-    // $updated_record = $this->loadRecord($id);
-    // return new ModifiedResourceResponse($updated_record, 200);
-  }
-
-  private function __sendTD($name , $lastname , $gender , $phone , $email , $privacy , $promo ) {
+  private function __sendTD($name , $lastname , $city , $phone , $email , $privacy , $promo, $id_number, $td_client ) {
     
+    $country = "col";
     // define variable that will be used to tell the __sendTD method if it should send to the production database
-    $is_production = false;
+    $is_production = preg_match("@live-cobackendbecks.pantheonsite.io@", $_SERVER['HTTP_HOST']);
     // define the purpose variable as an empty array
     $purposes = array();
     // check whether the TC-PP checkbox is checked, and if it is, then adds it to the purpose array - informed
@@ -439,18 +512,21 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     $data = array(
       "abi_firstname" => $name,
       "abi_lastname" => $lastname,
-      "abi_gender" => $gender,
+      "abi_city" => $city,
+      "abi_country" => $country,
       "abi_phone" => $phone,
       "abi_email" => $email,
+      "abi_cpf" => $id_number,
+      "td_client_id" => $td_client,
       "purpose_name" => $purposes,
     );
 
     $tdstatus = Util::sendTD(
         $data,              // form data & purposes
-        'col',              // country
-        'Becks',            // brand
-        "BECKS_SOCIETY ",   // campaign
-        "BECKS_SOCIETY ",   // form
+        $country,           // country
+        "Becks",            // brand
+        "BECKS_WEBAPP_1120",   // campaign
+        "BECKS_WEBAPP_1120",   // form
         true,   // unify
         $is_production  // production flag
     );

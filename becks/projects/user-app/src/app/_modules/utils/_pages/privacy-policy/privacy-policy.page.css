@@ -1,0 +1,27 @@
+.fullSection {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.title-priv {
+    width: 758px;
+    height: 192px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.title-primary {
+    font-weight: 500;
+    font-size: 84px;
+    line-height: 18px;
+    text-align: center;
+    text-transform: none;
+}
+
+h3 {
+    font-family: 'Helvetica LT Std';
+}
+
+.separator-min {
+    width: auto;
+}

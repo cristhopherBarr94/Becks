@@ -1,0 +1,80 @@
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: #ffffff;
+}
+::ng-deep .mat-checkbox-checkmark-path {
+  stroke: #2daf73 !important;
+}
+::ng-deep .mat-checkbox-checked .mat-checkbox-frame {
+  background-color: #ffffff;
+}
+
+.title-primary {
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 18px !important;
+  line-height: 22px !important;
+  text-align: left !important;
+}
+.title-fourthy {
+  text-align: left !important;
+  font-size: 16px !important;
+  line-height: 19px !important;
+}
+
+.mat-paginator-page-size {
+  display: none !important;
+}
+
+.btn-delete {
+  width: 25px;
+  height: 20px;
+}
+
+.btn-order {
+  width: 9px;
+  height: 9px;
+  margin-left: 9px;
+}
+
+.btn-order:active {
+  width: 7px;
+  height: 7px;
+}
+
+.becks-btn-primary,
+.button-disabled,
+.button-disabled:hover,
+.button-disabled:active {
+  padding-left: 35px;
+  width: 300px !important;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    font-size: 11px !important;
+    background-position-x: 10px;
+    &:hover {
+      background-position-x: 7px;
+    }
+  }
+  @media (min-width: 769px) {
+    background-position-x: 20px;
+    &:hover {
+      background-position-x: 17px;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #4a4a4a;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #038259;
+  border-radius: 8px;
+  background-clip: padding-box;
+}

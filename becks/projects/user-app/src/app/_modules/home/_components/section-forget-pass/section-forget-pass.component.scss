@@ -1,0 +1,108 @@
+.recovery-section {
+  background: #121212;
+  color: #ffffff;
+  padding-top: 108px;
+
+  @media (min-width: 769px) {
+    background-image: url(./../../../../../assets/img/bg_beckregist2.jpg);
+    background-size: cover;
+  }
+}
+.logo-2 {
+  width: 120px;
+  height: 120px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    display: none;
+  }
+}
+.margin-top-icon {
+  top: 10px;
+}
+.cancel-btn {
+  position: absolute;
+  background: transparent;
+  width: 35px;
+  height: 35px;
+  right: 20px;
+  top: 20px;
+  padding-right: 30px !important;
+  img {
+    max-width: none !important;
+  }
+  @media (min-width: 0px) and (max-width: 768px) {
+    display: none;
+  }
+}
+.title-secondary {
+  font-weight: 500 !important;
+  font-style: normal !important;
+  font-size: 13px !important;
+  line-height: 50px !important;
+}
+.title-tertiary {
+  width: 301px;
+  font-style: normal !important;
+  font-weight: bold !important;
+  text-transform: none !important;
+  margin-bottom: 30px;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    font-size: 16px !important;
+    line-height: 19px !important;
+  }
+  @media (min-width: 769px) {
+    font-size: 16px !important;
+    line-height: 19px !important;
+  }
+}
+
+.recovery-icon {
+  position: relative !important;
+
+  @media (min-width: 769px) {
+    width: 150px;
+    height: 150px;
+    margin-top: 20px;
+  }
+}
+.no-padding {
+  padding: 0px;
+  ion-row,
+  ion-col {
+    padding: 0px;
+  }
+}
+
+.margin-top-button {
+  margin: 30px;
+
+  @media (min-width: 769px) {
+    margin: 20px;
+    width: 364px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .padding-form {
+    background: rgba(2, 2, 2, 0.7);
+    border-radius: 8px;
+    width: 507px;
+    height: auto;
+    padding: 20px;
+    margin-bottom: 100px;
+    backdrop-filter: blur(20px) !important;
+  }
+  .title-secondary {
+    font-size: 18px !important;
+    line-height: 50px !important;
+    width: 400px;
+  }
+  .form-section {
+    margin-top: 0px;
+  }
+  .btn-cancel {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+  }
+}

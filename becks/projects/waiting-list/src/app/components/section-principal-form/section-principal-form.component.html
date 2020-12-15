@@ -2,18 +2,27 @@
   id="formSection"
   class="fullSection from-section content-flex-all-center"
 >
-  <div class="content-flex-all-center full-height flex-direction-column padding-form">
+  <div
+    class="content-flex-all-center full-height flex-direction-column padding-form"
+  >
     <h2 class="title-secondary">DÉJANOS TUS DATOS</h2>
 
     <h3 class="title-tertiary max-width-title-secondary">
-      Déjanos tus datos Regístrate y pronto te contaremos si harás parte de la Beck’s Society
+      Déjanos tus datos Regístrate y pronto te contaremos si harás parte de la
+      Beck’s Society
     </h3>
 
     <form
       [formGroup]="userRegisterForm"
       class="form-section"
-      autocomplete="off">
-      <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.name)" >
+      autocomplete="off"
+    >
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userRegisterForm.controls.name)"
+      >
         <mat-label>Nombre</mat-label>
         <input
           matInput
@@ -24,11 +33,18 @@
           [(ngModel)]="userRegister.first_name"
           required
           data-qadp="name"
-        >
-        <mat-error *ngIf="userRegisterForm.controls.name.errors">{{ getMessageform(userRegisterForm.controls.name, 'nombre', 0, 20) }}</mat-error>
+        />
+        <mat-error *ngIf="userRegisterForm.controls.name.errors">{{
+          getMessageform(userRegisterForm.controls.name, "nombre", 0, 20)
+        }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.surname)">
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userRegisterForm.controls.surname)"
+      >
         <mat-label>Apellido</mat-label>
         <input
           matInput
@@ -39,20 +55,40 @@
           [(ngModel)]="userRegister.last_name"
           required
           data-qadp="lastName"
-        >
-        <mat-error *ngIf="userRegisterForm.controls.surname.errors">{{ getMessageform(userRegisterForm.controls.surname, 'apellido', 0, 20) }}</mat-error>
+        />
+        <mat-error *ngIf="userRegisterForm.controls.surname.errors">{{
+          getMessageform(userRegisterForm.controls.surname, "apellido", 0, 20)
+        }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInputSelect(userRegisterForm.controls.gender)">
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInputSelect(userRegisterForm.controls.gender)"
+      >
         <mat-label>Sexo</mat-label>
-        <mat-select panelClass="backgroud-panel" formControlName="gender" required [(ngModel)]="userRegister.gender" data-qadp="gender">
+        <mat-select
+          panelClass="backgroud-panel"
+          formControlName="gender"
+          required
+          [(ngModel)]="userRegister.gender"
+          data-qadp="gender"
+        >
           <mat-option value="F"> FEMENINO</mat-option>
           <mat-option value="M"> MASCULINO</mat-option>
         </mat-select>
-        <mat-error *ngIf="userRegisterForm.controls.gender.hasError('required')">Seleccione un género</mat-error>
+        <mat-error *ngIf="userRegisterForm.controls.gender.hasError('required')"
+          >Seleccione un género</mat-error
+        >
       </mat-form-field>
-        
-      <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.telephone)">
+
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userRegisterForm.controls.telephone)"
+      >
         <mat-label>Número Celular</mat-label>
         <input
           matInput
@@ -64,11 +100,23 @@
           maxlength="10"
           [(ngModel)]="userRegister.mobile_phone"
           data-qadp="phone"
-        >
-        <mat-error *ngIf="userRegisterForm.controls.telephone.errors">{{ getMessageform(userRegisterForm.controls.telephone, 'número celular', 7, 10)}}</mat-error>
+        />
+        <mat-error *ngIf="userRegisterForm.controls.telephone.errors">{{
+          getMessageform(
+            userRegisterForm.controls.telephone,
+            "número celular",
+            7,
+            10
+          )
+        }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" floatLabel="auto" class="fullInput" [ngClass]="getClassInput(userRegisterForm.controls.email)">
+      <mat-form-field
+        appearance="fill"
+        floatLabel="auto"
+        class="fullInput"
+        [ngClass]="getClassInput(userRegisterForm.controls.email)"
+      >
         <mat-label>Correo electrónico</mat-label>
         <input
           matInput
@@ -78,61 +126,80 @@
           type="email"
           required
           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
-          maxlength="30"
+          maxlength="60"
           data-qadp="email"
-        >
-        <mat-error *ngIf="userRegisterForm.controls.email.errors">{{ getMessageform(userRegisterForm.controls.email, 'email', 0, 30)}}</mat-error>
+        />
+        <mat-error *ngIf="userRegisterForm.controls.email.errors">{{
+          getMessageform(userRegisterForm.controls.email, "email", 0, 30)
+        }}</mat-error>
       </mat-form-field>
 
       <div class="checks">
-
         <div class="content-check">
           <mat-checkbox
-              id="mat-checkbox-promo"
-              formControlName="promo"
-              [(ngModel)]="userRegister.promo"
-              color="success"
-              class="margin-check">
+            id="mat-checkbox-promo"
+            formControlName="promo"
+            [(ngModel)]="userRegister.promo"
+            color="success"
+            class="margin-check"
+          >
           </mat-checkbox>
           <div>
             <i class="title-fourthy">
-              Deseo recibir información comercial y eventos de Becks.
+              Deseo recibir información comercial y eventos de Beck's.
             </i>
-        </div>
-        </div>
-        
-        <div class="content-check">
-          <mat-checkbox 
-              formControlName="privacy"
-              [(ngModel)]="userRegister.privacy"
-              color="success"
-              class="margin-check"
-              required>
-          </mat-checkbox>
-          <div>
-            <i class="title-fourthy"> 
-              He leído, entendido y aceptado los <a target="_blank" href="./terms-conditions" data-qadp="link-tc">Términos y Condiciones</a> y la <a target="_blank" href="./privacy-policy" data-qadp="link-pp">política de protección de datos personales</a>, en particular el procesamiento de mi información personal por parte de Bavaria & Cía S.C.A. con las finalidades y usos requeridos por ésta descritos en la mencionada política.
-            </i>
-            <mat-error *ngIf="userRegisterForm.controls.privacy.hasError('required')">Por favor lea y acepte las políticas y los términos</mat-error>
           </div>
         </div>
 
+        <div class="content-check">
+          <mat-checkbox
+            formControlName="privacy"
+            [(ngModel)]="userRegister.privacy"
+            color="success"
+            class="margin-check"
+            required
+          >
+          </mat-checkbox>
+          <div>
+            <i class="title-fourthy">
+              He leído, entendido y aceptado los
+              <a target="_blank" href="./terms-conditions" data-qadp="link-tc"
+                >Términos y Condiciones</a
+              >
+              y la
+              <a target="_blank" href="./privacy-policy" data-qadp="link-pp"
+                >política de protección de datos personales</a
+              >, en particular el procesamiento de mi información personal por
+              parte de Bavaria & Cía S.C.A. con las finalidades y usos
+              requeridos por ésta descritos en la mencionada política.
+            </i>
+            <mat-error
+              *ngIf="userRegisterForm.controls.privacy.hasError('required')"
+              >Por favor lea y acepte las políticas y los términos</mat-error
+            >
+          </div>
+        </div>
       </div>
-      
-      <app-captcha [restart]="restartCaptcha"
-                  (status)="setCaptchaStatus($event)">
+
+      <app-captcha
+        [restart]="restartCaptcha"
+        (status)="setCaptchaStatus($event)"
+      >
       </app-captcha>
 
-      <br/><mat-error *ngIf="httpError">{{ httpError }}</mat-error>
+      <mat-error *ngIf="httpError">{{ httpError }}</mat-error>
 
       <button
         block="block"
         color="becks"
         (click)="saveUser()"
         class="becks-btn-primary margin-top-button"
-        [ngClass]="{'button-disabled': userRegisterForm.invalid || !captchaStatus }"
+        [ngClass]="{
+          'button-disabled': userRegisterForm.invalid || !captchaStatus
+        }"
         [disabled]="userRegisterForm.invalid || !captchaStatus"
-        data-qadp="send-button-form">
+        data-qadp="send-button-form"
+      >
         <span>ENVIAR</span>
       </button>
     </form>

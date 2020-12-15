@@ -1,0 +1,72 @@
+<ion-content>
+  <app-header></app-header>
+  <section
+    id="formSection"
+    class="recovery-section fullSection content-flex-all-center"
+  >
+  <span class="logo-2 margin-top-icon"> </span>
+
+    <div
+      class="content-flex-all-center full-height flex-direction-column padding-form"
+    >
+    <button class="cancel-btn" [routerLink]="'/home'">
+      <img src="./assets/icon/cancel-icon.svg" alt="cancel" />
+    </button>
+      <span class="recovery-icon"> </span>
+
+      <form
+        [formGroup]="userRegisterForm"
+        class="form-section"
+        autocomplete="off"
+      >
+        <h1 class="title-secondary">RECUPERAR CONTRASEÑA</h1>
+        <P class="title-tertiary">Ingresa tu correo electrónico con el que te registraste en Beck’s Society y te enviaremos los pasos para ingresar nuevamente</P>
+        <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userRegisterForm.controls.email)"
+        >
+          <mat-label>Correo electrónico</mat-label>
+          <input
+            matInput
+            formControlName="email"
+            placeholder="example@example.com"
+            type="email"
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}$"
+            maxlength="40"
+            [(ngModel)]="userRegister.email"
+            data-qadp="email"
+            required
+          />
+          <mat-error *ngIf="userRegisterForm.controls.email.errors">
+            *Has ingresado un dato inválido
+          </mat-error>
+        </mat-form-field>
+        <app-captcha
+          [showError]="allowCaptchaError"
+          [restart]="restartCaptcha"
+          (status)="setCaptchaStatus($event)"
+        >
+        </app-captcha>
+        <br/>
+        <mat-error *ngIf="httpError">
+          {{ httpError }}
+        </mat-error>
+
+        <button
+          class="becks-btn-primary margin-top-button button-width"
+          (click)="sendEmail()"
+          block="block"
+          color="becks"
+          [ngClass]="{
+            'button-disabled': userRegisterForm.invalid || !captchaStatus
+          }"
+        >
+          <span>RECUPERARLA</span>
+        </button>
+      </form>
+    </div>
+  </section>
+  <app-footer></app-footer>
+</ion-content>

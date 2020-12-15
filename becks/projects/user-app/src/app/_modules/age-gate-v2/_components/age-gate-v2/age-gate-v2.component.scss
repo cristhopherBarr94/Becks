@@ -1,0 +1,200 @@
+.padding-logo {
+  padding-bottom: 0 !important;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .logo-2 {
+    top: 42px;
+    width: 120px;
+  }
+
+  .form-section {
+    position: relative;
+    margin-top: 58px;
+    min-height: 550px;
+    width: 100%;
+    background: rgba(3, 130, 89, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+  }
+  .title-primary {
+    font-size: 16px !important;
+    line-height: 17px !important;
+    letter-spacing: 0.15px !important;
+  }
+  .title-tertiary {
+    font-size: 13.28px !important;
+    line-height: 18px !important;
+    margin-top: 10px;
+    text-transform: lowercase;
+  }
+
+  .text-before {
+    width: 280px;
+  }
+  .margin-check {
+    margin-right: 5px;
+  }
+  .margin-top-button {
+    margin: 20px 0;
+  }
+
+  mat-carousel {
+    .input-age {
+      max-width: 50px !important;
+      margin: 0px 5px !important;
+    }
+    mat-form-field input {
+      font-size: 20px !important;
+    }
+    ::ng-deep .mat-form-field-flex {
+      height: 80px !important;
+    }
+    mat-label {
+      font-size: 18px !important;
+    }
+    mat-carousel-slide {
+      align-items: center;
+    }
+  }
+  ::ng-deep .carousel {
+    height: 200px !important;
+  }
+  ::ng-deep .mat-icon-button {
+    top: 90px !important;
+    right: 0 !important;
+  }
+  ::ng-deep .carousel button:first-of-type {
+    left: 0 !important;
+  }
+  ::ng-deep .mat-icon-button .mat-icon {
+    color: #ffffff;
+  }
+
+  ::ng-deep .mat-icon-button.mat-button-disabled {
+    visibility: hidden;
+  }
+  .error-message {
+    color: #f44336;
+    margin-left: 47px !important;
+    padding-left: 20px !important;
+    width: auto;
+  }
+  mat-error {
+    margin-left: 35px !important;
+  }
+  ::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: #ffffff;
+  }
+  .title-fourthy-width {
+    width: 290px;
+    text-align: justify !important;
+    margin-left: 10px;
+    margin-top: 20px;
+  }
+  .no-margin {
+    margin-top: 20px;
+  }
+}
+@media (min-width: 769px) {
+  .logo-2 {
+    top: 50px;
+    width: 160px;
+  }
+  .fullSection {
+    padding-bottom: 0px;
+  }
+  .form-section {
+    position: relative;
+    margin-top: 130px;
+    margin-bottom: 0;
+    width: 100%;
+    min-height: 680px;
+    background: rgba(3, 130, 89, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+  }
+  .title-primary {
+    font-size: 24px !important;
+    line-height: 50px !important;
+    letter-spacing: 0.15px !important;
+  }
+  .title-tertiary {
+    font-size: 16px !important;
+    line-height: 18px !important;
+  }
+
+  ion-content {
+    --background: var(--ion-background-color, transparent);
+    ::ng-deep .scroll-y {
+      overscroll-behavior-y: auto !important;
+    }
+  }
+
+  .text-before {
+    width: 334px !important;
+  }
+  .content-check {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+    .margin-check {
+      margin-left: 30px;
+    }
+  }
+  .margin-top-button,
+  .no-margin {
+    margin-top: 34px;
+  }
+  .title-fourthy-width {
+    width: 735px;
+    height: 72px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 170px;
+    text-align: left;
+  }
+  .input-age {
+    max-width: 87px !important;
+    margin: 0px 7px !important;
+  }
+  mat-form-field input {
+    height: 127px !important;
+    font-size: 40px !important;
+  }
+
+  mat-label {
+    font-size: 40px !important;
+    margin-top: 36.5px;
+  }
+
+  mat-carousel {
+    mat-carousel-slide {
+      align-items: center;
+    }
+  }
+  ::ng-deep .carousel {
+    height: 250px !important;
+  }
+  ::ng-deep .mat-icon-button .mat-icon {
+    color: #ffffff;
+  }
+
+  ::ng-deep .mat-icon-button.mat-button-disabled {
+    visibility: hidden;
+  }
+  .error-message {
+    color: #f44336;
+    margin-left: 38%;
+  }
+  mat-error {
+    margin-left: 250px !important;
+  }
+  .margin-check {
+    margin-right: 10px;
+  }
+  ::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: #ffffff;
+  }
+}

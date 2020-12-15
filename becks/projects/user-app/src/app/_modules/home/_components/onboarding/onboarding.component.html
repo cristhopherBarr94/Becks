@@ -1,0 +1,146 @@
+<ion-slides
+  loop="false"
+  pager="true"
+  spaceBetween="0"
+  [options]="slideOpts"
+  slidesPerView="1"
+  effect="slide"
+  zoom="false"
+  class="onboarding-slider"
+  #slides
+  (ionSlideWillChange)="doCheck()"
+>
+  <ion-slide>
+    <img
+      src="./assets/img/onboarding/slider_1.png"
+      alt="slider_1"
+      class="onboarding-img animate__animated animate__bounceInRight"
+    />
+    <img
+      src="./assets/img/onboarding/slider_1_desktop.png"
+      alt="slider_1"
+      class="onboarding-img-desk animate__animated animate__bounceInRight"
+    />
+    <div class="content-onbording">
+      <img
+        src="./assets/img/profile_desktop_logo.svg"
+        alt="logo_beck animate__animated animate__bounceInRight"
+        class="logo-brand"
+      />
+      <p
+        class="title-primary primary max-width-title-primary-age-gate animate__animated animate__bounceInRight"
+      >
+        Regístrate
+      </p>
+      <p
+        class="detail-content animate__animated animate__bounceInRight animate__delay-1s"
+      >
+        Sé miembro de la Beck's Society
+      </p>
+    </div>
+    <button class="btn-onboarding btn-omitir" (click)="joinredirection()">
+      <span>Omitir</span>
+    </button>
+    <button
+      class="btn-onboarding btn-action"
+      (click)="swipeNext()"
+      *ngIf="!disableNextBtn"
+    >
+      <span>Siguiente</span>
+    </button>
+    <button
+      class="btn-onboarding btn-action"
+      *ngIf="finalSlider"
+      (click)="joinredirection()"
+    >
+      <span>Unirse</span>
+    </button>
+  </ion-slide>
+  <ion-slide>
+    <img
+      src="./assets/img/onboarding/slider_2.png"
+      alt="slider_2"
+      class="onboarding-img animate__animated animate__bounceInRight"
+    />
+    <img
+      src="./assets/img/onboarding/slider_2_desktop.png"
+      alt="slider_2"
+      class="onboarding-img-desk animate__animated animate__bounceInRight"
+    />
+    <div class="content-onbording">
+      <img
+        src="./assets/img/profile_desktop_logo.svg"
+        alt="logo_beck animate__animated animate__bounceInRight"
+        class="logo-brand"
+      />
+      <p
+        class="title-primary primary max-width-title-primary-age-gate animate__animated animate__bounceInRight"
+      >
+        COMPRA BECK'S
+      </p>
+      <p
+        class="detail-content animate__animated animate__bounceInRight animate__delay-1s"
+      >
+        Compra Beck’s para poder activar las experiencias de este mes
+      </p>
+    </div>
+    <button class="btn-onboarding btn-omitir" (click)="joinredirection()">
+      <span>Omitir</span>
+    </button>
+    <button
+      class="btn-onboarding btn-action"
+      (click)="swipeNext()"
+      *ngIf="!disableNextBtn"
+    >
+      <span>Siguiente</span>
+    </button>
+    <button class="btn-onboarding btn-action" *ngIf="finalSlider">
+      <span>Unirse</span>
+    </button>
+  </ion-slide>
+  <br />
+  <ion-slide>
+    <img
+      src="./assets/img/onboarding/slider_3.png"
+      alt="slider_3"
+      class="onboarding-img animate__animated animate__bounceInRight"
+    />
+    <img
+      src="./assets/img/onboarding/slider_3_desktop.png"
+      alt="slider_3"
+      class="onboarding-img-desk animate__animated animate__bounceInRight"
+    />
+    <div class="content-onbording">
+      <img
+        src="./assets/img/profile_desktop_logo.svg"
+        alt="logo_beck animate__animated animate__bounceInRight"
+        class="logo-brand"
+      />
+      <p
+        class="title-primary primary max-width-title-primary-age-gate animate__animated animate__bounceInRight"
+      >
+        vive experiencias
+      </p>
+      <p
+        class="detail-content animate__animated animate__bounceInRight animate__delay-1s"
+      >
+        Ya estás listo para vivir las experiencias únicas que te da este
+        exclusivo club.
+      </p>
+    </div>
+    <button
+      class="btn-onboarding btn-action"
+      (click)="swipeNext()"
+      *ngIf="!disableNextBtn"
+    >
+      <span>Siguiente</span>
+    </button>
+    <button
+      class="btn-onboarding btn-action"
+      *ngIf="disableNextBtn"
+      (click)="joinredirection()"
+    >
+      <span>Unirse</span>
+    </button>
+  </ion-slide>
+</ion-slides>

@@ -1,0 +1,204 @@
+@mixin input($color, $label-color, $border, $padding) {
+  span,
+  input,
+  :active {
+    color: $color;
+    font-family: "Helvetica LT Std";
+  }
+  .mat-form-field-label {
+    color: $label-color;
+    font-family: "Helvetica LT Std";
+  }
+  .mat-form-field-flex {
+    border: $border;
+    border-radius: 4px;
+  }
+  &:focus .mat-form-field-flex {
+    border: 2px solid #377f5e;
+    border-radius: 4px;
+  }
+  .mat-form-field-ripple,
+  .mat-form-field-underline {
+    display: none;
+  }
+  margin-bottom: 5px;
+}
+
+@mixin select($backgraund-color, $color, $label-color, $border, $padding) {
+  @include input($color, $label-color, $border, $padding);
+  .mat-select-arrow {
+    color: $color;
+  }
+}
+
+mat-form-field .mat-form-field {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.mat-focused {
+  label {
+    color: #ffffff !important;
+  }
+  .mat-input-element {
+    caret-color: #ffffff !important;
+  }
+}
+
+.mat-form-field-subscript-wrapper {
+  padding: 0px !important;
+}
+
+.mat-error {
+  padding-left: 16px;
+}
+
+.fullInput {
+  width: 100%;
+}
+
+.input-becks {
+  @include input(#ffffff, #ffffff, 1px solid #ffffff, 5px 16px);
+}
+
+.input-becks-error {
+  @include input(#ffffff, #ff0c3e, 1px solid #ff0c3e, 5px 16px);
+}
+
+.input-becks-ok {
+  @include input(#ffffff, #219653, 1px solid #ffffff, 5px 16px);
+}
+
+.select-becks {
+  @include select(#377f5e, #ffffff, #ffffff, 1px solid #ffffff, 5px 16px);
+}
+
+.select-becks-ok {
+  @include select(#377f5e, #ffffff, #219653, 1px solid #ffffff, 5px 16px);
+}
+
+.select-becks-error {
+  @include select(#377f5e, #ffffff, #ff0c3e, 1px solid #ff0c3e, 5px 16px);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.input-age {
+  max-width: 89px;
+  margin: 0px 12px;
+
+  .mat-form-field-label {
+    font-family: "Helvetica LT Std";
+    display: flex !important;
+    justify-content: center !important;
+  }
+  input {
+    font-family: "Helvetica LT Std";
+    text-align: center !important;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 100px;
+    margin: 0px 13.5px;
+  }
+}
+
+.mat-option {
+  color: #ffffff;
+  font-family: "Helvetica LT Std";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 50px;
+
+  &.mat-active,
+  &.mat-selected,
+  &.mat-focus-indicator:hover {
+    color: #377f5e !important;
+    background: #ffffff !important;
+  }
+}
+
+.mat-select-panel, .mat-autocomplete-panel  {
+  background: #377f5e;
+  border: 1px solid #ffffff;
+}
+
+.input-search {
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+  width: 220px;
+  height: 29px;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-family: "Helvetica LT Std";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  background: url("../assets/icon/search.png");
+  background-repeat: no-repeat;
+  background-position: 10px;
+  background-size: 15px;
+  padding-left: 30px;
+  transition: padding-left 0.5s;
+}
+
+.input-search:focus {
+  border: none;
+  background: transparent;
+  padding-left: 10px;
+}
+::-webkit-input-placeholder {
+  color: #ffffff;
+}
+
+.pageSize {
+  width: 200px;
+  height: 22px;
+  margin-bottom: 20px;
+  color: #ffffff;
+
+  select {
+    width: 41px;
+    height: 22px;
+    margin: 0 10px;
+    padding-left: 5px;
+    border: 1px solid #ffffff;
+    // box-sizing: border-box;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    background: transparent;
+    background-image: url("../assets/icon/caret-up.svg");
+    background-repeat: no-repeat;
+    background-position: 85% center;
+    background-size: 0.65em auto, 100%;
+    -webkit-appearance: none;
+
+    option,
+    select {
+      background: rgb(17, 19, 18, 1);
+    }
+  }
+
+  @-moz-document url-prefix() {
+    select {
+      padding-left: 0;
+    }
+  }
+}
+
+.mat-form-field {
+  mat-icon {
+    cursor: pointer;
+  }
+}

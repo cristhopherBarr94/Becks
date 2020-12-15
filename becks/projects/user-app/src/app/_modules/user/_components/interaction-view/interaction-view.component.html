@@ -1,0 +1,57 @@
+<ion-content>
+  <app-header></app-header>
+
+  <section class="fullSection interaction-section content-flex-all-center"  [style.background-image]="'linear-gradient(90deg, rgba(2, 2, 2, 0.5) 0%, rgba(2, 2, 2, 0.5) 100%), url('+bgExp+')'">
+    <div
+      class="content-flex-all-center full-height flex-direction-column section-question"
+    >
+      <h1 class="title-secondary main-title">{{titleExpView}}</h1>
+      <div class="separator-becks"></div>
+      <span class="interaction-icon"> </span>
+      <h2 class="title-secondary sub-title">¿Cómo Participar?</h2>
+      <div class="interaction-text title-tertiary">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus in elementum diam. Duis gravida nunc in ex posuere elementum. Sed ut urna leo. Nam porttitor neque luctus
+        </p>
+      </div>
+      <div class="question-box title-tertiary">
+        <p class="title-question">
+          ¿Como se llama la nueva cerveza de Beck’s?
+        </p>
+        <p class="answer-question">
+          respuesta
+        </p>
+        <ion-list class="question-box"  [lines]="'none'">
+          <ion-radio-group value="biff">
+      
+            <ion-item>
+              <ion-label> Pura Malta
+               </ion-label>
+              <ion-radio slot="start" color="light" value="biff"></ion-radio>
+            </ion-item>
+      
+            <ion-item>
+              <ion-label> Dorada
+               </ion-label>
+              <ion-radio slot="start" color="light" value="griff"></ion-radio>
+            </ion-item>
+      
+            <ion-item>
+              <ion-label> Limonada</ion-label>
+              <ion-radio slot="start" color="light" value="buford"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </div>
+      <button
+        block="block"
+        color="becks"
+        class="becks-btn-primary margin-top-button button-width"
+        (click)="redirecWithId()"
+      >
+        <span>PARTICIPAR</span>
+      </button>
+    </div>
+  </section>
+  <app-footer></app-footer>
+</ion-content>

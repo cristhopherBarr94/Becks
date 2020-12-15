@@ -1,0 +1,38 @@
+.container {
+    height: 90%;
+    margin: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .edit-button {
+    background-color: transparent;
+    font-family: "Helvetica LT Std";
+    color: #ffffff;
+    margin-top: 14px;
+    font-size: 20px;
+    text-align: start;
+    margin-right: 20px;
+    @media (min-width: 1367px) {
+      font-size: 16px;
+    }
+  }
+  
+  .separator-line-row {
+    height: 1px;
+    width: 100%;
+    border-top: 0.25px solid #c4c4c4;
+    margin-top: 19px;
+  }
+  
+  .red-color {
+    color: #db4843;
+  }
+  
+  .cancel {
+    position: absolute;
+    margin-left: 380px;
+    background-color: transparent;
+    color:#ffffff
+  }

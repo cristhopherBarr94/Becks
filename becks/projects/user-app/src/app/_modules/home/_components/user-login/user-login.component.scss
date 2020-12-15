@@ -1,0 +1,55 @@
+::ng-deep mat-icon:active {
+  font-family: "Material Icons" !important;
+}
+
+.button-width {
+  border-radius: 16px 0px 16px 0px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 330px !important;
+  }
+  @media (min-width: 769px) {
+    width: 365px !important;
+  }
+}
+
+.separator-login {
+  margin-top: 18px;
+  height: 1px;
+  width: 45%;
+  border: 1px solid #6f6f6f;
+}
+
+.separator-box {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.separator-o {
+  color: #6f6f6f;
+  padding: 9px;
+  font-weight: bold;
+}
+
+.url-hyper {
+  text-decoration: underline #ffffff;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.margin-top-button {
+  margin-top: 20px;
+}
+
+.becks-btn-icon-dis {
+  @media (min-width: 0px) and (max-width: 768px) {
+    margin-left: 30px;
+    margin-right: 50px;
+  }
+  @media (min-width: 769px) {
+    margin: 0px 50px;
+  }
+}
+mat-error {
+  margin-bottom: 20px;
+}

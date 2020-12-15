@@ -1,0 +1,342 @@
+.fullSection {
+  background-color: black;
+}
+#formActivationSection {
+  position: relative !important;
+}
+.separator-becks {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65px;
+  height: 2px;
+  background: rgb(98, 248, 178);
+  background: linear-gradient(
+    90deg,
+    rgba(98, 248, 178, 1) 0%,
+    rgba(18, 18, 18, 1) 100%
+  );
+  position: absolute;
+
+  &__1 {
+    top: 60px;
+    @media (min-width: 769px) {
+      display: none;
+    }
+  }
+
+  &__2 {
+    top: 85px;
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+}
+
+.cancel-btn {
+  position: absolute;
+  background: transparent;
+  width: 35px;
+  height: 35px;
+  right: 20px;
+  top: 20px;
+  padding-right: 30px !important;
+  img {
+    max-width: none !important;
+  }
+  @media (min-width: 0px) and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.activation-icon {
+  @media (min-width: 0px) and (max-width: 768px) {
+    margin-top: 65px;
+  }
+  @media (min-width: 769px) {
+    margin: 20px;
+  }
+}
+.title-secondary {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  letter-spacing: 0.15px !important;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 256px;
+    height: 39px;
+    margin-top: 116px;
+  }
+  @media (min-width: 769px) {
+    width: 300px;
+    height: 52px;
+    margin-top: 80px;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+  }
+}
+
+.title-tertiary {
+  width: 304px;
+  font-weight: bold !important;
+  font-size: 13.28px !important;
+  line-height: 16px !important;
+  text-align: center !important;
+  text-transform: none;
+  a {
+    color: #038259;
+  }
+  @media (min-width: 769px) {
+    width: 413px;
+    font-size: 20px !important;
+    line-height: 24px !important;
+    margin-bottom: 0 !important;
+    font-weight: 700 !important;
+  }
+}
+
+.title-tertiary-link {
+  font-family: "Eurostile BQ";
+  width: 304px;
+  font-weight: bold !important;
+  font-size: 13.28px !important;
+  line-height: 16px !important;
+  text-align: center !important;
+  text-transform: none;
+  a {
+    color: #038259;
+  }
+  @media (min-width: 769px) {
+    width: 413px;
+    font-size: 20px !important;
+    line-height: 30px !important;
+    margin-bottom: 0 !important;
+    font-weight: 700 !important;
+    letter-spacing: normal;
+  }
+}
+// .section-merqueo {
+//   margin: 20px 5px 0px 5px;
+//   text-align: center;
+//   width: 90px;
+//   .city {
+//     text-transform: uppercase;
+//     font-family: "Helvetica LT Std";
+//     font-style: normal;
+//     font-weight: bold;
+//     font-size: 14px;
+//     line-height: 100%;
+//     @media (min-width: 769px) {
+//       font-size: 18px;
+//       line-height: 110%;
+//     }
+//   }
+//   .btn-merqueo {
+//     border: none;
+//     background: transparent;
+//     position: relative;
+//     width: 98px;
+//     height: 44px;
+//     @media (min-width: 769px) {
+//       width: 90px;
+//       height: 44px;
+//     }
+//   }
+//   @media (min-width: 769px) {
+//     margin: 20px 15px 0px 15px;
+//   }
+// }
+
+.section-buy {
+  margin-top: 30px;
+  transition: 0.5;
+  font-family: "Helvetica LT Std";
+  text-align: center;
+  a {
+    text-decoration: none;
+  }
+  .card {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 25px;
+    margin: 2px;
+    margin-top: 10px;
+    object-fit: cover;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    &__1 {
+      background: url("./../../../../../../../assets/img/cerveza_merqueo_sm.png");
+      @media (min-width: 769px) {
+        background: url("./../../../../../../../assets/img/cerveza_merqueo_medium.png");
+      }
+    }
+    &__2 {
+      background: url("./../../../../../../../assets/img/cerveza_merqueo_sm.png");
+      @media (min-width: 769px) {
+        background: url("./../../../../../../../assets/img/cerveza_merqueo_medium.png");
+      }
+    }
+    &__3 {
+      background: url("./../../../../../../../assets/img/cerveza_merqueo_sm.png");
+      @media (min-width: 769px) {
+        background: url("./../../../../../../../assets/img/cerveza_merqueo_medium.png");
+      }
+    }
+    @media (min-width: 0px) and (max-width: 768px) {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+    }
+  }
+
+  .merqueo-icon {
+    width: 54px;
+    height: 26px;
+    top: 11px;
+    left: 15px;
+    @media (min-width: 0px) and (max-width: 768px) {
+      width: 40px;
+      height: 20px;
+      top: 5px;
+      left: 5px;
+    }
+  }
+  .city {
+    width: 90%;
+    position: relative;
+    margin: auto;
+    height: 35px;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 100%;
+    padding: 5px 10px;
+    color: #ffffff;
+    transform: translateY(-10px);
+    @media (min-width: 769px) {
+      font-size: 18px;
+      line-height: 110%;
+    }
+  }
+  .soon-foot {
+    margin-top: 0px;
+  }
+}
+
+.form-section {
+  @media (min-width: 0px) and (max-width: 768px) {
+    margin-top: 30px;
+  }
+  @media (min-width: 769px) {
+    width: 328px;
+  }
+}
+.help-icon {
+  width: 20px !important;
+  height: 20px !important;
+  top: 2px !important;
+}
+::ng-deep .tooltip-becks {
+  background: #ffffff !important;
+  color: black !important;
+
+  text-align: center !important;
+  text-transform: none;
+
+  @media (min-width: 769px) {
+    width: 190px;
+    font-size: 14px !important;
+    line-height: 17px !important;
+  }
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 190px;
+    font-size: 14px !important;
+    line-height: 17px !important;
+  }
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .title-desktop {
+    display: none;
+  }
+  .bg-grey {
+    background-image: linear-gradient(
+        90deg,
+        rgba(2, 2, 2, 0.6) 0%,
+        rgba(2, 2, 2, 0.6) 100%
+      ),
+      url(./../../../../../../../assets/img/bg_inactiva.jpg);
+    background-size: cover;
+    background-position: center;
+  }
+  .bg-color {
+    background-image: linear-gradient(
+        90deg,
+        rgba(2, 2, 2, 0.5) 0%,
+        rgba(2, 2, 2, 0.5) 100%
+      ),
+      url(./../../../../../../../assets/img/bg_activa.jpg);
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .bg-grey {
+    background-image: url(./../../../../../../../assets/img/bg_inactiva.jpg);
+    background-size: cover;
+    background-position: top;
+  }
+  .bg-color {
+    background-image: url(./../../../../../../../assets/img/bg_activa.jpg);
+    background-size: cover;
+    background-position: top;
+  }
+  #formActivationSection {
+    background: rgba(2, 2, 2, 0.7);
+    border-radius: 8px;
+    width: 507px;
+    height: auto;
+    padding: 20px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    .title-desktop {
+      margin-bottom: 0;
+      margin-top: 30px;
+      height: 30px !important;
+      font-family: "Eurostile BQ";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 110%;
+      text-align: center;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .button-width {
+      margin: 20px;
+      width: 328px;
+    }
+  }
+}
+.becks-btn-primary,
+.button-disabled,
+.button-disabled:hover,
+.button-disabled:active {
+  padding-left: 35px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    background-position-x: 7px;
+    font-size: 11px !important;
+    &:hover {
+      background-position-x: 4px;
+    }
+  }
+  @media (min-width: 769px) {
+    background-position-x: 10px;
+    &:hover {
+      background-position-x: 7px;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<div class="modal">
+    <span class="modal-hader">
+    <button class="btn-cancel"
+    (click)="close()"
+    >X</button>
+    </span>
+    <span class="modal-body">
+      <span class="logo-brand-modal"> </span>
+    <div>
+      <h1 [hidden]="allow==true">VAS A DARLE ACCESO A {{amount}} USUARIOS</h1>
+      <h1 [hidden]="allow==false">VAS A ELIMINAR A ESTE USUARIO</h1>
+    </div>
+    <div>
+      <h3>¿DESEAS CONTINUAR?</h3>
+    </div>
+    </span>
+    <span>
+      <button
+      [hidden]="allow==true"
+      class="becks-btn-primary button-width"
+      (click)="activateUserParent()"
+      >CONTINUAR</button>
+      <button
+      [hidden]="allow==false"
+      class="becks-btn-primary button-width"
+      (click)="deleteUserParent()"
+      >ELIMINAR</button>
+    </span>
+</div>

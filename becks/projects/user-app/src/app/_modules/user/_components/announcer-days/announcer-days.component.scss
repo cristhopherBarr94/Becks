@@ -1,0 +1,136 @@
+.announce-section {
+  position: absolute;
+  left: auto;
+  right: 0;
+  background: rgba(18, 18, 18, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 5px 0 0 5px;
+  z-index: 2;
+  text-align: center;
+  justify-content: center;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 99px;
+    height: 115px;
+    top: 140px;
+  }
+  @media (min-width: 769px) {
+    width: 150px;
+    height: 171px;
+    top: 230px;
+  }
+
+  .relative {
+    position: relative;
+    top: 0px;
+    height: 130px;
+    width: 150px;
+    .circle-progress-tool {
+      margin-bottom: 0px !important;
+      position: relative !important;
+      height: 90px;
+      width: 150px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    circle-progress {
+      font-family: "Eurostile BQ";
+      font-style: normal !important;
+      line-height: 50px !important;
+      letter-spacing: 0.15px !important;
+      margin: 0 !important;
+    }
+
+    .supp-circle {
+      position: absolute !important;
+      border-radius: 100%;
+      width: 116px;
+      height: 116px;
+      top: 10px;
+      .clock {
+        position: absolute !important;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 22px;
+        height: 22px;
+        background: url(../../../../../assets/icon/clock-icon.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: black;
+        border-radius: 100%;
+        left: 47px;
+        top: 1px;
+      }
+    }
+    .subtitle-days {
+      position: absolute !important;
+      height: 90px;
+      width: 150px;
+      font-family: "Helvetica LT Std" !important;
+      font-style: normal !important;
+      font-weight: bold !important;
+      font-size: 14px !important;
+      line-height: 12px !important;
+      text-align: center !important;
+      top: 0px;
+      left: 0px;
+
+      .title_1 {
+        margin-top: 42px;
+        margin-bottom: 24px;
+      }
+    }
+  }
+
+  .days-rem {
+    margin-top: 10px;
+    .title,
+    .units {
+      font-family: "Helvetica LT Std";
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 17px;
+    }
+    .units {
+      margin-bottom: 5px !important;
+    }
+    .days {
+      font-family: "Eurostile BQ" !important;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 5px;
+      letter-spacing: 0.15px;
+    }
+  }
+  a {
+    font-family: "Helvetica LT Std";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-decoration-line: underline;
+    text-transform: uppercase;
+    width: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+  }
+  .activated {
+    color: #01c586;
+  }
+  .inactivated {
+    color: #ff0c3e;
+  }
+}
+.temp-relative {
+  @media (min-width: 769px) {
+    position: relative;
+  }
+}

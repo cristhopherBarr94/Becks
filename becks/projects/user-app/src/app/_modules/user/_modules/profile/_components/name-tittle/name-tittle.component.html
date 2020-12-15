@@ -1,0 +1,23 @@
+<div class="container flex-direction-row header-div margin-botton">
+  <div class="margin-top-icon lateral-div">
+    <div
+      class="titleLogo-desktop"
+      *ngIf="this.size == 'lg' || this.size == 'md'"
+    ></div>
+  </div>
+  <div class="col-flex-center flex-direction-column center-div">
+   <div style="height: 51px; width: 100%;" *ngIf=" this.size == 'xs'&& visibleNAme"></div>
+    <div
+      class="titleLogo margin-top-icon title-secondary"
+      *ngIf=" this.size == 'xs'&& !visibleNAme"
+    ></div>
+    <span
+      class="title-profile margin-tittle"
+      *ngIf="user && this.size == 'xs' && !visibleNAme"
+      >!Hola, {{ user.first_name }}!</span
+    >
+  </div>
+  <div class="lateral-div">
+    <!-- <button md-fab class="singOutLogo" (click)="logout()"  *ngIf=" this.size == 'xs'"></button> -->
+  </div>
+</div>

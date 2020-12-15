@@ -1,0 +1,113 @@
+.card-model {
+  height: 72px;
+  @media (min-width: 768px) {
+    height: 117px;
+  }
+  margin-top: 24px;
+  background-color: #141313;
+  width: 90%;
+  display: flex;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.vertical_card_model {
+  margin-top: 24px;
+  background-color: #141313;
+  height: 230px;
+  display: flex;
+  width: 193px;
+  margin-right: 25px;
+  margin-bottom: 24px;
+}
+
+.container {
+  text-align: left;
+  @media (min-width: 768px) {
+    margin-left: 10px;
+  }
+}
+
+.image-box {
+  height: 72px;
+  width: 108px;
+  @media (min-width: 768px) and (max-width: 1200px) {
+    height: 117px;
+    width: 188px;
+  }
+  @media (min-width: 1201px) {
+    height: 117px;
+    width: 218px;
+  }
+  display: flex;
+  justify-content: center;
+}
+
+.image-box-vertical {
+  height: 104px;
+  width: 193px;
+  display: flex;
+  justify-content: center;
+  padding-left: 0px !important;
+}
+
+.image-card {
+  height: 72px;
+  max-width: 108px;
+  // background: -webkit-gradient(linear, left, right, color-stop(0%,#2C2F36), color-stop(100%,#141313));
+  @media (min-width: 768px) {
+    height: 117px;
+    max-width: 218px;
+  }
+}
+
+.image-card-vertical {
+  height: 104px;
+  max-width: 193px;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.content-card {
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100%;
+  padding: 5px;
+  width: 67%;
+}
+
+.content-card-vartical {
+  justify-content: center;
+  align-items: flex-start;
+  height: 40%;
+}
+
+.content-card-details {
+  justify-content: flex-end;
+  min-height: 100%;
+  min-width: 98%;
+  position: absolute;
+  align-items: flex-end;
+}
+
+.view-details {
+  width: 100px;
+}
+
+::ng-deep .mat-card {
+  padding: 0px !important;
+}
+
+.red-color {
+  color: #ff0c3e !important;
+}
+
+.orange-color {
+  color: #ff720c !important;
+}
+
+.green-color {
+  color: #038259 !important;
+}

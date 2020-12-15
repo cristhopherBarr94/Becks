@@ -1,0 +1,76 @@
+<section class="container-exp" *ngIf="isActive">
+  <p
+    class="title1"
+    *ngIf="
+      (pendingCards == undefined || pendingCards.length == 0) &&
+      (acceptCards == undefined || acceptCards.length == 0) &&
+      (cancelCards == undefined || cancelCards.length == 0)
+    "
+  >
+    Aún no cuentas con ninguna experiencia
+  </p>
+  <div class="margin-top">
+    <span class="title-profile orange-color" *ngIf="pendingCards.length > 0"
+      >PENDIENTES</span
+    >
+    <div [ngClass]="direcionCards">
+      <user-experiences-card
+        *ngFor="let item of pendingCards"
+        [urlImageExperience]="item.imagesExp"
+        [nameExperience]="item.titleExp"
+        [vertical]="vertical"
+        [id]="item.id"
+        type="pending"
+      >
+      </user-experiences-card>
+    </div>
+  </div>
+  <div
+    class="separator-exp"
+    *ngIf="pendingCards.length > 0 && acceptCards.length > 0"
+  ></div>
+  <div class="margin-top">
+    <span class="title-profile green-color" *ngIf="acceptCards.length > 0"
+      >RESERVADAS</span
+    >
+    <div [ngClass]="direcionCards">
+      <user-experiences-card
+        *ngFor="let item of acceptCards"
+        [urlImageExperience]="item.imagesExp"
+        [nameExperience]="item.titleExp"
+        [id]="item.id"
+        [vertical]="vertical"
+        type="complete"
+      >
+      </user-experiences-card>
+    </div>
+  </div>
+  <div
+    class="separator-exp"
+    *ngIf="acceptCards.length > 0 && cancelCards.length > 0"
+  ></div>
+  <div
+    class="separator-exp"
+    *ngIf="
+      pendingCards.length > 0 &&
+      cancelCards.length > 0 &&
+      acceptCards.length == 0
+    "
+  ></div>
+  <div class="margin-top">
+    <span class="title-profile red-color" *ngIf="cancelCards.length > 0"
+      >CANCELADAS</span
+    >
+    <div [ngClass]="direcionCards">
+      <user-experiences-card
+        *ngFor="let item of cancelCards"
+        [urlImageExperience]="item.imagesExp"
+        [nameExperience]="item.titleExp"
+        [vertical]="vertical"
+        [id]="item.id"
+        type="cancel"
+      >
+      </user-experiences-card>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,64 @@
+<section class="seccion-tabs">
+  <mat-tab-group mat-stretch-tabs selectedIndex="0" class="tab-group">
+    <mat-tab label="Mi Cuenta" id="count">
+      <user-circle-progress *ngIf="this.size == 'xs'"></user-circle-progress>
+      <div
+        class="container-desktop"
+        *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
+      >
+        <section class="card-component-circle">
+          <user-circle-progress class="internal-section"></user-circle-progress>
+        </section>
+        <!-- <section class="card-component-experiences">
+          <div class="margin-tittle-desktop">
+            <div class="text-aling">
+              <span class="title-profile-big">MIS EXPERIENCIAS</span>
+            </div>
+            <button
+              class="font-link color-green text-aling-end trasparent-button"
+              (click)="redirectExp()"
+              >VER TODAS</button
+            >
+          </div>
+          <user-experiences-cards style="min-width:90%"></user-experiences-cards>
+        </section> -->
+      </div>
+    </mat-tab>
+    <mat-tab label="Mis Experiencias" id="experiencies">
+      <user-experiences-cards
+        *ngIf="this.size == 'xs'"
+      ></user-experiences-cards>
+      <div  [hidden]="isActive" class="title-not-activate" *ngIf="this.size == 'xs'">
+        <p class="title1">
+          Aún no cuentas con ninguna experiencia       
+        </p>
+        <p class="title2">
+          para vivir nuevas experiencias debes activar tu cuenta
+        </p>
+      </div>
+      <div
+        class="container-desktop container-desktop-exp"
+        *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
+      >
+        <section class="experioencesCard">
+          <span class="title-profile-big" style="margin-top: 30px"
+            >MIS EXPERIENCIAS</span
+          >
+          <span class="separator-becks"></span>
+          <user-experiences-cards
+            style="min-width: 100%"
+            [vertical]="true"
+          ></user-experiences-cards>
+          <div  [hidden]="isActive" class="title-not-activate">
+            <p class="title1">
+              Aún no cuentas con ninguna experiencia       
+            </p>
+            <p class="title2">
+              para vivir nuevas experiencias debes activar tu cuenta
+            </p>
+          </div>
+        </section>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</section>

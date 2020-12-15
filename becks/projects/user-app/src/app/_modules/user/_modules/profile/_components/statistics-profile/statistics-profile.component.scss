@@ -1,0 +1,30 @@
+.container-component {
+  min-width: 100%;
+  margin-top: 16px;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    height: 60px;
+    width: 40%;
+  }
+  @media (min-width: 1367px) {
+    width: 40%;
+  }
+}
+
+.div-static {
+  width: 33.3%;
+  min-height: 50px;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    height: 60px;
+  }
+}
+
+.div-static-center {
+  width: 33.4%;
+  min-height: 50px;
+}
+.margin-section {
+  margin-top: 5px;
+  @media (min-width: 769px) {
+    margin-top: 0px;
+  }
+}

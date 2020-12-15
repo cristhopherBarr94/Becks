@@ -1,0 +1,107 @@
+<ion-content>
+  <app-header [hidden]="activate"></app-header>
+  <section
+    class="fullSection from-section content-flex-all-center"
+    [ngClass]="colorBg"
+  >
+    <div *ngIf="show" class="separator-becks separator-becks__1"></div>
+    <div
+      id="formActivationSection"
+      class="content-flex-all-center full-height flex-direction-column padding-form"
+      [hidden]="activate"
+    >
+      <button class="cancel-btn" [routerLink]="'/user/exp'">
+        <img src="./assets/icon/cancel-icon.svg" alt="cancel" />
+      </button>
+      <h2 class="title-desktop">{{title}}</h2>
+      <div class="separator-becks separator-becks__2"></div>
+      <!-- <span class="activation-icon"> </span> -->
+      <h2 class="title-secondary">INGRESA TU CÓDIGO</h2>
+      <p class="title-tertiary">
+        Compra Beck’s en Merqueo, recibe tu código y activa tu cuenta para
+        empezar a vivir experiencias únicas
+      </p>
+      <div class="section-buy">
+        <p>Elige tu ciudad:</p>
+        <ion-row>
+          <a target="_blank" href="https://merqueo.onelink.me/XbOm/beckslatax6">
+            <div class="card card__1">
+              <div class="city">Bogotá</div>
+            </div>
+          </a>
+          <a
+            target="_blank"
+            href="https://merqueo.onelink.me/XbOm/beckslatax6med"
+          >
+            <div class="card card__2">
+              <div class="city">Medellín</div>
+            </div>
+          </a>
+          <a
+            target="_blank"
+            href="https://merqueo.onelink.me/XbOm/beckslatax6cali"
+          >
+            <div class="card card__3">
+              <div class="city">Cali</div>
+            </div>
+          </a>
+        </ion-row>
+        <div class="soon-foot">
+          <p>*Proximamente en más ciudades de Colombia</p>
+        </div>
+      </div>
+
+      <form
+        [formGroup]="userActivationForm"
+        class="form-section"
+        autocomplete="off"
+      >
+        <mat-form-field
+          appearance="fill"
+          floatLabel="auto"
+          class="fullInput"
+          [ngClass]="getClassInput(userActivationForm.controls.codeNum)"
+        >
+          <mat-label>Ingresa el código de compra</mat-label>
+          <input
+            matInput
+            (input)="inputValidatorAlphaNumeric($event)"
+            formControlName="codeNum"
+            placeholder="Número de id"
+            minlength="4"
+            maxlength="11"
+            [(ngModel)]="userActivation.id_number"
+            required
+            data-qadp="codeNum"
+          />
+
+          <mat-icon matSuffix
+            ><span
+              #tooltip="matTooltip"
+              class="help-icon"
+              matTooltip="Compra Beck’s en Merqueo, recibe tu código y escríbelo para activar tu cuenta en la BECK’S SOCIETY"
+              matTooltipClass="tooltip-becks title-tertiary"
+              matTooltipPosition="below"
+              (click)="tooltip.toggle()"
+            ></span
+          ></mat-icon>
+
+          <mat-error *ngIf="httpError">{{ httpError }}</mat-error>
+        </mat-form-field>
+        <button
+          block="block"
+          color="becks"
+          class="becks-btn-primary margin-top-button button-width"
+          [ngClass]="{
+          'button-disabled': userActivationForm.invalid
+        }"
+          [disabled]="userActivationForm.invalid"
+          data-qadp="send-button-form"
+          (click)="verifyCode()"
+        >
+          <span>activa tu cuenta</span>
+        </button>
+      </form>
+    </div>
+  </section>
+</ion-content>

@@ -1,20 +1,23 @@
 .fullSection {
-    padding-left: 20px;
-    padding-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .title-primary {
-    font-weight: 500;
-    font-size: 84px;
-    line-height: 18px;
-    text-align: center;
-    text-transform: none;
+  font-weight: 500;
+  font-size: 84px;
+  line-height: 18px;
+  text-align: center;
+  text-transform: none !important;
+}
+.title-tertiary {
+  text-transform: none !important;
 }
 
 h3 {
-    font-family: 'Helvetica LT Std';
+  font-family: "Helvetica LT Std";
 }
 
 .separator-min {
-    width: auto;
+  width: auto;
 }

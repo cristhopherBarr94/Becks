@@ -1,0 +1,374 @@
+@mixin img-step($background-image, $width, $height) {
+  background-image: $background-image;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: $width;
+  height: $height;
+  margin-top: 65px;
+  margin-bottom: 53px;
+  @media (min-width: 0px) and (max-width: 720px) {
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+}
+
+.separator-min {
+  @include img-step(url("../assets/img/rectangle.svg"), 62px, 2px);
+}
+
+.register {
+  @include img-step(url("../assets/img/register.svg"), 121px, 73px);
+}
+
+.surface {
+  @include img-step(url("../assets/img/surface.svg"), 121px, 73px);
+}
+
+.customer {
+  @include img-step(url("../assets/img/customer.svg"), 121px, 73px);
+}
+
+.logo {
+  width: 140px;
+  height: 65.5px;
+  position: absolute;
+  top: 17px;
+  left: 139px;
+  z-index: 99;
+  margin-top: 0px;
+  // @media (min-width: 0px) and (max-width: 360px) {
+  // }
+  @media (min-width: 0px) and (max-width: 768px) {
+    top: 17px;
+    left: auto;
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+  }
+}
+
+.logo-2 {
+  background-image: url("../assets/img/becks-logoblanco.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  width: 193px;
+  height: 84px;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    width: 150px;
+    height: 71px;
+  }
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 120px;
+    height: 51px;
+  }
+}
+
+.logo-login {
+  background-image: url("../assets/img/becks-logoverde.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  width: 150px;
+  height: 67px;
+}
+
+.titleLogo {
+  background-image: url("../assets/img/tittle_profile_logo.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 27.2px;
+  height: 33px;
+}
+
+.titleLogo-desktop {
+  background-image: url("../assets/img/profile_desktop_logo.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 35.4px;
+  height: 43px;
+}
+
+.singOutLogo {
+  background-image: url("../assets/img/sing_out_logo.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 27.2px;
+  height: 33px;
+  background-color: transparent;
+}
+
+.editLogo {
+  background-image: url("../assets/img/edit_logo.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 17px;
+  height: 25px;
+  background-color: transparent;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 10px;
+    height: 18px;
+  }
+}
+
+.editPhotoLogo {
+  background-image: url("../assets/img/edit_profile_photo.svg");
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  margin-top: 40px;
+  margin-left: 90px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    margin-top: 20px;
+    margin-left: 45px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.loadingLogo {
+  background-image: url("../assets/img/beer_loading.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 103px;
+  height: 127px;
+}
+
+.fb-img {
+  background-image: url("../assets/icon/FB-Frame.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: start;
+  position: relative;
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.social {
+  background-image: url("../assets/img/Social.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 165px;
+  height: 33px;
+}
+
+.img-404 {
+  background-image: url("../assets/img/4042.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 928px;
+  height: 391px;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 349px;
+    height: 147px;
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    width: 500px;
+    height: 211px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 928px;
+    height: 391px;
+  }
+}
+
+.social-icon {
+  width: 28px;
+  height: 28px;
+  margin: 0px 5px;
+}
+
+.recovery-icon {
+  background-image: url("../assets/icon/recovery-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 123px;
+    height: 81px;
+  }
+  @media (min-width: 769px) {
+    width: 147px;
+    height: 74px;
+  }
+}
+
+.plane-icon {
+  background-image: url("../assets/icon/plane-confirm.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  width: 132px;
+  height: 104px;
+}
+.lock-icon {
+  background-image: url("../assets/icon/lock-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  width: 90px;
+  height: 56px;
+}
+.left-arrow-icon {
+  background-image: url("../assets/icon/chevron-left.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 13px;
+    height: 23px;
+  }
+}
+.activation-icon {
+  background-image: url("../assets/icon/activation-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 140px;
+    height: 85px;
+  }
+  @media (min-width: 768px) {
+    width: 160px;
+    height: 100px;
+  }
+}
+.help-icon {
+  background-image: url("../assets/icon/help-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 7px;
+  width: 11px;
+  height: 11px;
+}
+.cancel-icon {
+  background-image: url("../assets/icon/cancel-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  left: 0px;
+}
+.mgm-icon {
+  background-image: url("../assets/icon/mgm-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 132px;
+    height: 89px;
+  }
+  @media (min-width: 769px) {
+    width: 163px;
+    height: 110px;
+  }
+}
+.trash-icon {
+  background-image: url("../assets/icon/trash-alt.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 13px !important;
+    height: 20px !important;
+  }
+  @media (min-width: 769px) {
+    width: 18px;
+    height: 22px;
+  }
+}
+.email-icon {
+  background-image: url("../assets/icon/email-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 18px !important;
+  height: 13px !important;
+  margin-right: 10px;
+}
+.briefcase-icon {
+  background-image: url("../assets/icon/briefcase-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+}
+.logo-brand-modal {
+  background-image: url("../assets/icon/menu/logo_brand.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    left: 45%;
+    width: 27px !important;
+    height: 33px !important;
+  }
+  @media (min-width: 769px) {
+    left: 48%;
+    width: 35px !important;
+    height: 43px !important;
+  }
+}
+
+.interaction-icon {
+  background-image: url("../assets/icon/interaction-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 132px;
+    height: 89px;
+  }
+  @media (min-width: 769px) {
+    width: 135px;
+    height: 87px;
+  }
+}
+.becks-btn-icon {
+  background-image: url("../assets/icon/becks-btn-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: start;
+  position: relative;
+  width: 25px;
+  height: 29px;
+}
+
+.merqueo-icon {
+  background-image: url("../assets/icon/merqueo-icon.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 44px;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 90px;
+  }
+  @media (min-width: 769px) {
+    width: 98px;
+  }
+}

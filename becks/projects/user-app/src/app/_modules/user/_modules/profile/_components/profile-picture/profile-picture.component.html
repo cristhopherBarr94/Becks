@@ -1,0 +1,22 @@
+<div
+  class="content-flex-all-center flex-direction-column container"
+  [ngClass]="isPofile"
+>
+  <ion-avatar *ngIf="time && user" class="image-size-profile">
+    <img *ngIf="user.photo" [src]="url + user.photo + time" />
+    <img
+      *ngIf="user.photo == undefined"
+      [src]="'./assets/img/profile_male.jpg'"
+    />
+  </ion-avatar>
+  <button
+    md-fab
+    class="editPhotoLogo"
+    *ngIf="profile_view"
+    (click)="editPhot()"
+  ></button>
+  <span *ngIf="profile_view"
+        class="font-profile margin-tittle margin-top-letter">{{
+    user.first_name + ' ' + user.last_name
+  }}</span>
+</div>

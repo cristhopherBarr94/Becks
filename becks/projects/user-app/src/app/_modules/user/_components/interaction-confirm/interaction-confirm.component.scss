@@ -1,0 +1,180 @@
+.interaction-section-confirm {
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat;
+  text-align: left;
+  a {
+    color: #01c586;
+  }
+  .logo-brand-modal {
+    @media (min-width: 0px) and (max-width: 768px) {
+      position: relative !important;
+      top: 24px !important;
+      left: 0px !important;
+      margin-bottom: 50px !important;
+    }
+    @media (min-width: 769px) {
+      position: relative !important;
+      top: 40px !important;
+      left: 0px !important;
+      margin-bottom: 50px !important;
+    }
+  }
+  .main-confirm-title {
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 13.28px !important;
+      font-weight: 500 !important;
+      line-height: 20px !important;
+      width: 195px !important;
+    }
+    @media (min-width: 769px) {
+      font-size: 24px !important;
+      line-height: 110% !important;
+      font-style: normal !important;
+      width: 343px !important;
+    }
+  }
+
+  .exp-content {
+    font-family: "Helvetica LT Std";
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 0.15px;
+    color: #ffffff;
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 13.28px;
+      line-height: 110%;
+    }
+    @media (min-width: 769px) {
+      font-size: 24px;
+      line-height: 110%;
+    }
+  }
+  .width-content-exp {
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 13.28px;
+      line-height: 110%;
+    }
+    @media (min-width: 769px) {
+      width: 397px;
+    }
+  }
+  .width-content-exp-alt {
+    line-height: 110%;
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 13.28px;
+      width: 204px;
+    }
+    @media (min-width: 769px) {
+      font-size: 24px;
+      width: 397px;
+    }
+  }
+  ::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: #ffffff;
+  }
+  .content-check {
+    font-family: "Helvetica LT Std";
+    font-style: normal;
+    font-weight: bold;
+
+    display: flex;
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 11px;
+      line-height: 12px;
+      width: 210px;
+    }
+    @media (min-width: 769px) {
+      font-size: 13.28px;
+      line-height: 16px;
+      width: 290px;
+    }
+
+    .text-checkbox {
+      margin-left: 10px;
+      align-items: left !important;
+    }
+  }
+}
+.margin-top-button {
+  margin: 10px;
+}
+
+.section-redemption-confirm {
+  background: rgba(2, 2, 2, 0.5);
+  border-radius: 8px;
+  backdrop-filter: blur(20px) !important;
+  height: auto;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 267px !important;
+    padding: 20px;
+  }
+  @media (min-width: 769px) {
+    width: 495px;
+    padding: 20px;
+  }
+}
+
+.mat-error {
+  @media (min-width: 0px) and (max-width: 768px) {
+    font-size: 10px;
+    padding-left: 0;
+  }
+}
+.button-width {
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 206px !important;
+    height: 35px !important;
+  }
+}
+
+.btn-cancel-redemption {
+  font-family: "Eurostile BQ";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  text-decoration-line: underline;
+  text-transform: uppercase;
+  @media (min-width: 769px) {
+    font-size: 18px;
+    line-height: 110%;
+  }
+}
+.cancel-btn {
+  position: absolute;
+  background: transparent;
+  width: 35px;
+  height: 35px;
+  right: 20px;
+  top: 20px;
+  padding-right: 30px !important;
+  img {
+    max-width: none !important;
+  }
+  @media (min-width: 0px) and (max-width: 768px) {
+    display: none;
+  }
+}
+.becks-btn-primary,
+.button-disabled,
+.button-disabled:hover,
+.button-disabled:active {
+  @media (min-width: 0px) and (max-width: 768px) {
+    padding-left: 20px;
+    background-position-x: 10px;
+    &:hover {
+      background-position-x: 7px;
+    }
+  }
+  @media (min-width: 769px) {
+    background-position-x: 50px;
+    &:hover {
+      background-position-x: 47px;
+    }
+  }
+}

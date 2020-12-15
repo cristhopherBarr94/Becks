@@ -1,0 +1,34 @@
+<ion-content>
+  <app-header></app-header>
+
+  <section class="fullSection confirm-section content-flex-all-center">
+    <span class="logo-2 margin-top-icon"> </span>
+    <div
+      class="content-flex-all-center full-height flex-direction-column section-email"
+    >
+      <button class="cancel-btn" [routerLink]="'/home'">
+        <img src="./assets/icon/cancel-icon.svg" alt="cancel" />
+      </button>
+      <span class="plane-icon"> </span>
+
+      <div class="confirm-text title-tertiary">
+        <p>
+          Hemos enviado a tu correo electrónico los pasos para recuperar tu
+          contraseña.
+        </p>
+        <br />
+        <p>Si no recibes el correo electrónico, haz clic en reenviar correo.</p>
+      </div>
+
+      <button
+        block="block"
+        color="becks"
+        class="becks-btn-primary margin-top-button button-width"
+        [routerLink]="['/home/recovery']"
+      >
+        <span>REENVIAR CORREO</span>
+      </button>
+    </div>
+  </section>
+  <app-footer></app-footer>
+</ion-content>

@@ -1,0 +1,63 @@
+  <section class="circle-progress-tool content-flex-all-center margin-top">
+    <circle-progress
+      [percent]="progress"
+      [radius]="70"
+      [outerStrokeWidth]="27.5"
+      [showInnerStroke]="true"
+      [space]="-32"
+      [innerStrokeColor]="'#121212'"
+      [outerStrokeColor]="colorProgress"
+      [animation]="false"
+      [animationDuration]="50"
+      [showUnits]="false"
+      [maxPercent]="30"
+      [outerStrokeGradient]="false"
+      [outerStrokeGradientStopColor]="colorProgress"
+      [clockwise]="false"
+      [showTitle]="false"
+      [showBackground]="true"
+      [backgroundGradient]="false"
+      [backgroundColor]="'#121212'"
+      [subtitleColor]="'#FFFFFF'"
+      [subtitle]="remaining_days"
+      [subtitleFontSize]="33"
+      [backgroundPadding]="-27"
+      [renderOnClick]="false"
+    ></circle-progress>
+  
+    <section class="content-flex-all-center">
+      <div class="subtitle-days">
+        <p class="title_1">Te quedan</p>
+        <p>Días</p>
+      </div>
+    </section>
+    <section class="content-flex-all-center">
+      <div class="supp-circle" style="transform: rotate(-{{ progress * 3.6 }}deg)">
+        <div class="clock"></div>
+      </div>
+    </section>
+  </section>
+  
+  
+  
+  <section class="content-flex-all-center bar">
+    <ion-progress-bar
+      [value]="progress / 100 + 0.03"
+      style="--progress-background: {{ colorProgressBar }}"
+    ></ion-progress-bar>
+  </section>
+  <div class="content-flex-all-center title-tertiary text-notify">
+    <p>
+    {{textDays}}
+    </p>
+  </div>
+  <div class="content-flex-all-center">
+  <button
+    class="becks-btn-primary button-width margin-top"
+    block="block"
+    color="becks"
+    (click)= "redirectSales()"
+  >
+    <span>{{buttonTitle}}</span>
+  </button>
+  </div>

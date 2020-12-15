@@ -1,0 +1,145 @@
+.button-width {
+  border-radius: 16px 0px 16px 0px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 330px !important;
+  }
+  @media (min-width: 769px) {
+    width: 365px !important;
+  }
+}
+
+.becks-btn-primary {
+  margin: 0 auto;
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: #ffffff;
+}
+.error-http {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 10px 0px;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .no-padding {
+    padding: 5px;
+    ion-row,
+    ion-col {
+      padding: 5px;
+    }
+  }
+
+  .checks {
+    cursor: default;
+    font-family: "Helvetica Neue";
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: bold;
+
+    .content-check {
+      justify-content: space-between;
+      margin: 20px 0px;
+      a {
+        cursor: pointer;
+        color: #219653;
+        text-decoration: underline;
+      }
+    }
+
+    .margin-check {
+      margin-right: 11px;
+    }
+
+    ::ng-deep .mat-checkbox-frame {
+      border-color: white;
+    }
+
+    mat-error {
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      font-weight: normal;
+    }
+    .title-fourthy {
+      text-align: left !important;
+    }
+  }
+  app-captcha {
+    margin-top: 30px;
+  }
+
+  .separator-login {
+    margin-top: 18px;
+    height: 1px;
+    width: 45%;
+    border: 1px solid #6f6f6f;
+  }
+  .separator-box {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+  }
+
+  .separator-o {
+    color: #6f6f6f;
+    padding: 9px;
+    font-weight: bold;
+  }
+
+  .section1,
+  .section2 {
+    // margin-top: 0px !important;
+    margin: 0 auto;
+  }
+  .section1 {
+    margin-top: 30px;
+  }
+}
+@media (min-width: 769px) {
+  .content-flex-all-center {
+    height: auto;
+    justify-content: center;
+
+    .general-row {
+      flex-direction: row;
+      width: 800px;
+
+      .form-section {
+        padding: 20px;
+        width: 400px;
+        flex-direction: column;
+        padding: 10px;
+        justify-content: left;
+        align-items: left;
+
+        .fullInput {
+          width: 364px;
+        }
+      }
+    }
+    .section2 {
+      position: absolute;
+      margin-left: 400px;
+    }
+    .checks {
+      padding: 20px;
+      a {
+        cursor: pointer;
+        color: #095228;
+        text-decoration: underline;
+      }
+    }
+    .content-check {
+      margin: 15px;
+      padding-left: 0px;
+      justify-content: space-between !important;
+    }
+    .button-row {
+      justify-content: center;
+
+      .separator-box {
+        margin: 15px !important;
+      }
+    }
+  }
+}

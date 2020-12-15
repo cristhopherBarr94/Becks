@@ -1,0 +1,85 @@
+<ion-content>
+  <app-header></app-header>
+
+  <section
+    class="fullSection interaction-section-confirm content-flex-all-center"
+    [style.background-image]="
+      'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url(' +
+      this.getImgExp() +
+      ')'
+    "
+  >
+    <div
+      class="section-redemption-confirm content-flex-all-center flex-direction-column"
+    >
+      <button class="cancel-btn" [routerLink]="'/home'">
+        <img src="./assets/icon/cancel-icon.svg" alt="cancel" />
+      </button>
+      <span class="logo-brand-modal"> </span>
+      <div class="width-content-exp">
+        <h1 class="title-secondary">¡FELICITACIONES!</h1>
+        <p class="exp-content">Experiencia: {{ this.experience.titleExp }}</p>
+        <p class="exp-content">Ubicación: {{ this.experience.placeExp }}</p>
+        <p class="exp-content">
+          Enviaremos a tu correo las instrucciones para vivir esta experiencia.
+        </p>
+      </div>
+
+      <form
+        [formGroup]="userRegisterForm"
+        autocomplete="off"
+        class="general-row"
+      >
+        <ion-row>
+          <div class="content-check">
+            <mat-checkbox
+              id="mat-checkbox-privacy"
+              formControlName="privacy"
+              [(ngModel)]="userRegister.privacy"
+              color="success"
+              class="margin-check"
+              required
+            >
+            </mat-checkbox>
+            <p class="text-checkbox">
+              Debes aceptar los
+              <a
+                target="_blank"
+                href="assets/files/TerminosyCondicionesArtista.pdf"
+                data-qadp="link-tc"
+              >
+                Términos y condiciones campaña
+              </a>
+              de Beck's para disfrutar de esta experiencia.
+            </p>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div>
+            <mat-error
+              *ngIf="
+                userRegisterForm.controls.privacy.touched &&
+                userRegisterForm.controls.privacy.invalid
+              "
+              >Por favor lea y acepte los términos y condiciones</mat-error
+            >
+          </div>
+        </ion-row>
+      </form>
+
+      <button
+        block="block"
+        color="becks"
+        (click)="redempExp()"
+        class="becks-btn-primary margin-top-button button-width"
+        [ngClass]="{
+          'button-disabled': userRegisterForm.invalid
+        }"
+      >
+        <span>aceptar</span>
+      </button>
+      <a [routerLink]="['/user/exp']" class="btn-cancel-redemption">cancelar</a>
+    </div>
+  </section>
+  <app-footer></app-footer>
+</ion-content>

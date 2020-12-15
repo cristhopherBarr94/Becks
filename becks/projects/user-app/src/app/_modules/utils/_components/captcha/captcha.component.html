@@ -1,0 +1,17 @@
+<fieldset class="becks-captcha" *ngIf="userCaptcha.question">
+  <legend>{{ userCaptcha.question  }}</legend>
+  <mat-radio-group>
+    <mat-radio-button 
+      *ngFor="let answer of userCaptcha.answers; let i = index"
+      class="answer" 
+      disableRipple="true"
+      [value]="answer.value"
+      (change)="checkCaptcha(answer)">
+        <mat-icon 
+          [ngClass]="{'active': userAnswer.value === answer.value}"
+          aria-hidden="false"
+          >{{ answer.icon }}</mat-icon>
+    </mat-radio-button>
+  </mat-radio-group>
+  <mat-error *ngIf="showError" [hidden]="captchaAnswer.value == userAnswer.value">Captcha no válido</mat-error>
+</fieldset>

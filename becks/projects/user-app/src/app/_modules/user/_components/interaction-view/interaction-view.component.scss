@@ -1,0 +1,163 @@
+.interaction-section {
+  color: #ffffff;
+  font-style: normal !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat;
+  .main-title {
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-weight: 500 !important;
+      font-size: 16px !important;
+      line-height: 50px !important;
+      margin-top: 20px;
+    }
+    @media (min-width: 769px) {
+      font-size: 24px !important;
+      line-height: 50px !important;
+    }
+  }
+  .separator-becks {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65px;
+    height: 2px;
+    background: rgb(98, 248, 178);
+    background: linear-gradient(
+      90deg,
+      rgba(98, 248, 178, 1) 0%,
+      rgba(18, 18, 18, 1) 100%
+    );
+    position: absolute;
+    top: 60px;
+    @media (min-width: 769px) {
+      position: relative;
+      top: 0px;
+    }
+  }
+
+  .interaction-icon {
+    @media (min-width: 0px) and (max-width: 768px) {
+      margin-top: 50px;
+      margin-bottom: 0px;
+    }
+    @media (min-width: 769px) {
+      margin: 30px;
+    }
+  }
+
+  .sub-title {
+    font-style: normal !important;
+    font-weight: 500 !important;
+
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 16px !important;
+      line-height: 50px !important;
+    }
+    @media (min-width: 769px) {
+      font-size: 18.72px !important;
+      line-height: 30px !important;
+    }
+  }
+  .interaction-text {
+    text-align: center;
+    text-transform: lowercase;
+    font-style: normal !important;
+    font-size: 14px !important;
+    line-height: 128% !important;
+    @media (min-width: 0px) and (max-width: 768px) {
+      width: 304px;
+      height: 67px;
+      margin-bottom: 30px;
+    }
+    @media (min-width: 769px) {
+      width: 360px;
+      height: 103px;
+    }
+  }
+  .question-box {
+    text-align: left !important;
+    justify-content: left !important;
+    text-align: center;
+    text-transform: none;
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 14px !important;
+      line-height: 128% !important;
+      font-style: normal !important;
+      width: 330px;
+    }
+    @media (min-width: 769px) {
+      font-size: 14px !important;
+      line-height: 128% !important;
+      font-style: normal !important;
+      width: 360px;
+    }
+
+    .title-question,
+    .answer-question {
+      color: #01c586 !important;
+      margin-left: 10px;
+    }
+
+    .input-becks {
+      background-color: transparent !important;
+      margin-right: 10px;
+    }
+
+    .input-becks:checked {
+      background-color: black !important;
+    }
+  }
+}
+.margin-top-button {
+  margin: 30px;
+}
+
+.section-question {
+  @media (min-width: 769px) {
+    background: rgba(2, 2, 2, 0.7);
+    border-radius: 8px;
+    width: 507px;
+    height: auto;
+    padding: 20px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    backdrop-filter: blur(20px) !important;
+  }
+}
+::ng-deep.item .sc-ion-label-md-h {
+  border: none !important;
+  color: #ffffff;
+  font-style: normal !important;
+  font-family: "Helvetica LT Std";
+  font-size: 14px !important;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    line-height: 24px !important;
+  }
+  @media (min-width: 769px) {
+    line-height: 128% !important;
+  }
+}
+::ng-deep.ion-radio {
+  margin-right: 10px !important;
+}
+.becks-btn-primary,
+.button-disabled,
+.button-disabled:hover,
+.button-disabled:active {
+  padding-left: 35px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    background-position-x: 50px;
+    &:hover {
+      background-position-x: 47px;
+    }
+  }
+  @media (min-width: 769px) {
+    background-position-x: 50px;
+
+    &:hover {
+      background-position-x: 47px;
+    }
+  }
+}

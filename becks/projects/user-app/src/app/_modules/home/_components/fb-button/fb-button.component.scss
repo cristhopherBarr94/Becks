@@ -1,0 +1,10 @@
+.button-width {
+  @media (min-width: 768px) {
+  width: 365px !important;}
+  width: 330px !important;
+  border-radius: 16px 0px 16px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}

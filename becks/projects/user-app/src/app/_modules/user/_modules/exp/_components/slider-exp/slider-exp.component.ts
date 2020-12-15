@@ -19,6 +19,7 @@ import { UiService } from "src/app/_services/ui.service";
 import { UserService } from "src/app/_services/user.service";
 import { SoldMessageComponent } from "src/app/_modules/user/_components/sold-message/sold-message.component";
 import { RedemptionsService } from "src/app/_services/redemptions.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "user-slider-exp",
@@ -57,6 +58,9 @@ export class SliderExpComponent
   wasChecked = false;
   timerToChecked = 0;
   // status = 0;
+
+  public defaultDeskImage = environment.serverUrl + environment.user.getImgExp + "0_desk";
+  public defaultMobileImage = environment.serverUrl + environment.user.getImgExp + "0_mob";
 
   @ViewChild("slides") slides: IonSlides;
 

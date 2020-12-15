@@ -169,6 +169,10 @@ function ab_inbev_api_schema() {
         'not null' => TRUE,
         'description' => 'Experience To timestamp.',
       ],
+    'activate_from' => [
+        'type' => 'int',
+        'description' => 'Activate from timestamp.',
+    ],
     ],
     'primary key' => ['id'],
     'indexes' => [
@@ -484,6 +488,10 @@ function ab_inbev_api_update_8602() {
         'not null' => TRUE,
         'description' => 'Experience To timestamp.',
       ],
+       'activate_from' => [
+              'type' => 'int',
+              'description' => 'Activate from timestamp.',
+            ],
     ],
     'primary key' => ['id'],
     'indexes' => [
@@ -619,3 +627,17 @@ function ab_inbev_api_update_8602() {
   $schema->createTable('ab_inbev_redemption', $spec_redemp);
   return $schema;
 }
+function ab_inbev_api_update_8603() {
+$spec = [
+        'type' => 'int',
+        'description' => 'Activate From.',
+  ];
+  $schema = Database::getConnection()->schema();
+  $schema->addField('ab_inbev_experience', 'activate_from', $spec);
+  return $schema;
+}
+    /**
+   * NOTE: Update 8603 add field activate_from en table ab_inbev_experience.
+   * Update 8603 implements the change correctly.
+   */
+

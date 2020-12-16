@@ -156,6 +156,7 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
       dateEnd: new FormControl("", Validators.required),
       dateStart: new FormControl("", Validators.required),
       dateActiv: new FormControl(""),
+      dateActivTo: new FormControl(""),
       insideCheck: new FormControl("", null),
       outsideCheck: new FormControl("", null),
     });
@@ -225,6 +226,9 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
           this.userEditForm.controls.dateEnd.value.getTime() / 1000
         ),
         activate_from: this.dateVal,
+        activate_to: Math.floor(
+          this.userEditForm.controls.dateActivTo.value.getTime() / 1000
+        ),
         status: this.statusOne,
         stock: this.arrPeriod,
         img_desk: this.photoDes.split(",")[1],
@@ -452,6 +456,14 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
       } else {
         this.userEditForm.controls.dateActiv.reset();
         this.userEditForm.controls.dateActiv.setValue(" ");
+      }
+    }
+    else if (targetHidden == "dateActivTo") {
+      this.hidedateAc = !this.hidedateAc;
+      if (targetStatus == true) {
+      } else {
+        this.userEditForm.controls.dateActivTo.reset();
+        this.userEditForm.controls.dateActivTo.setValue(" ");
       }
     }
   }

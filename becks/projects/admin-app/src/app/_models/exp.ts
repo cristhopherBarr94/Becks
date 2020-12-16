@@ -17,6 +17,7 @@ export class Exp {
   stock: any;
   checkIn?: boolean = false;
   dateActiv: any;
+  dateActivTo: any;
 
   constructor(data?: any) {
     if (data !== undefined) {
@@ -26,6 +27,7 @@ export class Exp {
       this.dateStart = data["dateStart"] !== undefined ? data["dateStart"] : undefined;
       this.dateEnd = data["dateEnd"] !== undefined ? data["dateEnd"] : undefined;
       this.dateActiv = data["dateActiv"] !== undefined ? data["dateActiv"] : undefined;
+      this.dateActivTo = data["dateActivTo"] !== undefined ? data["dateActivTo"] : undefined;
       this.dateRelease = data["dateRelease"] !== undefined ? data["dateRelease"] : undefined;
       this.imagesExp = data["imagesExp"] !== undefined ? data["imagesExp"] : undefined;
       this.imagesExpMob = data["imagesExpMob"] !== undefined ? data["imagesExpMob"] : undefined;
@@ -51,6 +53,7 @@ export class Exp {
     data["dateStart"] = this.dateStart !== undefined ? this.dateStart : null;
     data["dateEnd"] = this.dateEnd !== undefined ? this.dateEnd : null;
     data["dateActiv"] = this.dateActiv !== undefined ? this.dateActiv : null;
+    data["dateActivTo"] = this.dateActivTo !== undefined ? this.dateActivTo : null;
     data["dateRelease"] = this.dateRelease !== undefined ? this.dateRelease : null;
     data["imagesExp"] = this.imagesExp !== undefined ? this.imagesExp : null;
     data["imagesExpMob"] = this.imagesExpMob !== undefined ? this.imagesExpMob : null;

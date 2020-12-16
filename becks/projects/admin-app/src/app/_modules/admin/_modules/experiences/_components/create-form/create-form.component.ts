@@ -88,6 +88,8 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
   private hidedateAc: boolean;
   private dateVal: any;
   private statusOne: string;
+  private activNull: boolean;
+  private dateValTo: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -207,12 +209,14 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
       this.arrPeriod = [];
     }
     this.ui.showLoading();
-    if(this.userEditForm.controls.dateActiv.value!==null){
+    if(this.activNull===true){
       this.statusOne = '2';
-      this.dateVal= this.userEditForm.controls.dateActiv.value.getTime() / 1000
-    }else{
-      this.statusOne = '0';
+      this.dateVal= this.userEditForm.controls.dateActiv.value.getTime() / 1000;
+      this.dateValTo= this.userEditForm.controls.dateActivTo.value.getTime() / 1000;
+    } else {
       this.dateVal= null;
+      this.dateValTo= null;
+      this.statusOne = '0';
     }
     this.httpService
       .post(environment.serverUrl + environment.admin.postExp, {
@@ -226,9 +230,7 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
           this.userEditForm.controls.dateEnd.value.getTime() / 1000
         ),
         activate_from: this.dateVal,
-        activate_to: Math.floor(
-          this.userEditForm.controls.dateActivTo.value.getTime() / 1000
-        ),
+        activate_to: this.dateValTo,
         status: this.statusOne,
         stock: this.arrPeriod,
         img_desk: this.photoDes.split(",")[1],
@@ -453,17 +455,11 @@ export class CreateFormComponent implements OnInit, AfterViewInit {
     else if (targetHidden == "dateActiv") {
       this.hidedateAc = !this.hidedateAc;
       if (targetStatus == true) {
+        this.activNull=true;
       } else {
+        this.activNull=false;
         this.userEditForm.controls.dateActiv.reset();
         this.userEditForm.controls.dateActiv.setValue(" ");
-      }
-    }
-    else if (targetHidden == "dateActivTo") {
-      this.hidedateAc = !this.hidedateAc;
-      if (targetStatus == true) {
-      } else {
-        this.userEditForm.controls.dateActivTo.reset();
-        this.userEditForm.controls.dateActivTo.setValue(" ");
       }
     }
   }

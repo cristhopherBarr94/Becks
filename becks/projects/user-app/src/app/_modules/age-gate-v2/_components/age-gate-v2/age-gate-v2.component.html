@@ -10,12 +10,16 @@
         timings="250ms ease-in"
         [autoplay]="false"
         color="primary"
-        slides="3"
+        [slides]="3"
         [loop]="false"
-        [hideArrows]="false"
+        [hideArrows]="this.arrowsCtrl"
         [hideIndicators]="true"
         [useKeyboard]="false"
         [useMouseWheel]="false"
+        [svgIconOverrides]="{
+          arrowBack: 'chevron-left',
+          arrowForward: 'chevron-right'
+        }"
         orientation="ltr"
         class="content-flex-all-center"
       >
@@ -39,6 +43,7 @@
               <mat-label>A</mat-label>
               <input
                 #year1
+                id="year1"
                 matInput
                 formControlName="year_1"
                 placeholder="A"
@@ -47,7 +52,7 @@
                 generalValidYear="true"
                 (input)="inputValidatorNumeric($event)"
                 data-qadp="year_1"
-                (keyup)="move(year1, year2)"
+                (keyup)="move($event, year1, year2)"
               />
             </mat-form-field>
             <mat-form-field
@@ -59,6 +64,7 @@
               <mat-label>A</mat-label>
               <input
                 #year2
+                id="year2"
                 matInput
                 formControlName="year_2"
                 placeholder="A"
@@ -66,7 +72,7 @@
                 maxlength="1"
                 (input)="inputValidatorNumeric($event)"
                 data-qadp="year_2"
-                (keyup)="move(year2, year3)"
+                (keyup)="move($event, year2, year3)"
               />
             </mat-form-field>
             <mat-form-field
@@ -78,6 +84,7 @@
               <mat-label>A</mat-label>
               <input
                 #year3
+                id="year3"
                 matInput
                 formControlName="year_3"
                 placeholder="A"
@@ -85,7 +92,7 @@
                 maxlength="1"
                 (input)="inputValidatorNumeric($event)"
                 data-qadp="year_3"
-                (keyup)="move(year3, year4)"
+                (keyup)="move($event, year3, year4)"
               />
             </mat-form-field>
             <mat-form-field
@@ -97,12 +104,14 @@
               <mat-label>A</mat-label>
               <input
                 #year4
+                id="year4"
                 matInput
                 formControlName="year_4"
                 placeholder="A"
                 minlength="1"
                 maxlength="1"
                 (input)="inputValidatorNumeric($event)"
+                (keyup)="validateYear($event)"
                 data-qadp="year_4"
               />
             </mat-form-field>
@@ -146,6 +155,7 @@
               <mat-label>M</mat-label>
               <input
                 #month1
+                id="month1"
                 matInput
                 formControlName="month_1"
                 placeholder="M"
@@ -153,7 +163,7 @@
                 maxlength="1"
                 (input)="inputValidatorNumeric($event)"
                 data-qadp="month_1"
-                (keyup)="move(month1, month2)"
+                (keyup)="move($event, month1, month2)"
               />
             </mat-form-field>
             <mat-form-field
@@ -170,6 +180,7 @@
                 placeholder="M"
                 minlength="1"
                 maxlength="1"
+                (keyup)="validateMonth($event)"
                 (input)="inputValidatorNumeric($event)"
                 data-qadp="month_2"
               />
@@ -208,6 +219,7 @@
               <mat-label>D</mat-label>
               <input
                 #day1
+                id="day1"
                 matInput
                 formControlName="day_1"
                 placeholder="D"
@@ -215,7 +227,7 @@
                 maxlength="1"
                 (input)="inputValidatorNumeric($event)"
                 data-qadp="day_1"
-                (keyup)="move(day1, day2)"
+                (keyup)="move($event, day1, day2)"
               />
             </mat-form-field>
             <mat-form-field
@@ -232,6 +244,7 @@
                 placeholder="D"
                 minlength="1"
                 maxlength="1"
+                (keyup)="validateDay($event)"
                 (input)="inputValidatorNumeric($event)"
                 data-qadp="day_2"
               />
@@ -258,13 +271,17 @@
           <div class="text-before">
             <span class="title-fourthy">RECUÉRDAME* </span>
           </div>
-          <mat-checkbox color="success" class="margin-check"></mat-checkbox>
+          <mat-checkbox
+            color="success"
+            class="margin-check"
+            (onchange)="this.checked = !this.checked"
+          ></mat-checkbox>
         </ion-row>
       </div>
       <div class="title-fourthy title-fourthy-width">
         <i class="title-fourthy">
-          No selecciones esta opción si compartes este computador con menores
-          de edad.
+          No selecciones esta opción si compartes este computador con menores de
+          edad.
         </i>
         <p class="no-margin">
           Este sitio web utiliza cookies que se quedarán almacenadas en el
@@ -287,9 +304,10 @@
           class="becks-btn-primary margin-top-button button-width"
           [ngClass]="{
             'button-disabled':
-              yearForm.invalid || monthForm.invalid || dayForm.invalid
+              this.yearchk == false ||
+              this.monthchk == false ||
+              this.daychk == false
           }"
-          [disabled]="yearForm.invalid || monthForm.invalid || dayForm.invalid"
           data-qadp="button_enter_agegate"
         >
           <span>ENTRAR</span>

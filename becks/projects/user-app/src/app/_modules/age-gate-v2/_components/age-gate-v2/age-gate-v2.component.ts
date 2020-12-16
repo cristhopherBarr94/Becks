@@ -214,7 +214,7 @@ export class AgeGateV2Component implements OnInit {
           this.yearForm.controls.year_2.value +
           this.yearForm.controls.year_3.value +
           this.yearForm.controls.year_4.value <=
-          2002
+          parseInt((new Date().getFullYear() - 18).toString())
       ) {
         if (
           this.yearForm.controls.year_1.value +

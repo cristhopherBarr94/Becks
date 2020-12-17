@@ -205,3 +205,8 @@
     border-color: #ffffff;
   }
 }
+.hide-button {
+  ::ng-deep .carousel button:last-of-type {
+    visibility: hidden;
+  }
+}

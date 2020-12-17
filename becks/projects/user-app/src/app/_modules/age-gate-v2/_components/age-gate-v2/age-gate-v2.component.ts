@@ -185,8 +185,10 @@ export class AgeGateV2Component implements OnInit {
     var maxlength = fromtxt.getAttribute(maxlength);
 
     if (event.key === "Backspace") {
-      console.log(event.key, this.cont);
-      document.getElementById("year" + this.cont).focus();
+      let selField;
+      selField = document.getElementById("year" + this.cont);
+      selField.focus();
+      selField.select();
       this.cont -= 1;
       if (this.cont < 1) {
         this.cont = 1;
@@ -195,12 +197,16 @@ export class AgeGateV2Component implements OnInit {
       this.cont = 2;
       if (length == maxlength) {
         totxt.focus();
+        totxt.select();
       }
     }
   }
   validateYear(event) {
     if (event.key === "Backspace") {
-      document.getElementById("year3").focus();
+      let selyear;
+      selyear = document.getElementById("year3");
+      selyear.focus();
+      selyear.select();
       this.yearchk = false;
       this.arrowsCtrl = true;
     } else {
@@ -224,6 +230,7 @@ export class AgeGateV2Component implements OnInit {
           2002
         ) {
           console.log("ingrese mes");
+          this.hideNext(true);
           this.arrowsCtrl = false;
           this.yearchk = false;
         } else {
@@ -241,7 +248,10 @@ export class AgeGateV2Component implements OnInit {
 
   validateMonth(event) {
     if (event.key === "Backspace") {
-      document.getElementById("month1").focus();
+      let selMonth;
+      selMonth = document.getElementById("month1");
+      selMonth.focus();
+      selMonth.select();
       this.monthchk = false;
     } else {
       if (
@@ -256,13 +266,17 @@ export class AgeGateV2Component implements OnInit {
       } else {
         console.log("ingrese día");
         this.monthchk = false;
+        this.hideNext(false);
       }
     }
   }
 
   validateDay(event) {
     if (event.key === "Backspace") {
-      document.getElementById("day1").focus();
+      let selday;
+      selday = document.getElementById("day1");
+      selday.focus();
+      selday.select();
       this.daychk = false;
     } else {
       if (
@@ -278,6 +292,16 @@ export class AgeGateV2Component implements OnInit {
         this.daychk = false;
         window.location.href = "https://www.tapintoyourbeer.com/age_check.cfm";
       }
+    }
+  }
+
+  hideNext(act: boolean) {
+    let styl = "";
+    if (act) {
+      let styl = " hide-button";
+      return styl;
+    } else {
+      return styl;
     }
   }
 }

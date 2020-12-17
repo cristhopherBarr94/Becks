@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -8,14 +8,6 @@ import {
 import * as moment from "moment";
 import { Router } from "@angular/router";
 import { IonSlides } from "@ionic/angular";
-import {
-  MatCarouselSlide,
-  MatCarouselSlideComponent,
-} from "@ngmodule/material-carousel";
-import { invalid } from "@angular/compiler/src/render3/view/util";
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
-
 @Component({
   selector: "age-gate-v2",
   templateUrl: "./age-gate-v2.component.html",
@@ -33,36 +25,27 @@ export class AgeGateV2Component implements OnInit {
   public yearchk: boolean = false;
   public arrowsCtrl: boolean = true;
   public cont: number = 2;
+  public prevHidden: boolean = false;
+  public nextHidden: boolean = false;
+  public activeIndex: number;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
-  ) {
-    this.matIconRegistry.addSvgIcon(
-      "chevron-left",
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        "../../../../../../assets/icon/chevron-left.svg"
-      )
-    );
-    this.matIconRegistry.addSvgIcon(
-      "chevron-right",
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        "../../../../../../assets/icon/chevron-right.svg"
-      )
-    );
+  @ViewChild("mySlider") slides: IonSlides;
+  slideOpts = {
+    initialSlide: 0,
+    speed: 500,
+    allowTouchMove: false,
+    effect: "fade",
+  };
+
+  constructor(private formBuilder: FormBuilder, private router: Router) {
+    setTimeout(() => {
+      this.slides.lockSwipes(true);
+    }, 100);
   }
 
   ngOnInit() {
     this.checked = false;
     this.initforms();
-    // console.log(
-    //   this.yearForm.controls.year_1.value +
-    //     this.yearForm.controls.year_2.value +
-    //     this.yearForm.controls.year_3.value +
-    //     this.yearForm.controls.year_4.value
-    // );
   }
 
   initforms() {
@@ -230,9 +213,8 @@ export class AgeGateV2Component implements OnInit {
           2002
         ) {
           console.log("ingrese mes");
-          this.hideNext(true);
-          this.arrowsCtrl = false;
           this.yearchk = false;
+          this.slideNext();
         } else {
           this.yearchk = true;
           this.monthchk = true;
@@ -266,7 +248,7 @@ export class AgeGateV2Component implements OnInit {
       } else {
         console.log("ingrese día");
         this.monthchk = false;
-        this.hideNext(false);
+        this.slideNext();
       }
     }
   }
@@ -295,13 +277,32 @@ export class AgeGateV2Component implements OnInit {
     }
   }
 
-  hideNext(act: boolean) {
-    let styl = "";
-    if (act) {
-      let styl = " hide-button";
-      return styl;
-    } else {
-      return styl;
+  // Move to Next slide
+  slideNext() {
+    this.slides.lockSwipes(false);
+    this.slides.slideNext(500);
+    this.slides.lockSwipes(true);
+  }
+
+  // Move to previous slide
+  slidePrev() {
+    this.slides.lockSwipes(false);
+    this.slides.slidePrev(500);
+    this.slides.lockSwipes(true);
+  }
+
+  async getIndex() {
+    if (this.slides) {
+      this.activeIndex = await this.slides.getActiveIndex();
+      console.log(this.activeIndex);
+      if (this.activeIndex == 0) {
+        this.prevHidden = false;
+      } else if (this.activeIndex == 1) {
+        this.prevHidden = true;
+      }
+      if (this.activeIndex == 2) {
+        this.prevHidden = true;
+      }
     }
   }
 }

@@ -38,7 +38,7 @@
     margin: 20px 0;
   }
 
-  mat-carousel {
+  ion-slides {
     .input-age {
       max-width: 50px !important;
       margin: 0px 5px !important;
@@ -55,21 +55,16 @@
     mat-label {
       font-size: 18px !important;
     }
-    mat-carousel-slide {
+    ion-slide {
       align-items: center;
     }
-  }
-  ::ng-deep .carousel {
-    height: 200px !important;
   }
   ::ng-deep .mat-icon-button {
     top: 90px !important;
     right: 0 !important;
     transition: 0.5 all !important;
   }
-  ::ng-deep .carousel button:first-of-type {
-    left: 0 !important;
-  }
+
   ::ng-deep .mat-icon-button .mat-icon {
     color: #ffffff;
   }
@@ -80,12 +75,9 @@
 
   .error-message {
     color: #f44336;
-    margin-left: 47px !important;
+    // margin-left: 47px !important;
     padding-left: 20px !important;
     width: auto;
-  }
-  mat-error {
-    margin-left: 35px !important;
   }
   ::ng-deep .mat-checkbox .mat-checkbox-frame {
     border-color: #ffffff;
@@ -174,29 +166,14 @@
     margin-top: 36.5px;
   }
 
-  mat-carousel {
-    mat-carousel-slide {
-      align-items: center;
-    }
-  }
-  ::ng-deep .carousel {
-    height: 250px !important;
-  }
   ::ng-deep .mat-icon-button .mat-icon {
     color: #ffffff;
     width: 36px !important;
     height: 36px !important;
   }
 
-  ::ng-deep .mat-icon-button.mat-button-disabled {
-    visibility: hidden;
-  }
   .error-message {
     color: #f44336;
-    margin-left: 38%;
-  }
-  mat-error {
-    margin-left: 250px !important;
   }
   .margin-check {
     margin-right: 10px;
@@ -205,8 +182,60 @@
     border-color: #ffffff;
   }
 }
-.hide-button {
-  ::ng-deep .carousel button:last-of-type {
-    visibility: hidden;
+
+ion-slides {
+  height: 300px !important;
+  width: 600px !important;
+  margin-bottom: 20px;
+  @media (min-width: 0px) and(max-width:768px) {
+    height: 200px !important;
+    width: 300px !important;
+  }
+}
+
+.position-relative {
+  position: relative;
+}
+.btn-prev-field,
+.btn-next-field {
+  background: transparent;
+  color: #ffffff;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  z-index: 99;
+  .material-icons {
+    font-size: 40px;
+  }
+  @media (min-width: 769px) {
+    width: 80px;
+    height: 80px;
+    .material-icons {
+      font-size: 60px;
+    }
+  }
+  :hover {
+    border: none;
+  }
+  :active {
+    border: none !important;
+  }
+}
+.btn-prev-field {
+  left: 10px !important;
+  top: 165px !important;
+  @media (min-width: 769px) {
+    left: 250px !important;
+    top: 200px !important;
+  }
+}
+
+.btn-next-field {
+  right: 10px !important;
+  top: 165px !important;
+
+  @media (min-width: 769px) {
+    right: 250px !important;
+    top: 200px !important;
   }
 }

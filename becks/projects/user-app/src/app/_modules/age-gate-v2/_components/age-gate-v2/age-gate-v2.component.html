@@ -2,33 +2,27 @@
   class="content-flex-all-center flex-direction-column age-gate-background-img padding-logo"
 >
   <span class="logo-2"></span>
-  <div class="form-section">
+  <div class="form-section position-relative">
     <h1 class="title-primary">PARA CONTINUAR DEBES SER MAYOR DE EDAD</h1>
 
     <div>
-      <mat-carousel
-        timings="250ms ease-in"
-        [autoplay]="false"
-        color="primary"
-        [slides]="3"
-        [loop]="false"
-        [hideArrows]="this.arrowsCtrl"
-        [hideIndicators]="true"
-        [useKeyboard]="false"
-        [useMouseWheel]="false"
-        [svgIconOverrides]="{
-          arrowBack: 'chevron-left',
-          arrowForward: 'chevron-right'
-        }"
-        orientation="ltr"
-        class="content-flex-all-center"
-        [ngClass]="hideNext()"
+      <button
+        *ngIf="this.prevHidden"
+        class="btn-prev-field"
+        (click)="slidePrev()"
       >
-        <mat-carousel-slide
-          #matCarouselSlide
-          overlayColor=""
-          [hideOverlay]="false"
-        >
+        <span class="material-icons">keyboard_arrow_left</span>
+      </button>
+      <ion-slides
+        class="full-height .slide"
+        pager="false"
+        zoom="false"
+        lockSwipes="true"
+        slidesPerView="1"
+        (ionSlideDidChange)="getIndex()"
+        #mySlider
+      >
+        <ion-slide class="flex-direction-column">
           <h3 class="title-tertiary">INGRESA TU AÑO DE NACIMIENTO</h3>
           <form
             [formGroup]="yearForm"
@@ -135,11 +129,10 @@
                 yearForm.controls.year_3.value != '' &&
                 yearForm.controls.year_4.value != '')
             "
-            style="margin-left: 30%"
             >{{ invalidYear() }} *Ingrese un año entre 1920 y 2020</mat-error
           >
-        </mat-carousel-slide>
-        <mat-carousel-slide overlayColor="" [hideOverlay]="false">
+        </ion-slide>
+        <ion-slide class="flex-direction-column">
           <h3 class="title-tertiary">INGRESA TU MES DE NACIMIENTO</h3>
 
           <form
@@ -202,8 +195,8 @@
           >
             {{ invalidMonth() }}
           </mat-error>
-        </mat-carousel-slide>
-        <mat-carousel-slide overlayColor="" [hideOverlay]="false">
+        </ion-slide>
+        <ion-slide class="flex-direction-column">
           <h3 class="title-tertiary">INGRESA TU DÍA DE NACIMIENTO</h3>
 
           <form
@@ -264,9 +257,16 @@
           >
             {{ invalidDay() }}
           </mat-error>
-        </mat-carousel-slide>
-      </mat-carousel>
-
+        </ion-slide>
+      </ion-slides>
+      <!-- <button
+        *ngIf="this.nextHidden"
+        class="btn-next-field"
+        [ngClass]="{ 'detail-active': truePager }"
+        (click)="slideNext()"
+      >
+        <span class="material-icons">keyboard_arrow_right</span>
+      </button> -->
       <div class="content-check content-flex-all-center">
         <ion-row>
           <div class="text-before">

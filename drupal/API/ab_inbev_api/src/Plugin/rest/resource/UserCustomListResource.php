@@ -103,6 +103,9 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
     $this->dbConnection = $db_connection;
     $this->entityTypeManager = $entity_type_manager;
     $this->currentRequest = $request;
+    
+    //GMT-5
+    date_default_timezone_set('America/Bogota');
   }
 
   /**

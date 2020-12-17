@@ -81,6 +81,9 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     parent::__construct($configuration, $plugin_id, $plugin_definition, $serializer_formats, $logger);
     $this->dbConnection = $db_connection;
     $this->entityTypeManager = $entity_type_manager;
+    
+    //GMT-5
+    date_default_timezone_set('America/Bogota');
   }
 
   /**

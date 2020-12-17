@@ -105,6 +105,9 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
     $this->entityTypeManager = $entity_type_manager;
     $this->currentRequest = $request;
     $this->currentUser = $account;
+    
+    //GMT-5
+    date_default_timezone_set('America/Bogota');
   }
 
   /**

@@ -108,6 +108,9 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
     $this->currentRequest = $request;
     $this->currentUser = $account;
     $this->passwordHasher = $password_hasher;
+    
+    //GMT-5
+    date_default_timezone_set('America/Bogota');
   }
 
   /**

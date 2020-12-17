@@ -138,7 +138,6 @@
                      (change)="
                          hideField($event.source.name, $event.source.checked)
                        "
-
                    ></mat-slide-toggle>
                  </ion-row>
 
@@ -184,6 +183,46 @@
                     *Has ingresado un dato inválido
                   </mat-error>
                 </mat-form-field>
+
+                <mat-form-field
+
+                  appearance="fill"
+                  floatLabel="auto"
+                  class="smallInput"
+                  [ngClass]="getClassInput(userEditForm.controls.dateActivTo)"
+                  hideRequiredMarker
+                >
+                  <mat-label>Fecha Activación</mat-label>
+                  <input
+                    matInput
+                    [ngxMatDatetimePicker]="picker5"
+                    [min]="minDate2"
+                    formControlName="dateActivTo"
+                  />
+                  <mat-datepicker-toggle matSuffix [for]="picker5">
+                    <mat-icon matDatepickerToggleIcon
+                    >keyboard_arrow_down</mat-icon
+                    >
+                  </mat-datepicker-toggle>
+                  <ngx-mat-datetime-picker
+                    #picker5
+                    [showSpinners]="true"
+                    [showSeconds]="true"
+                    [touchUi]="false"
+                    [enableMeridian]="true"
+                    [disableMinute]="false"
+                  >
+                  </ngx-mat-datetime-picker>
+                  <mat-error
+                    *ngIf="
+                      userEditForm.controls.dateActivTo.touched &&
+                      userEditForm.controls.dateActivTo.errors
+                    "
+                  >
+                    *Has ingresado un dato inválido
+                  </mat-error>
+                </mat-form-field>
+
               </ion-row>
               <!--fecha activacion-->
 

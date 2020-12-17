@@ -61,7 +61,7 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
-  
+
   /**
    * A current request.
    *
@@ -139,7 +139,7 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
    * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    */
   public function get($id) {
-    
+
     $response = new ResourceResponse($this->loadRecords($id));
     $disable_cache = new CacheableMetadata();
     $disable_cache->setCacheContexts(['url.path', 'url.query_args']);
@@ -147,7 +147,6 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
 
     return $response;
   }
-
   /**
    * Responds to POST requests and saves the new record.
    *
@@ -160,7 +159,7 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
   public function post($data) {
 
     // ADMIN
-    if ( !in_array("administrator", $this->currentUser->getRoles()) ) {
+    if ( !in_array("web_app", $this->currentUser->getRoles()) ) {
       return new ModifiedResourceResponse(['message' => 'No permitido'], 405);
     }
 
@@ -178,7 +177,10 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
       'url_terms' => $data['url_terms'],
       'created' => $date,
       'valid_from' => $data['valid_from'],
-      'valid_to' => $data['valid_to']
+      'valid_to' => $data['valid_to'],
+	  'activate_from' => $data['activate_from'],
+	  'activate_to' => $data['activate_to'],
+	  'status' => $data['status'],
    ];
 
     $id = $this->dbConnection->insert('ab_inbev_experience')
@@ -265,8 +267,8 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
    */
   public function patch($id, $data) {
     // ADMIN
-    if ( !in_array("administrator", $this->currentUser->getRoles()) ) {
-      return new ModifiedResourceResponse(['message' => 'No permitido'], 405);
+    if ( !in_array("web_app", $this->currentUser->getRoles()) ) {
+      return new ModifiedResourceResponse(['message' => $this->currentUser->getRoles()], 405);
     }
 
     $this->validate_patch($data);
@@ -297,7 +299,7 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
       dump( $th );
       throw new BadRequestHttpException('Error guardando imagen, intenta de nuevo mas tarde.');
     }
-    
+
     // SET EXP DATA
     $exp_data = [
       'title' => $data['title'],
@@ -307,7 +309,9 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
       'url_terms' => $data['url_terms'],
       'valid_from' => $data['valid_from'],
       'valid_to' => $data['valid_to'],
-      'activate_from' => $data['activate_from'],
+	  'activate_from' => $data['activate_from'],
+	   'activate_to' => $data['activate_to'],
+	  'status' => $data['status']
    ];
 
    try {
@@ -318,16 +322,16 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
    } catch (\Throwable $th) {
       throw new BadRequestHttpException('Error interno, No se pudieron actualizar los datos, intenta de nuevo mas tarde.');
    }
-    
+
     $actual_date = time();
     //SET STOCK DATA
     foreach ($data['stock'] as &$stock) {
       if ( $stock['delete'] == true  && $stock['add'] == true ) {
         // UNSENSE QUERY CONDITION
-        continue; 
+        continue;
       }
-      
-      if ( ( !isset($stock['delete']) && !isset($stock['add']) ) || 
+
+      if ( ( !isset($stock['delete']) && !isset($stock['add']) ) ||
             ( !$stock['delete'] && !$stock['add'] ) ) {
         try {
           // UPDATE QUERY CONDITION
@@ -504,7 +508,7 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
     // @DCG Add more validation rules here.
   }
 
-  
+
   protected function validate_patch($record) {
     if (!is_array($record) || count($record) == 0) {
       throw new BadRequestHttpException('No record content received.');
@@ -577,31 +581,31 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
   }
 
   protected function loadRecords($typeQuery) {
-    
+
     switch ($typeQuery) {
       case 0:
         // All the active experiences
         // $result = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} WHERE 1', []);
         $date = time();
         $result = $this->dbConnection->query('SELECT  exp.*,
-                                                      sum(stock.stock_initial) as stock_initial, 
-                                                      sum(stock.stock_actual) as stock_actual 
-                                              FROM {ab_inbev_experience} exp 
-                                              INNER JOIN {ab_inbev_exp_stock} stock 
-                                                    ON exp.id = stock.eid 
-                                                    AND exp.valid_from <= :date 
-                                                    AND exp.valid_to >= :date 
-                                                    AND stock.release <= :date 
-                                              GROUP BY exp.id, exp.type, exp.status, exp.title, exp.description, exp.inscription_txt, exp.location, exp.url_redirect, exp.url_terms, exp.created, exp.valid_from, exp.valid_to, exp.activate_from, exp.status', [':date' => $date]);
+                                                      sum(stock.stock_initial) as stock_initial,
+                                                      sum(stock.stock_actual) as stock_actual
+                                              FROM {ab_inbev_experience} exp
+                                              INNER JOIN {ab_inbev_exp_stock} stock
+                                                    ON exp.id = stock.eid
+                                                    AND exp.valid_from <= :date
+                                                    AND exp.valid_to >= :date
+                                                    AND stock.release <= :date
+                                              GROUP BY exp.id, exp.type, exp.status, exp.title, exp.description, exp.inscription_txt, exp.location, exp.url_redirect, exp.url_terms, exp.created, exp.valid_from, exp.valid_to, exp.activate_from, exp.activate_to, exp.status', [':date' => $date]);
         $records = [];
         $ids = [];
         while($record = $result->fetchAssoc()) {
           $records[] = $record;
           $ids[] = $record['id'];
         }
-        $resultII = $this->dbConnection->query('SELECT exp.* FROM {ab_inbev_experience} exp 
-                                              WHERE exp.valid_from <= :date 
-                                              AND exp.valid_to >= :date 
+        $resultII = $this->dbConnection->query('SELECT exp.* FROM {ab_inbev_experience} exp
+                                              WHERE exp.valid_from <= :date
+                                              AND exp.valid_to >= :date
                                               AND exp.id NOT IN ( :ids ) ', [':date' => $date, ':ids' => implode(" , ", $ids)]);
         while($record = $resultII->fetchAssoc()) {
           if ( in_array($record['id'] , $ids) ) {
@@ -656,7 +660,7 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
   protected function loadRecordsAdmin( $typeQuery ) {
     switch ( $typeQuery ) {
       case 0:
-      
+
       case 1:
         return $records = $this->dbConnection->query('SELECT * FROM {ab_inbev_experience} ')->fetchAssoc();
       default:

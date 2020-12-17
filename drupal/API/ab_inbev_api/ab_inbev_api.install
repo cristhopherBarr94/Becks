@@ -173,6 +173,10 @@ function ab_inbev_api_schema() {
         'type' => 'int',
         'description' => 'Activate from timestamp.',
     ],
+        'activate_to' => [
+            'type' => 'int',
+            'description' => 'Activate to timestamp.',
+        ],
     ],
     'primary key' => ['id'],
     'indexes' => [
@@ -488,10 +492,14 @@ function ab_inbev_api_update_8602() {
         'not null' => TRUE,
         'description' => 'Experience To timestamp.',
       ],
-       'activate_from' => [
-              'type' => 'int',
-              'description' => 'Activate from timestamp.',
-            ],
+        'activate_from' => [
+        'type' => 'int',
+        'description' => 'Activate from timestamp.',
+        ],
+        'activate_to' => [
+          'type' => 'int',
+          'description' => 'Activate to timestamp.',
+        ],
     ],
     'primary key' => ['id'],
     'indexes' => [
@@ -632,8 +640,13 @@ $spec = [
         'type' => 'int',
         'description' => 'Activate From.',
   ];
+$specD = [
+  'type' => 'int',
+  'description' => 'Activate To.',
+];
   $schema = Database::getConnection()->schema();
   $schema->addField('ab_inbev_experience', 'activate_from', $spec);
+  $schema->addField('ab_inbev_experience', 'activate_to', $specD);
   return $schema;
 }
     /**

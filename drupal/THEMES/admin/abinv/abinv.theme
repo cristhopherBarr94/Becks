@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * SUBTHEME theme file.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+function abinv_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  	if(in_array($form_id, ['user_login_form'])){
+    $form['name']['#attributes']['placeholder'] = t('Usuario*');
+	$form['pass']['#attributes']['placeholder'] = t('Contraseña*');
+}	
+}
+
+function abinv_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Alter login form and add own custom submit handler.
+  $form['#submit'][] = 'abinv_user_login_form_submit';
+
+}
+function abinv_user_login_form_submit($form, FormStateInterface $form_state) {
+  // Set redirect to login form.
+  $form_state->setRedirect('view.experience.experience');
+}
+

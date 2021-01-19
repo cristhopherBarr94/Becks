@@ -55,6 +55,8 @@
       *ngIf="(this.isActivate && exp.stock_actual) || exp.status == 2"
       [stock]="exp.stock_actual"
       [status]="exp.status"
+      [type]="exp.type"
+      [reserved]="this.reserv"
     ></user-announcer-amount>
     <img
       *ngIf="this.size == 'lg' || this.size == 'md'"
@@ -148,11 +150,36 @@
 
         <!-- [routerLink]="['/user/interaction/', exp.id]" -->
         <button
-          *ngIf="this.isActivate && exp.stock_actual > 0 && exp.status != '2'"
+          *ngIf="
+            this.isActivate &&
+            exp.stock_actual > 0 &&
+            exp.status != '2' &&
+            exp.type != '3'
+          "
           block="block"
           color="becks"
           (click)="participateExperience(exp.id)"
           class="becks-btn-primary margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+          [ngClass]="{
+            'animate__animated animate__bounceInLeft animate__delay-1s': this
+              .isActivate
+          }"
+        >
+          <span>Participar</span>
+        </button>
+
+        <!-- free event -->
+        <button
+          *ngIf="
+            this.isActivate &&
+            exp.stock_actual > 0 &&
+            exp.status != '2' &&
+            exp.type == '3'
+          "
+          block="block"
+          color="becks"
+          (click)="participateExperience(exp.id)"
+          class="becks-btn-free margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
           [ngClass]="{
             'animate__animated animate__bounceInLeft animate__delay-1s': this
               .isActivate
@@ -176,7 +203,7 @@
         </button>
 
         <button
-          *ngIf="exp.stock_actual == 0"
+          *ngIf="this.isActivate && exp.stock_actual == 0"
           block="block"
           color="becks"
           class="becks-btn-sold margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
@@ -256,7 +283,12 @@
       <span>Activa tu cuenta</span>
     </button>
     <button
-      *ngIf="this.isActivate && exp.stock_actual > 0 && exp.status != '2'"
+      *ngIf="
+        this.isActivate &&
+        exp.stock_actual > 0 &&
+        exp.status != '2' &&
+        exp.type != '3'
+      "
       block="block"
       color="becks"
       (click)="participateExperience(exp.id)"
@@ -268,6 +300,26 @@
     >
       <span>Participar</span>
     </button>
+    <!-- free event -->
+    <button
+      *ngIf="
+        this.isActivate &&
+        exp.stock_actual > 0 &&
+        exp.status != '2' &&
+        exp.type == '3'
+      "
+      block="block"
+      color="becks"
+      (click)="participateExperience(exp.id)"
+      class="becks-btn-free more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+      [ngClass]="{
+        'animate__animated animate__bounceInLeft animate__delay-1s': this
+          .isActivate
+      }"
+    >
+      <span>Participar</span>
+    </button>
+    <!-- soon event -->
     <button
       *ngIf="this.isActivate && exp.status == 2"
       block="block"
@@ -281,6 +333,7 @@
     >
       <span>PRÓXIMAMENTE</span>
     </button>
+    <!-- sold out event -->
     <button
       *ngIf="this.isActivate && exp.stock_actual == 0"
       block="block"

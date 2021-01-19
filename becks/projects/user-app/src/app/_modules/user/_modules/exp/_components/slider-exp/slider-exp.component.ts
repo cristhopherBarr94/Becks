@@ -44,6 +44,8 @@ export class SliderExpComponent
   private redemps: number[] = [];
   public activeIndex: number;
   public DefaultSlide: boolean = false;
+  public reserv: boolean = false;
+
   sliderExp = {
     isBeginningSlide: true,
     isEndSlide: false,
@@ -246,6 +248,7 @@ export class SliderExpComponent
       for (let _id of this.redemps) {
         if (_id == eid) {
           //pop up message error
+          this.reserv = true;
           this.router.navigate([`user/access-forbidden/${eid}`]);
           return;
         }

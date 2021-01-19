@@ -435,18 +435,24 @@
   span {
     font-size: 40px;
   }
+  @media (max-width: 680px) {
+    top: 0;
+    bottom: 0;
+  }
+  @media (min-width: 681px) and (max-width: 1024px) {
+    bottom: 10px;
+  }
+  @media (min-width: 1025px) {
+    bottom: -70px;
+  }
 }
 
 .btn-prev {
   left: 1%;
-  top: 0;
-  bottom: 0;
 }
 
 .btn-next {
   right: 1%;
-  top: 0;
-  bottom: 0;
 }
 
 .detail-active {

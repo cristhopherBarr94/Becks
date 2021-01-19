@@ -17,7 +17,17 @@
     font-size: 11px !important;
   }
 }
-
+.becks-btn-free,
+.becks-btn-soon,
+.becks-btn-sold {
+  background-position-x: 40px;
+  &:hover {
+    background-position-x: 37px;
+  }
+  @media (min-width: 0px) and (max-width: 768px) {
+    font-size: 11px !important;
+  }
+}
 .exp-link-value span {
   padding: 10px;
   text-decoration: underline;

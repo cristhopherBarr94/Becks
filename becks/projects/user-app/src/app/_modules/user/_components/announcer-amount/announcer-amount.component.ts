@@ -9,6 +9,7 @@ export class AnnouncerAmountComponent implements OnInit {
   @Input() stock: number;
   @Input() status: any;
   @Input() type: number;
+  @Input() reserved: boolean;
   constructor() {}
 
   ngOnInit() {}

@@ -1,13 +1,36 @@
 <div class="announcer-container">
+  <!-- green -->
   <img
-    *ngIf="this.stock > 0 || this.status == '2'"
+    *ngIf="
+      (this.stock > 0 && this.type != '3') ||
+      (this.status == '2' && this.type != '3')
+    "
     src="./assets/icon/few-amount-icon.svg"
     alt="few amounts"
   />
+  <!-- grey -->
   <img
-    *ngIf="this.stock == 0 && this.status != '2'"
-    src="./assets/icon/not-amount-icon.svg"
-    alt="few amounts"
+    *ngIf="this.stock == 0 && this.status != '2' && this.type != '3'"
+    src="./assets/icon/sold-icon.svg"
+    alt="not amounts"
+  />
+  <!-- yellow -->
+  <img
+    *ngIf="this.status == '2' && this.type != '3'"
+    src="./assets/icon/soon-icon.svg"
+    alt="soon"
+  />
+  <!-- black -->
+  <img
+    *ngIf="this.status == '3' && this.type != '3'"
+    src="./assets/icon/reserved-icon.svg"
+    alt="reserved"
+  />
+  <!-- blue/free -->
+  <img
+    *ngIf="this.type == '3'"
+    src="./assets/icon/free-exp-icon.svg"
+    alt="free"
   />
   <p *ngIf="this.stock > 0 && this.status != '2'" class="quantity-text">
     quedan {{ stock }} cupos
@@ -17,4 +40,5 @@
     agotada
   </p>
   <p *ngIf="this.status == '2'" class="soon-text">PRÓXIMAMENTE</p>
+  <p *ngIf="this.status == '3'" class="soon-text">RESERVADA</p>
 </div>

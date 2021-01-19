@@ -59,8 +59,10 @@ export class SliderExpComponent
   timerToChecked = 0;
   // status = 0;
 
-  public defaultDeskImage = environment.serverUrl + environment.user.getImgExp + "0_desk";
-  public defaultMobileImage = environment.serverUrl + environment.user.getImgExp + "0_mob";
+  public defaultDeskImage =
+    environment.serverUrl + environment.user.getImgExp + "0_desk";
+  public defaultMobileImage =
+    environment.serverUrl + environment.user.getImgExp + "0_mob";
 
   @ViewChild("slides") slides: IonSlides;
 
@@ -113,7 +115,7 @@ export class SliderExpComponent
             this.sliderExp.slidesItems = response;
             this.slideOpts = {
               initialSlide: this.compareId(this.id == NaN ? 0 : this.id),
-              direction: "vertical",
+              direction: "horizontal",
               speed: 400,
               allowTouchMove: false,
             };

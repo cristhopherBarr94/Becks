@@ -255,6 +255,39 @@ a {
 .becks-btn-soon {
   @include btn(
     #ffffff,
+    #ee991a,
+    "",
+    "Eurostile BQ" !important,
+    18px,
+    267px,
+    56px,
+    ""
+  );
+  line-height: 16px;
+  text-transform: uppercase;
+  text-align: center !important;
+  font-style: normal !important;
+  font-weight: 500;
+  padding-left: 40px !important;
+  background-image: url(../assets/icon/becks-btn-icon.svg) !important;
+  background-size: 25px !important;
+  background-repeat: no-repeat !important;
+  background-position-x: 20px !important;
+  background-position-y: 15px !important;
+  border: 1px solid #ffffff;
+  border-radius: 16px 0px 16px 0px;
+  &:active {
+    background: #ffffff;
+    // background-image: url(../assets/icon/becks-btn-icon-soon.svg) !important;
+    span {
+      color: #ee991a;
+    }
+  }
+}
+
+.becks-btn-reserved {
+  @include btn(
+    #ffffff,
     #000000,
     "",
     "Eurostile BQ" !important,
@@ -281,6 +314,72 @@ a {
     background-image: url(../assets/icon/becks-btn-icon-soon.svg) !important;
     span {
       color: #377f5e;
+    }
+  }
+}
+
+.becks-btn-sold {
+  @include btn(
+    #ffffff,
+    #616161,
+    "",
+    "Eurostile BQ" !important,
+    18px,
+    267px,
+    56px,
+    ""
+  );
+  line-height: 16px;
+  text-transform: uppercase;
+  text-align: center !important;
+  font-style: normal !important;
+  font-weight: 500;
+  padding-left: 40px !important;
+  background-image: url(../assets/icon/becks-btn-icon.svg) !important;
+  background-size: 25px !important;
+  background-repeat: no-repeat !important;
+  background-position-x: 20px !important;
+  background-position-y: 15px !important;
+  border: 1px solid #ffffff;
+  border-radius: 16px 0px 16px 0px;
+  &:active {
+    background: #616161;
+    // background-image: url(../assets/icon/becks-btn-icon-soon.svg) !important;
+    span {
+      color: #ffffff;
+    }
+  }
+}
+
+.becks-btn-free {
+  @include btn(
+    #ffffff,
+    #0083e2,
+    "",
+    "Eurostile BQ" !important,
+    18px,
+    267px,
+    56px,
+    ""
+  );
+  line-height: 16px;
+  text-transform: uppercase;
+  text-align: center !important;
+  font-style: normal !important;
+  font-weight: 500;
+  padding-left: 40px !important;
+  background-image: url(../assets/icon/becks-btn-icon.svg) !important;
+  background-size: 25px !important;
+  background-repeat: no-repeat !important;
+  background-position-x: 20px !important;
+  background-position-y: 15px !important;
+  border: 1px solid #ffffff;
+  border-radius: 16px 0px 16px 0px;
+  &:active {
+    background: #616161;
+    // background-image: url(../assets/icon/becks-btn-icon-soon.svg) !important;
+    span {
+      color: #ffffff;
     }
   }
 }

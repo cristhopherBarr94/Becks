@@ -3,6 +3,7 @@
   class="btn-prev"
   *ngIf="!disablePrevBtn && experienciaContent.length > 0"
   (click)="slidePrev(sliderExp.slidesItems, slides)"
+  [hidden]="truePager"
 >
   <span class="material-icons">keyboard_arrow_up</span>
 </button>
@@ -49,6 +50,7 @@
     [ngClass]="{ inactive: !this.isActivate, active: this.isActivate }"
   >
     <!-- <user-announcer-days [hidden]= "!disableCounter"></user-announcer-days> -->
+
     <user-announcer-amount
       *ngIf="(this.isActivate && exp.stock_actual) || exp.status == 2"
       [stock]="exp.stock_actual"
@@ -158,11 +160,9 @@
         >
           <span>Participar</span>
         </button>
+
         <button
-          *ngIf="
-            (this.isActivate && exp.status == 2) ||
-            (exp.stock_actual == 0 && this.isActivate)
-          "
+          *ngIf="this.isActivate && exp.status == 2"
           block="block"
           color="becks"
           class="becks-btn-soon margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
@@ -173,6 +173,20 @@
           [disabled]="true"
         >
           <span>PRÓXIMAMENTE</span>
+        </button>
+
+        <button
+          *ngIf="exp.stock_actual == 0"
+          block="block"
+          color="becks"
+          class="becks-btn-sold margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+          [ngClass]="{
+            'animate__animated animate__bounceInLeft animate__delay-1s':
+              exp.proxExp
+          }"
+          [disabled]="true"
+        >
+          <span>AGOTADA</span>
         </button>
       </div>
     </div>
@@ -255,10 +269,7 @@
       <span>Participar</span>
     </button>
     <button
-      *ngIf="
-        (this.isActivate && exp.status == 2) ||
-        (exp.stock_actual == 0 && this.isActivate)
-      "
+      *ngIf="this.isActivate && exp.status == 2"
       block="block"
       color="becks"
       class="becks-btn-soon more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
@@ -269,6 +280,19 @@
       [disabled]="true"
     >
       <span>PRÓXIMAMENTE</span>
+    </button>
+    <button
+      *ngIf="this.isActivate && exp.stock_actual == 0"
+      block="block"
+      color="becks"
+      class="becks-btn-sold more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
+      [ngClass]="{
+        'animate__animated animate__bounceInLeft animate__delay-1s': this
+          .isActivate
+      }"
+      [disabled]="true"
+    >
+      <span>AGOTADA</span>
     </button>
   </ion-slide>
 </ion-slides>

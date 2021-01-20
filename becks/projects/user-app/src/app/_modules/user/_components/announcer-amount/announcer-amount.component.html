@@ -20,17 +20,20 @@
   <!-- black/reserved -->
   <!-- user var -->
   <img
-    *ngIf="this.reserved && this.type != '3'"
+    *ngIf="this.reserved"
     src="./assets/icon/reserved-icon.svg"
     alt="reserved"
   />
   <!-- blue/free -->
   <img
-    *ngIf="this.stock > 0 && this.type == '3'"
+    *ngIf="this.stock > 0 && this.type == '3' && !this.reserved"
     src="./assets/icon/free-exp-icon.svg"
     alt="free"
   />
-  <p *ngIf="this.stock > 0 && this.status != '2'" class="quantity-text">
+  <p
+    *ngIf="this.stock > 0 && this.status != '2' && !this.reserved"
+    class="quantity-text"
+  >
     quedan {{ stock }} cupos
   </p>
 

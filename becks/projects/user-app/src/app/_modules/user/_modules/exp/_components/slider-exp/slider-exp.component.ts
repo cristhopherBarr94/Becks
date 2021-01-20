@@ -218,6 +218,17 @@ export class SliderExpComponent
             }
           );
         }
+        // evaluate redemp status
+        if (this.redemps) {
+          for (let _id of this.redemps) {
+            if (_id == this.experienciaContent[CurrentSld].id) {
+              //pop up message error
+              this.reserv = true;
+            } else {
+              this.reserv = false;
+            }
+          }
+        }
       }
     }
   }
@@ -282,6 +293,13 @@ export class SliderExpComponent
     else if (exp.type == "2") {
       this.router.navigate([`user/interaction/${eid}`]);
     }
+    //free event
+    else if (exp.type == "3") {
+      this.router.navigate([`user/confirm-interaction/`], {
+        queryParamsHandling: "preserve",
+        state: { exp: exp },
+      });
+    }
   }
 
   public closeModal() {
@@ -290,7 +308,7 @@ export class SliderExpComponent
   }
 
   changeSlider() {
-    // console.log('cambio de slider # si click ->', this.itemChange);
+    console.log("cambio de slider # si click ->", this.itemChange);
     if (this.itemChange !== undefined) {
       // console.log('cambio de slider # con click ->', this.itemChange);
       if (this.experienciaContent[this.itemChange].detalleExp === true) {

@@ -2,18 +2,14 @@ import {
   AfterContentChecked,
   AfterViewInit,
   Component,
-  Input,
-  OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
   ViewChild,
 } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { IonSlides, Platform } from "@ionic/angular";
 import { Subscription } from "rxjs";
 import { Exp } from "src/app/_models/exp";
-import { User } from "src/app/_models/User";
 import { ExperienciasService } from "src/app/_services/experiencias.service";
 import { UiService } from "src/app/_services/ui.service";
 import { UserService } from "src/app/_services/user.service";
@@ -45,6 +41,8 @@ export class SliderExpComponent
   public activeIndex: number;
   public DefaultSlide: boolean = false;
   public reserv: boolean = false;
+  public isLoading: boolean = false;
+  public hideDays: boolean = false;
 
   sliderExp = {
     isBeginningSlide: true,
@@ -164,6 +162,7 @@ export class SliderExpComponent
   ngOnDestroy(): void {
     this.userCodeSubs.unsubscribe();
     this.expSubs.unsubscribe();
+    this.redempSubs.unsubscribe();
   }
 
   detalleExperiencia(item: any) {
@@ -229,8 +228,14 @@ export class SliderExpComponent
             }
           }
         }
+        if (this.experienciaContent[CurrentSld].type == "3") {
+          this.hideDays = true;
+        } else {
+          this.hideDays = false;
+        }
       }
     }
+    this.isLoading = false;
   }
 
   async getIndex() {
@@ -308,7 +313,8 @@ export class SliderExpComponent
   }
 
   changeSlider() {
-    console.log("cambio de slider # si click ->", this.itemChange);
+    // console.log("cambio de slider # si click ->", this.itemChange);
+    this.isLoading = true;
     if (this.itemChange !== undefined) {
       // console.log('cambio de slider # con click ->', this.itemChange);
       if (this.experienciaContent[this.itemChange].detalleExp === true) {
@@ -371,5 +377,26 @@ export class SliderExpComponent
       object.isEndSlide = istrue;
       this.disableNextBtn = istrue;
     });
+  }
+
+  getColorExp(exp: any): string {
+    let colorClass = "";
+    // free exp
+    if (exp.type == "3" && !this.reserv) {
+      colorClass = "free-color";
+    }
+    // reserved exp
+    else if (this.isActivate && this.reserv) {
+      colorClass = "reserved-color";
+    }
+    // soon exp
+    else if (this.isActivate && exp.status == 2) {
+      colorClass = "soon-color";
+    }
+    // sold out
+    else if (this.isActivate && exp.stock_actual == 0) {
+      colorClass = "sold-color";
+    }
+    return colorClass;
   }
 }

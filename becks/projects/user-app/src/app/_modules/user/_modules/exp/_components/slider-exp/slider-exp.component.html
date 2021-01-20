@@ -44,20 +44,39 @@
   [ngClass]="{ 'active-info': truePager }"
   #slides
 >
-  <user-announcer-days [hidden]="truePager"></user-announcer-days>
+  <user-announcer-days
+    *ngIf="!this.hideDays"
+    [hidden]="truePager"
+  ></user-announcer-days>
   <ion-slide
     class="item-exp"
     *ngFor="let exp of experienciaContent; let i = index"
     [attr.data-index]="i"
     [ngClass]="{ inactive: !this.isActivate, active: this.isActivate }"
   >
+    <!-- user announcer amount -->
     <user-announcer-amount
-      *ngIf="(this.isActivate && exp.stock_actual) || exp.status == 2"
+      *ngIf="
+        this.isLoading ||
+        (this.isActivate && exp.stock_actual) ||
+        exp.status == 2
+      "
       [stock]="exp.stock_actual"
       [status]="exp.status"
       [type]="exp.type"
       [reserved]="this.reserv"
     ></user-announcer-amount>
+    <!-- free message -->
+    <div
+      class="free-message"
+      *ngIf="exp.type == '3'"
+      [ngClass]="getColorExp(exp)"
+    >
+      <h4>evento gratuito</h4>
+      <p>Entrada libre.</p>
+      <p>No necesitas pagar ni canjear código</p>
+      <a href="">Aplican términos y condiciones</a>
+    </div>
     <img
       *ngIf="this.size == 'lg' || this.size == 'md'"
       [src]="exp.imagesExp"
@@ -154,7 +173,8 @@
             this.isActivate &&
             exp.stock_actual > 0 &&
             exp.status != '2' &&
-            exp.type != '3'
+            exp.type != '3' &&
+            !this.reserv
           "
           block="block"
           color="becks"
@@ -162,7 +182,7 @@
           class="becks-btn-primary margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
           [ngClass]="{
             'animate__animated animate__bounceInLeft animate__delay-1s': this
-              .isActivate
+              .proxExp
           }"
         >
           <span>Participar</span>
@@ -171,11 +191,10 @@
         <!-- free event -->
         <button
           *ngIf="
-            this.isActivate &&
             exp.stock_actual > 0 &&
             exp.status != '2' &&
             exp.type == '3' &&
-            this.reserv == false
+            !this.reserv
           "
           block="block"
           color="becks"
@@ -183,14 +202,14 @@
           class="becks-btn-free margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
           [ngClass]="{
             'animate__animated animate__bounceInLeft animate__delay-1s': this
-              .isActivate
+              .proxExp
           }"
         >
           <span>Participar</span>
         </button>
         <!-- soon -->
         <button
-          *ngIf="this.isActivate && exp.status == 2"
+          *ngIf="this.isActivate && exp.status == 2 && !this.reserv"
           block="block"
           color="becks"
           class="becks-btn-soon margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
@@ -204,7 +223,7 @@
         </button>
         <!-- sold out -->
         <button
-          *ngIf="this.isActivate && exp.stock_actual == 0"
+          *ngIf="this.isActivate && exp.stock_actual == 0 && !this.reserv"
           block="block"
           color="becks"
           class="becks-btn-sold margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
@@ -218,14 +237,14 @@
         </button>
         <!-- reserved -->
         <button
-          *ngIf="this.isActivate && this.reserv"
+          *ngIf="this.isActivate && this.reserv && this.status != '2'"
           block="block"
           color="becks"
           (click)="participateExperience(exp.id)"
           class="becks-btn-reserved margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
           [ngClass]="{
             'animate__animated animate__bounceInLeft animate__delay-1s': this
-              .isActivate
+              .proxExp
           }"
         >
           <span>RESERVADA</span>
@@ -302,7 +321,8 @@
         this.isActivate &&
         exp.stock_actual > 0 &&
         exp.status != '2' &&
-        exp.type != '3'
+        exp.type != '3' &&
+        !this.reserv
       "
       block="block"
       color="becks"
@@ -310,7 +330,7 @@
       class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
       [ngClass]="{
         'animate__animated animate__bounceInLeft animate__delay-1s': this
-          .isActivate
+          .proxExp
       }"
     >
       <span>Participar</span>
@@ -318,11 +338,10 @@
     <!-- free event -->
     <button
       *ngIf="
-        this.isActivate &&
         exp.stock_actual > 0 &&
         exp.status != '2' &&
         exp.type == '3' &&
-        this.reserv == false
+        !this.reserv
       "
       block="block"
       color="becks"
@@ -330,20 +349,20 @@
       class="becks-btn-free more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
       [ngClass]="{
         'animate__animated animate__bounceInLeft animate__delay-1s': this
-          .isActivate
+          .proxExp
       }"
     >
       <span>Participar</span>
     </button>
     <!-- soon event -->
     <button
-      *ngIf="this.isActivate && exp.status == 2"
+      *ngIf="this.isActivate && exp.status == 2 && !this.reserv"
       block="block"
       color="becks"
       class="becks-btn-soon more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
       [ngClass]="{
         'animate__animated animate__bounceInLeft animate__delay-1s': this
-          .isActivate
+          .proxExp
       }"
       [disabled]="true"
     >
@@ -351,13 +370,13 @@
     </button>
     <!-- sold out event -->
     <button
-      *ngIf="this.isActivate && exp.stock_actual == 0"
+      *ngIf="this.isActivate && exp.stock_actual == 0 && !this.reserv"
       block="block"
       color="becks"
       class="becks-btn-sold more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
       [ngClass]="{
         'animate__animated animate__bounceInLeft animate__delay-1s': this
-          .isActivate
+          .proxExp
       }"
       [disabled]="true"
     >
@@ -365,13 +384,13 @@
     </button>
     <!-- reserved event -->
     <button
-      *ngIf="this.isActivate && this.reserv"
+      *ngIf="this.isActivate && this.reserv && this.status != '2'"
       block="block"
       color="becks"
       class="becks-btn-reserved more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
       [ngClass]="{
         'animate__animated animate__bounceInLeft animate__delay-1s': this
-          .isActivate
+          .proxExp
       }"
       [disabled]="true"
     >

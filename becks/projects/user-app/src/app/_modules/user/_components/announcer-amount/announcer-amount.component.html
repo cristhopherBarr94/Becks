@@ -1,7 +1,9 @@
 <div class="announcer-container">
   <!-- green/active -->
   <img
-    *ngIf="this.stock > 0 && this.type != '3' && this.status != '2'"
+    *ngIf="
+      this.stock > 0 && this.type != '3' && this.status != '2' && !this.reserved
+    "
     src="./assets/icon/few-amount-icon.svg"
     alt="few amounts"
   />
@@ -13,14 +15,14 @@
   />
   <!-- yellow/soon -->
   <img
-    *ngIf="this.status == '2'"
+    *ngIf="this.status == '2' && !this.reserved"
     src="./assets/icon/soon-icon.svg"
     alt="soon"
   />
   <!-- black/reserved -->
   <!-- user var -->
   <img
-    *ngIf="this.reserved"
+    *ngIf="this.reserved && this.status != '2'"
     src="./assets/icon/reserved-icon.svg"
     alt="reserved"
   />

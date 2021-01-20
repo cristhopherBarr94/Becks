@@ -18,7 +18,6 @@ import { User } from "src/app/_models/User";
 import { HttpService } from "src/app/_services/http.service";
 import { UiService } from "src/app/_services/ui.service";
 import { UserService } from "src/app/_services/user.service";
-// import * as moment from "moment";
 import { environment } from "src/environments/environment";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
@@ -94,12 +93,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
 
   initforms() {
     this.userEditProfileForm = this.formBuilder.group({
-      name: new FormControl(this.user.first_name, [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(20),
-      ]),
-      lastName: new FormControl(this.user.last_name, [
+      fullname: new FormControl(this.user.full_name, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(20),
@@ -109,18 +103,6 @@ export class EditFormComponent implements OnInit, OnDestroy {
         Validators.minLength(6),
         Validators.maxLength(10),
       ]),
-      // day: new FormControl(
-      //   !!this.user.birthdate && moment(this.user.birthdate).format("DD"),
-      //   [Validators.required, Validators.min(1), Validators.max(31)]
-      // ),
-      // month: new FormControl(
-      //   !!this.user.birthdate && moment(this.user.birthdate).format("MM"),
-      //   [Validators.required, Validators.min(1), Validators.max(12)]
-      // ),
-      // year: new FormControl(
-      //   !!this.user.birthdate && moment(this.user.birthdate).format("YYYY"),
-      //   [Validators.required, Validators.min(1920), Validators.max(2002)]
-      // ),
       id: new FormControl(this.user.type_id, [Validators.required]),
       document: new FormControl(this.user.id_number, [Validators.required]),
       city: new FormControl(this.user.city, Validators.required),

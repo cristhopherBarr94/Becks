@@ -9,54 +9,24 @@
         appearance="fill"
         floatLabel="auto"
         class="fullInput"
-        [ngClass]="getClassInput(userEditProfileForm.controls.name)"
+        [ngClass]="getClassInput(userEditProfileForm.controls.fullname)"
       >
-        <mat-label class="color-green">Nombre</mat-label>
+        <mat-label class="color-green">Nombre y apellido</mat-label>
 
         <input
           matInput
-          formControlName="name"
+          formControlName="fullname"
           required
           type="text"
           maxlength="20"
-          data-qadp="name"
-          [value]="user.first_name"
+          data-qadp="fullname"
+          [value]="user.full_name"
         />
-        <mat-error *ngIf="userEditProfileForm.controls.name.errors">
+        <mat-error *ngIf="userEditProfileForm.controls.fullname.errors">
           {{
             getMessageform(
-              userEditProfileForm.controls.name,
-              "nombre",
-              3,
-              20,
-              0,
-              1
-            )
-          }}</mat-error
-        >
-      </mat-form-field>
-
-      <mat-form-field
-        appearance="fill"
-        floatLabel="auto"
-        class="fullInput"
-        [ngClass]="getClassInput(userEditProfileForm.controls.lastName)"
-      >
-        <mat-label class="color-green">Apellidos</mat-label>
-
-        <input
-          matInput
-          formControlName="lastName"
-          type="text"
-          required
-          maxlength="30"
-          data-qadp="lastName"
-        />
-        <mat-error *ngIf="userEditProfileForm.controls.lastName.errors">
-          {{
-            getMessageform(
-              userEditProfileForm.controls.lastName,
-              "apellido(s)",
+              userEditProfileForm.controls.fullname,
+              "nombre y apellido",
               3,
               20,
               0,

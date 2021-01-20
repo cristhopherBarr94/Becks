@@ -3,60 +3,35 @@
     <form [formGroup]="userRegisterForm" autocomplete="off" class="general-row">
       <ion-row>
         <div class="form-section section1">
+          <!-- full name -->
           <mat-form-field
             appearance="fill"
             floatLabel="auto"
             class="fullInput"
-            [ngClass]="getClassInput(userRegisterForm.controls.name)"
+            [ngClass]="getClassInput(userRegisterForm.controls.fullname)"
           >
-            <mat-label>Nombres</mat-label>
+            <mat-label>Nombre y apellido</mat-label>
             <input
               matInput
               (input)="inputValidatorAlphabetical($event)"
-              formControlName="name"
-              placeholder="Nombres"
-              maxlength="20"
-              [(ngModel)]="userRegister.first_name"
-              data-qadp="name"
+              formControlName="fullname"
+              placeholder="Nombre y apellido"
+              maxlength="50"
+              [(ngModel)]="userRegister.full_name"
+              data-qadp="fullname"
               required
             />
             <mat-error
               *ngIf="
-                userRegisterForm.controls.name.touched &&
-                userRegisterForm.controls.name.errors
+                userRegisterForm.controls.fullname.touched &&
+                userRegisterForm.controls.fullname.errors
               "
             >
               *Has ingresado un dato inválido
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field
-            appearance="fill"
-            floatLabel="auto"
-            class="fullInput"
-            [ngClass]="getClassInput(userRegisterForm.controls.surname)"
-          >
-            <mat-label>Apellidos</mat-label>
-            <input
-              matInput
-              (input)="inputValidatorAlphabetical($event)"
-              formControlName="surname"
-              placeholder="Apellidos"
-              maxlength="20"
-              [(ngModel)]="userRegister.last_name"
-              data-qadp="lastName"
-              required
-            />
-            <mat-error
-              *ngIf="
-                userRegisterForm.controls.surname.touched &&
-                userRegisterForm.controls.surname.errors
-              "
-            >
-              *Has ingresado un dato inválido
-            </mat-error>
-          </mat-form-field>
-
+          <!-- email -->
           <mat-form-field
             appearance="fill"
             floatLabel="auto"
@@ -84,36 +59,7 @@
               *Has ingresado un dato inválido
             </mat-error>
           </mat-form-field>
-
-          <mat-form-field
-            appearance="fill"
-            floatLabel="auto"
-            class="fullInput"
-            [ngClass]="getClassInput(userRegisterForm.controls.telephone)"
-          >
-            <mat-label>Número de teléfono</mat-label>
-            <input
-              matInput
-              (input)="inputValidatorNumeric($event)"
-              formControlName="telephone"
-              placeholder="Número de teléfono"
-              minlength="7"
-              maxlength="10"
-              [(ngModel)]="userRegister.mobile_phone"
-              data-qadp="phone"
-              required
-            />
-            <mat-error
-              *ngIf="
-                userRegisterForm.controls.telephone.touched &&
-                userRegisterForm.controls.telephone.errors
-              "
-            >
-              *Has ingresado un número inválido
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="form-section section2">
+          <!-- city -->
           <mat-form-field
             appearance="fill"
             floatLabel="auto"
@@ -148,34 +94,36 @@
               >Debes seleccionar un campo</mat-error
             >
           </mat-form-field>
-
+        </div>
+        <div class="form-section section2">
+          <!-- phone number -->
           <mat-form-field
             appearance="fill"
             floatLabel="auto"
             class="fullInput"
-            [ngClass]="getClassInput(userRegisterForm.controls.idNumber)"
+            [ngClass]="getClassInput(userRegisterForm.controls.telephone)"
           >
-            <mat-label>Número de identificación</mat-label>
+            <mat-label>Número de teléfono</mat-label>
             <input
               matInput
-              formControlName="idNumber"
-              placeholder="Número de id"
-              minlength="4"
-              maxlength="11"
               (input)="inputValidatorNumeric($event)"
-              [(ngModel)]="userRegister.id_number"
+              formControlName="telephone"
+              placeholder="Número de teléfono"
+              minlength="7"
+              maxlength="10"
+              [(ngModel)]="userRegister.mobile_phone"
+              data-qadp="phone"
               required
-              data-qadp="numId"
             />
             <mat-error
               *ngIf="
-                userRegisterForm.controls.idNumber.touched &&
-                userRegisterForm.controls.idNumber.errors
+                userRegisterForm.controls.telephone.touched &&
+                userRegisterForm.controls.telephone.errors
               "
-              >*Este campo es obligatorio</mat-error
             >
+              *Has ingresado un número inválido
+            </mat-error>
           </mat-form-field>
-
           <mat-form-field
             appearance="fill"
             floatLabel="auto"

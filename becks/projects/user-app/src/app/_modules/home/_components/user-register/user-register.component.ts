@@ -18,11 +18,10 @@ import { UiService } from "../../../../_services/ui.service";
 import { UtilService } from "src/app/_services/util.service";
 import { environment } from "src/environments/environment";
 import { SHA256 } from "crypto-js";
-import { BasicAlertComponent } from "src/app/_modules/utils/_components/basic-alert/basic-alert.component";
 import { AuthService } from "src/app/_services/auth.service";
 
 import { Observable } from "rxjs";
-import { isEmpty, map, startWith } from "rxjs/operators";
+import { map, startWith } from "rxjs/operators";
 import { MockCiudades } from "../../../../_mocks/ciudades-mock";
 
 declare global {
@@ -71,7 +70,9 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
   }
 
   private _filter(value: string): string[] {
-    if ( value == undefined || value == null ) { return; }
+    if (value == undefined || value == null) {
+      return;
+    }
     const filterValue = value.toLowerCase();
 
     return this.options.filter((option) =>
@@ -90,18 +91,9 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
 
   initforms() {
     this.userRegisterForm = this.formBuilder.group({
-      name: new FormControl("", [
+      fullname: new FormControl("", [
         Validators.required,
-        Validators.maxLength(20),
-      ]),
-      surname: new FormControl("", [
-        Validators.required,
-        Validators.maxLength(20),
-      ]),
-      idNumber: new FormControl("", [
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(11),
+        Validators.maxLength(50),
       ]),
       email: new FormControl("", [
         Validators.required,
@@ -128,8 +120,7 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
   }
 
   methodFB(userInfo: any) {
-    this.userRegisterForm.controls.name.patchValue(userInfo.first_name);
-    this.userRegisterForm.controls.surname.patchValue(userInfo.last_name);
+    this.userRegisterForm.controls.fullname.patchValue(userInfo.full_name);
     this.userRegisterForm.controls.email.patchValue(userInfo.email);
     this.cdr.detectChanges();
   }
@@ -156,7 +147,6 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
     );
     const email256 = SHA256(this.userRegister.email).toString();
     this.userRegister.cookie_td = this.utils.getCookie("_td");
-    this.userRegister.type_id = "CC";
     this.httpService
       .post(
         environment.serverUrl + environment.guest.postForm,

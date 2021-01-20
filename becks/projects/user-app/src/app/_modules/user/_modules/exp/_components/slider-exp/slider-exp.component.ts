@@ -41,7 +41,6 @@ export class SliderExpComponent
   public activeIndex: number;
   public DefaultSlide: boolean = false;
   public reserv: boolean = false;
-  public isLoading: boolean = false;
   public hideDays: boolean = false;
 
   sliderExp = {
@@ -235,7 +234,6 @@ export class SliderExpComponent
         }
       }
     }
-    this.isLoading = false;
   }
 
   async getIndex() {
@@ -314,7 +312,6 @@ export class SliderExpComponent
 
   changeSlider() {
     // console.log("cambio de slider # si click ->", this.itemChange);
-    this.isLoading = true;
     if (this.itemChange !== undefined) {
       // console.log('cambio de slider # con click ->', this.itemChange);
       if (this.experienciaContent[this.itemChange].detalleExp === true) {

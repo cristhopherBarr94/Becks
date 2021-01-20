@@ -58,9 +58,9 @@
     <!-- user announcer amount -->
     <user-announcer-amount
       *ngIf="
-        this.isLoading ||
+        exp.type == 3 ||
         (this.isActivate && exp.stock_actual) ||
-        exp.status == 2
+        (this.isActivate && exp.status == 2)
       "
       [stock]="exp.stock_actual"
       [status]="exp.status"
@@ -155,7 +155,7 @@
           <span>Conoce más</span>
         </a>
         <button
-          *ngIf="!this.isActivate"
+          *ngIf="!this.isActivate && exp.type != '3'"
           block="block"
           color="becks"
           (click)="redirectToAct(exp.titleExp)"
@@ -305,7 +305,7 @@
       >
     </div>
     <button
-      *ngIf="!this.isActivate"
+      *ngIf="!this.isActivate && exp.type != '3'"
       block="block"
       color="becks"
       (click)="redirectToAct(exp.titleExp)"

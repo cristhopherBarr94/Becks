@@ -159,21 +159,18 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
   public function post($data) {
 
     // ADMIN
-    if ( !in_array("Administrator", $this->currentUser->getRoles()) ) {
+    if ( !in_array("administrator", $this->currentUser->getRoles()) ) {
       return new ModifiedResourceResponse(['message' => 'No permitido'], 405);
     }
 
-    $this->validate($data);
+    // $this->validate($data);
 
-    $id = $this->dbConnection->insert('ab_inbev_code')
-      ->fields($data)
-      ->execute();
+    // $id = $this->dbConnection->insert('ab_inbev_code')
+    //   ->fields($data)
+    //   ->execute();
 
-    $created_record = $this->loadRecord($id);
-    unset($created_record['owner_to']);
-
-    // Return the newly created record in the response body.
-    return new ModifiedResourceResponse($created_record, 201);
+    // $created_record = $this->loadRecord($id);
+    // unset($created_record['owner_to']);
 
     // SELECT `cid` FROM `ab_inbev_code` WHERE 1 ORDER BY `id`
     // INTO OUTFILE '/tmp/codes.csv'
@@ -181,12 +178,13 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
     // ENCLOSED BY '"'
     // LINES TERMINATED BY '\n';
 
+    $created_record = [];
     // $actual_date = time();
     // $codes = str_split( md5( time() ) , 8);
     // $codes_counter = 0;
     // $counter = 1;
 
-    // while ( $counter <= 20000 ) {
+    // while ( $counter <= 200 ) {
     //   $code = $codes[ $codes_counter ];
     //   if ( !isset($code) || strlen($code) != 8 ) {
     //     $codes = str_split( md5( time() ) , 8);
@@ -199,7 +197,7 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
     //     "uid" => NULL,
     //     "created" => $actual_date,
     //     "valid_until" => NULL,
-    //     "owner" => "MERQUEO",
+    //     "owner" => "TEST",
     //     "owner_from" => NULL,
     //     "owner_to" => NULL,
     //     "status" => 0
@@ -214,6 +212,8 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
     //        echo("\r\n");
     //        echo( "Error Code : " . $code );
     //     }
+
+    //     array_push( $created_record , $data['cid'] );
     //   } catch (\Throwable $th) {
     //      echo("\r\n");
     //     echo( "Error Code : " . $code );
@@ -226,6 +226,9 @@ class CodeAppResource extends ResourceBase implements DependentPluginInterface {
     //     $codes_counter = 0;
     //   }
     // }
+
+    // // Return the newly created record in the response body.
+    return new ModifiedResourceResponse($created_record, 201);
   }
 
   /**

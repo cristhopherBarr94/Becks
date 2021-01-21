@@ -206,7 +206,7 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
         $user = $storage->load( $this->currentUser->id() );
         Util::sendEmail(  2, 
                           $user->getEmail() , 
-                          $user->get('field_first_name')->value . ' ' . $user->get('field_last_name')->value
+                          $user->get('field_full_name')->value
                         );
       }
 

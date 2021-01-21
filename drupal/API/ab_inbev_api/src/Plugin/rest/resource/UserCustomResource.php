@@ -141,8 +141,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
 
       $this->validate($data);
       $data['email'] = trim( $data['email'] );
-      $data['first_name'] = trim( $data['first_name'] );
-      $data['last_name'] = trim( $data['last_name'] );
+      $data['full_name'] = trim( $data['full_name'] );
       $data['mobile_phone'] = trim( $data['mobile_phone'] );
       $data['gender'] = trim( $data['gender'] );
 
@@ -164,8 +163,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->set("langcode", $lang);
       $user->set("preferred_langcode", $lang);
       $user->set("preferred_admin_langcode", $lang);
-      $user->set("field_first_name", $data['first_name'] );
-      $user->set("field_last_name", $data['last_name'] );
+      $user->set("field_full_name", $data['full_name'] );
       $user->set("field_mobile_phone", $data['mobile_phone'] );
       $user->set("field_gender",  $data['gender'] );
       // FASE II - FIELDS
@@ -184,7 +182,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
         $user->set("field_status", 0); // 0 = normal, 1 = require password change
         Util::sendEmail( 0, 
                         $user->getEmail() , 
-                        $user->get('field_first_name')->value . ' ' . $user->get('field_last_name')->value 
+                        $user->get('field_full_name')->value
                       );
       } else {
         // User come from Waiting-List
@@ -196,17 +194,18 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->save();
       $user_load = $this->loadRecord($user->id());
       if ( $user_load ) {
-        $result = $this->__sendTD( 
-          $data['first_name'],
-          $data['last_name'],
-          $data['city'],
-          intval($data['mobile_phone']),
-          $data['email'],
-          $data['privacy'],
-          $data['promo'],
-          $data['id_number'],
-          $data['cookie_td']
-       );
+        //TODO :: ASK FOR firstname and lastname in the TD
+      //   $result = $this->__sendTD( 
+      //     $data['first_name'],
+      //     $data['last_name'],
+      //     $data['city'],
+      //     intval($data['mobile_phone']),
+      //     $data['email'],
+      //     $data['privacy'],
+      //     $data['promo'],
+      //     $data['id_number'],
+      //     $data['cookie_td']
+      //  );
       } else {
         $code = '502';
         $response_array['message'] = "Error Interno";
@@ -362,18 +361,11 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       throw new BadRequestHttpException('El "Email" no es válido');
     }
 
-    if (!isset($record['first_name']) || empty($record['first_name'])) {
+    if (!isset($record['full_name']) || empty($record['full_name'])) {
       throw new BadRequestHttpException('El usuario no puede ser registrado porque hacen falta los "Nombres"');
     }
-    if ( strlen($record['first_name']) > 60) {
+    if ( strlen($record['full_name']) > 60) {
       throw new BadRequestHttpException('Los "Nombres" sobrepasa los caracteres permitidos');
-    }
-
-    if (!isset($record['last_name']) || empty($record['last_name'])) {
-      throw new BadRequestHttpException('El usuario no puede ser registrado porque hacen falta los "Apellidos"');
-    }
-    if ( strlen($record['last_name']) > 60) {
-      throw new BadRequestHttpException('Los "Apellidos" sobrepasa los caracteres permitidos');
     }
 
     if (!isset($record['mobile_phone']) || empty($record['mobile_phone'])) {

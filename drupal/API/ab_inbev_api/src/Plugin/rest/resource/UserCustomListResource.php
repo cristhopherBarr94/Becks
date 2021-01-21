@@ -144,9 +144,8 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
     $this->search = $this->currentRequest->get('search');
 
     switch ( $this->order_by ) {
-      case "0": $this->order_by = 'field_first_name'; break;
-      case "1": $this->order_by = 'field_last_name'; break;
-      case "2": $this->order_by = 'mail'; break;
+      case "0": $this->order_by = 'field_full_name'; break;
+      case "1": $this->order_by = 'mail'; break;
       default: $this->order_by = null;
     }
     // return new ResourceResponse($this->loadRecord($id));
@@ -352,7 +351,7 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
     }
 
     if ( $this->search != null ) { 
-      $query = $query->condition('field_first_name', $this->search , 'CONTAINS' );
+      $query = $query->condition('field_full_name', $this->search , 'CONTAINS' );
     }
     
     if ( $this->order_by != null ) {
@@ -436,7 +435,7 @@ class UserCustomListResource extends ResourceBase implements DependentPluginInte
         if ( $user->save() ) {
           Util::sendEmail(  0, 
                             $user->getEmail() , 
-                            $user->get('field_first_name')->value . ' ' . $user->get('field_last_name')->value
+                            $user->get('field_full_name')->value
                           );
         }
       }

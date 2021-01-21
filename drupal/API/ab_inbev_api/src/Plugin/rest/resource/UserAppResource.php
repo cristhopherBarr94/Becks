@@ -205,7 +205,7 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
         }
       break;
       case 1:
-        // PATCH DATA [ first_name , last_name, mobile_phone, birthdate ]
+        // PATCH DATA [ full_name , mobile_phone, birthdate ]
         $this->validate($data);
       break;
       case 2: 
@@ -247,32 +247,15 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
         }
       break;
       case 1:
-        // PATCH DATA [ first_name , last_name, mobile_phone, birthdate ]
-        // $user->set("field_first_name", $data['first_name'] );
-        // $user->set("field_last_name", $data['last_name'] );
-        // $user->set("field_mobile_phone", $data['mobile_phone'] );
-        // $user->set("field_birthdate", $data['birthdate'] );
-        // $user->set("field_type_id", $data['type_id'] );
-        // $user->set("field_id_number", $data['id_number'] );
-        // $user->save();
+        // PATCH DATA [ full_name, mobile_phone, birthdate ]
 
-        $response_array["first_name"] = false;
-        if ( isset($data['first_name']) ) {
+        $response_array["full_name"] = false;
+        if ( isset($data['full_name']) ) {
           try {
-            $response_array["first_name"] =  $this->dbConnection->update('user__field_first_name')
-                                              ->fields(['field_first_name_value' => $data['first_name']])
+            $response_array["full_name"] =  $this->dbConnection->update('user__field_full_name')
+                                              ->fields(['field_full_name_value' => $data['full_name']])
                                               ->condition('entity_id', $this->currentUser->id() )
                                               ->execute()  == 1;
-          } catch (\Throwable $th) {}
-        }
-        
-        $response_array["last_name"] = false;
-        if ( isset($data['last_name']) ) {
-          try {
-            $response_array["last_name"] = $this->dbConnection->update('user__field_last_name')
-                      ->fields(['field_last_name_value' => $data['last_name']])
-                      ->condition('entity_id', $this->currentUser->id() )
-                      ->execute()  == 1;
           } catch (\Throwable $th) {}
         }
         
@@ -544,18 +527,11 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
       }
     }
 
-    if (!isset($record['first_name']) || empty($record['first_name'])) {
+    if (!isset($record['full_name']) || empty($record['full_name'])) {
       throw new BadRequestHttpException('El usuario no puede ser editado porque hacen falta los "Nombres"');
     }
-    if ( strlen($record['first_name']) > 60) {
+    if ( strlen($record['full_name']) > 254) {
       throw new BadRequestHttpException('Los "Nombres" sobrepasan los caracteres permitidos');
-    }
-
-    if (!isset($record['last_name']) || empty($record['last_name'])) {
-      throw new BadRequestHttpException('El usuario no puede ser editado porque hacen falta los "Apellidos"');
-    }
-    if ( strlen($record['last_name']) > 60) {
-      throw new BadRequestHttpException('Los "Apellidos" sobrepasan los caracteres permitidos');
     }
 
     if (!isset($record['mobile_phone']) || empty($record['mobile_phone'])) {
@@ -603,8 +579,7 @@ class UserAppResource extends ResourceBase implements DependentPluginInterface {
       "roles" => $user->getRoles(),
       "email" => $user->getEmail(),
       "last_login" => $user->getLastAccessedTime(),
-      "first_name" => $user->get('field_first_name')->value,
-      "last_name" => $user->get('field_last_name')->value,
+      "full_name" => $user->get('field_full_name')->value,
       "photo" => $user->get('field_photo_uri')->value,
       "mobile_phone" => $user->get('field_mobile_phone')->value,
       "birthdate" => $user->get('field_birthdate')->value,

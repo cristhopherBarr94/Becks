@@ -13,7 +13,8 @@
   zoom="false"
   *ngIf="experienciaContent.length == 0"
 >
-  <ion-slide class="item-exp">
+  <ion-slide  id="exp-default" 
+              class="item-exp">
     <img
       *ngIf="this.size == 'lg' || this.size == 'md'"
       [src]="defaultDeskImage"

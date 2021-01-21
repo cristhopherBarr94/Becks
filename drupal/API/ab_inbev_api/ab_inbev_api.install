@@ -635,22 +635,43 @@ function ab_inbev_api_update_8602() {
   $schema->createTable('ab_inbev_redemption', $spec_redemp);
   return $schema;
 }
+
+/**
+* @desc Update 8603 add field activate_from en table ab_inbev_experience.
+*       Update 8603 implements the change correctly.
+*/
 function ab_inbev_api_update_8603() {
-$spec = [
-        'type' => 'int',
-        'description' => 'Activate From.',
+  $spec = [
+          'type' => 'int',
+          'description' => 'Activate From.',
+    ];
+  $specD = [
+    'type' => 'int',
+    'description' => 'Activate To.',
   ];
-$specD = [
-  'type' => 'int',
-  'description' => 'Activate To.',
-];
   $schema = Database::getConnection()->schema();
   $schema->addField('ab_inbev_experience', 'activate_from', $spec);
   $schema->addField('ab_inbev_experience', 'activate_to', $specD);
   return $schema;
 }
-    /**
-   * NOTE: Update 8603 add field activate_from en table ab_inbev_experience.
-   * Update 8603 implements the change correctly.
-   */
+
+/**
+* @desc Join the 'first_name' and 'last_name' 
+*       in a new 'full_name' field
+*/
+function ab_inbev_api_update_8604() {
+  $schema = Database::getConnection()->query(
+    "
+    INSERT INTO user__field_full_name (bundle, deleted, entity_id, revision_id, langcode, delta, field_full_name_value)
+    SELECT 	first_name.bundle, first_name.deleted, first_name.entity_id, first_name.revision_id, first_name.langcode, first_name.delta, 
+            CONCAT( field_first_name_value , ' ', field_last_name_value ) AS field_full_name_value
+    FROM	users_field_data,
+        user__field_first_name first_name,
+        user__field_last_name last_name
+    WHERE first_name.entity_id = users_field_data.uid
+      AND last_name.entity_id = users_field_data.uid
+    "
+  );
+  return $schema;
+}
 

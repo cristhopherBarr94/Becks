@@ -9,7 +9,7 @@
   />
   <!-- grey/sold out -->
   <img
-    *ngIf="this.stock == 0 && this.status != '2'"
+    *ngIf="this.stock == 0 && this.status != '2' && !this.reserved"
     src="./assets/icon/sold-icon.svg"
     alt="not amounts"
   />

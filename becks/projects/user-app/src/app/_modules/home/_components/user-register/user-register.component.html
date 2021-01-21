@@ -124,6 +124,7 @@
               *Has ingresado un número inválido
             </mat-error>
           </mat-form-field>
+          <!-- password -->
           <mat-form-field
             appearance="fill"
             floatLabel="auto"
@@ -153,12 +154,14 @@
               >*Este campo es obligatorio, mínimo 4 caracteres</mat-error
             >
           </mat-form-field>
-
+          <!-- password confirm -->
           <mat-form-field
             appearance="fill"
             floatLabel="auto"
             class="fullInput"
-            [ngClass]="getClassInput(userRegisterForm.controls.password)"
+            [ngClass]="
+              getClassInput(userRegisterForm.controls.password_confirm)
+            "
           >
             <mat-label>Confirmar Contraseña</mat-label>
             <input

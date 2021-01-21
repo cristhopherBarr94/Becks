@@ -95,8 +95,8 @@ export class EditFormComponent implements OnInit, OnDestroy {
     this.userEditProfileForm = this.formBuilder.group({
       fullname: new FormControl(this.user.full_name, [
         Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(20),
+        Validators.minLength(4),
+        Validators.maxLength(50),
       ]),
       phone: new FormControl(this.user.mobile_phone, [
         Validators.required,
@@ -174,8 +174,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
 
           this.httpService
             .patch(environment.serverUrl + environment.user.patchData, {
-              first_name: this.userEditProfileForm.controls.name.value.trim(),
-              last_name: this.userEditProfileForm.controls.lastName.value.trim(),
+              full_name: this.userEditProfileForm.controls.fullname.value.trim(),
               mobile_phone: this.userEditProfileForm.controls.phone.value.trim(),
               // birthdate: this.birthDayDate,
               type_id: this.userEditProfileForm.controls.id.value.trim(),
@@ -204,8 +203,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
         //MOBILE
 
         if (
-          !this.userEditProfileForm.controls.name.invalid &&
-          !this.userEditProfileForm.controls.lastName.invalid &&
+          !this.userEditProfileForm.controls.fullname.invalid &&
           !this.userEditProfileForm.controls.phone.invalid &&
           !this.userEditProfileForm.controls.city.invalid
           // !this.userEditProfileForm.controls.month.invalid &&
@@ -222,8 +220,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
           //   : undefined;
           this.httpService
             .patch(environment.serverUrl + environment.user.patchData, {
-              first_name: this.userEditProfileForm.controls.name.value.trim(),
-              last_name: this.userEditProfileForm.controls.lastName.value.trim(),
+              full_name: this.userEditProfileForm.controls.fullname.value.trim(),
               mobile_phone: this.userEditProfileForm.controls.phone.value.trim(),
               city: this.userEditProfileForm.controls.city.value.trim(),
               // birthdate: this.birthDayDate,

@@ -4,7 +4,11 @@
     class="form-section"
     autocomplete="off"
   >
-    <div [ngClass]="screnSize(size, false)" class="col-flex-center">
+    <!-- <div [ngClass]="screnSize(size, false)">
+
+    </div> -->
+    <div class="flex-direction-column">
+      <!-- full name -->
       <mat-form-field
         appearance="fill"
         floatLabel="auto"
@@ -18,7 +22,7 @@
           formControlName="fullname"
           required
           type="text"
-          maxlength="20"
+          maxlength="50"
           data-qadp="fullname"
           [value]="user.full_name"
         />
@@ -35,8 +39,7 @@
           }}</mat-error
         >
       </mat-form-field>
-    </div>
-    <div [ngClass]="screnSize(size, true)">
+      <!-- phone number -->
       <mat-form-field
         appearance="fill"
         floatLabel="auto"
@@ -66,7 +69,7 @@
           }}</mat-error
         >
       </mat-form-field>
-
+      <!-- city -->
       <mat-form-field
         appearance="fill"
         floatLabel="auto"
@@ -100,14 +103,13 @@
           >Debes seleccionar un campo</mat-error
         >
       </mat-form-field>
-    </div>
-
-    <div [ngClass]="screnSize(size, false)" *ngIf="size != 'xs'">
+      <!-- type id -->
       <mat-form-field
         appearance="fill"
         floatLabel="auto"
         class="fullInput"
         [ngClass]="getClassInputSelect(userEditProfileForm.controls.id)"
+        *ngIf="size != 'xs'"
       >
         <mat-label>Tipo de documento</mat-label>
         <mat-select
@@ -123,6 +125,10 @@
           >Debes seleccionar un campo</mat-error
         >
       </mat-form-field>
+    </div>
+
+    <div class="flex-direction-column" *ngIf="size != 'xs'" style="width: 100%">
+      <!-- id number -->
       <mat-form-field
         appearance="fill"
         floatLabel="auto"

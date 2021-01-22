@@ -2,18 +2,14 @@ import {
   AfterContentChecked,
   AfterViewInit,
   Component,
-  Input,
-  OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
   ViewChild,
 } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { IonSlides, Platform } from "@ionic/angular";
 import { Subscription } from "rxjs";
 import { Exp } from "src/app/_models/exp";
-import { User } from "src/app/_models/User";
 import { ExperienciasService } from "src/app/_services/experiencias.service";
 import { UiService } from "src/app/_services/ui.service";
 import { UserService } from "src/app/_services/user.service";
@@ -44,6 +40,9 @@ export class SliderExpComponent
   private redemps: number[] = [];
   public activeIndex: number;
   public DefaultSlide: boolean = false;
+  public reserv: boolean = false;
+  public hideDays: boolean = false;
+
   sliderExp = {
     isBeginningSlide: true,
     isEndSlide: false,
@@ -59,8 +58,10 @@ export class SliderExpComponent
   timerToChecked = 0;
   // status = 0;
 
-  public defaultDeskImage = environment.serverUrl + environment.user.getImgExp + "0_desk";
-  public defaultMobileImage = environment.serverUrl + environment.user.getImgExp + "0_mob";
+  public defaultDeskImage =
+    environment.serverUrl + environment.user.getImgExp + "0_desk";
+  public defaultMobileImage =
+    environment.serverUrl + environment.user.getImgExp + "0_mob";
 
   @ViewChild("slides") slides: IonSlides;
 
@@ -113,7 +114,7 @@ export class SliderExpComponent
             this.sliderExp.slidesItems = response;
             this.slideOpts = {
               initialSlide: this.compareId(this.id == NaN ? 0 : this.id),
-              direction: "vertical",
+              direction: "horizontal",
               speed: 400,
               allowTouchMove: false,
             };
@@ -160,6 +161,7 @@ export class SliderExpComponent
   ngOnDestroy(): void {
     this.userCodeSubs.unsubscribe();
     this.expSubs.unsubscribe();
+    this.redempSubs.unsubscribe();
   }
 
   detalleExperiencia(item: any) {
@@ -214,6 +216,22 @@ export class SliderExpComponent
             }
           );
         }
+        // evaluate redemp status
+        if (this.redemps) {
+          for (let _id of this.redemps) {
+            if (_id == this.experienciaContent[CurrentSld].id) {
+              //pop up message error
+              this.reserv = true;
+            } else {
+              this.reserv = false;
+            }
+          }
+        }
+        if (this.experienciaContent[CurrentSld].type == "3") {
+          this.hideDays = true;
+        } else {
+          this.hideDays = false;
+        }
       }
     }
   }
@@ -244,6 +262,7 @@ export class SliderExpComponent
       for (let _id of this.redemps) {
         if (_id == eid) {
           //pop up message error
+          this.reserv = true;
           this.router.navigate([`user/access-forbidden/${eid}`]);
           return;
         }
@@ -277,6 +296,13 @@ export class SliderExpComponent
     else if (exp.type == "2") {
       this.router.navigate([`user/interaction/${eid}`]);
     }
+    //free event
+    else if (exp.type == "3") {
+      this.router.navigate([`user/confirm-interaction/`], {
+        queryParamsHandling: "preserve",
+        state: { exp: exp },
+      });
+    }
   }
 
   public closeModal() {
@@ -285,7 +311,7 @@ export class SliderExpComponent
   }
 
   changeSlider() {
-    // console.log('cambio de slider # si click ->', this.itemChange);
+    // console.log("cambio de slider # si click ->", this.itemChange);
     if (this.itemChange !== undefined) {
       // console.log('cambio de slider # con click ->', this.itemChange);
       if (this.experienciaContent[this.itemChange].detalleExp === true) {
@@ -348,5 +374,26 @@ export class SliderExpComponent
       object.isEndSlide = istrue;
       this.disableNextBtn = istrue;
     });
+  }
+
+  getColorExp(exp: any): string {
+    let colorClass = "";
+    // free exp
+    if (exp.type == "3" && !this.reserv) {
+      colorClass = "free-color";
+    }
+    // reserved exp
+    else if (this.isActivate && this.reserv) {
+      colorClass = "reserved-color";
+    }
+    // soon exp
+    else if (this.isActivate && exp.status == 2) {
+      colorClass = "soon-color";
+    }
+    // sold out
+    else if (this.isActivate && exp.stock_actual == 0) {
+      colorClass = "sold-color";
+    }
+    return colorClass;
   }
 }

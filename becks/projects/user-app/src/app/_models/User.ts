@@ -1,7 +1,6 @@
 export class User {
   id: number;
-  first_name: string;
-  last_name: string;
+  full_name: string;
   mobile_phone: string;
   city: string;
   email: string;
@@ -31,10 +30,8 @@ export class User {
   constructor(data?: any) {
     if (data !== undefined) {
       this.id = data["id"] !== undefined ? data["id"] : undefined;
-      this.first_name =
-        data["first_name"] !== undefined ? data["first_name"] : undefined;
-      this.last_name =
-        data["last_name"] !== undefined ? data["last_name"] : undefined;
+      this.full_name =
+        data["full_name"] !== undefined ? data["full_name"] : undefined;
       this.mobile_phone =
         data["mobile_phone"] !== undefined ? data["mobile_phone"] : undefined;
       this.city = data["city"] !== undefined ? data["city"] : undefined;
@@ -82,8 +79,7 @@ export class User {
   toJS(data?: any) {
     data = {};
     data["id"] = this.id !== undefined ? this.id : null;
-    data["first_name"] = this.first_name !== undefined ? this.first_name : null;
-    data["last_name"] = this.last_name !== undefined ? this.last_name : null;
+    data["full_name"] = this.full_name !== undefined ? this.full_name : null;
     data["mobile_phone"] =
       this.mobile_phone !== undefined ? this.mobile_phone : null;
     data["city"] = this.city !== undefined ? this.city : null;

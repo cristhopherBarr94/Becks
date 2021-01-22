@@ -1,20 +1,49 @@
 <div class="announcer-container">
+  <!-- green/active -->
   <img
-    *ngIf="this.stock > 0 || this.status == '2'"
+    *ngIf="
+      this.stock > 0 && this.type != '3' && this.status != '2' && !this.reserved
+    "
     src="./assets/icon/few-amount-icon.svg"
     alt="few amounts"
   />
+  <!-- grey/sold out -->
   <img
-    *ngIf="this.stock == 0 && this.status != '2'"
-    src="./assets/icon/not-amount-icon.svg"
-    alt="few amounts"
+    *ngIf="this.stock == 0 && this.status != '2' && !this.reserved"
+    src="./assets/icon/sold-icon.svg"
+    alt="not amounts"
   />
-  <p *ngIf="this.stock > 0 && this.status != '2'" class="quantity-text">
+  <!-- yellow/soon -->
+  <img
+    *ngIf="this.status == '2' && !this.reserved"
+    src="./assets/icon/soon-icon.svg"
+    alt="soon"
+  />
+  <!-- black/reserved -->
+  <!-- user var -->
+  <img
+    *ngIf="this.reserved && this.status != '2'"
+    src="./assets/icon/reserved-icon.svg"
+    alt="reserved"
+  />
+  <!-- blue/free -->
+  <img
+    *ngIf="this.stock > 0 && this.type == '3' && !this.reserved"
+    src="./assets/icon/free-exp-icon.svg"
+    alt="free"
+  />
+  <p
+    *ngIf="this.stock > 0 && this.status != '2' && !this.reserved"
+    class="quantity-text"
+  >
     quedan {{ stock }} cupos
   </p>
 
   <p *ngIf="this.stock == 0 && this.status != '2'" class="quantity-text">
     agotada
   </p>
-  <p *ngIf="this.status == '2'" class="soon-text">PRÓXIMAMENTE</p>
+  <p *ngIf="this.status == '2' && !this.reserved" class="soon-text">
+    PRÓXIMAMENTE
+  </p>
+  <p *ngIf="this.reserved && this.status != '2'" class="soon-text">RESERVADA</p>
 </div>

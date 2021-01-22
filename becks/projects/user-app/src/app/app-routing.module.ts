@@ -16,15 +16,15 @@ const routes: Routes = [
       import("./_modules/user/user.module").then((m) => m.UserModule),
     canActivate: [AuthGuardService],
   },
+  // {
+  //   path: "age-gate",
+  //   loadChildren: () =>
+  //     import("./_modules/age-gate/age-gate.module").then(
+  //       (m) => m.AgeGateModule
+  //     ),
+  // },
   {
     path: "age-gate",
-    loadChildren: () =>
-      import("./_modules/age-gate/age-gate.module").then(
-        (m) => m.AgeGateModule
-      ),
-  },
-  {
-    path: "age-gate-v2",
     loadChildren: () =>
       import("./_modules/age-gate-v2/age-gate-v2.module").then(
         (m) => m.AgeGateV2Module

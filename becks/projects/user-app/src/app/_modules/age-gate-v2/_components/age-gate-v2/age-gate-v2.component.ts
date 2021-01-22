@@ -210,19 +210,16 @@ export class AgeGateV2Component implements OnInit {
             this.yearForm.controls.year_2.value +
             this.yearForm.controls.year_3.value +
             this.yearForm.controls.year_4.value ==
-          2002
+          parseInt((new Date().getFullYear() - 18).toString())
         ) {
-          console.log("ingrese mes");
           this.yearchk = false;
           this.slideNext();
         } else {
           this.yearchk = true;
           this.monthchk = true;
           this.daychk = true;
-          console.log("es mayor de edad año");
         }
       } else {
-        console.log("menor de edad año");
         window.location.href = "https://www.tapintoyourbeer.com/age_check.cfm";
       }
     }
@@ -238,17 +235,25 @@ export class AgeGateV2Component implements OnInit {
     } else {
       if (
         this.monthForm.controls.month_1.value +
-          this.monthForm.controls.month_2.value <=
-        new Date().getMonth()
+          this.monthForm.controls.month_2.value <
+        new Date().getMonth() + 1
       ) {
-        console.log("es mayor de edad mes");
         this.yearchk = true;
         this.monthchk = true;
         this.daychk = true;
-      } else {
-        console.log("ingrese día");
+      } else if (
+        this.monthForm.controls.month_1.value +
+          this.monthForm.controls.month_2.value ==
+        new Date().getMonth() + 1
+      ) {
         this.monthchk = false;
         this.slideNext();
+      } else if (
+        this.monthForm.controls.month_1.value +
+          this.monthForm.controls.month_2.value >
+        new Date().getMonth() + 1
+      ) {
+        window.location.href = "https://www.tapintoyourbeer.com/age_check.cfm";
       }
     }
   }
@@ -265,12 +270,10 @@ export class AgeGateV2Component implements OnInit {
         this.dayForm.controls.day_1.value + this.dayForm.controls.day_2.value <=
         new Date().getDate()
       ) {
-        console.log("es mayor de edad día");
         this.yearchk = true;
         this.monthchk = true;
         this.daychk = true;
       } else {
-        console.log("menor de edad día", new Date().getDate());
         this.daychk = false;
         window.location.href = "https://www.tapintoyourbeer.com/age_check.cfm";
       }
@@ -294,7 +297,6 @@ export class AgeGateV2Component implements OnInit {
   async getIndex() {
     if (this.slides) {
       this.activeIndex = await this.slides.getActiveIndex();
-      console.log(this.activeIndex);
       if (this.activeIndex == 0) {
         this.prevHidden = false;
       } else if (this.activeIndex == 1) {

@@ -1,15 +1,13 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { AnnouncerAccessForbiddenComponent } from './_components/announcer-access-forbidden/announcer-access-forbidden.component';
-import { InteractionConfirmComponent } from './_components/interaction-confirm/interaction-confirm.component';
-import { InteractionViewComponent } from './_components/interaction-view/interaction-view.component';
-import { ScheduleComponent } from './_components/schedule/schedule.component';
-import { VerticalCalendarComponent } from './_components/vertical-calendar/vertical-calendar.component';
+import { AnnouncerAccessForbiddenComponent } from "./_components/announcer-access-forbidden/announcer-access-forbidden.component";
+import { InteractionConfirmComponent } from "./_components/interaction-confirm/interaction-confirm.component";
+import { InteractionViewComponent } from "./_components/interaction-view/interaction-view.component";
+import { ScheduleComponent } from "./_components/schedule/schedule.component";
 import { ActivationPage } from "./_modules/profile/_pages/activation/activation.page";
 import { MGMPage } from "./_modules/profile/_pages/mgm/mgm.page";
 
 const routes: Routes = [
-
   {
     path: "profile",
     loadChildren: () =>
@@ -27,19 +25,19 @@ const routes: Routes = [
   },
   {
     path: "calendar",
-    component: ScheduleComponent
+    component: ScheduleComponent,
   },
   {
     path: "confirm-interaction",
-    component: InteractionConfirmComponent
+    component: InteractionConfirmComponent,
   },
   {
     path: "access-forbidden/:id",
-    component: AnnouncerAccessForbiddenComponent
+    component: AnnouncerAccessForbiddenComponent,
   },
   {
     path: "interaction/:id",
-    component: InteractionViewComponent
+    component: InteractionViewComponent,
   },
   {
     path: "activation",

@@ -8,6 +8,8 @@ import {
 import * as moment from "moment";
 import { Router } from "@angular/router";
 import { IonSlides } from "@ionic/angular";
+import { UiService } from "src/app/_services/ui.service";
+
 @Component({
   selector: "age-gate-v2",
   templateUrl: "./age-gate-v2.component.html",
@@ -37,7 +39,11 @@ export class AgeGateV2Component implements OnInit {
     effect: "fade",
   };
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private ui: UiService
+  ) {
     setTimeout(() => {
       this.slides.lockSwipes(true);
     }, 100);
@@ -121,6 +127,7 @@ export class AgeGateV2Component implements OnInit {
             moment().toISOString()
           );
         }
+        this.ui.showLoading();
         this.router.navigate(["home"], { queryParamsHandling: "preserve" });
       } else {
         localStorage.removeItem("user-age-gate-local");

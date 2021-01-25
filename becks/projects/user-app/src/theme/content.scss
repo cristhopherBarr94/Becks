@@ -694,14 +694,15 @@
     position: absolute;
     height: 27% !important;
     width: 100% !important;
-    border-radius: 16px 0px 16px 0px;
+    border-radius: 8px 8px 0px 0px;
     background-color: transparent;
     backdrop-filter: blur(10px);
     @media (min-width: 769px) {
       width: 439px !important;
       height: 180px !important;
       backdrop-filter: blur(0px);
-      background-color: #171717;
+      background: rgba(2, 2, 2, 0.7);
+      border-radius: 8px;
     }
   }
   @media (min-width: 769px) {

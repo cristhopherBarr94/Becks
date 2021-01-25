@@ -1,7 +1,14 @@
 .url-hyper {
-  text-decoration: underline #ffffff;
-  margin-bottom: 15px;
-  width: 100%;
+  // text-decoration: underline #ffffff;
+  // margin-bottom: 15px;
+  // width: 100%;
+  width: 196px;
+  height: 25px;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 5px 0 5px 0;
+  font-size: 11px;
+  line-height: 13px;
 }
 
 .margin-top {
@@ -69,20 +76,20 @@
   justify-content: center;
   font-family: "Helvetica LT Std";
   color: #ffffff !important;
-  border-radius: 16px 0px 16px 0px ;
-  border:1px solid  #ffffff;
+  border-radius: 16px 0px 16px 0px;
+  border: 1px solid #ffffff;
   width: 45%;
   @media (min-width: 769px) and (max-width: 1366px) {
     font-size: 18px;
     height: 45px;
   }
   @media (min-width: 1367px) {
-    font-size: 24px;    
+    font-size: 24px;
     height: 51px;
   }
 }
 
-.button-edit{
+.button-edit {
   width: 35%;
   margin-left: 5%;
 }
@@ -101,4 +108,27 @@
 
 .positionRelative {
   position: relative;
+}
+
+.flexbox {
+  @media (min-width: 0px) and (max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .editLogo {
+    margin-left: 6px;
+  }
+  &__box1 {
+    @media (min-width: 0px) and (max-width: 768px) {
+      width: 110px;
+      padding: 10px;
+    }
+  }
+  &__box2 {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 20px;
+  }
 }

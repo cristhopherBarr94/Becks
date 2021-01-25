@@ -5,7 +5,7 @@
   }
   margin-top: 24px;
   background-color: #141313;
-  width: 90%;
+  width: 95%;
   display: flex;
   color: #ffffff;
   margin-bottom: 24px;
@@ -54,7 +54,13 @@
 .image-card {
   height: 72px;
   max-width: 108px;
-  // background: -webkit-gradient(linear, left, right, color-stop(0%,#2C2F36), color-stop(100%,#141313));
+  background: -webkit-gradient(
+    linear,
+    left,
+    right,
+    color-stop(0%, #2c2f36),
+    color-stop(100%, #141313)
+  );
   @media (min-width: 768px) {
     height: 117px;
     max-width: 218px;
@@ -74,7 +80,7 @@
   justify-content: center;
   align-items: flex-start;
   min-height: 100%;
-  padding: 5px;
+  padding: 10px 15px;
   width: 67%;
 }
 
@@ -87,7 +93,7 @@
 .content-card-details {
   justify-content: flex-end;
   min-height: 100%;
-  min-width: 98%;
+  min-width: 100%;
   position: absolute;
   align-items: flex-end;
 }
@@ -109,5 +115,8 @@
 }
 
 .green-color {
+  color: rgba(98, 248, 178, 0.87) !important;
+}
+.green-color-btn {
   color: #038259 !important;
 }

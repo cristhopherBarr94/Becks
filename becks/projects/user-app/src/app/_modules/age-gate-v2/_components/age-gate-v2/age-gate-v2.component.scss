@@ -1,137 +1,216 @@
+// container styles
+
 .padding-logo {
-  padding-bottom: 0 !important;
-}
-@media (min-width: 0px) and (max-width: 768px) {
-  .logo-2 {
-    top: 42px;
-    width: 120px;
-  }
-
-  .form-section {
-    position: relative;
-    margin-top: 58px;
-    min-height: 550px;
-    width: 100%;
-    background: rgba(3, 130, 89, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 30px;
-  }
-  .title-primary {
-    font-size: 16px !important;
-    line-height: 17px !important;
-    letter-spacing: 0.15px !important;
-  }
-  .title-tertiary {
-    font-size: 13.28px !important;
-    line-height: 18px !important;
-    margin-top: 10px;
-    text-transform: lowercase;
-  }
-
-  .text-before {
-    width: 280px;
-  }
-  .margin-check {
-    margin-right: 5px;
-  }
-  .margin-top-button {
-    margin: 20px 0;
-  }
-
-  ion-slides {
-    .input-age {
-      max-width: 50px !important;
-      margin: 0px 5px !important;
-    }
-    mat-form-field input {
-      font-size: 20px !important;
-      @media (min-width: 0px) and (max-width: 768px) {
-        line-height: 40px !important;
-      }
-    }
-    ::ng-deep .mat-form-field-flex {
-      height: 80px !important;
-    }
-    mat-label {
-      font-size: 18px !important;
-    }
-    ion-slide {
-      align-items: center;
-    }
-  }
-  ::ng-deep .mat-icon-button {
-    top: 90px !important;
-    right: 0 !important;
-    transition: 0.5 all !important;
-  }
-
-  ::ng-deep .mat-icon-button .mat-icon {
-    color: #ffffff;
-  }
-
-  ::ng-deep .mat-icon-button.mat-button-disabled {
-    visibility: hidden;
-  }
-
-  .error-message {
-    color: #f44336;
-    // margin-left: 47px !important;
-    padding-left: 20px !important;
-    width: auto;
-  }
-  ::ng-deep .mat-checkbox .mat-checkbox-frame {
-    border-color: #ffffff;
-  }
-  .title-fourthy-width {
-    width: 290px;
-    text-align: justify !important;
-    margin-left: 10px;
-    margin-top: 20px;
-  }
-  .no-margin {
-    margin-top: 20px;
+  padding-bottom: 0px;
+  @media (min-width: 769px) {
+    padding-bottom: 60px;
   }
 }
-@media (min-width: 769px) {
-  .logo-2 {
-    top: 50px;
-    width: 160px;
-  }
-  .fullSection {
+
+.no-margin {
+  margin-top: 20px;
+}
+
+.fullSection {
+  @media (min-width: 769px) {
     padding-bottom: 0px;
   }
-  .form-section {
-    position: relative;
-    margin-top: 130px;
-    margin-bottom: 0;
-    width: 100%;
-    min-height: 680px;
-    background: rgba(3, 130, 89, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 30px;
-  }
-  .title-primary {
-    font-size: 24px !important;
-    line-height: 50px !important;
-    letter-spacing: 0.15px !important;
-  }
-  .title-tertiary {
-    font-size: 16px !important;
-    line-height: 18px !important;
-  }
-
-  ion-content {
+}
+ion-content {
+  @media (min-width: 769px) {
     --background: var(--ion-background-color, transparent);
     ::ng-deep .scroll-y {
       overscroll-behavior-y: auto !important;
     }
   }
-
-  .text-before {
-    width: 334px !important;
+}
+// general styles
+//add material icons to avoid the botton icon error
+::ng-deep mat-icon:active {
+  font-family: "Material Icons" !important;
+}
+.position-relative {
+  position: relative;
+}
+.logo-2 {
+  top: 42px;
+  width: 120px;
+  @media (min-width: 769px) {
+    display: none;
   }
-  .content-check {
-    width: 400px;
+}
+// titles styles overwrite
+.title-primary {
+  width: 700px;
+  font-size: 44px !important;
+  line-height: 49px !important;
+}
+.show {
+  font-family: "Helvetica LT Std";
+  font-style: normal;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 110%;
+  @media (min-width: 769px) {
+    font-size: 28px;
+    line-height: 38px;
+    width: 614px;
+  }
+  &__dk {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+  &__mb {
+    @media (min-width: 769px) {
+      display: none;
+    }
+  }
+}
+
+.title-tertiary {
+  text-transform: lowercase;
+  font-size: 13.28px !important;
+  line-height: 18px !important;
+  margin-top: 10px;
+  @media (min-width: 769px) {
+    font-size: 16px !important;
+    line-height: 18px !important;
+  }
+}
+
+.title-fourthy-width {
+  width: 278px;
+  text-align: left;
+  margin-left: 10px;
+  margin-top: 20px;
+  font-size: 13.28px !important;
+  line-height: 16px !important;
+
+  @media (min-width: 769px) {
+    width: 735px;
+    height: 72px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 17px;
+    text-align: center;
+    font-size: 16px !important;
+    line-height: 18.5px !important;
+  }
+}
+.title-fourthy {
+  @media (max-width: 768px) {
+    font-size: 13.28px !important;
+    line-height: 16px !important;
+  }
+}
+
+// age- gate form styles
+.form-section {
+  position: relative;
+  width: 100%;
+  @media (max-width: 768px) {
+    background: rgba(3, 130, 89, 0.1);
+    min-height: 680px;
+    padding: 30px;
+    margin-top: 65px;
+    margin-bottom: 0;
+    padding: 30px;
+    @supports (backdrop-filter: blur(10px)) {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      -moz-backdrop-filter: blur(10px);
+    }
+  }
+  @media (min-width: 769px) {
+    margin-top: 58px;
+    min-height: 550px;
+  }
+}
+
+//  slides styles
+ion-slides {
+  height: 250px;
+  width: 600px;
+  @media (max-width: 768px) {
+    height: 200px;
+    width: 300px;
+  }
+  .input-age {
+    max-width: 50px;
+    margin: 0px 15px;
+    @media (min-width: 769px) {
+      max-width: 87px;
+      margin: 0px 20px;
+    }
+  }
+  mat-form-field input {
+    font-size: 40px !important;
+    @media (max-width: 768px) {
+      height: 40px !important;
+    }
+    @media (min-width: 769px) {
+      height: 92px !important;
+    }
+  }
+  ::ng-deep .mat-form-field-flex {
+    @media (max-width: 768px) {
+      height: 80px !important;
+      padding: 0.5em 0.5em;
+    }
+  }
+  mat-label {
+    font-size: 40px !important;
+    @media (min-width: 769px) {
+      margin-top: 36.5px;
+    }
+  }
+
+  ion-slide {
+    align-items: center;
+  }
+}
+
+// error styles
+
+mat-error,
+.error-message {
+  font-size: 14px !important;
+  line-height: 16px !important;
+  padding-left: 0px !important;
+}
+.error-message {
+  color: #f44336;
+  width: auto;
+}
+
+// checkbox styles and text
+.text-before {
+  width: 280px;
+  @media (min-width: 769px) {
+    width: auto;
+  }
+}
+.margin-check {
+  margin-right: 5px;
+  @media (min-width: 769px) {
+    margin-right: 10px;
+  }
+}
+.margin-top-button {
+  margin: 20px 0;
+}
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: #ffffff;
+}
+
+.content-check {
+  @media (min-width: 769px) {
+    width: 670px;
     margin-left: auto;
     margin-right: auto;
     justify-content: space-between;
@@ -139,62 +218,33 @@
       margin-left: 30px;
     }
   }
-  .margin-top-button,
-  .no-margin {
+}
+
+.margin-top-button,
+.no-margin {
+  @media (min-width: 769px) {
     margin-top: 34px;
   }
-  .title-fourthy-width {
-    width: 735px;
-    height: 72px;
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px 170px;
-    text-align: left;
-  }
-  .input-age {
-    max-width: 87px !important;
-    margin: 0px 7px !important;
-  }
-  mat-form-field input {
-    height: 127px !important;
-    font-size: 40px !important;
-  }
+}
 
-  mat-label {
-    font-size: 40px !important;
-    margin-top: 36.5px;
-  }
+// add styles for conrol buttons in slides
 
-  ::ng-deep .mat-icon-button .mat-icon {
-    color: #ffffff;
+::ng-deep .mat-icon-button {
+  top: 90px !important;
+  right: 0 !important;
+  transition: 0.5 all !important;
+}
+
+::ng-deep .mat-icon-button .mat-icon {
+  color: #ffffff;
+  @media (min-width: 769px) {
     width: 36px !important;
     height: 36px !important;
   }
-
-  .error-message {
-    color: #f44336;
-  }
-  .margin-check {
-    margin-right: 10px;
-  }
-  ::ng-deep .mat-checkbox .mat-checkbox-frame {
-    border-color: #ffffff;
-  }
 }
 
-ion-slides {
-  height: 300px !important;
-  width: 600px !important;
-  margin-bottom: 20px;
-  @media (min-width: 0px) and(max-width:768px) {
-    height: 200px !important;
-    width: 300px !important;
-  }
-}
-
-.position-relative {
-  position: relative;
+::ng-deep .mat-icon-button.mat-button-disabled {
+  visibility: hidden;
 }
 .btn-prev-field,
 .btn-next-field {
@@ -223,19 +273,44 @@ ion-slides {
 }
 .btn-prev-field {
   left: 10px !important;
-  top: 165px !important;
-  @media (min-width: 769px) {
-    left: 250px !important;
-    top: 200px !important;
+  top: 150px !important;
+  @media (min-width: 769px) and (max-width: 1366px) {
+    left: 30% !important;
+    top: 300px !important;
+  }
+  @media (min-width: 1367px) {
+    left: 35% !important;
+    top: 300px !important;
   }
 }
 
-.btn-next-field {
-  right: 10px !important;
-  top: 165px !important;
+// change the default styles of mat-label for 40px font size
 
-  @media (min-width: 769px) {
-    right: 250px !important;
-    top: 200px !important;
+::ng-deep.mat-focused {
+  label {
+    @media (max-width: 600px) {
+      transform: translateY(-1em) translateX(0.1em) scale(0.65) !important;
+    }
+    @media (min-width: 601px) {
+      transform: translateY(-1em) translateX(0.2em) scale(0.65) !important;
+    }
+  }
+}
+
+::ng-deep .input-becks-ok .mat-form-field-label {
+  @media (max-width: 600px) {
+    transform: translateY(-1em) translateX(0.1em) scale(0.65) !important;
+  }
+  @media (min-width: 601px) {
+    transform: translateY(-1em) translateX(0.2em) scale(0.65) !important;
+  }
+}
+
+::ng-deep .mat-form-field-label-wrapper {
+  @media (max-width: 600px) {
+    overflow: inherit !important;
+  }
+  @media (min-width: 601px) {
+    top: -1.84375em;
   }
 }

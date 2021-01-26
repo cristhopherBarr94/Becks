@@ -661,28 +661,25 @@
 
 .age-gate-background-img {
   background: #140514;
-  background-size: cover;
-  background-position: center;
-
-  // @media (min-width: 0px) and (max-width: 360px) {
-  // }
-  @media (min-width: 0px) and (max-width: 768px) {
+  background-size: contain;
+  background-position: top;
+  background-repeat: no-repeat;
+  @media (min-width: 0px) and (max-width: 600px) {
     background-image: linear-gradient(
         0deg,
         rgba(0, 0, 0, 0.2) 100%,
         rgba(0, 0, 0, 0.2) 100%
       ),
-      url("../assets/img/bg_mobile_360x667_botellaverde.jpg");
-    background-position-x: 83%;
+      url("../assets/img/bg_mobile_360x667_home.jpg");
   }
-  @media (min-width: 768px) {
+  @media (min-width: 600px) {
     background-image: linear-gradient(
         0deg,
         rgba(0, 0, 0, 0.3) 100%,
         rgba(0, 0, 0, 0.3) 100%
       ),
-      url("../assets/img/bg_desktop_1366x768_botellaverde.jpg");
-    background-position: top;
+      url("../assets/img/bg_desktop_1366x768_home.jpg");
+    background-position: center;
     background-size: cover;
   }
 }

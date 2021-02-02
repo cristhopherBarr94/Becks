@@ -26,10 +26,10 @@ export class AgeGateV2Component implements OnInit {
   public monthchk: boolean = false;
   public yearchk: boolean = false;
   public arrowsCtrl: boolean = true;
-  public cont: number = 2;
   public prevHidden: boolean = false;
   public nextHidden: boolean = false;
   public activeIndex: number;
+  public validInput: boolean = false;
 
   @ViewChild("mySlider") slides: IonSlides;
   slideOpts = {
@@ -141,6 +141,9 @@ export class AgeGateV2Component implements OnInit {
     const pattern = /^[0-9]*$/;
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(/[^0-9]/g, "");
+      this.validInput = true;
+    } else {
+      this.validInput = false;
     }
   }
 
@@ -157,6 +160,7 @@ export class AgeGateV2Component implements OnInit {
     }
     return classreturn;
   }
+
   invalidYear() {
     this.yearForm.reset();
     this.yearForm.markAllAsTouched();
@@ -170,27 +174,33 @@ export class AgeGateV2Component implements OnInit {
     this.dayForm.reset();
     this.dayForm.markAllAsTouched();
   }
+
   move(event, fromtxt, totxt) {
     var length = fromtxt.length;
     var maxlength = fromtxt.getAttribute(maxlength);
-
-    if (event.key === "Backspace") {
-      let selField;
-      selField = document.getElementById("year" + this.cont);
-      selField.focus();
-      selField.select();
-      this.cont -= 1;
-      if (this.cont < 1) {
-        this.cont = 1;
-      }
-    } else {
-      this.cont = 2;
-      if (length == maxlength) {
-        totxt.focus();
-        totxt.select();
+    if (!this.validInput) {
+      if (event.key === "Backspace") {
+        let selField;
+        if (fromtxt.id == "year4") {
+          selField = document.getElementById("year3");
+        } else if (fromtxt.id == "year3") {
+          selField = document.getElementById("year2");
+        } else if (fromtxt.id == "year2") {
+          selField = document.getElementById("year1");
+        } else {
+          selField = document.getElementById("year1");
+        }
+        selField.focus();
+        selField.select();
+      } else {
+        if (length == maxlength && event.target.value != "") {
+          totxt.focus();
+          totxt.select();
+        }
       }
     }
   }
+
   validateYear(event) {
     if (event.key === "Backspace") {
       let selyear;
@@ -226,7 +236,17 @@ export class AgeGateV2Component implements OnInit {
           this.monthchk = true;
           this.daychk = true;
         }
-      } else {
+      } else if (
+        this.yearForm.controls.year_1.value != "" &&
+        this.yearForm.controls.year_2.value != "" &&
+        this.yearForm.controls.year_3.value != "" &&
+        this.yearForm.controls.year_4.value != "" &&
+        this.yearForm.controls.year_1.value +
+          this.yearForm.controls.year_2.value +
+          this.yearForm.controls.year_3.value +
+          this.yearForm.controls.year_4.value >
+          parseInt((new Date().getFullYear() - 18).toString())
+      ) {
         window.location.href = "https://www.tapintoyourbeer.com/age_check.cfm";
       }
     }

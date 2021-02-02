@@ -286,7 +286,7 @@ mat-error,
 
 // change the default styles of mat-label for 40px font size
 
-::ng-deep.mat-focused {
+:host::ng-deep.mat-focused {
   label {
     @media (max-width: 600px) {
       transform: translateY(-1em) translateX(0.1em) scale(0.65) !important;
@@ -297,7 +297,7 @@ mat-error,
   }
 }
 
-::ng-deep .input-becks-ok .mat-form-field-label {
+:host::ng-deep .input-becks-ok .mat-form-field-label {
   @media (max-width: 600px) {
     transform: translateY(-1em) translateX(0.1em) scale(0.65) !important;
   }
@@ -306,7 +306,7 @@ mat-error,
   }
 }
 
-::ng-deep .mat-form-field-label-wrapper {
+:host::ng-deep .mat-form-field-label-wrapper {
   @media (max-width: 600px) {
     overflow: inherit !important;
   }

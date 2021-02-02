@@ -132,7 +132,6 @@ export class AgeGateV2Component implements OnInit {
       } else {
         localStorage.removeItem("user-age-gate-local");
         sessionStorage.removeItem("user-age-gate-session");
-        window.location.href = "https://www.tapintoyourbeer.com/age_check.cfm";
       }
     }
   }

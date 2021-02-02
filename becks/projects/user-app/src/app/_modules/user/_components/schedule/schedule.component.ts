@@ -149,6 +149,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   onSelect(event) {
     this.showEvent = false;
+    console.log(event);
     this.stringCom = event;
     this.selectedDate = event;
     const dateString = this.selectedDate.toLocaleDateString(
@@ -239,7 +240,9 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   }
 
   showDate(dateS?, dateE?) {
-    let dateSel = new Date(this.stringCom);
+    let todayDate = new Date(this.stringCom).toDateString();
+    let dateSel = new Date(todayDate);
+
     let dateSs = new Date(
       dateS.split("/")[1] +
         "/" +
@@ -254,7 +257,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
         "/" +
         dateE.split("/")[2]
     );
-
     if (
       dateSel.getTime() / 1000 >= new Date(dateSs).getTime() / 1000 &&
       dateSel.getTime() / 1000 <= new Date(dateEs).getTime() / 1000

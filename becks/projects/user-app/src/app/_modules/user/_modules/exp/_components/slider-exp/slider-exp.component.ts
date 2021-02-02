@@ -197,13 +197,31 @@ export class SliderExpComponent
   }
 
   checkCodes(CurrentSld: any) {
+    for (let i = 0; i < this.experienciaContent.length; i++) {
+      if (this.experienciaContent[CurrentSld].type == "3") {
+        this.hideDays = true;
+      } else {
+        this.hideDays = false;
+      }
+    }
     if (this.codes && this.codes.length > 0) {
       for (let i = 0; i < this.experienciaContent.length; i++) {
+        // evaluate redemp status
+        if (this.redemps) {
+          for (let _id of this.redemps) {
+            if (_id == this.experienciaContent[CurrentSld].id) {
+              //pop up message error
+              this.reserv = true;
+              console.log(_id, this.experienciaContent[CurrentSld].id);
+            }
+          }
+        }
         // this.experienciaContent[CurrentSld].status == '2' &&
         if (
           this.experienciaContent[CurrentSld].stock_actual == "0" &&
           this.modalIsShowed == false &&
-          this.experienciaContent[CurrentSld].status != "2"
+          this.experienciaContent[CurrentSld].status != "2" &&
+          !this.reserv
         ) {
           this.modalIsShowed = true;
           this.ui.showModal(
@@ -215,22 +233,6 @@ export class SliderExpComponent
               Func: this.closeModal.bind(this),
             }
           );
-        }
-        // evaluate redemp status
-        if (this.redemps) {
-          for (let _id of this.redemps) {
-            if (_id == this.experienciaContent[CurrentSld].id) {
-              //pop up message error
-              this.reserv = true;
-            } else {
-              this.reserv = false;
-            }
-          }
-        }
-        if (this.experienciaContent[CurrentSld].type == "3") {
-          this.hideDays = true;
-        } else {
-          this.hideDays = false;
         }
       }
     }
@@ -311,7 +313,7 @@ export class SliderExpComponent
   }
 
   changeSlider() {
-    // console.log("cambio de slider # si click ->", this.itemChange);
+    this.reserv = false;
     if (this.itemChange !== undefined) {
       // console.log('cambio de slider # con click ->', this.itemChange);
       if (this.experienciaContent[this.itemChange].detalleExp === true) {

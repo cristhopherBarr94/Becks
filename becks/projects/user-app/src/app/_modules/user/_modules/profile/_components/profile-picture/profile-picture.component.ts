@@ -21,7 +21,7 @@ export class ProfilePictureComponent
   @Input() profile_view: boolean;
   public time;
   public url: string = environment.serverUrl;
-  public isPofile: string;
+  public isProfile: string;
   public user;
   private pictureSub: Subscription;
   private userSub: Subscription;
@@ -32,16 +32,16 @@ export class ProfilePictureComponent
 
   ngOnInit() {
     if (this.profile_view) {
-      this.isPofile = "background-color-profile";
+      this.isProfile = "background-color-profile";
     }
-    
+
     this.pictureSub = this.userSvc.editing$.subscribe((isEditing) => {
       this.time = isEditing
         ? ""
         : "?time_stamp=" + Math.floor(Date.now() / 1000);
     });
 
-    this.userSub = this.userSvc.user$.subscribe( (user) => {
+    this.userSub = this.userSvc.user$.subscribe((user) => {
       this.user = user;
     });
   }

@@ -242,6 +242,10 @@ a {
 .trasparent-button {
   background-color: transparent;
   width: 100%;
+  @media (max-width: 600px) {
+    font-size: 11px !important;
+    line-height: 13px !important;
+  }
 }
 
 .exp-btn-inactive {

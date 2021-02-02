@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { Platform } from "@ionic/angular";
-import { Subscription } from 'rxjs';
-import { User } from 'src/app/_models/User';
+import { Subscription } from "rxjs";
+import { User } from "src/app/_models/User";
 import { AuthService } from "src/app/_services/auth.service";
 import { HttpService } from "src/app/_services/http.service";
 import { UiService } from "src/app/_services/ui.service";
-import { UserService } from 'src/app/_services/user.service';
+import { UserService } from "src/app/_services/user.service";
 import { environment } from "src/environments/environment";
 
 @Component({
@@ -17,8 +17,8 @@ import { environment } from "src/environments/environment";
 export class NameTittleComponent implements OnInit, OnDestroy {
   @Input() first_name: string;
   public size: string;
-  public nameResponsive: any
-  public visibleNAme : boolean
+  public nameResponsive: any;
+  public visibleNAme: boolean = false;
   private userSub: Subscription;
   public user: User;
 
@@ -37,13 +37,15 @@ export class NameTittleComponent implements OnInit, OnDestroy {
       });
       this.size = this.ui.getSizeType(platform.width());
     });
-    this.nameResponsive = this.userSvc.dropdownMenu$.subscribe((result)=>{ this.visibleNAme=result})
-   
+    this.nameResponsive = this.userSvc.dropdownMenu$.subscribe((result) => {
+      this.visibleNAme = result;
+    });
+
     // console.log("NameTittleComponent -> this.nameResponsive", this.nameResponsive)
   }
 
   ngOnInit() {
-    this.userSub = this.userSvc.user$.subscribe( (user) => {
+    this.userSub = this.userSvc.user$.subscribe((user) => {
       this.user = user;
     });
   }
@@ -66,7 +68,7 @@ export class NameTittleComponent implements OnInit, OnDestroy {
           this.router.navigate(["home"]);
         }
       );
-      this.authService.setAuthenticated("");
-      this.userSvc.logout();
+    this.authService.setAuthenticated("");
+    this.userSvc.logout();
   }
 }

@@ -1,22 +1,22 @@
 <ion-content>
   <div class="container-profile flex-direction-column">
     <user-name-tittle *ngIf="this.size == 'xs'"></user-name-tittle>
-    <user-menu [ngClass]='positionHeader()' ></user-menu>
-    <user-profile-picture
-      [profile_view]="true"
-    ></user-profile-picture>
-    <span
-      *ngIf="this.size == 'xs'"
-      class="link-profile url-hyper content-flex-all-center margin-top"
-      (click)="editProfile()"
-      >Editar Perfil <div class="editLogo "></div></span
-    >
-    <!-- <span
-      *ngIf="this.size == 'xs'"
-      class="link-profile url-hyper content-flex-all-center margin-top"
-      (click)="editPassword()"
-      >Cambiar Contraseña <div class="editLogo "></div></span
-    > -->
+    <user-menu [ngClass]="positionHeader()"></user-menu>
+    <div class="flexbox">
+      <div class="flexbox__box1">
+        <user-profile-picture [profile_view]="true"></user-profile-picture>
+      </div>
+      <div class="flexbox__box2" *ngIf="this.size == 'xs'">
+        <span
+          *ngIf="this.size == 'xs'"
+          class="link-profile url-hyper content-flex-all-center margin-top"
+          (click)="editProfile()"
+          >Editar Perfil
+          <div class="editLogo"></div
+        ></span>
+      </div>
+    </div>
+
     <div
       class="background-color margin-top-section"
       *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
@@ -27,7 +27,7 @@
       [statistics]="stats"
       *ngIf=" false"
     ></user-statistics-profile>
-    <div style="height: 75px;" *ngIf=" this.size == 'xs' "></div>
+    <div style="height: 55px" *ngIf=" this.size == 'xs' "></div>
     <div
       class="flex-direction-row background-color conte-second"
       *ngIf=" this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
@@ -38,22 +38,28 @@
         *ngIf="false"
       ></user-statistics-profile>
 
-      
       <div class="buttons-edition">
         <!-- <button class="edit-button flex-direction-row" (click)="editPassword()">
           Cambiar Contraseña
         </button> -->
-        <button class="edit-button flex-direction-row button-edit" (click)="editProfile()">
-          Editar Perfil <div class="editLogo margin-left-tt"></div>
+        <button
+          class="edit-button flex-direction-row button-edit"
+          (click)="editProfile()"
+        >
+          Editar Perfil
+          <div class="editLogo margin-left-tt"></div>
         </button>
-
-        
       </div>
-      <div class="separator-line-column sin-stadisticas" *ngIf="isNotXS()"></div>
-      </div>  
+      <div
+        class="separator-line-column sin-stadisticas"
+        *ngIf="isNotXS()"
+      ></div>
+    </div>
 
-    <user-seccions-profile class="seccions" [isActive]="user && user.activate"></user-seccions-profile>
-  
+    <user-seccions-profile
+      class="seccions"
+      [isActive]="user && user.activate"
+    ></user-seccions-profile>
   </div>
   <app-footer></app-footer>
 </ion-content>

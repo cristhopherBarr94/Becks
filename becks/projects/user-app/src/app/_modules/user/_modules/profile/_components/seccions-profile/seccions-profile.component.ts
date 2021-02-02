@@ -10,8 +10,7 @@ import { UiService } from "src/app/_services/ui.service";
 })
 export class SeccionsProfileComponent implements OnInit {
   public size: string;
-  @Input() isActive : boolean
- 
+  @Input() isActive: boolean;
 
   constructor(
     private platform: Platform,
@@ -26,14 +25,14 @@ export class SeccionsProfileComponent implements OnInit {
     });
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     // console.log("SeccionsProfileComponent -> isActive", this.isActive)
   }
 
   redirectExp() {
     this.router.navigate(["user/exp"], {
       queryParamsHandling: "preserve",
-      state: { reload: 'true' }
+      state: { reload: "true" },
     });
   }
 }

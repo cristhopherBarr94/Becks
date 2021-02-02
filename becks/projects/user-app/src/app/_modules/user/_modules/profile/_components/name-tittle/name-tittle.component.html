@@ -10,17 +10,16 @@
       style="height: 51px; width: 100%"
       *ngIf="this.size == 'xs' && visibleNAme"
     ></div>
-    <div
+    <!-- <div
       class="titleLogo margin-top-icon title-secondary"
       *ngIf="this.size == 'xs' && !visibleNAme"
-    ></div>
+    ></div> -->
     <span
       class="title-profile margin-tittle"
-      *ngIf="user && this.size == 'xs' && !visibleNAme"
-      >!Hola,
-      {{ user.full_name.split(" ")[0] }}
-      !</span
+      *ngIf="this.size == 'xs' && !visibleNAme"
     >
+      {{ user.full_name.split(" ")[0] + " " + user.full_name.split(" ")[1] }}
+    </span>
   </div>
   <div class="lateral-div">
     <!-- <button md-fab class="singOutLogo" (click)="logout()"  *ngIf=" this.size == 'xs'"></button> -->

@@ -1,5 +1,8 @@
 .margin-top-letter {
   margin-top: 14px;
+  @media (min-width: 0px) and (max-width: 768px) {
+    display: none;
+  }
 }
 .image-size-profile {
   @media (min-width: 0px) and (max-width: 768px) {
@@ -14,12 +17,13 @@
 
 .container {
   padding-top: 8px;
+
   @media (min-width: 768px) {
     padding-top: 18px;
   }
 }
 .background-color-profile {
   @media (min-width: 768px) {
-    background-color: #1d1d1d;
+    background-color: #141414;
   }
 }

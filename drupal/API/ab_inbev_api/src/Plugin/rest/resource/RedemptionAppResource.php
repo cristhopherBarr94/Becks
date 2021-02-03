@@ -165,58 +165,95 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
       throw new BadRequestHttpException('Experiencia no encontrada.');
     }
 
-    if ( time() > intval($exp_result["valid_to"]) ) {
+    $now = time();
+
+    if ( $now > intval($exp_result["valid_to"]) ) {
       throw new BadRequestHttpException('Experiencia ya finalizada.');
     }
 
-    if ( intval($exp_result["status"]) == 2 ) {
+    if ( intval($exp_result["status"]) == 2 ||
+          ( $now < intval($exp_result["activate_from"]) || $now > intval($exp_result["activate_to"]) ) ) {
+      // Próximamente
       throw new BadRequestHttpException('Próximamente.');
     }
 
-    $stock_result = $this->dbConnection->query('SELECT * FROM {ab_inbev_exp_stock} WHERE eid = :id', [':id' => trim($data['eid'])]);
 
-    $isEmpty = false;
-    $stock = null;
-    while($stock = $stock_result->fetchAssoc()) {
-      if ( $stock['stock_actual'] > 0 ) {
-        $isEmpty = false;
-        break;
-      }
-      $isEmpty = true;
-    }
-
-    if ( $isEmpty ) {
-      throw new BadRequestHttpException('Experiencia sin stock.');
-    }
-
-    try {
-
+    
+    if ( intval($exp_result["status"]) == 3) {
+      // Gratuita
       $record = [
         "uid" => $this->currentUser->id(),
-        "cid" => trim($data['cid']),
+        "cid" => '-1',
         "eid" => trim($data['eid']),
-        "created" => time()
+        "created" => $now
       ];
-      $id = $this->dbConnection->insert('ab_inbev_redemption')
-            ->fields($record)
-            ->execute();
-      if ( is_numeric($id) ) {
-        $this->dbConnection->query('UPDATE {ab_inbev_exp_stock} SET stock_actual = stock_actual - 1 WHERE id = :id', [':id' => $stock['id']]);
-        $storage = $this->entityTypeManager->getStorage('user');
-        $user = $storage->load( $this->currentUser->id() );
-        Util::sendEmail(  2, 
-                          $user->getEmail() , 
-                          $user->get('field_full_name')->value
-                        );
+      try {
+        $id = $this->dbConnection->insert('ab_inbev_redemption')
+              ->fields($record)
+              ->execute();
+        if ( is_numeric($id) ) {
+          $storage = $this->entityTypeManager->getStorage('user');
+          $user = $storage->load( $this->currentUser->id() );
+          Util::sendEmail(  2, 
+                            $user->getEmail() , 
+                            $user->get('field_full_name')->value
+          );
+        }
+        return new ModifiedResourceResponse($record, 201);
+      } catch (\Throwable $th) {
+        if ( strrpos( $th->getMessage() , '1062 Duplicate entry' ) !== false ) {
+          throw new BadRequestHttpException('No se puede redimir mas de una vez la experiencia.');
+        }
+      }
+    } else {
+      // Normal
+      $stock_result = $this->dbConnection->query('SELECT * FROM {ab_inbev_exp_stock} WHERE eid = :id', [':id' => trim($data['eid'])]);
+
+      $isEmpty = false;
+      $stock = null;
+      while($stock = $stock_result->fetchAssoc()) {
+        if ( $stock['stock_actual'] > 0 ) {
+          $isEmpty = false;
+          break;
+        }
+        $isEmpty = true;
       }
 
-      // $created_record = $this->loadRecord($id);
-      // Return the newly created record in the response body.
-      return new ModifiedResourceResponse($record, 201);
-    } catch (\Throwable $th) {
-      if ( strrpos( $th->getMessage() , '1062 Duplicate entry' ) !== false ) {
-        throw new BadRequestHttpException('No se puede redimir mas de una vez la experiencia.');
+      if ( $isEmpty ) {
+        throw new BadRequestHttpException('Experiencia sin stock.');
       }
+      
+      try {
+
+        $record = [
+          "uid" => $this->currentUser->id(),
+          "cid" => trim($data['cid']),
+          "eid" => trim($data['eid']),
+          "created" => time()
+        ];
+
+        $id = $this->dbConnection->insert('ab_inbev_redemption')
+              ->fields($record)
+              ->execute();
+        if ( is_numeric($id) ) {
+          $this->dbConnection->query('UPDATE {ab_inbev_exp_stock} SET stock_actual = stock_actual - 1 WHERE id = :id', [':id' => $stock['id']]);
+          $storage = $this->entityTypeManager->getStorage('user');
+          $user = $storage->load( $this->currentUser->id() );
+          Util::sendEmail(  2, 
+                            $user->getEmail() , 
+                            $user->get('field_full_name')->value
+                          );
+        }
+
+        // $created_record = $this->loadRecord($id);
+        // Return the newly created record in the response body.
+        return new ModifiedResourceResponse($record, 201);
+      } catch (\Throwable $th) {
+        if ( strrpos( $th->getMessage() , '1062 Duplicate entry' ) !== false ) {
+          throw new BadRequestHttpException('No se puede redimir mas de una vez la experiencia.');
+        }
+      }
+
     }
 
     throw new BadRequestHttpException('Error interno, intenta de nuevo mas tarde.');

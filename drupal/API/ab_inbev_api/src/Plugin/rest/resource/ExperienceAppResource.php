@@ -599,6 +599,10 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
         $records = [];
         $ids = [];
         while($record = $result->fetchAssoc()) {
+          if ( ( $date < intval($record["activate_from"]) || $date > intval($record["activate_to"]) ) ) {
+            // PROXIMAMENTE
+            $record['status'] = 2;
+          }
           $records[] = $record;
           $ids[] = $record['id'];
         }

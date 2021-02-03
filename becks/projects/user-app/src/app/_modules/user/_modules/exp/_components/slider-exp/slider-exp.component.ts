@@ -212,7 +212,6 @@ export class SliderExpComponent
             if (_id == this.experienciaContent[CurrentSld].id) {
               //pop up message error
               this.reserv = true;
-              console.log(_id, this.experienciaContent[CurrentSld].id);
             }
           }
         }

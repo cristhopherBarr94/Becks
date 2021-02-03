@@ -210,7 +210,7 @@
         </button>
         <!-- soon -->
         <button
-          *ngIf="this.isActivate && exp.status == 2 && !this.reserv"
+          *ngIf="exp.status == 2 && !this.reserv"
           block="block"
           color="becks"
           class="becks-btn-soon margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
@@ -357,7 +357,7 @@
     </button>
     <!-- soon event -->
     <button
-      *ngIf="this.isActivate && exp.status == 2 && !this.reserv"
+      *ngIf="exp.status == 2 && !this.reserv"
       block="block"
       color="becks"
       class="becks-btn-soon more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"

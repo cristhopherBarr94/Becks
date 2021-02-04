@@ -156,7 +156,12 @@
           <span>Conoce más</span>
         </a>
         <button
-          *ngIf="!this.isActivate && exp.type != '3'"
+          *ngIf="
+            !this.isActivate &&
+            exp.type != '3' &&
+            !this.reserv &&
+            exp.status != 2
+          "
           block="block"
           color="becks"
           (click)="redirectToAct(exp.titleExp)"
@@ -239,7 +244,7 @@
         </button>
         <!-- reserved -->
         <button
-          *ngIf="this.isActivate && this.reserv && this.status != '2'"
+          *ngIf="this.reserv && this.status != '2'"
           block="block"
           color="becks"
           (click)="participateExperience(exp.id)"
@@ -306,7 +311,9 @@
       >
     </div>
     <button
-      *ngIf="!this.isActivate && exp.type != '3'"
+      *ngIf="
+        !this.isActivate && exp.type != '3' && !this.reserv && exp.status != 2
+      "
       block="block"
       color="becks"
       (click)="redirectToAct(exp.titleExp)"
@@ -386,7 +393,7 @@
     </button>
     <!-- reserved event -->
     <button
-      *ngIf="this.isActivate && this.reserv && this.status != '2'"
+      *ngIf="this.reserv && this.status != '2'"
       block="block"
       color="becks"
       class="becks-btn-reserved more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"

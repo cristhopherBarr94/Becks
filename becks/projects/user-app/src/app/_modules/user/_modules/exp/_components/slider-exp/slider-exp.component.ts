@@ -198,23 +198,23 @@ export class SliderExpComponent
 
   checkCodes(CurrentSld: any) {
     for (let i = 0; i < this.experienciaContent.length; i++) {
+      // hide days announcer when exp is free
       if (this.experienciaContent[CurrentSld].type == "3") {
         this.hideDays = true;
       } else {
         this.hideDays = false;
       }
-    }
-    if (this.codes && this.codes.length > 0) {
-      for (let i = 0; i < this.experienciaContent.length; i++) {
-        // evaluate redemp status
-        if (this.redemps) {
-          for (let _id of this.redemps) {
-            if (_id == this.experienciaContent[CurrentSld].id) {
-              //pop up message error
-              this.reserv = true;
-            }
+
+      // evaluate redemp status
+      if (this.redemps) {
+        for (let _id of this.redemps) {
+          if (_id == this.experienciaContent[CurrentSld].id) {
+            //pop up message error
+            this.reserv = true;
           }
         }
+      }
+      if (this.codes && this.codes.length > 0) {
         // this.experienciaContent[CurrentSld].status == '2' &&
         if (
           this.experienciaContent[CurrentSld].stock_actual == "0" &&
@@ -384,7 +384,7 @@ export class SliderExpComponent
       colorClass = "free-color";
     }
     // reserved exp
-    else if (this.isActivate && this.reserv) {
+    else if (this.reserv) {
       colorClass = "reserved-color";
     }
     // soon exp

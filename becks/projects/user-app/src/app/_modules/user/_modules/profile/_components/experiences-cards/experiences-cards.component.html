@@ -1,10 +1,11 @@
-<section class="container-exp" *ngIf="isActive">
+<section class="container-exp">
   <p
     class="title1"
     *ngIf="
       (pendingCards == undefined || pendingCards.length == 0) &&
       (acceptCards == undefined || acceptCards.length == 0) &&
-      (cancelCards == undefined || cancelCards.length == 0)
+      (cancelCards == undefined || cancelCards.length == 0) &&
+      isActive
     "
   >
     Aún no cuentas con ninguna experiencia

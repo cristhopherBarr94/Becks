@@ -1,10 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from 'rxjs';
-import { Exp } from 'src/app/_models/exp';
-import { User } from 'src/app/_models/User';
-import { ExperienciasService } from 'src/app/_services/experiencias.service';
-import { RedemptionsService } from 'src/app/_services/redemptions.service';
-import { UserService } from 'src/app/_services/user.service';
+import { Subscription } from "rxjs";
+import { Exp } from "src/app/_models/exp";
+import { User } from "src/app/_models/User";
+import { ExperienciasService } from "src/app/_services/experiencias.service";
+import { RedemptionsService } from "src/app/_services/redemptions.service";
+import { UserService } from "src/app/_services/user.service";
 
 @Component({
   selector: "user-experiences-cards",
@@ -15,7 +15,7 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
   @Input() vertical: boolean;
   public user = new User();
   public direcionCards: string;
-  public isActive:boolean;
+  public isActive: boolean;
   cancelCards = new Array();
   pendingCards = new Array();
   acceptCards = new Array();
@@ -34,17 +34,17 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.userCodeSubscription = this.userSvc.userCodes$.subscribe(codes =>{
-      if(codes && codes.length>0){
+    this.userCodeSubscription = this.userSvc.userCodes$.subscribe((codes) => {
+      if (codes && codes.length > 0) {
         this.isActive = true;
       }
     });
 
-    this.expSubscription = this.expService.exp$.subscribe( exps => {
+    this.expSubscription = this.expService.exp$.subscribe((exps) => {
       this.experiences = exps;
       this.buildCards();
     });
-    
+
     this.redempSubs = this.redempSvc.redemp$.subscribe((red) => {
       this.redemptions = red;
       this.buildCards();
@@ -56,7 +56,7 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
     }
 
     this.experiences = this.expService.getActualExps();
-    if ( this.experiences && this.experiences.length > 0 ) {
+    if (this.experiences && this.experiences.length > 0) {
       this.buildCards();
     }
     this.expService.getData();
@@ -65,22 +65,26 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.userCodeSubscription.unsubscribe();
+    this.redempSubs.unsubscribe();
+    this.expSubscription.unsubscribe();
   }
 
   buildCards() {
-    // console.log( "this.experiences" , this.experiences );
-    // console.log( "this.redemptions" , this.redemptions );
-    if ( this.experiences && this.redemptions ) {
-      
+    if (this.experiences && this.redemptions) {
       this.acceptCards = [];
       this.pendingCards = [];
 
       for (let i = 0; i < this.experiences.length; i++) {
-        if ( this.redemptions.indexOf( parseInt(this.experiences[i].id+"") ) > -1 ) {
+        if (
+          this.redemptions.indexOf(parseInt(this.experiences[i].id + "")) > -1
+        ) {
           if (this.experiences[i].status == "0") {
             this.acceptCards.push(this.experiences[i]);
           }
-          if (this.experiences[i].status == "1" || this.experiences[i].status == "2") {
+          if (
+            this.experiences[i].status == "1" ||
+            this.experiences[i].status == "2"
+          ) {
             this.pendingCards.push(this.experiences[i]);
           }
         }

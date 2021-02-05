@@ -1,7 +1,12 @@
 .seccion-tabs {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  -moz-backdrop-filter: blur(10px);
+  @supports (backdrop-filter: blur(20px)) {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    -moz-backdrop-filter: blur(20px);
+  }
+  @supports not (backdrop-filter: blur(20px)) {
+    background: rgba(16, 16, 16, 0.7);
+  }
   min-height: 100%;
   min-width: 100%;
 }

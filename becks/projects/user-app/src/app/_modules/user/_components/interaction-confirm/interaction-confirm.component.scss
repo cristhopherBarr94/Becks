@@ -1,12 +1,19 @@
 .interaction-section-confirm {
   color: #ffffff;
-  backdrop-filter: blur(10px);
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat;
   text-align: left;
   width: 100%;
   min-height: 100vh;
+  @supports (backdrop-filter: blur(10px)) {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+  }
+  @supports not (backdrop-filter: blur(10px)) {
+    background: rgba(16, 16, 16, 0.7);
+  }
   a {
     color: #01c586;
   }

@@ -90,7 +90,11 @@
     height: auto;
     padding: 20px;
     margin-bottom: 100px;
-    backdrop-filter: blur(20px) !important;
+    @supports (backdrop-filter: blur(20px)) {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      -moz-backdrop-filter: blur(20px);
+    }
   }
   .title-secondary {
     font-size: 18px !important;

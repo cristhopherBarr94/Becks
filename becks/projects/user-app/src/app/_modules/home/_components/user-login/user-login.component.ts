@@ -13,8 +13,13 @@ import { AuthService } from "src/app/_services/auth.service";
 import { UserService } from "src/app/_services/user.service";
 import { Subscription } from "rxjs";
 import { User } from "src/app/_models/User";
+import { SHA256 } from "crypto-js";
 import { SectionChangePassComponent } from "src/app/_modules/user/_modules/profile/_components/section-change-pass/section-change-pass.component";
-
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
 @Component({
   selector: "user-user-login",
   templateUrl: "./user-login.component.html",
@@ -89,6 +94,7 @@ export class UserLoginComponent implements OnInit, OnDestroy {
     if (this.userLoginForm.valid && this.captchaStatus) {
       this.userSvc.logout();
       const formData = new FormData();
+      const email256 = SHA256(this.user.email).toString();
       try {
         this.restartCaptcha = true;
         this.setCaptchaStatus(!this.restartCaptcha);
@@ -117,6 +123,12 @@ export class UserLoginComponent implements OnInit, OnDestroy {
           (response: any) => {
             this.ui.dismissLoading();
             if (response.status == 200) {
+              window.dataLayer.push({
+                event: "trackEvent",
+                eventCategory: "Becks experiencias",
+                eventAction: "Iniciar sesion",
+                eventLabel: email256,
+              });
               this.userLoginForm.reset();
               this.authService.setAuthenticated(
                 "Bearer " + response.body.access_token

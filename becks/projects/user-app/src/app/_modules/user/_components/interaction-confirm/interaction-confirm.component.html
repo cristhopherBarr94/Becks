@@ -25,20 +25,13 @@
         </p>
       </div>
 
-      <form
-        [formGroup]="userRegisterForm"
-        autocomplete="off"
-        class="general-row"
-      >
+      <div class="general-row">
         <ion-row>
           <div class="content-check">
             <mat-checkbox
-              id="mat-checkbox-privacy"
-              formControlName="privacy"
-              [(ngModel)]="userRegister.privacy"
               color="success"
               class="margin-check"
-              required
+              (change)="setStatus($event.checked)"
             >
             </mat-checkbox>
             <p class="text-checkbox">
@@ -56,16 +49,12 @@
         </ion-row>
         <ion-row>
           <div>
-            <mat-error
-              *ngIf="
-                userRegisterForm.controls.privacy.touched &&
-                userRegisterForm.controls.privacy.invalid
-              "
-              >Por favor lea y acepte los términos y condiciones</mat-error
-            >
+            <p *ngIf="this.showMessage" class="error-msm">
+              Por favor lea y acepte los términos y condiciones
+            </p>
           </div>
         </ion-row>
-      </form>
+      </div>
 
       <button
         block="block"
@@ -73,7 +62,7 @@
         (click)="redempExp()"
         class="becks-btn-primary margin-top-button button-width"
         [ngClass]="{
-          'button-disabled': userRegisterForm.invalid
+          'button-disabled': this.isChecked == false
         }"
       >
         <span>aceptar</span>

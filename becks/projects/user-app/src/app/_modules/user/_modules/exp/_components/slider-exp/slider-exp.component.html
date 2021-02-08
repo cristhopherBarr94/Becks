@@ -53,7 +53,10 @@
     class="item-exp"
     *ngFor="let exp of experienciaContent; let i = index"
     [attr.data-index]="i"
-    [ngClass]="{ inactive: !this.isActivate, active: this.isActivate }"
+    [ngClass]="{
+      inactive: !this.isActivate && exp.type != 3,
+      active: this.isActivate || exp.type == 3
+    }"
   >
     <!-- user announcer amount -->
     <user-announcer-amount

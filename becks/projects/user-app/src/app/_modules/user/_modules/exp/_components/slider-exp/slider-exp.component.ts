@@ -380,7 +380,7 @@ export class SliderExpComponent
   getColorExp(exp: any): string {
     let colorClass = "";
     // free exp
-    if (exp.type == "3" && !this.reserv) {
+    if (exp.type == "3" && !this.reserv && exp.stock_actual > 0) {
       colorClass = "free-color";
     }
     // reserved exp
@@ -388,11 +388,11 @@ export class SliderExpComponent
       colorClass = "reserved-color";
     }
     // soon exp
-    else if (this.isActivate && exp.status == 2) {
+    else if (exp.status == 2) {
       colorClass = "soon-color";
     }
     // sold out
-    else if (this.isActivate && exp.stock_actual == 0) {
+    else if (exp.stock_actual == 0) {
       colorClass = "sold-color";
     }
     return colorClass;

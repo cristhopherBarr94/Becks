@@ -44,11 +44,6 @@
   [ngClass]="{ 'active-info': truePager }"
   #slides
 >
-  <!-- user announcer days -->
-  <user-announcer-days
-    *ngIf="!this.hideDays"
-    [hidden]="truePager"
-  ></user-announcer-days>
   <ion-slide
     class="item-exp"
     *ngFor="let exp of experienciaContent; let i = index"
@@ -81,6 +76,11 @@
       <p>No necesitas pagar ni canjear código</p>
       <a href="">Aplican términos y condiciones</a>
     </div>
+    <!-- user announcer days -->
+    <user-announcer-days
+      [hidden]="truePager"
+      *ngIf="exp.type != 3 && i == 0"
+    ></user-announcer-days>
     <img
       *ngIf="this.size == 'lg' || this.size == 'md'"
       [src]="exp.imagesExp"

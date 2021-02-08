@@ -30,7 +30,7 @@
       ></user-experiences-cards>
       <div
         class="title-not-activate"
-        *ngIf="this.size == 'xs' && this.showMessagge"
+        *ngIf="this.size == 'xs' && this.expRedem.length == 0"
       >
         <p class="title1">Aún no cuentas con ninguna experiencia</p>
         <p class="title2">
@@ -56,7 +56,7 @@
             style="min-width: 100%"
             [vertical]="true"
           ></user-experiences-cards>
-          <div *ngIf="this.showMessagge" class="title-not-activate">
+          <div *ngIf="this.expRedem.length == 0" class="title-not-activate">
             <p class="title1">Aún no cuentas con ninguna experiencia</p>
             <p class="title2">
               para vivir nuevas experiencias debes activar tu cuenta

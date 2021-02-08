@@ -232,7 +232,7 @@
         </button>
         <!-- sold out -->
         <button
-          *ngIf="this.isActivate && exp.stock_actual == 0 && !this.reserv"
+          *ngIf="exp.stock_actual == 0 && !this.reserv"
           block="block"
           color="becks"
           class="becks-btn-sold margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
@@ -381,7 +381,7 @@
     </button>
     <!-- sold out event -->
     <button
-      *ngIf="this.isActivate && exp.stock_actual == 0 && !this.reserv"
+      *ngIf="exp.stock_actual == 0 && !this.reserv"
       block="block"
       color="becks"
       class="becks-btn-sold more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"

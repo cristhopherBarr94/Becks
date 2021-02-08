@@ -17,7 +17,7 @@ export class SeccionsProfileComponent implements OnInit, OnDestroy {
   public size: string;
   public experiences: any[] = [];
   public redemptions: any[] = [];
-  public showMessagge: boolean = false;
+  public expRedem: any[] = [];
 
   @Input() isActive: boolean;
 
@@ -46,9 +46,7 @@ export class SeccionsProfileComponent implements OnInit, OnDestroy {
       for (let i = 0; i < this.experiences.length; i++) {
         for (let j = 0; j < this.redemptions.length; j++) {
           if (this.experiences[i].id == this.redemptions[j]) {
-            this.showMessagge = false;
-          } else {
-            this.showMessagge = true;
+            this.expRedem.push(this.experiences[i].id);
           }
         }
       }

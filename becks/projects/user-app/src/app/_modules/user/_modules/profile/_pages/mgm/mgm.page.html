@@ -87,9 +87,9 @@
         <div *ngIf="this.size == 'xs' || this.size == 'sm' ">
           <div
             class="separator-friends"
-            *ngIf="!guest_users.length ==0 || redemp"
+            *ngIf="guest_users.length !=0 || redemp"
           ></div>
-          <div class="friend-list" *ngIf="!guest_users.length ==0 || redemp">
+          <div class="friend-list" *ngIf="guest_users.length !=0 || redemp">
             <h3 class="title-fourthy">
               Tus amigos que se han unido a la beck’s society
             </h3>

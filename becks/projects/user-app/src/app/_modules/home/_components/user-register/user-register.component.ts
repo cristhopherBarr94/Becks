@@ -158,8 +158,8 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
             if (res.status >= 200 && res.status < 300) {
               window.dataLayer.push({
                 event: "trackEvent",
-                eventCategory: "fase 3",
-                eventAction: "finalizar fase 3",
+                eventCategory: "Becks experiencias",
+                eventAction: "registro",
                 eventLabel: email256,
               });
               // window.location.reload();

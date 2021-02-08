@@ -5,7 +5,6 @@ import { Subscription } from "rxjs";
 import { ExperienciasService } from "src/app/_services/experiencias.service";
 import { RedemptionsService } from "src/app/_services/redemptions.service";
 import { UiService } from "src/app/_services/ui.service";
-import { Exp } from "src/app/_models/exp";
 
 @Component({
   selector: "user-seccions-profile",
@@ -18,7 +17,7 @@ export class SeccionsProfileComponent implements OnInit, OnDestroy {
   public size: string;
   public experiences: any[] = [];
   public redemptions: any[] = [];
-  public showMessagge: boolean = true;
+  public showMessagge: boolean = false;
 
   @Input() isActive: boolean;
 
@@ -48,6 +47,8 @@ export class SeccionsProfileComponent implements OnInit, OnDestroy {
         for (let j = 0; j < this.redemptions.length; j++) {
           if (this.experiences[i].id == this.redemptions[j]) {
             this.showMessagge = false;
+          } else {
+            this.showMessagge = true;
           }
         }
       }

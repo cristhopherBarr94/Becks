@@ -2,7 +2,7 @@
   <!-- green/active -->
   <img
     *ngIf="
-      this.stock > 0 && this.type != '3' && this.status != '2' && !this.reserved
+      this.stock > 0 && this.type != 3 && this.status != '2' && !this.reserved
     "
     src="./assets/icon/few-amount-icon.svg"
     alt="few amounts"
@@ -15,7 +15,7 @@
   />
   <!-- yellow/soon -->
   <img
-    *ngIf="this.status == '2' && !this.reserved && this.type != '3'"
+    *ngIf="this.status == '2' && !this.reserved && this.type != 3"
     src="./assets/icon/soon-icon.svg"
     alt="soon"
   />
@@ -28,7 +28,7 @@
   />
   <!-- blue/free -->
   <img
-    *ngIf="!this.reserved && this.stock > 0 && this.type == '3'"
+    *ngIf="!this.reserved && this.stock > 0 && this.type == 3"
     src="./assets/icon/free-exp-icon.svg"
     alt="free"
   />

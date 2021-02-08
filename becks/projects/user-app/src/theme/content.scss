@@ -489,7 +489,11 @@
   ion-backdrop {
     visibility: visible !important;
     background: rgba(18, 18, 18, 1) !important;
-    backdrop-filter: blur(500px) !important;
+    @supports (backdrop-filter: blur(500px) !important) {
+      backdrop-filter: blur(500px) !important;
+      -webkit-backdrop-filter: blur(500px) !important;
+      -moz-backdrop-filter: blur(500px) !important;
+    }
   }
   .modal-wrapper {
     overflow: hidden;
@@ -523,7 +527,7 @@
       padding-left: 30px;
       padding-right: 30px;
     }
-    .modal-hader {
+    .modal-header {
       display: block;
       margin-right: auto;
       margin-top: 11.29px;
@@ -531,12 +535,14 @@
         margin-left: 90%;
       }
       @media (min-width: 769px) {
-        margin-left: 100%;
+        margin-left: 97%;
       }
       .btn-cancel {
         background-color: transparent !important;
         color: #ffffff;
         font-family: "Eurostile BQ";
+        width: 25px;
+        height: 25px;
       }
     }
 
@@ -693,13 +699,22 @@
     width: 100% !important;
     border-radius: 8px 8px 0px 0px;
     background-color: transparent;
-    backdrop-filter: blur(10px);
     @media (min-width: 769px) {
       width: 439px !important;
       height: 180px !important;
       backdrop-filter: blur(0px);
       background: rgba(2, 2, 2, 0.7);
       border-radius: 8px;
+    }
+    @supports (backdrop-filter: blur(10px)) {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      -moz-backdrop-filter: blur(10px);
+      @media (min-width: 769px) {
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+        -moz-backdrop-filter: blur(0px);
+      }
     }
   }
   @media (min-width: 769px) {
@@ -710,7 +725,14 @@
 
 .modal-edit-profile {
   align-items: center;
-  backdrop-filter: blur(10px);
+  @supports (backdrop-filter: blur(10px)) {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+  }
+  @supports not (backdrop-filter: blur(10px)) {
+    background: rgba(16, 16, 16, 0.7);
+  }
   .modal-wrapper {
     overflow: auto;
     contain: strict;
@@ -729,7 +751,14 @@
 .modal-edit-password {
   z-index: 99999 !important;
   align-items: center;
-  backdrop-filter: blur(10px);
+  @supports (backdrop-filter: blur(10px)) {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+  }
+  @supports not (backdrop-filter: blur(10px)) {
+    background: rgba(16, 16, 16, 0.7);
+  }
   .modal-wrapper {
     overflow: none;
     contain: strict;
@@ -745,7 +774,6 @@
 }
 .modal-sold-message {
   align-items: center;
-  // backdrop-filter: blur(10px);
   .modal-wrapper {
     overflow: auto;
     contain: strict;

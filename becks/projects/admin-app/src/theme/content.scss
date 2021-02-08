@@ -414,7 +414,11 @@
   ion-backdrop {
     visibility: visible !important;
     background: rgba(18, 18, 18, 1) !important;
-    backdrop-filter: blur(500px) !important;
+    @supports (backdrop-filter: blur(500px !important)) {
+      backdrop-filter: blur(500px) !important;
+      -webkit-backdrop-filter: blur(500px) !important;
+      -moz-backdrop-filter: blur(500px) !important;
+    }
   }
   .modal-wrapper {
     overflow: hidden;

@@ -54,7 +54,10 @@
     class="item-exp"
     *ngFor="let exp of experienciaContent; let i = index"
     [attr.data-index]="i"
-    [ngClass]="{ inactive: !this.isActivate, active: this.isActivate }"
+    [ngClass]="{
+      inactive: !this.isActivate && exp.type != 3,
+      active: this.isActivate || exp.type == 3
+    }"
   >
     <!-- user announcer amount -->
     <user-announcer-amount
@@ -189,7 +192,7 @@
           class="becks-btn-primary margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
           [ngClass]="{
             'animate__animated animate__bounceInLeft animate__delay-1s': this
-              .proxExp
+              .isActivate
           }"
         >
           <span>Participar</span>
@@ -209,7 +212,7 @@
           class="becks-btn-free margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
           [ngClass]="{
             'animate__animated animate__bounceInLeft animate__delay-1s': this
-              .proxExp
+              .isActivate
           }"
         >
           <span>Participar</span>
@@ -219,12 +222,12 @@
           *ngIf="exp.status == 2 && !this.reserv"
           block="block"
           color="becks"
+          (click)="participateExperience(exp.id)"
           class="becks-btn-soon margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
           [ngClass]="{
-            'animate__animated animate__bounceInLeft animate__delay-1s':
-              exp.proxExp
+            'animate__animated animate__bounceInLeft animate__delay-1s': this
+              .isActivate
           }"
-          [disabled]="true"
         >
           <span>PRÓXIMAMENTE</span>
         </button>
@@ -236,7 +239,7 @@
           class="becks-btn-sold margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
           [ngClass]="{
             'animate__animated animate__bounceInLeft animate__delay-1s':
-              exp.proxExp
+              exp.isActivate
           }"
           [disabled]="true"
         >
@@ -244,14 +247,14 @@
         </button>
         <!-- reserved -->
         <button
-          *ngIf="this.reserv && this.status != '2'"
+          *ngIf="this.reserv && exp.status != '2'"
           block="block"
           color="becks"
           (click)="participateExperience(exp.id)"
           class="becks-btn-reserved margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
           [ngClass]="{
             'animate__animated animate__bounceInLeft animate__delay-1s': this
-              .proxExp
+              .isActivate
           }"
         >
           <span>RESERVADA</span>
@@ -339,7 +342,7 @@
       class="becks-btn-primary more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
       [ngClass]="{
         'animate__animated animate__bounceInLeft animate__delay-1s': this
-          .proxExp
+          .isActivate
       }"
     >
       <span>Participar</span>
@@ -358,7 +361,7 @@
       class="becks-btn-free more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
       [ngClass]="{
         'animate__animated animate__bounceInLeft animate__delay-1s': this
-          .proxExp
+          .isActivate
       }"
     >
       <span>Participar</span>
@@ -368,12 +371,12 @@
       *ngIf="exp.status == 2 && !this.reserv"
       block="block"
       color="becks"
+      (click)="participateExperience(exp.id)"
       class="becks-btn-soon more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
       [ngClass]="{
         'animate__animated animate__bounceInLeft animate__delay-1s': this
-          .proxExp
+          .isActivate
       }"
-      [disabled]="true"
     >
       <span>PRÓXIMAMENTE</span>
     </button>
@@ -385,7 +388,7 @@
       class="becks-btn-sold more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
       [ngClass]="{
         'animate__animated animate__bounceInLeft animate__delay-1s': this
-          .proxExp
+          .isActivate
       }"
       [disabled]="true"
     >
@@ -393,13 +396,13 @@
     </button>
     <!-- reserved event -->
     <button
-      *ngIf="this.reserv && this.status != '2'"
+      *ngIf="this.reserv && exp.status != '2'"
       block="block"
       color="becks"
       class="becks-btn-reserved more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
       [ngClass]="{
         'animate__animated animate__bounceInLeft animate__delay-1s': this
-          .proxExp
+          .isActivate
       }"
       [disabled]="true"
     >

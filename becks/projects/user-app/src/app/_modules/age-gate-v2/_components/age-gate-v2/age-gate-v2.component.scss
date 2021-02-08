@@ -125,6 +125,9 @@ ion-content {
       -webkit-backdrop-filter: blur(10px);
       -moz-backdrop-filter: blur(10px);
     }
+    @supports not (backdrop-filter: blur(10px)) {
+      background: rgba(16, 16, 16, 0.7);
+    }
   }
   @media (min-width: 769px) {
     margin-top: 58px;

@@ -72,10 +72,15 @@
       *ngIf="exp.type == '3'"
       [ngClass]="getColorExp(exp)"
     >
-      <h4>evento gratuito</h4>
+      <h4>EXPERIENCIA GRATUITA</h4>
       <p>Entrada libre.</p>
-      <p>No necesitas pagar ni canjear código</p>
-      <a href="">Aplican términos y condiciones</a>
+      <p>No necesitas activar tu cuenta para participar</p>
+      <a
+        target="_blank"
+        href="assets/files/TERMINOSYCONDICIONESGENERALES.pdf"
+        rel="noopener noreferrer"
+        >Aplican términos y condiciones</a
+      >
     </div>
     <!-- user announcer days -->
     <user-announcer-days
@@ -228,12 +233,13 @@
             'animate__animated animate__bounceInLeft animate__delay-1s': this
               .isActivate
           }"
+          [disabled]="true"
         >
           <span>PRÓXIMAMENTE</span>
         </button>
         <!-- sold out -->
         <button
-          *ngIf="this.isActivate && exp.stock_actual == 0 && !this.reserv"
+          *ngIf="exp.stock_actual == 0 && !this.reserv"
           block="block"
           color="becks"
           class="becks-btn-sold margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
@@ -256,6 +262,7 @@
             'animate__animated animate__bounceInLeft animate__delay-1s': this
               .isActivate
           }"
+          [disabled]="true"
         >
           <span>RESERVADA</span>
         </button>
@@ -382,7 +389,7 @@
     </button>
     <!-- sold out event -->
     <button
-      *ngIf="this.isActivate && exp.stock_actual == 0 && !this.reserv"
+      *ngIf="exp.stock_actual == 0 && !this.reserv"
       block="block"
       color="becks"
       class="becks-btn-sold more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"

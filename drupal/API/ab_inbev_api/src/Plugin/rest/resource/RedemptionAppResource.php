@@ -172,7 +172,10 @@ class RedemptionAppResource extends ResourceBase implements DependentPluginInter
     }
 
     if ( intval($exp_result["status"]) == 2 ||
-          ( $now < intval($exp_result["activate_from"]) || $now > intval($exp_result["activate_to"]) ) ) {
+          ( ( is_numeric($exp_result["activate_from"]) && is_numeric($exp_result["activate_to"]) ) &&
+            ( $now < intval($exp_result["activate_from"]) || $now > intval($exp_result["activate_to"]) )
+          ) 
+        ) {
       // Próximamente
       throw new BadRequestHttpException('Próximamente.');
     }

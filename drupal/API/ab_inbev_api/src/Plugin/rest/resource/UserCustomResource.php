@@ -194,18 +194,16 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
       $user->save();
       $user_load = $this->loadRecord($user->id());
       if ( $user_load ) {
-        //TODO :: ASK FOR firstname and lastname in the TD
-      //   $result = $this->__sendTD( 
-      //     $data['first_name'],
-      //     $data['last_name'],
-      //     $data['city'],
-      //     intval($data['mobile_phone']),
-      //     $data['email'],
-      //     $data['privacy'],
-      //     $data['promo'],
-      //     $data['id_number'],
-      //     $data['cookie_td']
-      //  );
+        $result = $this->__sendTD( 
+          $data['full_name'],
+          $data['city'],
+          intval($data['mobile_phone']),
+          $data['email'],
+          $data['privacy'],
+          $data['promo'],
+          $data['id_number'],
+          $data['cookie_td']
+       );
       } else {
         $code = '502';
         $response_array['message'] = "Error Interno";
@@ -491,7 +489,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
    * Private Function
    *  Analytics
    */
-  private function __sendTD($name , $lastname , $city , $phone , $email , $privacy , $promo, $id_number, $td_client ) {
+  private function __sendTD($name , $city , $phone , $email , $privacy , $promo, $id_number, $td_client ) {
     
     $country = "col";
     // define variable that will be used to tell the __sendTD method if it should send to the production database
@@ -505,8 +503,7 @@ class UserCustomResource extends ResourceBase implements DependentPluginInterfac
     // here it's possible to add additional purposes to the purpose array
     // runs the __sendTD method with parameters got from the request, it should be changed based on your form fields, country, brand, campaign, form, and whether if it's running in the production environment or not
     $data = array(
-      "abi_firstname" => $name,
-      "abi_lastname" => $lastname,
+      "abi_name" => $name,
       "abi_city" => $city,
       "abi_country" => $country,
       "abi_phone" => $phone,

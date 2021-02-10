@@ -31,6 +31,7 @@ export class AgeGateV2Component implements OnInit {
   public activeIndex: number;
   public validInput: boolean = false;
 
+  // initialize the props of ion slide
   @ViewChild("mySlider") slides: IonSlides;
   slideOpts = {
     initialSlide: 0,
@@ -48,12 +49,12 @@ export class AgeGateV2Component implements OnInit {
       this.slides.lockSwipes(true);
     }, 100);
   }
-
+  // initialize the form
   ngOnInit() {
     this.checked = false;
     this.initforms();
   }
-
+  // declare the fields of each form
   initforms() {
     this.yearForm = this.formBuilder.group({
       year_1: new FormControl("", [
@@ -103,7 +104,7 @@ export class AgeGateV2Component implements OnInit {
       ]),
     });
   }
-
+  // validate the state of day, motn and year forms
   validateAgeGate() {
     if (
       this.yearchk == false ||
@@ -135,7 +136,7 @@ export class AgeGateV2Component implements OnInit {
       }
     }
   }
-
+  // validate inputs
   public inputValidatorNumeric(event: any) {
     const pattern = /^[0-9]*$/;
     if (!pattern.test(event.target.value)) {
@@ -145,7 +146,7 @@ export class AgeGateV2Component implements OnInit {
       this.validInput = false;
     }
   }
-
+  // assign class name
   public getClassInput(item: any): string {
     let classreturn = "input-becks";
     if (item.valid) {
@@ -159,6 +160,8 @@ export class AgeGateV2Component implements OnInit {
     }
     return classreturn;
   }
+
+  // reset forms on invalid input
 
   invalidYear() {
     this.yearForm.reset();
@@ -174,6 +177,7 @@ export class AgeGateV2Component implements OnInit {
     this.dayForm.markAllAsTouched();
   }
 
+  //move between fields in typing
   move(event, fromtxt, totxt) {
     var length = fromtxt.length;
     var maxlength = fromtxt.getAttribute(maxlength);
@@ -191,6 +195,11 @@ export class AgeGateV2Component implements OnInit {
         }
         selField.focus();
         selField.select();
+      } else if (event.key === "Enter") {
+        this.validateAgeGate();
+        if (this.monthchk == false || this.daychk == false) {
+          this.slideFirst();
+        }
       } else {
         if (length == maxlength && event.target.value != "") {
           totxt.focus();
@@ -200,6 +209,7 @@ export class AgeGateV2Component implements OnInit {
     }
   }
 
+  // validate year form
   validateYear(event) {
     if (event.key === "Backspace") {
       let selyear;
@@ -208,6 +218,11 @@ export class AgeGateV2Component implements OnInit {
       selyear.select();
       this.yearchk = false;
       this.arrowsCtrl = true;
+    } else if (event.key === "Enter") {
+      this.validateAgeGate();
+      if (this.monthchk == false || this.daychk == false) {
+        this.slideFirst();
+      }
     } else {
       if (
         this.yearForm.controls.year_1.value +
@@ -250,7 +265,7 @@ export class AgeGateV2Component implements OnInit {
       }
     }
   }
-
+  // validate month form
   validateMonth(event) {
     if (event.key === "Backspace") {
       let selMonth;
@@ -258,6 +273,11 @@ export class AgeGateV2Component implements OnInit {
       selMonth.focus();
       selMonth.select();
       this.monthchk = false;
+    } else if (event.key === "Enter") {
+      this.validateAgeGate();
+      if (this.monthchk == false || this.daychk == false) {
+        this.slideFirst();
+      }
     } else {
       if (
         this.monthForm.controls.month_1.value +
@@ -283,7 +303,7 @@ export class AgeGateV2Component implements OnInit {
       }
     }
   }
-
+  // validate day form
   validateDay(event) {
     if (event.key === "Backspace") {
       let selday;
@@ -291,6 +311,11 @@ export class AgeGateV2Component implements OnInit {
       selday.focus();
       selday.select();
       this.daychk = false;
+    } else if (event.key === "Enter") {
+      this.validateAgeGate();
+      if (this.monthchk == false || this.daychk == false) {
+        this.slideFirst();
+      }
     } else {
       if (
         this.dayForm.controls.day_1.value + this.dayForm.controls.day_2.value <=
@@ -319,7 +344,13 @@ export class AgeGateV2Component implements OnInit {
     this.slides.slidePrev(500);
     this.slides.lockSwipes(true);
   }
-
+  //Move to first slide
+  slideFirst() {
+    this.slides.lockSwipes(false);
+    this.slides.slideTo(0, 500);
+    this.slides.lockSwipes(true);
+  }
+  // obtain the slide id
   async getIndex() {
     if (this.slides) {
       this.activeIndex = await this.slides.getActiveIndex();

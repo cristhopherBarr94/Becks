@@ -45,11 +45,9 @@
   }
 
   .swiper-pagination.swiper-pagination-bullets {
-    // right: auto;
-    // left: 30px;
-    // @media (min-width: 1024px) {
-    //   left: 40px;
-    // }
+    @media (min-width: 1024px) {
+      bottom: 50px;
+    }
 
     .swiper-pagination-bullet {
       width: 10px;
@@ -446,7 +444,7 @@
     bottom: 10px;
   }
   @media (min-width: 1025px) {
-    bottom: -70px;
+    bottom: -50px;
   }
 }
 
@@ -502,8 +500,8 @@
     text-align: center;
     text-transform: uppercase;
     @media (min-width: 0px) and (max-width: 600px) {
-      font-size: 12px;
-      line-height: 15px;
+      font-size: 11px;
+      line-height: 14px;
       margin-bottom: 0px;
     }
     @media (min-width: 601px) {

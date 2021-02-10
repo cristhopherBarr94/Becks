@@ -181,62 +181,6 @@
   background-clip: padding-box;
 }
 
-.title-not-activate {
-  font-family: "Eurostile BQ";
-  font-style: normal;
-  justify-content: center;
-  text-transform: uppercase;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  margin-top: 80px;
-
-  .title1 {
-    font-weight: 500;
-    margin: 0 auto 20px auto;
-    @media (min-width: 0px) and (max-width: 768px) {
-      font-size: 13px !important;
-      line-height: 20px;
-      width: 252px;
-    }
-    @media (min-width: 769px) {
-      font-size: 16px !important;
-      line-height: 20px;
-    }
-  }
-  .title2 {
-    font-weight: 500;
-    margin: 0px auto 50px auto;
-    @media (min-width: 0px) and (max-width: 768px) {
-      font-size: 8px !important;
-      width: 252px;
-    }
-    @media (min-width: 769px) {
-      font-size: 13px !important;
-      line-height: 20px;
-    }
-  }
-  .becks-btn-primary,
-  .button-disabled,
-  .button-disabled:hover,
-  .button-disabled:active {
-    padding-left: 35px;
-
-    @media (min-width: 0px) and (max-width: 768px) {
-      background-position-x: 10px;
-      &:hover {
-        background-position-x: 7px;
-      }
-    }
-    @media (min-width: 769px) {
-      background-position-x: 10px;
-      &:hover {
-        background-position-x: 7px;
-      }
-    }
-  }
-}
 .separator-becks {
   display: block;
   margin-left: auto;

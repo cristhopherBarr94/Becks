@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Platform } from "@ionic/angular";
 import { Subscription } from "rxjs";
@@ -11,13 +11,10 @@ import { UiService } from "src/app/_services/ui.service";
   templateUrl: "./seccions-profile.component.html",
   styleUrls: ["./seccions-profile.component.scss"],
 })
-export class SeccionsProfileComponent implements OnInit, OnDestroy {
+export class SeccionsProfileComponent implements OnInit {
   expSubscription: Subscription;
   redempSubs: Subscription;
   public size: string;
-  public experiences: any[] = [];
-  public redemptions: any[] = [];
-  public expRedem: any[] = [];
 
   @Input() isActive: boolean;
 
@@ -36,35 +33,5 @@ export class SeccionsProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
-    this.expSubscription = this.expService.exp$.subscribe((exps) => {
-      this.experiences = exps;
-      this.redempSubs = this.redempSvc.redemp$.subscribe((red) => {
-        this.redemptions = red;
-      });
-
-      for (let i = 0; i < this.experiences.length; i++) {
-        for (let j = 0; j < this.redemptions.length; j++) {
-          if (this.experiences[i].id == this.redemptions[j]) {
-            this.expRedem.push(this.experiences[i].id);
-          }
-        }
-      }
-    });
-
-    this.redempSvc.getData();
-    this.expService.getData();
-  }
-
-  ngOnDestroy(): void {
-    this.redempSubs.unsubscribe();
-    this.expSubscription.unsubscribe();
-  }
-
-  redirectExp() {
-    this.router.navigate(["user/exp"], {
-      queryParamsHandling: "preserve",
-      state: { reload: "true" },
-    });
-  }
+  ngOnInit() {}
 }

@@ -1,9 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Platform } from "@ionic/angular";
 import { Subscription } from "rxjs";
 import { Exp } from "src/app/_models/exp";
 import { User } from "src/app/_models/User";
 import { ExperienciasService } from "src/app/_services/experiencias.service";
 import { RedemptionsService } from "src/app/_services/redemptions.service";
+import { UiService } from "src/app/_services/ui.service";
 import { UserService } from "src/app/_services/user.service";
 
 @Component({
@@ -16,6 +19,8 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
   public user = new User();
   public direcionCards: string;
   public isActive: boolean;
+  public size: string;
+
   cancelCards = new Array();
   pendingCards = new Array();
   acceptCards = new Array();
@@ -28,10 +33,20 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
   redemptions: Number[];
 
   constructor(
+    private platform: Platform,
     private userSvc: UserService,
     private expService: ExperienciasService,
-    private redempSvc: RedemptionsService
-  ) {}
+    private redempSvc: RedemptionsService,
+    private ui: UiService,
+    private router: Router
+  ) {
+    platform.ready().then(() => {
+      this.platform.resize.subscribe(() => {
+        this.size = this.ui.getSizeType(platform.width());
+      });
+      this.size = this.ui.getSizeType(platform.width());
+    });
+  }
 
   ngOnInit() {
     this.userCodeSubscription = this.userSvc.userCodes$.subscribe((codes) => {
@@ -90,5 +105,12 @@ export class ExperiencesCardsComponent implements OnInit, OnDestroy {
         }
       }
     }
+  }
+
+  redirectExp() {
+    this.router.navigate(["user/exp"], {
+      queryParamsHandling: "preserve",
+      state: { reload: "true" },
+    });
   }
 }

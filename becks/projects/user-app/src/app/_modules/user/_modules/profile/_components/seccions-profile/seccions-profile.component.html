@@ -29,21 +29,6 @@
         *ngIf="this.size == 'xs'"
       ></user-experiences-cards>
       <div
-        class="title-not-activate"
-        *ngIf="this.size == 'xs' && this.expRedem.length == 0"
-      >
-        <p class="title1">Aún no cuentas con ninguna experiencia</p>
-        <p class="title2">
-          para vivir nuevas experiencias debes activar tu cuenta
-        </p>
-        <button
-          class="becks-btn-primary button-width margin-top"
-          (click)="redirectExp()"
-        >
-          IR A EXPERIENCIAS
-        </button>
-      </div>
-      <div
         class="container-desktop container-desktop-exp"
         *ngIf="this.size == 'sm' || this.size == 'lg' || this.size == 'md'"
       >
@@ -56,18 +41,6 @@
             style="min-width: 100%"
             [vertical]="true"
           ></user-experiences-cards>
-          <div *ngIf="this.expRedem.length == 0" class="title-not-activate">
-            <p class="title1">Aún no cuentas con ninguna experiencia</p>
-            <p class="title2">
-              para vivir nuevas experiencias debes activar tu cuenta
-            </p>
-            <button
-              class="becks-btn-primary button-width margin-top"
-              (click)="redirectExp()"
-            >
-              IR A EXPERIENCIAS
-            </button>
-          </div>
         </section>
       </div>
     </mat-tab>

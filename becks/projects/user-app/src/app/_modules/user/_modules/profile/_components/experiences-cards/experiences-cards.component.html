@@ -1,15 +1,22 @@
 <section class="container-exp">
-  <!-- <p
-    class="title1"
+  <div
+    class="title-not-activate"
     *ngIf="
       (pendingCards == undefined || pendingCards.length == 0) &&
       (acceptCards == undefined || acceptCards.length == 0) &&
-      (cancelCards == undefined || cancelCards.length == 0) &&
-      isActive
+      (cancelCards == undefined || cancelCards.length == 0)
     "
   >
-    Aún no cuentas con ninguna experiencia
-  </p> -->
+    <p class="title1">Aún no cuentas con ninguna experiencia</p>
+    <p class="title2">para vivir nuevas experiencias debes activar tu cuenta</p>
+    <button
+      class="becks-btn-primary button-width margin-top"
+      (click)="redirectExp()"
+    >
+      IR A EXPERIENCIAS
+    </button>
+  </div>
+
   <div class="margin-top">
     <span class="title-profile orange-color" *ngIf="pendingCards.length > 0"
       >PENDIENTES</span

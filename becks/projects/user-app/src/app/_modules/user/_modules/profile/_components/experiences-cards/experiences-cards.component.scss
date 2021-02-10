@@ -47,3 +47,98 @@
     line-height: 20px;
   }
 }
+.experioencesCard {
+  flex-direction: column;
+  background-color: #141414;
+  height: 440px;
+  width: 80%;
+  margin-top: 42px;
+  margin-bottom: 42px;
+  align-items: center;
+  contain: strict;
+  overflow: auto;
+  display: flex;
+  box-shadow: 0px 4px 4px 3px rgba(0, 0, 0, 0.5);
+}
+.container-desktop {
+  min-height: 100%;
+  min-width: 100%;
+  background-color: #121212;
+  flex-direction: row;
+  display: flex;
+}
+
+.container-desktop-exp {
+  justify-content: center;
+}
+.separator-becks {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65px;
+  height: 2px;
+  background: rgb(98, 248, 178);
+  background: linear-gradient(
+    90deg,
+    rgba(98, 248, 178, 1) 0%,
+    rgba(18, 18, 18, 1) 100%
+  );
+  position: absolute;
+  top: 80px;
+}
+.title-not-activate {
+  font-family: "Eurostile BQ";
+  font-style: normal;
+  justify-content: center;
+  text-transform: uppercase;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 80px;
+
+  .title1 {
+    font-weight: 500;
+    margin: 0 auto 20px auto;
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 13px !important;
+      line-height: 20px;
+      width: 252px;
+    }
+    @media (min-width: 769px) {
+      font-size: 16px !important;
+      line-height: 20px;
+    }
+  }
+  .title2 {
+    font-weight: 500;
+    margin: 0px auto 50px auto;
+    @media (min-width: 0px) and (max-width: 768px) {
+      font-size: 8px !important;
+      width: 252px;
+    }
+    @media (min-width: 769px) {
+      font-size: 13px !important;
+      line-height: 20px;
+    }
+  }
+  .becks-btn-primary,
+  .button-disabled,
+  .button-disabled:hover,
+  .button-disabled:active {
+    padding-left: 35px;
+
+    @media (min-width: 0px) and (max-width: 768px) {
+      background-position-x: 10px;
+      &:hover {
+        background-position-x: 7px;
+      }
+    }
+    @media (min-width: 769px) {
+      background-position-x: 10px;
+      &:hover {
+        background-position-x: 7px;
+      }
+    }
+  }
+}

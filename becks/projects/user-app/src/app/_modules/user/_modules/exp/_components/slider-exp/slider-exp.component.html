@@ -55,7 +55,6 @@
   >
     <!-- user announcer amount -->
     <user-announcer-amount
-      *ngIf="exp.type == 3 || exp.stock_actual || exp.status == 2"
       [stock]="exp.stock_actual"
       [status]="exp.status"
       [type]="exp.type"

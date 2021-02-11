@@ -56,11 +56,7 @@
   >
     <!-- user announcer amount -->
     <user-announcer-amount
-      *ngIf="
-        exp.type == 3 ||
-        (this.isActivate && exp.stock_actual) ||
-        (this.isActivate && exp.status == 2)
-      "
+      *ngIf="exp.type == 3 || exp.stock_actual || exp.status == 2"
       [stock]="exp.stock_actual"
       [status]="exp.status"
       [type]="exp.type"
@@ -384,6 +380,7 @@
         'animate__animated animate__bounceInLeft animate__delay-1s': this
           .isActivate
       }"
+      [disabled]="true"
     >
       <span>PRÓXIMAMENTE</span>
     </button>

@@ -2,25 +2,45 @@
   background: #121212;
   width: 100%;
   min-height: 674px;
-
+  a {
+    text-decoration: none !important;
+  }
   .title-primary {
     font-size: 24px !important;
     line-height: 50px !important;
     margin-bottom: 0;
     top: 0px;
   }
+  .calendar-title {
+    @media (min-width: 0px) and (max-width: 600px) {
+      font-weight: 500 !important;
+      font-size: 16px !important;
+      line-height: 110% !important;
+      position: absolute;
+      top: 30px;
+    }
+  }
   .separator-white {
     width: 80px;
     height: 4px;
     background: #ffffff;
     border-radius: 2px;
+    @media (min-width: 0px) and (max-width: 768px) {
+      width: 74px;
+      height: 4px;
+      border: 2px solid #ffffff;
+      position: absolute;
+      top: 60px;
+    }
   }
   .calendar {
-    width: 800px;
-    height: 460px;
-    background: #171717;
-    margin-top: 80px;
-    padding: 30px 0;
+    @media (min-width: 600px) {
+      width: 800px;
+      height: 460px;
+      background: #171717;
+      margin-top: 80px;
+      padding: 30px 0;
+    }
 
     .title-secondary {
       font-weight: 500 !important;
@@ -51,14 +71,31 @@
       left: 0 !important;
     }
     mat-calendar {
-      width: 320px;
-      height: 300px !important;
+      @media (min-width: 601px) {
+        width: 320px;
+        height: 300px !important;
 
-      ::ng-deep .mat-calendar-previous-button {
-        visibility: hidden;
+        ::ng-deep .mat-calendar-previous-button {
+          visibility: hidden;
+        }
+        ::ng-deep .mat-calendar-next-button {
+          visibility: hidden;
+        }
       }
-      ::ng-deep .mat-calendar-next-button {
-        visibility: hidden;
+      @media (max-width: 600px) {
+        width: 300px;
+        height: 316px !important;
+
+        ::ng-deep .mat-calendar-previous-button {
+          position: absolute !important;
+          left: 60px !important;
+          transform: translateY(-10px) !important;
+        }
+        ::ng-deep .mat-calendar-next-button {
+          position: absolute !important;
+          right: 60px !important;
+          transform: translateY(-10px) !important;
+        }
       }
     }
     .month1 {
@@ -127,6 +164,11 @@
     height: 550px;
     margin-left: 16px;
     padding: 16px;
+    @media (max-width: 600px) {
+      padding: 25px;
+      width: 100%;
+      height: auto;
+    }
     .title-secondary {
       font-style: normal !important;
       font-weight: 500 !important;
@@ -148,10 +190,16 @@
       justify-content: left !important;
     }
     .schedule-over {
-      width: 362px;
+      width: 100%;
       height: 455px;
       overflow-y: auto;
+      @media (max-width: 600px) {
+        text-align: center;
+        height: 175px;
+        overflow-y: hidden;
+      }
     }
+    // styles for events in desktop
     .schedule-body {
       a {
         text-decoration: none;
@@ -225,6 +273,97 @@
       border-radius: 8px;
       background-clip: padding-box;
     }
+
+    // styles for event cards in mobile
+    .card-event {
+      height: 180px;
+      width: 100%;
+
+      .lateral-month {
+        width: 37px;
+        min-height: 180px;
+        height: auto;
+        background: #121212;
+        // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.87);
+      }
+      .vertical_dotted_line {
+        // border-left: 5px dotted #303030;
+        height: 100px;
+        margin: 10px 16px;
+      }
+      .title-tertiary {
+        font-size: 18.72px !important;
+        line-height: 22px !important;
+        color: #09ce8f;
+        text-transform: capitalize;
+        margin: 0 !important;
+      }
+      .day-event {
+        color: #ffffff;
+        background: #303030;
+        height: 34px;
+        width: 37px;
+        border-radius: 8px 0px 8px 0px;
+        padding-top: 6px;
+      }
+      .day-event,
+      .title-tertiary {
+        text-align: center !important;
+      }
+      .img-event {
+        width: 75%;
+        height: 165px;
+        margin-left: 20px;
+        border-radius: 4px;
+        background-image: linear-gradient(
+          90.32deg,
+          #121212 6.96%,
+          rgba(44, 47, 54, 0) 99.66%
+        );
+        background-position: center;
+        background-size: cover;
+        mix-blend-mode: normal;
+        position: relative;
+        .event-description {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          margin: auto;
+          .title-secondary {
+            font-style: normal !important;
+            font-weight: normal !important;
+            text-transform: capitalize !important;
+            font-size: 11px !important;
+            line-height: 20px !important;
+            letter-spacing: 0.15px !important;
+            margin: 0 !important;
+            height: auto;
+            max-height: 50px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 90%;
+          }
+          .title-tertiary {
+            font-style: normal !important;
+            font-weight: normal !important;
+            font-size: 13.78px !important;
+            line-height: 128.3% !important;
+            color: #ffffff;
+            margin: 0 !important;
+          }
+          .title-secondary,
+          .title-tertiary {
+            text-align: left !important;
+            margin-left: 14px !important;
+          }
+          .card-button {
+            margin-top: 50px;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -243,4 +382,22 @@
 .soon-exp:after {
   color: yellow !important;
   content: "PRÓXIMAMENTE";
+}
+
+// calendar styles for mobile screen
+
+.calendar-container {
+  @media (max-width: 600px) {
+    position: relative;
+    margin-top: 60px;
+  }
+}
+.btn-card {
+  transform: rotate(0deg);
+  position: relative;
+  margin-bottom: 20px;
+  transition: all 0.4s;
+  &:focus {
+    outline: none !important;
+  }
 }

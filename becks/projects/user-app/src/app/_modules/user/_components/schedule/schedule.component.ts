@@ -17,12 +17,11 @@ import { UiService } from "src/app/_services/ui.service";
   styleUrls: ["./schedule.component.scss"],
 })
 export class ScheduleComponent implements OnInit, OnDestroy {
-  DayAndDate: string;
-  eventDay = [];
-  events = [];
-  datesToHighlight = ["2020/10/23", "2020/10/18", "2020/10/29"];
-  exps = [];
-  options = {
+  public DayAndDate: string;
+  public eventDay = [];
+  public events = [];
+  public exps = [];
+  public options = {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -45,6 +44,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   public newEvents = true;
   private redemps: number[] = [];
   private redempSubs: Subscription;
+  public dropExp: boolean = false;
 
   currentYear = new Date().getFullYear();
   @ViewChild("calendar1", { static: false }) calendar1: MatCalendar<Date>;
@@ -284,5 +284,37 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       }
     }
     return classreturn;
+  }
+
+  classTransition() {
+    let dropButton = document.querySelector("#drop");
+    let bar = document.querySelector("#schBar");
+    let container = document.querySelector("#shkCont");
+    let calendar = document.querySelector("#calendar");
+    this.dropExp = !this.dropExp;
+    if (this.dropExp == false) {
+      dropButton.setAttribute("style", "transform:rotate(180deg)");
+      bar.setAttribute("style", "height: 455px; overflow-y: auto;");
+      calendar.setAttribute(
+        "style",
+        "transition:transform 0.8s; transform:translateY(-500px); opacity:0;"
+      );
+      container.setAttribute(
+        "style",
+        "transition:transform 0.8s; transform:translateY(-300px);"
+      );
+    } else {
+      dropButton.setAttribute("style", "transform:rotate(0deg)");
+      bar.setAttribute("style", "height: 175px; overflow-y: hidden;");
+      ("transition:transform 0.8s; transform:translateY(-500px);");
+      calendar.setAttribute(
+        "style",
+        "transition:transform 0.8s; transform:translateY(0px); opacity:1;"
+      );
+      container.setAttribute(
+        "style",
+        "transition:transform 0.8s; transform:translateY(0px);"
+      );
+    }
   }
 }

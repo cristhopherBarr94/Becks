@@ -3,14 +3,30 @@
 
   <section
     class="content-flex-all-center flex-direction-column container-schedule-component"
-    *ngIf="this.size == 'lg' || this.size == 'md'"
   >
-    <h1 class="title-primary">calendario</h1>
+    <h1 class="title-primary" *ngIf="this.size == 'lg' || this.size == 'md'">
+      calendario
+    </h1>
+
+    <h1
+      class="calendar-title title-secondary"
+      *ngIf="this.size == 'xs' || this.size == 'sm'"
+    >
+      Experiencias
+    </h1>
     <span class="separator-white"></span>
     <ion-row>
-      <div class="calendar">
-        <h3 class="title-secondary">{{ currentYear }}</h3>
-        <ion-row>
+      <div id="calendar" class="calendar">
+        <h3
+          class="title-secondary"
+          *ngIf="this.size == 'lg' || this.size == 'md'"
+        >
+          {{ currentYear }}
+        </h3>
+        <ion-row
+          class="schedule-container"
+          *ngIf="this.size == 'lg' || this.size == 'md'"
+        >
           <button (click)="previousDate()" class="btn btn-left">
             <span class="left-arrow-icon"> </span>
           </button>
@@ -19,7 +35,7 @@
           </button>
         </ion-row>
         <ion-row>
-          <div>
+          <div class="calendar-container">
             <mat-calendar
               *ngIf="newEvents"
               #calendar1
@@ -32,7 +48,7 @@
           </div>
           <div>
             <mat-calendar
-              *ngIf="newEvents"
+              *ngIf="newEvents && (this.size == 'lg' || this.size == 'md')"
               #calendar2
               class="month2"
               [minDate]="minDate2"
@@ -43,65 +59,145 @@
           </div>
         </ion-row>
       </div>
-      <div class="schedule">
-        <div>
+      <div id="shkCont" class="schedule">
+        <div *ngIf="newEvents && (this.size == 'lg' || this.size == 'md')">
           <h2 class="title-secondary">próximos eventos</h2>
           <h4 class="title-tertiary">{{ DayAndDate }}</h4>
         </div>
-        <div class="schedule-over">
+        <div id="schBar" class="schedule-over">
           <p *ngIf="!showEvent">Ningún evento disponible.</p>
 
-          <div class="schedule-body" *ngFor="let event of exps">
-            <a [routerLink]="['/user/exp/' + event.id]">
-              <div
-                class="card-schedule"
-                *ngIf="showDate(event.fechaAlt, event.fechaExp)"
-              >
-                <ion-row>
-                  <div class="width-box">
-                    <div class="title-tertiary title-card">
-                      {{ event.titleExp }}
-                    </div>
-                    <div class="title-tertiary hour-card">
-                      {{ event.fechaExp }}
+          <!-- calendar events view for desktop-->
+          <div *ngIf="this.size == 'lg' || this.size == 'md'">
+            <div class="schedule-body" *ngFor="let event of exps">
+              <a [routerLink]="['/user/exp/' + event.id]">
+                <div
+                  class="card-schedule"
+                  *ngIf="showDate(event.fechaAlt, event.fechaExp)"
+                >
+                  <ion-row>
+                    <div class="width-box">
+                      <div class="title-tertiary title-card">
+                        {{ event.titleExp }}
+                      </div>
+                      <div class="title-tertiary hour-card">
+                        {{ event.fechaExp }}
+                      </div>
+                      <div
+                        class="title-tertiary"
+                        [ngClass]="
+                          showDataExperience(
+                            event.id,
+                            event.stock_actual,
+                            event.status
+                          )
+                        "
+                      ></div>
                     </div>
                     <div
-                      class="title-tertiary"
-                      [ngClass]="
-                        showDataExperience(
-                          event.id,
-                          event.stock_actual,
-                          event.status
-                        )
-                      "
-                    ></div>
-                  </div>
-                  <div class="circle-icon">
-                    <span
-                      class="img-exp"
-                      [ngStyle]="{
-                        'background-image': 'url(' + event.imagesExpMob + ')'
-                      }"
+                      *ngIf="this.size == 'lg' || this.size == 'md'"
+                      class="circle-icon"
                     >
-                    </span>
+                      <span
+                        class="img-exp"
+                        [ngStyle]="{
+                          'background-image': 'url(' + event.imagesExpMob + ')'
+                        }"
+                      >
+                      </span>
+                    </div>
+                  </ion-row>
+                  <!-- <ion-row>
+                  <div class="guest-card" title="@usuario"></div>
+                  <div class="guest-card" title="@usuario"></div>
+                  <div class="guest-card" title="@usuario"></div>
+                  <div class="guest-card" title="@usuario"></div>
+                </ion-row> -->
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- calendar events view for mobile -->
+          <div *ngIf="this.size == 'xs' || this.size == 'sm'">
+            <div class="card-event" *ngFor="let item of exps">
+              <a [routerLink]="['/user/exp/' + item.id]">
+                <ion-row *ngIf="showDate(item.fechaAlt, item.fechaExp)">
+                  <div class="lateral-month">
+                    <h1 class="title-tertiary">
+                      {{
+                        item.fechaExp.split("/")[1] +
+                          "/" +
+                          item.fechaExp.split("/")[0] +
+                          "/" +
+                          item.fechaExp.split("/")[2] | date: "MMM"
+                      }}
+                    </h1>
+                    <h2 class="day-event title-tertiary">
+                      {{ item.fechaExp.split("/")[0] }}
+                    </h2>
+                    <div class="vertical_dotted_line"></div>
+                  </div>
+                  <div
+                    class="img-event"
+                    [style.background-image]="
+                      'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url(' +
+                      item.imagesExp +
+                      ')'
+                    "
+                  >
+                    <div class="event-description">
+                      <p class="title-secondary">{{ item.titleExp }}</p>
+                      <p class="title-tertiary">
+                        {{
+                          item.fechaExp.split("/")[1] +
+                            "/" +
+                            item.fechaExp.split("/")[0] +
+                            "/" +
+                            item.fechaExp.split("/")[2] | date: "EEEE"
+                        }}
+                        {{
+                          item.fechaExp.split("/")[1] +
+                            "/" +
+                            item.fechaExp.split("/")[0] +
+                            "/" +
+                            item.fechaExp.split("/")[2] | date: "dd"
+                        }}
+                        {{
+                          item.fechaExp.split("/")[1] +
+                            "/" +
+                            item.fechaExp.split("/")[0] +
+                            "/" +
+                            item.fechaExp.split("/")[2] | date: "LLL"
+                        }}
+                      </p>
+                      <div
+                        class="title-tertiary card-button"
+                        [ngClass]="
+                          showDataExperience(
+                            item.id,
+                            item.stock_actual,
+                            item.status
+                          )
+                        "
+                      ></div>
+                    </div>
                   </div>
                 </ion-row>
-                <!-- <ion-row>
-                <div class="guest-card" title="@usuario"></div>
-                <div class="guest-card" title="@usuario"></div>
-                <div class="guest-card" title="@usuario"></div>
-                <div class="guest-card" title="@usuario"></div>
-              </ion-row> -->
-              </div>
-            </a>
+              </a>
+            </div>
           </div>
         </div>
       </div>
+      <button
+        id="drop"
+        *ngIf="showEvent && (this.size == 'xs' || this.size == 'sm')"
+        class="btn-next btn-card"
+        (click)="classTransition()"
+      >
+        <span class="material-icons">keyboard_arrow_down</span>
+      </button>
     </ion-row>
   </section>
-
-  <user-vertical-calendar
-    *ngIf="this.size == 'xs' || this.size == 'sm'"
-  ></user-vertical-calendar>
   <app-footer></app-footer>
 </ion-content>

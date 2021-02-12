@@ -44,7 +44,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   public newEvents = true;
   private redemps: number[] = [];
   private redempSubs: Subscription;
-  public dropExp: boolean = false;
+  public dropExp: boolean = true;
 
   currentYear = new Date().getFullYear();
   @ViewChild("calendar1", { static: false }) calendar1: MatCalendar<Date>;
@@ -292,28 +292,37 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     let container = document.querySelector("#shkCont");
     let calendar = document.querySelector("#calendar");
     this.dropExp = !this.dropExp;
+    // open menu
     if (this.dropExp == false) {
       dropButton.setAttribute("style", "transform:rotate(180deg)");
-      bar.setAttribute("style", "height: 455px; overflow-y: auto;");
+
+      bar.setAttribute(
+        "style",
+        "height: 455px; overflow-y: auto; margin-top: 60px; transition:height 0.8s 0.4s; transform-origin: top;"
+      );
+
       calendar.setAttribute(
         "style",
-        "transition:transform 0.8s; transform:translateY(-500px); opacity:0;"
+        " transform:translateY(-500px); opacity:0; max-height :0px ;transition: transform 0.8s 0.4s, max-height 0.8s 0.4s;"
       );
+
       container.setAttribute(
         "style",
-        "transition:transform 0.8s; transform:translateY(-300px);"
+        "transform:translateY(0px); transition:transform 0.8s 0.4s;"
       );
     } else {
+      // closed menu
       dropButton.setAttribute("style", "transform:rotate(0deg)");
-      bar.setAttribute("style", "height: 175px; overflow-y: hidden;");
-      ("transition:transform 0.8s; transform:translateY(-500px);");
+
+      bar.setAttribute("style", "height: 175px; overflow-y: hidden; ");
+
       calendar.setAttribute(
         "style",
-        "transition:transform 0.8s; transform:translateY(0px); opacity:1;"
+        " max-height :auto; transform:translateY(0px); opacity:1; transition: transform 0.8s; 0.4s"
       );
       container.setAttribute(
         "style",
-        "transition:transform 0.8s; transform:translateY(0px);"
+        "transform:translateY(0px); transition:transform 0.8s 0.4s;"
       );
     }
   }

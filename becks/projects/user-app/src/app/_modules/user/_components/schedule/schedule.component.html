@@ -189,14 +189,15 @@
           </div>
         </div>
       </div>
-      <button
-        id="drop"
+      <div
         *ngIf="showEvent && (this.size == 'xs' || this.size == 'sm')"
-        class="btn-next btn-card"
-        (click)="classTransition()"
+        class="drop-container"
       >
-        <span class="material-icons">keyboard_arrow_down</span>
-      </button>
+        <P *ngIf="this.dropExp == true" class="title-tertiary"> Más eventos </P>
+        <button id="drop" class="btn-next btn-card" (click)="classTransition()">
+          <span class="material-icons">keyboard_arrow_down</span>
+        </button>
+      </div>
     </ion-row>
   </section>
   <app-footer></app-footer>

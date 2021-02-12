@@ -26,19 +26,34 @@
     src="./assets/icon/reserved-icon.svg"
     alt="reserved"
   />
-  <!-- blue/free -->
+  <!-- white/free -->
   <img
     *ngIf="!this.reserved && this.stock > 0 && this.type == 3"
     src="./assets/icon/free-exp-icon.svg"
     alt="free"
+    style="opacity: 1 !important"
   />
+  <!-- normal exp message -->
   <p
-    *ngIf="this.stock > 0 && this.status != '2' && !this.reserved"
+    *ngIf="
+      this.stock > 0 && this.status != '2' && !this.reserved && this.type != 3
+    "
     class="quantity-text"
   >
     quedan {{ stock }} cupos
   </p>
 
+  <!-- free exp message black -->
+  <p
+    *ngIf="
+      this.stock > 0 && this.status != '2' && !this.reserved && this.type == 3
+    "
+    class="quantity-text"
+    style="color: #121212"
+  >
+    quedan {{ stock }} cupos
+  </p>
+  <!-- sold out message -->
   <p
     *ngIf="this.stock == 0 && this.status != '2' && !this.reserved"
     class="quantity-text"

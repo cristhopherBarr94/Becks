@@ -34,6 +34,9 @@
     }
   }
   .calendar {
+    @media (min-width: 0px) and (max-width: 768px) {
+      margin-top: 60px;
+    }
     @media (min-width: 600px) {
       width: 800px;
       height: 460px;
@@ -157,7 +160,11 @@
       cursor: initial;
     }
   }
-
+  .min-height {
+    @media (min-width: 0px) and (max-width: 600px) {
+      min-height: 105vh;
+    }
+  }
   .schedule {
     background: transparent;
     width: 362px;
@@ -193,9 +200,11 @@
       width: 100%;
       height: 455px;
       overflow-y: auto;
+      overflow-x: hidden;
       @media (max-width: 600px) {
         text-align: center;
-        height: 175px;
+        // height: 175px;
+        height: auto;
         overflow-y: hidden;
       }
     }
@@ -212,7 +221,8 @@
         border-radius: 4px;
         padding: 24px 20px;
         margin-top: 16px;
-        border-left: 8px solid #038259;
+        position: relative;
+        // border-left: 8px solid #038259;
 
         .title-card {
           color: #ffffff !important;
@@ -225,7 +235,10 @@
           line-height: 24px !important;
         }
         .width-box {
-          width: 200px !important;
+          width: 200px;
+          @media (min-width: 0px) and (max-width: 600px) {
+            width: 175px;
+          }
         }
         .circle-icon {
           width: 48px;
@@ -284,10 +297,8 @@
         min-height: 180px;
         height: auto;
         background: #121212;
-        // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.87);
       }
       .vertical_dotted_line {
-        // border-left: 5px dotted #303030;
         height: 100px;
         margin: 10px 16px;
       }
@@ -367,56 +378,120 @@
   }
 }
 
+.becks-btn-primary,
+.becks-btn-soon,
+.becks-btn-sold,
+.becks-btn-reserved,
+.becks-btn-free {
+  font-size: 8px;
+  width: 161px;
+  height: 24px;
+  min-height: 24px;
+  background-size: 12px;
+  border-radius: 8px 0px 8px 0px;
+  background-position-y: 6px;
+  background-position-x: 20px;
+  margin-left: 50px;
+  margin-top: 10px;
+
+  @media (min-width: 0px) and (max-width: 768px) {
+    width: 161px !important;
+    margin-left: 0px;
+    &:active,
+    &:hover {
+      background-position-y: 3px !important;
+    }
+  }
+  @media (min-width: 769px) {
+    &:active,
+    &:hover {
+      background-position-y: 3px;
+      background-position-x: 17px;
+    }
+  }
+}
+// text of the buttons
 .reserve-exp:after {
-  color: grey !important;
   content: "RESERVADA";
 }
 .empty-exp:after {
-  color: red !important;
   content: "AGOTADA";
 }
 .normal-exp:after {
-  color: #038259 !important;
-  content: "ACTIVA";
+  content: "PARTICIPAR";
 }
 .soon-exp:after {
-  color: yellow !important;
   content: "PRÓXIMAMENTE";
 }
-
+// border cards
+.border-normal {
+  border-left: 8px solid #038259;
+}
+.border-sold {
+  border-left: 8px solid #616161;
+}
+.border-soon {
+  border-left: 8px solid #ee991a;
+}
+.border-reserved {
+  border-left: 8px solid #000000;
+}
+.border-free {
+  border-left: 8px solid #ffffff;
+}
 // calendar styles for mobile screen
+// .calendar-container {
+//   @media (max-width: 600px) {
+//     position: relative;
+//     margin-top: 60px;
+//   }
+// }
+// .btn-card {
+//   width: 100%;
+//   height: 55px;
+//   transform: rotate(0deg);
+//   position: relative;
+//   margin-bottom: 20px;
+//   transition: all 0.4s;
+//   z-index: 10;
+//   &:focus {
+//     outline: none !important;
+//   }
+// }
+// :host::ng-deep .mat-icon-button {
+//   width: 45px;
+//   height: 45px;
+// }
+// .drop-container {
+//   display: flex;
+//   justify-content: center;
+//   flex-direction: column;
+//   flex: 1;
+//   .title-tertiary {
+//     font-size: 16px !important;
+//     line-height: 24px !important;
+//     margin: 0;
+//     text-transform: none;
+//   }
+// }
 
-.calendar-container {
-  @media (max-width: 600px) {
-    position: relative;
-    margin-top: 60px;
-  }
+// styles for announcer amount component
+:host::ng-deep .announcer-container,
+:host::ng-deep .soon-text,
+:host::ng-deep .quantity-text {
+  width: 104px !important;
+  height: 104px !important;
 }
-.btn-card {
-  width: 100%;
-  height: 55px;
-  transform: rotate(0deg);
-  position: relative;
-  margin-bottom: 20px;
-  transition: all 0.4s;
-  z-index: 10;
-  &:focus {
-    outline: none !important;
-  }
+:host::ng-deep .soon-text,
+:host::ng-deep .quantity-text {
+  font-size: 8px !important;
+  top: 20px !important;
+  right: 16px !important;
+  text-align: center;
 }
-:host::ng-deep .mat-icon-button {
-  width: 45px;
-  height: 45px;
+:host::ng-deep .soon-text {
+  padding: 3px 0px !important;
 }
-.drop-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  flex: 1;
-  .title-tertiary {
-    font-size: 16px !important;
-    line-height: 24px !important;
-    margin: 0;
-    text-transform: none;
-  }
+:host::ng-deep .quantity-text {
+  padding: 0px 0px !important;
 }

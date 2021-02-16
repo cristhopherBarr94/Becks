@@ -45,7 +45,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   private redemps: number[] = [];
   private redempSubs: Subscription;
   public dropExp: boolean = true;
-
+  public reserv: boolean = false;
   currentYear = new Date().getFullYear();
   @ViewChild("calendar1", { static: false }) calendar1: MatCalendar<Date>;
   @ViewChild("calendar2", { static: false }) calendar2: MatCalendar<Date>;
@@ -149,7 +149,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   onSelect(event) {
     this.showEvent = false;
-    console.log(event);
     this.stringCom = event;
     this.selectedDate = event;
     const dateString = this.selectedDate.toLocaleDateString(
@@ -266,64 +265,97 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       return false;
     }
   }
-
-  showDataExperience(eid: number, stk: any, sts: number) {
+  // add card border and button style
+  // send reserv parameter for announcer amount
+  showDataExperience(
+    objetive: string,
+    index: number,
+    stk: any,
+    sts: number,
+    type: number
+  ) {
     let classreturn = "";
+
     if (stk == "0" && sts == 0) {
-      classreturn = "empty-exp";
-    } else if (sts == 0 && stk > 0) {
-      classreturn = "normal-exp";
+      if (objetive == "border") {
+        classreturn = "border-sold";
+      } else {
+        classreturn = "empty-exp becks-btn-sold";
+      }
+    } else if (sts == 0 && stk > 0 && type != 3) {
+      if (objetive == "border") {
+        classreturn = "border-normal";
+      } else {
+        classreturn = "normal-exp becks-btn-primary";
+      }
     } else if (sts == 2) {
-      classreturn = "soon-exp";
+      if (objetive == "border") {
+        classreturn = "border-soon";
+      } else {
+        classreturn = "soon-exp becks-btn-soon";
+      }
+    } else if (type == 3) {
+      if (objetive == "border") {
+        classreturn = "border-free";
+      } else {
+        classreturn = "normal-exp becks-btn-free";
+      }
     }
     if (this.redemps) {
+      this.reserv = false;
       for (let _id of this.redemps) {
-        if (_id == eid) {
-          classreturn = "reserve-exp";
+        if (_id == this.exps[index].id) {
+          this.reserv = true;
+          if (objetive == "border") {
+            classreturn = "border-reserved";
+          } else {
+            classreturn = "reserve-exp becks-btn-reserved";
+          }
         }
       }
     }
+
     return classreturn;
   }
 
-  classTransition() {
-    let dropButton = document.querySelector("#drop");
-    let bar = document.querySelector("#schBar");
-    let container = document.querySelector("#shkCont");
-    let calendar = document.querySelector("#calendar");
-    this.dropExp = !this.dropExp;
-    // open menu
-    if (this.dropExp == false) {
-      dropButton.setAttribute("style", "transform:rotate(180deg)");
+  //   classTransition() {
+  //     let dropButton = document.querySelector("#drop");
+  //     let bar = document.querySelector("#schBar");
+  //     let container = document.querySelector("#shkCont");
+  //     let calendar = document.querySelector("#calendar");
+  //     this.dropExp = !this.dropExp;
+  //     // open menu
+  //     if (this.dropExp == false) {
+  //       dropButton.setAttribute("style", "transform:rotate(180deg)");
 
-      bar.setAttribute(
-        "style",
-        "height: 455px; overflow-y: auto; margin-top: 60px; transition:height 0.8s 0.4s; transform-origin: top;"
-      );
+  //       bar.setAttribute(
+  //         "style",
+  //         "height: 455px; overflow-y: auto; margin-top: 60px; transition:height 0.8s 0.4s; transform-origin: top;"
+  //       );
 
-      calendar.setAttribute(
-        "style",
-        " transform:translateY(-500px); opacity:0; max-height :0px ;transition: transform 0.8s 0.4s, max-height 0.8s 0.4s;"
-      );
+  //       calendar.setAttribute(
+  //         "style",
+  //         " transform:translateY(-500px); opacity:0; max-height :0px ;transition: transform 0.8s 0.4s, max-height 0.8s 0.4s;"
+  //       );
 
-      container.setAttribute(
-        "style",
-        "transform:translateY(0px); transition:transform 0.8s 0.4s;"
-      );
-    } else {
-      // closed menu
-      dropButton.setAttribute("style", "transform:rotate(0deg)");
+  //       container.setAttribute(
+  //         "style",
+  //         "transform:translateY(0px); transition:transform 0.8s 0.4s;"
+  //       );
+  //     } else {
+  //       // closed menu
+  //       dropButton.setAttribute("style", "transform:rotate(0deg)");
 
-      bar.setAttribute("style", "height: 175px; overflow-y: hidden; ");
+  //       bar.setAttribute("style", "height: 175px; overflow-y: hidden; ");
 
-      calendar.setAttribute(
-        "style",
-        " max-height :auto; transform:translateY(0px); opacity:1; transition: transform 0.8s; 0.4s"
-      );
-      container.setAttribute(
-        "style",
-        "transform:translateY(0px); transition:transform 0.8s 0.4s;"
-      );
-    }
-  }
+  //       calendar.setAttribute(
+  //         "style",
+  //         " max-height :auto; transform:translateY(0px); opacity:1; transition: transform 0.8s; 0.4s"
+  //       );
+  //       container.setAttribute(
+  //         "style",
+  //         "transform:translateY(0px); transition:transform 0.8s 0.4s;"
+  //       );
+  //     }
+  //   }
 }

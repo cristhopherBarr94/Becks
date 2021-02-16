@@ -24,6 +24,7 @@ import { LOCALE_ID } from "@angular/core";
 import es from "@angular/common/locales/es";
 import { registerLocaleData } from "@angular/common";
 import { AnnouncerAccessForbiddenComponent } from "./_components/announcer-access-forbidden/announcer-access-forbidden.component";
+import { AnnouncerAmountComponent } from "./_components/announcer-amount/announcer-amount.component";
 
 registerLocaleData(es);
 @NgModule({
@@ -35,6 +36,7 @@ registerLocaleData(es);
     InteractionConfirmComponent,
     VerticalCalendarComponent,
     AnnouncerAccessForbiddenComponent,
+    AnnouncerAmountComponent,
   ],
   imports: [
     CommonModule,

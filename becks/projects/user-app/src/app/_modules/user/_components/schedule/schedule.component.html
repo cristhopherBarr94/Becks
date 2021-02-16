@@ -12,10 +12,10 @@
       class="calendar-title title-secondary"
       *ngIf="this.size == 'xs' || this.size == 'sm'"
     >
-      Experiencias
+      agenda
     </h1>
     <span class="separator-white"></span>
-    <ion-row>
+    <ion-row class="min-height">
       <div id="calendar" class="calendar">
         <h3
           class="title-secondary"
@@ -68,22 +68,44 @@
           <p *ngIf="!showEvent">Ningún evento disponible.</p>
 
           <!-- calendar events view for desktop-->
-          <div *ngIf="this.size == 'lg' || this.size == 'md'">
-            <div class="schedule-body" *ngFor="let event of exps">
-              <a [routerLink]="['/user/exp/' + event.id]">
-                <div
-                  class="card-schedule"
-                  *ngIf="showDate(event.fechaAlt, event.fechaExp)"
-                >
-                  <ion-row>
-                    <div class="width-box">
-                      <div class="title-tertiary title-card">
-                        {{ event.titleExp }}
-                      </div>
-                      <div class="title-tertiary hour-card">
-                        {{ event.fechaExp }}
-                      </div>
-                      <div
+          <div>
+            <div
+              class="schedule-body"
+              *ngFor="let event of exps; let i = index"
+            >
+              <div
+                class="card-schedule"
+                [ngClass]="
+                  showDataExperience(
+                    'border',
+                    i,
+                    event.stock_actual,
+                    event.status,
+                    event.type
+                  )
+                "
+                *ngIf="showDate(event.fechaAlt, event.fechaExp)"
+              >
+                <!-- user announcer amount -->
+                <user-announcer-amount
+                  [stock]="event.stock_actual"
+                  [status]="event.status"
+                  [type]="event.type"
+                  [reserved]="this.reserv"
+                ></user-announcer-amount>
+
+                <ion-row>
+                  <div class="width-box">
+                    <div class="title-tertiary title-card">
+                      {{ event.titleExp }}
+                    </div>
+                    <div class="title-tertiary hour-card">
+                      {{ event.placeExp }}
+                    </div>
+                    <div class="title-tertiary hour-card">
+                      {{ event.fechaExp }}
+                    </div>
+                    <!-- <div
                         class="title-tertiary"
                         [ngClass]="
                           showDataExperience(
@@ -92,104 +114,115 @@
                             event.status
                           )
                         "
-                      ></div>
-                    </div>
-                    <div
-                      *ngIf="this.size == 'lg' || this.size == 'md'"
-                      class="circle-icon"
+                      ></div> -->
+                  </div>
+                  <div class="circle-icon">
+                    <span
+                      class="img-exp"
+                      [ngStyle]="{
+                        'background-image': 'url(' + event.imagesExpMob + ')'
+                      }"
                     >
-                      <span
-                        class="img-exp"
-                        [ngStyle]="{
-                          'background-image': 'url(' + event.imagesExpMob + ')'
-                        }"
-                      >
-                      </span>
-                    </div>
-                  </ion-row>
-                  <!-- <ion-row>
+                    </span>
+                  </div>
+                </ion-row>
+                <button
+                  [routerLink]="['/user/exp/' + event.id]"
+                  block="block"
+                  color="becks"
+                  [ngClass]="
+                    showDataExperience(
+                      'card',
+                      i,
+                      event.stock_actual,
+                      event.status,
+                      event.type
+                    )
+                  "
+                ></button>
+                <!-- <ion-row>
                   <div class="guest-card" title="@usuario"></div>
                   <div class="guest-card" title="@usuario"></div>
                   <div class="guest-card" title="@usuario"></div>
                   <div class="guest-card" title="@usuario"></div>
                 </ion-row> -->
-                </div>
-              </a>
+              </div>
             </div>
           </div>
 
           <!-- calendar events view for mobile -->
-          <div *ngIf="this.size == 'xs' || this.size == 'sm'">
+          <!-- <div *ngIf="this.size == 'xs' || this.size == 'sm'">
             <div class="card-event" *ngFor="let item of exps">
-              <a [routerLink]="['/user/exp/' + item.id]">
-                <ion-row *ngIf="showDate(item.fechaAlt, item.fechaExp)">
-                  <div class="lateral-month">
-                    <h1 class="title-tertiary">
+              <ion-row *ngIf="showDate(item.fechaAlt, item.fechaExp)">
+                <div class="lateral-month">
+                  <h1 class="title-tertiary">
+                    {{
+                      item.fechaExp.split("/")[1] +
+                        "/" +
+                        item.fechaExp.split("/")[0] +
+                        "/" +
+                        item.fechaExp.split("/")[2] | date: "MMM"
+                    }}
+                  </h1>
+                  <h2 class="day-event title-tertiary">
+                    {{ item.fechaExp.split("/")[0] }}
+                  </h2>
+                  <div class="vertical_dotted_line"></div>
+                </div>
+                <div
+                  class="img-event"
+                  [style.background-image]="
+                    'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url(' +
+                    item.imagesExp +
+                    ')'
+                  "
+                >
+                  <div class="event-description">
+                    <p class="title-secondary">{{ item.titleExp }}</p>
+                    <p class="title-tertiary">
                       {{
                         item.fechaExp.split("/")[1] +
                           "/" +
                           item.fechaExp.split("/")[0] +
                           "/" +
-                          item.fechaExp.split("/")[2] | date: "MMM"
+                          item.fechaExp.split("/")[2] | date: "EEEE"
                       }}
-                    </h1>
-                    <h2 class="day-event title-tertiary">
-                      {{ item.fechaExp.split("/")[0] }}
-                    </h2>
-                    <div class="vertical_dotted_line"></div>
+                      {{
+                        item.fechaExp.split("/")[1] +
+                          "/" +
+                          item.fechaExp.split("/")[0] +
+                          "/" +
+                          item.fechaExp.split("/")[2] | date: "dd"
+                      }}
+                      {{
+                        item.fechaExp.split("/")[1] +
+                          "/" +
+                          item.fechaExp.split("/")[0] +
+                          "/" +
+                          item.fechaExp.split("/")[2] | date: "LLL"
+                      }}
+                    </p>
+                    <button
+                      [routerLink]="['/user/exp/' + item.id]"
+                      block="block"
+                      color="becks"
+                      class="card-button"
+                      [ngClass]="
+                        showDataExperience(
+                          item.id,
+                          item.stock_actual,
+                          item.status
+                        )
+                      "
+                    ></button>
                   </div>
-                  <div
-                    class="img-event"
-                    [style.background-image]="
-                      'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url(' +
-                      item.imagesExp +
-                      ')'
-                    "
-                  >
-                    <div class="event-description">
-                      <p class="title-secondary">{{ item.titleExp }}</p>
-                      <p class="title-tertiary">
-                        {{
-                          item.fechaExp.split("/")[1] +
-                            "/" +
-                            item.fechaExp.split("/")[0] +
-                            "/" +
-                            item.fechaExp.split("/")[2] | date: "EEEE"
-                        }}
-                        {{
-                          item.fechaExp.split("/")[1] +
-                            "/" +
-                            item.fechaExp.split("/")[0] +
-                            "/" +
-                            item.fechaExp.split("/")[2] | date: "dd"
-                        }}
-                        {{
-                          item.fechaExp.split("/")[1] +
-                            "/" +
-                            item.fechaExp.split("/")[0] +
-                            "/" +
-                            item.fechaExp.split("/")[2] | date: "LLL"
-                        }}
-                      </p>
-                      <div
-                        class="title-tertiary card-button"
-                        [ngClass]="
-                          showDataExperience(
-                            item.id,
-                            item.stock_actual,
-                            item.status
-                          )
-                        "
-                      ></div>
-                    </div>
-                  </div>
-                </ion-row>
-              </a>
+                </div>
+              </ion-row>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
-      <div
+      <!-- <div
         *ngIf="showEvent && (this.size == 'xs' || this.size == 'sm')"
         class="drop-container"
       >
@@ -197,8 +230,11 @@
         <button id="drop" class="btn-next btn-card" (click)="classTransition()">
           <span class="material-icons">keyboard_arrow_down</span>
         </button>
-      </div>
+      </div> -->
     </ion-row>
   </section>
+  <!-- <user-vertical-calendar
+    *ngIf="this.size == 'xs' || this.size == 'sm'"
+  ></user-vertical-calendar> -->
   <app-footer></app-footer>
 </ion-content>

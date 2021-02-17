@@ -5,43 +5,6 @@
       <h1 class="title-primary">Términos y condiciones</h1>
       <div class="separator-min">&nbsp;</div>
       <div class="cols-container">
-        <!-- <div class="left-side">
-          <div class="btns-container">
-            <button class="btn-side">
-              <span
-                id="cam"
-                (click)="getObjetive($event.target.id)"
-                class="btn-inner-txt"
-                >Campañas</span
-              >
-            </button>
-            <button class="btn-side">
-              <span
-                id="gen"
-                (click)="getObjetive($event.target.id)"
-                class="btn-inner-txt"
-                >Generales</span
-              >
-            </button>
-            <button class="btn-side">
-              <span
-                id="ppc"
-                (click)="getObjetive($event.target.id)"
-                class="btn-inner-txt"
-                >Políticas de privacidad Colombia</span
-              >
-            </button>
-            <button class="btn-side">
-              <span
-                id="ppm"
-                (click)="getObjetive($event.target.id)"
-                class="btn-inner-txt"
-                >Políticas de privacidad marca</span
-              >
-            </button>
-          </div>
-        </div> -->
-        <!-- <div *ngIf="campains" class="right-side"></div> -->
         <mat-tab-group
           [selectedIndex]="0"
           (selectedTabChange)="selectedTab($event.index)"
@@ -59,10 +22,12 @@
                 > -->
             </mat-expansion-panel>
           </mat-tab>
-          <mat-tab label="Generales" class="btn-side"> </mat-tab>
-          <mat-tab label="Políticas de privacidad Colombia" class="btn-side">
+          <mat-tab label="Generales" class="btn-side">Generales </mat-tab>
+          <mat-tab label="Políticas de privacidad Colombia" class="btn-side"
+            >Políticas de privacidad Colombia
           </mat-tab>
-          <mat-tab label="Políticas de privacidad Marca" class="btn-side">
+          <mat-tab label="Políticas de privacidad Marca" class="btn-side"
+            >Políticas de privacidad Marca
           </mat-tab>
         </mat-tab-group>
       </div>

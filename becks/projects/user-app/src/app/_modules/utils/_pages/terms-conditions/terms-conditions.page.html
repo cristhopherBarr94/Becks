@@ -53,12 +53,7 @@
                   {{terms.titleExp}}
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <embed
-                [src]="saveUrl[id]"
-                type="application/pdf"
-                width="100%"
-                height="600px"
-              />
+              <iframe [src]="saveUrl[id]" width="100%" height="600px"> </iframe>
               <!-- <a [href]="globalUrl + terms.id +'.pdf'" target="_blank"
                   >{{terms.titleExp}}</a
                 > -->

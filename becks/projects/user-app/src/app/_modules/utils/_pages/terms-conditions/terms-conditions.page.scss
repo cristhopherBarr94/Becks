@@ -1,14 +1,22 @@
 .fullSection {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 35px 20px;
+}
+.background-black {
+  background-color: #121212 !important;
 }
 
 .title-primary {
-  font-weight: 500;
-  font-size: 84px;
-  line-height: 18px;
+  margin-bottom: 0px !important;
   text-align: center;
-  text-transform: none;
+  font-size: 16px !important;
+  line-height: 110% !important;
+  width: 50%;
+  margin: auto;
+  @media (min-width: 600px) {
+    font-size: 24px !important;
+    line-height: 50px !important;
+    width: 100%;
+  }
 }
 
 h3 {
@@ -17,7 +25,11 @@ h3 {
 
 .separator-min {
   width: auto;
-  margin-top: 30px !important;
+  margin: 20px auto !important;
+  @media (min-width: 600px) {
+    margin-top: 0px !important;
+    margin-bottom: 30px !important;
+  }
 }
 
 .logo {
@@ -27,5 +39,114 @@ h3 {
     left: 0;
     right: 0;
     margin: auto;
+  }
+}
+::ng-deep .mat-tab-labels {
+  @media (min-width: 600px) {
+    flex-direction: column;
+  }
+}
+::ng-deep .mat-tab-label {
+  font-family: "Eurostile BQ";
+  color: #ffffff !important;
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 500;
+  font-style: normal;
+  width: auto;
+  max-width: 100px;
+  height: auto !important;
+  @media (min-width: 600px) {
+    min-height: 50px;
+    max-height: 150px;
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 24px;
+    white-space: normal !important;
+  }
+}
+::ng-deep .mat-tab-label-content {
+  white-space: normal !important;
+}
+
+::ng-deep .mat-tab-label-active {
+  font-family: "Eurostile BQ";
+  color: #ffffff !important;
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 500;
+  font-style: normal;
+  max-width: 100px;
+  height: auto;
+  @media (min-width: 600px) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+::ng-deep .mat-ink-bar {
+  background: linear-gradient(
+    270deg,
+    #00d18c 13.03%,
+    rgba(3, 184, 124, 0) 101.86%
+  ) !important;
+  height: 2px !important;
+  bottom: -5px !important;
+  @media (min-width: 600px) {
+    height: 6px !important;
+    top: 50px;
+  }
+}
+
+::ng-deep .mat-tab-group {
+  @media (min-width: 600px) {
+    flex-direction: row !important;
+  }
+}
+::ng-deep .mat-tab-header {
+  @media (min-width: 600px) {
+    width: 18%;
+  }
+}
+::ng-deep .mat-tab-body-wrapper {
+  @media (min-width: 600px) {
+    border-left: 1px solid #ffffff;
+    padding-left: 20px;
+    width: 90% !important;
+    margin-right: 10%;
+  }
+}
+
+::ng-deep
+  .mat-tab-header-pagination-controls-enabled
+  .mat-tab-header-pagination {
+  display: none !important;
+}
+
+::ng-deep .mat-tab-list {
+  @media (max-width: 600px) {
+    margin-bottom: 30px;
+  }
+}
+
+mat-expansion-panel {
+  background: transparent;
+  box-shadow: none !important;
+  ::ng-deep .mat-expansion-panel-header-description,
+  ::ng-deep .mat-expansion-indicator::after {
+    color: rgba(0, 255, 148, 0.87);
+  }
+  mat-expansion-panel-header {
+    background-color: #222222 !important;
+    margin-bottom: 24px;
+    height: 48px;
+    border-radius: 0px;
+
+    mat-panel-title {
+      font-style: normal !important;
+      font-weight: 500 !important;
+      font-size: 16px !important;
+      line-height: 50px !important;
+    }
   }
 }

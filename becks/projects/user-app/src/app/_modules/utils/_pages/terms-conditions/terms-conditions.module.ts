@@ -5,6 +5,8 @@ import { IonicModule } from "@ionic/angular";
 import { TermsConditionsPageRoutingModule } from "./terms-conditions-routing.module";
 import { TermsConditionsPage } from "./terms-conditions.page";
 import { UtilsModule } from "../../utils.module";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
   imports: [
@@ -13,6 +15,8 @@ import { UtilsModule } from "../../utils.module";
     IonicModule,
     TermsConditionsPageRoutingModule,
     UtilsModule,
+    MatExpansionModule,
+    MatTabsModule,
   ],
   declarations: [TermsConditionsPage],
 })

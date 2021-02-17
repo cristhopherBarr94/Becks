@@ -1,21 +1,76 @@
 <ion-content class="background-black">
-  <a href="/home"
-    ><img class="logo" src="./assets/img/becks-logoverde.svg" alt="logo"
-  /></a>
+  <user-menu></user-menu>
   <div class="fullSection background-black padding-logo">
-    <div class="content-terms-priv font-terms">
+    <div class="font-terms">
       <h1 class="title-primary">Términos y condiciones</h1>
-      <h2 class="title-tertiary">Campañas Beck's Society</h2>
       <div class="separator-min">&nbsp;</div>
-      <ul class="un-list-2">
-        <li *ngFor="let terms of terms_exp; let id=index">
-          <a
-            href="{{'https://becks.flexitco.co/becks-back/sites/default/files/pdfs/experience/' + terms.id +'.pdf'}}"
-            target="_blank"
-            >{{terms.titleExp}}</a
-          >
-        </li>
-      </ul>
+      <div class="cols-container">
+        <!-- <div class="left-side">
+          <div class="btns-container">
+            <button class="btn-side">
+              <span
+                id="cam"
+                (click)="getObjetive($event.target.id)"
+                class="btn-inner-txt"
+                >Campañas</span
+              >
+            </button>
+            <button class="btn-side">
+              <span
+                id="gen"
+                (click)="getObjetive($event.target.id)"
+                class="btn-inner-txt"
+                >Generales</span
+              >
+            </button>
+            <button class="btn-side">
+              <span
+                id="ppc"
+                (click)="getObjetive($event.target.id)"
+                class="btn-inner-txt"
+                >Políticas de privacidad Colombia</span
+              >
+            </button>
+            <button class="btn-side">
+              <span
+                id="ppm"
+                (click)="getObjetive($event.target.id)"
+                class="btn-inner-txt"
+                >Políticas de privacidad marca</span
+              >
+            </button>
+          </div>
+        </div> -->
+        <!-- <div *ngIf="campains" class="right-side"></div> -->
+        <mat-tab-group
+          [selectedIndex]="0"
+          (selectedTabChange)="selectedTab($event.index)"
+        >
+          <mat-tab label="Campañas" class="right-side">
+            <mat-expansion-panel *ngFor="let terms of terms_exp; let id=index">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="title-primary">
+                  {{terms.titleExp}}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <embed
+                [src]="saveUrl[id]"
+                type="application/pdf"
+                width="100%"
+                height="600px"
+              />
+              <!-- <a [href]="globalUrl + terms.id +'.pdf'" target="_blank"
+                  >{{terms.titleExp}}</a
+                > -->
+            </mat-expansion-panel>
+          </mat-tab>
+          <mat-tab label="Generales" class="btn-side"> </mat-tab>
+          <mat-tab label="Políticas de privacidad Colombia" class="btn-side">
+          </mat-tab>
+          <mat-tab label="Políticas de privacidad Marca" class="btn-side">
+          </mat-tab>
+        </mat-tab-group>
+      </div>
     </div>
   </div>
 

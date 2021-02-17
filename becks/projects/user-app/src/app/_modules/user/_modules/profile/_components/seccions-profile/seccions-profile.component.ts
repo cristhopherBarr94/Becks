@@ -18,13 +18,7 @@ export class SeccionsProfileComponent implements OnInit {
 
   @Input() isActive: boolean;
 
-  constructor(
-    private platform: Platform,
-    private ui: UiService,
-    private router: Router,
-    private redempSvc: RedemptionsService,
-    private expService: ExperienciasService
-  ) {
+  constructor(private platform: Platform, private ui: UiService) {
     platform.ready().then(() => {
       this.platform.resize.subscribe(() => {
         this.size = this.ui.getSizeType(platform.width());

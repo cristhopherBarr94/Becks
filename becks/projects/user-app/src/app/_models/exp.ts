@@ -7,6 +7,8 @@ export class Exp {
   titleExp: string;
   fechaExp: string;
   fechaAlt: string;
+  dateActFrom: string;
+  dateActTo: string;
   horaExp: string;
   placeExp: string;
   detailExp: string;

@@ -72,7 +72,7 @@
       <p>No necesitas activar tu cuenta para participar</p>
       <a
         target="_blank"
-        href="assets/files/TERMINOSYCONDICIONESGENERALES.pdf"
+        href="assets/files/TERMINOSYCONDICIONESCAMPANA.pdf"
         rel="noopener noreferrer"
         >Aplican términos y condiciones</a
       >
@@ -123,9 +123,9 @@
         >
           <mat-icon matSuffix>calendar_today</mat-icon>
           {{
-            exp.fechaAlt == exp.fechaExp
-              ? exp.fechaExp
-              : exp.fechaAlt + " - " + exp.fechaExp
+            exp.dateActFrom == exp.dateActTo
+              ? exp.dateActTo
+              : exp.dateActFrom + " - " + exp.dateActTo
           }}
         </p>
         <p
@@ -287,9 +287,9 @@
           class="detail-content detail-place animate__animated animate__backInUp animate__delay-1s"
         >
           {{
-            exp.fechaAlt == exp.fechaExp
-              ? exp.fechaExp
-              : exp.fechaAlt + " - " + exp.fechaExp
+            exp.dateActFrom == exp.dateActTo
+              ? exp.dateActTo
+              : exp.dateActFrom + " - " + exp.dateActTo
           }}
         </p>
         <p

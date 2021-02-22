@@ -88,6 +88,7 @@ export class ActivationPage implements OnInit, AfterViewInit, OnDestroy {
 
     this.subsCodes = this.userSvc.userCodes$.subscribe((codes) => {
       this.ui.dismissLoading();
+      console.log(codes);
       if (codes && codes.length > 0) {
         this.activate = true;
         this.date_til = moment(new Date(codes[0].valid_until * 1000));

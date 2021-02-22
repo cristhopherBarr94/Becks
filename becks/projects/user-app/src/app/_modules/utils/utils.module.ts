@@ -17,13 +17,13 @@ import { CaptchaComponent } from "./_components/captcha/captcha.component";
 import { LottieModule } from "ngx-lottie";
 import player from "lottie-web";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MenuComponent } from './_components/menu/menu.component';
-import { SplashScreenComponent } from './_components/splash-screen/splash-screen.component';
-import { NameTittleComponent } from '../user/_modules/profile/_components/name-tittle/name-tittle.component';
-import { BasicAlertComponent } from './_components/basic-alert/basic-alert.component';
-import { CircleProgressComponent } from '../user/_modules/profile/_components/circle-progress/circle-progress.component';
+import { MenuComponent } from "./_components/menu/menu.component";
+import { SplashScreenComponent } from "./_components/splash-screen/splash-screen.component";
+import { NameTittleComponent } from "../user/_modules/profile/_components/name-tittle/name-tittle.component";
+import { BasicAlertComponent } from "./_components/basic-alert/basic-alert.component";
+import { CircleProgressComponent } from "../user/_modules/profile/_components/circle-progress/circle-progress.component";
 import { NgCircleProgressModule } from "ng-circle-progress";
-
+import { AnnouncerAmountComponent } from "./_components/announcer-amount/announcer-amount.component";
 
 export function playerFactory() {
   return player;
@@ -42,6 +42,7 @@ export function playerFactory() {
     NameTittleComponent,
     BasicAlertComponent,
     CircleProgressComponent,
+    AnnouncerAmountComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +70,7 @@ export function playerFactory() {
     NameTittleComponent,
     BasicAlertComponent,
     CircleProgressComponent,
+    AnnouncerAmountComponent,
   ],
 })
 export class UtilsModule {}

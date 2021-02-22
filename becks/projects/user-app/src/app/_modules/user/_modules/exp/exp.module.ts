@@ -8,20 +8,18 @@ import { UtilsModule } from "src/app/_modules/utils/utils.module";
 import { MatCarouselModule } from "@ngmodule/material-carousel";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
-import { IonicModule } from '@ionic/angular';
-import { MatIconModule } from '@angular/material/icon';
-import { AnnouncerDaysComponent } from '../../_components/announcer-days/announcer-days.component';
-import { NgCircleProgressModule } from 'ng-circle-progress';
-import { AnnouncerAmountComponent } from '../../_components/announcer-amount/announcer-amount.component';
-import { SoldMessageComponent } from '../../_components/sold-message/sold-message.component';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { IonicModule } from "@ionic/angular";
+import { MatIconModule } from "@angular/material/icon";
+import { AnnouncerDaysComponent } from "../../_components/announcer-days/announcer-days.component";
+import { NgCircleProgressModule } from "ng-circle-progress";
+import { SoldMessageComponent } from "../../_components/sold-message/sold-message.component";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 @NgModule({
   declarations: [
     SliderExpComponent,
     HomeExpPage,
     AnnouncerDaysComponent,
-    AnnouncerAmountComponent,
-    SoldMessageComponent
+    SoldMessageComponent,
   ],
   imports: [
     CommonModule,

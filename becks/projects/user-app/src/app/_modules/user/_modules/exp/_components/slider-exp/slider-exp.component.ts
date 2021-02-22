@@ -377,19 +377,19 @@ export class SliderExpComponent
     });
   }
 
-  getColorExp(exp: any): string {
+  getColorExp(exp: any): string {    
     let colorClass = "";
+    // soon exp
+    if (exp.status == 2) {
+      colorClass = "soon-color";
+    }
     // free exp
-    if (exp.type == "3" && !this.reserv && exp.stock_actual > 0) {
+    else if (exp.type == "3" && !this.reserv && exp.stock_actual > 0) {
       colorClass = "free-color";
     }
     // reserved exp
     else if (this.reserv) {
       colorClass = "reserved-color";
-    }
-    // soon exp
-    else if (exp.status == 2) {
-      colorClass = "soon-color";
     }
     // sold out
     else if (exp.stock_actual == 0) {

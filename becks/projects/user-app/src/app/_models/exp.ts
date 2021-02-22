@@ -16,4 +16,8 @@ export class Exp {
   status: string;
   type: string;
   urlRedirect:string;
+  validFrom: number;
+  validTo: number;
+  activateFrom: number;
+  activateTo: number;
 }

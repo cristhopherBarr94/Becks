@@ -268,6 +268,13 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   }
 
   showDataExperience(eid: number, stk: any, sts: number) {
+    if (this.redemps) {
+      for (let _id of this.redemps) {
+        if (_id == eid) {
+          return "reserve-exp";
+        }
+      }
+    }
     let classreturn = "";
     if (stk == "0" && sts == 0) {
       classreturn = "empty-exp";
@@ -275,13 +282,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       classreturn = "normal-exp";
     } else if (sts == 2) {
       classreturn = "soon-exp";
-    }
-    if (this.redemps) {
-      for (let _id of this.redemps) {
-        if (_id == eid) {
-          classreturn = "reserve-exp";
-        }
-      }
     }
     return classreturn;
   }

@@ -76,6 +76,10 @@ export class ExperienciasService {
                 horaExp: element.horaExp,
                 type: element.type,
                 urlRedirect: element.url_redirect,
+                validFrom: element.valid_from,
+                validTo: element.valid_to,
+                activateFrom: element.activate_from,
+                activateTo: element.activate_to,
               };
               this._exps.push(elementoResponse);
               if (response.body.length - 1 == index) {

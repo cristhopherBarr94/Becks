@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class MenuStatusService {
   private _menuStatus = new Subject<string>();
@@ -9,7 +9,7 @@ export class MenuStatusService {
 
   constructor() {}
 
-  public statusMenu (state:string){
-    this._menuStatus.next(state)
+  public statusMenu(state: string) {
+    this._menuStatus.next(state);
   }
 }

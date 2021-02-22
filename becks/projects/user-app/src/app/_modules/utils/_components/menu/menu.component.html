@@ -25,7 +25,7 @@
     <a
       [routerLink]="['/user/exp']"
       class="menu-item"
-      [ngClass]="selected('exp')"
+      [ngClass]="selected('/user/exp')"
     >
       <img class="icon-item" src="./assets/icon/menu/home.svg" alt="Inicio" />
       <span class="name-item">Inicio</span>
@@ -33,7 +33,7 @@
     <a
       [routerLink]="['/user/calendar']"
       class="menu-item"
-      [ngClass]="selected('calendar')"
+      [ngClass]="selected('/user/calendar')"
     >
       <img
         class="icon-item"
@@ -54,7 +54,7 @@
       *ngIf="user && time; else defaultPicMobile"
       [routerLink]="['/user/profile']"
       class="menu-item"
-      [ngClass]="selected('profile')"
+      [ngClass]="selected('/user/profile')"
     >
       <img
         *ngIf="user.photo"
@@ -76,7 +76,7 @@
       <a
         [routerLink]="['/user/profile']"
         class="menu-item"
-        [ngClass]="selected('profile')"
+        [ngClass]="selected('/user/profile')"
       >
         <img
           [src]="'./assets/img/profile_male.jpg'"
@@ -126,7 +126,7 @@
           <a
             [routerLink]="['/user/calendar']"
             class="menu-item-destkop"
-            [ngClass]="selected('calendar')"
+            [ngClass]="selected('/user/calendar')"
           >
             <img
               class="icon-item"
@@ -152,7 +152,7 @@
             *ngIf="user && time; else defaultPicDesktop"
             [routerLink]="['/user/profile']"
             class="menu-item-destkop"
-            [ngClass]="selected('profile')"
+            [ngClass]="selected('/user/profile')"
           >
             <img
               *ngIf="user.photo"
@@ -175,7 +175,7 @@
           <a
             [routerLink]="['/user/profile']"
             class="menu-item"
-            [ngClass]="selected('profile')"
+            [ngClass]="selected('/user/profile')"
           >
             <img
               [src]="'./assets/img/profile_male.jpg'"

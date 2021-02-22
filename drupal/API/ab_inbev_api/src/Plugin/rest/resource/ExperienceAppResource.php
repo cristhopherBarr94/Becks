@@ -169,7 +169,6 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
     $date = time();
     $exp_data = [
       'type' => '0',
-      'status' => '0',
       'title' => $data['title'],
       'description' => $data['description'],
       'location' => $data['location'],
@@ -310,7 +309,7 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
       'valid_from' => $data['valid_from'],
       'valid_to' => $data['valid_to'],
 	  'activate_from' => $data['activate_from'],
-	   'activate_to' => $data['activate_to'],
+	  'activate_to' => $data['activate_to'],
 	  'status' => $data['status']
    ];
 
@@ -600,6 +599,11 @@ class ExperienceAppResource extends ResourceBase implements DependentPluginInter
         $records = [];
         $ids = [];
         while($record = $result->fetchAssoc()) {
+          if ( ( is_numeric( $record["activate_from"] ) && is_numeric( $record["activate_to"] ) ) && 
+                ( $date < intval($record["activate_from"]) || $date > intval($record["activate_to"]) ) ) {
+            // PROXIMAMENTE
+            $record['status'] = 2;
+          }
           $records[] = $record;
           $ids[] = $record['id'];
         }

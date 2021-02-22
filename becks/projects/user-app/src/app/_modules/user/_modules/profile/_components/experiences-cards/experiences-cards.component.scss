@@ -15,6 +15,12 @@
   margin-top: 24px;
   max-width: 90%;
   justify-content: center;
+  @media (min-width: 1024px) {
+    margin: auto;
+    margin-top: 24px;
+    max-width: 100%;
+    padding: 0px 5%;
+  }
 }
 
 .margin-top {

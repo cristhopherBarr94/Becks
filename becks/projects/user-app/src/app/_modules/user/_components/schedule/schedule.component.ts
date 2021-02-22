@@ -109,19 +109,20 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     const tmpL = this.events.length;
     this.events = [];
     for (const exp of this.exps) {
+      // create the final date to show exp
       let dateExp =
-        exp.fechaExp.split("/")[1] +
+        exp.dateActTo.split("/")[1] +
         "/" +
-        exp.fechaExp.split("/")[0] +
+        exp.dateActTo.split("/")[0] +
         "/" +
-        exp.fechaExp.split("/")[2];
-
+        exp.dateActTo.split("/")[2];
+      // create the initial date to show exp
       let dateSt =
-        exp.fechaAlt.split("/")[1] +
+        exp.dateActFrom.split("/")[1] +
         "/" +
-        exp.fechaAlt.split("/")[0] +
+        exp.dateActFrom.split("/")[0] +
         "/" +
-        exp.fechaAlt.split("/")[2];
+        exp.dateActFrom.split("/")[2];
 
       let fechaEnd = new Date(dateExp)
         .toLocaleDateString("es-ES", this.options)
@@ -135,6 +136,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
         start: dateSt,
         end: dateExp,
       });
+
       this.eventDay.push({
         start: fechaStart,
         end: fechaEnd,
@@ -146,7 +148,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       setTimeout(() => (this.newEvents = true), 50);
     }
   }
-
+  // function to evaluate the current date selected and decide to if shown the message
   onSelect(event) {
     this.showEvent = false;
     this.stringCom = event;
@@ -163,19 +165,19 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       if (
         event.getTime() <=
           new Date(
-            exp.fechaExp.split("/")[1] +
+            exp.dateActTo.split("/")[1] +
               "/" +
-              exp.fechaExp.split("/")[0] +
+              exp.dateActTo.split("/")[0] +
               "/" +
-              exp.fechaExp.split("/")[2]
+              exp.dateActTo.split("/")[2]
           ).getTime() &&
         event.getTime() >=
           new Date(
-            exp.fechaAlt.split("/")[1] +
+            exp.dateActFrom.split("/")[1] +
               "/" +
-              exp.fechaAlt.split("/")[0] +
+              exp.dateActFrom.split("/")[0] +
               "/" +
-              exp.fechaAlt.split("/")[2]
+              exp.dateActFrom.split("/")[2]
           ).getTime()
       ) {
         this.showEvent = true;

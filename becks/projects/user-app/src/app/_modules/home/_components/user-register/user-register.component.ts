@@ -119,11 +119,11 @@ export class UserRegisterComponent implements OnInit, AfterViewInit {
     });
   }
 
-  methodFB(userInfo: any) {
-    this.userRegisterForm.controls.fullname.patchValue(userInfo.full_name);
-    this.userRegisterForm.controls.email.patchValue(userInfo.email);
-    this.cdr.detectChanges();
-  }
+  // methodFB(userInfo: any) {
+  //   this.userRegisterForm.controls.fullname.patchValue(userInfo.full_name);
+  //   this.userRegisterForm.controls.email.patchValue(userInfo.email);
+  //   this.cdr.detectChanges();
+  // }
 
   saveUser(): void {
     if (this.userRegisterForm.invalid || !this.captchaStatus) {

@@ -104,12 +104,16 @@
               class="col-flex-center col-flex-center__links"
             >
               <ul style="list-style: none; margin: 0px !important">
-                <!-- <li>
+                <li
+                *ngIf="this.log"
+                >
                   <a href="./terms-conditions" class="font-link"
                     >Términos y condiciones campañas</a
                   >
-                </li> -->
-                <li>
+                </li>
+                <li
+                *ngIf="!this.log"
+                >
                   <a
                     target="_blank"
                     href="assets/files/TERMINOSYCONDICIONESCAMPANA.pdf"

@@ -22,10 +22,6 @@
   -webkit-font-smoothing: antialiased;
 }
 
-@font-face {
-  font-family: "Eurostile";
-  src: url("../assets/font/Eurostile.woff") format("woff");
-}
 
 @font-face {
   font-family: "Eurostile BQ";
@@ -37,15 +33,7 @@
   src: url("../assets/font/HelveticaNeueLTStd-BdCn_3.woff") format("woff");
 }
 
-@font-face {
-  font-family: "Helvetica Neue";
-  src: url("../assets/font/HelveticaNeue.woff") format("woff");
-}
 
-@font-face {
-  font-family: "Droid Sans";
-  src: url("../assets/font/DroidSans-Bold-webfont.woff") format("woff");
-}
 
 @mixin title(
   $font-family,
@@ -349,7 +337,6 @@ p {
   text-transform: capitalize;
   color: #ffffff;
   @media (min-width: 768px) {
-    font-family: "Droid Sans";
     font-size: 36px;
   }
 }

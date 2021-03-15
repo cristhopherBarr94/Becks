@@ -58,8 +58,8 @@
             <ion-col
               sizeXs="12"
               sizeSm="12"
-              sizeLg="1"
-              sizeXl="1"
+              sizeLg="3"
+              sizeXl="3"
               class="col-flex-center"
               ><a
                 target="_blank"
@@ -69,7 +69,7 @@
                 >Vive responsable</a
               ></ion-col
             >
-            <ion-col
+            <!-- <ion-col
               sizeXs="12"
               sizeSm="12"
               sizeLg="3"
@@ -82,12 +82,42 @@
                 class="font-link"
                 >Términos y condiciones generales</a
               ></ion-col
-            >
+            > -->
+
+            <ion-col
+            sizeXs="12"
+            sizeSm="12"
+            sizeLg="3"
+            sizeXl="3"
+            class="col-flex-center col-flex-center__links"
+          >
+            <ul style="list-style: none; margin: 0px !important">
+              <li
+              *ngIf="this.log"
+              >
+                <a href="./terms-conditions" class="font-link"
+                  >Términos y condiciones</a
+                >
+              </li>
+              <li
+              *ngIf="!this.log"
+              >
+                <a
+                  target="_blank"
+                  href="assets/files/TERMINOSYCONDICIONESCAMPANA.pdf"
+                  rel="noopener noreferrer"
+                  class="font-link"
+                  >Términos y condiciones campañas
+                </a>
+              </li>
+            </ul>
+          </ion-col>
+
             <ion-col
               sizeXs="12"
               sizeSm="12"
-              sizeLg="2"
-              sizeXl="2"
+              sizeLg="3"
+              sizeXl="3"
               class="col-flex-center"
               ><a
                 href="./privacy-policy"
@@ -96,35 +126,8 @@
                 >Políticas de privacidad</a
               ></ion-col
             >
-            <ion-col
-              sizeXs="12"
-              sizeSm="12"
-              sizeLg="3"
-              sizeXl="3"
-              class="col-flex-center col-flex-center__links"
-            >
-              <ul style="list-style: none; margin: 0px !important">
-                <li
-                *ngIf="this.log"
-                >
-                  <a href="./terms-conditions" class="font-link"
-                    >Términos y condiciones campañas</a
-                  >
-                </li>
-                <li
-                *ngIf="!this.log"
-                >
-                  <a
-                    target="_blank"
-                    href="assets/files/TERMINOSYCONDICIONESCAMPANA.pdf"
-                    rel="noopener noreferrer"
-                    class="font-link"
-                    >Términos y condiciones campañas
-                  </a>
-                </li>
-              </ul>
-            </ion-col>
-            <ion-col
+
+            <!-- <ion-col
               sizeXs="12"
               sizeSm="12"
               sizeLg="2"
@@ -137,19 +140,19 @@
                 class="font-link"
                 >Aviso de privacidad</a
               ></ion-col
-            >
+            > -->
             <ion-col
               sizeXs="12"
               sizeSm="12"
-              sizeLg="1"
-              sizeXl="1"
+              sizeLg="3"
+              sizeXl="3"
               class="col-flex-center"
               ><a
                 target="_blank"
                 href="https://www.bavaria.co/contactenos"
                 class="font-link"
                 rel="noopener noreferrer"
-                >Contáctenos</a
+                >Contáctanos</a
               ></ion-col
             >
           </ion-row>

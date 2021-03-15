@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
-import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
+import { SelectivePreloadStrategyService } from "./_services/selective-preload-strategy.service";
 import { AgeGuardService } from "./_services/age-guard.service";
 import { AuthGuardService } from "./_services/auth-guard.service";
 
@@ -29,6 +30,7 @@ const routes: Routes = [
       import("./_modules/age-gate-v2/age-gate-v2.module").then(
         (m) => m.AgeGateV2Module
       ),
+    data: { preload: true },
   },
   {
     path: "privacy-policy",
@@ -55,7 +57,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    //RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: SelectivePreloadStrategyService,
+    }),
   ],
   exports: [RouterModule],
 })

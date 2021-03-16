@@ -39,7 +39,7 @@ export class TermsConditionsPage implements OnInit {
       }
       exps.forEach((e) => {
         let dangerousUrl =
-          e.file+"#toolbar=0&navpanes=0&scrollbar=0&#view=fitv";
+          e.file+"#toolbar=0&navpanes=0&scrollbar=0&#view=fitv&embedded=true";
         this.saveUrl.push(
           this.sanitizer.bypassSecurityTrustResourceUrl(dangerousUrl)
         );

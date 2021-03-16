@@ -1,13 +1,14 @@
 {
-  "name": "waiting-list",
-  "short_name": "waiting-list",
+  "name": "user-app",
+  "short_name": "user-app",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [
     {
       "src": "../icon/ms-icon-310x310.png",
       "sizes": "310x310",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
     }
   ],
   "background_color": "#488aff",

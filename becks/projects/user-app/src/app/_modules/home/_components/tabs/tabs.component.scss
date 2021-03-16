@@ -11,7 +11,7 @@
   min-width: 100%;
 }
 
-::ng-deep .mat-tab-label {
+:host::ng-deep .mat-tab-label {
   font-family: "Eurostile BQ";
   color: #ffffff !important;
   font-size: 11px;
@@ -22,7 +22,7 @@
   }
 }
 
-::ng-deep .mat-tab-label-active {
+:host::ng-deep .mat-tab-label-active {
   font-family: "Eurostile BQ";
   color: #ffffff !important;
   font-size: 11px;
@@ -43,7 +43,7 @@
   width: 50% !important;
 }
 
-::ng-deep .mat-tab-body-wrapper {
+:host::ng-deep .mat-tab-body-wrapper {
   background-color: transparent;
   min-width: 100%;
   @media (min-width: 768px) {
@@ -52,7 +52,7 @@
   }
 }
 
-::ng-deep .mat-tab-header {
+:host::ng-deep .mat-tab-header {
   @media (min-width: 768px) {
     width: auto;
     margin-right: 0%;

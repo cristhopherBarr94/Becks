@@ -63,7 +63,7 @@
   }
 }
 
-::ng-deep .mat-tab-body-wrapper {
+:host::ng-deep .mat-tab-body-wrapper {
   background-color: transparent;
   min-width: 100%;
   padding: 20px;

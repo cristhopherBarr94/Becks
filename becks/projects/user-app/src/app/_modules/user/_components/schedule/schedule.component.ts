@@ -77,7 +77,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       (red) => {
         this.ui.dismissLoading();
         this.redemps = red;
-        console.log(red);
       },
       (e) => {
         this.ui.dismissLoading();
@@ -145,7 +144,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     }
     if (tmpL != this.events.length) {
       this.newEvents = false;
-      this.showEvent = false;
+      this.showEvent = true;
       setTimeout(() => (this.newEvents = true), 50);
     }
   }

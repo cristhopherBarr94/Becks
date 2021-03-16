@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
-import { ExperienciasService } from "src/app/_services/experiencias.service";
+// import { ExperienciasService } from "src/app/_services/experiencias.service";
 import { DomSanitizer } from "@angular/platform-browser";
 import { Platform } from "@ionic/angular";
 import { UiService } from "src/app/_services/ui.service";
+import { FilesService } from "src/app/_services/files.service";
 @Component({
   selector: "app-terms-conditions",
   templateUrl: "./terms-conditions.page.html",
@@ -12,15 +13,14 @@ import { UiService } from "src/app/_services/ui.service";
 export class TermsConditionsPage implements OnInit {
   private expSubs: Subscription;
   public terms_exp = [];
-  public globalUrl: string =
-    "https://becks.flexitco.co/becks-back/sites/default/files/pdfs/experience/";
+
   public saveUrl: any[] = [];
   public isBordered: boolean = true;
   public campains: boolean = true;
   public size: string;
 
   constructor(
-    private expService: ExperienciasService,
+    private filesService: FilesService,
     private sanitizer: DomSanitizer,
     private platform: Platform,
     private ui: UiService
@@ -32,21 +32,20 @@ export class TermsConditionsPage implements OnInit {
       this.size = this.ui.getSizeType(platform.width());
     });
 
-    this.expSubs = this.expService.exp$.subscribe((exps) => {
+    this.expSubs = this.filesService.expFiles$.subscribe((exps) => {
+
       if (exps && exps.length > 0) {
         this.terms_exp = exps;
       }
       exps.forEach((e) => {
         let dangerousUrl =
-          this.globalUrl +
-          e.id +
-          ".pdf#toolbar=0&navpanes=0&scrollbar=0&#view=fitv";
+          e.file+"#toolbar=0&navpanes=0&scrollbar=0&#view=fitv";
         this.saveUrl.push(
           this.sanitizer.bypassSecurityTrustResourceUrl(dangerousUrl)
         );
       });
     });
-    this.expService.getData();
+    this.filesService.getDataFiles();
   }
 
   ngOnInit() {}

@@ -56,12 +56,6 @@ export class SliderExpComponent
   disableNextBtn = false;
   wasChecked = false;
   timerToChecked = 0;
-  // status = 0;
-
-  public defaultDeskImage =
-    environment.serverUrl + environment.user.getImgExp + "0_desk";
-  public defaultMobileImage =
-    environment.serverUrl + environment.user.getImgExp + "0_mob";
 
   @ViewChild("slides") slides: IonSlides;
 
@@ -111,6 +105,7 @@ export class SliderExpComponent
         try {
           if (response) {
             this.experienciaContent = response;
+            // console.log(response);
             this.sliderExp.slidesItems = response;
             this.slideOpts = {
               initialSlide: this.compareId(this.id == NaN ? 0 : this.id),

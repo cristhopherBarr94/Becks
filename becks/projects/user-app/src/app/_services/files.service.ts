@@ -31,18 +31,14 @@ export class FilesService {
         (response: any) => {
           if (response.status >= 200 && response.status < 300) {
             this._expsFiles = [];
-
-            response.body.forEach((element, index) => {
+            response.body.forEach((element) => {
               const elementoResponse = {
-                id: element.id,
-                titleExp: element.title,
-                file: element.file
+                titleExp: element.label,
+                file: element.tyc_pdf
               };
               this._expsFiles.push(elementoResponse);
-              if (response.body.length - 1 == index) {
-                this._expFilesSbj.next(this._expsFiles);
-              }
             });
+            this._expFilesSbj.next(this._expsFiles);
           } else {
             // TODO :: logic for error
           }

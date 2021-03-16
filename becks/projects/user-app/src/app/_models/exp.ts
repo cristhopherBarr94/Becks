@@ -20,4 +20,5 @@ export class Exp {
   validTo: number;
   activateFrom: number;
   activateTo: number;
+  tyc_pdf:string;
 }

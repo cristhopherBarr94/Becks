@@ -42,20 +42,8 @@ export class ExperienciasService {
                 id: element.id,
                 stock_actual: element.stock_actual,
                 detalleExp: false,
-                imagesExp:
-                  urlServer +
-                  environment.user.getImgExp +
-                  element.id +
-                  "_desk" +
-                  "?time_stamp=" +
-                  new Date().getTime(),
-                imagesExpMob:
-                  urlServer +
-                  environment.user.getImgExp +
-                  element.id +
-                  "_mob" +
-                  "?time_stamp=" +
-                  new Date().getTime(),
+                imagesExp:element.img_desk,
+                imagesExpMob:element.img_mob,
                 titleExp: element.title,
                 fechaAlt: new Date(element.valid_from * 1000)
                   .toLocaleString()
@@ -80,6 +68,7 @@ export class ExperienciasService {
                 validTo: element.valid_to,
                 activateFrom: element.activate_from,
                 activateTo: element.activate_to,
+                tyc_pdf: element.tyc_pdf,
               };
               this._exps.push(elementoResponse);
               if (response.body.length - 1 == index) {

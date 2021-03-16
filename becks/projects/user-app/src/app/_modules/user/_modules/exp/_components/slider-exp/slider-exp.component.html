@@ -19,13 +19,13 @@
               class="item-exp">
     <img
       *ngIf="this.size == 'lg' || this.size == 'md'"
-      [src]="defaultDeskImage"
+      src="assets/img/0_desk.jpg"
       alt="Experiencia"
       class="exp-images animate__animated animate__bounceInLeft"
     />
     <img
       *ngIf="this.size == 'xs' || this.size == 'sm'"
-      [src]="defaultMobileImage"
+      src="assets/img/0_mob.jpg"
       alt="Experiencia"
       class="exp-images animate__animated animate__bounceInLeft"
     />
@@ -234,7 +234,7 @@
         </button>
         <!-- sold out -->
         <button
-          *ngIf="exp.stock_actual == 0 && !this.reserv  && exp.status != '2'"
+          *ngIf="(this.isActivate && exp.stock_actual == 0 && !this.reserv  && exp.status != '2') || (exp.type == '3' && exp.stock_actual == 0 && !this.reserv  && exp.status != '2') "
           block="block"
           color="becks"
           class="becks-btn-sold margin-top-button content-desk button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"
@@ -317,7 +317,7 @@
     </div>
     <button
       *ngIf="
-        !this.isActivate && exp.type != '3' && !this.reserv && exp.status != 2
+        !this.isActivate && exp.type != '3' && !this.reserv && exp.status != '2'
       "
       block="block"
       color="becks"
@@ -385,7 +385,7 @@
     </button>
     <!-- sold out event -->
     <button
-      *ngIf="exp.stock_actual == 0 && !this.reserv  && exp.status != '2'"
+    *ngIf="(this.isActivate && exp.stock_actual == 0 && !this.reserv  && exp.status != '2') || (exp.type == '3' && exp.stock_actual == 0 && !this.reserv  && exp.status != '2') "
       block="block"
       color="becks"
       class="becks-btn-sold more-info margin-top-button button-width animate__animated animate__bounceInLeft animate__delay-1s btn-exp"

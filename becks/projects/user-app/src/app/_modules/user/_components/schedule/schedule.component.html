@@ -103,18 +103,24 @@
                       {{ event.placeExp }}
                     </div>
                     <div class="title-tertiary hour-card">
-                      {{ event.dateActFrom }}
+                      Del
+                      {{ 
+                        event.dateActFrom.split("/")[1] +
+                        "/" +
+                        event.dateActFrom.split("/")[0] +
+                        "/" +
+                        event.dateActFrom.split("/")[2] | date: "d"
+                      }}
+                      al
+                      {{
+                      event.dateActTo.split("/")[1] +
+                      "/" +
+                      event.dateActTo.split("/")[0] +
+                      "/" +
+                      event.dateActTo.split("/")[2] 
+                        |date :'d MMM'}}
                     </div>
-                    <!-- <div
-                        class="title-tertiary"
-                        [ngClass]="
-                          showDataExperience(
-                            event.id,
-                            event.stock_actual,
-                            event.status
-                          )
-                        "
-                      ></div> -->
+
                   </div>
                   <div class="circle-icon">
                     <span
@@ -140,101 +146,14 @@
                     )
                   "
                 ></button>
-                <!-- <ion-row>
-                  <div class="guest-card" title="@usuario"></div>
-                  <div class="guest-card" title="@usuario"></div>
-                  <div class="guest-card" title="@usuario"></div>
-                  <div class="guest-card" title="@usuario"></div>
-                </ion-row> -->
               </div>
             </div>
           </div>
-
-          <!-- calendar events view for mobile -->
-          <!-- <div *ngIf="this.size == 'xs' || this.size == 'sm'">
-            <div class="card-event" *ngFor="let item of exps">
-              <ion-row *ngIf="showDate(item.fechaAlt, item.fechaExp)">
-                <div class="lateral-month">
-                  <h1 class="title-tertiary">
-                    {{
-                      item.fechaExp.split("/")[1] +
-                        "/" +
-                        item.fechaExp.split("/")[0] +
-                        "/" +
-                        item.fechaExp.split("/")[2] | date: "MMM"
-                    }}
-                  </h1>
-                  <h2 class="day-event title-tertiary">
-                    {{ item.fechaExp.split("/")[0] }}
-                  </h2>
-                  <div class="vertical_dotted_line"></div>
-                </div>
-                <div
-                  class="img-event"
-                  [style.background-image]="
-                    'linear-gradient(90deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.6) 100%), url(' +
-                    item.imagesExp +
-                    ')'
-                  "
-                >
-                  <div class="event-description">
-                    <p class="title-secondary">{{ item.titleExp }}</p>
-                    <p class="title-tertiary">
-                      {{
-                        item.fechaExp.split("/")[1] +
-                          "/" +
-                          item.fechaExp.split("/")[0] +
-                          "/" +
-                          item.fechaExp.split("/")[2] | date: "EEEE"
-                      }}
-                      {{
-                        item.fechaExp.split("/")[1] +
-                          "/" +
-                          item.fechaExp.split("/")[0] +
-                          "/" +
-                          item.fechaExp.split("/")[2] | date: "dd"
-                      }}
-                      {{
-                        item.fechaExp.split("/")[1] +
-                          "/" +
-                          item.fechaExp.split("/")[0] +
-                          "/" +
-                          item.fechaExp.split("/")[2] | date: "LLL"
-                      }}
-                    </p>
-                    <button
-                      [routerLink]="['/user/exp/' + item.id]"
-                      block="block"
-                      color="becks"
-                      class="card-button"
-                      [ngClass]="
-                        showDataExperience(
-                          item.id,
-                          item.stock_actual,
-                          item.status
-                        )
-                      "
-                    ></button>
-                  </div>
-                </div>
-              </ion-row>
-            </div>
-          </div> -->
         </div>
       </div>
-      <!-- <div
-        *ngIf="showEvent && (this.size == 'xs' || this.size == 'sm')"
-        class="drop-container"
-      >
-        <P *ngIf="this.dropExp == true" class="title-tertiary"> Más eventos </P>
-        <button id="drop" class="btn-next btn-card" (click)="classTransition()">
-          <span class="material-icons">keyboard_arrow_down</span>
-        </button>
-      </div> -->
+
     </ion-row>
   </section>
-  <!-- <user-vertical-calendar
-    *ngIf="this.size == 'xs' || this.size == 'sm'"
-  ></user-vertical-calendar> -->
+
   <app-footer></app-footer>
 </ion-content>

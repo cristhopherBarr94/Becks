@@ -141,10 +141,14 @@ export class ScheduleComponent implements OnInit, OnDestroy {
         start: fechaStart,
         end: fechaEnd,
       });
+      if(this.eventDay.length == 0 || this.events.length == 0){
+      this.showEvent = false;
+      }else{
+        this.showEvent = true;
+      }
     }
     if (tmpL != this.events.length) {
       this.newEvents = false;
-      this.showEvent = true;
       setTimeout(() => (this.newEvents = true), 50);
     }
   }

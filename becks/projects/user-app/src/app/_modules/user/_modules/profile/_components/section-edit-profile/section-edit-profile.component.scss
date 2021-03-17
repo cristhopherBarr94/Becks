@@ -179,7 +179,7 @@ seccion-tabs {
   }
 }
 
-::ng-deep .mat-ink-bar {
+:host::ng-deep .mat-ink-bar {
   background: linear-gradient(
     100deg,
     rgba(0, 209, 140, 1) 0%,

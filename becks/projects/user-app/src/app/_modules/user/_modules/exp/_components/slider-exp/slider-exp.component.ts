@@ -151,6 +151,12 @@ export class SliderExpComponent
       }
     );
     this.userSvc.getCodes();
+    if (
+      localStorage.getItem("token") ||
+      sessionStorage.getItem("token")
+    ) {
+      this.ui.dismissLoading();
+    }
   }
 
   ngOnDestroy(): void {

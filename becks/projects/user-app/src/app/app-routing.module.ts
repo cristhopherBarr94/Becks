@@ -45,6 +45,7 @@ const routes: Routes = [
       import(
         "./_modules/utils/_pages/terms-conditions/terms-conditions.module"
       ).then((m) => m.TermsConditionsPageModule),
+      canActivate: [AgeGuardService],
   },
   {
     path: "**",

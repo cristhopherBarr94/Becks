@@ -53,7 +53,7 @@ export class TermsConditionsPage implements OnInit {
     this.expSubs.unsubscribe();
   }
 
-  selectedTab = (tab) => {
+  selectedTab (tab)  {
     if (this.size == "md" || this.size == "lg") {
       let inkBar = document.querySelector(".mat-ink-bar");
       if (tab === 0) {

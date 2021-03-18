@@ -367,6 +367,5 @@ export class AgeGateV2Component implements OnInit {
   // check remb opt
   remember (e){
     this.checked = e;
-    console.log(this.checked)
   }
 }

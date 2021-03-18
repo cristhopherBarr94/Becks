@@ -7,6 +7,7 @@
       <div class="cols-container">
         <mat-tab-group
           [selectedIndex]="0"
+          [focusTab]="fousedTab"
           (selectedTabChange)="selectedTab($event.index)"
         >
           <mat-tab label="Campañas" class="right-side">

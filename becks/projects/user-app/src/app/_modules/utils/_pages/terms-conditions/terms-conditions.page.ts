@@ -13,7 +13,7 @@ import { FilesService } from "src/app/_services/files.service";
 export class TermsConditionsPage implements OnInit {
   private expSubs: Subscription;
   public terms_exp = [];
-
+  public fousedTab = 2;
   public saveUrl: any[] = [];
   public isBordered: boolean = true;
   public campains: boolean = true;
@@ -48,7 +48,9 @@ export class TermsConditionsPage implements OnInit {
     this.filesService.getDataFiles();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fousedTab = 0;
+  }
   ngOnDestroy(): void {
     this.expSubs.unsubscribe();
   }
@@ -56,15 +58,17 @@ export class TermsConditionsPage implements OnInit {
   selectedTab (tab)  {
     if (this.size == "md" || this.size == "lg") {
       let inkBar = document.querySelector(".mat-ink-bar");
+      let verticalPs = 50;
       if (tab === 0) {
-        inkBar.setAttribute("style", "top:50px !important; width: 160px;");
+        verticalPs = 50;
       } else if (tab === 1) {
-        inkBar.setAttribute("style", "top:125px !important;width: 160px;");
+        verticalPs = 125;
       } else if (tab === 2) {
-        inkBar.setAttribute("style", "top:235px !important; width: 160px;");
+        verticalPs = 200;
       } else if (tab === 3) {
-        inkBar.setAttribute("style", "top:340px !important; width: 160px;");
+        verticalPs = 275;
       }
+      inkBar.setAttribute("style", "top:" + verticalPs + "px !important; width: 160px;");
     }
   };
 }

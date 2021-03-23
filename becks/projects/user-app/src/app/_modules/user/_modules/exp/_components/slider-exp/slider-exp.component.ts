@@ -305,6 +305,13 @@ export class SliderExpComponent
         state: { exp: exp },
       });
     }
+    // datalayer
+    window.dataLayer.push({
+      event: "trackEvent",
+      eventCategory: "Becks experiencias",
+      eventAction: "participar",
+      eventLabel: exp.titleExp,
+    });
   }
 
   public closeModal() {

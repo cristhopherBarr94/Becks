@@ -123,9 +123,7 @@
         >
           <mat-icon matSuffix>calendar_today</mat-icon>
           {{
-            exp.dateActFrom == exp.dateActTo
-              ? exp.dateActTo
-              : exp.dateActFrom + " - " + exp.dateActTo
+            exp.dateActFrom + " - " + exp.dateActTo
           }}
         </p>
         <p
